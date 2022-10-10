@@ -1,0 +1,11 @@
+{
+  "name": "@vighnesh153/react",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.21"
+  }
+}

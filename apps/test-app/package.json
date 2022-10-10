@@ -1,0 +1,11 @@
+{
+  "name": "test-app",
+  "dependencies": {
+    "@vighnesh153/next": "*"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
