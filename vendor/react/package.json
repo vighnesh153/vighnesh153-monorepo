@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "react": "18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "18.0.21"
+    "react": "18.2.0",
+    "@vighnesh153/typescript": "*",
+    "@types/react": "18.0.17"
   }
 }
