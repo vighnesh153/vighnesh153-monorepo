@@ -11,9 +11,12 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "new-app": "ts-node scripts/new-app.ts"
   },
   "devDependencies": {
+    "@vighnesh153/ts-node": "*",
+    "@vighnesh153/commander": "*",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "latest"
@@ -21,6 +24,5 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
   "packageManager": "npm@8.15.0"
 }

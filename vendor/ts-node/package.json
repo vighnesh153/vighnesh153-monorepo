@@ -1,0 +1,8 @@
+{
+  "name": "@vighnesh153/ts-node",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "ts-node": "10.9.1"
+  }
+}

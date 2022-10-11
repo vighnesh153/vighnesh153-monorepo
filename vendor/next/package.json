@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "next": "12.3.1",
+    "@babel/core": "^7.0.0",
     "@vighnesh153/react": "*",
     "@vighnesh153/react-dom": "*",
-    "@vighnesh153/typescript": "*"
+    "@vighnesh153/typescript": "*",
+    "next": "12.3.1",
+    "next-transpile-modules": "9.0.0"
   }
 }
