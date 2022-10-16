@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.0.0",
+    "@vighnesh153/next-transpile-modules": "*",
     "@vighnesh153/react": "*",
     "@vighnesh153/react-dom": "*",
     "@vighnesh153/typescript": "*",

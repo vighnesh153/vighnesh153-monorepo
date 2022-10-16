@@ -12,17 +12,16 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "new-app": "ts-node scripts/new-app.ts"
+    "new-app": "./node_modules/@vighnesh153/scripts/vighnesh153-new-app.sh"
   },
   "devDependencies": {
-    "@vighnesh153/ts-node": "*",
-    "@vighnesh153/commander": "*",
+    "@vighnesh153/scripts": "*",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "packageManager": "npm@8.15.0"
 }
