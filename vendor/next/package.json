@@ -1,14 +1,13 @@
 {
-  "name": "@vighnesh153/next",
+  "name": "@vighnesh153/vendor-next",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.0.0",
-    "@vighnesh153/next-transpile-modules": "*",
-    "@vighnesh153/react": "*",
-    "@vighnesh153/react-dom": "*",
-    "@vighnesh153/typescript": "*",
-    "next": "12.3.1",
-    "next-transpile-modules": "9.0.0"
+    "@vighnesh153/vendor-next-transpile-modules": "*",
+    "@vighnesh153/vendor-react": "*",
+    "@vighnesh153/vendor-react-dom": "*",
+    "@vighnesh153/vendor-typescript": "*",
+    "next": "12.3.1"
   }
 }

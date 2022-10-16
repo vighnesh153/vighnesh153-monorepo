@@ -1,7 +1,8 @@
 {
   "name": "test-app",
   "dependencies": {
-    "@vighnesh153/next": "*"
+    "@vighnesh153/vendor-next": "*",
+    "@vighnesh153/package-web-ui": "*"
   },
   "scripts": {
     "dev": "next dev",

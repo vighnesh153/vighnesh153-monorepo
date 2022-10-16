@@ -1,10 +1,11 @@
 {
-  "name": "@vighnesh153/react-dom",
+  "name": "@vighnesh153/vendor-react-dom",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react-dom": "18.2.0",
-    "@vighnesh153/react": "*",
-    "@vighnesh153/typescript": "*"
+    "@types/react-dom": "18.0.6",
+    "@vighnesh153/vendor-react": "*",
+    "@vighnesh153/vendor-typescript": "*"
   }
 }

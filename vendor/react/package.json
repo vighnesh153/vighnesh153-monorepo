@@ -1,10 +1,10 @@
 {
-  "name": "@vighnesh153/react",
+  "name": "@vighnesh153/vendor-react",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react": "18.2.0",
-    "@vighnesh153/typescript": "*",
+    "@vighnesh153/vendor-typescript": "*",
     "@types/react": "18.0.17"
   }
 }

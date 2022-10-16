@@ -57,7 +57,7 @@ async function addNextJsToPackageJson(appDirectoryName: string) {
     start: "next start"
   };
   packageJson.dependencies = {
-    "@vighnesh153/next": "*"
+    "@vighnesh153/vendor-next": "*"
   };
 
   // write back to the package.json file
@@ -91,7 +91,9 @@ async function createNextJsConfigFile(appDirectoryName: string) {
   await delay()
 
   await writeFile(nextConfigPath, `
-const withTM = require("next-transpile-modules")(["ui"]);
+const withTM = require("next-transpile-modules")([
+  "@vighnesh153/package-web-ui"
+]);
 
 module.exports = withTM({
   reactStrictMode: true,

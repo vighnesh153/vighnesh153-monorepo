@@ -1,5 +1,5 @@
 {
-  "name": "@vighnesh153/inquirer",
+  "name": "@vighnesh153/vendor-inquirer",
   "private": true,
   "version": "1.0.0",
   "dependencies": {

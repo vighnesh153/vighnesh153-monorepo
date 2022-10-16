@@ -1,8 +1,8 @@
 {
-  "name": "@vighnesh153/next-transpile-modules",
+  "name": "@vighnesh153/vendor-next-transpile-modules",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "next-transpile-modules": "^9.1.0"
+    "next-transpile-modules": "9.1.0"
   }
 }

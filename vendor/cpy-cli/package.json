@@ -1,5 +1,5 @@
 {
-  "name": "@vighnesh153/cpy-cli",
+  "name": "@vighnesh153/vendor-cpy-cli",
   "version": "1.0.0",
   "private": true,
   "dependencies": {

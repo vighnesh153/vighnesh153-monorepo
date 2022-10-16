@@ -1,5 +1,5 @@
 {
-  "name": "@vighnesh153/scripts",
+  "name": "@vighnesh153/package-scripts",
   "version": "1.0.0",
   "private": true,
   "files": [
@@ -15,11 +15,11 @@
     "postinstall": "npm run clean && npm run build && npm run copy"
   },
   "dependencies": {
-    "@vighnesh153/cpy-cli": "*",
-    "@vighnesh153/inquirer": "*",
-    "@vighnesh153/rimraf": "*",
-    "@vighnesh153/tsconfig": "*",
-    "@vighnesh153/typescript": "*",
+    "@vighnesh153/vendor-cpy-cli": "*",
+    "@vighnesh153/vendor-inquirer": "*",
+    "@vighnesh153/vendor-rimraf": "*",
+    "@vighnesh153/package-tsconfig": "*",
+    "@vighnesh153/vendor-typescript": "*",
     "@vighnesh153/vendor-spinnies": "*"
   }
 }

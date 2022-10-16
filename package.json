@@ -12,11 +12,11 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "new-app": "./node_modules/@vighnesh153/scripts/vighnesh153-new-app.sh"
+    "new-app": "./node_modules/@vighnesh153/package-scripts/vighnesh153-new-app.sh"
   },
   "devDependencies": {
-    "@vighnesh153/scripts": "*",
-    "eslint-config-custom": "*",
+    "@vighnesh153/package-scripts": "*",
+    "eslint-config-vighnesh153": "*",
     "prettier": "latest",
     "turbo": "latest"
   },
