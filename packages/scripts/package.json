@@ -2,7 +2,7 @@
   "name": "@vighnesh153/scripts",
   "version": "1.0.0",
   "private": true,
-  "files": ["src/**/*.js", "dist", "vighnesh153-new-app.sh", "tsconfig.json"],
+  "files": ["dist", "vighnesh153-new-app.sh"],
   "scripts": {
     "copy:inquirer": "cpy --flat './src/utils/getInquirer.js' './dist/utils'",
     "copy": "npm run copy:inquirer",
@@ -14,7 +14,6 @@
   "dependencies": {
     "@vighnesh153/cpy-cli": "*",
     "@vighnesh153/rimraf": "*",
-    "@vighnesh153/ts-node": "*",
     "@vighnesh153/typescript": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/inquirer": "*"
