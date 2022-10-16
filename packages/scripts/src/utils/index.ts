@@ -1,5 +1,11 @@
 import path from "path";
 import fs from "node:fs/promises";
+import Spinnies from "spinnies";
+
+/**
+ * Returns the Logger
+ */
+export * from "./logger";
 
 /**
  * Returns the inquirer instance
@@ -35,20 +41,6 @@ export async function fileExists(filePath: string) {
       throw err;
     }
   }
-}
-
-/**
- * Create the README.md file
- */
-export async function createReadmeFile(parentDirectory: string, packageName: string) {
-  const fileName = path.resolve(parentDirectory, "README.md");
-
-  console.log("🚧 Creating README.md file...");
-
-  // create the file
-  await writeFile(fileName, `# ${packageName}`);
-
-  console.log("✅ Created README.md file 🎉");
 }
 
 /**
@@ -91,4 +83,37 @@ export function getPackagesDirectory() {
  */
 export function getVendorDirectory() {
   return `${getProjectRoot()}/vendor`;
+}
+
+/**
+ * Adds a delay
+ */
+export async function delay(ms: number = 2000) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+/**
+ * Returns the instance of spinnies
+ */
+export const spinnies = new Spinnies();
+
+/**
+ * Create the README.md file
+ */
+export async function createReadmeFile(parentDirectory: string, packageName: string) {
+  const fileName = path.resolve(parentDirectory, "README.md");
+
+  spinnies.add("create README.md", {
+    text: "🚧 Creating README.md file...\n"
+  });
+  await delay()
+
+  // create the file
+  await writeFile(fileName, `# ${packageName}`);
+
+  spinnies.succeed("create README.md", {
+    text: "✅ Created README.md file 🎉\n"
+  });
 }

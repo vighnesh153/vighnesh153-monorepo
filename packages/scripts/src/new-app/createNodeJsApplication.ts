@@ -2,7 +2,7 @@ import {
   getAppsDirectory,
   fileExists,
   createDirectory,
-  writeFile, createReadmeFile
+  writeFile, createReadmeFile, Logger, spinnies, delay
 } from "../utils";
 import path from "path";
 
@@ -15,9 +15,12 @@ export async function createNodeJsApplication(
   newAppDirectoryName: string,
   newAppPackageName: string
 ) {
-  console.log("🚧 Creating a NodeJS application...");
-  console.log(`ℹ️ App directory: apps/${newAppDirectoryName}`);
-  console.log(`ℹ️ Package name: ${newAppPackageName}`);
+  spinnies.add("NodeJS application", {
+    text: "🚧 Creating a NodeJS application...\n"
+  });
+  Logger.info(`ℹ️  App directory: apps/${newAppDirectoryName}`)
+  Logger.info(`ℹ️  Package name: ${newAppPackageName}\n`);
+  await delay()
 
   // /apps directory
   const appsDirectory = getAppsDirectory();
@@ -40,8 +43,10 @@ export async function createNodeJsApplication(
     createReadmeFile(newAppDirectory, newAppPackageName)
   ]);
 
-  console.log("✅ Created the NodeJS application 🎉");
-};
+  spinnies.succeed("NodeJS application", {
+    text: "✅ Created the NodeJS application 🎉\n"
+  });
+}
 
 /**
  * Create the package.json file
@@ -53,7 +58,10 @@ export async function createNodeJsApplication(
 async function createPackageDotJson(parentDirectory: string, packageName: string) {
   const fileName = path.resolve(parentDirectory, "package.json");
 
-  console.log("🚧 Creating package.json file...");
+  spinnies.add("create package.json", {
+    text: "🚧 Creating package.json file...\n"
+  });
+  await delay()
 
   // write the file
   await writeFile(fileName, JSON.stringify({
@@ -62,5 +70,7 @@ async function createPackageDotJson(parentDirectory: string, packageName: string
     private: true
   }, null, 2));
 
-  console.log("✅ Created package.json file 🎉");
+  spinnies.succeed("create package.json", {
+    text: "✅ Created package.json file 🎉\n"
+  });
 }

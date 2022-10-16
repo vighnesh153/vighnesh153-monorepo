@@ -1,6 +1,6 @@
 import path from "path";
 import { createNodeJsApplication } from "./createNodeJsApplication";
-import { getAppsDirectory, readFile, writeFile } from "../utils";
+import { delay, getAppsDirectory, Logger, readFile, spinnies, writeFile } from "../utils";
 
 /**
  * Creates a new next-js application in the apps/ directory
@@ -8,7 +8,7 @@ import { getAppsDirectory, readFile, writeFile } from "../utils";
  * @param packageName {string} name of the package
  */
 export async function createNextJsApplication(directoryName: string, packageName: string) {
-  console.log("Creating a NextJS application...");
+  Logger.info("Creating a NextJS application...\n");
 
   // Create an empty nodejs project first
   await createNodeJsApplication(directoryName, packageName);
@@ -20,6 +20,9 @@ export async function createNextJsApplication(directoryName: string, packageName
     // Create the next.config.js file
     createNextJsConfigFile(directoryName)
   ]);
+
+  Logger.success("✅ Created the Next.JS application 🎉\n");
+  Logger.info(`cd into "apps/${directoryName}" to start development\n`)
 }
 
 /**
@@ -42,7 +45,10 @@ async function addNextJsToPackageJson(appDirectoryName: string) {
   // package.json content
   const packageJson = JSON.parse(await readFile(packageJsonPath));
 
-  console.log("🚧 Updating package.json with next.js specifics...");
+  spinnies.add("update packageJson", {
+    text: "🚧 Updating package.json with next.js tooling...\n"
+  });
+  await delay()
 
   // Update the content
   packageJson.scripts = {
@@ -57,7 +63,9 @@ async function addNextJsToPackageJson(appDirectoryName: string) {
   // write back to the package.json file
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-  console.log("✅ Updated package.json 🎉");
+  spinnies.succeed("update packageJson", {
+    text: "✅ Updated package.json with next.js tooling 🎉\n"
+  });
 }
 
 /**
@@ -77,7 +85,10 @@ async function createNextJsConfigFile(appDirectoryName: string) {
     "next.config.js"
   );
 
-  console.log("🚧 Creating next.config.js file...");
+  spinnies.add("create next.config.js", {
+    text: "🚧 Creating next.config.js file...\n"
+  });
+  await delay()
 
   await writeFile(nextConfigPath, `
 const withTM = require("next-transpile-modules")(["ui"]);
@@ -87,5 +98,7 @@ module.exports = withTM({
 });
 `.trim());
 
-  console.log("✅ Created next.config.js file 🎉");
+  spinnies.succeed("create next.config.js", {
+    text: "✅ Created next.config.js file 🎉\n"
+  });
 }
