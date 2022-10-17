@@ -1,3 +1,6 @@
+/**
+ * Scripts logger for console
+ */
 export class Logger {
   static debug(message?: any, ...optionalParams: any[]) {
     console.debug(`\x1b[37m [DEBUG] ${message}`, ...optionalParams)
