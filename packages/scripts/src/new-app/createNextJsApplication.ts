@@ -1,11 +1,12 @@
 import path from "path";
+import { createSpinner } from "@vighnesh153/vendor-spinnies";
+
 import {
   createTsConfigFile,
   delay,
   getAppsDirectory,
   Logger,
   readFile,
-  spinnies,
   writeFile,
   createNodeJsPackage, createDirectory
 } from "../utils";
@@ -51,8 +52,7 @@ export async function createNextJsApplication(directoryName: string, packageName
  * Adds nextJs specific things to package.json
  */
 async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) {
-  const spinniesIdentifier = "updates to package.json with next.js tooling";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Updating package.json with next.js tooling...\n"
   });
   await delay();
@@ -82,7 +82,7 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
   // write back to the package.json file
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Updated package.json with next.js tooling 🎉\n"
   });
 }
@@ -97,8 +97,7 @@ async function createNextJsConfigFile(directoryPath: string) {
     "next.config.js"
   );
 
-  const spinniesIdentifier = "create next.config.js";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating next.config.js file...\n"
   });
   await delay();
@@ -115,7 +114,7 @@ module.exports = withTM({
 });
 `.trim());
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created next.config.js file 🎉\n"
   });
 }
@@ -142,8 +141,7 @@ async function createPagesDirectoryAndAddContent(directoryPath: string) {
 async function createHomePage(directoryPath: string) {
   const homePagePath = path.resolve(directoryPath, "index.tsx");
 
-  const spinniesIdentifier = "create 'pages/index.tsx'";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating \"pages/index.tsx\" file...\n"
   });
   await delay();
@@ -162,7 +160,7 @@ export default function Home() {
 }
     `.trim())
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created \"pages/index.tsx\" file\n"
   });
 }
@@ -174,8 +172,7 @@ async function createHelloWorldApi(directoryPath: string) {
   const apiDirectory = path.resolve(directoryPath, "api");
   const helloApiPath = path.resolve(apiDirectory, "hello.ts");
 
-  const spinniesIdentifier = "create 'pages/api/hello.ts'";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating \"pages/api/hello.ts\" file...\n"
   });
   await delay();
@@ -200,7 +197,7 @@ export default function handler(
 }
   `.trim());
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created \"pages/api/hello.ts\" file\n"
   });
 }
@@ -211,8 +208,7 @@ export default function handler(
 async function createUnderscoreAppTsxFile(directoryPath: string) {
   const appTsxFilePath = path.resolve(directoryPath, "_app.tsx");
 
-  const spinniesIdentifier = "create 'pages/_app.tsx'";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating \"pages/_app.tsx\" file...\n"
   });
   await delay();
@@ -228,7 +224,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
   `.trim());
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created \"pages/_app.tsx\" file\n"
   });
 }
@@ -253,8 +249,7 @@ async function createStylesDirectoryAndAddContent(directoryPath: string) {
 async function createGlobalsCssFile(directoryPath: string) {
   const globalsCssPath = path.resolve(directoryPath, "globals.css")
 
-  const spinniesIdentifier = "create 'styles/globals.css'";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating \"styles/globals.css\" file...\n"
   });
   await delay();
@@ -289,7 +284,7 @@ a {
 }
   `.trim());
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created \"styles/globals.css\" file\n"
   });
 }

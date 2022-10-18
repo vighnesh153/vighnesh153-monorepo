@@ -1,6 +1,6 @@
 import path from "path";
+import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
-import { spinnies } from "./spinnies";
 import { delay } from "./delay";
 import { writeFile } from "./writeFile";
 
@@ -10,8 +10,7 @@ import { writeFile } from "./writeFile";
 export async function createReadmeFile(parentDirectory: string, fileContent: string) {
   const fileName = path.resolve(parentDirectory, "README.md");
 
-  const spinniesIdentifier = "create README.md";
-  spinnies.add(spinniesIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating README.md file...\n"
   });
   await delay();
@@ -19,7 +18,7 @@ export async function createReadmeFile(parentDirectory: string, fileContent: str
   // create the file
   await writeFile(fileName, fileContent);
 
-  spinnies.succeed(spinniesIdentifier, {
+  spinner.succeed({
     text: "✅ Created README.md file 🎉\n"
   });
 }

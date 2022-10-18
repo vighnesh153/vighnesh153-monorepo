@@ -1,8 +1,21 @@
 {
   "name": "@vighnesh153/vendor-spinnies",
   "private": true,
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
   "version": "1.0.0",
+  "files": ["dist"],
+  "scripts": {
+    "clean:dist": "rimraf dist",
+    "clean": "npm run clean:dist",
+    "build": "tsc --project ./tsconfig.json",
+    "preinstall": "npm run clean && npm run build"
+  },
   "dependencies": {
     "spinnies": "0.5.1"
+  },
+  "devDependencies": {
+    "@vighnesh153/vendor-rimraf": "*",
+    "@vighnesh153/vendor-typescript": "*"
   }
 }

@@ -1,6 +1,6 @@
 import path from "path";
+import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
-import { spinnies } from "./spinnies";
 import { delay } from "./delay";
 import { writeFile } from "./writeFile";
 
@@ -13,7 +13,7 @@ export async function createTsConfigFile(
 ) {
   const fileName = path.resolve(directoryPath, "tsconfig.json");
 
-  spinnies.add("create tsconfig.json", {
+  const spinner = createSpinner({
     text: "🚧 Creating tsconfig.json file...\n"
   });
   await delay();
@@ -33,7 +33,7 @@ export async function createTsConfigFile(
   // create the file
   await writeFile(fileName, JSON.stringify(tsconfig, null, 2));
 
-  spinnies.succeed("create tsconfig.json", {
+  spinner.succeed({
     text: "✅ Created tsconfig.json file 🎉\n"
   });
 }

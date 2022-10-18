@@ -1,7 +1,7 @@
 import path from "path";
+import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
 import { Logger } from "./logger";
-import { spinnies } from "./spinnies";
 import { delay } from "./delay";
 import { fileExists } from "./fileExists";
 import { createDirectory } from "./createDirectory";
@@ -15,8 +15,7 @@ export async function createNodeJsPackage(
   directoryPath: string,
   packageName: string
 ) {
-  const spinnerIdentifier = "Creation of an empty NodeJS package";
-  spinnies.add(spinnerIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating an empty NodeJS application...\n"
   });
   Logger.info(`ℹ️  Package name: ${packageName}\n`);
@@ -24,7 +23,7 @@ export async function createNodeJsPackage(
 
   // Checks if package already exists
   if (await fileExists(directoryPath)) {
-    const parentDirectoryName = path.dirname(path.resolve(directoryPath, '..'));
+    const parentDirectoryName = path.dirname(path.resolve(directoryPath, ".."));
     const currentDirectoryName = path.dirname(directoryPath);
     throw new Error(
       `"${parentDirectoryName}/${currentDirectoryName}" already exists...`
@@ -42,9 +41,9 @@ export async function createNodeJsPackage(
     createReadmeFile(directoryPath, `# ${packageName}`)
   ]);
 
-  spinnies.succeed(spinnerIdentifier, {
-    text: "✅ Created the NodeJS application 🎉\n",
-  })
+  spinner.succeed({
+    text: "✅ Created the NodeJS application 🎉\n"
+  });
 }
 
 /**
@@ -53,8 +52,7 @@ export async function createNodeJsPackage(
 async function createPackageDotJson(directoryPath: string, packageName: string) {
   const fileName = path.resolve(directoryPath, "package.json");
 
-  const spinnerIdentifier = "creation of package.json";
-  spinnies.add(spinnerIdentifier, {
+  const spinner = createSpinner({
     text: "🚧 Creating package.json file...\n"
   });
   await delay();
@@ -66,7 +64,7 @@ async function createPackageDotJson(directoryPath: string, packageName: string) 
     private: true
   }, null, 2));
 
-  spinnies.succeed(spinnerIdentifier, {
+  spinner.succeed({
     text: "✅ Created package.json file 🎉\n"
   });
 }

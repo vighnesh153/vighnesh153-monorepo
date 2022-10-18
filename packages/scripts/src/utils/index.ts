@@ -12,5 +12,4 @@ export * from "./getProjectRoot";
 export * from "./getVendorDirectory";
 export * from "./logger";
 export * from "./readFile";
-export * from "./spinnies";
 export * from "./writeFile";
