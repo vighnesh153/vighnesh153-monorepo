@@ -1,8 +1,0 @@
-{
-  "name": "@vighnesh153/vendor-commander",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "commander": "9.4.1"
-  }
-}

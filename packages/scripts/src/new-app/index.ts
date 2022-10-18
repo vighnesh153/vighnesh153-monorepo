@@ -1,4 +1,6 @@
-import { appCreators } from "./appCreators";
+import { ApplicationType } from "./applicationTypes";
+import { createNodeJsApplication } from "./createNodeJsApplication";
+import { createNextJsApplication } from "./createNextJsApplication";
 import { promptUserForInputs } from "./prompts";
 
 async function main() {
@@ -11,7 +13,10 @@ async function main() {
   } = await promptUserForInputs();
 
   // Creates the app
-  await appCreators[applicationType](directoryName, packageName);
+  await {
+    [ApplicationType.NodeJs]: createNodeJsApplication,
+    [ApplicationType.NextJs]: createNextJsApplication
+  }[applicationType](directoryName, packageName);
 }
 
 main().catch(e => {

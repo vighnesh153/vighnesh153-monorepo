@@ -1,0 +1,8 @@
+{
+  "name": "@vighnesh153/vendor-types-node",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/node": "^17.0.12"
+  }
+}

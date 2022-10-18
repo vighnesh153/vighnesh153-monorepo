@@ -1,0 +1,9 @@
+{
+  "name": "@vighnesh153/vendor-types-react-dom",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/react-dom": "18.0.6",
+    "@vighnesh153/vendor-types-react": "*"
+  }
+}

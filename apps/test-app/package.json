@@ -4,6 +4,9 @@
     "@vighnesh153/vendor-next": "*",
     "@vighnesh153/package-web-ui": "*"
   },
+  "devDependencies": {
+    "@vighnesh153/vendor-types-next": "*"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

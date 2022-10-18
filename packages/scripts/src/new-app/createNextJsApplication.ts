@@ -7,13 +7,17 @@ import {
   readFile,
   spinnies,
   writeFile,
-  createNodeJsPackage
+  createNodeJsPackage, createDirectory
 } from "../utils";
+import { promptForPort } from "./prompts";
 
 /**
  * Creates a new next-js application in the apps/ directory
  */
 export async function createNextJsApplication(directoryName: string, packageName: string) {
+  // Development server port number
+  const devPort = await promptForPort()
+
   Logger.info("Creating a NextJS application...\n");
 
   const directoryPath = path.resolve(getAppsDirectory(), directoryName);
@@ -24,14 +28,19 @@ export async function createNextJsApplication(directoryName: string, packageName
 
   await Promise.all([
     // Add next-js specifics to package.json
-    addNextJsToPackageJson(packageJsonPath),
+    addNextJsToPackageJson(packageJsonPath, devPort),
 
     // Create the next.config.js file
     createNextJsConfigFile(directoryPath),
 
     // Create the tsconfig.json file
-    createTsConfigFile(directoryPath, "nextjs"
-    )
+    createTsConfigFile(directoryPath, "nextjs"),
+
+    // Creates the "pages/" directory and adds content to it
+    createPagesDirectoryAndAddContent(directoryPath),
+
+    // Creates the "styles/" directory and adds content to it
+    createStylesDirectoryAndAddContent(directoryPath),
   ]);
 
   Logger.success("✅ Created the Next.JS application 🎉\n");
@@ -41,8 +50,8 @@ export async function createNextJsApplication(directoryName: string, packageName
 /**
  * Adds nextJs specific things to package.json
  */
-async function addNextJsToPackageJson(packageJsonPath: string) {
-  const spinniesIdentifier = "updates to package.json with next.js tooling"
+async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) {
+  const spinniesIdentifier = "updates to package.json with next.js tooling";
   spinnies.add(spinniesIdentifier, {
     text: "🚧 Updating package.json with next.js tooling...\n"
   });
@@ -54,12 +63,19 @@ async function addNextJsToPackageJson(packageJsonPath: string) {
   // Update the content
   Object.assign(packageJson, {
     scripts: {
-      dev: "next dev",
+      dev: `next dev --port ${devPort}`,
       build: "next build",
-      start: "next start"
+      start: "next start",
+      lint: "next lint"
     },
     dependencies: {
-      "@vighnesh153/vendor-next": "*"
+      "@vighnesh153/package-web-ui": "*",
+      "@vighnesh153/vendor-next": "*",
+    },
+    devDependencies: {
+      "@vighnesh153/vendor-eslint": "*",
+      "@vighnesh153/vendor-types-next": "*",
+      "eslint-config-vighnesh153": "*",
     }
   });
 
@@ -81,12 +97,13 @@ async function createNextJsConfigFile(directoryPath: string) {
     "next.config.js"
   );
 
-  const spinniesIdentifier = "create next.config.js"
+  const spinniesIdentifier = "create next.config.js";
   spinnies.add(spinniesIdentifier, {
     text: "🚧 Creating next.config.js file...\n"
   });
   await delay();
 
+  // write to the "next.config.js" file
   await writeFile(nextConfigPath, `
 const withTM = require("next-transpile-modules")([
   "@vighnesh153/package-web-ui"
@@ -94,10 +111,185 @@ const withTM = require("next-transpile-modules")([
 
 module.exports = withTM({
   reactStrictMode: true,
+  swcMinify: true,
 });
 `.trim());
 
   spinnies.succeed(spinniesIdentifier, {
     text: "✅ Created next.config.js file 🎉\n"
+  });
+}
+
+/**
+ * Creates the "pages/" directory and add sample files to it
+ */
+async function createPagesDirectoryAndAddContent(directoryPath: string) {
+  const pagesDirectoryPath = path.resolve(directoryPath, "pages");
+
+  // Make the "pages/" directory
+  await createDirectory(pagesDirectoryPath)
+
+  await Promise.all([
+    createHomePage(pagesDirectoryPath),
+    createHelloWorldApi(pagesDirectoryPath),
+    createUnderscoreAppTsxFile(pagesDirectoryPath),
+  ]);
+}
+
+/**
+ * Creates the home page
+ */
+async function createHomePage(directoryPath: string) {
+  const homePagePath = path.resolve(directoryPath, "index.tsx");
+
+  const spinniesIdentifier = "create 'pages/index.tsx'";
+  spinnies.add(spinniesIdentifier, {
+    text: "🚧 Creating \"pages/index.tsx\" file...\n"
+  });
+  await delay();
+
+  // Create the "pages/index.tsx file"
+  await writeFile(homePagePath, `
+import { Button } from "@vighnesh153/package-web-ui";
+
+export default function Home() {
+  return (
+    <div>
+      <h1>This is the home page</h1>
+      <Button />
+    </div>
+  );
+}
+    `.trim())
+
+  spinnies.succeed(spinniesIdentifier, {
+    text: "✅ Created \"pages/index.tsx\" file\n"
+  });
+}
+
+/**
+ * Creates the sample "pages/api/hello.ts" api
+ */
+async function createHelloWorldApi(directoryPath: string) {
+  const apiDirectory = path.resolve(directoryPath, "api");
+  const helloApiPath = path.resolve(apiDirectory, "hello.ts");
+
+  const spinniesIdentifier = "create 'pages/api/hello.ts'";
+  spinnies.add(spinniesIdentifier, {
+    text: "🚧 Creating \"pages/api/hello.ts\" file...\n"
+  });
+  await delay();
+
+  // create "pages/api" directory
+  await createDirectory(apiDirectory);
+
+  // write to "pages/api/hello.ts" file
+  await writeFile(helloApiPath, `
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+type Data = {
+  name: string
+};
+
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  res.status(200).json({ name: 'Vighnesh' });
+}
+  `.trim());
+
+  spinnies.succeed(spinniesIdentifier, {
+    text: "✅ Created \"pages/api/hello.ts\" file\n"
+  });
+}
+
+/**
+ * Creates the "pages/_app.tsx" file
+ */
+async function createUnderscoreAppTsxFile(directoryPath: string) {
+  const appTsxFilePath = path.resolve(directoryPath, "_app.tsx");
+
+  const spinniesIdentifier = "create 'pages/_app.tsx'";
+  spinnies.add(spinniesIdentifier, {
+    text: "🚧 Creating \"pages/_app.tsx\" file...\n"
+  });
+  await delay();
+
+  await writeFile(appTsxFilePath, `
+  import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
+}
+
+export default MyApp;
+  `.trim());
+
+  spinnies.succeed(spinniesIdentifier, {
+    text: "✅ Created \"pages/_app.tsx\" file\n"
+  });
+}
+
+/**
+ * Creates the "styles/" directory and adds content to it
+ */
+async function createStylesDirectoryAndAddContent(directoryPath: string) {
+  const stylesDirectoryPath = path.resolve(directoryPath, "styles");
+
+  // create styles/ directory
+  await createDirectory(stylesDirectoryPath);
+
+  await Promise.all([
+    createGlobalsCssFile(stylesDirectoryPath),
+  ]);
+}
+
+/**
+ * Creates the "styles/globals.css" file
+ */
+async function createGlobalsCssFile(directoryPath: string) {
+  const globalsCssPath = path.resolve(directoryPath, "globals.css")
+
+  const spinniesIdentifier = "create 'styles/globals.css'";
+  spinnies.add(spinniesIdentifier, {
+    text: "🚧 Creating \"styles/globals.css\" file...\n"
+  });
+  await delay();
+
+  // write to the file
+  await writeFile(globalsCssPath, `
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+  `.trim());
+
+  spinnies.succeed(spinniesIdentifier, {
+    text: "✅ Created \"styles/globals.css\" file\n"
   });
 }

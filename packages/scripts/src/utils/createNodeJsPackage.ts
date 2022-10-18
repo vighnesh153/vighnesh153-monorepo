@@ -39,7 +39,7 @@ export async function createNodeJsPackage(
     createPackageDotJson(directoryPath, packageName),
 
     // Create the README.md file
-    createReadmeFile(directoryPath, packageName)
+    createReadmeFile(directoryPath, `# ${packageName}`)
   ]);
 
   spinnies.succeed(spinnerIdentifier, {

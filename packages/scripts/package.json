@@ -18,8 +18,11 @@
     "@vighnesh153/vendor-cpy-cli": "*",
     "@vighnesh153/vendor-inquirer": "*",
     "@vighnesh153/vendor-rimraf": "*",
-    "@vighnesh153/package-tsconfig": "*",
-    "@vighnesh153/vendor-typescript": "*",
     "@vighnesh153/vendor-spinnies": "*"
+  },
+  "devDependencies": {
+    "@vighnesh153/vendor-types-inquirer": "*",
+    "@vighnesh153/vendor-types-spinnies": "*",
+    "@vighnesh153/vendor-typescript": "*"
   }
 }

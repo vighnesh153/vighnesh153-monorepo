@@ -5,9 +5,7 @@
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@vighnesh153/vendor-next-transpile-modules": "*",
-    "@vighnesh153/vendor-react": "*",
     "@vighnesh153/vendor-react-dom": "*",
-    "@vighnesh153/vendor-typescript": "*",
     "next": "12.3.1"
   }
 }

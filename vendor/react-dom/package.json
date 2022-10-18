@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "react-dom": "18.2.0",
-    "@types/react-dom": "18.0.6",
-    "@vighnesh153/vendor-react": "*",
-    "@vighnesh153/vendor-typescript": "*"
+    "@vighnesh153/vendor-react": "*"
   }
 }

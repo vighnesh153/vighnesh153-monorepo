@@ -1,8 +1,8 @@
 {
-  "name": "@vighnesh153/vendor-inquirer",
+  "name": "@vighnesh153/vendor-eslint",
   "private": true,
   "version": "1.0.0",
   "dependencies": {
-    "inquirer": "9.1.3"
+    "eslint": "8.25.0"
   }
 }

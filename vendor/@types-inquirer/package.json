@@ -1,0 +1,8 @@
+{
+  "name": "@vighnesh153/vendor-types-inquirer",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/inquirer": "9.0.2"
+  }
+}

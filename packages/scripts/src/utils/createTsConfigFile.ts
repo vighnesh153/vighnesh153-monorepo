@@ -19,11 +19,18 @@ export async function createTsConfigFile(
   await delay();
 
   // create the file
-  await writeFile(fileName, JSON.stringify({
+  const tsconfig = {
     extends: `@vighnesh153/package-tsconfig/${extendFrom}.json`,
-    include: ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    include: ["**/*.ts", "**/*.tsx"],
     exclude: ["node_modules"]
-  }, null, 2));
+  }
+
+  // Only add for nextjs
+  if (extendFrom === "nextjs") {
+    tsconfig.include.push("next-env.d.ts");
+  }
+
+  await writeFile(fileName, JSON.stringify(tsconfig, null, 2));
 
   spinnies.succeed("create tsconfig.json", {
     text: "✅ Created tsconfig.json file 🎉\n"

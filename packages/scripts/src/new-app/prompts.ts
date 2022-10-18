@@ -60,3 +60,31 @@ async function promptForPackageName(directoryName: string): Promise<string> {
   ]);
   return packageName;
 }
+
+/**
+ * Prompts the user for the port number
+ */
+export async function promptForPort(
+  question = "Enter the development server port number (3000 <= {value} < 4000)"
+): Promise<number> {
+  const inquirer = await getInquirer();
+  const { portNumber } = await inquirer.prompt([
+    {
+      type: 'number',
+      name: "portNumber",
+      message: question,
+      validate(input) {
+        const port = Number(`${input}`)
+        if (isNaN(port)) {
+          return "Port should be a number"
+        }
+        if (port < 3000 || port >= 4000) {
+          return "Port should be between 3000 (inclusive) and 3999 (inclusive)"
+        }
+        // port is valid
+        return true
+      }
+    }
+  ]);
+  return Number(`${portNumber}`);
+}
