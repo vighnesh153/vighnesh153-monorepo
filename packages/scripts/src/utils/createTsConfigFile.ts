@@ -18,7 +18,7 @@ export async function createTsConfigFile(
   });
   await delay();
 
-  // create the file
+  // define the file content
   const tsconfig = {
     extends: `@vighnesh153/package-tsconfig/${extendFrom}.json`,
     include: ["**/*.ts", "**/*.tsx"],
@@ -30,6 +30,7 @@ export async function createTsConfigFile(
     tsconfig.include.push("next-env.d.ts");
   }
 
+  // create the file
   await writeFile(fileName, JSON.stringify(tsconfig, null, 2));
 
   spinnies.succeed("create tsconfig.json", {
