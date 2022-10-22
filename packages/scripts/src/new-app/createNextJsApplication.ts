@@ -19,7 +19,7 @@ export async function createNextJsApplication(directoryName: string, packageName
   // Development server port number
   const devPort = await promptForPort()
 
-  Logger.info("Creating a NextJS application...\n");
+  Logger.info("Creating a NextJS application...");
 
   const directoryPath = path.resolve(getAppsDirectory(), directoryName);
   const packageJsonPath = path.resolve(directoryPath, "package.json");
@@ -53,7 +53,7 @@ export async function createNextJsApplication(directoryName: string, packageName
  */
 async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) {
   const spinner = createSpinner({
-    text: "🚧 Updating package.json with next.js tooling...\n"
+    text: "🚧 Updating package.json with next.js tooling..."
   });
   await delay();
 
@@ -98,7 +98,7 @@ async function createNextJsConfigFile(directoryPath: string) {
   );
 
   const spinner = createSpinner({
-    text: "🚧 Creating next.config.js file...\n"
+    text: "🚧 Creating next.config.js file..."
   });
   await delay();
 
@@ -142,7 +142,7 @@ async function createHomePage(directoryPath: string) {
   const homePagePath = path.resolve(directoryPath, "index.tsx");
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/index.tsx\" file...\n"
+    text: "🚧 Creating \"pages/index.tsx\" file..."
   });
   await delay();
 
@@ -173,7 +173,7 @@ async function createHelloWorldApi(directoryPath: string) {
   const helloApiPath = path.resolve(apiDirectory, "hello.ts");
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/api/hello.ts\" file...\n"
+    text: "🚧 Creating \"pages/api/hello.ts\" file..."
   });
   await delay();
 
@@ -209,7 +209,7 @@ async function createUnderscoreAppTsxFile(directoryPath: string) {
   const appTsxFilePath = path.resolve(directoryPath, "_app.tsx");
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/_app.tsx\" file...\n"
+    text: "🚧 Creating \"pages/_app.tsx\" file..."
   });
   await delay();
 
@@ -250,7 +250,7 @@ async function createGlobalsCssFile(directoryPath: string) {
   const globalsCssPath = path.resolve(directoryPath, "globals.css")
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"styles/globals.css\" file...\n"
+    text: "🚧 Creating \"styles/globals.css\" file..."
   });
   await delay();
 

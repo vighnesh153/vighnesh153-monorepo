@@ -14,7 +14,7 @@ export async function createTsConfigFile(
   const fileName = path.resolve(directoryPath, "tsconfig.json");
 
   const spinner = createSpinner({
-    text: "🚧 Creating tsconfig.json file...\n"
+    text: "🚧 Creating tsconfig.json file..."
   });
   await delay();
 

@@ -16,7 +16,7 @@ export async function createNodeJsPackage(
   packageName: string
 ) {
   const spinner = createSpinner({
-    text: "🚧 Creating an empty NodeJS application...\n"
+    text: "🚧 Creating an empty NodeJS application..."
   });
   Logger.info(`ℹ️  Package name: ${packageName}\n`);
   await delay();
@@ -53,7 +53,7 @@ async function createPackageDotJson(directoryPath: string, packageName: string) 
   const fileName = path.resolve(directoryPath, "package.json");
 
   const spinner = createSpinner({
-    text: "🚧 Creating package.json file...\n"
+    text: "🚧 Creating package.json file..."
   });
   await delay();
 

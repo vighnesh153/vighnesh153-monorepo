@@ -2,6 +2,7 @@ import { ApplicationType } from "./applicationTypes";
 import { createNodeJsApplication } from "./createNodeJsApplication";
 import { createNextJsApplication } from "./createNextJsApplication";
 import { promptUserForInputs } from "./prompts";
+import { runNpmInstall } from "../utils";
 
 async function main() {
   console.log("Preparing creation of a new application in `apps/` directory");
@@ -17,6 +18,9 @@ async function main() {
     [ApplicationType.NodeJs]: createNodeJsApplication,
     [ApplicationType.NextJs]: createNextJsApplication
   }[applicationType](directoryName, packageName);
+
+  // index the app and install dependencies, if any
+  await runNpmInstall(packageName)
 }
 
 main().catch(e => {

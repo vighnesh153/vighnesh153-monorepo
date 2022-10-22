@@ -12,4 +12,5 @@ export * from "./getProjectRoot";
 export * from "./getVendorDirectory";
 export * from "./logger";
 export * from "./readFile";
+export * from "./runNpmInstall";
 export * from "./writeFile";

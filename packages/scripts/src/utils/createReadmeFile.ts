@@ -11,7 +11,7 @@ export async function createReadmeFile(parentDirectory: string, fileContent: str
   const fileName = path.resolve(parentDirectory, "README.md");
 
   const spinner = createSpinner({
-    text: "🚧 Creating README.md file...\n"
+    text: "🚧 Creating README.md file..."
   });
   await delay();
 
