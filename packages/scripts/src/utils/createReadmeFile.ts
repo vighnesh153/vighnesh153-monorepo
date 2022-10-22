@@ -19,6 +19,6 @@ export async function createReadmeFile(parentDirectory: string, fileContent: str
   await writeFile(fileName, fileContent);
 
   spinner.succeed({
-    text: "✅ Created README.md file 🎉\n"
+    text: "✅ Created README.md file 🎉"
   });
 }

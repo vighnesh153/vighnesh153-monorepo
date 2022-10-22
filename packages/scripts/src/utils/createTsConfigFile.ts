@@ -34,6 +34,6 @@ export async function createTsConfigFile(
   await writeFile(fileName, JSON.stringify(tsconfig, null, 2));
 
   spinner.succeed({
-    text: "✅ Created tsconfig.json file 🎉\n"
+    text: "✅ Created tsconfig.json file 🎉"
   });
 }

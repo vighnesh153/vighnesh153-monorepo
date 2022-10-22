@@ -83,7 +83,7 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
   spinner.succeed({
-    text: "✅ Updated package.json with next.js tooling 🎉\n"
+    text: "✅ Updated package.json with next.js tooling 🎉"
   });
 }
 
@@ -115,7 +115,7 @@ module.exports = withTM({
 `.trim());
 
   spinner.succeed({
-    text: "✅ Created next.config.js file 🎉\n"
+    text: "✅ Created next.config.js file 🎉"
   });
 }
 
@@ -161,7 +161,7 @@ export default function Home() {
     `.trim())
 
   spinner.succeed({
-    text: "✅ Created \"pages/index.tsx\" file\n"
+    text: "✅ Created \"pages/index.tsx\" file"
   });
 }
 
@@ -198,7 +198,7 @@ export default function handler(
   `.trim());
 
   spinner.succeed({
-    text: "✅ Created \"pages/api/hello.ts\" file\n"
+    text: "✅ Created \"pages/api/hello.ts\" file"
   });
 }
 
@@ -225,7 +225,7 @@ export default MyApp;
   `.trim());
 
   spinner.succeed({
-    text: "✅ Created \"pages/_app.tsx\" file\n"
+    text: "✅ Created \"pages/_app.tsx\" file"
   });
 }
 
@@ -285,6 +285,6 @@ a {
   `.trim());
 
   spinner.succeed({
-    text: "✅ Created \"styles/globals.css\" file\n"
+    text: "✅ Created \"styles/globals.css\" file"
   });
 }

@@ -42,7 +42,7 @@ export async function createNodeJsPackage(
   ]);
 
   spinner.succeed({
-    text: "✅ Created the NodeJS application 🎉\n"
+    text: "✅ Created the NodeJS application 🎉"
   });
 }
 
@@ -65,6 +65,6 @@ async function createPackageDotJson(directoryPath: string, packageName: string) 
   }, null, 2));
 
   spinner.succeed({
-    text: "✅ Created package.json file 🎉\n"
+    text: "✅ Created package.json file 🎉"
   });
 }
