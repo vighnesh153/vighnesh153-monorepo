@@ -1,8 +1,0 @@
-{
-  "name": "@vighnesh153/vendor-rimraf",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "rimraf": "3.0.2"
-  }
-}

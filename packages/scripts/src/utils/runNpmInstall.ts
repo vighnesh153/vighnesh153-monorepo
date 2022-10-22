@@ -1,8 +1,7 @@
 import util from 'util';
 import child_process from "child_process";
 
-import { createSpinner } from "@vighnesh153/vendor-spinnies";
-
+import { createSpinner } from "./createSpinner";
 import { delay } from "./delay";
 
 const exec = util.promisify(child_process.exec);

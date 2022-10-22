@@ -1,0 +1,12 @@
+{
+  "name": "@vighnesh153/dependencies-nextjs-dev",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/node": "^17.0.12",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "@vighnesh153/package-tsconfig": "*",
+    "typescript": "4.5.3"
+  }
+}

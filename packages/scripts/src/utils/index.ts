@@ -1,6 +1,7 @@
 export * from "./createDirectory";
 export * from "./createNodeJsPackage";
 export * from "./createReadmeFile";
+export * from "./createSpinner";
 export * from "./createTsConfigFile";
 export * from "./delay";
 export * from "./fileExists";
@@ -9,7 +10,6 @@ export * from "./getAppsDirectory";
 export { default as getInquirer } from "./getInquirer";
 export * from "./getPackagesDirectory";
 export * from "./getProjectRoot";
-export * from "./getVendorDirectory";
 export * from "./logger";
 export * from "./readFile";
 export * from "./runNpmInstall";

@@ -1,7 +1,7 @@
 import path from "path";
-import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
 import {
+  createSpinner,
   createTsConfigFile,
   delay,
   getAppsDirectory,
@@ -69,13 +69,11 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
       lint: "next lint"
     },
     dependencies: {
+      "@vighnesh153/dependencies-nextjs": "*",
       "@vighnesh153/package-web-ui": "*",
-      "@vighnesh153/vendor-next": "*",
     },
     devDependencies: {
-      "@vighnesh153/vendor-eslint": "*",
-      "@vighnesh153/vendor-types-next": "*",
-      "eslint-config-vighnesh153": "*",
+      "@vighnesh153/dependencies-nextjs-dev": "*"
     }
   });
 

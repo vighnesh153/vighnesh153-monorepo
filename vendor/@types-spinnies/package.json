@@ -1,8 +1,0 @@
-{
-  "name": "@vighnesh153/vendor-types-spinnies",
-  "private": true,
-  "version": "1.0.0",
-  "dependencies": {
-    "@types/spinnies": "0.5.0"
-  }
-}

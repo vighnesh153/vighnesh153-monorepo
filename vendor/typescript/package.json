@@ -1,9 +1,0 @@
-{
-  "name": "@vighnesh153/vendor-typescript",
-  "version": "1.0.0",
-  "dependencies": {
-    "@vighnesh153/package-tsconfig": "*",
-    "@vighnesh153/vendor-types-node": "*",
-    "typescript": "4.5.3"
-  }
-}

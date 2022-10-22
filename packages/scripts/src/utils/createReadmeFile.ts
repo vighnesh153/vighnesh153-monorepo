@@ -1,6 +1,6 @@
 import path from "path";
-import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
+import { createSpinner } from "./createSpinner";
 import { delay } from "./delay";
 import { writeFile } from "./writeFile";
 

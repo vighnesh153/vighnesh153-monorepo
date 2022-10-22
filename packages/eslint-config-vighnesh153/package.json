@@ -1,19 +1,13 @@
 {
   "name": "eslint-config-vighnesh153",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
   "dependencies": {
-    "@vighnesh153/vendor-eslint": "*",
+    "eslint": "8.25.0",
     "eslint-config-next": "12.0.8",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-react": "7.31.8",
     "eslint-config-turbo": "latest"
-  },
-  "devDependencies": {
-    "@vighnesh153/vendor-typescript": "*"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

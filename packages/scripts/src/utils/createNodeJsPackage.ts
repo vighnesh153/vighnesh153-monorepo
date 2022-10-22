@@ -1,10 +1,10 @@
 import path from "path";
-import { createSpinner } from "@vighnesh153/vendor-spinnies";
 
 import { Logger } from "./logger";
 import { delay } from "./delay";
 import { fileExists } from "./fileExists";
 import { createDirectory } from "./createDirectory";
+import { createSpinner } from "./createSpinner";
 import { createReadmeFile } from "./createReadmeFile";
 import { writeFile } from "./writeFile";
 

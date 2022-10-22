@@ -15,14 +15,9 @@
     "postinstall": "npm run clean && npm run build && npm run copy"
   },
   "dependencies": {
-    "@vighnesh153/vendor-cpy-cli": "*",
-    "@vighnesh153/vendor-inquirer": "*",
-    "@vighnesh153/vendor-rimraf": "*",
-    "@vighnesh153/vendor-spinnies": "*"
+    "@vighnesh153/dependencies-cli": "*"
   },
   "devDependencies": {
-    "@vighnesh153/vendor-types-inquirer": "*",
-    "@vighnesh153/vendor-types-spinnies": "*",
-    "@vighnesh153/vendor-typescript": "*"
+    "@vighnesh153/dependencies-cli-dev": "*"
   }
 }

@@ -1,11 +1,11 @@
 {
   "name": "test-app",
   "dependencies": {
-    "@vighnesh153/vendor-next": "*",
+    "@vighnesh153/dependencies-nextjs": "*",
     "@vighnesh153/package-web-ui": "*"
   },
   "devDependencies": {
-    "@vighnesh153/vendor-types-next": "*"
+    "@vighnesh153/dependencies-nextjs-dev": "*"
   },
   "scripts": {
     "dev": "next dev",

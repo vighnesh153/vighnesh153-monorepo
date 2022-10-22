@@ -1,8 +1,0 @@
-{
-  "extends": "@vighnesh153/package-tsconfig/base.json",
-  "compilerOptions": {
-    "outDir": "./dist"
-  },
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
-}

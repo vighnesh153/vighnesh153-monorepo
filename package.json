@@ -4,8 +4,8 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*",
-    "vendor/*"
+    "dependencies/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",

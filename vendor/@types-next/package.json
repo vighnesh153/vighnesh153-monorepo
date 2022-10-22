@@ -1,9 +1,0 @@
-{
-  "name": "@vighnesh153/vendor-types-next",
-  "private": true,
-  "version": "1.0.0",
-  "dependencies": {
-    "@vighnesh153/vendor-types-react-dom": "*",
-    "@vighnesh153/vendor-typescript": "*"
-  }
-}
