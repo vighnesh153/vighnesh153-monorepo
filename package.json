@@ -11,16 +11,21 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "test": "echo 'Testing...'",
     "lint": "turbo run lint",
     "lint-staged": "turbo run lint-staged",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "new-app": "./node_modules/@vighnesh153/package-scripts/vighnesh153-new-app.sh"
+    "new-app": "./node_modules/@vighnesh153/package-scripts/vighnesh153-new-app.sh",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@vighnesh153/package-scripts": "*",
     "@vighnesh153/package-tsconfig": "*",
     "@vighnesh153/prettier-config": "^1.0.3",
     "eslint-config-vighnesh153": "*",
+    "husky": "^8.0.0",
     "lint-staged": "13.0.3",
     "prettier": "latest",
     "turbo": "latest"
