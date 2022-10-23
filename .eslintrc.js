@@ -1,10 +1,14 @@
 module.exports = {
   root: true,
-  // This tells ESLint to load the config from the package `eslint-config-custom`
-  extends: ["vighnesh153"],
+  extends: ["vighnesh153/ts.eslintrc"],
+  env: {
+    browser: true,
+    amd: true,
+    node: true
+  },
   settings: {
     next: {
-      rootDir: ["apps/*/"],
-    },
-  },
+      rootDir: ["apps/*/"]
+    }
+  }
 };

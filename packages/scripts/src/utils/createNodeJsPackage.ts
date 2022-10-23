@@ -61,7 +61,12 @@ async function createPackageDotJson(directoryPath: string, packageName: string) 
   await writeFile(fileName, JSON.stringify({
     name: packageName,
     version: "1.0.0",
-    private: true
+    private: true,
+    scripts: {},
+    dependencies: {},
+    devDependencies: {
+      "eslint-config-vighnesh153": "*",
+    },
   }, null, 2));
 
   spinner.succeed({

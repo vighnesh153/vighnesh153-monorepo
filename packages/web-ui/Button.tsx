@@ -1,4 +1,5 @@
-import * as React from "react";
-export const Button = () => {
-  return <button>Lol</button>;
-};
+import React, { ButtonHTMLAttributes } from 'react';
+
+export function Button(props: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return <button {...props} />;
+}

@@ -2,6 +2,7 @@
   "name": "vighnesh153-turbo",
   "version": "0.0.0",
   "private": true,
+  "prettier": "@vighnesh153/prettier-config",
   "workspaces": [
     "apps/*",
     "dependencies/*",
@@ -16,6 +17,8 @@
   },
   "devDependencies": {
     "@vighnesh153/package-scripts": "*",
+    "@vighnesh153/package-tsconfig": "*",
+    "@vighnesh153/prettier-config": "^1.0.3",
     "eslint-config-vighnesh153": "*",
     "prettier": "latest",
     "turbo": "latest"

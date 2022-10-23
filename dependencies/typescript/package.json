@@ -1,0 +1,10 @@
+{
+  "name": "@vighnesh153/dependencies-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/node": "^17.0.12",
+    "@vighnesh153/package-tsconfig": "*",
+    "typescript": "4.5.3"
+  }
+}

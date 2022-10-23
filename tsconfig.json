@@ -1,0 +1,14 @@
+{
+  "extends": "@vighnesh153/package-tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "declarationMap": false,
+    "sourceMap": false,
+    "declaration": false,
+    "allowJs": true,
+    "esModuleInterop": true
+  }
+}

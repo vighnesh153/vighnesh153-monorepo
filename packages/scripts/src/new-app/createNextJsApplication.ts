@@ -1,6 +1,7 @@
 import path from "path";
 
 import {
+  alphabeticallyOrder,
   createSpinner,
   createTsConfigFile,
   delay,
@@ -37,6 +38,9 @@ export async function createNextJsApplication(directoryName: string, packageName
     // Create the tsconfig.json file
     createTsConfigFile(directoryPath, "nextjs"),
 
+    // Creates the eslint config file
+    createEslintConfigFile(directoryPath),
+
     // Creates the "pages/" directory and adds content to it
     createPagesDirectoryAndAddContent(directoryPath),
 
@@ -63,18 +67,21 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
   // Update the content
   Object.assign(packageJson, {
     scripts: {
+      ...packageJson.scripts,
       dev: `next dev --port ${devPort}`,
       build: "next build",
       start: "next start",
       lint: "next lint"
     },
-    dependencies: {
+    dependencies: alphabeticallyOrder({
+      ...packageJson.dependencies,
       "@vighnesh153/dependencies-nextjs": "*",
       "@vighnesh153/package-web-ui": "*",
-    },
-    devDependencies: {
+    }),
+    devDependencies: alphabeticallyOrder({
+      ...packageJson.devDependencies,
       "@vighnesh153/dependencies-nextjs-dev": "*"
-    }
+    }),
   });
 
   // write back to the package.json file
@@ -283,6 +290,31 @@ a {
   `.trim());
 
   spinner.succeed({
-    text: "✅ Created \"styles/globals.css\" file"
+    text: `✅ Created "styles/globals.css" file 🎉`
+  });
+}
+
+/**
+ * Create eslint config file
+ */
+async function createEslintConfigFile(directoryPath: string) {
+  const eslintConfigFilePath = path.resolve(directoryPath, ".eslintrc.js")
+
+  const spinner = createSpinner({
+    text: `🚧 Creating ".eslintrc.js" file...`
+  });
+  await delay();
+
+  // write to the file
+  await writeFile(eslintConfigFilePath, `
+module.exports = {
+  extends: [
+    "vighnesh153/next-ts.eslintrc",
+  ],
+};
+  `.trim());
+
+  spinner.succeed({
+    text: `✅ Created ".eslintrc.js" file 🎉`,
   });
 }

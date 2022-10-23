@@ -1,3 +1,4 @@
+export * from "./alphabeticallyOrder";
 export * from "./createDirectory";
 export * from "./createNodeJsPackage";
 export * from "./createReadmeFile";
