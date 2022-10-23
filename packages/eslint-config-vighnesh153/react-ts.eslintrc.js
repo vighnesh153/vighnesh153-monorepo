@@ -5,7 +5,15 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',
   ],
-  rules: {},
+  rules: {
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
+  },
   settings: {
     react: {
       createClass: 'createReactClass', // Regex for Component Factory to use,
