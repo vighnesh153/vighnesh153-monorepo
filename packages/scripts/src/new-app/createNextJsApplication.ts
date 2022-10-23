@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 
 import {
   alphabeticallyOrder,
@@ -9,21 +9,22 @@ import {
   Logger,
   readFile,
   writeFile,
-  createNodeJsPackage, createDirectory
-} from "../utils";
-import { promptForPort } from "./prompts";
+  createNodeJsPackage,
+  createDirectory,
+} from '../utils';
+import { promptForPort } from './prompts';
 
 /**
  * Creates a new next-js application in the apps/ directory
  */
 export async function createNextJsApplication(directoryName: string, packageName: string) {
   // Development server port number
-  const devPort = await promptForPort()
+  const devPort = await promptForPort();
 
-  Logger.info("Creating a NextJS application...");
+  Logger.info('Creating a NextJS application...');
 
   const directoryPath = path.resolve(getAppsDirectory(), directoryName);
-  const packageJsonPath = path.resolve(directoryPath, "package.json");
+  const packageJsonPath = path.resolve(directoryPath, 'package.json');
 
   // Create an empty nodejs project first
   await createNodeJsPackage(directoryPath, packageName);
@@ -36,7 +37,7 @@ export async function createNextJsApplication(directoryName: string, packageName
     createNextJsConfigFile(directoryPath),
 
     // Create the tsconfig.json file
-    createTsConfigFile(directoryPath, "nextjs"),
+    createTsConfigFile(directoryPath, 'nextjs'),
 
     // Creates the eslint config file
     createEslintConfigFile(directoryPath),
@@ -46,9 +47,12 @@ export async function createNextJsApplication(directoryName: string, packageName
 
     // Creates the "styles/" directory and adds content to it
     createStylesDirectoryAndAddContent(directoryPath),
+
+    // Create the .lintstagedrc.js file
+    createLintStagedConfigFile(directoryPath),
   ]);
 
-  Logger.success("✅ Created the Next.JS application 🎉\n");
+  Logger.success('✅ Created the Next.JS application 🎉\n');
   Logger.info(`cd into "apps/${directoryName}" to start development\n`);
 }
 
@@ -57,7 +61,7 @@ export async function createNextJsApplication(directoryName: string, packageName
  */
 async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) {
   const spinner = createSpinner({
-    text: "🚧 Updating package.json with next.js tooling..."
+    text: '🚧 Updating package.json with next.js tooling...',
   });
   await delay();
 
@@ -69,18 +73,19 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
     scripts: {
       ...packageJson.scripts,
       dev: `next dev --port ${devPort}`,
-      build: "next build",
-      start: "next start",
-      lint: "next lint"
+      build: 'next build',
+      start: 'next start',
+      lint: 'next lint',
+      'lint-staged': 'lint-staged',
     },
     dependencies: alphabeticallyOrder({
       ...packageJson.dependencies,
-      "@vighnesh153/dependencies-nextjs": "*",
-      "@vighnesh153/package-web-ui": "*",
+      '@vighnesh153/dependencies-nextjs': '*',
+      '@vighnesh153/package-web-ui': '*',
     }),
     devDependencies: alphabeticallyOrder({
       ...packageJson.devDependencies,
-      "@vighnesh153/dependencies-nextjs-dev": "*"
+      '@vighnesh153/dependencies-nextjs-dev': '*',
     }),
   });
 
@@ -88,7 +93,7 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
   spinner.succeed({
-    text: "✅ Updated package.json with next.js tooling 🎉"
+    text: '✅ Updated package.json with next.js tooling 🎉',
   });
 }
 
@@ -97,18 +102,17 @@ async function addNextJsToPackageJson(packageJsonPath: string, devPort: number) 
  */
 async function createNextJsConfigFile(directoryPath: string) {
   // next.config.js file path
-  const nextConfigPath = path.resolve(
-    directoryPath,
-    "next.config.js"
-  );
+  const nextConfigPath = path.resolve(directoryPath, 'next.config.js');
 
   const spinner = createSpinner({
-    text: "🚧 Creating next.config.js file..."
+    text: '🚧 Creating next.config.js file...',
   });
   await delay();
 
   // write to the "next.config.js" file
-  await writeFile(nextConfigPath, `
+  await writeFile(
+    nextConfigPath,
+    `
 const withTM = require("next-transpile-modules")([
   "@vighnesh153/package-web-ui"
 ]);
@@ -117,10 +121,11 @@ module.exports = withTM({
   reactStrictMode: true,
   swcMinify: true,
 });
-`.trim());
+`.trim()
+  );
 
   spinner.succeed({
-    text: "✅ Created next.config.js file 🎉"
+    text: '✅ Created next.config.js file 🎉',
   });
 }
 
@@ -128,10 +133,10 @@ module.exports = withTM({
  * Creates the "pages/" directory and add sample files to it
  */
 async function createPagesDirectoryAndAddContent(directoryPath: string) {
-  const pagesDirectoryPath = path.resolve(directoryPath, "pages");
+  const pagesDirectoryPath = path.resolve(directoryPath, 'pages');
 
   // Make the "pages/" directory
-  await createDirectory(pagesDirectoryPath)
+  await createDirectory(pagesDirectoryPath);
 
   await Promise.all([
     createHomePage(pagesDirectoryPath),
@@ -144,15 +149,17 @@ async function createPagesDirectoryAndAddContent(directoryPath: string) {
  * Creates the home page
  */
 async function createHomePage(directoryPath: string) {
-  const homePagePath = path.resolve(directoryPath, "index.tsx");
+  const homePagePath = path.resolve(directoryPath, 'index.tsx');
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/index.tsx\" file..."
+    text: '🚧 Creating "pages/index.tsx" file...',
   });
   await delay();
 
   // Create the "pages/index.tsx file"
-  await writeFile(homePagePath, `
+  await writeFile(
+    homePagePath,
+    `
 import { Button } from "@vighnesh153/package-web-ui";
 
 export default function Home() {
@@ -163,10 +170,11 @@ export default function Home() {
     </div>
   );
 }
-    `.trim())
+    `.trim()
+  );
 
   spinner.succeed({
-    text: "✅ Created \"pages/index.tsx\" file"
+    text: '✅ Created "pages/index.tsx" file',
   });
 }
 
@@ -174,11 +182,11 @@ export default function Home() {
  * Creates the sample "pages/api/hello.ts" api
  */
 async function createHelloWorldApi(directoryPath: string) {
-  const apiDirectory = path.resolve(directoryPath, "api");
-  const helloApiPath = path.resolve(apiDirectory, "hello.ts");
+  const apiDirectory = path.resolve(directoryPath, 'api');
+  const helloApiPath = path.resolve(apiDirectory, 'hello.ts');
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/api/hello.ts\" file..."
+    text: '🚧 Creating "pages/api/hello.ts" file...',
   });
   await delay();
 
@@ -186,7 +194,9 @@ async function createHelloWorldApi(directoryPath: string) {
   await createDirectory(apiDirectory);
 
   // write to "pages/api/hello.ts" file
-  await writeFile(helloApiPath, `
+  await writeFile(
+    helloApiPath,
+    `
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -200,10 +210,11 @@ export default function handler(
 ) {
   res.status(200).json({ name: 'Vighnesh' });
 }
-  `.trim());
+  `.trim()
+  );
 
   spinner.succeed({
-    text: "✅ Created \"pages/api/hello.ts\" file"
+    text: '✅ Created "pages/api/hello.ts" file',
   });
 }
 
@@ -211,14 +222,16 @@ export default function handler(
  * Creates the "pages/_app.tsx" file
  */
 async function createUnderscoreAppTsxFile(directoryPath: string) {
-  const appTsxFilePath = path.resolve(directoryPath, "_app.tsx");
+  const appTsxFilePath = path.resolve(directoryPath, '_app.tsx');
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"pages/_app.tsx\" file..."
+    text: '🚧 Creating "pages/_app.tsx" file...',
   });
   await delay();
 
-  await writeFile(appTsxFilePath, `
+  await writeFile(
+    appTsxFilePath,
+    `
   import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 
@@ -227,10 +240,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
-  `.trim());
+  `.trim()
+  );
 
   spinner.succeed({
-    text: "✅ Created \"pages/_app.tsx\" file"
+    text: '✅ Created "pages/_app.tsx" file',
   });
 }
 
@@ -238,29 +252,29 @@ export default MyApp;
  * Creates the "styles/" directory and adds content to it
  */
 async function createStylesDirectoryAndAddContent(directoryPath: string) {
-  const stylesDirectoryPath = path.resolve(directoryPath, "styles");
+  const stylesDirectoryPath = path.resolve(directoryPath, 'styles');
 
   // create styles/ directory
   await createDirectory(stylesDirectoryPath);
 
-  await Promise.all([
-    createGlobalsCssFile(stylesDirectoryPath),
-  ]);
+  await Promise.all([createGlobalsCssFile(stylesDirectoryPath)]);
 }
 
 /**
  * Creates the "styles/globals.css" file
  */
 async function createGlobalsCssFile(directoryPath: string) {
-  const globalsCssPath = path.resolve(directoryPath, "globals.css")
+  const globalsCssPath = path.resolve(directoryPath, 'globals.css');
 
   const spinner = createSpinner({
-    text: "🚧 Creating \"styles/globals.css\" file..."
+    text: '🚧 Creating "styles/globals.css" file...',
   });
   await delay();
 
   // write to the file
-  await writeFile(globalsCssPath, `
+  await writeFile(
+    globalsCssPath,
+    `
 html,
 body {
   padding: 0;
@@ -287,10 +301,11 @@ a {
     background: black;
   }
 }
-  `.trim());
+  `.trim()
+  );
 
   spinner.succeed({
-    text: `✅ Created "styles/globals.css" file 🎉`
+    text: `✅ Created "styles/globals.css" file 🎉`,
   });
 }
 
@@ -298,23 +313,61 @@ a {
  * Create eslint config file
  */
 async function createEslintConfigFile(directoryPath: string) {
-  const eslintConfigFilePath = path.resolve(directoryPath, ".eslintrc.js")
+  const eslintConfigFilePath = path.resolve(directoryPath, '.eslintrc.js');
 
   const spinner = createSpinner({
-    text: `🚧 Creating ".eslintrc.js" file...`
+    text: `🚧 Creating ".eslintrc.js" file...`,
   });
   await delay();
 
   // write to the file
-  await writeFile(eslintConfigFilePath, `
+  await writeFile(
+    eslintConfigFilePath,
+    `
 module.exports = {
   extends: [
     "vighnesh153/next-ts.eslintrc",
   ],
 };
-  `.trim());
+  `.trim()
+  );
 
   spinner.succeed({
     text: `✅ Created ".eslintrc.js" file 🎉`,
+  });
+}
+
+/**
+ * Create .lintstagedrc.js
+ */
+async function createLintStagedConfigFile(directoryPath: string) {
+  const lintStagedConfigFilePath = path.resolve(directoryPath, '.lintstagedrc.js');
+
+  const spinner = createSpinner({
+    text: `🚧 Creating ".lintstagedrc.js" file...`,
+  });
+  await delay();
+
+  // write to the file
+  await writeFile(
+    lintStagedConfigFilePath,
+    `
+const path = require('path');
+
+const buildEslintCommand = (filenames) => {
+  console.log('Current working directory:', process.cwd());
+  const filenameMapper = (filename) => path.relative(process.cwd(), filename);
+  const files = \`--file \${filenames.map(filenameMapper).join(' --file ')}\`;
+  return \`next lint --max-warnings=0 --fix \${files}\`;
+};
+
+module.exports = {
+  '*.{js,jsx,ts,tsx,md,mdx}': [buildEslintCommand, 'prettier --write'],
+};
+  `.trim()
+  );
+
+  spinner.succeed({
+    text: `✅ Created ".lintstagedrc.js" file 🎉`,
   });
 }

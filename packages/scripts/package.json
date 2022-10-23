@@ -12,6 +12,7 @@
     "clean:dist": "rimraf dist",
     "clean": "npm run clean:dist",
     "build": "tsc --project ./tsconfig.json",
+    "lint-staged": "lint-staged",
     "postinstall": "npm run clean && npm run build && npm run copy"
   },
   "dependencies": {
