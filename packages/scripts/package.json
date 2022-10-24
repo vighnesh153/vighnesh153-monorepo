@@ -4,7 +4,7 @@
   "private": true,
   "files": [
     "dist",
-    "vighnesh153-new-app.sh"
+    "vighnesh153-new.sh"
   ],
   "scripts": {
     "copy:inquirer": "cpy --flat './src/utils/getInquirer.js' './dist/utils'",

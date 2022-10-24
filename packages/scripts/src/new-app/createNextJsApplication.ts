@@ -341,10 +341,10 @@ module.exports = {
  * Create .lintstagedrc.js
  */
 async function createLintStagedConfigFile(directoryPath: string) {
-  const lintStagedConfigFilePath = path.resolve(directoryPath, '.lintstagedrc.js');
+  const lintStagedConfigFilePath = path.resolve(directoryPath, 'lint-staged.config.js');
 
   const spinner = createSpinner({
-    text: `🚧 Creating ".lintstagedrc.js" file...`,
+    text: `🚧 Creating "lint-staged.config.js" file...`,
   });
   await delay();
 
@@ -359,6 +359,6 @@ module.exports = { ...baseLintStaged };
   );
 
   spinner.succeed({
-    text: `✅ Created ".lintstagedrc.js" file 🎉`,
+    text: `✅ Created "lint-staged.config.js" file 🎉`,
   });
 }
