@@ -1,3 +1,3 @@
-module.exports = {
-  '*.{js,ts,md}': ['eslint --fix', 'prettier --write'],
-};
+const baseLintStaged = require('../../.lintstagedrc');
+
+module.exports = { ...baseLintStaged };
