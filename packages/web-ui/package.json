@@ -1,8 +1,8 @@
 {
   "name": "@vighnesh153/package-web-ui",
   "version": "1.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./components/index.tsx",
+  "types": "./components/index.tsx",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",

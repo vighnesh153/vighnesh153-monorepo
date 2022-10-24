@@ -1,4 +1,4 @@
-import { Button } from "@vighnesh153/package-web-ui";
+import { Button } from '@vighnesh153/package-web-ui/components';
 
 export default function Page() {
   return (
@@ -6,5 +6,5 @@ export default function Page() {
       <h1>This is my test-app</h1>
       <Button />
     </div>
-  )
+  );
 }
