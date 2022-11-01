@@ -4,6 +4,9 @@
     "@vighnesh153/dependencies-nextjs": "*",
     "@vighnesh153/package-web-ui": "*"
   },
+  "peerDependencies": {
+
+  },
   "devDependencies": {
     "@vighnesh153/dependencies-nextjs-dev": "*"
   },
