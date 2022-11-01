@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    'vighnesh153/ts.eslintrc',
+    'vighnesh153/ts-base.eslintrc',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',
