@@ -4,6 +4,14 @@ All my projects will be placed in this mono-repo.
 
 ### Development server ports
 
+### Check updates
+
+```shell
+cd apps/vighnesh153.com
+
+ncu -u
+```
+
 ### TODO
 
 - Add nodemon to nodejs app
