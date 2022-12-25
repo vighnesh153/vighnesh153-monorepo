@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
-    "@vighnesh153/dependencies-typescript": "*"
+    "@vighnesh153/dependencies-typescript": "*",
+    "eslint-config-vighnesh153": "*"
   }
 }

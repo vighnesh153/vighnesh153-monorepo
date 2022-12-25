@@ -1,0 +1,22 @@
+{
+  "name": "sample-external",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "publish": ""
+  },
+  "dependencies": {
+    "@vighnesh153/dependencies-ts-lib": "*"
+  },
+  "devDependencies": {
+    "@vighnesh153/dependencies-ts-lib-dev": "*"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

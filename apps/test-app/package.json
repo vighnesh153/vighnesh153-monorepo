@@ -1,20 +1,18 @@
 {
   "name": "test-app",
-  "dependencies": {
-    "@vighnesh153/dependencies-nextjs": "*",
-    "@vighnesh153/package-web-ui": "*"
-  },
-  "peerDependencies": {
-
-  },
-  "devDependencies": {
-    "@vighnesh153/dependencies-nextjs-dev": "*"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint-staged": "lint-staged"
+  },
+  "dependencies": {
+    "@vighnesh153/dependencies-nextjs": "*",
+    "@vighnesh153/package-web-ui": "*"
+  },
+  "devDependencies": {
+    "@vighnesh153/dependencies-nextjs-dev": "*",
+    "eslint-config-vighnesh153": "*"
   }
 }

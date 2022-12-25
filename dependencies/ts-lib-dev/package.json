@@ -1,0 +1,10 @@
+{
+  "name": "@vighnesh153/dependencies-ts-lib-dev",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@vighnesh153/dependencies-typescript": "*",
+    "eslint-config-vighnesh153": "*",
+    "tsup": "^6.3.0"
+  }
+}
