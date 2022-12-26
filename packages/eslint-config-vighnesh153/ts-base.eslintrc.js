@@ -39,6 +39,7 @@ module.exports = {
     'max-len': ['error', { code: 120 }],
     'no-duplicate-imports': 'error',
     'no-empty-function': 'error',
+    'no-plusplus': 'off',
     /**
      * @see https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
      */
