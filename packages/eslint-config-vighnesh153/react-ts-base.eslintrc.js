@@ -1,7 +1,8 @@
 module.exports = {
   extends: [
-    'airbnb',
     'vighnesh153/ts-base.eslintrc',
+    'airbnb',
+    'airbnb-typescript',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',

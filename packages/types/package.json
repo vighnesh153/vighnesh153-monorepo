@@ -11,5 +11,11 @@
   },
   "files": [
     "src"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "typescript": "^4.9.4"
+  }
 }
