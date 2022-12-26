@@ -1,0 +1,15 @@
+{
+  "name": "@vighnesh153/types",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "files": [
+    "src"
+  ]
+}
