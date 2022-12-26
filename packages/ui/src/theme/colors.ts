@@ -1,6 +1,6 @@
 import { IColor } from '@vighnesh153/types';
 
-export const Colors: Record<string, IColor> = {
+export const Colors = {
   Gray: {
     Shade0: '#f8f9fa',
     Shade1: '#f1f3f5',
@@ -286,4 +286,4 @@ export const Colors: Record<string, IColor> = {
     Shade11: '#516605',
     Shade12: '#3d4d04',
   },
-};
+} satisfies Record<string, IColor>;

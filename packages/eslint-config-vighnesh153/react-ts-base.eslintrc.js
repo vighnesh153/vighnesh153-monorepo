@@ -1,11 +1,35 @@
 module.exports = {
   extends: [
+    'airbnb',
     'vighnesh153/ts-base.eslintrc',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',
   ],
   rules: {
+    'jsx-a11y/heading-has-content': 'warn',
+    'jsx-a11y/interactive-supports-focus': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        depth: 2,
+      },
+    ],
+    'jsx-a11y/no-autofocus': 'off',
+    'react/destructuring-assignment': 'off',
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.ts', '.tsx'],
+      },
+    ],
+    'react/jsx-no-constructed-context-values': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-unescaped-entities': 'error',
+    'react/no-unused-prop-types': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'react/self-closing-comp': [
       'error',
       {

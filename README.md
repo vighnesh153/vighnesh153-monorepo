@@ -32,6 +32,7 @@ ncu -u
   - files
   - private
   - main
+  - types
 
 ### Todos for a new package
 
