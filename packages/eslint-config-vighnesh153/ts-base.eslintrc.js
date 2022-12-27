@@ -19,6 +19,14 @@ module.exports = {
     ecmaVersion: 2015,
     sourceType: 'module',
   },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
+    },
+  },
   rules: {
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': 'error',
@@ -35,6 +43,7 @@ module.exports = {
     ],
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off', // turning it off because it is not working ☹️
     'import/prefer-default-export': 'off',
     'max-len': ['error', { code: 120 }],
     'no-duplicate-imports': 'error',
@@ -60,5 +69,12 @@ module.exports = {
     'operator-linebreak': 'off',
     'prefer-arrow-callback': 'error',
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'sort-imports': [
+      'error',
+      {
+        memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
+        allowSeparatedGroups: true,
+      },
+    ],
   },
 };

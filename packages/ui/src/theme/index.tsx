@@ -1,5 +1,7 @@
+import { CssBaseline, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+
+export { useTheme } from '@mui/material';
 
 export const theme = createTheme({
   palette: {
@@ -16,9 +18,9 @@ export const theme = createTheme({
 
 export function VighneshThemeProvider(props: PropsWithChildren<unknown>) {
   return (
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       {props.children}
-    </ThemeProvider>
+    </MuiThemeProvider>
   );
 }

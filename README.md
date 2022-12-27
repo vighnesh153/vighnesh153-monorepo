@@ -1,8 +1,29 @@
 # @vighnesh153-turbo
 
-All my projects will be placed in this mono-repo.
+Welcome to my mono-repo. This repository contains (will contain) source code of all the projects that I work on and
+publish to the outside world.
 
-### Development server ports
+### Something broken?
+
+- Please [report an issue here](https://bit.ly/rv-mono-repo-report-issue).
+
+### Commitlint
+
+Common types according to commitlint-config-conventional (based on the Angular convention) can be:
+
+- build
+- chore
+- ci
+- docs
+- feat
+- fix
+- perf
+- refactor
+- revert
+- style
+- test
+
+These can be modified by [your own configuration](https://github.com/conventional-changelog/commitlint#config).
 
 ### Check updates
 
@@ -12,11 +33,12 @@ cd apps/vighnesh153.com
 ncu -u
 ```
 
-### TODO
+### Todos
 
-- Add nodemon to nodejs app
-- Add new package creation to npm run new
-  - Creation of external package
+- Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
+  - NPM package: https://www.npmjs.com/package/@docsearch/react
+- Checkout material's documentation website configurations
+  - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
 
 ### Todos for a new project
 

@@ -1,8 +1,8 @@
 module.exports = {
   extends: [
-    'vighnesh153/ts-base.eslintrc',
     'airbnb',
     'airbnb-typescript',
+    'vighnesh153/ts-base.eslintrc',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',
@@ -27,6 +27,8 @@ module.exports = {
     'react/jsx-no-constructed-context-values': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react-perf/jsx-no-new-function-as-prop': 'off',
+    'react-perf/jsx-no-new-object-as-prop': 'off',
     'react/no-unescaped-entities': 'error',
     'react/no-unused-prop-types': 'off',
     'react/prop-types': 'off',
