@@ -1,42 +1,74 @@
-import React from 'react';
 import {
   AppBar,
   Box,
-  Button,
-  Divider,
   Drawer,
   IconButton,
   Icons,
+  Link,
   List,
   ListItem,
-  ListItemButton,
-  ListItemText,
   Toolbar,
   Typography,
+  useTheme,
 } from '@vighnesh153/ui';
+import { useState } from 'react';
+import { FocusDashedOutline } from '@modules/common/components/focus-dashed-outline';
+import { MuiNextLink } from './next-link';
 
 const drawerWidth = 240;
-const navItems = ['About', 'Experience', 'Projects', 'Contact'];
+const navItems = [
+  { label: 'About', href: '/#about' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Contact', href: '/#contact' },
+  { label: 'Resume', href: 'https://bit.ly/vighnesh153-resume' },
+];
 
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        height: '100%',
+        background: theme.palette.primary.light,
+        textAlign: 'center',
+      }}
+    >
+      <List
+        sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          gap: '4rem',
+        }}
+      >
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
+          <ListItem key={item.label} disablePadding sx={{ justifyContent: 'center' }}>
+            <FocusDashedOutline>
+              <MuiNextLink
+                href={item.href}
+                sx={{
+                  color: theme.palette.text.primary,
+                  '&:is(:hover,:focus)': {
+                    color: theme.palette.secondary.main,
+                  },
+                }}
+              >
+                <Typography variant="body1" component="span">
+                  {item.label}
+                </Typography>
+              </MuiNextLink>
+            </FocusDashedOutline>
           </ListItem>
         ))}
       </List>
@@ -53,7 +85,7 @@ export function Navbar() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" color="secondary">
+      <AppBar component="nav" color="primary">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -76,9 +108,9 @@ export function Navbar() {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
+              <Link component={MuiNextLink} key={item.label} sx={{ color: '#fff' }} href={item.href}>
+                {item.label}
+              </Link>
             ))}
           </Box>
         </Toolbar>

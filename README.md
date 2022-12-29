@@ -37,8 +37,9 @@ ncu -u
 
 - Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
   - NPM package: https://www.npmjs.com/package/@docsearch/react
-- Checkout material's documentation website configurations
+- Checkout material's documentation website configurations for creating blog
   - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
+- Fix `import-sorting` in eslint
 
 ### Todos for a new project
 

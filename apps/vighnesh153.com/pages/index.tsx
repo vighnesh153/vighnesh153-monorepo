@@ -1,9 +1,9 @@
-import { Head, Navbar, SkipToMainContent } from '@components';
+import { Components } from '@modules/common';
 
 export default function Home() {
   return (
     <>
-      <Head>
+      <Components.Head>
         <title>Vighnesh Raut - the man, the myth, the living legend himself</title>
         <meta
           name="description"
@@ -11,14 +11,23 @@ export default function Home() {
           interfaces. He also loves to dabble with Physics and Mathematics. When bored, you
           can find him watching Netflix on his bed."
         />
-      </Head>
+      </Components.Head>
 
-      <SkipToMainContent />
+      <Components.SkipToMainContent />
 
-      <Navbar />
+      <Components.Navbar />
 
       <main id="main">
-        <p style={{ background: 'red', height: 1500 }} />
+        <p style={{ background: 'red', height: 1500, paddingTop: 200 }}>
+          {/* <iframe */}
+          {/*  title="my resume" */}
+          {/*  src="https://drive.google.com/file/d/1u_8oDHemUAYZdO99AGEYX8iqRrl3lNGO/preview" */}
+          {/*  width="300" */}
+          {/*  // height="480" */}
+          {/*  style={{ aspectRatio: '1/1.270' }} */}
+          {/*  allow="autoplay" */}
+          {/* /> */}
+        </p>
       </main>
     </>
   );

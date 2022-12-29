@@ -4,11 +4,13 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'airbnb-base',
     'airbnb-typescript/base',
+    'plugin:import/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
     'prettier',
   ],
+  plugins: ['import'],
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
@@ -41,9 +43,16 @@ module.exports = {
         functions: 'never',
       },
     ],
-    'import/extensions': 'off',
+    // 'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off', // turning it off because it is not working ☹️
+    // 'import/order': [
+    //   'error',
+    //   {
+    //     alphabetize: { order: 'asc' },
+    //     groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+    //   },
+    // ],
     'import/prefer-default-export': 'off',
     'max-len': ['error', { code: 120 }],
     'no-duplicate-imports': 'error',
@@ -69,12 +78,5 @@ module.exports = {
     'operator-linebreak': 'off',
     'prefer-arrow-callback': 'error',
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    'sort-imports': [
-      'error',
-      {
-        memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
-        allowSeparatedGroups: true,
-      },
-    ],
   },
 };

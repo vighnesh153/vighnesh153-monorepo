@@ -1,24 +1,25 @@
-import { CssBaseline, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
-
-export { useTheme } from '@mui/material';
+import { createTheme, CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from '@mui/material';
 
 export const theme = createTheme({
   palette: {
     primary: {
-      main: 'hsl(166, 100%, 70%)',
-    },
-    secondary: {
       main: 'hsl(216, 65%, 11%)',
       light: 'hsl(218, 58%, 16%)',
       dark: 'hsl(218, 80%, 6%)',
     },
+    secondary: {
+      main: 'hsl(166, 100%, 70%)',
+    },
+    text: {
+      primary: 'hsl(226, 70%, 88%)',
+    },
   },
 });
 
-export function VighneshThemeProvider(props: PropsWithChildren<unknown>) {
+export function VighneshThemeProvider(props: PropsWithChildren<{ theme?: Theme }>) {
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={props.theme ?? theme}>
       <CssBaseline />
       {props.children}
     </MuiThemeProvider>
