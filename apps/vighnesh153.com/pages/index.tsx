@@ -1,6 +1,8 @@
 import { Components } from '@modules/common';
+import { useTheme } from '@mui/material';
 
 export default function Home() {
+  const theme = useTheme();
   return (
     <>
       <Components.Head>
@@ -18,7 +20,7 @@ export default function Home() {
       <Components.Navbar />
 
       <main id="main">
-        <p style={{ background: 'red', height: 1500, paddingTop: 200 }}>
+        <p style={{ background: theme.palette.primary.main, height: 3500, paddingTop: 200 }}>
           {/* <iframe */}
           {/*  title="my resume" */}
           {/*  src="https://drive.google.com/file/d/1u_8oDHemUAYZdO99AGEYX8iqRrl3lNGO/preview" */}

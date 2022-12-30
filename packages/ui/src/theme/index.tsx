@@ -15,6 +15,9 @@ export const theme = createTheme({
       primary: 'hsl(226, 70%, 88%)',
     },
   },
+  // shadows: {
+  //
+  // },
 });
 
 export function VighneshThemeProvider(props: PropsWithChildren<{ theme?: Theme }>) {

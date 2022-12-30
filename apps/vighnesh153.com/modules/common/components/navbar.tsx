@@ -1,7 +1,20 @@
 import { RVLogoIcon } from '@vighnesh153/ui';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { AppBar, Box, SwipeableDrawer, IconButton, List, ListItem, Toolbar, Typography, useTheme } from '@mui/material';
-import { useState } from 'react';
+import {
+  AppBar,
+  Box,
+  SwipeableDrawer,
+  IconButton,
+  List,
+  ListItem,
+  Toolbar,
+  Slide,
+  Typography,
+  useTheme,
+  useScrollTrigger,
+  alpha,
+} from '@mui/material';
+import React, { useState } from 'react';
 import { useIsIOS } from '@vighnesh153/react-hooks';
 import { not } from '@vighnesh153/utils';
 import { FocusDashedOutline } from './focus-dashed-outline';
@@ -20,6 +33,16 @@ const navItems: NavItem[] = [
   { label: 'Contact', href: '/#contact' },
   { label: 'Resume', href: 'https://bit.ly/vighnesh153-resume' },
 ];
+
+function HideOnScroll(props: { children: React.ReactElement }) {
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="down" in={not(trigger)}>
+      {props.children}
+    </Slide>
+  );
+}
 
 function NavDrawer({ isOpen, updateIsOpen }: { isOpen: boolean; updateIsOpen: (newIsOpen: boolean) => void }) {
   const theme = useTheme();
@@ -114,54 +137,62 @@ export function Navbar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <FocusDashedOutline>
-        <AppBar component="nav" color="primary">
-          <Toolbar sx={{ py: '2rem' }}>
-            <Box
-              sx={{
-                flexGrow: 1,
-                fontSize: 0,
-                svg: {
-                  width: 40,
-                  height: 40,
-                },
-              }}
-            >
-              <MuiNextLink href="/" color={theme.palette.secondary.main}>
-                <RVLogoIcon />
-              </MuiNextLink>
-            </Box>
-            <Box sx={{ display: { xs: 'none', md: 'flex', gap: '2rem' } }}>
-              {navItems.map((item) => (
-                <MuiNextLink
-                  key={item.label}
-                  href={item.href}
-                  sx={{
-                    color: theme.palette.text.primary,
-                    '&:is(:hover,:focus)': {
-                      color: theme.palette.secondary.main,
-                    },
-                  }}
-                >
-                  <Typography variant="body1" component="span">
-                    {item.label}
-                  </Typography>
+        <HideOnScroll>
+          <AppBar
+            component="nav"
+            color="primary"
+            sx={{
+              boxShadow: `0 10px 30px -10px ${alpha(theme.palette.primary.dark, 0.7)}`,
+            }}
+          >
+            <Toolbar sx={{ py: '2rem', px: '2rem' }}>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  fontSize: 0,
+                  svg: {
+                    width: 40,
+                    height: 40,
+                  },
+                }}
+              >
+                <MuiNextLink href="/" color={theme.palette.secondary.main}>
+                  <RVLogoIcon />
                 </MuiNextLink>
-              ))}
-            </Box>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{
-                mr: 2,
-                display: { md: 'none' },
-              }}
-            >
-              <MenuIcon fontSize="large" />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+              </Box>
+              <Box sx={{ display: { xs: 'none', md: 'flex', gap: '2rem' } }}>
+                {navItems.map((item) => (
+                  <MuiNextLink
+                    key={item.label}
+                    href={item.href}
+                    sx={{
+                      color: theme.palette.text.primary,
+                      '&:is(:hover,:focus)': {
+                        color: theme.palette.secondary.main,
+                      },
+                    }}
+                  >
+                    <Typography variant="h6" component="span">
+                      {item.label}
+                    </Typography>
+                  </MuiNextLink>
+                ))}
+              </Box>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{
+                  mr: 2,
+                  display: { md: 'none' },
+                }}
+              >
+                <MenuIcon fontSize="large" />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
       </FocusDashedOutline>
       <Box component="nav">
         <NavDrawer isOpen={mobileDrawerOpen} updateIsOpen={(newIsOpen) => setMobileDrawerOpen(newIsOpen)} />
