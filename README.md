@@ -43,9 +43,6 @@ ncu -u
 
 ### Todos for a new project
 
-- tsconfig
-- eslint configuration
-- install typescript
 - package.json config
   - Name
   - Author
@@ -56,6 +53,12 @@ ncu -u
   - private
   - main
   - types
+- eslint configuration
+  - .eslintrc.js
+  - .eslintignore
+- typescript
+  - Add typescript dependency
+  - tsconfig
 
 ### Todos for a new package
 

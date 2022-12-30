@@ -1,22 +1,19 @@
-import {
-  AppBar,
-  Box,
-  Drawer,
-  IconButton,
-  Icons,
-  Link,
-  List,
-  ListItem,
-  Toolbar,
-  Typography,
-  useTheme,
-} from '@vighnesh153/ui';
+import { RVLogoIcon } from '@vighnesh153/ui';
+import { Menu as MenuIcon } from '@mui/icons-material';
+import { AppBar, Box, SwipeableDrawer, IconButton, List, ListItem, Toolbar, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { FocusDashedOutline } from '@modules/common/components/focus-dashed-outline';
+import { useIsIOS } from '@vighnesh153/react-hooks';
+import { not } from '@vighnesh153/utils';
+import { FocusDashedOutline } from './focus-dashed-outline';
 import { MuiNextLink } from './next-link';
 
-const drawerWidth = 240;
-const navItems = [
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const drawerWidth = 320;
+const navItems: NavItem[] = [
   { label: 'About', href: '/#about' },
   { label: 'Experience', href: '/#experience' },
   { label: 'Projects', href: '/#projects' },
@@ -24,21 +21,26 @@ const navItems = [
   { label: 'Resume', href: 'https://bit.ly/vighnesh153-resume' },
 ];
 
-export function Navbar() {
+function NavDrawer({ isOpen, updateIsOpen }: { isOpen: boolean; updateIsOpen: (newIsOpen: boolean) => void }) {
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const isIOS = useIsIOS();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
+  const container = (() => {
+    try {
+      return window.document.body;
+    } catch (e) {
+      return undefined;
+    }
+  })();
+
+  const toggleDrawer = (newIsOpen = !isOpen) => updateIsOpen(newIsOpen);
 
   const drawer = (
     <Box
-      onClick={handleDrawerToggle}
       sx={{
         height: '100%',
+        position: 'relative',
         background: theme.palette.primary.light,
-        textAlign: 'center',
       }}
     >
       <List
@@ -56,6 +58,7 @@ export function Navbar() {
           <ListItem key={item.label} disablePadding sx={{ justifyContent: 'center' }}>
             <FocusDashedOutline>
               <MuiNextLink
+                onClick={() => toggleDrawer()}
                 href={item.href}
                 sx={{
                   color: theme.palette.text.primary,
@@ -64,7 +67,7 @@ export function Navbar() {
                   },
                 }}
               >
-                <Typography variant="body1" component="span">
+                <Typography variant="h6" component="span">
                   {item.label}
                 </Typography>
               </MuiNextLink>
@@ -75,64 +78,93 @@ export function Navbar() {
     </Box>
   );
 
-  const container = (() => {
-    try {
-      return window.document.body;
-    } catch (e) {
-      return undefined;
-    }
-  })();
+  return (
+    <SwipeableDrawer
+      container={container}
+      variant="temporary"
+      open={isOpen}
+      onOpen={() => toggleDrawer(true)}
+      onClose={() => toggleDrawer()}
+      anchor="right"
+      disableBackdropTransition={not(isIOS)}
+      disableDiscovery={not(isIOS)}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+      sx={{
+        display: { xs: 'block', md: 'none' },
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+        },
+      }}
+    >
+      {drawer}
+    </SwipeableDrawer>
+  );
+}
+
+export function Navbar() {
+  const theme = useTheme();
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileDrawerOpen((prevState) => !prevState);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" color="primary">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <Icons.Menu />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'none', sm: 'block' },
-            }}
-          >
-            MUI
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Link component={MuiNextLink} key={item.label} sx={{ color: '#fff' }} href={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <FocusDashedOutline>
+        <AppBar component="nav" color="primary">
+          <Toolbar sx={{ py: '2rem' }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                fontSize: 0,
+                svg: {
+                  width: 40,
+                  height: 40,
+                },
+              }}
+            >
+              <MuiNextLink href="/" color={theme.palette.secondary.main}>
+                <RVLogoIcon />
+              </MuiNextLink>
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex', gap: '2rem' } }}>
+              {navItems.map((item) => (
+                <MuiNextLink
+                  key={item.label}
+                  href={item.href}
+                  sx={{
+                    color: theme.palette.text.primary,
+                    '&:is(:hover,:focus)': {
+                      color: theme.palette.secondary.main,
+                    },
+                  }}
+                >
+                  <Typography variant="body1" component="span">
+                    {item.label}
+                  </Typography>
+                </MuiNextLink>
+              ))}
+            </Box>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{
+                mr: 2,
+                display: { md: 'none' },
+              }}
+            >
+              <MenuIcon fontSize="large" />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </FocusDashedOutline>
       <Box component="nav">
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
+        <NavDrawer isOpen={mobileDrawerOpen} updateIsOpen={(newIsOpen) => setMobileDrawerOpen(newIsOpen)} />
       </Box>
     </Box>
   );

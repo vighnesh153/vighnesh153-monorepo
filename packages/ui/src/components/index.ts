@@ -1,2 +1,3 @@
-export * from '@mui/material';
-export * as Icons from '@mui/icons-material';
+export function SampleComponent() {
+  return null;
+}
