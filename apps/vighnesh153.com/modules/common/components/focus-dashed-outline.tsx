@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Box, BoxProps } from '@vighnesh153/ui';
+import { Box, BoxProps } from '@mui/material';
 
 export function FocusDashedOutline(props: PropsWithChildren<BoxProps>) {
   return (

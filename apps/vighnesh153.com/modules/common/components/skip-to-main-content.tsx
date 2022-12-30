@@ -1,4 +1,4 @@
-import { Link, useTheme } from '@vighnesh153/ui';
+import { Link, useTheme } from '@mui/material';
 import React from 'react';
 
 export function SkipToMainContent() {
@@ -15,8 +15,8 @@ export function SkipToMainContent() {
         top: -100,
         display: 'inline-block',
 
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.secondary.main,
         fontWeight: theme.typography.fontWeightBold,
 
         borderRadius: 2.5,
