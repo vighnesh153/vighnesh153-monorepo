@@ -17,6 +17,7 @@ import {
 import React, { useState } from 'react';
 import { useIsIOS } from '@vighnesh153/react-hooks';
 import { not } from '@vighnesh153/utils';
+import { commonConstants } from '../constants';
 import { FocusDashedOutline } from './focus-dashed-outline';
 import { MuiNextLink } from './next-link';
 
@@ -27,11 +28,20 @@ interface NavItem {
 
 const drawerWidth = 320;
 const navItems: NavItem[] = [
-  { label: 'About', href: '/#about' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Contact', href: '/#contact' },
-  { label: 'Resume', href: 'https://bit.ly/vighnesh153-resume' },
+  { label: 'About', href: commonConstants.pageLinks.homePage.aboutSection },
+  {
+    label: 'Experience',
+    href: commonConstants.pageLinks.homePage.experienceSection,
+  },
+  {
+    label: 'Projects',
+    href: commonConstants.pageLinks.homePage.projectsSection,
+  },
+  {
+    label: 'Contact',
+    href: commonConstants.pageLinks.homePage.contactMeSection,
+  },
+  { label: 'Resume', href: commonConstants.resumeLink },
 ];
 
 function HideOnScroll(props: { children: React.ReactElement }) {
