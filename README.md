@@ -40,6 +40,10 @@ ncu -u
 Tired of breaking up 💔 with your partner over silly reasons 😮‍💨? Try out the dating compatibility test to see if you and
 your partner 👫 are compatible, before emotionally investing into your relationship 💍.
 
+#### URL shortener/links
+
+Why? There are 1000s of url shorteners out there. Well, none of them are made by me 😌
+
 ### Todos
 
 - Add social links for `xs` in homepage footer
