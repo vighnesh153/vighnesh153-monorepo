@@ -33,7 +33,24 @@ cd apps/vighnesh153.com
 ncu -u
 ```
 
+Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
+
 ### Pending projects
+
+#### Role based access control on vighnesh153.com
+
+Roles have limitations. There will always be a case where we wouldn't want to give 1 permission to a person, but we want
+to give that permission to some other person. So, this leads to creating an extra role. And again in the future, this
+issue will occur again which will lead to creation of `N` number of roles which is basically what `groups` are meant
+for. So, instead of relying on roles, I will be creating `groups` and grant permissions to groups
+
+- 3 major groups
+  - Root (only me)
+  - PeopleILike (includes people I love and want to give CRUD permissions to the majority of the projects)
+  - Everyone (will mostly have read permissions for `almost` everything)
+- Access: Access to a resource will be granted based on following criteria
+  - To a group
+  - To a specific email
 
 #### Dating ❤️ Compatibility Test 🧪
 
