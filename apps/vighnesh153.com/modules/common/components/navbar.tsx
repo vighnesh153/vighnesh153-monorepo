@@ -155,14 +155,14 @@ export function Navbar() {
               boxShadow: `0 10px 30px -10px ${alpha(theme.palette.primary.dark, 0.7)}`,
             }}
           >
-            <Toolbar sx={{ py: '2rem', px: '2rem' }}>
+            <Toolbar sx={{ py: '2rem' }}>
               <Box
                 sx={{
                   flexGrow: 1,
                   fontSize: 0,
                   svg: {
-                    width: 40,
-                    height: 40,
+                    width: '2.5rem',
+                    height: '2.5rem',
                   },
                 }}
               >
@@ -189,13 +189,15 @@ export function Navbar() {
                 ))}
               </Box>
               <IconButton
-                color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
                 sx={{
-                  mr: 2,
                   display: { md: 'none' },
+                  color: theme.palette.text.primary,
+                  '&:is(:hover, :focus)': {
+                    color: theme.palette.secondary.main,
+                  },
                 }}
               >
                 <MenuIcon fontSize="large" />

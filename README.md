@@ -35,6 +35,7 @@ ncu -u
 
 ### Todos
 
+- Add social links for `xs` in homepage footer
 - Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
   - NPM package: https://www.npmjs.com/package/@docsearch/react
 - Checkout material's documentation website configurations for creating blog

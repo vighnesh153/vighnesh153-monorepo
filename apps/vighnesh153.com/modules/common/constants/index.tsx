@@ -1,3 +1,5 @@
+import { FaStackOverflow, FaCodepen, FaLinkedin, FaGithub } from 'react-icons/fa';
+
 export const commonConstants = {
   email: {
     personal: {
@@ -9,12 +11,32 @@ export const commonConstants = {
     },
   },
   resumeLink: 'https://bit.ly/vighnesh153-resume',
-  profiles: {
-    github: 'https://github.com/vighnesh153',
-    linkedIn: 'https://www.linkedin.com/in/vighnesh153',
-    stackoverflow: 'https://stackoverflow.com/users/8822610/vighnesh153',
-    codepen: 'https://codepen.io/vighnesh153',
-  },
+  profiles: [
+    {
+      identifier: 'github',
+      title: 'Github profile',
+      link: 'https://github.com/vighnesh153',
+      Icon: FaGithub,
+    },
+    {
+      identifier: 'linkedIn',
+      title: 'LinkedIn profile',
+      link: 'https://www.linkedin.com/in/vighnesh153',
+      Icon: FaLinkedin,
+    },
+    {
+      identifier: 'stackoverflow',
+      title: 'Stackoverflow profile',
+      link: 'https://stackoverflow.com/users/8822610/vighnesh153',
+      Icon: FaStackOverflow,
+    },
+    {
+      identifier: 'codepen',
+      title: 'Codepen profile',
+      link: 'https://codepen.io/vighnesh153',
+      Icon: FaCodepen,
+    },
+  ],
   pageLinks: {
     homePage: {
       aboutSection: '/#about',

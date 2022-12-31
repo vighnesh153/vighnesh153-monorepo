@@ -1,10 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 import { Box, BoxProps } from '@mui/material';
+import clsx from 'clsx';
 
 export function FocusDashedOutline(props: PropsWithChildren<BoxProps>) {
   return (
     <Box
       {...props}
+      className={clsx(props.className, 'dashed-outline-on-focus')}
       sx={{
         ...(props.sx ?? {}),
         '*:focus-visible': {
