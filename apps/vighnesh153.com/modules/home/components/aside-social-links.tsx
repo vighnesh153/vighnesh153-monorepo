@@ -19,8 +19,9 @@ export function AsideSocialLinks() {
             sm: 'flex',
           },
           flexDirection: 'column',
-          gap: '1rem',
+          gap: '1.5rem',
 
+          fontSize: 0,
           listStyle: 'none',
 
           '&:after': {
@@ -42,6 +43,8 @@ export function AsideSocialLinks() {
                 href={profile.link}
                 aria-label={`Link to ${profile.title}`}
                 sx={{
+                  display: 'inline-block',
+
                   fontSize: 0,
                   color: theme.palette.text.primary,
                   '&:is(:hover, :focus)': {

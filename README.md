@@ -33,9 +33,17 @@ cd apps/vighnesh153.com
 ncu -u
 ```
 
+### Pending projects
+
+#### Dating ❤️ Compatibility Test 🧪
+
+Tired of breaking up 💔 with your partner over silly reasons 😮‍💨? Try out the dating compatibility test to see if you and
+your partner 👫 are compatible, before emotionally investing into your relationship 💍.
+
 ### Todos
 
 - Add social links for `xs` in homepage footer
+- Google OAuth
 - Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
   - NPM package: https://www.npmjs.com/package/@docsearch/react
 - Checkout material's documentation website configurations for creating blog
