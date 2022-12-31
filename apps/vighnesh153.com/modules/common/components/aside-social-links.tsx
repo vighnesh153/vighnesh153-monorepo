@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box, useTheme, Tooltip } from '@mui/material';
-import { CommonComponents, commonConstants } from '@modules/common';
+import { commonConstants } from '../constants';
+import { FocusDashedOutline } from './focus-dashed-outline';
+import { MuiNextLink } from './next-link';
 
 export function AsideSocialLinks() {
   const theme = useTheme();
   return (
-    <CommonComponents.FocusDashedOutline>
+    <FocusDashedOutline>
       <Box
         component="ul"
         sx={{
@@ -39,7 +41,7 @@ export function AsideSocialLinks() {
         {commonConstants.profiles.map((profile) => (
           <Box component="li" key={profile.identifier}>
             <Tooltip title={profile.title} placement="right">
-              <CommonComponents.MuiNextLink
+              <MuiNextLink
                 href={profile.link}
                 aria-label={`Link to ${profile.title}`}
                 sx={{
@@ -53,11 +55,11 @@ export function AsideSocialLinks() {
                 }}
               >
                 <profile.Icon size="1.25rem" />
-              </CommonComponents.MuiNextLink>
+              </MuiNextLink>
             </Tooltip>
           </Box>
         ))}
       </Box>
-    </CommonComponents.FocusDashedOutline>
+    </FocusDashedOutline>
   );
 }

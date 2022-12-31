@@ -1,6 +1,5 @@
 import { CommonComponents } from '@modules/common';
 import { homeModuleConstants } from '../constants';
-import { AsideSocialLinks } from './aside-social-links';
 
 export function HomePage() {
   return (
@@ -12,7 +11,7 @@ export function HomePage() {
 
       <CommonComponents.SkipToMainContent />
       <CommonComponents.Navbar />
-      <AsideSocialLinks />
+      <CommonComponents.AsideSocialLinks />
 
       <main id="main">
         {/* <iframe */}
