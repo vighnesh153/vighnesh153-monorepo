@@ -12,6 +12,7 @@ export function HomePage() {
       <CommonComponents.SkipToMainContent />
       <CommonComponents.Navbar />
       <CommonComponents.AsideSocialLinks />
+      <CommonComponents.AsideEmailAddress />
 
       <main id="main">
         {/* <iframe */}

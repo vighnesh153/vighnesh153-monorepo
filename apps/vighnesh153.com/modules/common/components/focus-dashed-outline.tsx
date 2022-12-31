@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Box, BoxProps } from '@mui/material';
 import clsx from 'clsx';
 
-export function FocusDashedOutline(props: PropsWithChildren<BoxProps>) {
+export function FocusDashedOutline(props: BoxProps) {
   return (
     <Box
       {...props}
