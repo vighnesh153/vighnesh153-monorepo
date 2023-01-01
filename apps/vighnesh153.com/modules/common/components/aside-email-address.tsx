@@ -29,7 +29,7 @@ export function AsideEmailAddress() {
         },
       }}
     >
-      <Tooltip title="email me" placement="left">
+      <Tooltip title="Email me" placement="left">
         <MuiNextLink
           href={`mailto:${commonConstants.email.personal.secondary}`}
           aria-label={`email me @ ${commonConstants.email.personal.secondary}`}
