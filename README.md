@@ -35,9 +35,48 @@ ncu -u
 
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
 
-### Pending projects
+### Pending projects/tasks
 
-#### Role based access control on vighnesh153.com
+#### Tasks
+
+- Logger
+- Notification system and processing
+  - Retry mechanism
+  - Email me with a retry link to retry the task and send debugging details
+
+#### Email service (Priority: P0)
+
+This service/lambda will allow me to send email to any users
+
+##### Features
+
+- Should include a SQS queue where I will push new messages.
+  - Message will include `to`, `from`, `subject`, `cc`, `bcc`, `message` fields.
+  - Probably store the above fields in a NoSQL DB table and only add the `messageId` to the above message?
+- An internal API endpoint to add messages to the email queue
+- A lambda will be connected to the SQS which will send an email based on the message from the queue
+  - Perform validation to check if the `from` field matches my domain `.*@vighnesh153\.com`. Most of the time, the
+    `from` field will be `no-reply@vighnesh153.com`
+
+#### Push notifications (Priority: P2)
+
+This will allow me to send push notifications to users
+
+##### Features
+
+- Should include a SQS queue where I will push new messages
+  - Message will include `icon`, `messageTitle`, `messageBody`, `platforms`, etc. fields
+    - Platforms include Mobile Push notification, Desktop push notification, etc.
+  - Probably store the above fields in a NoSQL DB table and only add the `messageId` to the above message?
+- An internal API endpoint to add messages to the email queue
+- A lambda will be connected to the above SQS which will send the notification
+
+#### Email bans (Priority: P0)
+
+- Ban spammers for `X` number of days (the next ban will be twice the previous one)
+- 5 bans will lead to permanent ban (will need to reach out to me with proper explanation for getting un-banned)
+
+#### Role based access control on vighnesh153.com (Priority: P0)
 
 Roles have limitations. There will always be a case where we wouldn't want to give 1 permission to a person, but we want
 to give that permission to some other person. So, this leads to creating an extra role. And again in the future, this
@@ -52,12 +91,28 @@ for. So, instead of relying on roles, I will be creating `groups` and grant perm
   - To a group
   - To a specific email
 
-#### Dating ❤️ Compatibility Test 🧪
+#### Dating ❤️ Compatibility Test 🧪 (Priority: P1)
 
 Tired of breaking up 💔 with your partner over silly reasons 😮‍💨? Try out the dating compatibility test to see if you and
 your partner 👫 are compatible, before emotionally investing into your relationship 💍.
 
-#### URL shortener/links
+##### Features
+
+###### Admin
+
+TODO
+
+###### Users
+
+- Ability to fill out the questionnaire
+- Auto-save the answers
+- Ability to check compatibility with other users
+  - Ability to select users from dropdown
+- Ability to invite people to the app (if they haven't signed up)
+- Ability to request permission to view answers of other people
+- Ability to share the app on Whatsapp, Instagram, Facebook, etc
+
+#### URL shortener/links (Priority: P1)
 
 Why? There are 1000s of url shorteners out there. Well, none of them are made by me 😌
 
