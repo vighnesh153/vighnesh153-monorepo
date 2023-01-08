@@ -1,14 +1,14 @@
-import { alpha, Box, List, Typography, useTheme } from '@mui/material';
+import { Box, List, Typography, useTheme } from '@mui/material';
 import { FocusDashedOutline } from '@modules/common';
-import { HomePageSectionTitle } from './section-title';
-import { homeModuleConstants } from '../constants';
-import { SectionListItem } from './section-list-item';
+import { homeModuleConstants } from '@modules/home/constants';
+import { HomePageSectionTitle } from '../section-title';
+import { SectionListItem } from '../section-list-item';
 
 const aboutMeSection = homeModuleConstants.sections.aboutMe;
 
 export function AboutMeSection() {
   const theme = useTheme();
-  const textColor = alpha(theme.palette.text.primary, 0.65);
+  const textColor = theme.palette.text.secondary;
   return (
     <Box id="about" className="about-me" component="section" sx={{ py: 12.5 }}>
       <HomePageSectionTitle count={aboutMeSection.count} title={aboutMeSection.title} />

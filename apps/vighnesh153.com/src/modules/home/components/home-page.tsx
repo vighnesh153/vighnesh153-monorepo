@@ -1,9 +1,7 @@
 import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, SkipToMainContent } from '@modules/common';
 import { Box } from '@mui/material';
 import { homeModuleConstants } from '../constants';
-import { IntroductionSection } from './introduction-section';
-import { AboutMeSection } from './about-me-section';
-import { ExperienceSection } from './experience-section';
+import { IntroductionSection, AboutMeSection, ExperienceSection, ContactMeSection } from './sections';
 
 export function HomePage() {
   return (
@@ -32,6 +30,7 @@ export function HomePage() {
           <IntroductionSection />
           <AboutMeSection />
           <ExperienceSection />
+          <ContactMeSection />
         </Box>
 
         {/* <iframe */}

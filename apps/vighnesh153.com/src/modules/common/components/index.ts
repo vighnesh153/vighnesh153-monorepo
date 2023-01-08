@@ -1,6 +1,7 @@
 export * from './404-page';
 export * from './aside-email-address';
 export * from './aside-social-links';
+export * from './border-corner-animation-link';
 export * from './focus-dashed-outline';
 export * from './head';
 export * from './navbar';

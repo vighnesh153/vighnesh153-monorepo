@@ -25,19 +25,14 @@ export function UnderlinedAnimationLink(props: UnderlinedAnimationLinkProps) {
 
           backgroundColor: 'currentColor',
 
-          transition: (theme) => `right ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
+          '@media (prefers-reduced-motion: no-preference)': {
+            transition: (theme) =>
+              `right ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
+          },
         },
 
-        ':is(:hover, :focus)': {
-          '@media (prefers-reduced-motion: reduce)': {
-            textDecoration: 'underline',
-          },
-
-          '::after': {
-            '@media (prefers-reduced-motion: no-preference)': {
-              right: 0,
-            },
-          },
+        ':hover::after': {
+          right: 0,
         },
       }}
     />

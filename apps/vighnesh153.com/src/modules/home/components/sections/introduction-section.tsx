@@ -1,6 +1,6 @@
 import React from 'react';
 import { alpha, Box, Typography, useTheme } from '@mui/material';
-import { homeModuleConstants } from '../constants';
+import { homeModuleConstants } from '@modules/home/constants';
 
 const introductionSection = homeModuleConstants.sections.introduction;
 

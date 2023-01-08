@@ -1,5 +1,7 @@
 import React, { PropsWithChildren } from 'react';
-import { createTheme, CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { alpha, createTheme, CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from '@mui/material';
+
+const primaryTextColor = 'hsl(226, 70%, 88%)';
 
 export const theme = createTheme({
   palette: {
@@ -12,7 +14,8 @@ export const theme = createTheme({
       main: 'hsl(166, 100%, 70%)',
     },
     text: {
-      primary: 'hsl(226, 70%, 88%)',
+      primary: primaryTextColor,
+      secondary: alpha(primaryTextColor, 0.65),
     },
   },
   components: {

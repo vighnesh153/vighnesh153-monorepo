@@ -215,5 +215,13 @@ export const homeModuleConstants = {
         },
       ],
     },
+    contactMe: {
+      count: '04',
+      caption: `What's next?`,
+      title: 'Get In Touch',
+      summary:
+        'My inbox is always open, whether you have a question or just to say hi. ' +
+        'I will try my best to get back to you.',
+    },
   },
 };

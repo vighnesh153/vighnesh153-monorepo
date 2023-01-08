@@ -1,14 +1,14 @@
 import { alpha, Box, List, ListItem, Typography, useTheme } from '@mui/material';
 import { FocusDashedOutline, UnderlinedAnimationLink } from '@modules/common';
 import { SectionListItem } from '@modules/home/components/section-list-item';
-import { homeModuleConstants } from '../constants';
-import { HomePageSectionTitle } from './section-title';
+import { homeModuleConstants } from '@modules/home/constants';
+import { HomePageSectionTitle } from '../section-title';
 
 const experienceSection = homeModuleConstants.sections.experience;
 
 export function ExperienceSection() {
   const theme = useTheme();
-  const textColor = alpha(theme.palette.text.primary, 0.65);
+  const textColor = theme.palette.text.secondary;
   return (
     <Box id="experience" className="experience" component="section" sx={{ py: 12.5 }}>
       <HomePageSectionTitle count={experienceSection.count} title={experienceSection.title} />
