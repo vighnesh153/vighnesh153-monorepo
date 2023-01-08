@@ -12,6 +12,12 @@
       ]
     },
     "test": {
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts"
+      ],
+      "outputs": [],
       "dependsOn": [
         "^test"
       ]
