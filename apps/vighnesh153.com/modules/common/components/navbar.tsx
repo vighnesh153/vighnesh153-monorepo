@@ -15,7 +15,7 @@ import {
   alpha,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { useIsIOS } from '@vighnesh153/react-hooks';
+import { useIsIOS, useWindowScrollAmount } from '@vighnesh153/react-hooks';
 import { not } from '@vighnesh153/utils';
 import { commonConstants } from '../constants';
 import { FocusDashedOutline } from './focus-dashed-outline';
@@ -138,10 +138,18 @@ function NavDrawer({ isOpen, updateIsOpen }: { isOpen: boolean; updateIsOpen: (n
 
 export function Navbar() {
   const theme = useTheme();
+  const { scrollAmount: windowScrollAmount } = useWindowScrollAmount();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
+  };
+
+  const getAppBarBoxShadow = () => {
+    if (windowScrollAmount.scrollY < 70) {
+      return 'none';
+    }
+    return `0 10px 30px -10px ${alpha(theme.palette.primary.dark, 0.7)}`;
   };
 
   return (
@@ -152,10 +160,10 @@ export function Navbar() {
             component="nav"
             color="primary"
             sx={{
-              boxShadow: `0 10px 30px -10px ${alpha(theme.palette.primary.dark, 0.7)}`,
+              boxShadow: getAppBarBoxShadow(),
             }}
           >
-            <Toolbar sx={{ py: '2rem' }}>
+            <Toolbar sx={{ py: '1.5rem' }}>
               <Box
                 sx={{
                   flexGrow: 1,

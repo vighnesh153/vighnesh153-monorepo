@@ -11,19 +11,11 @@ publish to the outside world.
 
 Common types according to commitlint-config-conventional (based on the Angular convention) can be:
 
-- build
-- chore
-- ci
-- docs
-- feat
-- fix
-- perf
-- refactor
-- revert
-- style
-- test
-
-These can be modified by [your own configuration](https://github.com/conventional-changelog/commitlint#config).
+- [Understand what it is](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Local setup](https://commitlint.js.org/#/guides-local-setup)
+- [API Reference](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/index.js)
+- [Commit rules](https://commitlint.js.org/#/reference-rules)
+- [Configurations](https://github.com/conventional-changelog/commitlint#config)
 
 ### Check updates
 
@@ -36,6 +28,12 @@ ncu -u
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
 
 ### Pending projects/tasks
+
+#### Embed GitHub files/commits/gists into html
+
+- API: https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
+- Fetch commit information and store in Dynammo db
+- API rate limiting for storing commit information
 
 #### Tasks
 

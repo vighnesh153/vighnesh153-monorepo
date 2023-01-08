@@ -1,4 +1,4 @@
-interface UseIsIOSProps {
+export interface UseIsIOSProps {
   defaultIsIOS?: boolean;
 }
 

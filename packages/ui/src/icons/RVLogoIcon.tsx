@@ -20,13 +20,13 @@ export function RVLogoIcon({ textStyle, ...props }: RVLogoIconProps) {
       {...props}
     >
       <title>Logo</title>
-      <polygon points="100,2 2,50 2,150 100,198 198,150 198,50 100,2" />
+      <polygon points="100,2 2,50 2,150 100,198 198,150 198,50 100,2" fill="transparent" />
       <text
         x="45"
         y="135"
         strokeWidth="2"
         fill="currentColor"
-        style={{ color: 'currentcolor', fontSize: 88, ...textStyle }}
+        style={{ color: 'currentColor', fontSize: 88, ...textStyle }}
       >
         RV
       </text>

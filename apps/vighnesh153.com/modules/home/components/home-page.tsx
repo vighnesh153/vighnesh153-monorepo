@@ -1,20 +1,35 @@
-import { CommonComponents } from '@modules/common';
+import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, SkipToMainContent } from '@modules/common';
+import { Box } from '@mui/material';
+import { IntroductionSection } from './introduction-section';
 import { homeModuleConstants } from '../constants';
 
 export function HomePage() {
   return (
     <>
-      <CommonComponents.Head>
+      <Head>
         <title>{homeModuleConstants.pageTitle}</title>
         <meta name="description" content={homeModuleConstants.pageDescription} />
-      </CommonComponents.Head>
+      </Head>
 
-      <CommonComponents.SkipToMainContent />
-      <CommonComponents.Navbar />
-      <CommonComponents.AsideSocialLinks />
-      <CommonComponents.AsideEmailAddress />
+      <SkipToMainContent />
+      <Navbar />
+      <AsideSocialLinks />
+      <AsideEmailAddress />
 
-      <main id="main">
+      <Box component="main" sx={{ px: '2rem' }}>
+        <Box
+          sx={{
+            mx: 'auto',
+            px: {
+              sm: '2rem',
+              md: '4rem',
+            },
+            maxWidth: 1200,
+          }}
+        >
+          <IntroductionSection />
+        </Box>
+
         {/* <iframe */}
         {/*  title="my resume" */}
         {/*  src="https://drive.google.com/file/d/1u_8oDHemUAYZdO99AGEYX8iqRrl3lNGO/preview" */}
@@ -23,7 +38,7 @@ export function HomePage() {
         {/*  style={{ aspectRatio: '1/1.270' }} */}
         {/*  allow="autoplay" */}
         {/* /> */}
-      </main>
+      </Box>
     </>
   );
 }

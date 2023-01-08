@@ -17,6 +17,11 @@ export function AsideEmailAddress() {
 
         listStyle: 'none',
 
+        display: {
+          xs: 'none',
+          sm: 'block',
+        },
+
         '&:after': {
           content: '""',
           width: '1px',

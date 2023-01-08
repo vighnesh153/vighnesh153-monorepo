@@ -1,2 +1,2 @@
-export * as CommonComponents from './components';
+export * from './components';
 export * from './constants';

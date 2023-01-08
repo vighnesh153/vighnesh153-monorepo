@@ -1,2 +1,2 @@
-export * as HomeComponents from './components';
+export * from './components';
 export * from './constants';
