@@ -1,5 +1,8 @@
 import React from 'react';
 import { alpha, Box, Typography, useTheme } from '@mui/material';
+import { homeModuleConstants } from '../constants';
+
+const introductionSection = homeModuleConstants.sections.introduction;
 
 export function IntroductionSection() {
   const theme = useTheme();
@@ -25,7 +28,7 @@ export function IntroductionSection() {
             display: 'block',
           }}
         >
-          Hi, my name is
+          {introductionSection.caption}
         </Typography>
         <Typography
           component="span"
@@ -42,7 +45,7 @@ export function IntroductionSection() {
             },
           }}
         >
-          Vighnesh Raut.
+          {introductionSection.title}
         </Typography>
         <Typography
           component="span"
@@ -59,7 +62,7 @@ export function IntroductionSection() {
             },
           }}
         >
-          I build things, mostly for the web.
+          {introductionSection.subtitle}
         </Typography>
       </Typography>
       <Typography
@@ -73,8 +76,7 @@ export function IntroductionSection() {
           },
         }}
       >
-        I am a Software Engineer specializing in building exceptional digital experiences. Currently, I’m focused on
-        building accessible, human-centered products for different causes.
+        {introductionSection.summary}
       </Typography>
     </Box>
   );
