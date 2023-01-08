@@ -15,6 +15,15 @@ export const theme = createTheme({
       primary: 'hsl(226, 70%, 88%)',
     },
   },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        component: 'p',
+      },
+    },
+  },
 });
 
 export function VighneshThemeProvider(props: PropsWithChildren<{ theme?: Theme }>) {

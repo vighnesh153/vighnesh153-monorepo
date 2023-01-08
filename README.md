@@ -37,6 +37,12 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- Add `Get-In-Touch` button in the Introduction section on the homepage
+- Authentication
+- Projects
+- Groups/Permissions
+- Blogs
+  - Reactions (Likes & other emoji reactions, Comments)
 - Logger
 - Notification system and processing
   - Retry mechanism
