@@ -6,3 +6,4 @@ export * from './head';
 export * from './navbar';
 export * from './next-link';
 export * from './skip-to-main-content';
+export * from './underlined-animation-link';

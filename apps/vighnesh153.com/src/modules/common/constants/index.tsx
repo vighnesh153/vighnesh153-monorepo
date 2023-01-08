@@ -11,6 +11,12 @@ export const commonConstants = {
     },
   },
   resumeLink: 'https://bit.ly/vighnesh153-resume',
+  work: {
+    google: { url: 'https://about.google' },
+    amazon: { url: 'https://amazon.com' },
+    smarterCodes: { url: 'https://smarter.codes' },
+    tavisca: { url: 'https://tavisca.com' },
+  },
   profiles: [
     {
       identifier: 'github',

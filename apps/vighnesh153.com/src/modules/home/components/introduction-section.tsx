@@ -10,6 +10,7 @@ export function IntroductionSection() {
   return (
     <Box
       className="hero"
+      component="section"
       sx={{
         minHeight: '100vh',
         display: 'flex',
