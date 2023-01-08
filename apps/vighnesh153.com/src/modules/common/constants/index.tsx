@@ -10,6 +10,7 @@ export const commonConstants = {
       google: 'rvighnesh@google.com',
     },
   },
+  appGithubLink: 'https://github.com/vighnesh153/vighnesh153-turbo',
   resumeLink: 'https://bit.ly/vighnesh153-resume',
   work: {
     google: { url: 'https://about.google' },

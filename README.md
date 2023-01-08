@@ -29,15 +29,8 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 ### Pending projects/tasks
 
-#### Embed GitHub files/commits/gists into html
-
-- API: https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
-- Fetch commit information and store in Dynammo db
-- API rate limiting for storing commit information
-
 #### Tasks
 
-- Add footer
 - Update navbar
   - dropdown for homepage links
   - add blog
@@ -45,12 +38,23 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Authentication
 - Projects
 - Groups/Permissions
+- Embed GitHub commit snippet
 - Blogs
   - Reactions (Likes & other emoji reactions, Comments)
 - Logger
 - Notification system and processing
   - Retry mechanism
   - Email me with a retry link to retry the task and send debugging details
+- Email service
+
+#### Embed GitHub files/commits/gists into html
+
+- API: https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
+- Fetch commit information and store in Dynammo db
+- API rate limiting for storing commit information
+- Getting commit info: https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit
+- Prism diff highlighter: https://prismjs.com/plugins/diff-highlight/
+- Diff 2 html CLI: https://github.com/rtfpessoa/diff2html-cli
 
 #### Email service (Priority: P0)
 

@@ -1,4 +1,4 @@
-import { commonConstants, UnderlinedAnimationLink } from '@modules/common';
+import { commonConstants, MuiNextLink, UnderlinedAnimationLink } from '@modules/common';
 
 const appstoreDeveloperConsole = (
   <UnderlinedAnimationLink href="https://developer.amazon.com/apps-and-games" target="_blank">
@@ -222,6 +222,16 @@ export const homeModuleConstants = {
       summary:
         'My inbox is always open, whether you have a question or just to say hi. ' +
         'I will try my best to get back to you.',
+    },
+    footer: {
+      summary: (
+        <>
+          Inspired by Brittany Chiang{' '}
+          <MuiNextLink href={commonConstants.appGithubLink} color="secondary">
+            View on Github
+          </MuiNextLink>
+        </>
+      ),
     },
   },
 };

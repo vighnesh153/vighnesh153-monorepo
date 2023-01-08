@@ -1,7 +1,7 @@
-import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, SkipToMainContent } from '@modules/common';
 import { Box } from '@mui/material';
+import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, SkipToMainContent } from '@modules/common';
 import { homeModuleConstants } from '../constants';
-import { IntroductionSection, AboutMeSection, ExperienceSection, ContactMeSection } from './sections';
+import { IntroductionSection, AboutMeSection, ExperienceSection, ContactMeSection, FooterSection } from './sections';
 
 export function HomePage() {
   return (
@@ -33,14 +33,7 @@ export function HomePage() {
           <ContactMeSection />
         </Box>
 
-        {/* <iframe */}
-        {/*  title="my resume" */}
-        {/*  src="https://drive.google.com/file/d/1u_8oDHemUAYZdO99AGEYX8iqRrl3lNGO/preview" */}
-        {/*  width="300" */}
-        {/*  // height="480" */}
-        {/*  style={{ aspectRatio: '1/1.270' }} */}
-        {/*  allow="autoplay" */}
-        {/* /> */}
+        <FooterSection />
       </Box>
     </>
   );
