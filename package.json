@@ -10,7 +10,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "test": "echo 'Testing...'",
+    "test": "turbo run test",
     "lint": "turbo run lint",
     "lint-staged": "lint-staged",
     "clean": "npm exec --workspaces -- rimraf node_modules && rimraf node_modules",
