@@ -37,8 +37,11 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Add `Get-In-Touch` button in the Introduction section on the homepage
-- Change selection color and add transition for scrolling (#about, #contact, etc)
+- Add footer
+- Update navbar
+  - dropdown for homepage links
+  - add blog
+  - make configurable
 - Authentication
 - Projects
 - Groups/Permissions

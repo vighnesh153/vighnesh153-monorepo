@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  /*
+    Not sure why we need !important here even though I am not overriding it
+    anywhere else in my code
+  */
+  scroll-behavior: smooth !important;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
