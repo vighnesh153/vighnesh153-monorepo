@@ -16,4 +16,9 @@ export const serverConfig = {
       },
     },
   },
+  db: {
+    mongodb: {
+      connectionUri: process.env.MONGODB_URI ?? envVarNotFound('MONGODB_URI'),
+    },
+  },
 };

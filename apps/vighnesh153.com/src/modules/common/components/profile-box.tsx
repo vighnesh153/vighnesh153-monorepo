@@ -41,6 +41,9 @@ export function ProfileBox({ user }: ProfileBoxProps) {
         <Avatar
           alt={user?.name ?? undefined}
           src={user?.image ?? undefined}
+          imgProps={{
+            referrerPolicy: 'no-referrer',
+          }}
           sx={{ width: 30, height: 30, border: `2px solid ${theme.palette.secondary.main}` }}
         />
       </IconButton>

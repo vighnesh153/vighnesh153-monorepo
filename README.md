@@ -33,7 +33,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 - Integrate mongodb
 - Projects
-- Store users in MongoDB
 - Groups/Permissions
 - Embed GitHub commit snippet
 - Blogs
