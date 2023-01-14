@@ -40,6 +40,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Groups/Permissions
 - Embed GitHub commit snippet
 - Blogs
+  - Redirect `/blogs/*` to `/blog/*`
   - Reactions (Likes & other emoji reactions, Comments)
 - Logger
 - Notification system and processing

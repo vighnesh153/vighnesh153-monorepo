@@ -3,25 +3,19 @@ import { alpha, AppBar, Box, IconButton, Toolbar, Typography, useTheme } from '@
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { RVLogoIcon } from '@vighnesh153/ui';
 import { useWindowScrollAmount } from '@vighnesh153/react-hooks';
-import { not } from '@vighnesh153/utils';
 import { FocusDashedOutline } from '../focus-dashed-outline';
 import { MuiNextLink } from '../next-link';
-import { HideOnScroll, navItems, profileAndSignInId } from './common';
+import { HideOnScroll, navItems, NavItemSection } from './common';
 import { NavDrawer } from './nav-drawer';
 
 export interface NavbarProps {
-  showProfileAndSignInButton?: boolean;
+  navItemSections: Array<NavItemSection>;
 }
 
-export function Navbar({ showProfileAndSignInButton = true }: NavbarProps) {
+export function Navbar({ navItemSections }: NavbarProps) {
   const theme = useTheme();
   const { scrollAmount: windowScrollAmount } = useWindowScrollAmount();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-
-  const removeIds: string[] = [];
-  if (not(showProfileAndSignInButton)) {
-    removeIds.push(profileAndSignInId);
-  }
 
   const handleDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
@@ -62,7 +56,7 @@ export function Navbar({ showProfileAndSignInButton = true }: NavbarProps) {
               </Box>
               <Box sx={{ alignItems: 'center', display: { xs: 'none', md: 'flex', gap: '2rem' } }}>
                 {navItems
-                  .filter((item) => not(removeIds.includes(item.id)))
+                  .filter((item) => navItemSections.includes(item.id))
                   .map((item) =>
                     item.type === 'link' ? (
                       <MuiNextLink
@@ -106,7 +100,7 @@ export function Navbar({ showProfileAndSignInButton = true }: NavbarProps) {
         <NavDrawer
           isOpen={mobileDrawerOpen}
           updateIsOpen={(newIsOpen) => setMobileDrawerOpen(newIsOpen)}
-          showProfileAndSignInButton={showProfileAndSignInButton}
+          navItemSections={navItemSections}
         />
       </Box>
     </Box>

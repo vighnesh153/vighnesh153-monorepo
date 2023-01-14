@@ -14,51 +14,62 @@ export function HideOnScroll(props: { children: React.ReactElement }) {
   );
 }
 
+// eslint-disable-next-line no-shadow
+export enum NavItemSection {
+  About = 'about',
+  Blog = 'blog',
+  Projects = 'projects',
+  Experience = 'experience',
+  Contact = 'contact',
+  Resume = 'resume',
+  ProfileAndSignIn = 'profile-and-sign-in',
+}
+
 export type NavItem = ({ label: string; href: string; type: 'link' } | { element: ReactElement; type: 'custom' }) & {
-  id: string;
+  id: NavItemSection;
 };
 
 export const drawerWidth = 320;
-export const profileAndSignInId = 'profile-and-sign-in';
+
 export const navItems: NavItem[] = [
   {
-    id: 'about',
+    id: NavItemSection.About,
     label: 'About',
     href: commonConstants.pageLinks.homePage.aboutSection,
     type: 'link',
   },
   {
-    id: 'blog',
+    id: NavItemSection.Blog,
     label: 'Blog',
     href: commonConstants.pageLinks.homePage.blogsSection,
     type: 'link',
   },
   {
-    id: 'projects',
+    id: NavItemSection.Projects,
     label: 'Projects',
     href: commonConstants.pageLinks.homePage.projectsSection,
     type: 'link',
   },
   {
-    id: 'experience',
+    id: NavItemSection.Experience,
     label: 'Experience',
     href: commonConstants.pageLinks.homePage.experienceSection,
     type: 'link',
   },
   {
-    id: 'contact',
+    id: NavItemSection.Contact,
     label: 'Contact',
     href: commonConstants.pageLinks.homePage.contactMeSection,
     type: 'link',
   },
   {
-    id: 'resume',
+    id: NavItemSection.Resume,
     label: 'Resume',
     href: commonConstants.resumeLink,
     type: 'link',
   },
   {
-    id: profileAndSignInId,
+    id: NavItemSection.ProfileAndSignIn,
     element: <AuthBox />,
     type: 'custom',
   },

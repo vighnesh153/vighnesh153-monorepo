@@ -48,7 +48,7 @@ export const commonConstants = {
     homePage: {
       aboutSection: '/#about',
       experienceSection: '/#experience',
-      blogsSection: '/blogs',
+      blogsSection: '/blog',
       projectsSection: '/projects',
       contactMeSection: '/#contact',
     },

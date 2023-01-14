@@ -4,22 +4,17 @@ import { useIsIOS } from '@vighnesh153/react-hooks';
 import { not } from '@vighnesh153/utils';
 import { FocusDashedOutline } from '../focus-dashed-outline';
 import { MuiNextLink } from '../next-link';
-import { drawerWidth, navItems, profileAndSignInId } from './common';
+import { drawerWidth, navItems, NavItemSection } from './common';
 
 export interface NavDrawerProps {
   isOpen: boolean;
   updateIsOpen: (newIsOpen: boolean) => void;
-  showProfileAndSignInButton: boolean;
+  navItemSections: Array<NavItemSection>;
 }
 
-export function NavDrawer({ isOpen, updateIsOpen, showProfileAndSignInButton }: NavDrawerProps) {
+export function NavDrawer({ isOpen, updateIsOpen, navItemSections }: NavDrawerProps) {
   const theme = useTheme();
   const isIOS = useIsIOS();
-
-  const removeIds: string[] = [];
-  if (not(showProfileAndSignInButton)) {
-    removeIds.push(profileAndSignInId);
-  }
 
   const container = (() => {
     try {
@@ -51,7 +46,7 @@ export function NavDrawer({ isOpen, updateIsOpen, showProfileAndSignInButton }: 
         }}
       >
         {navItems
-          .filter((item) => not(removeIds.includes(item.id)))
+          .filter((item) => navItemSections.includes(item.id))
           .map((item) => (
             <ListItem key={item.id} disablePadding sx={{ justifyContent: 'center' }}>
               <FocusDashedOutline>

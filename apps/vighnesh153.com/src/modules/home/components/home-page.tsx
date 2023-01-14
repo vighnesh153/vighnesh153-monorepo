@@ -1,7 +1,17 @@
 import { Box } from '@mui/material';
-import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, SkipToMainContent } from '@modules/common';
+import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, NavItemSection, SkipToMainContent } from '@modules/common';
 import { homeModuleConstants } from '../constants';
-import { IntroductionSection, AboutMeSection, ExperienceSection, ContactMeSection, FooterSection } from './sections';
+import { AboutMeSection, ContactMeSection, ExperienceSection, FooterSection, IntroductionSection } from './sections';
+
+const navItemSections: Array<NavItemSection> = [
+  NavItemSection.About,
+  NavItemSection.Blog,
+  NavItemSection.Projects,
+  NavItemSection.Experience,
+  NavItemSection.Contact,
+  NavItemSection.Resume,
+  NavItemSection.ProfileAndSignIn,
+];
 
 export function HomePage() {
   return (
@@ -12,7 +22,7 @@ export function HomePage() {
       </Head>
 
       <SkipToMainContent />
-      <Navbar />
+      <Navbar navItemSections={navItemSections} />
       <AsideSocialLinks />
       <AsideEmailAddress />
 
