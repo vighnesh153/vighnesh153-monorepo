@@ -27,7 +27,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.115",
-    "@mui/material": "^5.11.3",
+    "@mui/material": "^5.11.4",
     "@mui/utils": "^5.11.2",
     "clsx": "^1.2.1",
     "react-icons": "^4.7.1"
