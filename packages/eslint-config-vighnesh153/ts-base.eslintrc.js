@@ -66,6 +66,7 @@ module.exports = {
     'no-unused-vars': 'error',
     'no-use-before-define': 'error',
     'no-useless-constructor': 'error',
+    'no-void': 'off',
     'object-curly-newline': [
       'error',
       {

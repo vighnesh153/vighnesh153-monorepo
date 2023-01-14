@@ -34,8 +34,8 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Update navbar
   - dropdown for homepage links
   - add blog
-  - make configurable
-- Authentication
+- Add social links in footer when sm screen
+- Hide Sign in button on homepage
 - Projects
 - Groups/Permissions
 - Embed GitHub commit snippet
@@ -52,6 +52,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - API: https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
 - Fetch commit information and store in Dynammo db
 - API rate limiting for storing commit information
+  - https://docs.github.com/en/developers/apps/building-github-apps/rate-limits-for-github-apps
 - Getting commit info: https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit
 - Prism diff highlighter: https://prismjs.com/plugins/diff-highlight/
 - Diff 2 html CLI: https://github.com/rtfpessoa/diff2html-cli
