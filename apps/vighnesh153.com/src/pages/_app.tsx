@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import '@vighnesh153/ui/src/imports';
 
 import { VighneshThemeProvider } from '@vighnesh153/ui';
+import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { alpha, Box } from '@mui/material';
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
           }}
         >
           <Component {...pageProps} />
+          <Analytics />
         </Box>
       </VighneshThemeProvider>
     </SessionProvider>
