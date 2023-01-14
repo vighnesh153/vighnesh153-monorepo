@@ -85,8 +85,8 @@ export const homeModuleConstants = {
           responsibilities: [
             <>Building next-gen developer tools for GoogleTV</>,
             <>
-              Google App Verification System for validating integration flows like <strong>Playnext</strong>
-              and <strong>Deeplink</strong> validation between GoogleTV and {`developer's`} apps
+              Google App Verification System for validating integration flows like <strong>Playnext</strong> and{' '}
+              <strong>Deeplink</strong> validation between GoogleTV and {`developer's`} apps
             </>,
           ],
         },
