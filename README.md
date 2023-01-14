@@ -31,12 +31,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Update navbar
-  - dropdown for homepage links
-  - add blog
-- Add social links in footer when sm screen
-- Hide Sign in button on homepage
+- Integrate mongodb
 - Projects
+- Store users in MongoDB
 - Groups/Permissions
 - Embed GitHub commit snippet
 - Blogs

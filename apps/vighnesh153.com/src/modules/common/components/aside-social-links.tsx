@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, useTheme, Tooltip } from '@mui/material';
-import { commonConstants } from '../constants';
+import { Box, useTheme } from '@mui/material';
 import { FocusDashedOutline } from './focus-dashed-outline';
-import { MuiNextLink } from './next-link';
+import { SocialLinks } from './social-links';
 
 export function AsideSocialLinks() {
   const theme = useTheme();
@@ -38,27 +37,7 @@ export function AsideSocialLinks() {
           },
         }}
       >
-        {commonConstants.profiles.map((profile) => (
-          <Box component="li" key={profile.identifier}>
-            <Tooltip title={profile.title} placement="right">
-              <MuiNextLink
-                href={profile.link}
-                aria-label={`Link to ${profile.title}`}
-                sx={{
-                  display: 'inline-block',
-
-                  fontSize: 0,
-                  color: theme.palette.text.primary,
-                  '&:is(:hover, :focus)': {
-                    color: theme.palette.secondary.main,
-                  },
-                }}
-              >
-                <profile.Icon size="1.25rem" />
-              </MuiNextLink>
-            </Tooltip>
-          </Box>
-        ))}
+        <SocialLinks placement="right" />
       </Box>
     </FocusDashedOutline>
   );
