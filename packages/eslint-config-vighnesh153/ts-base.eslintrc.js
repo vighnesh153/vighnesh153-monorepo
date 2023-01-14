@@ -30,6 +30,9 @@ module.exports = {
     },
   },
   rules: {
+    /**
+     * @see https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
+     */
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-use-before-define': ['warn'],
@@ -58,10 +61,7 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'no-empty-function': 'error',
     'no-plusplus': 'off',
-    /**
-     * @see https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
-     */
-    'no-shadow': 'error',
+    'no-shadow': 'off',
     'no-underscore-dangle': 'error',
     'no-unused-vars': 'error',
     'no-use-before-define': 'error',

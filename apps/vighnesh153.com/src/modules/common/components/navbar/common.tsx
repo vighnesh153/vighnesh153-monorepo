@@ -14,7 +14,6 @@ export function HideOnScroll(props: { children: React.ReactElement }) {
   );
 }
 
-// eslint-disable-next-line no-shadow
 export enum NavItemSection {
   About = 'about',
   Blog = 'blog',
