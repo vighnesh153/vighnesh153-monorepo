@@ -11,7 +11,7 @@ export function AuthBox() {
 
   if (isLoading) {
     return (
-      <Box sx={{ width: 40, display: 'grid', placeItems: 'center' }}>
+      <Box sx={{ width: 46, height: 46, display: 'grid', placeItems: 'center' }}>
         <CircularProgress color="info" size={20} />
       </Box>
     );

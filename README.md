@@ -3,6 +3,15 @@
 Welcome to my mono-repo. This repository contains (will contain) source code of all the projects that I work on and
 publish to the outside world.
 
+### Something broken?
+
+- Please [report an issue here](https://bit.ly/rv-mono-repo-report-issue).
+
+### Quick links
+
+- Vercel project: https://vercel.com/vighnesh153/vighnesh153-main
+- Logging, Monitoring: https://cloud.axiom.co/vighnesh153-GNaU/datasets
+
 ### Integrations
 
 - Database: Mongodb
@@ -12,10 +21,6 @@ publish to the outside world.
     - 4xx responses >= 5, in past 10 minutes
     - 5xx responses >= 5, in past 10 minutes
     - General errors >= 5, in past 10 minutes
-
-### Something broken?
-
-- Please [report an issue here](https://bit.ly/rv-mono-repo-report-issue).
 
 ### Commitlint
 
@@ -51,6 +56,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Blogs
   - Redirect `/blogs/*` to `/blog/*`
   - Reactions (Likes & other emoji reactions, Comments)
+- Checkout sentry for detailed error analysis
+  - https://sentry.io/welcome/
+  - https://github.com/getsentry/sentry-javascript
 
 #### Embed GitHub files/commits/gists into html
 
