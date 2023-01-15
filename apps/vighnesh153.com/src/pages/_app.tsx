@@ -7,6 +7,8 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { alpha, Box } from '@mui/material';
 
+export { reportWebVitals } from 'next-axiom';
+
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>

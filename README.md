@@ -3,6 +3,16 @@
 Welcome to my mono-repo. This repository contains (will contain) source code of all the projects that I work on and
 publish to the outside world.
 
+### Integrations
+
+- Database: Mongodb
+- Logging
+  - Service: [Axiom](https://www.axiom.co/)
+  - Email alerts
+    - 4xx responses >= 5, in past 10 minutes
+    - 5xx responses >= 5, in past 10 minutes
+    - General errors >= 5, in past 10 minutes
+
 ### Something broken?
 
 - Please [report an issue here](https://bit.ly/rv-mono-repo-report-issue).
@@ -31,18 +41,16 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Integrate mongodb
 - Projects
 - Groups/Permissions
-- Embed GitHub commit snippet
-- Blogs
-  - Redirect `/blogs/*` to `/blog/*`
-  - Reactions (Likes & other emoji reactions, Comments)
-- Logger
 - Notification system and processing
   - Retry mechanism
   - Email me with a retry link to retry the task and send debugging details
 - Email service
+- Embed GitHub commit snippet
+- Blogs
+  - Redirect `/blogs/*` to `/blog/*`
+  - Reactions (Likes & other emoji reactions, Comments)
 
 #### Embed GitHub files/commits/gists into html
 
