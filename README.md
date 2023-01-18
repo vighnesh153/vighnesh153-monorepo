@@ -53,6 +53,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
   - Email me with a retry link to retry the task and send debugging details
 - Email service
 - Embed GitHub commit snippet
+- Media CDN
 - Blogs
   - Redirect `/blogs/*` to `/blog/*`
   - Reactions (Likes & other emoji reactions, Comments)
