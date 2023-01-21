@@ -5,6 +5,7 @@
   "prettier": "@vighnesh153/prettier-config",
   "workspaces": [
     "apps/*",
+    "aws-serverless-tools/*",
     "packages/*"
   ],
   "scripts": {

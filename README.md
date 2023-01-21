@@ -46,9 +46,10 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- Audit logs in mongodb
 - SQS Queues
   - Pending events
-    - USER_SIGNING_UP: Creates an entry in `user_info` and triggers `USER_CREATED` event
+    - USER_CREATION_IN_PROGRESS: Creates an entry in `user_info` and triggers `USER_CREATED` event
     - USER_CREATED
 - Projects
 - Groups/Permissions
