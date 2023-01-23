@@ -1,5 +1,5 @@
 import { ClientSession } from 'mongoose';
-import { createAuditLog } from '@lib/mongoose/entity-creation';
+import { createAuditLog } from '@lib/mongoose/entity-creation/createAuditLog';
 import { IUserInfo } from '@vighnesh153/types';
 
 export async function signUpAuditLog(userInfo: Omit<IUserInfo, 'createdAt'>, session: ClientSession) {
