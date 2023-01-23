@@ -16,11 +16,14 @@ publish to the outside world.
 
 - Database: Mongodb
 - Logging
-  - Service: [Axiom](https://www.axiom.co/)
-  - Email alerts
-    - 4xx responses >= 5, in past 10 minutes
-    - 5xx responses >= 5, in past 10 minutes
-    - General errors >= 5, in past 10 minutes
+  - General Logs
+    - Service: [Axiom](https://www.axiom.co/)
+    - Email alerts
+      - 4xx responses >= 5, in past 10 minutes
+      - 5xx responses >= 5, in past 10 minutes
+      - General errors >= 5, in past 10 minutes
+  - Audit logs
+    - Mongodb
 
 ### Commitlint
 
@@ -46,7 +49,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Audit logs in mongodb
+- Transactions configuration
+- Create user on sign-in
+- Trigger a user account created message in SNS
 - SQS Queues
   - Pending events
     - USER_CREATION_IN_PROGRESS: Creates an entry in `user_info` and triggers `USER_CREATED` event
@@ -59,6 +64,13 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Email service
 - Embed GitHub commit snippet
 - Media CDN
+- Audit logs viewer
+  - Filters based on
+    - action
+    - user
+    - date
+  - Search
+  - Pagination
 - Blogs
   - Redirect `/blogs/*` to `/blog/*`
   - Reactions (Likes & other emoji reactions, Comments)

@@ -10,7 +10,7 @@ export interface IAuditLog {
    * Who performed the action
    */
   actor: {
-    emailId: string;
+    email: string;
     name: string;
   };
 

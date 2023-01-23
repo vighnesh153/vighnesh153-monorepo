@@ -1,33 +1,15 @@
 import NextAuth, { AuthOptions } from 'next-auth';
-import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
-import { serverConfig } from '@modules/common/config/server-config';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+
 import { nextAuthMongoDbClientPromise } from '@lib/mongodb-next-auth';
+import { signInCallback, NextAuthGoogleProvider } from '@lib/helpers/next-auth/server';
 
 export const authOptions: AuthOptions = {
   adapter: MongoDBAdapter(nextAuthMongoDbClientPromise),
   callbacks: {
-    async signIn({ account, profile }) {
-      if (account?.provider === 'google') {
-        const googleProfile = profile as GoogleProfile;
-        return googleProfile.email_verified;
-      }
-      return false;
-    },
+    signIn: signInCallback,
   },
-  providers: [
-    GoogleProvider({
-      clientId: serverConfig.oauth.providers.google.clientId,
-      clientSecret: serverConfig.oauth.providers.google.clientSecret,
-      authorization: {
-        params: {
-          prompt: 'consent',
-          access_type: 'offline',
-          response_type: 'code',
-        },
-      },
-    }),
-  ],
+  providers: [NextAuthGoogleProvider],
 };
 
 export default NextAuth(authOptions);

@@ -1,16 +1,19 @@
-import { Types, Document as MongooseDocument } from 'mongoose';
+import { ClientSession } from 'mongoose';
 import { IAuditLog } from '@vighnesh153/types';
 import { AuditLogModel } from '@lib/mongoose/models';
-
-type AuditLogReturnType = MongooseDocument<unknown, unknown, IAuditLog> & IAuditLog & { _id: Types.ObjectId };
+import { log } from 'next-axiom';
 
 /**
  * Creates a new audit log and invokes the `save` method
  *
- * @param log
+ * @param auditLog
+ * @param session
  */
-export async function createAuditLog(log: Omit<IAuditLog, 'createdAt'>): Promise<AuditLogReturnType> {
-  const auditLog = new AuditLogModel({ ...log });
-  await auditLog.save();
-  return auditLog;
+export async function createAuditLog(auditLog: Omit<IAuditLog, 'createdAt'>, session: ClientSession): Promise<void> {
+  try {
+    await AuditLogModel.create([{ ...auditLog }], { session });
+    log.info(auditLog.message, { action: auditLog.action, actor: auditLog.actor });
+  } catch (error) {
+    log.error('Failed to save audit log', { error, auditLog });
+  }
 }
