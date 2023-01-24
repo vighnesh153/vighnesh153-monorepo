@@ -9,7 +9,7 @@ import { log } from 'next-axiom';
  * @param auditLog
  * @param session
  */
-export async function createAuditLog(auditLog: Omit<IAuditLog, 'createdAt'>, session: ClientSession): Promise<void> {
+export async function createAuditLog(auditLog: Omit<IAuditLog, 'createdAt'>, session?: ClientSession): Promise<void> {
   try {
     await AuditLogModel.create([{ ...auditLog }], { session });
     log.info(auditLog.message, { action: auditLog.action, actor: auditLog.actor });

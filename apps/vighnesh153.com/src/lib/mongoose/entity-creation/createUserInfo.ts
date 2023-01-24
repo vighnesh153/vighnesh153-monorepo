@@ -13,7 +13,7 @@ type CreateUserInfoReturnType = MongooseDocument<unknown, unknown, IUserInfo> & 
  */
 export async function createUserInfo(
   userInfo: Omit<IUserInfo, 'createdAt'>,
-  session: ClientSession
+  session?: ClientSession
 ): Promise<CreateUserInfoReturnType> {
   const newUser = await UserInfoModel.create([{ ...userInfo }], { session });
   await signUpAuditLog(userInfo, session);

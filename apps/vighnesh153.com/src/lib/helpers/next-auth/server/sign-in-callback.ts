@@ -1,11 +1,16 @@
 import { Account, CallbacksOptions } from 'next-auth/core/types';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { log } from 'next-axiom';
+import { ClientSession } from 'mongoose';
 
 import { not } from '@vighnesh153/utils';
 import { IUserInfo } from '@vighnesh153/types';
 
-import { commitTransactionAndEnd, createNewSessionWithTransaction } from '@lib/mongoose/session';
+import {
+  abortTransactionAndEnd,
+  commitTransactionAndEnd,
+  createNewSessionWithTransaction,
+} from '@lib/mongoose/session';
 import { createUserInfo } from '@lib/mongoose/entity-creation';
 import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
 import { signInAuditLog } from '@lib/helpers/audit-log';
@@ -29,6 +34,12 @@ function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<
   };
 }
 
+async function handleSignInSignUpError(error: unknown, session: ClientSession) {
+  const abortedTransaction = await abortTransactionAndEnd(session);
+  log.error('Failed to create new user', { error, abortedTransaction });
+  return DenySignIn;
+}
+
 export const signInCallback: CallbacksOptions['signIn'] = async ({ account, profile }) => {
   if (not(isGoogleProvider(account))) {
     return DenySignIn;
@@ -40,11 +51,13 @@ export const signInCallback: CallbacksOptions['signIn'] = async ({ account, prof
   const session = await createNewSessionWithTransaction();
   const userInfo = constructUserInfoFromGoogleProfile(googleProfile);
   try {
-    await createUserInfo(userInfo, session);
-  } catch (e) {
-    if (not(isDuplicateMongooseDocument(e))) {
-      log.error('Failed to create new user', { error: e });
-      return DenySignIn;
+    // we don't need a transaction here because if this fails, we don't want to
+    // abort the transaction but instead, we need to sign in the user if they have
+    // already
+    await createUserInfo(userInfo);
+  } catch (error) {
+    if (not(isDuplicateMongooseDocument(error))) {
+      return handleSignInSignUpError(error, session);
     }
 
     // Email is duplicate

@@ -1,36 +1,96 @@
-import { User } from 'next-auth/core/types';
+import { Account, User } from 'next-auth/core/types';
 import { GoogleProfile } from 'next-auth/providers/google';
-import { DenySignIn, signInCallback } from '../sign-in-callback';
+import { randomEmail, randomImage, randomName, randomUuid } from '@vighnesh153/fake-data';
+
+import { AllowSignIn, DenySignIn, signInCallback } from '../sign-in-callback';
+
+function generateRandomUser(): User {
+  return {
+    id: randomUuid(),
+    name: randomName(),
+    email: randomEmail(),
+    image: randomImage(),
+  };
+}
+
+function generateOauthAccount(provider: 'amazon' | 'google'): Account {
+  return {
+    provider,
+    providerAccountId: `com.${provider}`,
+    type: 'oauth',
+  };
+}
+
+function generateGoogleProfile(overrides: Partial<GoogleProfile>): GoogleProfile {
+  return {
+    email_verified: true,
+    aud: '',
+    azp: '',
+    exp: 0,
+    family_name: '',
+    given_name: '',
+    hd: '',
+    iat: 0,
+    iss: '',
+    jti: '',
+    name: randomName(),
+    email: randomEmail(),
+    picture: randomImage(),
+    nbf: 0,
+    sub: '',
+    ...overrides,
+  };
+}
 
 describe('Next Auth Sign-in callback tests', () => {
   it('should deny sign in if provider is not google', async () => {
-    const result = await signInCallback({
-      account: {
-        provider: 'amazon',
-        providerAccountId: 'com.amazon',
-        type: 'oauth',
-      },
-      user: {} as User,
+    const isSignInAllowed = await signInCallback({
+      account: generateOauthAccount('amazon'),
+      user: generateRandomUser(),
     });
 
-    expect(result).toBe(DenySignIn);
+    expect(isSignInAllowed).toBe(DenySignIn);
   });
 
   it('should deny sign in if google profile is not verified', async () => {
-    const result = await signInCallback({
-      account: {
-        provider: 'google',
-        providerAccountId: 'com.google',
-        type: 'oauth',
-      },
-      user: {} as User,
-      profile: {
-        email_verified: false,
-      } as GoogleProfile,
+    const isSignInAllowed = await signInCallback({
+      account: generateOauthAccount('google'),
+      user: generateRandomUser(),
+      profile: generateGoogleProfile({ email_verified: false }),
     });
 
-    expect(result).toBe(DenySignIn);
+    expect(isSignInAllowed).toBe(DenySignIn);
   });
 
-  // TODO: add more tests
+  it('should create user info if the user is signing in for the first time', async () => {
+    const isSignInAllowed = await signInCallback({
+      account: generateOauthAccount('google'),
+      user: generateRandomUser(),
+      profile: generateGoogleProfile({ email_verified: true }),
+    });
+
+    expect(isSignInAllowed).toBe(AllowSignIn);
+  });
+
+  it('should sign-in the user if the user is signing in for the second time', async () => {
+    const oauthAccount = generateOauthAccount('google');
+    const randomUser = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true });
+
+    // signup for the first time
+    await signInCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
+    });
+
+    // signing in for the second time
+    const isSignInAllowed = await signInCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
+    });
+
+    expect(isSignInAllowed).toBe(AllowSignIn);
+  });
 });

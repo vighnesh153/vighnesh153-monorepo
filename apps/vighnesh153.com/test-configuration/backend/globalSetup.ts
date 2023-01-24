@@ -1,4 +1,4 @@
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import * as mongoose from 'mongoose';
 import { serverTestConfig } from './config';
 
@@ -6,14 +6,13 @@ export default async function globalSetup() {
   if (serverTestConfig.Memory) {
     // Config to decided if a mongodb-memory-server instance should be used
     // it's needed in global space, because we don't want to create a new instance every test-suite
-    const instance = await MongoMemoryServer.create({
-      instance: {
-        port: parseInt(serverTestConfig.Port, 10),
-      },
+    const replSet = await MongoMemoryReplSet.create({
+      replSet: { count: 1 },
+      instanceOpts: [{ port: parseInt(serverTestConfig.Port, 10) }],
     });
-    const uri = instance.getUri();
+    const uri = replSet.getUri();
     // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
-    (global as any).__MONGOINSTANCE = instance;
+    (global as any).__MONGOINSTANCE = replSet;
     process.env.MONGODB_URI = uri.slice(0, uri.lastIndexOf('/'));
   } else {
     process.env.MONGODB_URI = `mongodb://${serverTestConfig.IP}:${serverTestConfig.Port}`;
