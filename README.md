@@ -52,7 +52,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- split sign-up and sign-in in different transactions
 - email template builder
 - send email sqs worker
 - Trigger a user account created message in SNS
