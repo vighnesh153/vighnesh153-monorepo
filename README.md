@@ -15,6 +15,7 @@ publish to the outside world.
 ### Integrations
 
 - Database: Mongodb
+  - Backend Testing: [mongodb-memory-server](https://www.npmjs.com/package/mongodb-memory-server)
 - Logging
   - General Logs
     - Service: [Axiom](https://www.axiom.co/)
@@ -24,6 +25,8 @@ publish to the outside world.
       - General errors >= 5, in past 10 minutes
   - Audit logs
     - Mongodb
+- SNS notification
+  - `user-created-notification`: Notification triggered when a user sign's up for the first time
 
 ### Commitlint
 
@@ -49,13 +52,14 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Transactions configuration
-- Create user on sign-in
+- split sign-up and sign-in in different transactions
+- email template builder
+- send email sqs worker
 - Trigger a user account created message in SNS
 - SQS Queues
   - Pending events
-    - USER_CREATION_IN_PROGRESS: Creates an entry in `user_info` and triggers `USER_CREATED` event
     - USER_CREATED
+      - Subscription 1: Send a welcome email
 - Projects
 - Groups/Permissions
 - Notification system and processing
@@ -64,6 +68,8 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Email service
 - Embed GitHub commit snippet
 - Media CDN
+- vighnesh153.com/memes
+  - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when sharing url
 - Audit logs viewer
   - Filters based on
     - action
@@ -183,10 +189,13 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - main
   - types
 - eslint configuration
+  - `eslint-config-vighnesh153`: Add to devDeps
   - .eslintrc.js
   - .eslintignore
 - typescript
-  - Add typescript dependency
+  - `@types/node`: Add to devDeps
+  - `@vighnesh153/tsconfig`: Add to devDeps
+  - `typescript`: Add to devDeps
   - tsconfig
 
 ### Todos for a new package

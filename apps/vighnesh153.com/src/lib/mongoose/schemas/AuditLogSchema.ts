@@ -8,6 +8,7 @@ export const AuditLogSchema = new Schema<IAuditLog>(
       email: { type: String, required: true },
       name: { type: String, required: true },
     },
+    fields: { type: Schema.Types.Mixed },
     message: { type: String, required: true },
   },
   {

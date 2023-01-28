@@ -1,2 +1,2 @@
 export * from './google-provider';
-export * from './sign-in-callback';
+export * from './next-auth-sign-in-callback';

@@ -6,7 +6,7 @@ import { signUpAuditLog } from '@lib/helpers/audit-log';
 type CreateUserInfoReturnType = MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo & { _id: Types.ObjectId };
 
 /**
- * Creates a new user info entity and invokes the `save` method on it
+ * Creates a new user info entity
  *
  * @param userInfo
  * @param session

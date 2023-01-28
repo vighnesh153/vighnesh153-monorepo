@@ -1,6 +1,8 @@
 import { ClientSession, Connection } from 'mongoose';
 import { TransactionOptions } from 'mongodb';
 import { log } from 'next-axiom';
+import { SuccessOrFailureType } from '@vighnesh153/types';
+
 import { mainDbConnection } from '@lib/mongoose/connection';
 
 /**
@@ -42,7 +44,7 @@ export async function createNewSessionWithTransaction(
   return session;
 }
 
-export async function endSession(session: ClientSession): Promise<'success' | 'failure'> {
+export async function endSession(session: ClientSession): Promise<SuccessOrFailureType> {
   try {
     await session.endSession();
     return 'success';
@@ -57,7 +59,7 @@ export async function endSession(session: ClientSession): Promise<'success' | 'f
  *
  * @param session
  */
-export async function commitTransactionAndEnd(session: ClientSession): Promise<'success' | 'failure'> {
+export async function commitTransactionAndEnd(session: ClientSession): Promise<SuccessOrFailureType> {
   try {
     await session.commitTransaction();
   } catch (error) {
@@ -67,7 +69,7 @@ export async function commitTransactionAndEnd(session: ClientSession): Promise<'
   return endSession(session);
 }
 
-export async function abortTransactionAndEnd(session: ClientSession): Promise<'success' | 'failure'> {
+export async function abortTransactionAndEnd(session: ClientSession): Promise<SuccessOrFailureType> {
   try {
     await session.abortTransaction();
   } catch (error) {

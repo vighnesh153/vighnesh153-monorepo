@@ -1,0 +1,35 @@
+{
+  "name": "user-created-notification",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "serverless.ts",
+  "types": "serverless.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "url": "https://vighnesh153.com",
+    "email": "me@vighnesh153.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "files": [],
+  "dependencies": {
+    "@middy/core": "^3.4.0",
+    "@middy/http-json-body-parser": "^3.4.0"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^3.0.0",
+    "@types/aws-lambda": "^8.10.71",
+    "@types/node": "^18.11.18",
+    "@vighnesh153/tsconfig": "*",
+    "esbuild": "^0.14.11",
+    "eslint-config-vighnesh153": "*",
+    "json-schema-to-ts": "^1.5.0",
+    "serverless": "^3.0.0",
+    "serverless-esbuild": "^1.23.3",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.9.4"
+  }
+}

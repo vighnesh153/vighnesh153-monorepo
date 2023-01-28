@@ -2,7 +2,7 @@ import { Account, User } from 'next-auth/core/types';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { randomEmail, randomImage, randomName, randomUuid } from '@vighnesh153/fake-data';
 
-import { AllowSignIn, DenySignIn, signInCallback } from '../sign-in-callback';
+import { AllowSignIn, DenySignIn, nextAuthSignInCallback } from '../next-auth-sign-in-callback';
 
 function generateRandomUser(): User {
   return {
@@ -44,7 +44,7 @@ function generateGoogleProfile(overrides: Partial<GoogleProfile>): GoogleProfile
 
 describe('Next Auth Sign-in callback tests', () => {
   it('should deny sign in if provider is not google', async () => {
-    const isSignInAllowed = await signInCallback({
+    const isSignInAllowed = await nextAuthSignInCallback({
       account: generateOauthAccount('amazon'),
       user: generateRandomUser(),
     });
@@ -53,7 +53,7 @@ describe('Next Auth Sign-in callback tests', () => {
   });
 
   it('should deny sign in if google profile is not verified', async () => {
-    const isSignInAllowed = await signInCallback({
+    const isSignInAllowed = await nextAuthSignInCallback({
       account: generateOauthAccount('google'),
       user: generateRandomUser(),
       profile: generateGoogleProfile({ email_verified: false }),
@@ -63,7 +63,7 @@ describe('Next Auth Sign-in callback tests', () => {
   });
 
   it('should create user info if the user is signing in for the first time', async () => {
-    const isSignInAllowed = await signInCallback({
+    const isSignInAllowed = await nextAuthSignInCallback({
       account: generateOauthAccount('google'),
       user: generateRandomUser(),
       profile: generateGoogleProfile({ email_verified: true }),
@@ -78,14 +78,14 @@ describe('Next Auth Sign-in callback tests', () => {
     const googleProfile = generateGoogleProfile({ email_verified: true });
 
     // signup for the first time
-    await signInCallback({
+    await nextAuthSignInCallback({
       account: oauthAccount,
       user: randomUser,
       profile: googleProfile,
     });
 
     // signing in for the second time
-    const isSignInAllowed = await signInCallback({
+    const isSignInAllowed = await nextAuthSignInCallback({
       account: oauthAccount,
       user: randomUser,
       profile: googleProfile,
