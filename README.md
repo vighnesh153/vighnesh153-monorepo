@@ -52,6 +52,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- Add social links for `xs` in homepage footer
 - set `_id` to email on user signup
 - email template builder
   - Create welcome email template
@@ -79,8 +80,14 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
   - Search
   - Pagination
 - Blogs
+  - Checkout material's documentation website configurations for creating blog
+    - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
   - Redirect `/blogs/*` to `/blog/*`
   - Reactions (Likes & other emoji reactions, Comments)
+- Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
+  - NPM package: https://www.npmjs.com/package/@docsearch/react
+- Fix `import-sorting` in eslint
+- Explore and integrate Cockroach DB (Serverless SQL): https://www.cockroachlabs.com/
 - Checkout sentry for detailed error analysis
   - https://sentry.io/welcome/
   - https://github.com/getsentry/sentry-javascript
@@ -166,17 +173,6 @@ TODO
 #### URL shortener/links (Priority: P1)
 
 Why? There are 1000s of url shorteners out there. Well, none of them are made by me 😌
-
-### Todos
-
-- Add social links for `xs` in homepage footer
-- Google OAuth
-- Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
-  - NPM package: https://www.npmjs.com/package/@docsearch/react
-- Checkout material's documentation website configurations for creating blog
-  - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
-- Fix `import-sorting` in eslint
-- https://www.cockroachlabs.com/
 
 ### Todos for a new project
 
