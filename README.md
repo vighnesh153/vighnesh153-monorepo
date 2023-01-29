@@ -52,8 +52,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Add social links for `xs` in homepage footer
-- set `_id` to email on user signup
 - email template builder
   - Create welcome email template
 - send email sqs worker
