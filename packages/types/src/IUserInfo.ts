@@ -1,5 +1,10 @@
 export interface IUserInfo {
   /**
+   * Unique ID for the document
+   */
+  _id: string;
+
+  /**
    * User's full name
    */
   name: string;

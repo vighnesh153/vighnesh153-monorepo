@@ -1,11 +1,9 @@
-import { ClientSession, Document as MongooseDocument, Types } from 'mongoose';
+import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserInfo } from '@vighnesh153/types';
 import { UserInfoModel } from '@lib/mongoose/models';
 import { signInAuditLog, updatedUserInfoAuditLog } from '@lib/helpers/audit-log';
 
-type UpdateUserInfoReturnType =
-  | (MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo & { _id: Types.ObjectId })
-  | null;
+type UpdateUserInfoReturnType = (MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo) | null;
 
 /**
  * Updates the user info of an existing user

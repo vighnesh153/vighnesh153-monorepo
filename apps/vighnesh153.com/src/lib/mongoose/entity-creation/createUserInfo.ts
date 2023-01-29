@@ -1,9 +1,9 @@
-import { ClientSession, Document as MongooseDocument, Types } from 'mongoose';
+import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserInfo } from '@vighnesh153/types';
 import { UserInfoModel } from '@lib/mongoose/models';
 import { signUpAuditLog } from '@lib/helpers/audit-log';
 
-type CreateUserInfoReturnType = MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo & { _id: Types.ObjectId };
+type CreateUserInfoReturnType = MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo;
 
 /**
  * Creates a new user info entity

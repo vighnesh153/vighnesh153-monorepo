@@ -28,6 +28,7 @@ function isGoogleProfileVerified(googleProfile: GoogleProfile): boolean {
 
 function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<IUserInfo, 'createdAt'> {
   return {
+    _id: googleProfile.email,
     name: googleProfile.name,
     image: googleProfile.picture,
     email: googleProfile.email,
