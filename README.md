@@ -52,7 +52,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- set `_id` to email on user signup
 - email template builder
+  - Create welcome email template
 - send email sqs worker
 - Trigger a user account created message in SNS
 - SQS Queues
@@ -174,6 +176,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 - Checkout material's documentation website configurations for creating blog
   - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
 - Fix `import-sorting` in eslint
+- https://www.cockroachlabs.com/
 
 ### Todos for a new project
 

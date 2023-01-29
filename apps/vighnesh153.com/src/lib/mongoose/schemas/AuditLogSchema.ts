@@ -16,6 +16,7 @@ export const AuditLogSchema = new Schema<IAuditLog>(
     optimisticConcurrency: true,
     timestamps: {
       createdAt: 'createdAt',
+      updatedAt: false,
     },
   }
 );
