@@ -52,6 +52,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- pick a username experience
 - email template builder
   - Create welcome email template
 - send email sqs worker
@@ -68,8 +69,15 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Email service
 - Embed GitHub commit snippet
 - Media CDN
+- Hide emails of users on client side
+- Profile page for all users
+  - `/users` -> Show list of users (hide emails)
+  - `/users/username`
 - vighnesh153.com/memes
   - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when sharing url
+  - Meme credit to
+    - users
+    - other portals
 - Audit logs viewer
   - Filters based on
     - action
@@ -77,6 +85,12 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
     - date
   - Search
   - Pagination
+- Liked videos
+  - Features
+    - Tags
+  - List
+    - https://www.youtube.com/watch?v=JHregeIsjPQ
+- Miscellaneous: Holds links to all my projects
 - Blogs
   - Checkout material's documentation website configurations for creating blog
     - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
@@ -113,6 +127,37 @@ This service/lambda will allow me to send email to any users
 - A lambda will be connected to the SQS which will send an email based on the message from the queue
   - Perform validation to check if the `from` field matches my domain `.*@vighnesh153\.com`. Most of the time, the
     `from` field will be `no-reply@vighnesh153.com`
+
+#### ReactJS at scale
+
+- Fundamentals
+- Advanced concepts
+  - Patterns
+  - Rendering Paradigms
+    - SPA
+    - SSG
+    - ISR
+    - SSR
+    - Combinations of above
+  - Best practices
+- Development Tools
+  - Linting
+    - Eslint
+    - Prettier
+  - Git hooks
+    - Husky
+- Testing
+- Bootstrapping
+  - Create-React-App
+  - NextJS
+  - Remix
+- Monorepo
+- Deployment
+  - Github pages
+  - S3 + Cloudfront
+  - Vercel
+- Creating a react-js library
+- Micro-frontends with React
 
 #### Push notifications (Priority: P2)
 
