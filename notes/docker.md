@@ -38,6 +38,7 @@ docker build -t vighnesh153/mymongo:latest .
 - `-it`: Starts the container in an interactive mode
 - `-d`: Detached mode: run command in the background
 - `--name`: Give a name to the container
+- `-p <Host-Machine-Port>:<Container-Exposed-Port>`: Bind the host machine port to container port
 
 ## Busy box
 
@@ -91,6 +92,24 @@ CMD [ "mongod" ]
 
 ### NodeJS project image
 
-```dockerfile
+- Build the image: `docker build -t vighnesh153/sample-node-app:latest .`
+- Run: `docker run --rm -p 3004:3002 vighnesh153/sample-node-app`
 
+```dockerfile
+FROM node:lts-alpine
+
+WORKDIR /vighnesh153
+
+# Copy the package.json file first so that all commands
+# till `RUN npm install` can be cached during the next build
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+EXPOSE 3002
+
+CMD [ "npm", "start" ]
 ```
