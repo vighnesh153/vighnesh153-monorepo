@@ -17,9 +17,9 @@
     "@ngneat/falso": "^6.4.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.11.19",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
