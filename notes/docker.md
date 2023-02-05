@@ -1,5 +1,7 @@
 # All things Docker
 
+- `.dockerignore` file: Use this file to ignore copying some files to docker container
+
 ## Hello world
 
 ```shell
@@ -112,4 +114,19 @@ COPY ./ ./
 EXPOSE 3002
 
 CMD [ "npm", "start" ]
+```
+
+### Docker compose
+
+```yaml
+services:
+  mongo-dev:
+    image: mongo:6.0.4
+
+  node-app:
+    build: .
+    depends_on:
+      - mongo-dev
+    ports:
+      - 8000:8000
 ```

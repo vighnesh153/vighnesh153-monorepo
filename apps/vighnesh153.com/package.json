@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev:pre-requisites": "chmod +x ./development-server.sh",
+    "dev:server": "./development-server.sh",
+    "dev": "npm run dev:pre-requisites && npm run dev:server",
     "build": "next build",
     "start": "next start",
     "lint:fix": "eslint --fix .",

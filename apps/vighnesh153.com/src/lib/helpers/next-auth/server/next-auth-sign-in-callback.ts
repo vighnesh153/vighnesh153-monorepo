@@ -14,6 +14,7 @@ import {
 import { createUserInfo } from '@lib/mongoose/entity-creation';
 import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
 import { updateUserInfo } from '@lib/mongoose/entity-updation';
+import { consoleLogger } from '@lib/helpers/consoleLogger';
 
 export const AllowSignIn = true;
 export const DenySignIn = false;
@@ -89,26 +90,37 @@ async function signIn(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOr
  * @param profile
  */
 export const nextAuthSignInCallback: CallbacksOptions['signIn'] = async ({ account, profile }) => {
+  consoleLogger('Inside nextAuthSignInCallback');
   if (not(isGoogleProvider(account))) {
+    consoleLogger('Inside nextAuthSignInCallback: Not a google provider. Denying signing in');
     return DenySignIn;
   }
+  consoleLogger('Inside nextAuthSignInCallback: Profile is Google profile');
   const googleProfile = profile as GoogleProfile;
   if (not(isGoogleProfileVerified(googleProfile))) {
+    consoleLogger('Inside nextAuthSignInCallback: Google Profile not verified. Denying signing in');
     return DenySignIn;
   }
+  consoleLogger('Inside nextAuthSignInCallback: Google profile is verified');
 
   const userInfo = constructUserInfoFromGoogleProfile(googleProfile);
 
   try {
+    consoleLogger('Inside nextAuthSignInCallback: Attempting to SignUp');
     const signUpSuccessful = (await signUp(userInfo)) === 'success';
+    consoleLogger(`Inside nextAuthSignInCallback: SignUp successful: ${signUpSuccessful}`);
     return signUpSuccessful ? AllowSignIn : DenySignIn;
   } catch (error) {
+    consoleLogger(`Inside nextAuthSignInCallback: Error occurred while signing in: ${error}`);
     if (not(isDuplicateMongooseDocument(error))) {
+      consoleLogger(`Inside nextAuthSignInCallback: Not duplicate document`);
       log.error('Failed to create new user', { error });
       return DenySignIn;
     }
 
+    consoleLogger(`Inside nextAuthSignInCallback: Attempting to SignIn`);
     const signInSuccessful = (await signIn(userInfo)) === 'success';
+    consoleLogger(`Inside nextAuthSignInCallback: SignIn successful: ${signInSuccessful}`);
     return signInSuccessful ? AllowSignIn : DenySignIn;
   }
 };
