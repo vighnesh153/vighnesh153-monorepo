@@ -3,7 +3,7 @@ import { GoogleProfile } from 'next-auth/providers/google';
 import { log } from 'next-axiom';
 import { ClientSession } from 'mongoose';
 
-import { not } from '@vighnesh153/utils';
+import { not, slugify } from '@vighnesh153/utils';
 import { IUserInfo, SuccessOrFailureType } from '@vighnesh153/types';
 
 import {
@@ -15,6 +15,7 @@ import { createUserInfo } from '@lib/mongoose/entity-creation';
 import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
 import { updateUserInfo } from '@lib/mongoose/entity-updation';
 import { consoleLogger } from '@lib/helpers/consoleLogger';
+import { md5Hash } from '@lib/helpers/hashing';
 
 export const AllowSignIn = true;
 export const DenySignIn = false;
@@ -28,11 +29,17 @@ function isGoogleProfileVerified(googleProfile: GoogleProfile): boolean {
 }
 
 function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<IUserInfo, 'createdAt'> {
+  const { name, email, picture: image } = googleProfile;
+  const salt = Math.random().toString(16).split('.')[1];
+  const clientId = md5Hash(googleProfile.email + salt);
+  const userName = slugify(name, { lower: true });
   return {
-    _id: googleProfile.email,
-    name: googleProfile.name,
-    image: googleProfile.picture,
-    email: googleProfile.email,
+    _id: email,
+    clientId,
+    userName,
+    name,
+    image,
+    email,
   };
 }
 

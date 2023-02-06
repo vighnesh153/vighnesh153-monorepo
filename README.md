@@ -52,7 +52,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- pick a username experience
 - email template builder
   - Create welcome email template
 - send email sqs worker
@@ -72,7 +71,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Hide emails of users on client side
 - Profile page for all users
   - `/users` -> Show list of users (hide emails)
-  - `/users/username`
+  - `/users/:userId/username`
+  - `/users/:userId` redirect to `/users/:userId/username`
+  - Allow editing username
 - vighnesh153.com/memes
   - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when sharing url
   - Meme credit to
@@ -103,6 +104,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Checkout sentry for detailed error analysis
   - https://sentry.io/welcome/
   - https://github.com/getsentry/sentry-javascript
+- docker mongo-nextjs image
 
 #### Embed GitHub files/commits/gists into html
 

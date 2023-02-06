@@ -1,18 +1,21 @@
-export interface IUserInfo {
+/**
+ * Not all fields should be sent to the client (like email)
+ */
+export interface IPublicUserInfo {
   /**
-   * Unique ID for the document
+   * This ID will be shared on the client to uniquely identify the user
    */
-  _id: string;
+  clientId: string;
+
+  /**
+   * User preferred name for the portal
+   */
+  userName: string;
 
   /**
    * User's full name
    */
   name: string;
-
-  /**
-   * User's email address
-   */
-  email: string;
 
   /**
    * User's avatar link
@@ -23,4 +26,16 @@ export interface IUserInfo {
    * When was this entity created
    */
   createdAt: Date;
+}
+
+export interface IUserInfo extends IPublicUserInfo {
+  /**
+   * Unique ID for the document (server only)
+   */
+  _id: string;
+
+  /**
+   * User's email address
+   */
+  email: string;
 }
