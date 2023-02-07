@@ -231,15 +231,15 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - private
   - main
   - types
-- eslint configuration
-  - `eslint-config-vighnesh153`: Add to devDeps
-  - .eslintrc.js
-  - .eslintignore
 - typescript
   - `@types/node`: Add to devDeps
   - `@vighnesh153/tsconfig`: Add to devDeps
   - `typescript`: Add to devDeps
   - tsconfig
+- eslint configuration
+  - `eslint-config-vighnesh153`: Add to devDeps
+  - .eslintrc.js
+  - .eslintignore
 
 ### Todos for a new package
 
