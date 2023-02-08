@@ -8,4 +8,5 @@ export const commonJestConfig: Config = {
     '^@modules/(.*)$': '<rootDir>/src/modules/$1',
   },
   preset: 'ts-jest',
+  roots: ['<rootDir>/src/'],
 };
