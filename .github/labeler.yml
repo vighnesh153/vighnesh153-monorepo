@@ -1,0 +1,52 @@
+# Add 'yaml' label to any yaml file changes
+yaml:
+- any: ['*.yml', '*.yaml']
+
+lint:
+- '**/*.eslintrc.js'
+- '**/.eslintrc.js'
+- '**/.lintstagedrc.js'
+- '**/commitlint.config.js'
+
+readme:
+- '**/README.md'
+
+docs:
+- '**/*.md'
+
+'package(-lock)?.json':
+- '**/package.json'
+- '**/package-lock.json'
+
+tsconfig:
+- '**/tsconfig.json'
+- '**/tsconfig/base.json'
+- '**/tsconfig/nextjs.json'
+- '**/tsconfig/react-library.json'
+
+turbo:
+- '**/turbo.json'
+
+test:
+- any: [
+    '*.spec.ts', 
+    '*.test.ts', 
+    '*.spec.tsx', 
+    '*.test.tsx'
+  ]
+
+fontend-test:
+- any: [
+    '*.frontend.spec.ts', 
+    '*.frontend.test.ts', 
+    '*.frontend.spec.tsx', 
+    '*.frontend.test.tsx'
+  ]
+
+backend-test:
+- any: [
+    '*.backend.spec.ts', 
+    '*.backend.test.ts', 
+    '*.backend.spec.tsx', 
+    '*.backend.test.tsx'
+  ]
