@@ -52,6 +52,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
+- `@vighnesh153/github-gist`
+- DallE images to instagram with quotes
+- Imgur upload library
 - email template builder
   - Create welcome email template
 - send email sqs worker
@@ -105,6 +108,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
   - https://sentry.io/welcome/
   - https://github.com/getsentry/sentry-javascript
 - docker mongo-nextjs image
+- Free subtitles srt editor
 
 #### Embed GitHub files/commits/gists into html
 

@@ -1,6 +1,15 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
+
+const token = '111';
+// eslint-disable-next-line no-console
+console.log(token);
 
 export default function Home() {
+  useEffect(() => {
+    // verifyGithubPAT(token);
+  }, []);
+
   return (
     <>
       <Head>
