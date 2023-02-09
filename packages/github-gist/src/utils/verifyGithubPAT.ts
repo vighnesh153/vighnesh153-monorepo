@@ -4,16 +4,14 @@ import { constants } from '../constants';
 
 async function isTokenValid(token: string): Promise<boolean> {
   const rateLimitEndpoint = constants.urls.github.rateLimit;
-  return axios
-    .get(rateLimitEndpoint, {
-      url: rateLimitEndpoint,
-      method: 'get',
-      headers: { Authorization: `token ${token}` },
-    })
-    .then((result) => {
-      const OAuthScopes = result.headers['x-oauth-scopes'];
-      return OAuthScopes.includes('gist');
-    });
+  return axios({
+    url: rateLimitEndpoint,
+    method: 'get',
+    headers: { Authorization: `token ${token}` },
+  }).then((result) => {
+    const OAuthScopes = result.headers['x-oauth-scopes'] ?? '';
+    return OAuthScopes.includes('gist');
+  });
 }
 
 // check if the provided GitHub PAT (personal access token) is valid and has gist access
