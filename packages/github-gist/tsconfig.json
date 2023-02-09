@@ -1,5 +1,8 @@
 {
   "extends": "@vighnesh153/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ES6"
+  },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

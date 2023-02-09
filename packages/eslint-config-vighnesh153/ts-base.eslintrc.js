@@ -30,12 +30,14 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/no-empty-function': ['error'],
     /**
      * @see https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
      */
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-use-before-define': ['warn'],
+    '@typescript-eslint/no-useless-constructor': ['error'],
     'comma-dangle': [
       'error',
       {
@@ -59,13 +61,13 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'max-len': ['error', { code: 120 }],
     'no-duplicate-imports': 'error',
-    'no-empty-function': 'error',
+    'no-empty-function': 'off',
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'no-underscore-dangle': 'error',
     'no-unused-vars': 'error',
     'no-use-before-define': 'error',
-    'no-useless-constructor': 'error',
+    'no-useless-constructor': 'off',
     'no-void': 'off',
     'object-curly-newline': [
       'error',
