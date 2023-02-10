@@ -12,15 +12,10 @@ export interface FetchGistMetadataProps {
 /**
  * Fetches the metadata of the gist which has one of the files named `gistIdentifyingFileName`
  *
- * @param personalAccessToken
- * @param appIdentifier
- *
  * @todo Optimize this, if possible
  */
-export async function fetchGistMetadata({
-  personalAccessToken,
-  appIdentifier,
-}: FetchGistMetadataProps): Promise<IGithubGistMetadata | null> {
+export async function fetchGistMetadata(props: FetchGistMetadataProps): Promise<IGithubGistMetadata | null> {
+  const { personalAccessToken, appIdentifier } = props;
   // Fetches metadata of all the gists belonging to this PAT
   const { data: gistsMetadata } = await axios<IGithubGistMetadata[]>(
     withAuthConfig({

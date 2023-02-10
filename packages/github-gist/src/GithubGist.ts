@@ -61,6 +61,9 @@ export class GithubGist {
 
   constructor(private options: GithubGistProps) {}
 
+  /**
+   * Returns all the files from the Gist
+   */
   get files(): GistFile[] {
     if (this.gistMetadata === null) {
       throw gistNotInitializedError();
@@ -88,6 +91,14 @@ export class GithubGist {
     return this.gistMetadata.owner.login;
   }
 
+  /**
+   * Creates a new file and returns it
+   *
+   * > It doesn't save the file on the Gist. You have to manually invoke
+   * the "save" method
+   *
+   * @param fileName
+   */
   createNewFile(fileName: string): GistFile {
     if (this.gistMetadata === null) {
       throw gistNotInitializedError();
@@ -111,6 +122,9 @@ export class GithubGist {
     return gistFile;
   }
 
+  /**
+   * Saves only modified files as the latest commit
+   */
   async save(): Promise<void> {
     if (this.gistMetadata === null) {
       throw gistNotInitializedError();
@@ -147,6 +161,10 @@ export class GithubGist {
     });
   }
 
+  /**
+   * Returns the file from Gist, if it exists, else, returns null
+   * @param fileName
+   */
   getFileByName(fileName: string): GistFile | null {
     if (this.gistMetadata === null) {
       throw gistNotInitializedError();

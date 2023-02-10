@@ -10,13 +10,8 @@ export interface BuildLatestGistFileFetchUrlProps {
   gistOwner: string;
 }
 
-export function buildGistFileFetchRequestConfigForCommit({
-  commitId,
-  corsConfig,
-  fileName,
-  gistId,
-  gistOwner,
-}: BuildLatestGistFileFetchUrlProps): AxiosRequestConfig {
+export function buildGistFileFetchRequestConfigForCommit(props: BuildLatestGistFileFetchUrlProps): AxiosRequestConfig {
+  const { commitId, corsConfig, fileName, gistId, gistOwner } = props;
   const url = `https://gist.githubusercontent.com/${gistOwner}/${gistId}/raw/${commitId}/${fileName}`;
 
   if (corsConfig.type === 'none') {
