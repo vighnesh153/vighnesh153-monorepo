@@ -9,7 +9,10 @@ export interface FetchLatestGistCommitProps {
   personalAccessToken: string;
 }
 
-export async function fetchLatestGistCommitId({ gistId, personalAccessToken }: FetchLatestGistCommitProps) {
+export async function fetchLatestGistCommitId({
+  gistId,
+  personalAccessToken,
+}: FetchLatestGistCommitProps): Promise<string> {
   const {
     data: { history },
   } = await axios<{ history: Array<{ version: string }> }>(

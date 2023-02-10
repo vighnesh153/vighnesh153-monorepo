@@ -12,7 +12,11 @@ export interface CreateGistProps {
   personalAccessToken: string;
 }
 
-export async function createGist({ appIdentifier, isGistPublic = false, personalAccessToken }: CreateGistProps) {
+export async function createGist({
+  appIdentifier,
+  isGistPublic = false,
+  personalAccessToken,
+}: CreateGistProps): Promise<IGithubGistMetadata> {
   const identifyingFileContent = constants.identifier.content.replace(constants.identifier.keyword, appIdentifier);
   const fileIdentifier = generateGithubGistIdentifier(appIdentifier);
   const payload = {
