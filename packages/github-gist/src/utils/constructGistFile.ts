@@ -11,15 +11,16 @@ export interface ConstructGistFileProps {
   personalAccessToken: string;
 }
 
-export function constructGistFile({
-  corsConfig,
-  enableRequestCaching,
-  gistFileName,
-  gistMetadata,
-  gistFileContent,
-  isGistPublic,
-  personalAccessToken,
-}: ConstructGistFileProps): GistFile {
+export function constructGistFile(props: ConstructGistFileProps): GistFile {
+  const {
+    corsConfig,
+    enableRequestCaching,
+    gistFileName,
+    gistMetadata,
+    gistFileContent,
+    isGistPublic,
+    personalAccessToken,
+  } = props;
   return new GistFile({
     corsConfig,
     enableRequestCaching,

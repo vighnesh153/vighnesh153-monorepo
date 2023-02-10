@@ -1,12 +1,6 @@
 import axios from 'axios';
 import { not } from '@vighnesh153/utils';
-import {
-  buildGistFileFetchRequestConfigForCommit,
-  fetchLatestGistCommitId,
-  getCache,
-  setCache,
-  withAuthConfig,
-} from './utils';
+import { fetchLatestContent, fetchLatestGistCommitId, getCache, setCache, withAuthConfig } from './utils';
 import { constants } from './constants';
 import { CORSConfig, IGithubGistMetadata } from './types';
 
@@ -21,16 +15,29 @@ export interface GistFileProps {
 }
 
 export class GistFile {
+  /**
+   * Returns `true`, if the file is dirty (modifier and not synced with Gist), else, false
+   */
   hasUnSyncedUpdates = true;
 
-  constructor(private options: GistFileProps) {}
+  private fileContent: string;
 
+  constructor(private options: GistFileProps) {
+    this.fileContent = options.fileContent;
+  }
+
+  /**
+   * Get the name of the file
+   */
   get name(): string {
     return this.options.fileName;
   }
 
+  /**
+   * Get the content in memory
+   */
   get content(): string {
-    return this.options.fileContent;
+    return this.fileContent;
   }
 
   /**
@@ -42,10 +49,10 @@ export class GistFile {
    * @param newContent
    */
   set content(newContent: string) {
-    if (this.options.fileContent === newContent) {
+    if (this.fileContent === newContent) {
       return;
     }
-    this.options.fileContent = newContent;
+    this.fileContent = newContent;
     this.hasUnSyncedUpdates = true;
   }
 
@@ -55,17 +62,23 @@ export class GistFile {
   async save(): Promise<void> {
     if (not(this.hasUnSyncedUpdates)) return;
 
-    const url = `${constants.urls.github.gists}/${this.options.gistMetadata.id}`;
-    const body = {
-      public: this.options.isPublic,
-      files: {
-        [this.options.fileName]: {
-          content: this.options.fileContent,
+    await axios(
+      withAuthConfig({
+        personalAccessToken: this.options.personalAccessToken,
+        baseConfig: {
+          url: `${constants.urls.github.gists}/${this.options.gistMetadata.id}`,
+          method: 'post',
+          data: {
+            public: this.options.isPublic,
+            files: {
+              [this.options.fileName]: {
+                content: this.fileContent,
+              },
+            },
+          },
         },
-      },
-    };
-
-    await axios.post(url, body, withAuthConfig({ personalAccessToken: this.options.personalAccessToken }));
+      })
+    );
     this.hasUnSyncedUpdates = false;
   }
 
@@ -73,35 +86,47 @@ export class GistFile {
    * Fetches the latest content of the file from the Gist
    */
   async fetchLatestContent(): Promise<void> {
-    const latestCommit = await fetchLatestGistCommitId({
-      gistId: this.options.gistMetadata.id,
-      personalAccessToken: this.options.personalAccessToken,
+    const gistId = this.options.gistMetadata.id;
+    const {
+      personalAccessToken,
+      fileName,
+      enableRequestCaching,
+      corsConfig,
+      gistMetadata: {
+        owner: { login: gistOwner },
+      },
+    } = this.options;
+
+    const latestCommitId = await fetchLatestGistCommitId({
+      gistId,
+      personalAccessToken,
     });
 
-    const key = `gistId=${this.options.gistMetadata.id},commitId=${latestCommit},fileName=${this.options.fileName}`;
-    let fileContent: string | null = this.options.enableRequestCaching ? (getCache(key) as string | null) : null;
+    const cacheKey = `gistId=${gistId},commitId=${latestCommitId},fileName=${fileName}`;
 
-    if (fileContent === null) {
-      const { data } = await axios<string>(
-        withAuthConfig({
-          personalAccessToken: this.options.personalAccessToken,
-          baseConfig: {
-            ...buildGistFileFetchRequestConfigForCommit({
-              fileName: this.options.fileName,
-              gistId: this.options.gistMetadata.id,
-              gistOwner: this.options.gistMetadata.owner.login,
-              corsConfig: this.options.corsConfig,
-              commitId: latestCommit,
-            }),
-            method: 'get',
-          },
-        })
-      );
-      fileContent = data ?? '';
+    // cache hit and caching is enabled
+    if (enableRequestCaching && getCache(cacheKey) !== null) {
+      this.fileContent = getCache(cacheKey) as string;
+      this.hasUnSyncedUpdates = false;
+      return;
     }
-    setCache(key, fileContent);
 
-    this.options.fileContent = typeof fileContent === 'string' ? fileContent : JSON.stringify(fileContent);
+    // fetch the actual data
+    const fileContent = await fetchLatestContent({
+      personalAccessToken,
+      fileName,
+      gistId,
+      gistOwner,
+      corsConfig,
+      latestCommitId,
+    });
+
+    // if caching is enabled, store the result in the cache
+    if (enableRequestCaching) {
+      setCache(cacheKey, fileContent);
+    }
+
+    this.fileContent = typeof fileContent === 'string' ? fileContent : JSON.stringify(fileContent);
     this.hasUnSyncedUpdates = false;
   }
 }

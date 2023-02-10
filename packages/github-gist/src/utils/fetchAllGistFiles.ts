@@ -10,13 +10,8 @@ export interface FetchAllGistFilesProps {
   personalAccessToken: string;
 }
 
-export async function fetchAllGistFiles({
-  corsConfig,
-  enableRequestCaching,
-  gistMetadata,
-  isGistPublic,
-  personalAccessToken,
-}: FetchAllGistFilesProps): Promise<GistFile[]> {
+export async function fetchAllGistFiles(props: FetchAllGistFilesProps): Promise<GistFile[]> {
+  const { corsConfig, enableRequestCaching, gistMetadata, isGistPublic, personalAccessToken } = props;
   const gistFiles: GistFile[] = [];
   const gistFileContentPromises: Promise<void>[] = [];
   const gistFilesNames = Object.keys(gistMetadata.files);
