@@ -4,6 +4,7 @@ import { constructGistFile } from './constructGistFile';
 
 export interface FetchAllGistFilesProps {
   corsConfig: CORSConfig;
+  enableRequestCaching: boolean;
   gistMetadata: IGithubGistMetadata;
   isGistPublic: boolean;
   personalAccessToken: string;
@@ -11,6 +12,7 @@ export interface FetchAllGistFilesProps {
 
 export async function fetchAllGistFiles({
   corsConfig,
+  enableRequestCaching,
   gistMetadata,
   isGistPublic,
   personalAccessToken,
@@ -22,6 +24,7 @@ export async function fetchAllGistFiles({
   gistFilesNames.forEach((gistFileName) => {
     const gistFile = constructGistFile({
       gistFileName,
+      enableRequestCaching,
       gistFileContent: '',
       corsConfig,
       gistMetadata,

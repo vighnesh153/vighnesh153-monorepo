@@ -30,6 +30,15 @@ export interface GithubGistProps {
   appIdentifier: string;
 
   /**
+   * Since commit hashes are unique and whenever a file changes, we can be sure that the new SHA
+   * will be different from the previously encountered ones. This option can be used to cache the
+   * content for all unique SHAs
+   *
+   * @default true
+   */
+  enableRequestCaching?: boolean;
+
+  /**
    * Whether the gist should be private or public
    *
    * @default false
@@ -39,7 +48,7 @@ export interface GithubGistProps {
   /**
    * CORS configuration. Needed when using the API on the client side.
    *
-   * If `type=default`, it will use `https://cors-anywhere.herokuapp.com/` as prefix to
+   * If `type=default`, it will use `https://corsanywhere.herokuapp.com/` as prefix to
    * the GitHub URLs to tackle CORS blocking
    */
   corsConfig?: CORSConfig;
@@ -91,6 +100,7 @@ export class GithubGist {
 
     const gistFile = constructGistFile({
       corsConfig: this.corsConfig(),
+      enableRequestCaching: this.getEnableRequestCaching(),
       isGistPublic: this.isGistPublic(),
       gistFileName: fileName,
       gistFileContent: '',
@@ -177,14 +187,19 @@ export class GithubGist {
 
     this.gistFiles = await fetchAllGistFiles({
       corsConfig: this.corsConfig(),
+      enableRequestCaching: this.getEnableRequestCaching(),
       isGistPublic: this.isGistPublic(),
       personalAccessToken: this.options.personalAccessToken,
       gistMetadata: this.gistMetadata,
     });
   }
 
+  private getEnableRequestCaching(): boolean {
+    return this.options.enableRequestCaching ?? true;
+  }
+
   private corsConfig(): CORSConfig {
-    return this.options.corsConfig ?? { type: 'heroku-prefix' };
+    return this.options.corsConfig ?? { type: 'default' };
   }
 
   private isGistPublic(): boolean {

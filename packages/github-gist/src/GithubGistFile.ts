@@ -1,12 +1,19 @@
 import axios from 'axios';
 import { not } from '@vighnesh153/utils';
-import { buildGistFileFetchRequestConfigForCommit, fetchLatestGistCommitId, withAuthConfig } from './utils';
+import {
+  buildGistFileFetchRequestConfigForCommit,
+  fetchLatestGistCommitId,
+  getCache,
+  setCache,
+  withAuthConfig,
+} from './utils';
 import { constants } from './constants';
 import { CORSConfig, IGithubGistMetadata } from './types';
 
 export interface GistFileProps {
   gistMetadata: IGithubGistMetadata;
   personalAccessToken: string;
+  enableRequestCaching: boolean;
   fileName: string;
   fileContent: string;
   isPublic: boolean;
@@ -35,6 +42,9 @@ export class GistFile {
    * @param newContent
    */
   set content(newContent: string) {
+    if (this.options.fileContent === newContent) {
+      return;
+    }
     this.options.fileContent = newContent;
     this.hasUnSyncedUpdates = true;
   }
@@ -67,19 +77,31 @@ export class GistFile {
       gistId: this.options.gistMetadata.id,
       personalAccessToken: this.options.personalAccessToken,
     });
-    const { data: fileContent } = await axios<string>(
-      withAuthConfig({
-        personalAccessToken: this.options.personalAccessToken,
-        ...buildGistFileFetchRequestConfigForCommit({
-          fileName: this.options.fileName,
-          gistId: this.options.gistMetadata.id,
-          gistOwner: this.options.gistMetadata.owner.login,
-          corsConfig: this.options.corsConfig,
-          commitId: latestCommit,
-        }),
-      })
-    );
-    this.options.fileContent = fileContent;
+
+    const key = `gistId=${this.options.gistMetadata.id},commitId=${latestCommit},fileName=${this.options.fileName}`;
+    let fileContent: string | null = this.options.enableRequestCaching ? (getCache(key) as string | null) : null;
+
+    if (fileContent === null) {
+      const { data } = await axios<string>(
+        withAuthConfig({
+          personalAccessToken: this.options.personalAccessToken,
+          baseConfig: {
+            ...buildGistFileFetchRequestConfigForCommit({
+              fileName: this.options.fileName,
+              gistId: this.options.gistMetadata.id,
+              gistOwner: this.options.gistMetadata.owner.login,
+              corsConfig: this.options.corsConfig,
+              commitId: latestCommit,
+            }),
+            method: 'get',
+          },
+        })
+      );
+      fileContent = data ?? '';
+    }
+    setCache(key, fileContent);
+
+    this.options.fileContent = typeof fileContent === 'string' ? fileContent : JSON.stringify(fileContent);
     this.hasUnSyncedUpdates = false;
   }
 }

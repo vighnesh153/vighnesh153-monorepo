@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 
 export type CORSConfig =
   | { type: 'none' }
-  | { type: 'heroku-prefix' }
+  | { type: 'default' }
   | {
       type: 'custom';
 
