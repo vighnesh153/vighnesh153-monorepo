@@ -18,6 +18,15 @@
   "files": [
     "dist/**/*"
   ],
+  "keywords": [
+    "gist",
+    "storage",
+    "gist db",
+    "database",
+    "github",
+    "github gist",
+    "gist github"
+  ],
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/node": "*",
