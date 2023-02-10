@@ -64,8 +64,8 @@ the queue
 - No customization for the 5-minute deduplication interval
 - 20% expensive than Standard queues
 
-If your project won't have higher than 3000 TPS or if you don't need customization for the default deduplication
-interval, FIFO queues would be perfect for your project
+If your project has less than 3000 TPS or if you don't need customization for the default deduplication interval, FIFO
+queues would be perfect for your project
 
 ## Conclusion
 

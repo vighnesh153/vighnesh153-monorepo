@@ -30,8 +30,8 @@ const logo = {
 const h1 = {
   color: '#000',
   fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', " +
-    "'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', ` +
+    `'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
   fontSize: '24px',
   fontWeight: 'normal',
   textAlign: 'center' as const,
@@ -51,8 +51,8 @@ const link = {
 const text = {
   color: '#000',
   fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', " +
-    "'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', ` +
+    `'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
   fontSize: '14px',
   lineHeight: '24px',
 };
@@ -70,8 +70,8 @@ const btn = {
   borderRadius: '5px',
   color: '#fff',
   fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', " +
-    "'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', ` +
+    `'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
   fontSize: '12px',
   fontWeight: 500,
   lineHeight: '50px',
@@ -93,8 +93,8 @@ const hr = {
 const footer = {
   color: '#666666',
   fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', " +
-    "'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', ` +
+    `'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
   fontSize: '12px',
   lineHeight: '24px',
 };
@@ -159,7 +159,8 @@ export default function Email() {
           <Text style={footer}>
             This invitation was intended for <span style={black}>zenorocha</span>.This invite was sent from{' '}
             <span style={black}>204.13.186.218</span> located in <span style={black}>São Paulo, Brazil</span>. If you
-            were not expecting this invitation, you can ignore this email. If you are concerned about your {`account's`}{' '}
+            were not expecting this invitation, you can ignore this email. If you are concerned about your{' '}
+            {`account's `}
             safety, please reply to this email to get in touch with us.
           </Text>
         </Container>

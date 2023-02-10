@@ -1,13 +1,36 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { GithubGist } from '@vighnesh153/github-gist';
 
 const token = '111';
-// eslint-disable-next-line no-console
-console.log(token);
 
 export default function Home() {
   useEffect(() => {
-    // verifyGithubPAT(token);
+    (async () => {
+      const gist = new GithubGist({
+        personalAccessToken: token,
+        appIdentifier: 'my-test-gist',
+      });
+      await gist.initialize();
+
+      const fileJson = gist.createNewFile('vighnesh153.json');
+      fileJson.content = JSON.stringify({ message: 'Vighnesh is the best' });
+
+      const filePython = gist.createNewFile('vighnesh153.py');
+      filePython.content = `print("Vighnesh is the best")`;
+
+      const fileJs = gist.createNewFile('vighnesh153.js');
+      fileJs.content = `console.log("Vighnesh is the best")`;
+
+      await gist.save();
+
+      const fileMd = gist.createNewFile('vighnesh153.md');
+      fileMd.content = '# Vighnesh is the best';
+
+      fileJs.content = [fileJs.content, 'console.log("Vighnesh is the best and I know it")'].join('\n');
+
+      await gist.save();
+    })();
   }, []);
 
   return (

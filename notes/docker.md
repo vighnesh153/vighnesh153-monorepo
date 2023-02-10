@@ -75,8 +75,8 @@ FROM alpine
 RUN apk add binutils
 
 # Find repositories here: https://wiki.alpinelinux.org/wiki/Repositories
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositories
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.9/community" >> /etc/apk/repositories
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositories
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/community" >> /etc/apk/repositories
 RUN apk update
 
 RUN apk add mongodb

@@ -23,7 +23,7 @@ export function buildGistFileFetchRequestConfigForCommit({
     return { url };
   }
 
-  if (corsConfig.type === 'heroku-prefix') {
+  if (corsConfig.type === 'default') {
     return { url: `${constants.urls.corsAnywherePrefix}${url}` };
   }
 

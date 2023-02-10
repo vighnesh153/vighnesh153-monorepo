@@ -3,6 +3,7 @@ import { CORSConfig, IGithubGistMetadata } from '../types';
 
 export interface ConstructGistFileProps {
   corsConfig: CORSConfig;
+  enableRequestCaching: boolean;
   gistFileContent: string;
   gistFileName: string;
   gistMetadata: IGithubGistMetadata;
@@ -12,6 +13,7 @@ export interface ConstructGistFileProps {
 
 export function constructGistFile({
   corsConfig,
+  enableRequestCaching,
   gistFileName,
   gistMetadata,
   gistFileContent,
@@ -20,6 +22,7 @@ export function constructGistFile({
 }: ConstructGistFileProps): GistFile {
   return new GistFile({
     corsConfig,
+    enableRequestCaching,
     fileName: gistFileName,
     gistMetadata,
     fileContent: gistFileContent,

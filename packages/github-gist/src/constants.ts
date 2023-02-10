@@ -4,7 +4,7 @@ export const constants = {
       rateLimit: 'https://api.github.com/rate_limit',
       gists: 'https://api.github.com/gists',
     },
-    corsAnywherePrefix: 'https://cors-anywhere.herokuapp.com/',
+    corsAnywherePrefix: 'https://corsanywhere.herokuapp.com/',
   },
   identifier: {
     prefix: '__',
