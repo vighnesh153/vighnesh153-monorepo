@@ -1,7 +1,13 @@
 {
   "extends": "@vighnesh153/tsconfig/base.json",
   "compilerOptions": {
-    "target": "ES6"
+    "target": "ESNext",
+    "module": "ES2015",
+    "rootDir": "src",
+
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "declaration": true
   },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
