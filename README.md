@@ -53,6 +53,8 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 #### Tasks
 
 - `@vighnesh153/github-gist`
+- Publish some other packages
+- Move react use global state to this monorepo
 - DallE images to instagram with quotes
 - Imgur upload library
 - email template builder
@@ -244,6 +246,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - `eslint-config-vighnesh153`: Add to devDeps
   - .eslintrc.js
   - .eslintignore
+- README.md
 
 ### Todos for a new package
 
