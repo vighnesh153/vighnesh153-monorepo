@@ -32,7 +32,7 @@ function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<
   const { name, email, picture: image } = googleProfile;
   const salt = Math.random().toString(16).split('.')[1];
   const clientId = md5Hash(googleProfile.email + salt);
-  const userName = slugify(name, { lower: true });
+  const userName = slugify(name, { convertToLowerCase: true });
   return {
     _id: email,
     clientId,
