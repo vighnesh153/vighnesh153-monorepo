@@ -1,0 +1,9 @@
+{
+  "name": "@vighnesh153/-version",
+  "version": "0.1.0",
+  "description": "This package just tracks the version of my repo",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

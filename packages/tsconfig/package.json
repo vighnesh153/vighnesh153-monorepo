@@ -1,7 +1,10 @@
 {
   "name": "@vighnesh153/tsconfig",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "base.json",
     "nextjs.json",
