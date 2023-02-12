@@ -18,15 +18,52 @@ npm install @vighnesh153/github-gist
 
 To interact with the gist in your GitHub account, you need to create a Personal Access Token with the **gist** scope.
 
-[Generate your token](https://github.com/settings/tokens/new?scopes=gist)
+- [Generate your token](https://github.com/settings/tokens/new?scopes=gist)
+- CORS configuration (if you are using this on a browser): The `GET` API to fetch the content of a file in a gist, is
+  CORS protected. If you are using this library on a browser, then you will get CORS blocked. To prevent that, I have
+  added a default CORS proxy server configuration `https://corsanywhere.herokuapp.com/`. But, it is not a good idea to
+  use this default in production because it probably isn't reliable. The owner might decide to shut it down anytime. So,
+  I recommend you to build/host your own proxy or opt in for a more reliable one. Following are some helpful links (I
+  found these options via a quick google search and these are just to get you started and not my recommendations):
+  - A cheap paid service option: https://cors.sh/
+  - Host one of the following proxy server code on your platform of choice
+    - https://github.com/ccoenraets/cors-proxy/blob/master/server.js
+  - Create your own CORS proxy from scratch
+    - Way 1: https://dev.to/decker67/write-your-own-cors-proxy-with-nodejs-in-no-time-30f9
+    - Way 2: https://medium.com/nodejsmadeeasy/a-simple-cors-proxy-for-javascript-applications-9b36a8d39c51
 
 ## Usage
+
+### Importing
+
+In Typescript / ES Modules
+
+```ts
+import { GithubGist } from '@vighnesh153/github-gist';
+```
+
+In Javascript or CommonJS
+
+```js
+const { GithubGist } = require('@vighnesh153/github-gist');
+```
+
+Directly as a script tag (UMD modules)
+
+```html
+<!--More on JS Deliver: https://www.jsdelivr.com/-->
+<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0/dist/umd.js"></script>
+
+<script>
+  const GithubGist = GithubGistUmd.GithubGist;
+
+  // rest of the code below
+</script>
+```
 
 ### Instantiation
 
 ```ts
-import { GithubGist } from '@vighnesh153/github-gist';
-
 const gist = new GithubGist({
   // Required
   personalAccessToken: '<GITHUB_PERSONAL_ACCESS_TOKEN>',
