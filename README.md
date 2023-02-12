@@ -53,14 +53,21 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 #### Tasks
 
 - `@vighnesh153/github-gist`
+- Make packages ready
+- Add version-tracker package
 - Add CONTRIBUTING.md guide
   - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
   - Reference: https://reactjs.org/docs/how-to-contribute.html
   - https://github.com/angular/angular/blob/main/CONTRIBUTING.md
 - Move @vighnesh153/utils tests to a **tests** folder or create folders for all utils
+- Cleanup
+  - NPM tokens
+  - Deprecate repos
+  - Delete npm packages
+- Add all code from old @vighnesh153/utils repo to this repo
+  - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
 - Publish some other packages
-  - `@vighnesh153/utils`
   - `@vighnesh153/tsconfig`
   - `eslint-config-vighnesh153`
 - Move react use global state to this monorepo

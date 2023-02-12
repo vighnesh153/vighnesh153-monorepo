@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-vighnesh153",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
