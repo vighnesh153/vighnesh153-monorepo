@@ -13,6 +13,7 @@ on:
         options:
           - yes
           - no
+          - maybe
       shouldGitTag:
         required: true
         type: choice
@@ -21,6 +22,7 @@ on:
         options:
           - yes
           - no
+          - maybe
       shouldPublishToNPM:
         required: true
         type: choice
@@ -29,6 +31,7 @@ on:
         options:
           - yes
           - no
+          - maybe
       newVersion:
         required: true
         description: Specify the new version
