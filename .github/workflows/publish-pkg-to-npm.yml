@@ -9,28 +9,28 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: yes
+        default: haa
         options:
-          - yes
-          - no
+          - haa
+          - naa
           - maybe
       shouldGitTag:
         required: true
         type: choice
         description: Create a tag commit?
-        default: yes
+        default: haa
         options:
-          - yes
-          - no
+          - haa
+          - naa
           - maybe
       shouldPublishToNPM:
         required: true
         type: choice
         description: Publish to NPM
-        default: yes
+        default: haa
         options:
-          - yes
-          - no
+          - haa
+          - naa
           - maybe
       newVersion:
         required: true
@@ -63,7 +63,7 @@ jobs:
           git config --global user.email 'me@vighnesh153.com'
 
       - name: Update the version in the packages
-        if: ${{ inputs.shouldUpdateVersion == 'yes' }}
+        if: ${{ inputs.shouldUpdateVersion == 'haa' }}
         run: |
           npm run version-update -- ${{ inputs.newVersion }}
           git add .
@@ -73,7 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create a git tag and push
-        if: ${{ inputs.shouldGitTag == 'yes' }}
+        if: ${{ inputs.shouldGitTag == 'haa' }}
         run: |
           git tag v${{ inputs.newVersion }}
           git push --tags
@@ -81,7 +81,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the package
-        if: ${{ inputs.shouldPublishToNPM == 'yes' }}
+        if: ${{ inputs.shouldPublishToNPM == 'haa' }}
         run: |
           npm run overrideConfigWhilePublishing
           npm publish --workspace=packages
