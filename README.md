@@ -1,5 +1,7 @@
 # @vighnesh153-turbo
 
+[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
+
 Welcome to my mono-repo. This repository contains (will contain) source code of all the projects that I work on and
 publish to the outside world.
 
@@ -52,9 +54,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- `@vighnesh153/github-gist`
-- Make packages ready
-- Add version-tracker package
+- Add readme for
+  - eslint-config-vighnesh153
+  - @vighnesh153/tsconfig
 - Add CONTRIBUTING.md guide
   - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
   - Reference: https://reactjs.org/docs/how-to-contribute.html
@@ -67,10 +69,11 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Add all code from old @vighnesh153/utils repo to this repo
   - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
-- Publish some other packages
-  - `@vighnesh153/tsconfig`
-  - `eslint-config-vighnesh153`
-- Move react use global state to this monorepo
+- Move packages to this monorepo
+  - react use global state
+  - rv-serve-directory
+  - @vighnesh153/cors-proxy
+  - @vighnesh153/prettier-config
 - DallE images to instagram with quotes
 - Imgur upload library
 - email template builder
