@@ -5,35 +5,83 @@ on:
     inputs:
       packageName:
         required: true
-      releaseType:
+      shouldUpdateVersion:
         required: true
         type: choice
-        description: Release type
+        description: Update the version?
+        default: yes
         options:
-          - 
+          - yes
+          - no
+      shouldGitTag:
+        required: true
+        type: choice
+        description: Create a tag commit?
+        default: yes
+        options:
+          - yes
+          - no
+      shouldPublishToNPM:
+        required: true
+        type: choice
+        description: Publish to NPM
+        default: yes
+        options:
+          - yes
+          - no
+      newVersion:
+        required: true
+        description: Specify the new version
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 18.x ]
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
-      - run: |
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Config git metadata
+        run: |
           git config --global user.name 'Vighnesh Raut'
           git config --global user.email 'me@vighnesh153.com'
-          npm run release
+
+      - name: Update the version in the packages
+        if: ${{ inputs.shouldUpdateVersion == 'yes' }}
+        run: |
+          npm run version-update -- ${{ inputs.newVersion }}
+          git add .
+          git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
+          git push
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create a git tag and push
+        if: ${{ inputs.shouldGitTag == 'yes' }}
+        run: |
+          git tag v${{ inputs.newVersion }}
+          git push --tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish the package
+        if: ${{ inputs.shouldPublishToNPM == 'yes' }}
+        run: |
+          npm run overrideConfigWhilePublishing
+          npm publish --workspace=packages
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

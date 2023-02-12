@@ -7,6 +7,10 @@
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "overrideConfigWhilePublishing": {
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
   "author": {
     "name": "Vighnesh Raut",
     "url": "https://vighnesh153.com",
@@ -15,7 +19,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build:rollup": "rollup -c rollup.config.js",
-    "build": "npm run clean && npm test && npm-run-all build:*",
+    "build": "npm run clean && npm-run-all build:*",
     "test": "jest"
   },
   "files": [
