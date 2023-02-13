@@ -9,7 +9,7 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: haa
+        default: naa
         options:
           - haa
           - naa
@@ -18,7 +18,7 @@ on:
         required: true
         type: choice
         description: Create a tag commit?
-        default: haa
+        default: naa
         options:
           - haa
           - naa
@@ -27,7 +27,7 @@ on:
         required: true
         type: choice
         description: Publish to NPM
-        default: haa
+        default: naa
         options:
           - haa
           - naa

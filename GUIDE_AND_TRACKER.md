@@ -46,6 +46,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 - Add readme for
   - eslint-config-vighnesh153
   - @vighnesh153/tsconfig
+- Do the first publish
 - Add CONTRIBUTING.md guide
   - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
   - Reference: https://reactjs.org/docs/how-to-contribute.html
@@ -64,6 +65,9 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
   - @vighnesh153/cors-proxy
   - @vighnesh153/prettier-config
 - DallE images to instagram with quotes
+  - Open API: https://openai.com/api/pricing/
+  - Instagram API: https://developers.facebook.com/docs/instagram/
+  - Video: https://www.youtube.com/watch?v=RA0C_Hh9g8Q
 - Imgur upload library
 - email template builder
   - Create welcome email template
