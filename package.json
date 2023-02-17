@@ -40,9 +40,5 @@
     "rimraf": "^4.1.2",
     "semantic-release": "^20.1.0",
     "turbo": "*"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "packageManager": "npm@8.15.0"
+  }
 }
