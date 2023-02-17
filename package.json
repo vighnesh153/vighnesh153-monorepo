@@ -22,7 +22,6 @@
     "clean:workspaces": "npm exec --workspaces -- rimraf node_modules",
     "clean": "npm-run-all clean:*",
     "prepare": "husky install",
-    "version-update": "node ./version-update.js",
     "overrideConfigWhilePublishing": "node ./overrideConfigWhilePublishing.js",
     "removePrivatePackagesBeforePublishing": "node ./removePrivatePackagesBeforePublishing.js"
   },
