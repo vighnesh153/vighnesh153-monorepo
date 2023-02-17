@@ -84,7 +84,7 @@ jobs:
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
-          npm install -g npm@6
+          npm install -g npm@9
           npm -v
           npm publish --workspace=packages
         env:
