@@ -9,7 +9,7 @@ function main() {
     const packageJsonPath = `./packages/${pkg}/package.json`;
     const packageJson = require(packageJsonPath);
     if (packageJson.private) {
-      fs.rmdirSync(`./packages/${pkg}`);
+      fs.rmSync(`./packages/${pkg}`, { recursive: true, force: true });
       console.log(`Removed ./packages/${pkg} ✅`);
     }
   });
