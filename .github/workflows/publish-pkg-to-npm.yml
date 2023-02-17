@@ -83,7 +83,9 @@ jobs:
         run: |
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
-          npm publish --workspace=packages
+          rm -rf ./apps
+          yarn publish:all
+          # npm publish --workspace=packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
