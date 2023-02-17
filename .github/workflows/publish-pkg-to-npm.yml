@@ -63,10 +63,13 @@ jobs:
       - name: Update the version in the packages
         if: ${{ inputs.shouldUpdateVersion == 'haa' }}
         run: |
-          npm run version-update -- ${{ inputs.newVersion }}
-          git add .
-          git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
-          git push
+          npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./packages
+          git status
+          git diff
+          # npm run version-update -- ${{ inputs.newVersion }}
+          # git add .
+          # git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
+          # git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -84,8 +87,7 @@ jobs:
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
-          yarn publish:all
-          # npm publish --workspace=packages
+          npm publish --workspace=packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
