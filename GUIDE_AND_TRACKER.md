@@ -43,9 +43,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 
 #### Tasks
 
-- Add readme for
-  - eslint-config-vighnesh153
-  - @vighnesh153/tsconfig
 - Do the first publish
 - Add CONTRIBUTING.md guide
   - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
@@ -73,6 +70,10 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
   - Create welcome email template
 - send email sqs worker
 - Trigger a user account created message in SNS
+- Cors Anywhere route
+  - vighnesh153.com/cors-anywhere
+- NextJS replacement
+- Video editing tool
 - SQS Queues
   - Pending events
     - USER_CREATED
