@@ -22,7 +22,8 @@
     "clean": "npm-run-all clean:*",
     "prepare": "husky install",
     "version-update": "node ./version-update.js",
-    "overrideConfigWhilePublishing": "node ./overrideConfigWhilePublishing.js"
+    "overrideConfigWhilePublishing": "node ./overrideConfigWhilePublishing.js",
+    "removePrivatePackagesBeforePublishing": "node ./removePrivatePackagesBeforePublishing.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",

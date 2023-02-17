@@ -41,6 +41,11 @@ ncu -u
 
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
 
+### Publishing packages
+
+Visit
+[github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-turbo/actions/workflows/publish-pkg-to-npm.yml)
+
 #### Tasks
 
 - Do the first publish
@@ -250,6 +255,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - private
   - main
   - types
+  - "publishConfig": { "access": "public" },
 - typescript
   - `@types/node`: Add to devDeps
   - `@vighnesh153/tsconfig`: Add to devDeps

@@ -3,8 +3,6 @@ name: Publish a package to NPM
 on:
   workflow_dispatch:
     inputs:
-      packageName:
-        required: true
       shouldUpdateVersion:
         required: true
         type: choice
@@ -34,7 +32,7 @@ on:
           - maybe
       newVersion:
         required: true
-        description: Specify the new version
+        description: Specify the new version (if not updating, specify the current one)
 
 jobs:
   build:
@@ -84,6 +82,7 @@ jobs:
         if: ${{ inputs.shouldPublishToNPM == 'haa' }}
         run: |
           npm run overrideConfigWhilePublishing
+          npm run removePrivatePackagesBeforePublishing
           npm publish --workspace=packages
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
