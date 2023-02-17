@@ -49,6 +49,9 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Force install npm@7
+        run: npm install -g npm@7
+
       - name: Install dependencies
         run: npm ci
 
@@ -64,12 +67,9 @@ jobs:
         if: ${{ inputs.shouldUpdateVersion == 'haa' }}
         run: |
           npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./packages
-          git status
-          git diff
-          # npm run version-update -- ${{ inputs.newVersion }}
-          # git add .
-          # git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
-          # git push
+          git add .
+          git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
