@@ -81,9 +81,9 @@ jobs:
       - name: Publish the package
         if: ${{ inputs.shouldPublishToNPM == 'haa' }}
         run: |
-          npm run overrideConfigWhilePublishing
-          npm run removePrivatePackagesBeforePublishing
+          npm run overrideConfigWhilePublishing &&
+          npm run removePrivatePackagesBeforePublishing &&
           npm publish --workspace=packages
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
