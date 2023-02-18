@@ -85,9 +85,8 @@ jobs:
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
           
-          # When npm publish works with npm > 6, change next 2 lines to "npm publish --workspace=packages"
-          # npm install -g npm@6
-          npm login
+          # Change next 2 lines to "npm publish --workspace=packages" when they fix 
+          # the auth issue for workspace
           for pkg in ./packages/* ; do (cd "$pkg" && npm publish); done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
