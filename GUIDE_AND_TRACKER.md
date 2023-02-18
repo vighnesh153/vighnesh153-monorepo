@@ -257,6 +257,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - main
   - types
   - "publishConfig": { "access": "public" },
+  - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
 - typescript
   - `@types/node`: Add to devDeps
   - `@vighnesh153/tsconfig`: Add to devDeps
