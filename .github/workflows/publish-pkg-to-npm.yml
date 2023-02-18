@@ -49,6 +49,9 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Install latest NPM
+        run: npm install -g npm
+
       - name: Install dependencies
         run: npm ci
 
@@ -84,6 +87,14 @@ jobs:
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
+          
+          echo "Running npm -v"
+          npm -v
+          echo "Running node -v"
+          node -v
+          echo "Running npm config ls"
+          npm config ls
+          
 
           # for pkg in ./packages/* ; do (cd "$pkg" && npm publish); done
           npm publish --workspace=packages
