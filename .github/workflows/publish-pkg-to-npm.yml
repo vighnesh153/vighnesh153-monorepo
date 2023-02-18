@@ -84,9 +84,10 @@ jobs:
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
-          npm install -g npm@9
-          npm -v
-          npm publish --workspace=packages
+          
+          # When npm publish works with npm > 6, change next 2 lines to "npm publish --workspace=packages"
+          npm install -g npm@6
+          for pkg in ./packages/* ; do (cd "$pkg" && npm publish); done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
