@@ -1,4 +1,4 @@
-name: Publish a package to NPM
+name: Publish all packages to NPM
 
 on:
   workflow_dispatch:
@@ -81,20 +81,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish the package
+      - name: Publish the packages
         if: ${{ inputs.shouldPublishToNPM == 'haa' }}
         run: |
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
-          
-          echo "Running npm -v"
-          npm -v
-          echo "Running node -v"
-          node -v
-          echo "Running npm config ls"
-          npm config ls
-          
 
           # for pkg in ./packages/* ; do (cd "$pkg" && npm publish); done
           npm publish --workspace=packages
