@@ -10,6 +10,10 @@
     "nextjs.json",
     "react-library.json"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
   "keywords": [
     "typescript",
     "tsconfig",

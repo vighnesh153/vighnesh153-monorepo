@@ -5,5 +5,9 @@
   "private": false,
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   }
 }

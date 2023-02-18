@@ -16,6 +16,10 @@
     "url": "https://vighnesh153.com",
     "email": "me@vighnesh153.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:rollup": "rollup -c rollup.config.js",

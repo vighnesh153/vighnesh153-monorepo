@@ -5,6 +5,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
   "files": [
     "./next-ts.eslintrc.js",
     "./react-ts-base.eslintrc.js",
