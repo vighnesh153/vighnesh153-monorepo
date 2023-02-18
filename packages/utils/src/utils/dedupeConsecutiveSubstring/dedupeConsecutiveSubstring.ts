@@ -1,4 +1,4 @@
-import { repeat } from './repeat';
+import { repeat } from '../repeat';
 
 /**
  * Merges consecutive dedupeString instances into 1

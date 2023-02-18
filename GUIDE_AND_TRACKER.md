@@ -53,7 +53,6 @@ Visit
   - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
   - Reference: https://reactjs.org/docs/how-to-contribute.html
   - https://github.com/angular/angular/blob/main/CONTRIBUTING.md
-- Move @vighnesh153/utils tests to a **tests** folder or create folders for all utils
 - Cleanup
   - NPM tokens
   - Deprecate repos

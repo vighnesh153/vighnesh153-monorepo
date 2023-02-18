@@ -1,7 +1,7 @@
-import { not } from './not';
-import characterMap from '../data/character-map.json';
-import { dedupeConsecutiveSubstring } from './dedupeConsecutiveSubstring';
-import { trim as trimString } from './trimUtils';
+import { not } from '../not';
+import characterMap from '../../data/character-map.json';
+import { dedupeConsecutiveSubstring } from '../dedupeConsecutiveSubstring';
+import { trim as trimString } from '../trimUtils';
 
 const STRICT_REGEXP = /[a-zA-Z0-9_]/;
 const DEFAULT_SLUG_SAFE_CHARACTERS = /[a-zA-Z0-9\-._:@+()"'*~!]/;
