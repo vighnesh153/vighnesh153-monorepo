@@ -1,5 +1,5 @@
-import { groupStringCharacters } from './groupIterableItems';
-import { reverseString } from './reverseString';
+import { groupStringCharacters } from '../groupIterableItems';
+import { reverseString } from '../reverseString';
 
 const defaultTrimString = ' ';
 
