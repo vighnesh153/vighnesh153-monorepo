@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-vighnesh153",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -15,7 +15,15 @@
     "./react-ts-library.eslintrc.js",
     "./ts-base.eslintrc.js"
   ],
-  "keywords": ["eslint", "config", "vighnesh153", "eslintconfig", "javascript", "styleguide", "esnext"],
+  "keywords": [
+    "eslint",
+    "config",
+    "vighnesh153",
+    "eslintconfig",
+    "javascript",
+    "styleguide",
+    "esnext"
+  ],
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
