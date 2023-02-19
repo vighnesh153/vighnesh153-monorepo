@@ -36,13 +36,13 @@ To interact with the gist in your GitHub account, you need to create a Personal 
 
 ### Importing
 
-In Typescript / ES Modules
+Import/Export syntax
 
 ```ts
 import { GithubGist } from '@vighnesh153/github-gist';
 ```
 
-In Javascript or CommonJS
+Require syntax
 
 ```js
 const { GithubGist } = require('@vighnesh153/github-gist');
