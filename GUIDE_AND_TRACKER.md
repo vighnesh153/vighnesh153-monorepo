@@ -48,11 +48,7 @@ Visit
 
 #### Tasks
 
-- Do the first publish
-- Add CONTRIBUTING.md guide
-  - Sample: https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md
-  - Reference: https://reactjs.org/docs/how-to-contribute.html
-  - https://github.com/angular/angular/blob/main/CONTRIBUTING.md
+- Fix `browser: true` issue in GithubGist/rollup-config
 - Cleanup
   - NPM tokens
   - Deprecate repos
