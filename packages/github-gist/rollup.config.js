@@ -35,12 +35,12 @@ module.exports = {
   ],
   output: [
     {
-      file: 'dist/index.js',
+      file: 'dist/esm.js',
       format: 'es',
       sourcemap: false,
     },
     {
-      file: 'dist/commonjs.js',
+      file: 'dist/index.js',
       format: 'cjs',
       sourcemap: false,
     },
