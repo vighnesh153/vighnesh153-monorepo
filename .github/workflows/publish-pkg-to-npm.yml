@@ -65,7 +65,7 @@ jobs:
         run: |
           npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./packages
           git add .
-          git commit -m "build: update the npm version to ${{ inputs.newVersion }}"
+          git commit -m "build: update the npm version to ${{ inputs.newVersion }}" --no-verify
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
