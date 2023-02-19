@@ -76,7 +76,8 @@ Visit
 - Trigger a user account created message in SNS
 - Cors Anywhere route
   - vighnesh153.com/cors-anywhere
-- NextJS replacement
+- SECURITY.md
+- NextJS replacement tool (AWS deployment)
 - Video editing tool
 - SQS Queues
   - Pending events
