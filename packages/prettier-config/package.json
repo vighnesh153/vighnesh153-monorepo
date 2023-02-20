@@ -1,0 +1,37 @@
+{
+  "name": "@vighnesh153/prettier-config",
+  "description": "My preferred prettier configuration",
+  "version": "0.2.2",
+  "license": "MIT",
+  "private": false,
+  "main": "prettierConfig.json",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
+  "author": {
+    "name": "Vighnesh Raut",
+    "url": "https://vighnesh153.com",
+    "email": "me@vighnesh153.com"
+  },
+  "files": [
+    "prettierConfig.json",
+    ".prettierignore"
+  ],
+  "keywords": [
+    "prettier",
+    "beautify",
+    "pretty",
+    "prettier-config",
+    "config",
+    "lint",
+    "format",
+    "formatting",
+    "linting",
+    "configuration",
+    "opinionated"
+  ]
+}
