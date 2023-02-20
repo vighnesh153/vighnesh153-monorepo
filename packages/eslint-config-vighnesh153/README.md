@@ -1,4 +1,9 @@
-# eslint-config-vighnesh
+# eslint-config-vighnesh153
+
+[![](https://img.shields.io/npm/dt/eslint-config-vighnesh153)](https://img.shields.io/npm/dt/eslint-config-vighnesh153)
+[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
+[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
 
 ESLint's configuration based on my preferences. No need to install any additional deps like `eslint` as this package
 comes bundled with it.

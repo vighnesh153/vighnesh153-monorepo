@@ -1,6 +1,6 @@
 # GitHub Gist REST API Wrapper
 
-[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/github-gist)](https://www.npmjs.com/package/@vighnesh153/github-gist)
+[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
 [![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/github-gist)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/github-gist)
 [![npm](https://img.shields.io/npm/dt/@vighnesh153/github-gist)](https://img.shields.io/npm/dt/@vighnesh153/github-gist)
 [![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
