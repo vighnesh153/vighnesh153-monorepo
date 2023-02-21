@@ -7,32 +7,33 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: naa
+        default: false
         options:
-          - haa
-          - naa
-          - maybe
+          - true
+          - false
       shouldGitTag:
         required: true
         type: choice
         description: Create a tag commit?
-        default: naa
+        default: false
         options:
-          - haa
-          - naa
-          - maybe
+          - true
+          - false
       shouldPublishToNPM:
         required: true
         type: choice
         description: Publish to NPM
-        default: naa
+        default: false
         options:
-          - haa
-          - naa
-          - maybe
+          - true
+          - false
       newVersion:
         required: true
         description: Specify the new version (if not updating, specify the current one)
+      publishArgs:
+        required: false
+        default: '--workspace=packages'
+        description: customize the arguments passed to 'npm publish'
 
 jobs:
   build:
@@ -61,7 +62,7 @@ jobs:
           git config --global user.email 'me@vighnesh153.com'
 
       - name: Update the version in the packages
-        if: ${{ inputs.shouldUpdateVersion == 'haa' }}
+        if: ${{ inputs.shouldUpdateVersion == 'true' }}
         run: |
           npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./packages
           git add .
@@ -71,21 +72,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the packages
-        if: ${{ inputs.shouldPublishToNPM == 'haa' }}
+        if: ${{ inputs.shouldPublishToNPM == 'true' }}
         run: |
           npm run overrideConfigWhilePublishing
           npm run removePrivatePackagesBeforePublishing
           rm -rf ./apps
 
           npm login
-          npm publish --workspace=packages
+          npm publish ${{ inputs.publishArgs }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create a git tag and push
-        if: ${{ inputs.shouldGitTag == 'haa' }}
+        if: ${{ inputs.shouldGitTag == 'true' }}
         run: |
           git tag v${{ inputs.newVersion }}
           git push --tags

@@ -1,6 +1,7 @@
 {
   "name": "@vighnesh153/tsconfig",
   "version": "0.3.0",
+  "description": "My preferred `tsconfig` for different types of projects",
   "private": false,
   "publishConfig": {
     "access": "public"

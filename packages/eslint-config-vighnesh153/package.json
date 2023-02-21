@@ -1,6 +1,7 @@
 {
   "name": "eslint-config-vighnesh153",
   "private": false,
+  "description": "ESLint's configuration based on my preferences. No need to install any additional deps like `eslint` as this package comes bundled with it.",
   "version": "0.3.0",
   "publishConfig": {
     "access": "public"

@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "license": "MIT",
   "private": false,
+  "description": "A typescript-only utils package that I use internally in my projects",
   "publishConfig": {
     "access": "public"
   },
