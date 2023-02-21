@@ -10,9 +10,11 @@ This repository contains (will contain) source code of all the projects that I w
 
 - [eslint-config-vighnesh153](https://www.npmjs.com/package/eslint-config-vighnesh153): ESLint configuration that suits
   my preferences
-- [@vighnesh153/tsconfig](https://www.npmjs.com/package/@vighnesh153/tsconfig): Typescript configuration that I like
 - [@vighnesh153/github-gist](https://www.npmjs.com/package/@vighnesh153/github-gist): A promise based wrapper over
   GitHub Gist REST API
+- [@vighnesh153/localhost-cors-proxy](https://www.npmjs.com/package/@vighnesh153/localhost-cors-proxy): A simple proxy server for unlocking CORS disabled urls on localhost
+- [@vighnesh153/prettier-config](https://www.npmjs.com/package/@vighnesh153/prettier-config): My preferred prettier configuration
+- [@vighnesh153/tsconfig](https://www.npmjs.com/package/@vighnesh153/tsconfig): Typescript configuration that I like
 
 ### Internal
 
