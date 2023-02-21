@@ -48,11 +48,24 @@ Visit
 
 #### Tasks
 
-- Fix `browser: true` issue in GithubGist/rollup-config
+- Migrate libraries to `tsup`
+- Bundle dependency libraries in UMD but don't bundle in a single file for CommonJs and ESM modules
 - Cleanup
   - NPM tokens
   - Deprecate repos
+    - @vighnesh153/prettier-config
+    - @vighnesh153/cors-proxy
+      - https://github.com/vighnesh153/local-cors-proxy
+    - rv-serve-directory
+    - react use global state
   - Delete npm packages
+    - @vighnesh153/prettier-config
+    - @vighnesh153/cors-proxy
+    - rv-serve-directory
+    - react use global state
+- Github Gist
+  - Recommended way: `await GithubGist.initializeFromId()`
+  - Frowned upon: `new GithubGist(); await gist.initialize()`
 - Add all code from old @vighnesh153/utils repo to this repo
   - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
@@ -60,7 +73,6 @@ Visit
   - react use global state
   - rv-serve-directory
   - @vighnesh153/cors-proxy
-  - @vighnesh153/prettier-config
 - DallE images to instagram with quotes
   - Open API: https://openai.com/api/pricing/
   - Instagram API: https://developers.facebook.com/docs/instagram/
