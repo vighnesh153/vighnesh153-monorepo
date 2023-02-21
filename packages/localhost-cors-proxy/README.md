@@ -14,8 +14,13 @@ To proxy the `api.github.com` on localhost, you can run the following command. I
 on `localhost:1234`
 
 ```shell
-npx @vighnesh153/localhost-cors-proxy --target-url https://github.com --port 1234
+npx @vighnesh153/localhost-cors-proxy \
+  --target-url https://api.github.com \
+  --port 1234
 ```
+
+Then, you can hit `localhost:1234/*` instead of `https://api.github.com/*` and you won't get CORS
+blocked.
 
 ## Options
 
