@@ -53,14 +53,9 @@ Visit
 - Cleanup
   - NPM tokens
   - Deprecate repos
-    - @vighnesh153/prettier-config
-    - @vighnesh153/cors-proxy
-      - https://github.com/vighnesh153/local-cors-proxy
     - rv-serve-directory
     - react use global state
   - Delete npm packages
-    - @vighnesh153/prettier-config
-    - @vighnesh153/cors-proxy
     - rv-serve-directory
     - react use global state
 - Github Gist
@@ -258,6 +253,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - Name
   - Author
   - license
+  - description
   - version
   - scripts
   - files

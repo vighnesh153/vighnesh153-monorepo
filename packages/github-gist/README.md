@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
 
-A simple wrapper over the GitHub's REST API to play with GitHub Gists.
+A simple promise-based wrapper over the GitHub's REST API to play with GitHub Gists.
 
 ## Installation
 

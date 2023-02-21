@@ -2,6 +2,7 @@
   "name": "@vighnesh153/fake-data",
   "version": "0.3.0",
   "private": false,
+  "description": "An internal typescript-only package I use for generating fake data.",
   "publishConfig": {
     "access": "public"
   },
