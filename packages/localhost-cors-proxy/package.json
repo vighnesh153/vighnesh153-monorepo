@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/localhost-cors-proxy",
   "description": "A simple proxy server for unlocking CORS disabled urls on localhost",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "license": "MIT",
   "private": false,
   "main": "./dist/cli.js",
