@@ -12,6 +12,9 @@ A simple promise-based wrapper over the GitHub's REST API to play with GitHub Gi
 
 ```shell
 npm install @vighnesh153/github-gist
+
+# Peer dependency
+npm install axios
 ```
 
 ## Before you begin
@@ -52,10 +55,10 @@ Directly as a script tag (UMD modules)
 
 ```html
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
-<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/index.umd.js"></script>
 
 <!--Or a specific version-->
-<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0.1.0/dist/umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0.1.0/dist/index.umd.js"></script>
 
 <script>
   const GithubGist = GithubGistUmd.GithubGist;

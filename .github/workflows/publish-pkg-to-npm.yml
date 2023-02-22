@@ -30,10 +30,14 @@ on:
       newVersion:
         required: true
         description: Specify the new version (if not updating, specify the current one)
+      publishTag:
+        required: false
+        description: The tag which should be used to publish
+        default: '--tag latest'
       publishArgs:
         required: false
-        default: '--workspace=packages'
         description: customize the arguments passed to 'npm publish'
+        default: '--workspace packages'
 
 jobs:
   build:
@@ -79,7 +83,7 @@ jobs:
           rm -rf ./apps
 
           npm login
-          npm publish ${{ inputs.publishArgs }}
+          npm publish ${{ inputs.publishTag }} ${{ inputs.publishArgs }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
