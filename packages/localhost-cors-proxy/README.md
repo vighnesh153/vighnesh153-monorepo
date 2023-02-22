@@ -1,5 +1,10 @@
 # @vighnesh153/localhost-cors-proxy
 
+[![](https://img.shields.io/npm/dt/@vighnesh153/localhost-cors-proxy)](https://img.shields.io/npm/dt/@vighnesh153/localhost-cors-proxy)
+[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
+[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
+
 A simple proxy server for unlocking CORS disabled urls on localhost
 
 <!-- TOC -->

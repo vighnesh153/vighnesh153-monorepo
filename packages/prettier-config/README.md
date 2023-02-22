@@ -1,7 +1,7 @@
 # @vighnesh153/prettier-config
 
 [![](https://img.shields.io/npm/dt/@vighnesh153/prettier-config)](https://img.shields.io/npm/dt/@vighnesh153/prettier-config)
-[![](https://img.shields.io/github/package-json/v/vighnesh153/prettier-config)](https://github.com/vighnesh153/prettier-config/blob/main/package.json)
+[![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
 [![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
 
