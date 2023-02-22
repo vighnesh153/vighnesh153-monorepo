@@ -50,6 +50,7 @@ Visit
 
 - Migrate libraries to `tsup`
 - Bundle dependency libraries in UMD but don't bundle in a single file for CommonJs and ESM modules
+- Github gist change axios to peer dependency
 - Cleanup
   - NPM tokens
   - Deprecate repos
@@ -108,6 +109,7 @@ Visit
   - Meme credit to
     - users
     - other portals
+- CRON expression builder
 - Audit logs viewer
   - Filters based on
     - action
@@ -263,6 +265,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - private
   - main
   - types
+  - overrideConfigWhilePublishing (if needed)
   - "publishConfig": { "access": "public" },
   - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
 - typescript

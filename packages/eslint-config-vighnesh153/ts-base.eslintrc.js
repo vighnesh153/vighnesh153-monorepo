@@ -29,6 +29,7 @@ module.exports = {
       typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
     },
   },
+  ignorePatterns: ['*.d.ts'],
   rules: {
     '@typescript-eslint/no-empty-function': ['error'],
     /**
