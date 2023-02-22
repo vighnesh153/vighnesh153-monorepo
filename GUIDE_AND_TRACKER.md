@@ -48,9 +48,9 @@ Visit
 
 #### Tasks
 
-- Migrate libraries to `tsup`
-- Bundle dependency libraries in UMD but don't bundle in a single file for CommonJs and ESM modules
-- Github gist change axios to peer dependency
+- Move packages to this monorepo
+  - react use global state
+  - rv-serve-directory
 - Cleanup
   - NPM tokens
   - Deprecate repos
@@ -68,10 +68,6 @@ Visit
 - Add all code from old @vighnesh153/utils repo to this repo
   - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
-- Move packages to this monorepo
-  - react use global state
-  - rv-serve-directory
-  - @vighnesh153/cors-proxy
 - DallE images to instagram with quotes
   - Open API: https://openai.com/api/pricing/
   - Instagram API: https://developers.facebook.com/docs/instagram/
@@ -123,7 +119,6 @@ Visit
   - List
     - https://www.youtube.com/watch?v=JHregeIsjPQ
 - Miscellaneous: Holds links to all my projects
-- Change node version from 14 to `lts/*` in github actions npm publish workflow
 - Blogs
   - Checkout material's documentation website configurations for creating blog
     - Code: https://github.com/mui/material-ui/blob/master/docs/package.json
