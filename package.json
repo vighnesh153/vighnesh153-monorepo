@@ -11,7 +11,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:packages": "turbo run build --filter=./packages/*",
-    "dev": "turbo run dev --parallel",
+    "dev": "turbo run dev --parallel --no-cache",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "lint-staged": "lint-staged",
@@ -22,8 +22,7 @@
     "clean:workspaces": "npm exec --workspaces -- rimraf node_modules",
     "clean": "npm-run-all clean:*",
     "prepare": "husky install",
-    "overrideConfigWhilePublishing": "node ./overrideConfigWhilePublishing.js",
-    "removePrivatePackagesBeforePublishing": "node ./removePrivatePackagesBeforePublishing.js"
+    "changeStarToSpecificVersion": "node changeStarToSpecificVersion.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
