@@ -78,9 +78,8 @@ jobs:
       - name: Publish the packages
         if: ${{ inputs.shouldPublishToNPM == 'true' }}
         run: |
-          npm run overrideConfigWhilePublishing
-          npm run removePrivatePackagesBeforePublishing
-          rm -rf ./apps
+          npm run changeStarToSpecificVersion
+          GIT_PAGER=cat git diff
 
           npm login
           npm publish ${{ inputs.publishTag }} ${{ inputs.publishArgs }}

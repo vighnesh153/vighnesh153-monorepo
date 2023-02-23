@@ -6,12 +6,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
-  "overrideConfigWhilePublishing": {
-    "main": "./dist/index.commonjs.js",
-    "types": "./dist/index.d.ts"
-  },
+  "main": "./dist/index.commonjs.js",
+  "types": "./dist/index.d.ts",
   "author": {
     "name": "Vighnesh Raut",
     "url": "https://vighnesh153.com",
@@ -22,6 +18,7 @@
     "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   },
   "scripts": {
+    "dev": "npm run build -- --watch",
     "build": "tsup",
     "test": "jest"
   },

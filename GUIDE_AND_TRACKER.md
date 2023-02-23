@@ -260,7 +260,6 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - private
   - main
   - types
-  - overrideConfigWhilePublishing (if needed)
   - "publishConfig": { "access": "public" },
   - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
 - typescript
