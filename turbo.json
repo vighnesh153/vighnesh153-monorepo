@@ -27,6 +27,7 @@
       ],
       "outputs": [],
       "dependsOn": [
+        "^build",
         "^test"
       ]
     },
