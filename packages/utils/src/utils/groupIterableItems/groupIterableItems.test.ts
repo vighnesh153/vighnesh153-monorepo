@@ -1,15 +1,16 @@
+import { describe, it, expect } from 'vitest';
 import { groupArrayItems, groupStringCharacters } from './groupIterableItems';
 
 describe('"groupStringCharacters" tests', () => {
   it('should throw error if group length is non-integer or less than 1', () => {
     expect(() => groupStringCharacters('abc', 0)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "0""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"0\\""'
     );
     expect(() => groupStringCharacters('abc', 1.5)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "1.5""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"1.5\\""'
     );
     expect(() => groupStringCharacters('abc', -2)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "-2""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"-2\\""'
     );
   });
 
@@ -26,13 +27,13 @@ describe('"groupStringCharacters" tests', () => {
 describe('"groupArrayItems" tests', () => {
   it('should throw error if group length is non-integer or less than 1', () => {
     expect(() => groupArrayItems(['a', 'b', 'c'], 0)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "0""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"0\\""'
     );
     expect(() => groupArrayItems(['a', 'b', 'c'], 1.5)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "1.5""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"1.5\\""'
     );
     expect(() => groupArrayItems(['a', 'b', 'c'], -2)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected "groupLength" to be an integer and at least "1", found "-2""`
+      '"Expected \\"groupLength\\" to be an integer and at least \\"1\\", found \\"-2\\""'
     );
   });
 

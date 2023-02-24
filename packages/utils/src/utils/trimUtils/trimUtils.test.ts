@@ -1,4 +1,5 @@
-import { trimEnd, trimStart, trim } from './trimUtils';
+import { describe, expect, it } from 'vitest';
+import { trim, trimEnd, trimStart } from './trimUtils';
 
 describe('"trimStart" tests', () => {
   it('should do nothing if there is no whitespace', () => {

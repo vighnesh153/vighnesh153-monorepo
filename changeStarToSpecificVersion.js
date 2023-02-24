@@ -5,7 +5,7 @@ console.log(`
   and any incompatible library versions could break the application
 `);
 
-const fs = require('fs');
+import fs from 'fs';
 
 function readJsonFile(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf-8').toString();

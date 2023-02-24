@@ -48,6 +48,7 @@ Visit
 
 #### Tasks
 
+- Comments in .d.ts file
 - Move packages to this monorepo
   - react use global state
   - rv-serve-directory
@@ -88,6 +89,9 @@ Visit
       - Subscription 1: Send a welcome email
 - Projects
 - Groups/Permissions
+- Blog:
+  - Javascript at scale
+    - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
 - Notification system and processing
   - Retry mechanism
   - Email me with a retry link to retry the task and send debugging details
@@ -260,6 +264,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - private
   - main
   - types
+  - "type": "module"
   - "publishConfig": { "access": "public" },
   - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
 - typescript

@@ -1,9 +1,10 @@
+import { describe, expect, it } from 'vitest';
 import { slugify } from './slugify';
 
 describe('"slugify" tests', () => {
   it('should throw if "slugify" is invoked on "undefined"', () => {
     expect(() => slugify(undefined as unknown as string)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected type string, found "undefined""`
+      '"Expected type string, found \\"undefined\\""'
     );
   });
 

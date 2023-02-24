@@ -1,14 +1,14 @@
+import { describe, it, expect, vi } from 'vitest';
 import axios from 'axios';
 import { randomUuid } from '@vighnesh153/fake-data';
 import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock('axios');
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  mockedAxios.mockImplementation(impl);
+  axios.mockImplementation(impl);
 }
 
 describe('Helpers > "fetchLatestGistCommitId" tests', () => {

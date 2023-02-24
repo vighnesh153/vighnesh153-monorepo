@@ -1,29 +1,37 @@
 {
   "name": "@vighnesh153/react-hooks",
   "version": "0.4.0-alpha-03",
-  "private": true,
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "private": false,
+  "type": "module",
+  "main": "./dist/main.esm.js",
+  "types": "./dist/main.d.ts",
   "author": {
     "name": "Vighnesh Raut",
     "email": "me@vighnesh153.com",
     "url": "https://vighnesh153.com"
   },
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "build": "tsup",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
+  },
   "files": [
-    "src"
+    "dist"
   ],
   "peerDependencies": {
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.19",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/node": "^18.14.1",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
-    "typescript": "^4.9.5"
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.28.5"
   }
 }

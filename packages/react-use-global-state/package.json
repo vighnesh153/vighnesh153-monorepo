@@ -1,0 +1,35 @@
+{
+  "name": "@vighnesh153/react-use-global-state",
+  "description": "A tiny global useState hook",
+  "version": "0.4.0-alpha-03",
+  "private": false,
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
+  "author": {
+    "name": "Vighnesh Raut",
+    "url": "https://vighnesh153.com",
+    "email": "me@vighnesh153.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "typescript": "^4.9.5"
+  }
+}
