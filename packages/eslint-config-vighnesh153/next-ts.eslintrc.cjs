@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['vighnesh153/react-ts-base.eslintrc', 'next/core-web-vitals', 'turbo'],
+  extends: ['vighnesh153/react-ts-base.eslintrc.cjs', 'next/core-web-vitals', 'turbo'],
   settings: {
     next: {
       rootDir: 'apps/*/',

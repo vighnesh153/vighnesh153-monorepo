@@ -1,13 +1,13 @@
+import { describe, expect, it, vi } from 'vitest';
 import axios from 'axios';
 import { verifyGithubPAT } from '../verifyGithubPAT';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock('axios');
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  mockedAxios.mockImplementation(impl);
+  axios.mockImplementation(impl);
 }
 
 describe('"verifyGithubPAT" function tests', () => {

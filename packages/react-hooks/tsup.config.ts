@@ -9,13 +9,11 @@ export default defineConfig(() => ({
   dts: true,
   minify: true,
   treeshake: true,
-  format: ['cjs', 'esm', 'iife'],
-  globalName: 'GithubGistUmd',
+  format: ['cjs', 'esm'],
   outExtension({ format }) {
     let js: string | undefined;
     if (format === 'cjs') js = `.commonjs.js`;
     if (format === 'esm') js = `.esm.js`;
-    if (format === 'iife') js = `.umd.js`;
     return { js };
   },
 }));

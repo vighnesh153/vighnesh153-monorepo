@@ -1,7 +1,8 @@
+import { describe, it, expect, vi } from 'vitest';
 import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
 import { fetchAllGistFiles } from '../fetchAllGistFiles';
 
-jest.mock('../../GithubGistFile', () => ({
+vi.mock('../../GithubGistFile', () => ({
   GistFile: class {
     // eslint-disable-next-line class-methods-use-this
     fetchLatestContent(): Promise<void> {

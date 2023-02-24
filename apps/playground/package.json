@@ -2,6 +2,7 @@
   "name": "@vighnesh153/playground",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,17 +16,17 @@
     "test": "npm run test:frontend && npm run test:backend"
   },
   "dependencies": {
-    "@next/font": "^13.1.6",
+    "@next/font": "^13.2.1",
     "@types/node": "*",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/github-gist": "*",
     "@vighnesh153/react-hooks": "*",
     "@vighnesh153/ui": "*",
     "@vighnesh153/utils": "*",
     "eslint-config-vighnesh153": "*",
-    "next": "^13.1.6",
+    "next": "^13.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.9.5",
@@ -33,11 +34,11 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
-    "@types/uuid": "^9.0.0",
-    "jest": "^29.4.1",
-    "jest-environment-jsdom": "^29.4.1",
+    "@types/uuid": "^9.0.1",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.4.3",
     "ts-jest": "^29.0.5"
   }
 }

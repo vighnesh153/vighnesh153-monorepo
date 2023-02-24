@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest';
+
 import { generateGithubGistIdentifier } from '../generateGithubGistIdentifier';
 
 describe('Helpers > "generateGithubGistIdentifier" tests', () => {

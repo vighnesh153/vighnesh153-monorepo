@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['vighnesh153/ts-base.eslintrc'],
+  extends: ['vighnesh153/react-ts-library.eslintrc.cjs'],
   parserOptions: {
     project: './tsconfig.json',
   },

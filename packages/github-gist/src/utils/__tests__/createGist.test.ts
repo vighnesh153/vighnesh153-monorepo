@@ -1,21 +1,25 @@
+import { describe, it, vi, afterEach } from 'vitest';
 import axios from 'axios';
 import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
 import { createGist } from '../createGist';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock('axios');
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  mockedAxios.mockImplementation(impl);
+  axios.mockImplementation(impl);
 }
 
 describe('Helpers > "createGist" tests', () => {
   const GITHUB_PERSONAL_ACCESS_TOKEN = randomUuid();
   const APP_IDENTIFIER = randomUuid();
 
-  it('should create the gist and return its metadata', async () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should create the gist and return its metadata', async ({ expect }) => {
     const expectedGistMetadata = {
       id: randomUuid(),
       owner: { login: randomEmail() },
