@@ -2,7 +2,7 @@
   "name": "@vighnesh153/ui",
   "private": true,
   "description": "React components for different platforms",
-  "version": "0.4.0-alpha-03",
+  "version": "0.4.0-alpha-04",
   "type": "module",
   "main": "src/index.ts",
   "types": "./src/index.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/react-hooks",
-  "version": "0.4.0-alpha-03",
+  "version": "0.4.0-alpha-04",
   "private": false,
   "type": "module",
   "main": "./dist/main.esm.js",
