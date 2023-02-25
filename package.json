@@ -21,8 +21,8 @@
     "pkg-update:root": "ncu -u",
     "pkg-update:workspaces": "ncu -u -ws",
     "pkg-update": "npm-run-all pkg-update:*",
-    "clean:root": "rimraf package-lock.json && rimraf node_modules",
-    "clean:workspaces": "npm exec --workspaces -- rimraf node_modules",
+    "clean:root": "rimraf package-lock.json && rimraf node_modules dist .turbo",
+    "clean:workspaces": "npm exec --workspaces -- rimraf node_modules dist .turbo",
     "clean": "npm-run-all clean:*",
     "prepare": "husky install",
     "changeStarToSpecificVersion": "node changeStarToSpecificVersion.js"
