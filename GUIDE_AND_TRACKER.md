@@ -50,19 +50,15 @@ Visit
 
 - Comments in .d.ts file
 - Move packages to this monorepo
-  - react use global state
   - rv-serve-directory
 - Cleanup
   - NPM tokens
   - Deprecate repos
     - rv-serve-directory
-    - react use global state
   - Delete npm packages
     - rv-serve-directory
-    - react use global state
   - Add them in main README.md file
     - rv-serve-directory
-    - react use global state
 - Github Gist
   - Recommended way: `await GithubGist.initializeFromId()`
   - Frowned upon: `new GithubGist(); await gist.initialize()`
