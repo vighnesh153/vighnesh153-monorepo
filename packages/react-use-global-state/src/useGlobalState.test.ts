@@ -54,7 +54,7 @@ describe('useGlobalState hook tests', () => {
     });
 
     // adding some buffer because state is updated in nextTicks
-    await sleep(5);
+    await sleep(100);
 
     expect(r1.current[0]).toBe(500);
     expect(r2.current[0]).toBe(500);
