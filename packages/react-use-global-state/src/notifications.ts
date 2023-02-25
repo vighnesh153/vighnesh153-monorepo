@@ -3,6 +3,8 @@ import { not, Notification } from '@vighnesh153/utils';
 let notifications: Record<string, Notification<unknown>> = {};
 
 /**
+ * Creates a notification corresponding to an identifier. If a notification was already
+ * created for an identifier, it will be returned instead
  *
  * @param identifier
  * @internal
