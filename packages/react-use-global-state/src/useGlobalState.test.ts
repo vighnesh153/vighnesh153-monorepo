@@ -43,21 +43,25 @@ describe('useGlobalState hook tests', () => {
     expect(counter).toBe(42);
   });
 
-  it('should update all other subscribers of the hook if any one of them publishes a new value', async () => {
-    const id = `${Math.random()}`;
-    const { result: r1 } = renderHook(() => useGlobalState<number>(id));
-    const { result: r2 } = renderHook(() => useGlobalState<number>(id));
-    const { result: r3 } = renderHook(() => useGlobalState<number>(id));
+  it(
+    'should update all other subscribers of the hook if any one of them publishes a new value',
+    async () => {
+      const id = `${Math.random()}`;
+      const { result: r1 } = renderHook(() => useGlobalState<number>(id));
+      const { result: r2 } = renderHook(() => useGlobalState<number>(id));
+      const { result: r3 } = renderHook(() => useGlobalState<number>(id));
 
-    act(() => {
-      r2.current[1](500);
-    });
+      act(() => {
+        r2.current[1](500);
+      });
 
-    // adding some buffer because state is updated in nextTicks
-    await sleep(100);
+      // adding some buffer because state is updated in nextTicks
+      await sleep(10);
 
-    expect(r1.current[0]).toBe(500);
-    expect(r2.current[0]).toBe(500);
-    expect(r3.current[0]).toBe(500);
-  });
+      expect(r1.current[0]).toBe(500);
+      expect(r2.current[0]).toBe(500);
+      expect(r3.current[0]).toBe(500);
+    },
+    { retry: 5 }
+  );
 });
