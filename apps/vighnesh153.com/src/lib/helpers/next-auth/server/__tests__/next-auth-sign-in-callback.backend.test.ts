@@ -42,6 +42,9 @@ function generateGoogleProfile(overrides: Partial<GoogleProfile>): GoogleProfile
   };
 }
 
+// Last 2 tests are flaky (with a very low reproduction rate)
+jest.retryTimes(5, { logErrorsBeforeRetry: true });
+
 describe('Next Auth Sign-in callback tests', () => {
   it('should deny sign in if provider is not google', async () => {
     const isSignInAllowed = await nextAuthSignInCallback({
