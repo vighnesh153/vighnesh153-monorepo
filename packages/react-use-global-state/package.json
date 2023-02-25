@@ -4,6 +4,8 @@
   "version": "0.4.0-alpha-03",
   "private": false,
   "type": "module",
+  "main": "./dist/main.esm.js",
+  "types": "./dist/main.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -22,14 +24,25 @@
     "README.md"
   ],
   "scripts": {
+    "dev": "npm run build -- --watch",
+    "build": "tsup",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
   },
   "peerDependencies": {
     "react": ">=16.8"
   },
+  "dependencies": {
+    "@vighnesh153/utils": "*"
+  },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "typescript": "^4.9.5"
+    "happy-dom": "^8.9.0",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.28.5"
   }
 }
