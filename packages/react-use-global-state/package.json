@@ -27,7 +27,7 @@
     "dev": "npm run build -- --watch",
     "build": "tsup",
     "test:watch": "vitest",
-    "test": "vitest run --passWithNoTests"
+    "test": "NODE_ENV=test vitest run --passWithNoTests"
   },
   "peerDependencies": {
     "react": ">=16.8"
