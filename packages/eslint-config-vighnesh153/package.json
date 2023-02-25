@@ -2,7 +2,7 @@
   "name": "eslint-config-vighnesh153",
   "private": false,
   "description": "ESLint's configuration based on my preferences. No need to install any additional deps like `eslint` as this package comes bundled with it.",
-  "version": "0.4.0-alpha-04",
+  "version": "0.4.0-alpha-05",
   "type": "module",
   "publishConfig": {
     "access": "public"

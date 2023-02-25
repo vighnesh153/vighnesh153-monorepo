@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/react-use-global-state",
   "description": "A tiny global useState hook",
-  "version": "0.4.0-alpha-04",
+  "version": "0.4.0-alpha-05",
   "private": false,
   "type": "module",
   "main": "./dist/main.esm.js",
