@@ -1,6 +1,10 @@
 import { afterEach, beforeEach, describe, expect, vi, it } from 'vitest';
 import { sleep } from './sleep';
 
+async function flushPromises() {
+  return Promise.resolve(setImmediate);
+}
+
 describe('Helpers > sleep tests', () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -10,25 +14,27 @@ describe('Helpers > sleep tests', () => {
     vi.useRealTimers();
   });
 
-  // TODO
-  it.todo('should sleep for the specified duration', async () => {
+  it('should sleep for the specified duration', async () => {
     const mockFn = vi.fn();
 
     sleep(6000).then(mockFn);
 
-    // 0 ms
+    // after 0 ms
     expect(mockFn).not.toBeCalled();
     vi.advanceTimersByTime(2000);
+    await flushPromises();
 
-    // 2000 ms
+    // after 2000 ms
     expect(mockFn).not.toBeCalled();
     vi.advanceTimersByTime(2000);
+    await flushPromises();
 
-    // 4000 ms
+    // after 4000 ms
     expect(mockFn).not.toBeCalled();
     vi.advanceTimersByTime(3000);
+    await flushPromises();
 
-    // 7000 ms
+    // after 7000 ms
     expect(mockFn).toBeCalledTimes(1);
   });
 });

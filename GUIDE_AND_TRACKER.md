@@ -52,7 +52,6 @@ Visit
 - Move packages to this monorepo
   - rv-serve-directory
 - Cleanup
-  - NPM tokens
   - Deprecate repos
     - rv-serve-directory
   - Delete npm packages
@@ -79,6 +78,8 @@ Visit
 - SECURITY.md
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
+- Audio and video libraries
+- Sound effects on `vighnesh153.com
 - SQS Queues
   - Pending events
     - USER_CREATED
@@ -106,6 +107,9 @@ Visit
     - users
     - other portals
 - CRON expression builder
+- Video ideas
+  - How to use React context effectively
+  - How to build and publish a typescript and React JS component library
 - Audit logs viewer
   - Filters based on
     - action
@@ -133,6 +137,9 @@ Visit
   - https://github.com/getsentry/sentry-javascript
 - docker mongo-nextjs image
 - Free subtitles srt editor
+- Checkout libraries
+  - Zustand
+  - https://www.npmjs.com/package/magic-regexp
 
 #### Embed GitHub files/commits/gists into html
 
