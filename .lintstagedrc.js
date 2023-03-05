@@ -11,11 +11,11 @@ export default {
   '*.mdx': ['eslint --max-warnings=0 --fix', 'prettier --write'],
   '*.{ts,tsx}': async (files) => {
     const eslintFiles = await removeIgnoredEslintFiles(files);
-    // Doing the following "map" approach to avoid this error
-    // "ENAMETOOLONG: name too long"
     return [
-      `eslint --max-warnings=0 --fix ${eslintFiles}`,
       // ...eslintFiles.map((file) => `eslint --max-warnings=0 --fix ${file}`),
+      `eslint --max-warnings=0 --fix ${eslintFiles}`,
+      // Doing the following "map" approach to avoid this error
+      // "ENAMETOOLONG: name too long"
       ...files.map((file) => `prettier --write ${file}`),
     ];
   },
