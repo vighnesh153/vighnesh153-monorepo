@@ -7,6 +7,6 @@ export default defineConfig(() => ({
   publicDir: './src/public',
   clean: true,
   dts: true,
-  minify: false, // todo: switch this
+  minify: true,
   treeshake: true,
 }));

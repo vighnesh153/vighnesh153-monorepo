@@ -4,8 +4,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { not } from '@vighnesh153/utils';
-import { ROOT_HTML_FILE } from '../constants';
+import { CLIENT_BASE_DIR, ROOT_HTML_FILE } from '../constants';
 import { getDirectoryInformation, getDirName, isDirectoryPath, isPathValid } from './utils';
+
+export function frontendCodeHandler() {
+  return express.static(CLIENT_BASE_DIR);
+}
 
 export function validateRequestPathExists(servingPath: string) {
   return (req: Request, res: Response, next: NextFunction) => {
