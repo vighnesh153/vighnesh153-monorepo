@@ -2,7 +2,7 @@ import { ReactElement, useMemo } from 'react';
 import { Link, Tooltip } from '@mui/material';
 import { Download as DownloadIcon } from '@mui/icons-material';
 import { Vighnesh153File } from '../../../types';
-import { isDirectory } from '../utils';
+import { directoryZipAndDownloadPath, isDirectory, windowPathname } from '../utils';
 
 export interface DownloadItemByNameProps {
   type: 'by-name';
@@ -21,10 +21,10 @@ export function DownloadItem(props: DownloadItemByNameProps | DownloadItemByHref
       return props.href;
     }
     const { fileName, fileType } = props;
-    const directoryDownloadPath = `/zip?path=${window.location.pathname}/${fileName}`;
-    const fileDownloadPath = `${window.location.pathname}/${fileName}`;
+    const directoryDownloadPath = directoryZipAndDownloadPath(`${windowPathname}/${fileName}`);
+    const fileDownloadPath = `${windowPathname}/${fileName}`;
     return isDirectory(fileType) ? directoryDownloadPath : fileDownloadPath;
-  }, [props.type, ...(props.type === 'by-href' ? [props.href] : [props.fileName, props.fileType])]);
+  }, Object.values(props));
 
   return (
     <Tooltip title="Download">

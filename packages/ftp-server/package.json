@@ -23,7 +23,8 @@
     "dev": "echo TODO",
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
-    "build": "tsup && vite build"
+    "copy": "cpy --cwd=./src/client/dist . ../../../dist/__vighnesh153-ftp-client__/",
+    "build": "tsup && vite build && npm run copy"
   },
   "files": [
     "dist",
@@ -36,9 +37,7 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "ip": "^2.0.0",
-    "morgan": "^1.10.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.10.6",
@@ -54,7 +53,10 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
     "@vitejs/plugin-react": "^3.1.0",
+    "cpy-cli": "^4.2.0",
     "eslint-config-vighnesh153": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^4.9.5",
     "vite": "^4.1.0"
   }

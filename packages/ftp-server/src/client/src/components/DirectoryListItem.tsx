@@ -4,6 +4,7 @@ import { Vighnesh153File } from '../../../types';
 import { FileName } from './FileName';
 import { DownloadItem } from './DownloadItem';
 import { ListItemWrapper } from './ListItemWrapper';
+import { windowPathname } from '../utils';
 
 export interface DirectoryListItemProps {
   file: Vighnesh153File;
@@ -15,7 +16,7 @@ export function DirectoryListItem({ file }: DirectoryListItemProps) {
       leading={<FolderIcon />}
       middle={
         <Tooltip title="Open this folder">
-          <Link href={`${window.location.pathname}/${file.name}`} sx={{ display: 'flex' }}>
+          <Link href={`${windowPathname}/${file.name}`} sx={{ display: 'flex' }}>
             <FileName fileName={file.name} />
           </Link>
         </Tooltip>
