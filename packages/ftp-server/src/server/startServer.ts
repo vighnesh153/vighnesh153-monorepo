@@ -1,5 +1,6 @@
 import express from 'express';
-import { DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from '../constants';
+import morgan from 'morgan';
+import { CLIENT_BASE_DIR, DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from '../constants';
 import {
   frontendCodeHandler,
   handleDirectory,
@@ -18,8 +19,9 @@ export interface StartServerOptions {
 export function startServer(options: StartServerOptions = {}): void {
   const { port = DEFAULT_PORT, directoryPath = DEFAULT_SERVE_DIRECTORY } = options;
   const app = express();
+  app.use(morgan('tiny'));
 
-  app.use(frontendCodeHandler());
+  app.get(`/${CLIENT_BASE_DIR}*`, frontendCodeHandler());
   app.get('/zip', handleZip(directoryPath));
   app.get('*', validateRequestPathExists(directoryPath));
   app.get('*', handleDirectory(directoryPath));

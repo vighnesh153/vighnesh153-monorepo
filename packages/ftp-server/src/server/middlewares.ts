@@ -4,11 +4,13 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { not } from '@vighnesh153/utils';
-import { CLIENT_BASE_DIR, ROOT_HTML_FILE } from '../constants';
+import { ROOT_HTML_FILE_PATH } from '../constants';
 import { getDirectoryInformation, getDirName, isDirectoryPath, isPathValid } from './utils';
 
 export function frontendCodeHandler() {
-  return express.static(CLIENT_BASE_DIR);
+  return express.static(getDirName(), {
+    maxAge: '30000',
+  });
 }
 
 export function validateRequestPathExists(servingPath: string) {
@@ -68,7 +70,7 @@ export function handleDirectory(servingPath: string) {
       return;
     }
 
-    const htmlFile = fs.readFileSync(path.resolve(getDirName(), ROOT_HTML_FILE), { encoding: 'utf-8' });
+    const htmlFile = fs.readFileSync(path.resolve(getDirName(), ROOT_HTML_FILE_PATH), { encoding: 'utf-8' });
     const replacedFile = htmlFile.replace(
       '__REPLACEMENT__',
       JSON.stringify(getDirectoryInformation(userRequestedPath))
@@ -87,6 +89,8 @@ export function methodNotAllowed() {
 
 export function handleFileDownload(servingPath: string) {
   return express.static(servingPath, {
+    dotfiles: 'allow',
+    maxAge: '30000',
     setHeaders: (res) => {
       res.setHeader('content-type', 'application/octet-stream');
     },

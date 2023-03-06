@@ -1,4 +1,4 @@
-import { not } from '@vighnesh153/utils';
+import { not, trimEnd } from '@vighnesh153/utils';
 import { Vighnesh153File } from '../../../types';
 
 export const isDirectory = (fileType: Vighnesh153File['type']) => fileType === 'directory';
@@ -25,3 +25,9 @@ export const sortedDirectoryInformation = directoryInformation.sort((file1, file
   if (not(isFile1Dir) && isFile2Dir) return 1;
   return file1.name.localeCompare(file2.name);
 });
+
+export function directoryZipAndDownloadPath(directoryPath: string): string {
+  return `/zip?path=${directoryPath}`;
+}
+
+export const windowPathname = trimEnd(window.location.pathname, '/');

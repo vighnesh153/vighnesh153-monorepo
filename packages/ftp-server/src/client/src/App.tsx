@@ -1,7 +1,6 @@
 import { Box, List } from '@mui/material';
-import { DirectoryListItem, MainHeading, RegularFileListItem } from './components';
+import { DirectoryListItem, MainHeading, PathBreadcrumbs, RegularFileListItem } from './components';
 import { isDirectory, sortedDirectoryInformation } from './utils';
-import { PathBreadcrumbs } from './components/PathBreadcrumbs';
 
 export function App() {
   return (
