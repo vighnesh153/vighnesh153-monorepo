@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/ftp-server",
-  "version": "0.4.0-alpha-05",
+  "version": "0.4.0-alpha-06",
   "description": "A simple ftp server cli tool for your local files",
   "license": "MIT",
   "type": "module",

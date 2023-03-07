@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/utils",
-  "version": "0.4.0-alpha-05",
+  "version": "0.4.0-alpha-06",
   "license": "MIT",
   "private": false,
   "description": "A typescript-only utils package that I use internally in my projects",
