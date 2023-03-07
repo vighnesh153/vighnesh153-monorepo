@@ -1,28 +1,30 @@
-// #!/usr/bin/env node
+#!/usr/bin/env node
 
-// import { Command } from 'commander';
+import { Command } from 'commander';
 import { startServer } from './server';
-// import packageInfo from '../package.json';
-//
-// const program = new Command();
+import packageInfo from '../package.json';
+import { DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from './constants';
 
-// program
-//   .name(packageInfo.name)
-//   .description(packageInfo.description)
-//   .version(packageInfo.version)
-//   .option('-t, --target-url <target-url>', 'url to be CORS enabled')
-//   .option('-p, --port <port>', 'port number for the proxy server', '8080')
-//   .parse();
+const program = new Command();
 
-// interface Options {
-//   targetUrl: string;
-//   port: string;
-// }
+program
+  .name(packageInfo.name)
+  .description(packageInfo.description)
+  .version(packageInfo.version)
+  .option('-p, --port <port>', 'port number for the ftp server', `${DEFAULT_PORT}`)
+  .option('-d, --directory <path-to-directory>', 'directory to be served', `${DEFAULT_SERVE_DIRECTORY}`)
+  .parse();
 
-// const options = program.opts<Options>();
-// const { targetUrl, port } = options;
-// const parsedPort = parseInt(`${port}`, 10);
+interface Options {
+  port: string;
+  directory: string;
+}
 
-// startServer({ targetUrl, port: parsedPort });
+const options = program.opts<Options>();
+const { port, directory } = options;
+const parsedPort = parseInt(`${port}`, 10);
 
-startServer();
+startServer({
+  port: parsedPort,
+  directoryPath: directory,
+});

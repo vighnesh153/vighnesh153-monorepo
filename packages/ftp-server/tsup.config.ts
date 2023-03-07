@@ -4,9 +4,8 @@ export default defineConfig(() => ({
   entry: ['./src/cli.ts'],
   splitting: false,
   format: ['esm'],
-  publicDir: './src/public',
   clean: true,
-  dts: true,
+  dts: false,
   minify: true,
   treeshake: true,
 }));

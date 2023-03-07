@@ -68,6 +68,8 @@ Visit
   - Open API: https://openai.com/api/pricing/
   - Instagram API: https://developers.facebook.com/docs/instagram/
   - Video: https://www.youtube.com/watch?v=RA0C_Hh9g8Q
+- Random motivational quote post on instagram 
+- Random word and its meaning post on instagram 
 - Imgur upload library
 - email template builder
   - Create welcome email template
