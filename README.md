@@ -11,6 +11,7 @@ This repository contains (will contain) source code of all the projects that I w
 - [eslint-config-vighnesh153](https://www.npmjs.com/package/eslint-config-vighnesh153): ESLint configuration that suits
   my preferences
 - [@vighnesh153/fake-data](./packages/fake-data): A wrapper over bunch of fake data generation libraries
+- [@vighnesh153/ftp-server](./packages/ftp-server): A simple ftp server cli tool for your local files
 - [@vighnesh153/github-gist](https://www.npmjs.com/package/@vighnesh153/github-gist): A promise based wrapper over
   GitHub Gist REST API
 - [@vighnesh153/localhost-cors-proxy](https://www.npmjs.com/package/@vighnesh153/localhost-cors-proxy): A simple proxy server for unlocking CORS disabled urls on localhost

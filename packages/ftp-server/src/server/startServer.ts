@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import { CLIENT_BASE_DIR, DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from '../constants';
+import { CLIENT_BASE_DIR } from '../constants';
 import {
   frontendCodeHandler,
   handleDirectory,
@@ -12,12 +12,12 @@ import {
 import { serverFailedToStartHandler, serverIsListeningHandler } from './utils';
 
 export interface StartServerOptions {
-  port?: number;
-  directoryPath?: string;
+  port: number;
+  directoryPath: string;
 }
 
-export function startServer(options: StartServerOptions = {}): void {
-  const { port = DEFAULT_PORT, directoryPath = DEFAULT_SERVE_DIRECTORY } = options;
+export function startServer(options: StartServerOptions): void {
+  const { port, directoryPath } = options;
   const app = express();
   app.use(morgan('tiny'));
 

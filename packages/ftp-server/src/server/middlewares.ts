@@ -9,6 +9,7 @@ import { getDirectoryInformation, getDirName, isDirectoryPath, isPathValid } fro
 
 export function frontendCodeHandler() {
   return express.static(getDirName(), {
+    immutable: true,
     maxAge: '30000',
   });
 }
@@ -90,7 +91,6 @@ export function methodNotAllowed() {
 export function handleFileDownload(servingPath: string) {
   return express.static(servingPath, {
     dotfiles: 'allow',
-    maxAge: '30000',
     setHeaders: (res) => {
       res.setHeader('content-type', 'application/octet-stream');
     },

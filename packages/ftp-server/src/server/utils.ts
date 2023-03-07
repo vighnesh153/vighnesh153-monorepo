@@ -40,7 +40,7 @@ export function serverIsListeningHandler(options: { directoryPath: string; port:
   return () => {
     /* eslint-disable no-console */
     console.log(`Directory: ${path.resolve(directoryPath)}`);
-    console.log(`Server is listening on port ${port}.`);
+    console.log(`Server is listening on port ${port}`);
     console.log(`On this machine: http://localhost:${port}/`);
     console.log(`On local network: http://${ip.address()}:${port}/`);
     /* eslint-enable no-console */
