@@ -8,7 +8,7 @@
   },
   "type": "module",
   "main": "./dist/main.esm.js",
-  "types": "./dist/main.d.ts",
+  "types": "./dist/src/index.d.ts",
   "author": {
     "name": "Vighnesh Raut",
     "url": "https://vighnesh153.com",
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "npm run build -- --watch",
-    "build": "tsup",
+    "build": "tsup && tsc",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },

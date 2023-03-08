@@ -9,7 +9,7 @@
   "license": "MIT",
   "type": "module",
   "main": "./dist/main.esm.js",
-  "types": "./dist/main.d.ts",
+  "types": "./dist/src/index.d.ts",
   "author": {
     "email": "me@vighnesh153.com",
     "name": "Vighnesh Raut",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "npm run build -- --watch",
-    "build": "tsup",
+    "build": "tsup && tsc",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },

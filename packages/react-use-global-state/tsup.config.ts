@@ -4,7 +4,6 @@ export default defineConfig(() => ({
   entry: { main: './src/index.ts' },
   splitting: false,
   clean: true,
-  dts: true,
   minify: true,
   treeshake: true,
   format: ['cjs', 'esm'],
