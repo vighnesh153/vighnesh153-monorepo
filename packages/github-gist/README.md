@@ -39,19 +39,19 @@ To interact with the gist in your GitHub account, you need to create a Personal 
 
 ### Importing
 
-Import/Export syntax
+* ESM Modules
 
 ```ts
 import { GithubGist } from '@vighnesh153/github-gist';
 ```
 
-Require syntax
+* CommonJS
 
 ```js
-const { GithubGist } = require('@vighnesh153/github-gist');
+const { GithubGist } = require('@vighnesh153/github-gist/dist/main.commonjs');
 ```
 
-Directly as a script tag (UMD modules)
+* Directly as a script tag (UMD modules)
 
 ```html
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
