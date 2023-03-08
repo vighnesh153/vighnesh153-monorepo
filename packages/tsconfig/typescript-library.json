@@ -1,12 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React Library",
+  "display": "Typescript Library",
   "extends": "./base.json",
   "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
     "declarationMap": false,
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
     "outDir": "dist",
     "removeComments": false,
