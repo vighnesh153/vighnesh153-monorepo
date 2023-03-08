@@ -48,16 +48,6 @@ Visit
 
 #### Tasks
 
-- Comments in .d.ts file
-- Move packages to this monorepo
-  - rv-serve-directory
-- Cleanup
-  - Deprecate repos
-    - rv-serve-directory
-  - Delete npm packages
-    - rv-serve-directory
-  - Add them in main README.md file
-    - rv-serve-directory
 - Github Gist
   - Recommended way: `await GithubGist.initializeFromId()`
   - Frowned upon: `new GithubGist(); await gist.initialize()`
