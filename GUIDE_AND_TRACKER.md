@@ -51,6 +51,7 @@ Visit
 - Github Gist
   - Recommended way: `await GithubGist.initializeFromId()`
   - Frowned upon: `new GithubGist(); await gist.initialize()`
+  - Add API versions in all github gist API calls
 - Add all code from old @vighnesh153/utils repo to this repo
   - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request

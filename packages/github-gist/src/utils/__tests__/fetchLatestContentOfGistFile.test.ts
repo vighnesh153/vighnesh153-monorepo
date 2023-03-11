@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import axios from 'axios';
 import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
-import { fetchLatestContent } from '../fetchLatestContent';
+import { fetchLatestContentOfGistFile } from '../fetchLatestContentOfGistFile';
 
 vi.mock('axios');
 
@@ -11,12 +11,12 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   axios.mockImplementation(impl);
 }
 
-describe('Helpers > "fetchLatestContent" tests', () => {
+describe('Helpers > "fetchLatestContentOfGistFile" tests', () => {
   it('should fetch the latest content', async () => {
     const content = randomUuid();
     mockAxiosImplementation(() => Promise.resolve({ data: content }));
 
-    const latestContent = await fetchLatestContent({
+    const latestContent = await fetchLatestContentOfGistFile({
       latestCommitId: randomUuid(),
       gistId: randomUuid(),
       gistOwner: randomEmail(),

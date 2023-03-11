@@ -1,65 +1,56 @@
-import axios from 'axios';
-import { not } from '@vighnesh153/utils';
-import { createGist, fetchGistMetadata, verifyGithubPAT, withAuthConfig } from './utils';
-import { CORSConfig, IGithubGistMetadata } from './types';
+import {
+  fetchGistMetadata,
+  getCorsConfig,
+  getEnableRequestCaching,
+  isGistPublic,
+  removeFileContentFromGistMetadata,
+  verifyGithubPAT,
+} from './utils';
+import { IGithubGistMetadata, IGithubGistProps } from './types';
 import { GistFile } from './GithubGistFile';
-import { fetchAllGistFiles } from './utils/fetchAllGistFiles';
-import { constructGistFile } from './utils/constructGistFile';
-import { constants } from './constants';
+import { saveGithubGist } from './saveGithubGist';
 
 function gistNotInitializedError() {
   return new Error(`Gist is not initialized. Initialize the gist by invoking the "initialize()" method first`);
 }
 
-export interface GithubGistProps {
-  /**
-   * Head over to this link: https://github.com/settings/tokens/new?scopes=gist to create
-   * your personalAccessToken. Make sure that the "gist" scope is checked. Keep the token, a secret.
-   */
-  personalAccessToken: string;
+function buildGistFilesFromGistMetadataFiles(gistMetadata: IGithubGistMetadata, options: IGithubGistProps): GistFile[] {
+  const cleanedGistMetadata = removeFileContentFromGistMetadata(gistMetadata);
 
-  /**
-   * A unique name to identify your gist. The appIdentifier will be used to identify the gist being
-   * used for the storage.
-   *
-   * Examples: my-chat-app, my-first-app
-   *
-   * Note: Remember to use same identifier when re-starting the application. For different applications,
-   * use different identifiers, unless you want to share the files in the gist among different applications.
-   */
-  appIdentifier: string;
-
-  /**
-   * Since commit hashes are unique and whenever a file changes, we can be sure that the new SHA
-   * will be different from the previously encountered ones. This option can be used to cache the
-   * content for all unique SHAs
-   *
-   * @default true
-   */
-  enableRequestCaching?: boolean;
-
-  /**
-   * Whether the gist should be private or public
-   *
-   * @default false
-   */
-  isPublic?: boolean;
-
-  /**
-   * CORS configuration. Needed when using the API on the client side.
-   *
-   * If `type=default`, it will use `https://corsanywhere.herokuapp.com/` as prefix to
-   * the GitHub URLs to tackle CORS blocking
-   */
-  corsConfig?: CORSConfig;
+  return Object.values(gistMetadata.files).map(
+    (file) =>
+      new GistFile({
+        corsConfig: getCorsConfig(options),
+        gistMetadata: cleanedGistMetadata,
+        isPublic: isGistPublic(options),
+        personalAccessToken: options.personalAccessToken,
+        enableRequestCaching: getEnableRequestCaching(options),
+        fileContent: file.content,
+        fileName: file.filename,
+        hasUnSyncedUpdates: false,
+      })
+  );
 }
 
 export class GithubGist {
+  private static avoidInstantiation = true;
+
   private gistMetadata: IGithubGistMetadata | null = null;
 
   private gistFiles: GistFile[] = [];
 
-  constructor(private options: GithubGistProps) {}
+  /**
+   *
+   * @param options
+   * @deprecated Use the `GithubGist.initializeUsingGistId` static method instead
+   */
+  private constructor(private options: IGithubGistProps) {
+    if (GithubGist.avoidInstantiation) {
+      throw new Error(
+        `Public instantiation is not supported. Do "await GithubGist.initializeUsingGistId(...)" instead`
+      );
+    }
+  }
 
   /**
    * Returns all the files from the Gist
@@ -92,6 +83,41 @@ export class GithubGist {
   }
 
   /**
+   * Initializes the gist object with the metadata from server and all file content
+   * @param options
+   */
+  static async initializeUsingGistId(options: IGithubGistProps): Promise<GithubGist> {
+    const { personalAccessToken, gistId } = options;
+
+    // Throws error if the token is not valid
+    await verifyGithubPAT(personalAccessToken);
+
+    // Create the Gist instance
+    GithubGist.avoidInstantiation = false;
+    const gist = new GithubGist(options);
+    GithubGist.avoidInstantiation = true;
+
+    // Waits to fetch the gist metadata
+    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId });
+
+    // File content will be stored in `gistFiles`. Remove it from here to avoid bloat.
+    gist.gistMetadata = removeFileContentFromGistMetadata(gistMetadata);
+
+    // Grab the file content and initialize the `GistFiles`
+    gist.gistFiles = buildGistFilesFromGistMetadataFiles(gistMetadata, options);
+    return gist;
+  }
+
+  /**
+   * Fetches the latest content of all the files in the gist
+   */
+  async fetchLatestContent(): Promise<void> {
+    const { personalAccessToken, gistId } = this.options;
+    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId });
+    this.gistFiles = buildGistFilesFromGistMetadataFiles(gistMetadata, this.options);
+  }
+
+  /**
    * Creates a new file and returns it
    *
    * > It doesn't save the file on the Gist. You have to manually invoke
@@ -109,12 +135,12 @@ export class GithubGist {
       return existingFile;
     }
 
-    const gistFile = constructGistFile({
-      corsConfig: this.corsConfig(),
-      enableRequestCaching: this.getEnableRequestCaching(),
-      isGistPublic: this.isGistPublic(),
-      gistFileName: fileName,
-      gistFileContent: '',
+    const gistFile = new GistFile({
+      corsConfig: getCorsConfig(this.options),
+      enableRequestCaching: getEnableRequestCaching(this.options),
+      isPublic: isGistPublic(this.options),
+      fileName,
+      fileContent: '',
       personalAccessToken: this.options.personalAccessToken,
       gistMetadata: this.gistMetadata,
     });
@@ -130,30 +156,12 @@ export class GithubGist {
       throw gistNotInitializedError();
     }
 
-    const payload: Record<string, { content: string }> = {};
-    this.gistFiles.forEach((gistFile) => {
-      if (not(gistFile.hasUnSyncedUpdates)) return;
-      payload[gistFile.name] = {
-        content: gistFile.content,
-      };
+    await saveGithubGist({
+      gistId: this.gistMetadata.id,
+      gistFiles: this.gistFiles,
+      isGistPublic: isGistPublic(this.options),
+      personalAccessToken: this.options.personalAccessToken,
     });
-
-    // No files need updates. Hence, the payload is empty
-    if (Object.keys(payload).length === 0) return;
-
-    await axios(
-      withAuthConfig({
-        personalAccessToken: this.options.personalAccessToken,
-        baseConfig: {
-          url: `${constants.urls.github.gists}/${this.gistMetadata.id}`,
-          method: 'post',
-          data: {
-            public: this.isGistPublic(),
-            files: payload,
-          },
-        },
-      })
-    );
 
     this.gistFiles.forEach((gistFile) => {
       // eslint-disable-next-line no-param-reassign
@@ -170,57 +178,5 @@ export class GithubGist {
       throw gistNotInitializedError();
     }
     return this.gistFiles.find((file) => file.name === fileName) ?? null;
-  }
-
-  /**
-   * [Side Effect] Initializes the Gist. If the gist doesn't exist, it creates it, else, it
-   * will just fetch the metadata of the Gist
-   *
-   * > Should only be invoked once in the beginning
-   */
-  async initialize(): Promise<void> {
-    if (this.gistMetadata !== null) {
-      throw new Error('Gist is already initialized');
-    }
-
-    // Throws error if the token is not valid
-    await verifyGithubPAT(this.options.personalAccessToken);
-
-    // Fetches the metadata of the gist matching the
-    const fetchedGistMetadata = await fetchGistMetadata({
-      personalAccessToken: this.options.personalAccessToken,
-      appIdentifier: this.options.appIdentifier,
-    });
-
-    // Gist doesn't exist. So, create one
-    if (fetchedGistMetadata === null) {
-      this.gistMetadata = await createGist({
-        isGistPublic: this.options.isPublic,
-        personalAccessToken: this.options.personalAccessToken,
-        appIdentifier: this.options.appIdentifier,
-      });
-    } else {
-      this.gistMetadata = fetchedGistMetadata;
-    }
-
-    this.gistFiles = await fetchAllGistFiles({
-      corsConfig: this.corsConfig(),
-      enableRequestCaching: this.getEnableRequestCaching(),
-      isGistPublic: this.isGistPublic(),
-      personalAccessToken: this.options.personalAccessToken,
-      gistMetadata: this.gistMetadata,
-    });
-  }
-
-  private getEnableRequestCaching(): boolean {
-    return this.options.enableRequestCaching ?? true;
-  }
-
-  private corsConfig(): CORSConfig {
-    return this.options.corsConfig ?? { type: 'default' };
-  }
-
-  private isGistPublic(): boolean {
-    return this.options.isPublic ?? false;
   }
 }

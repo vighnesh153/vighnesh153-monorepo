@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@types/node": "*",
+    "@vighnesh153/fake-data": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "axios": "^1.3.4",
