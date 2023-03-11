@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import { constants } from '../constants';
 import { CORSConfig } from '../types';
+import { withCorsConfig } from './withCorsConfig';
 
 export interface BuildLatestGistFileFetchUrlProps {
   commitId: string;
@@ -13,18 +13,5 @@ export interface BuildLatestGistFileFetchUrlProps {
 export function buildGistFileFetchRequestConfigForCommit(props: BuildLatestGistFileFetchUrlProps): AxiosRequestConfig {
   const { commitId, corsConfig, fileName, gistId, gistOwner } = props;
   const url = `https://gist.githubusercontent.com/${gistOwner}/${gistId}/raw/${commitId}/${fileName}`;
-
-  if (corsConfig.type === 'none') {
-    return { url };
-  }
-
-  if (corsConfig.type === 'default') {
-    return { url: `${constants.urls.corsAnywherePrefix}${url}` };
-  }
-
-  if (corsConfig.type === 'custom') {
-    return corsConfig.customRequestConfig(url);
-  }
-
-  throw new Error('Unrecognized CORS configuration type');
+  return withCorsConfig({ url, corsConfig });
 }
