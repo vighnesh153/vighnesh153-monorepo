@@ -13,6 +13,8 @@
     "build": "turbo run build",
     "build:packages": "turbo run build --filter=./packages/*",
     "dev": "turbo run dev --parallel --no-cache",
+    "dev:apps:vighnesh153.com": "npm run dev -- --filter=vighnesh153.com",
+    "dev:apps:playground": "npm run dev -- --filter=@vighnesh153/playground",
     "test": "turbo run test",
     "test:packages": "turbo run test --filter=./packages/*",
     "lint": "turbo run lint",

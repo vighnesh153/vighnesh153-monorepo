@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { not } from '@vighnesh153/utils';
-import { fetchLatestContentOfGistFile, fetchLatestGistCommitId, getCache, setCache, withAuthConfig } from './utils';
+import {
+  fetchLatestContentOfGistFile,
+  fetchLatestGistCommitId,
+  getCache,
+  getCorsConfig,
+  setCache,
+  withAuthConfig,
+} from './utils';
 import { constants } from './constants';
 import { CORSConfig, IGithubGistMetadata } from './types';
 
@@ -105,6 +112,7 @@ export class GistFile {
     const latestCommitId = await fetchLatestGistCommitId({
       gistId,
       personalAccessToken,
+      corsConfig: getCorsConfig({ corsConfig: this.options.corsConfig }),
     });
 
     const cacheKey = `gistId=${gistId},commitId=${latestCommitId},fileName=${fileName}`;

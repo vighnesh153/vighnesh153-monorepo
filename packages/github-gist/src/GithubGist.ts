@@ -98,7 +98,7 @@ export class GithubGist {
     GithubGist.avoidInstantiation = true;
 
     // Waits to fetch the gist metadata
-    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId });
+    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId, corsConfig: getCorsConfig(options) });
 
     // File content will be stored in `gistFiles`. Remove it from here to avoid bloat.
     gist.gistMetadata = removeFileContentFromGistMetadata(gistMetadata);
@@ -113,7 +113,11 @@ export class GithubGist {
    */
   async fetchLatestContent(): Promise<void> {
     const { personalAccessToken, gistId } = this.options;
-    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId });
+    const gistMetadata = await fetchGistMetadata({
+      personalAccessToken,
+      gistId,
+      corsConfig: getCorsConfig(this.options),
+    });
     this.gistFiles = buildGistFilesFromGistMetadataFiles(gistMetadata, this.options);
   }
 
@@ -161,6 +165,7 @@ export class GithubGist {
       gistFiles: this.gistFiles,
       isGistPublic: isGistPublic(this.options),
       personalAccessToken: this.options.personalAccessToken,
+      corsConfig: getCorsConfig(this.options),
     });
 
     this.gistFiles.forEach((gistFile) => {

@@ -8,6 +8,6 @@ export function getEnableRequestCaching(options: IGithubGistProps): boolean {
   return options.enableRequestCaching ?? true;
 }
 
-export function getCorsConfig(options: IGithubGistProps): CORSConfig {
+export function getCorsConfig(options: Pick<IGithubGistProps, 'corsConfig'>): CORSConfig {
   return options.corsConfig ?? { type: 'default' };
 }

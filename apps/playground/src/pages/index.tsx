@@ -1,20 +1,26 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { GithubGist } from '@vighnesh153/github-gist';
 
-const token = '111';
+const personalAccessToken = '111';
+const gistId = '111g';
+
+function useEffectOnce(callback: () => void) {
+  const ref = useRef(false);
+  useEffect(() => {
+    if (ref.current) return;
+    ref.current = true;
+    callback();
+  }, [callback]);
+}
 
 export default function Home() {
-  useEffect(() => {
+  useEffectOnce(() => {
     (async () => {
-      const gist = new GithubGist({
-        personalAccessToken: token,
-        appIdentifier: 'my-test-gist',
-      });
-      await gist.initialize();
+      const gist = await GithubGist.initializeUsingGistId({ personalAccessToken, gistId });
 
       const fileJson = gist.createNewFile('vighnesh153.json');
-      fileJson.content = JSON.stringify({ message: 'Vighnesh is the best' });
+      fileJson.content = JSON.stringify({ message: 'Vighnesh is the best' }, null, 2);
 
       const filePython = gist.createNewFile('vighnesh153.py');
       filePython.content = `print("Vighnesh is the best")`;
@@ -31,7 +37,7 @@ export default function Home() {
 
       await gist.save();
     })();
-  }, []);
+  });
 
   return (
     <>
