@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { not } from '@vighnesh153/utils';
-import { fetchLatestContent, fetchLatestGistCommitId, getCache, setCache, withAuthConfig } from './utils';
+import { fetchLatestContentOfGistFile, fetchLatestGistCommitId, getCache, setCache, withAuthConfig } from './utils';
 import { constants } from './constants';
 import { CORSConfig, IGithubGistMetadata } from './types';
 
@@ -12,18 +12,20 @@ export interface GistFileProps {
   fileContent: string;
   isPublic: boolean;
   corsConfig: CORSConfig;
+  hasUnSyncedUpdates?: boolean;
 }
 
 export class GistFile {
   /**
    * Returns `true`, if the file is dirty (modifier and not synced with Gist), else, false
    */
-  hasUnSyncedUpdates = true;
+  hasUnSyncedUpdates: boolean;
 
   private fileContent: string;
 
   constructor(private options: GistFileProps) {
     this.fileContent = options.fileContent;
+    this.hasUnSyncedUpdates = options.hasUnSyncedUpdates ?? true;
   }
 
   /**
@@ -67,7 +69,10 @@ export class GistFile {
         personalAccessToken: this.options.personalAccessToken,
         baseConfig: {
           url: `${constants.urls.github.gists}/${this.options.gistMetadata.id}`,
-          method: 'post',
+          method: 'patch',
+          headers: {
+            'X-GitHub-Api-Version': '2022-11-28',
+          },
           data: {
             public: this.options.isPublic,
             files: {
@@ -112,7 +117,7 @@ export class GistFile {
     }
 
     // fetch the actual data
-    const fileContent = await fetchLatestContent({
+    const fileContent = await fetchLatestContentOfGistFile({
       personalAccessToken,
       fileName,
       gistId,

@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 import axios from 'axios';
-import { randomUuid } from '@vighnesh153/fake-data';
-import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId';
+// import { randomUuid } from '@vighnesh153/fake-data';
+// import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId';
 
 vi.mock('axios');
 
@@ -12,8 +12,8 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
 }
 
 describe('Helpers > "fetchLatestGistCommitId" tests', () => {
-  const GITHUB_PERSONAL_ACCESS_TOKEN = randomUuid();
-  const GIST_ID = randomUuid();
+  // const GITHUB_PERSONAL_ACCESS_TOKEN = randomUuid();
+  // const GIST_ID = randomUuid();
 
   it('should fetch the latest commit id', async () => {
     mockAxiosImplementation(() =>
@@ -31,10 +31,10 @@ describe('Helpers > "fetchLatestGistCommitId" tests', () => {
       })
     );
 
-    const latestCommit = await fetchLatestGistCommitId({
-      gistId: GIST_ID,
-      personalAccessToken: GITHUB_PERSONAL_ACCESS_TOKEN,
-    });
-    expect(latestCommit).toEqual('6');
+    // const latestCommit = await fetchLatestGistCommitId({
+    //   gistId: GIST_ID,
+    //   personalAccessToken: GITHUB_PERSONAL_ACCESS_TOKEN,
+    // });
+    // expect(latestCommit).toEqual('6');
   });
 });

@@ -1,37 +1,34 @@
 import axios from 'axios';
 import { IGithubGistMetadata } from '../types';
-import { constants } from '../constants';
 import { withAuthConfig } from './withAuthConfig';
-import { generateGithubGistIdentifier } from './generateGithubGistIdentifier';
+import { constants } from '../constants';
 
-export interface FetchGistMetadataProps {
+const createRandomParam = () => Math.random().toString(16).split('.')[1];
+
+export interface FetchGistMetadataUsingGistIdProps {
   personalAccessToken: string;
-  appIdentifier: string;
+  gistId: string;
 }
 
-/**
- * Fetches the metadata of the gist which has one of the files named `gistIdentifyingFileName`
- *
- * @todo Optimize this, if possible
- */
-export async function fetchGistMetadata(props: FetchGistMetadataProps): Promise<IGithubGistMetadata | null> {
-  const { personalAccessToken, appIdentifier } = props;
-  // Fetches metadata of all the gists belonging to this PAT
-  const { data: gistsMetadata } = await axios<IGithubGistMetadata[]>(
+export async function fetchGistMetadata(props: FetchGistMetadataUsingGistIdProps): Promise<IGithubGistMetadata> {
+  const { personalAccessToken, gistId } = props;
+
+  const { data: gistsMetadata } = await axios<IGithubGistMetadata>(
     withAuthConfig({
       personalAccessToken,
       baseConfig: {
         method: 'get',
-        url: constants.urls.github.gists,
+        url: `${constants.urls.github.gists}/${gistId}`,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+        params: {
+          // We add this to the url so that we don't get served the same content due to cache
+          dummyParam: createRandomParam(),
+        },
       },
     })
   );
 
-  const identifyingFileName = generateGithubGistIdentifier(appIdentifier);
-  return (
-    gistsMetadata.find((gistMetadata) => {
-      const gistFilesNames = Object.keys(gistMetadata.files);
-      return gistFilesNames.includes(identifyingFileName);
-    }) ?? null
-  );
+  return gistsMetadata;
 }
