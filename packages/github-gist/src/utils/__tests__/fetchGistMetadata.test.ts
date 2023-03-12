@@ -1,7 +1,8 @@
-import { describe, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import axios from 'axios';
 import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
-// import { fetchGistMetadata } from '../fetchGistMetadata';
+import { fetchGistMetadata } from '../fetchGistMetadata';
+import { IGithubGistMetadata } from '../../types';
 
 vi.mock('axios');
 
@@ -12,55 +13,35 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
 }
 
 describe('Helpers > "fetchGistMetadata" tests', () => {
-  // const GITHUB_PERSONAL_ACCESS_TOKEN = randomUuid();
+  const getConfig = () =>
+    ({
+      gistId: randomUuid(),
+      corsConfig: { type: 'default' },
+      personalAccessToken: randomUuid(),
+    } as const);
 
-  it('should return null if no gist found which has the appIdentifier file', async () => {
-    mockAxiosImplementation(() => Promise.resolve({ data: [] }));
+  it('should throw 404 if gist is not found', () => {
+    const error = new Error('Resource not found');
+    mockAxiosImplementation(() => Promise.reject(error));
 
-    // const metadata = await fetchGistMetadata({
-    //   personalAccessToken: GITHUB_PERSONAL_ACCESS_TOKEN,
-    //   gistId: randomUuid(),
-    // });
-    // expect(metadata).toBeNull();
+    expect(() => fetchGistMetadata(getConfig())).rejects.toThrowError(error);
   });
 
   it('should return the gist metadata based on the identifier provided', async () => {
-    const gistId = randomUuid();
-    const ownerLogin = randomEmail();
+    const gistMetadata: IGithubGistMetadata = {
+      id: randomUuid(),
+      owner: {
+        login: randomEmail(),
+      },
+      files: {},
+    };
 
-    mockAxiosImplementation(() =>
-      Promise.resolve({
-        data: [
-          {
-            id: randomUuid(),
-            owner: { login: randomEmail() },
-            files: { [randomUuid()]: {}, [randomUuid()]: {}, [randomUuid()]: {} },
-          },
-          {
-            id: gistId,
-            owner: { login: ownerLogin },
-            files: {
-              [randomUuid()]: {},
-              [randomUuid()]: {},
-              [randomUuid()]: {},
-            },
-          },
-          {
-            id: randomUuid(),
-            owner: { login: randomEmail() },
-            files: { [randomUuid()]: {}, [randomUuid()]: {}, [randomUuid()]: {} },
-          },
-        ],
-      })
-    );
+    mockAxiosImplementation(() => Promise.resolve({ data: gistMetadata }));
 
-    // const metadata = await fetchGistMetadata({
-    //   personalAccessToken: GITHUB_PERSONAL_ACCESS_TOKEN,
-    //   gistId,
-    // });
-    // expect(metadata).toMatchObject({
-    //   id: gistId,
-    //   owner: { login: ownerLogin },
-    // });
+    const fetchedGistMetadata = await fetchGistMetadata({
+      ...getConfig(),
+      gistId: gistMetadata.id,
+    });
+    expect(fetchedGistMetadata).toMatchObject(gistMetadata);
   });
 });
