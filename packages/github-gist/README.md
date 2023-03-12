@@ -22,18 +22,21 @@ npm install axios
 To interact with the gist in your GitHub account, you need to create a Personal Access Token with the **gist** scope.
 
 - [Generate your token](https://github.com/settings/tokens/new?scopes=gist)
+- Create a GitHub Gist by visiting [this link](https://gist.github.com/). You might have to create a dummy file because
+  GitHub doesn't allow you to create empty gist. Once you have created the gist, note down the gist id (found in the
+  url)
 - CORS configuration (if you are using this on a browser): The `GET` API to fetch the content of a file in a gist, is
   CORS protected. If you are using this library on a browser, then you will get CORS blocked. To prevent that, I have
   added a default CORS proxy server configuration `https://corsanywhere.herokuapp.com/`. But, it is not a good idea to
   use this default in production because it probably isn't reliable. The owner might decide to shut it down anytime. So,
   I recommend you to build/host your own proxy or opt in for a more reliable one. Following are some helpful links (I
   found these options via a quick google search and these are just to get you started and not my recommendations):
-  - A cheap paid service option: https://cors.sh/
-  - Host one of the following proxy server code on your platform of choice
-    - https://github.com/ccoenraets/cors-proxy/blob/master/server.js
-  - Create your own CORS proxy from scratch
-    - Way 1: https://dev.to/decker67/write-your-own-cors-proxy-with-nodejs-in-no-time-30f9
-    - Way 2: https://medium.com/nodejsmadeeasy/a-simple-cors-proxy-for-javascript-applications-9b36a8d39c51
+    - A cheap paid service option: https://cors.sh/
+    - Host one of the following proxy server code on your platform of choice
+        - https://github.com/ccoenraets/cors-proxy/blob/master/server.js
+    - Create your own CORS proxy from scratch
+        - Way 1: https://dev.to/decker67/write-your-own-cors-proxy-with-nodejs-in-no-time-30f9
+        - Way 2: https://medium.com/nodejsmadeeasy/a-simple-cors-proxy-for-javascript-applications-9b36a8d39c51
 
 ## Usage
 
@@ -55,10 +58,10 @@ const { GithubGist } = require('@vighnesh153/github-gist/dist/main.commonjs');
 
 ```html
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
-<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/index.umd.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/main.umd.js'></script>
 
 <!--Or a specific version-->
-<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0.1.0/dist/index.umd.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0.1.0/dist/main.umd.js'></script>
 
 <script>
   const GithubGist = GithubGistUmd.GithubGist;
@@ -70,12 +73,12 @@ const { GithubGist } = require('@vighnesh153/github-gist/dist/main.commonjs');
 ### Instantiation
 
 ```ts
-const gist = new GithubGist({
+const gist = await GithubGist.initializeUsingGistId({
   // Required
   personalAccessToken: '<GITHUB_PERSONAL_ACCESS_TOKEN>',
 
-  // Required. This will be used to identify and connect to your gist among all your other gists.
-  appIdentifier: 'my-first-gist',
+  // Required
+  gistId: '<YOUR-GIST-ID>',
 
   // --- OPTIONAL PARAMS BELOW ---
 
@@ -101,20 +104,11 @@ const gist = new GithubGist({
 });
 ```
 
-### Initialize the gist
-
-This will create the gist, if it doesn't exist. If the gist already exists, it will just fetch its metadata. This should
-be the first thing you do and should only be invoked once.
-
-```ts
-await gist.initialize();
-```
-
 ### Files in Gist
 
 A gist can have multiple files. To create a file, do the following:
 
-> You can only store string content in a file. So, if you are creating a JSON file, remember to stringify the content
+> You can only store `string` content in a file. So, if you are creating a JSON file, remember to stringify the content
 
 ```ts
 const pikachuJson = gist.createNewFile('pikachu.json');
@@ -130,7 +124,7 @@ console.log(JSON.parse(pikachuJson.content));
 
 ### Save a file
 
-Just creating the file won't save it on your Gist. To save, you will have to invoke the `save()` method on it
+Just creating the file won't save it on your GitHub Gist. To save, you will have to invoke the `save()` method on it
 
 ```ts
 // This will save the file on the Gist
@@ -166,6 +160,18 @@ return it.
 
 ```ts
 const existingPikachuJson = gist.createNewFile('pikachu.json');
+```
+
+### Fetch the latest content of a gist
+
+If you suspect that your local gist instance is out of date with the actual GitHub Gist, you can fetch the latest content
+
+```ts
+// Entire gist
+await gist.fetchLatestContent()
+
+// Specific file
+await pikachuJson.fetchLatestContent()
 ```
 
 ### Get all the files
