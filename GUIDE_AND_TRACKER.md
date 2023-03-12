@@ -49,14 +49,12 @@ Visit
 #### Tasks
 
 - Github Gist
-  - Recommended way: `await GithubGist.initializeFromId()`
-  - Frowned upon: `new GithubGist(); await gist.initialize()`
-  - Add API versions in all github gist API calls
+  - Readme
 - Add all code from old @vighnesh153/utils repo to this repo
   - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
 - DallE images to instagram with quotes
-  - Open API: https://openai.com/api/pricing/
+  - Open AI API pricing: https://openai.com/api/pricing/
   - Instagram API: https://developers.facebook.com/docs/instagram/
   - Video: https://www.youtube.com/watch?v=RA0C_Hh9g8Q
 - Random motivational quote post on instagram 
