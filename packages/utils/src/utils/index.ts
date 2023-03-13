@@ -1,5 +1,6 @@
 export * from './binarySearch';
 export * from './binarySearchLeftmost';
+export * from './binarySearchRightmost';
 export * from './debounce';
 export * from './dedupeConsecutiveSubstring';
 export * from './groupIterableItems';
