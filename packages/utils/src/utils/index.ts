@@ -5,6 +5,7 @@ export * from './constants';
 export * from './debounce';
 export * from './dedupeConsecutiveSubstring';
 export * from './groupIterableItems';
+export * from './heap';
 export * from './isStringEmpty';
 export * from './not';
 export * from './notification';
