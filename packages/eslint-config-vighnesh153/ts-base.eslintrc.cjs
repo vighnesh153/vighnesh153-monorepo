@@ -37,7 +37,7 @@ module.exports = {
      */
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-use-before-define': ['warn'],
+    '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/no-useless-constructor': ['error'],
     'comma-dangle': [
       'error',
@@ -67,7 +67,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-underscore-dangle': 'error',
     'no-unused-vars': 'error',
-    'no-use-before-define': 'error',
+    'no-use-before-define': 'off',
     'no-useless-constructor': 'off',
     'no-void': 'off',
     'object-curly-newline': [

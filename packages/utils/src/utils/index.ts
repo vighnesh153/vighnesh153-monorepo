@@ -12,4 +12,5 @@ export * from './repeat';
 export * from './reverseString';
 export * from './sleep';
 export * from './slugify';
+export * from './stack';
 export * from './trimUtils';
