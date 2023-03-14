@@ -8,6 +8,7 @@ export * from './groupIterableItems';
 export * from './isStringEmpty';
 export * from './not';
 export * from './notification';
+export * from './queue';
 export * from './repeat';
 export * from './reverseString';
 export * from './sleep';
