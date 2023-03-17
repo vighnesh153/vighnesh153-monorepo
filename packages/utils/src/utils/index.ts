@@ -10,6 +10,7 @@ export * from './deepFreeze';
 export * from './groupIterableItems';
 export * from './heap';
 export * from './isStringEmpty';
+export * from './memoize';
 export * from './not';
 export * from './notification';
 export * from './queue';
