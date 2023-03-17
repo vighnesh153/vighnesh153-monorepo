@@ -29,6 +29,7 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
+    "ts-essentials": "^9.3.1",
     "tsup": "^6.6.3",
     "typescript": "^4.9.5",
     "vitest": "^0.28.5"
