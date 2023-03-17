@@ -15,6 +15,7 @@ export * from './isOdd';
 export * from './isPrime';
 export * from './isStringEmpty';
 export * from './memoize';
+export * from './nextPrime';
 export * from './not';
 export * from './notification';
 export * from './queue';
