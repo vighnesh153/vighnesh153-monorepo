@@ -1,3 +1,4 @@
+export * from './arraysComparison';
 export * from './binarySearch';
 export * from './binarySearchLeftmost';
 export * from './binarySearchRightmost';
