@@ -14,6 +14,7 @@ export * from './memoize';
 export * from './not';
 export * from './notification';
 export * from './queue';
+export * from './range';
 export * from './repeat';
 export * from './reverseString';
 export * from './sleep';
