@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { deepFreeze } from './deepFreeze';
 
-describe('Helpers > deepFreeze tests', () => {
+describe('DeepFreeze tests', () => {
   it('should return the same object for a primitive', () => {
     const obj = 1;
     const deepFrozenObj = deepFreeze(obj);

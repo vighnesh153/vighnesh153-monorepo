@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { nextPrime } from './nextPrime';
 
-describe('Math > Numbers > Primes > nextPrime tests', () => {
+describe('Math > nextPrime tests', () => {
   test.each([
     [2, 3],
     [3, 5],

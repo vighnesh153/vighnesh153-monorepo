@@ -1,7 +1,7 @@
 import { describe, it, vi, expect, beforeAll, afterAll } from 'vitest';
 import { debounce } from './debounce';
 
-describe('Helpers > debounce tests', () => {
+describe('Debounce tests', () => {
   beforeAll(() => {
     vi.useFakeTimers();
   });

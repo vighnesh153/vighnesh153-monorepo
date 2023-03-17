@@ -1,7 +1,7 @@
 import { describe, expect, it, test } from 'vitest';
 import { gcd } from './gcd';
 
-describe('Math > Numbers > gcd tests', () => {
+describe('Math > gcd tests', () => {
   it('should throw error if negative number is passed', () => {
     expect(() => gcd(-1)).toThrowErrorMatchingInlineSnapshot(
       '"Expected \\"n\\" to be a positive integer, found \\"-1\\""'

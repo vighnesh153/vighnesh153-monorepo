@@ -1,7 +1,7 @@
 import { describe, expect, it, test } from 'vitest';
 import { nthPrime } from './nthPrime';
 
-describe('Math > Numbers > Primes > nthPrime tests', () => {
+describe('Math > nthPrime tests', () => {
   it('should throw error if n is not positive integer', () => {
     expect(() => nthPrime(-2)).toThrowErrorMatchingInlineSnapshot('"\\"n\\" needs to be a positive integer"');
     expect(() => nthPrime(5.5)).toThrowErrorMatchingInlineSnapshot('"\\"n\\" needs to be a positive integer"');

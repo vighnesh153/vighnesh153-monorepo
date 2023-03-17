@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { memoize } from './memoize';
 
-describe('Helpers > memoize tests', () => {
+describe('"memoize" tests', () => {
   it('should not invoke function twice', () => {
     const add = vi.fn((a: number, b: string) => a + b);
     const memoizedAdd = memoize(add);

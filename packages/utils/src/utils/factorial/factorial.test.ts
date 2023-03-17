@@ -1,7 +1,7 @@
 import { describe, expect, it, test } from 'vitest';
 import { factorial } from './factorial';
 
-describe('Math > Numbers > factorial tests', () => {
+describe('Math > factorial tests', () => {
   it('should throw if input number is not an integer', () => {
     expect(() => factorial(2213.3)).toThrowErrorMatchingInlineSnapshot(
       '"Factorial of fractional numbers is not defined"'

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { Notification } from './notification';
 import { sleep } from '../sleep';
 
-describe('Helpers > Notification tests', () => {
+describe('"Notification" tests', () => {
   it('should not crash on instantiation', () => {
     expect(() => new Notification()).not.toThrow();
   });

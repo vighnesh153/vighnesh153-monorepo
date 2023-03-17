@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isStringEmpty } from './isStringEmpty';
 
-describe('Helpers > isStringEmpty tests', () => {
+describe('"isStringEmpty" tests', () => {
   it('should return true if "undefined" is passed', () => {
     expect(isStringEmpty()).toBe(true);
     expect(isStringEmpty(undefined)).toBe(true);

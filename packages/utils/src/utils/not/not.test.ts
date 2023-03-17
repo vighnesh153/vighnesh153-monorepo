@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { not } from './not';
 
-describe('Helpers > not tests', () => {
+describe('"not" tests', () => {
   it('should return true if null or undefined is provided', () => {
     expect(not(null)).toBe(true);
     expect(not(undefined)).toBe(true);

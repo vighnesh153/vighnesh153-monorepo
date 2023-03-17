@@ -13,7 +13,7 @@ import {
   WHITESPACE_CHARACTERS,
 } from './constants';
 
-describe('Utils > constants tests', () => {
+describe('Constants tests', () => {
   test('decimal digits', () => {
     expect(DIGITS).toBe('0123456789');
   });
