@@ -28,6 +28,7 @@ export * from './randomInteger';
 export * from './range';
 export * from './repeat';
 export * from './reverseString';
+export * from './shuffle';
 export * from './sieveOfEratosthenes';
 export * from './sleep';
 export * from './slugify';
