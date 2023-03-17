@@ -20,6 +20,7 @@ export * from './not';
 export * from './notification';
 export * from './nthPrime';
 export * from './previousPrime';
+export * from './primeFactorize';
 export * from './queue';
 export * from './range';
 export * from './repeat';
