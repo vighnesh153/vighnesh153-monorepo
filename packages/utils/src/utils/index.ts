@@ -7,6 +7,7 @@ export * from './dateTimeComparison';
 export * from './debounce';
 export * from './dedupeConsecutiveSubstring';
 export * from './deepFreeze';
+export * from './factorial';
 export * from './groupIterableItems';
 export * from './heap';
 export * from './isStringEmpty';
