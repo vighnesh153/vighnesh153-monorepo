@@ -8,6 +8,7 @@ export * from './debounce';
 export * from './dedupeConsecutiveSubstring';
 export * from './deepFreeze';
 export * from './factorial';
+export * from './gcd';
 export * from './groupIterableItems';
 export * from './heap';
 export * from './isEven';
