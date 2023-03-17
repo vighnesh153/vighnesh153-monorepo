@@ -48,8 +48,6 @@ Visit
 
 #### Tasks
 
-- Add all code from old @vighnesh153/utils repo to this repo
-  - Repo link: https://github.com/vighnesh153/js-utils
 - Commit message lint verification workflow on pull request
 - DallE images to instagram with quotes
   - Open AI API pricing: https://openai.com/api/pricing/
