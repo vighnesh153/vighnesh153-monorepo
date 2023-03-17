@@ -17,6 +17,7 @@ export * from './isPrime';
 export * from './isStringEmpty';
 export * from './lcm';
 export * from './memoize';
+export * from './milliseconds';
 export * from './nextPrime';
 export * from './not';
 export * from './notification';
