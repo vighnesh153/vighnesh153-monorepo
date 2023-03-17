@@ -18,6 +18,7 @@ export * from './memoize';
 export * from './nextPrime';
 export * from './not';
 export * from './notification';
+export * from './nthPrime';
 export * from './queue';
 export * from './range';
 export * from './repeat';
