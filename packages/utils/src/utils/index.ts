@@ -25,6 +25,7 @@ export * from './queue';
 export * from './range';
 export * from './repeat';
 export * from './reverseString';
+export * from './sieveOfEratosthenes';
 export * from './sleep';
 export * from './slugify';
 export * from './stack';
