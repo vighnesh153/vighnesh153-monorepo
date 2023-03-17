@@ -10,6 +10,7 @@ export * from './deepFreeze';
 export * from './factorial';
 export * from './groupIterableItems';
 export * from './heap';
+export * from './isEven';
 export * from './isStringEmpty';
 export * from './memoize';
 export * from './not';
