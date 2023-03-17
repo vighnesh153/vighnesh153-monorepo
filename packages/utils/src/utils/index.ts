@@ -12,6 +12,7 @@ export * from './groupIterableItems';
 export * from './heap';
 export * from './isEven';
 export * from './isOdd';
+export * from './isPrime';
 export * from './isStringEmpty';
 export * from './memoize';
 export * from './not';
