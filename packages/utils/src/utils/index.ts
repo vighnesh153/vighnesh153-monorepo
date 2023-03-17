@@ -24,6 +24,7 @@ export * from './nthPrime';
 export * from './previousPrime';
 export * from './primeFactorize';
 export * from './queue';
+export * from './randomInteger';
 export * from './range';
 export * from './repeat';
 export * from './reverseString';
