@@ -15,6 +15,7 @@ export * from './isEven';
 export * from './isOdd';
 export * from './isPrime';
 export * from './isStringEmpty';
+export * from './lcm';
 export * from './memoize';
 export * from './nextPrime';
 export * from './not';
