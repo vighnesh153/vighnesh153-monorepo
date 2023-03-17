@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { lcm } from './lcm';
 
-describe('Math > Numbers > lcm tests', () => {
+describe('Math > lcm tests', () => {
   it('should throw error if negative number is passed', () => {
     expect(() => lcm(-1)).toThrowErrorMatchingInlineSnapshot(
       '"Expected \\"n\\" to be a positive integer, found \\"-1\\""'

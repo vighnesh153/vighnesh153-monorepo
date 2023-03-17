@@ -5,7 +5,7 @@ async function flushPromises() {
   return Promise.resolve(setImmediate);
 }
 
-describe('Helpers > sleep tests', () => {
+describe('"sleep" tests', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });

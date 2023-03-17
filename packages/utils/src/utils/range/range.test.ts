@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { range } from './range';
 
-describe('Helpers > range tests', () => {
+describe('"range" tests', () => {
   it('should throw error if step is 0', () => {
     expect(() => Array.from(range(1, 10, 0))).toThrowErrorMatchingInlineSnapshot(
       `"Expected \\"step\\" to be non-zero, found \\"0\\""`

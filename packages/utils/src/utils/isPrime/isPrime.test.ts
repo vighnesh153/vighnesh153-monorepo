@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { isPrime } from './isPrime';
 
-describe('Math > Numbers > Primes > isPrime tests', () => {
+describe('Math > isPrime tests', () => {
   test.each([
     [1.5, false],
     [-2, false],

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { randomInteger } from './randomInteger';
 
-describe('Math > Random > randomInteger tests', () => {
+describe('Random > randomInteger tests', () => {
   it('should throw if start is not an integer', () => {
     expect(() => randomInteger(0.4, 3, 1)).toThrowErrorMatchingInlineSnapshot(
       '"Expected \\"start\\" to be an integer, but found \\"0.4\\""'

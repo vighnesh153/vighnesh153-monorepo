@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { sieveOfEratosthenes } from './sieveOfEratosthenes';
 
-describe('Math > Numbers > Primes > Sieves > Sieve of Eratosthenes tests', () => {
+describe('Math > Sieve of Eratosthenes tests', () => {
   it('should return empty array if limit is negative number', () => {
     expect(sieveOfEratosthenes(-10)).toStrictEqual([]);
   });

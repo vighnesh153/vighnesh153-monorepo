@@ -8,7 +8,7 @@ import {
   isArrayLessThanOrEqualTo,
 } from './arrayComparison';
 
-describe('Helpers > Array Utils > Comparison tests', () => {
+describe('Array Utils > Comparison tests', () => {
   test.each([
     [[1, 2, 3], [1, 2, 3], true],
     [[1, 2, 5], [1, 2, 4], false],
