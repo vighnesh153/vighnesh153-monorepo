@@ -3,6 +3,7 @@ export * from './binarySearch';
 export * from './binarySearchLeftmost';
 export * from './binarySearchRightmost';
 export * from './constants';
+export * from './dateTimeComparison';
 export * from './debounce';
 export * from './dedupeConsecutiveSubstring';
 export * from './groupIterableItems';
