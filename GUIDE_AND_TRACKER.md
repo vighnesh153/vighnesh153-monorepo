@@ -48,7 +48,7 @@ Visit
 
 #### Tasks
 
-- Commit message lint verification workflow on pull request
+- CommonJS imports of dependency when building CJS format
 - DallE images to instagram with quotes
   - Open AI API pricing: https://openai.com/api/pricing/
   - Instagram API: https://developers.facebook.com/docs/instagram/
@@ -93,6 +93,7 @@ Visit
   - Meme credit to
     - users
     - other portals
+  - Update welcome email template with link to vighnesh153.com/memes
 - CRON expression builder
 - Video ideas
   - How to use React context effectively
@@ -256,6 +257,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   - types
   - "type": "module"
   - "publishConfig": { "access": "public" },
+  - keywords
   - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
 - typescript
   - `@types/node`: Add to devDeps
