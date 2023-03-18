@@ -19,6 +19,9 @@ jobs:
           node-version: 18.x
           cache: 'npm'
 
+      # Added because of this: https://github.com/wagoid/commitlint-github-action/issues/560
+      - run: rm tsconfig.json
+
       - uses: wagoid/commitlint-github-action@v5
         with:
           configFile: ./commitlint.config.cjs
