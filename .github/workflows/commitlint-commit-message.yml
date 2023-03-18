@@ -17,9 +17,6 @@ jobs:
           node-version: 18.x
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Validate all commits from PR
         run: |
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
