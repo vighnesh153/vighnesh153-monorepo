@@ -17,8 +17,10 @@ jobs:
           node-version: 18.x
           cache: 'npm'
 
-      - name: Validate all commits from PR
-        run: |
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
-          npx commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
+      - uses: wagoid/commitlint-github-action@v5
+
+#      - name: Validate all commits from PR
+#        run: |
+#          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+#          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+#          npx commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
