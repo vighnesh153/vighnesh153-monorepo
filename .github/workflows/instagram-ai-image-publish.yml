@@ -28,16 +28,21 @@ jobs:
         run: ls -la && ls -la ./packages/ui-automation && pwd
 
       - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          install: false
-          browser: chrome
-          working-directory: packages/ui-automation
-          spec: cypress/e2e/instagram-ai-image.cy.ts
-          # Records to Cypress Cloud
-          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
-          record: true
+        run: npm -w @vighnesh153/ui-automation run cypress:run -- --spec "cypress/e2e/instagram-ai-image.cy.ts"
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
+
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v5
+#        with:
+#          install: false
+#          browser: chrome
+#          working-directory: packages/ui-automation
+#          spec: cypress/e2e/instagram-ai-image.cy.ts
+#          # Records to Cypress Cloud
+#          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+#          record: true
+#        env:
+#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
