@@ -1,6 +1,6 @@
 import { publishToInstagram } from '../helpers';
 
-const credentials = process.env.INSTAGRAM_CREDENTIALS;
+const credentials = Cypress.env('INSTAGRAM_CREDENTIALS');
 if (!credentials) {
   throw new Error('Credentials not found');
 }

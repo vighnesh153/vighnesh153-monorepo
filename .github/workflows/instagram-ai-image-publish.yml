@@ -30,7 +30,7 @@ jobs:
       - name: Cypress run
         run: npm -w @vighnesh153/ui-automation run cypress:run -- --spec "cypress/e2e/instagram-ai-image.cy.ts" --browser chrome
         env:
-          INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
+          CYPRESS_INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
 
 #      - name: Cypress run
 #        uses: cypress-io/github-action@v5
