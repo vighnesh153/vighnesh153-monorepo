@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the app
+      - name: Build the image download script
         run: npm -w @vighnesh153/ui-automation run build
 
       - name: Download image
@@ -32,7 +32,7 @@ jobs:
         with:
           install: false
           browser: chrome
-          working-directory: packages/instagram-api
+          working-directory: packages/ui-automation
           spec: cypress/e2e/instagram-ai-image.cy.ts
           # Records to Cypress Cloud
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
