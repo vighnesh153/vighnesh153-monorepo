@@ -28,7 +28,7 @@ jobs:
         run: ls -la && ls -la ./packages/ui-automation && pwd
 
       - name: Cypress run
-        run: npm -w @vighnesh153/ui-automation run cypress:run -- --spec "cypress/e2e/instagram-ai-image.cy.ts"
+        run: npm -w @vighnesh153/ui-automation run cypress:run -- --spec "cypress/e2e/instagram-ai-image.cy.ts" --browser chrome
         env:
           INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
 
