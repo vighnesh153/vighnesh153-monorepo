@@ -1,6 +1,4 @@
-function millis(fromSeconds: number): number {
-  return fromSeconds * 1000;
-}
+import { milliseconds } from '@vighnesh153/utils';
 
 export interface PublishToInstagramProps {
   timeout?: number;
@@ -10,7 +8,7 @@ export interface PublishToInstagramProps {
 }
 
 export function publishToInstagram(props: PublishToInstagramProps): void {
-  const { timeout = millis(20), username, password, filePath } = props;
+  const { timeout = milliseconds({ seconds: 20 }), username, password, filePath } = props;
 
   cy.visit('https://www.instagram.com');
 
@@ -36,12 +34,12 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
   // image uploaded. go to next
   cy.get('button:contains("Next")', { timeout }).click();
 
-  cy.wait(millis(3));
+  cy.wait(milliseconds({ seconds: 3 }));
 
   // don't apply any filters
   cy.get('button:contains("Next")').click();
 
-  cy.wait(millis(3));
+  cy.wait(milliseconds({ seconds: 3 }));
 
   // set the caption
   cy.get('[role="textbox"]').type('My caption');
