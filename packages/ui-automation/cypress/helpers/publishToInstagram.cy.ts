@@ -7,10 +7,11 @@ export interface PublishToInstagramProps {
   username: string;
   password: string;
   filePath: string;
+  caption: string;
 }
 
 export function publishToInstagram(props: PublishToInstagramProps): void {
-  const { timeout = millis(20), username, password, filePath } = props;
+  const { timeout = millis(20), username, password, filePath, caption } = props;
 
   cy.visit('https://www.instagram.com');
 
@@ -44,7 +45,7 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
   cy.wait(millis(3));
 
   // set the caption
-  cy.get('[role="textbox"]').type('My caption');
+  cy.get('[role="textbox"]').type(caption);
 
   // publish
   cy.get('[role="button"]:contains("Share")', { timeout }).click();

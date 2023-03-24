@@ -12,5 +12,6 @@ it('Publish AI image to instagram', () => {
     username,
     password,
     filePath: 'open-ai-image.png',
+    caption: '#art #abstract #ai',
   });
 });
