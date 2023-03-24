@@ -13,12 +13,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm -w @vighnesh153/ui-automation run build
+
+      - name: Download image
+        run: npm -w @vighnesh153/ui-automation run openai:random-image
+
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          build: |
-            npm -w @vighnesh153/ui-automation run build
-            npm -w @vighnesh153/ui-automation run openai:random-image
           browser: chrome
           project: ./packages/instagram-api
           config-file: ./packages/instagram-api/cypress.config.ts
