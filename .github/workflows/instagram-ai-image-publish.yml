@@ -28,11 +28,11 @@ jobs:
         run: ls -la && ls -la ./packages/ui-automation
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
+          install: false
           browser: chrome
-          project: ./packages/instagram-api
-          config-file: ./packages/instagram-api/cypress.config.ts
+          working-directory: packages/instagram-api
           spec: cypress/e2e/instagram-ai-image.cy.ts
           # Records to Cypress Cloud
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
