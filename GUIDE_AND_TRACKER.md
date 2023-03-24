@@ -54,7 +54,9 @@ Visit
   - Instagram API: https://developers.facebook.com/docs/instagram/
   - Video: https://www.youtube.com/watch?v=RA0C_Hh9g8Q
 - Random motivational quote post on instagram 
-- Random word and its meaning post on instagram 
+- Random word and its meaning post on instagram
+- Random animal image
+- Random joke
 - Imgur upload library
 - email template builder
   - Create welcome email template
@@ -273,6 +275,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 ### Todos for a new package
 
 - extends: Todos for a new project
+- tsup
 
 #### Todos for a new application
 

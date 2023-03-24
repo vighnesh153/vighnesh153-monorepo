@@ -1,9 +1,6 @@
 import Head from 'next/head';
-import { useGithubGist } from '../hooks';
 
 export default function Home() {
-  useGithubGist();
-
   return (
     <>
       <Head>

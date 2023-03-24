@@ -21,7 +21,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vighnesh153/fake-data": "*",
-    "@vighnesh153/github-gist": "0.4.0-alpha-07",
+    "@vighnesh153/github-gist": "*",
     "@vighnesh153/react-hooks": "*",
     "@vighnesh153/ui": "*",
     "@vighnesh153/utils": "*",
