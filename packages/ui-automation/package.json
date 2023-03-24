@@ -1,0 +1,41 @@
+{
+  "name": "@vighnesh153/ui-automation",
+  "description": "Browser automation",
+  "version": "0.4.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Vighnesh Raut",
+    "url": "https://vighnesh153.com",
+    "email": "me@vighnesh153.com"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
+  "scripts": {
+    "openai:random-image": "node ./dist/RandomImage.esm.js",
+    "build": "tsup",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "files": [],
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@vighnesh153/utils": "*",
+    "axios": "^1.3.4",
+    "cypress": "^12.8.1",
+    "openai": "^3.2.1"
+  }
+}
