@@ -21,6 +21,11 @@ jobs:
 
       - name: Download image
         run: npm -w @vighnesh153/ui-automation run openai:random-image
+        env:
+          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
+
+      - name: List down the directory
+        run: ls -la && ls -la ./packages/ui-automation
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
@@ -36,4 +41,3 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INSTAGRAM_CREDENTIALS: ${{ secrets.INSTAGRAM_CREDENTIALS_AI_IMAGE_BOT }}
-          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
