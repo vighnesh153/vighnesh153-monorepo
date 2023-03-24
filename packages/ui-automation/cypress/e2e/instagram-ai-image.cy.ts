@@ -1,10 +1,11 @@
 import { publishToInstagram } from '../helpers';
 
-function credentialsNotFound(): string[] {
+const credentials = process.env.INSTAGRAM_CREDENTIALS;
+if (!credentials) {
   throw new Error('Credentials not found');
 }
 
-const [username, password] = process.env.INSTAGRAM_CREDENTIALS?.split(' ') ?? credentialsNotFound();
+const [username, password] = credentials.split(' ');
 
 it('Publish AI image to instagram', () => {
   publishToInstagram({
