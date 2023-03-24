@@ -34,12 +34,12 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
   cy.get('input[type=file]', { timeout }).selectFile(filePath, { force: true });
 
   // image uploaded. go to next
-  cy.get('button:contains("Next")', { timeout }).click();
+  cy.get('[role="button"]:contains("Next")', { timeout }).click();
 
   cy.wait(millis(3));
 
   // don't apply any filters
-  cy.get('button:contains("Next")').click();
+  cy.get('[role="button"]:contains("Next")').click();
 
   cy.wait(millis(3));
 
@@ -47,7 +47,7 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
   cy.get('[role="textbox"]').type('My caption');
 
   // publish
-  cy.get('button:contains("Share")', { timeout }).click();
+  cy.get('[role="button"]:contains("Share")', { timeout }).click();
 
   // wait for some time for the post to be published
   cy.wait(10000);
