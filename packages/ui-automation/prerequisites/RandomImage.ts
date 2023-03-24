@@ -1,19 +1,19 @@
-import { OpenAIApi } from 'openai';
+import { Configuration, OpenAIApi } from 'openai';
 import { downloadImage } from '../utils';
 
-const openai = new OpenAIApi({
-  apiKey: process.env.OPEN_AI_API_KEY,
-  isJsonMime(mime: string): boolean {
-    return mime.includes('json');
-  },
+const apiKey = process.env.OPEN_AI_API_KEY;
+
+const configuration = new Configuration({
+  apiKey,
 });
+const openaiApi = new OpenAIApi(configuration);
 
 // Development url
 // const imageUrl = 'https://i.imgur.com/1XbZ92c.png';
 
 async function main() {
-  const res = await openai.createImage({
-    prompt: '',
+  const res = await openaiApi.createImage({
+    prompt: 'Random abstract art',
     n: 1,
     size: '512x512',
     response_format: 'url',
@@ -22,7 +22,14 @@ async function main() {
   const { url: imageUrl } = res.data.data[0];
   // eslint-disable-next-line no-console
   console.log(`Image URL: ${imageUrl}`);
-  await downloadImage(imageUrl as string, './open-ai-image.png');
+  await downloadImage({
+    url: imageUrl as string,
+    filePath: './open-ai-image.png',
+  }).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.log(`Error: ${e}`);
+    process.exit(0);
+  });
 }
 
 main().then(() => {
