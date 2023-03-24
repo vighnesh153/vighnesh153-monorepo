@@ -25,7 +25,7 @@ jobs:
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
 
       - name: List down the directory
-        run: ls -la && ls -la ./packages/ui-automation
+        run: ls -la && ls -la ./packages/ui-automation && pwd
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
