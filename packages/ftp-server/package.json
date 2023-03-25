@@ -19,7 +19,7 @@
     "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   },
   "scripts": {
-    "dev": "echo TODO",
+    "dev": "npm-run-all --parallel dev:*",
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
     "copy": "cpy --cwd=./src/client/dist . ../../../dist/__vighnesh153-ftp-client__/",
@@ -54,6 +54,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "cpy-cli": "^4.2.0",
     "eslint-config-vighnesh153": "*",
+    "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.9.5",
