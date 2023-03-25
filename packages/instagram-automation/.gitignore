@@ -1,3 +1,7 @@
 cypress/screenshots
 cypress/videos
+
 open-ai-image.png
+random-quote-image.png
+random-quote-image-text.png
+random-quote-image-updated.png

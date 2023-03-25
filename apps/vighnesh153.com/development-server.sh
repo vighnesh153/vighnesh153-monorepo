@@ -1,3 +1,7 @@
+# Automatically exit shell script on error
+# https://stackoverflow.com/questions/2870992/automatic-exit-from-bash-shell-script-on-error
+set -euxo pipefail
+
 #####################################
 ##  Checks if docker is installed  ##
 #####################################

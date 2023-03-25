@@ -48,12 +48,7 @@ Visit
 
 #### Tasks
 
-- CommonJS imports of dependency when building CJS format
-- DallE images to instagram with quotes
-  - Open AI API pricing: https://openai.com/api/pricing/
-  - Instagram API: https://developers.facebook.com/docs/instagram/
-  - Video: https://www.youtube.com/watch?v=RA0C_Hh9g8Q
-- Random motivational quote post on instagram 
+- CommonJS imports of dependency when building CJS format 
 - Random word and its meaning post on instagram
 - Random animal image
 - Random joke
@@ -130,6 +125,13 @@ Visit
 - Checkout libraries
   - Zustand
   - https://www.npmjs.com/package/magic-regexp
+- Learn image processing
+- Image processing libraries
+  - Jimp
+  - Sharp
+  - [gm](https://www.npmjs.com/package/gm)
+  - [@squoosh/lib](https://www.npmjs.com/package/@squoosh/lib)
+  - [@squoosh/cli](https://www.npmjs.com/package/@squoosh/cli)
 
 #### Embed GitHub files/commits/gists into html
 

@@ -1,12 +1,4 @@
-import { Configuration, OpenAIApi } from 'openai';
-import { downloadImage } from '../utils';
-
-const apiKey = process.env.OPEN_AI_API_KEY;
-
-const configuration = new Configuration({
-  apiKey,
-});
-const openaiApi = new OpenAIApi(configuration);
+import { downloadImage, openaiApi } from '../utils';
 
 // Development url
 // const imageUrl = 'https://i.imgur.com/1XbZ92c.png';
