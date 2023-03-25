@@ -60,9 +60,6 @@ const { GithubGist } = require('@vighnesh153/github-gist/dist/main.commonjs');
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
 <script src='https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/main.umd.js'></script>
 
-<!--Or a specific version-->
-<script src='https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist@0.1.0/dist/main.umd.js'></script>
-
 <script>
   const GithubGist = GithubGistUmd.GithubGist;
 
