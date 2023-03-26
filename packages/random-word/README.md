@@ -30,7 +30,7 @@ npx @vighnesh153/random-word
 <script src='https://cdn.jsdelivr.net/npm/@vighnesh153/random-word/dist/main.umd.js'></script>
 
 <script>
-  const randomWord = generateRandomWord();
+  const randomWord = RandomWord.generateRandomWord();
 
   // rest of the code below
 </script>
