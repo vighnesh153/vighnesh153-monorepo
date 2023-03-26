@@ -30,7 +30,7 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
     "eslint-config-vighnesh153": "*",
-    "tsup": "^6.6.3",
+    "tsup": "^6.7.0",
     "typescript": "^4.9.5"
   },
   "keywords": [],
