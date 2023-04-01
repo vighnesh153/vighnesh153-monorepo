@@ -1,0 +1,44 @@
+{
+  "name": "dictionary-api-lambda",
+  "version": "1.0.0",
+  "description": "A simple dictionary API",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "layer:setup": "rm -rf layer && mkdir -p layer/nodejs",
+    "layer:install:deps": "cp package.json ./layer/nodejs && cd layer/nodejs && npm install --omit=dev && rm package.json package-lock.json",
+    "layer:zip": "cd layer && zip -r nodejs.zip nodejs",
+    "layer": "run-s layer:setup layer:install:deps layer:zip",
+    "build": "tsup",
+    "sls:doctor": "serverless doctor",
+    "sls:deploy:pre-requisites": "run-p layer build",
+    "sls:deploy:dev": "run-s sls:deploy:pre-requisites && serverless deploy --stage dev --verbose",
+    "sls:deploy:prod": "run-s sls:deploy:pre-requisites && serverless deploy --stage prod --verbose",
+    "sls:remove": "serverless remove"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "serverless-http": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "npm-run-all": "^4.1.5",
+    "serverless": "^3.29.0",
+    "serverless-domain-manager": "6.4.4",
+    "tsup": "^6.7.0",
+    "typescript": "^4.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  }
+}
