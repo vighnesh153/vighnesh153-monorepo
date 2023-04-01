@@ -18,8 +18,6 @@
       - General errors >= 5, in past 10 minutes
   - Audit logs
     - Mongodb
-- SNS notification
-  - `user-created-notification`: Notification triggered when a user sign's up for the first time
 
 ### Commitlint
 
