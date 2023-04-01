@@ -21,9 +21,7 @@
     "build:watch:bundle": "tsup --watch",
     "build:watch:types": "tsc --watch",
     "build": "npm-run-all build:once:*",
-    "dev": "npm-run-all --parallel build:watch:*",
-    "test:watch": "vitest",
-    "test": "vitest run --passWithNoTests"
+    "dev": "npm-run-all --parallel build:watch:*"
   },
   "files": [
     "dist"
@@ -32,12 +30,11 @@
     "@ngneat/falso": "^6.4.0"
   },
   "devDependencies": {
-    "@types/node": "^18.14.1",
+    "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "tsup": "^6.7.0",
-    "typescript": "^4.9.5",
-    "vitest": "^0.28.5"
+    "typescript": "^5.0.3"
   }
 }
