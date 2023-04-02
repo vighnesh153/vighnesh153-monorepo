@@ -1,0 +1,21 @@
+{
+  "extends": "@vighnesh153/tsconfig/typescript-library.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "target": "ES2020",
+    "outDir": "dist"
+  },
+  "include": ["."],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    ".serverless",
+    ".webpack",
+    "_warmup",
+    ".vscode"
+  ]
+}
