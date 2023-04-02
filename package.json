@@ -7,11 +7,12 @@
   "workspaces": [
     "apps/*",
     "aws-serverless-tools/*",
-    "packages/*"
+    "packages/*",
+    "templates/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "sls:deploy:prod": "turbo run sls:deploy:prod",
+    "sls:deploy:prod": "turbo run sls:deploy:prod --filter=./aws-serverless-tools/*",
     "build:packages": "turbo run build --filter=./packages/*",
     "dev": "turbo run dev --parallel --no-cache",
     "dev:apps:vighnesh153.com": "npm run dev -- --filter=vighnesh153.com",
