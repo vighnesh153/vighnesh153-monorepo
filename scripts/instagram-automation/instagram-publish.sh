@@ -10,6 +10,12 @@ source "$(dirname "$0")/secrets.sh"
 
 source "$(dirname "$0")/random-image.sh"
 source "$(dirname "$0")/random-quote.sh"
+source "$(dirname "$0")/random-word.sh"
+
+downloadRandomImage
+generateRandomQuote
+generateRandomWord
 
 publishRandomImageToInstagram
 publishRandomQuoteToInstagram
+publishRandomWordToInstagram

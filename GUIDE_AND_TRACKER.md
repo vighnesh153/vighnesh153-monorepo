@@ -53,9 +53,18 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 #### Tasks
 
 - CommonJS imports of dependency when building CJS format 
-- Random word and its meaning post on instagram
 - Random animal image
 - Random joke
+- Add verify instagram login script
+- Open-dictionary
+  - List of english words: https://github.com/dwyl/english-words
+  - Urban dictionary api samples
+    - https://api.urbandictionary.com/v0/define?term=people
+    - https://api.urbandictionary.com/v0/random
+  - Fetching a meaning of a word
+```js
+fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw").then((res) => res.text()).then(console.log)
+```
 - Imgur upload library
 - email template builder
   - Create welcome email template
