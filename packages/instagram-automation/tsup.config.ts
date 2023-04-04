@@ -4,6 +4,7 @@ export default defineConfig(() => ({
   entry: {
     RandomImage: './prerequisites/RandomImage.ts',
     RandomQuote: './prerequisites/RandomQuote.ts',
+    RandomWord: './prerequisites/RandomWord.ts',
   },
   splitting: false,
   clean: true,
