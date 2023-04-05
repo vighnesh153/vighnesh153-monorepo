@@ -18,6 +18,7 @@
     "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   },
   "scripts": {
+    "openai:random-animal-image": "node ./dist/RandomAnimalImage.esm.js",
     "openai:random-image": "node ./dist/RandomImage.esm.js",
     "openai:random-quote": "node ./dist/RandomQuote.esm.js",
     "openai:random-word": "node ./dist/RandomWord.esm.js",

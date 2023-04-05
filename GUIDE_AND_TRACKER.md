@@ -52,10 +52,11 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 
 #### Tasks
 
-- CommonJS imports of dependency when building CJS format 
-- Random animal image
+- CommonJS imports of dependency when building CJS format
 - Random joke
 - Add verify instagram login script
+- Incorporate this in template and dictionary-api
+  - https://github.com/serverless/serverless/issues/11879
 - Open-dictionary
   - List of english words: https://github.com/dwyl/english-words
   - Urban dictionary api samples
