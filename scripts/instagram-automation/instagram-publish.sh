@@ -11,11 +11,14 @@ source "$(dirname "$0")/secrets.sh"
 source "$(dirname "$0")/random-image.sh"
 source "$(dirname "$0")/random-quote.sh"
 source "$(dirname "$0")/random-word.sh"
+source "$(dirname "$0")/random-animal-image.sh"
 
 downloadRandomImage
 generateRandomQuote
 generateRandomWord
+downloadRandomAnimalImage
 
 publishRandomImageToInstagram
 publishRandomQuoteToInstagram
 publishRandomWordToInstagram
+publishRandomAnimalImageToInstagram
