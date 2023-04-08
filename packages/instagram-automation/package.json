@@ -20,6 +20,8 @@
   "scripts": {
     "openai:random-animal-image": "node ./dist/RandomAnimalImage.esm.js",
     "openai:random-image": "node ./dist/RandomImage.esm.js",
+    "openai:random-joke": "node ./dist/RandomJoke.esm.js",
+    "openai:random-joke:dev": "run-s build openai:random-joke",
     "openai:random-quote": "node ./dist/RandomQuote.esm.js",
     "openai:random-word": "node ./dist/RandomWord.esm.js",
     "openai:random-word:dev": "run-s build openai:random-word",

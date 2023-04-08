@@ -56,9 +56,13 @@ async function createImageWithQuote(quoteText: string) {
 <html>
   <head>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
         width: 512px;
         height: 512px;
+        background: hsla(0, 0%, 0%, 0.6);
       }
       div {
         width: 512px;
@@ -68,8 +72,7 @@ async function createImageWithQuote(quoteText: string) {
         display: grid; 
         place-items: center;
         
-        color: white;
-        background: hsla(0, 0%, 0%, 0.6); 
+        color: white; 
         
         font-size: 40px; 
         font-style: italic;
