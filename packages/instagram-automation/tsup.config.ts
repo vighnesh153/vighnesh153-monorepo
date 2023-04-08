@@ -4,6 +4,7 @@ export default defineConfig(() => ({
   entry: {
     RandomAnimalImage: './prerequisites/RandomAnimalImage.ts',
     RandomImage: './prerequisites/RandomImage.ts',
+    RandomJoke: './prerequisites/RandomJoke.ts',
     RandomQuote: './prerequisites/RandomQuote.ts',
     RandomWord: './prerequisites/RandomWord.ts',
   },

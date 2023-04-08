@@ -13,12 +13,17 @@ source "$(dirname "$0")/random-quote.sh"
 source "$(dirname "$0")/random-word.sh"
 source "$(dirname "$0")/random-animal-image.sh"
 
-downloadRandomImage
-generateRandomQuote
-generateRandomWord
-downloadRandomAnimalImage
+#downloadRandomImage
+#generateRandomQuote
+#generateRandomWord
+#downloadRandomAnimalImage
+#downloadRandomJokeImage
 
-publishRandomImageToInstagram
-publishRandomQuoteToInstagram
-publishRandomWordToInstagram
-publishRandomAnimalImageToInstagram
+# Verify if instagram publish is working
+publishSampleImageToInstagram
+
+#publishRandomImageToInstagram
+#publishRandomQuoteToInstagram
+#publishRandomWordToInstagram
+#publishRandomAnimalImageToInstagram
+#publishRandomJokeImageToInstagram

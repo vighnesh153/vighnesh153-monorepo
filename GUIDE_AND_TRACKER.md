@@ -54,9 +54,13 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 
 - CommonJS imports of dependency when building CJS format
 - Random joke
+  - Profile setup
 - Add verify instagram login script
 - Incorporate this in template and dictionary-api
   - https://github.com/serverless/serverless/issues/11879
+- CORS anywhere lambda
+- Response cache for a url, headers, etc (lambda)
+  - Useful for accessing Github APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
 - Open-dictionary
   - List of english words: https://github.com/dwyl/english-words
   - Urban dictionary api samples
@@ -67,6 +71,7 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw").then((res) => res.text()).then(console.log)
 ```
 - Imgur upload library
+- Codepen clone for my personal HTML projects (no api just local code files)
 - email template builder
   - Create welcome email template
 - send email sqs worker
