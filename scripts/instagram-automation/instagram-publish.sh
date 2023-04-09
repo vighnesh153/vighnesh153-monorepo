@@ -9,9 +9,13 @@ set -euxo pipefail
 source "$(dirname "$0")/secrets.sh"
 
 source "$(dirname "$0")/random-image.sh"
+source "$(dirname "$0")/random-joke.sh"
 source "$(dirname "$0")/random-quote.sh"
 source "$(dirname "$0")/random-word.sh"
 source "$(dirname "$0")/random-animal-image.sh"
+source "$(dirname "$0")/sample-image.sh"
+
+npm -w @vighnesh153/instagram-automation run build
 
 #downloadRandomImage
 #generateRandomQuote
@@ -20,7 +24,7 @@ source "$(dirname "$0")/random-animal-image.sh"
 #downloadRandomJokeImage
 
 # Verify if instagram publish is working
-publishSampleImageToInstagram
+#publishSampleImageToInstagram
 
 #publishRandomImageToInstagram
 #publishRandomQuoteToInstagram

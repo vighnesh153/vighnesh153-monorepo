@@ -53,9 +53,6 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 #### Tasks
 
 - CommonJS imports of dependency when building CJS format
-- Random joke
-  - Profile setup
-- Add verify instagram login script
 - Incorporate this in template and dictionary-api
   - https://github.com/serverless/serverless/issues/11879
 - CORS anywhere lambda
