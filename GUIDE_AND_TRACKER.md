@@ -52,12 +52,11 @@ npx serverless create --template=aws-nodejs-typescript --path project-name
 
 #### Tasks
 
-- CommonJS imports of dependency when building CJS format
 - Incorporate this in template and dictionary-api
   - https://github.com/serverless/serverless/issues/11879
 - CORS anywhere lambda
 - Response cache for a url, headers, etc (lambda)
-  - Useful for accessing Github APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
+  - Useful for accessing GitHub APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
 - Open-dictionary
   - List of english words: https://github.com/dwyl/english-words
   - Urban dictionary api samples
