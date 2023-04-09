@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/react-use-global-state",
   "description": "A tiny global useState hook",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": false,
   "type": "module",
   "exports": {
