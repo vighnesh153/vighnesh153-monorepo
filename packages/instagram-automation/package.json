@@ -23,6 +23,7 @@
     "openai:random-joke": "node ./dist/RandomJoke.esm.js",
     "openai:random-joke:dev": "run-s build openai:random-joke",
     "openai:random-quote": "node ./dist/RandomQuote.esm.js",
+    "openai:random-quote:dev": "run-s build openai:random-quote",
     "openai:random-word": "node ./dist/RandomWord.esm.js",
     "openai:random-word:dev": "run-s build openai:random-word",
     "build": "tsup",

@@ -63,10 +63,13 @@ async function createImageWithQuote(quoteText: string) {
         width: 512px;
         height: 512px;
         background: hsla(0, 0%, 0%, 0.6);
+        
+        display: grid; 
+        place-items: center;
       }
       div {
-        width: 512px;
-        height: 512px;
+        width: 412px;
+        height: 412px;
         padding: 40px;
         
         display: grid; 
@@ -95,6 +98,10 @@ async function createImageWithQuote(quoteText: string) {
 async function main() {
   const quote = await fetchRandomQuote();
   const quoteText = quote.q;
+  // const quoteText = `Go and do the things you can't. That's how you get to do them.`;
+
+  // eslint-disable-next-line no-console
+  console.log(`Quote: ${quoteText}`);
 
   await downloadRandomImage();
 

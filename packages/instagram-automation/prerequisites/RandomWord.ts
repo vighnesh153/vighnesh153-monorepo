@@ -1,5 +1,6 @@
 import axios from 'axios';
 import nodeHtmlToImage from 'node-html-to-image';
+import { randomBgColor } from '../utils';
 
 interface RandomWord {
   definition: string;
@@ -53,7 +54,7 @@ async function createImageWithRandomWord({ word, definition }: RandomWord) {
         padding: 40px;
         
         color: black;
-        background: lightpink; 
+        background: ${randomBgColor()}; 
       }
       p {
         margin: 0;
@@ -72,8 +73,8 @@ async function createImageWithRandomWord({ word, definition }: RandomWord) {
   </head>
   <body>
     <div>
-      <p class="word">${word}</p>
-      <p class="definition">${definition}</p>
+      <p class='word'>${word}</p>
+      <p class='definition'>${definition}</p>
     </div>
   </body>
 </html>
