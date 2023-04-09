@@ -11,6 +11,6 @@ export default defineConfig(() => ({
   treeshake: true,
   format: ['esm'],
   outExtension() {
-    return { js: `.esm.js` };
+    return { js: `.js` };
   },
 }));
