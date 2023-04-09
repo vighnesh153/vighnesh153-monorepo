@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/random-word",
   "description": "Generate a random word",
-  "version": "0.4.0",
+  "version": "0.4.1-alpha-01",
   "license": "MIT",
   "private": false,
   "type": "module",
