@@ -1,5 +1,5 @@
 import nodeHtmlToImage from 'node-html-to-image';
-import { openaiApi } from '../utils';
+import { openaiApi, randomBgColor } from '../utils';
 
 async function createImageWithJoke(joke: string) {
   await nodeHtmlToImage({
@@ -16,7 +16,7 @@ async function createImageWithJoke(joke: string) {
         width: 512px;
         height: 512px;
         padding: 40px;
-        background: lightpink;
+        background: ${randomBgColor()};
         
         display: grid; 
         place-items: center;
