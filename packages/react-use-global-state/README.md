@@ -1,4 +1,4 @@
-# @vighnesh153/use-global-state
+# @vighnesh153/react-use-global-state
 
 [![npm](https://img.shields.io/npm/dt/@vighnesh153/react-use-global-state)](https://img.shields.io/npm/dt/@vighnesh153/react-use-global-state)
 [![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/react-use-global-state)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/react-use-global-state)
