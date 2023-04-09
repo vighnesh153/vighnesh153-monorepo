@@ -40,8 +40,6 @@ package:
 layers:
   NodeModules:
     package:
-      patterns:
-        - 'layer/**'
       artifact: layer/nodejs.zip
     name: dictionary-api-deps-${sls:stage}
 

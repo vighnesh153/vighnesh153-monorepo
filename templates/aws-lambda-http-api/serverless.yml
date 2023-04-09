@@ -35,22 +35,23 @@ custom:
     createRoute53Record: true
 
 package:
-  patterns:
-    - '!./**'
-    - dist/**
+  individually: true
 
 layers:
   NodeModules:
     package:
-      patterns:
-        - 'layer/**'
       artifact: layer/nodejs.zip
-    name: ${sls:stage}-#######################-deps
+    name: '#######################-deps-${sls:stage}'
 
 functions:
   api:
+    name: '#####################-${sls:stage}'
     handler: dist/index.handler
     events:
       - httpApi: '*'
     layers:
       - !Ref NodeModulesLambdaLayer
+    package:
+      patterns:
+        - '!./**'
+        - dist/**

@@ -16,6 +16,7 @@ npm i
   * `service-name`
   * custom domains
   * layers.NodeModules.name
+  * functions.api.name
 
 ## Running locally
 ```shell
