@@ -10,7 +10,7 @@ import {
 describe('Date-Time Utils > Date Time Comparison utils', () => {
   it('should have a function to check if 2 dates are same', () => {
     const date1 = new Date();
-    const date2 = new Date();
+    const date2 = new Date(date1);
     expect(areDatesEqual(date1, date2)).toBe(true);
   });
 
