@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "bin": "./dist/cli.esm.js",
-  "main": "./dist/main.esm.js",
+  "bin": "./dist/cli.js",
+  "main": "./dist/main.js",
   "types": "./dist/src/index.d.ts",
   "author": {
     "name": "Vighnesh Raut",

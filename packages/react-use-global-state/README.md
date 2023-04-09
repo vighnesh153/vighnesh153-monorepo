@@ -19,6 +19,18 @@ this in place of the ReactJS's builtin `Context` API
 npm install @vighnesh153/react-use-global-state
 ```
 
+## Import
+
+* ESM
+```ts
+import { useGlobalState } from "@vighnesh153/react-use-global-state";
+```
+
+* CommonJS
+```js
+const { useGlobalState } = require("@vighnesh153/react-use-global-state/dist/main.cjs");
+```
+
 ## Usage
 
 ```jsx

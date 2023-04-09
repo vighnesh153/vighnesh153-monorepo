@@ -15,7 +15,7 @@ export default defineConfig(() => [
     globalName: 'RandomWord',
     outExtension({ format }) {
       let js: string | undefined;
-      if (format === 'esm') js = `.esm.js`;
+      if (format === 'esm') js = `.js`;
       if (format === 'iife') js = `.umd.js`;
       return { js };
     },
@@ -29,6 +29,6 @@ export default defineConfig(() => [
     minify: true,
     treeshake: true,
     format: ['esm'],
-    outExtension: () => ({ js: `.esm.js` }),
+    outExtension: () => ({ js: `.js` }),
   },
 ]);

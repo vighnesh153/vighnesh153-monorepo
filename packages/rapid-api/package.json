@@ -3,7 +3,7 @@
   "description": "A wrapper over the HTTP RapidAPI endpoints",
   "version": "0.4.0",
   "private": false,
-  "main": "./dist/main.esm.js",
+  "main": "./dist/main.js",
   "types": "./dist/src/index.d.ts",
   "type": "module",
   "license": "MIT",

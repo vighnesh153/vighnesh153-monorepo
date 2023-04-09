@@ -51,7 +51,7 @@ import { GithubGist } from '@vighnesh153/github-gist';
 * CommonJS
 
 ```js
-const { GithubGist } = require('@vighnesh153/github-gist/dist/main.commonjs');
+const { GithubGist } = require('@vighnesh153/github-gist/dist/main.cjs');
 ```
 
 * Directly as a script tag (UMD modules)

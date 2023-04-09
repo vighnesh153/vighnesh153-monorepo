@@ -12,8 +12,8 @@ export default defineConfig(() => ({
   globalName: 'GithubGistUmd',
   outExtension({ format }) {
     let js: string | undefined;
-    if (format === 'cjs') js = `.commonjs.js`;
-    if (format === 'esm') js = `.esm.js`;
+    if (format === 'cjs') js = `.cjs`;
+    if (format === 'esm') js = `.js`;
     if (format === 'iife') js = `.umd.js`;
     return { js };
   },
