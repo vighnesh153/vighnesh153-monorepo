@@ -1,0 +1,48 @@
+{
+  "name": "cors-anywhere-lambda",
+  "version": "1.0.0",
+  "description": "A cors anywhere lambda for bypassing CORS block on links",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "layer:setup": "rm -rf layer && mkdir -p layer/nodejs",
+    "layer:install:deps": "cp package.json ./layer/nodejs && cd layer/nodejs && npm install --omit=dev && rm package.json package-lock.json",
+    "layer:zip": "cd layer && zip -r nodejs.zip nodejs",
+    "layer": "run-s layer:setup layer:install:deps layer:zip",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "local:server": "nodemon ./dist/localServer.cjs",
+    "local": "run-s build && run-p build:watch local:server",
+    "sls:doctor": "serverless doctor",
+    "sls:deploy:pre-requisites": "run-p layer build",
+    "sls:deploy:dev": "run-s sls:deploy:prod",
+    "sls:deploy:prod": "run-s sls:deploy:pre-requisites && serverless deploy --verbose",
+    "sls:remove": "serverless remove"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "serverless": "^3.29.0",
+    "serverless-domain-manager": "6.4.4",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  }
+}

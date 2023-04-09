@@ -44,12 +44,6 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 Visit
 [github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-turbo/actions/workflows/publish-pkg-to-npm.yml)
 
-### Creating a serverless typescript project
-
-```shell
-npx serverless create --template=aws-nodejs-typescript --path project-name
-```
-
 #### Tasks
 
 - Incorporate this in template and dictionary-api
