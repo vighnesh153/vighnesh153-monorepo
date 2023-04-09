@@ -46,8 +46,6 @@ Visit
 
 #### Tasks
 
-- Incorporate this in template and dictionary-api
-  - https://github.com/serverless/serverless/issues/11879
 - CORS anywhere lambda
 - Response cache for a url, headers, etc (lambda)
   - Useful for accessing GitHub APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)

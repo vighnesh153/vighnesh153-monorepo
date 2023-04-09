@@ -15,7 +15,7 @@
     "export": "email export"
   },
   "devDependencies": {
-    "@react-email/button": "^0.0.7",
+    "@react-email/button": "^0.0.8",
     "@react-email/container": "^0.0.8",
     "@react-email/head": "^0.0.5",
     "@react-email/heading": "^0.0.8",
@@ -23,15 +23,15 @@
     "@react-email/html": "^0.0.4",
     "@react-email/img": "^0.0.5",
     "@react-email/link": "^0.0.5",
-    "@react-email/preview": "^0.0.5",
-    "@react-email/render": "^0.0.6",
+    "@react-email/preview": "^0.0.6",
+    "@react-email/render": "^0.0.7",
     "@react-email/section": "^0.0.9",
     "@react-email/text": "^0.0.5",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "react-email": "^1.9.0",
+    "react-email": "^1.9.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   }
 }

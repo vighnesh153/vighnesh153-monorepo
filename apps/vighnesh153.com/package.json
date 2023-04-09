@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",
-    "@next/font": "^13.2.4",
+    "@next/font": "^13.3.0",
     "@types/node": "^18.15.11",
-    "@types/react": "^18.0.31",
+    "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "@vercel/analytics": "^0.1.11",
     "@vighnesh153/fake-data": "*",
@@ -28,14 +28,14 @@
     "@vighnesh153/ui": "*",
     "@vighnesh153/utils": "*",
     "eslint-config-vighnesh153": "*",
-    "mongodb": "^4.14.0",
-    "mongoose": "^6.10.4",
-    "next": "^13.2.4",
-    "next-auth": "^4.20.1",
+    "mongodb": "^4.15.0",
+    "mongoose": "^6.10.5",
+    "next": "^13.3.0",
+    "next-auth": "^4.22.0",
     "next-axiom": "^0.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.0.3",
+    "typescript": "^5.0.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "@types/uuid": "^9.0.1",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
-    "mongodb-memory-server": "^8.12.1",
-    "ts-jest": "^29.0.5"
+    "mongodb-memory-server": "^8.12.2",
+    "ts-jest": "^29.1.0"
   }
 }
