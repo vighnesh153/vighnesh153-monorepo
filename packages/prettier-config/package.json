@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/prettier-config",
   "description": "My preferred prettier configuration",
-  "version": "0.4.1-alpha-01",
+  "version": "0.4.1",
   "license": "MIT",
   "private": false,
   "main": "prettierConfig.json",
