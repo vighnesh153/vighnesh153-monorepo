@@ -12,6 +12,7 @@
         "MONGODB_URI",
         "NEXTAUTH_SECRET",
         "NEXTAUTH_URL",
+        "VERCEL_URL",
         "NODE_ENV"
       ],
       "outputs": [
