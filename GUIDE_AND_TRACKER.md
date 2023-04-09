@@ -46,26 +46,20 @@ Visit
 
 #### Tasks
 
-- CORS anywhere lambda
-- Response cache for a url, headers, etc (lambda)
-  - Useful for accessing GitHub APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
-- Open-dictionary
-  - List of english words: https://github.com/dwyl/english-words
-  - Urban dictionary api samples
-    - https://api.urbandictionary.com/v0/define?term=people
-    - https://api.urbandictionary.com/v0/random
-  - Fetching a meaning of a word
-```js
-fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw").then((res) => res.text()).then(console.log)
-```
-- Imgur upload library
+- Groups/Permissions
+- Projects
+  - Migrate projects to `vighnesh153.com/projects/*`
+- Blog:
+  - Create a blog page under `vighnesh153.com/blog`
+  - Migrate all blogs from `blog.vighnesh153.com` to `vighnesh153/blog`
+  - Javascript at scale
+    - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
+- Migrate `vighnesh153-main.vercel.app` to `vighnesh153.com`
+- Sub-domain auth
+  - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
 - Codepen clone for my personal HTML projects (no api just local code files)
 - email template builder
   - Create welcome email template
-- send email sqs worker
-- Trigger a user account created message in SNS
-- Cors Anywhere route
-  - vighnesh153.com/cors-anywhere
 - SECURITY.md
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
@@ -75,11 +69,6 @@ fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?
   - Pending events
     - USER_CREATED
       - Subscription 1: Send a welcome email
-- Projects
-- Groups/Permissions
-- Blog:
-  - Javascript at scale
-    - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
 - Notification system and processing
   - Retry mechanism
   - Email me with a retry link to retry the task and send debugging details
@@ -99,6 +88,23 @@ fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?
     - other portals
   - Update welcome email template with link to vighnesh153.com/memes
 - CRON expression builder
+- CORS anywhere lambda
+  - `cors-anywhere.aws.vighnesh153.com`
+- Response cache for a url, headers, etc (lambda)
+  - Useful for accessing GitHub APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
+- Open-dictionary
+  - List of english words: https://github.com/dwyl/english-words
+  - Urban dictionary api samples
+    - https://api.urbandictionary.com/v0/define?term=people
+    - https://api.urbandictionary.com/v0/random
+  - Fetching a meaning of a word
+```js
+fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw").then((res) => res.text()).then(console.log)
+```
+- send email sqs worker
+- Trigger a user account created message in SNS
+- Imgur upload library
+
 - Video ideas
   - How to use React context effectively
   - How to build and publish a typescript and React JS component library
