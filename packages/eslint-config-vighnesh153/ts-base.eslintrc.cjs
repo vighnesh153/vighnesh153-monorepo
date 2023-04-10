@@ -66,7 +66,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'no-underscore-dangle': 'error',
-    'no-unused-vars': 'error',
+    'no-unused-vars': 'off',
     'no-use-before-define': 'off',
     'no-useless-constructor': 'off',
     'no-void': 'off',

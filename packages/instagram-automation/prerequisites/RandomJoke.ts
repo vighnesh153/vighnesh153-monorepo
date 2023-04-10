@@ -1,5 +1,6 @@
 import nodeHtmlToImage from 'node-html-to-image';
-import { openaiApi, randomBgColor } from '../utils';
+import { shuffle } from '@vighnesh153/utils';
+import { jokes, openaiApi, randomBgColor } from '../utils';
 
 async function createImageWithJoke(joke: string) {
   await nodeHtmlToImage({
@@ -22,19 +23,17 @@ async function createImageWithJoke(joke: string) {
         place-items: center;
       }
       div {
-        width: 412px;
-        height: 412px;
+        width: 450px;
+        height: 450px;
         
         display: grid; 
         place-items: center;
         
         color: black;
-        background: lightpink; 
         
         font-size: 40px; 
-        font-style: italic;
         font-weight: 600;
-        text-align: center;
+        white-space: pre-line;
       }
     </style>
   </head>
@@ -48,7 +47,8 @@ async function createImageWithJoke(joke: string) {
   });
 }
 
-async function main() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function chatGptJoke(): Promise<string> {
   const chat = await openaiApi.createChatCompletion({
     messages: [
       {
@@ -64,7 +64,15 @@ async function main() {
     console.log('Joke is not defined');
     process.exit(1);
   }
-  await createImageWithJoke(joke);
+  return joke;
+}
+
+async function main() {
+  // const joke = await chatGptJoke();
+  // await createImageWithJoke(joke);
+
+  const joke = shuffle(jokes)[0];
+  await createImageWithJoke([joke.setup, joke.punchline].join('\n\n'));
 }
 
 main().then(() => {
