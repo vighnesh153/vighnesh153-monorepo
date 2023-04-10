@@ -39,6 +39,16 @@ You can use different variants of the configurations in different types of proje
 }
 ```
 
+- Pure Typescript library
+
+```json
+{
+  "extends": "@vighnesh153/tsconfig/typescript-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}
+```
+
 - ReactJS typescript library
 
 ```json
