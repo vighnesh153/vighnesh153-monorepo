@@ -60,6 +60,7 @@ Visit
 - Codepen clone for my personal HTML projects (no api just local code files)
 - email template builder
   - Create welcome email template
+- get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
 - SECURITY.md
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
