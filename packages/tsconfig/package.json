@@ -9,7 +9,8 @@
   "files": [
     "base.json",
     "nextjs.json",
-    "react-library.json"
+    "react-library.json",
+    "typescript-library.json"
   ],
   "repository": {
     "type": "git",
