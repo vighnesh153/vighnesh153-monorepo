@@ -12,10 +12,10 @@
     "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   },
   "files": [
-    "./next-ts.eslintrc.js",
-    "./react-ts-base.eslintrc.js",
-    "./react-ts-library.eslintrc.js",
-    "./ts-base.eslintrc.js"
+    "next-ts.eslintrc.cjs",
+    "react-ts-base.eslintrc.cjs",
+    "react-ts-library.eslintrc.cjs",
+    "ts-base.eslintrc.cjs"
   ],
   "keywords": [
     "eslint",
