@@ -78,7 +78,6 @@ async function createImageWithQuote(quoteText: string) {
         color: white; 
         
         font-size: 40px; 
-        font-style: italic;
         font-weight: 600;
         text-align: center;
         text-shadow: black 0 0 10px;
