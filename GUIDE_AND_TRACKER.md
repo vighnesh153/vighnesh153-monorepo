@@ -60,7 +60,9 @@ Visit
 - Codepen clone for my personal HTML projects (no api just local code files)
 - email template builder
   - Create welcome email template
-- get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
+- Instagram automation
+  - get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
+  - Store a list of quotes and background images in a json file for gottaHaveHighHopes insta account
 - SECURITY.md
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
