@@ -11,6 +11,14 @@ export interface PublishToInstagramProps {
 }
 
 export function publishToInstagram(props: PublishToInstagramProps): void {
+  // eslint-disable-next-line consistent-return
+  cy.on('uncaught:exception', (err) => {
+    if (err.message.includes('user agent does not support public key credentials')) {
+      // don't fail the test
+      return false;
+    }
+  });
+
   const { timeout = millis(20), username, password, filePath, caption } = props;
 
   cy.visit('https://www.instagram.com');
@@ -52,4 +60,20 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
 
   // wait for some time for the post to be published
   cy.wait(10000);
+
+  // close the popup
+  cy.get('[role="button"] [aria-label="Close"]', { timeout }).click();
+
+  cy.wait(3000);
+
+  // Open the menu
+  cy.get('svg[aria-label="Settings"]').click();
+
+  cy.wait(3000);
+
+  // Click the "Log out" button
+  cy.get('[role="button"]:contains("Log out")').click();
+
+  // wait for log out
+  cy.wait(5000);
 }
