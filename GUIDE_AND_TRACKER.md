@@ -63,6 +63,8 @@ Visit
 - Instagram automation
   - get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
   - Store a list of quotes and background images in a json file for gottaHaveHighHopes insta account
+  - Animal prompts
+    - [ANIMAL] playing in a [PARK|FOREST]
 - SECURITY.md
 - NextJS replacement tool (AWS deployment)
 - Video editing tool

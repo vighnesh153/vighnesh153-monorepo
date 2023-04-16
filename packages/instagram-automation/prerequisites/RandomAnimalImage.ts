@@ -1,11 +1,15 @@
 import { shuffle } from '@vighnesh153/utils';
-import { downloadImage, openaiApi } from '../utils';
+import { animals, buildCombinations, downloadImage, openaiApi } from '../utils';
 
-const location = ['in park', 'on grass', 'on table'];
+const locations = ['in park', 'on grass', 'on table'];
+
+const prompts = buildCombinations('ANIMAL playing', animals, 'ANIMAL').flatMap((s) =>
+  locations.map((location) => [s, location].join(' '))
+);
 
 async function main() {
   const res = await openaiApi.createImage({
-    prompt: ['random animal playing', shuffle(location)[0]].join(' '),
+    prompt: shuffle(prompts)[0],
     n: 1,
     size: '512x512',
     response_format: 'url',

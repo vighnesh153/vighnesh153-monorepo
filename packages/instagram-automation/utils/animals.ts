@@ -1,0 +1,16 @@
+export const animals = [
+  'cat',
+  'dog',
+  'tiger',
+  'lion',
+  'deer',
+  'giraffe',
+  'rabbit',
+  'bunny',
+  'squirrel',
+  'turtle',
+  'sparrow',
+  'pigeon',
+  'bear',
+  'elephant',
+];
