@@ -1,0 +1,17 @@
+export const pokemon = [
+  'Pikachu',
+  'Charmandar',
+  'Bulbasaur',
+  'Squirtle',
+  'Treeko',
+  'Grovyl',
+  'Charizard',
+  'Chikorita',
+  'Bayleaf',
+  'Piplup',
+  'Aipom',
+  'Chimchar',
+  'Swallow',
+  'Happini',
+  'Blaziken',
+];
