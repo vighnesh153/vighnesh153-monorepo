@@ -4,6 +4,7 @@
 
 - Vercel project: https://vercel.com/vighnesh153/vighnesh153-main
 - Logging, Monitoring: https://cloud.axiom.co/vighnesh153-GNaU/datasets
+- Cloudflare workers: https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
 
 ### Integrations
 
