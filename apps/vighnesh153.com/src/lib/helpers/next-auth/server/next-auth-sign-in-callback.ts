@@ -11,7 +11,7 @@ import {
   commitTransactionAndEnd,
   createNewSessionWithTransaction,
 } from '@lib/mongoose/session';
-import { createUserInfo } from '@lib/mongoose/entity-creation';
+import { createUserInfo, createUserPermissions } from '@lib/mongoose/entity-creation';
 import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
 import { updateUserInfo } from '@lib/mongoose/entity-updation';
 import { consoleLogger } from '@lib/helpers/consoleLogger';
@@ -66,6 +66,14 @@ async function signUp(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOr
 
   try {
     await createUserInfo(userInfo, session);
+    await createUserPermissions(
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        _id: userInfo._id,
+        permissions: [],
+      },
+      session
+    );
   } catch (error) {
     await handleSignUpFailure(session, error);
     throw error;
