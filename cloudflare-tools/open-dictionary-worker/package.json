@@ -1,0 +1,26 @@
+{
+  "name": "cloudflare-open-dictionary-worker",
+  "description": "A simple worker to fetch word definition from the vighnesh153/open-dictionary github repository",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Vighnesh Raut",
+    "url": "https://vighnesh153.com",
+    "email": "me@vighnesh153.com"
+  },
+  "scripts": {
+    "start": "dotenv -e ../../.env.local -- wrangler dev",
+    "cloudflare:workers:deploy:prod": "wrangler publish",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230404.0",
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "typescript": "^5.0.4",
+    "vitest": "^0.30.1",
+    "wrangler": "2.16.0"
+  }
+}

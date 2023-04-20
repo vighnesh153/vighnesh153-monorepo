@@ -7,13 +7,15 @@
   "workspaces": [
     "apps/*",
     "aws-serverless-tools/*",
+    "cloudflare-tools/*",
     "packages/*",
     "templates/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "sls:deploy:prod": "turbo run sls:deploy:prod --filter=./aws-serverless-tools/*",
+    "aws:sls:deploy:prod": "turbo run sls:deploy:prod --filter=./aws-serverless-tools/*",
     "build:packages": "turbo run build --filter=./packages/*",
+    "cloudflare:workers:deploy:prod": "turbo run cloudflare:workers:deploy:prod --filter=./cloudflare-tools/*",
     "dev": "turbo run dev --parallel --no-cache",
     "dev:apps:vighnesh153.com": "npm run dev -- --filter=vighnesh153.com",
     "dev:apps:playground": "npm run dev -- --filter=@vighnesh153/playground",
@@ -36,6 +38,7 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@vighnesh153/prettier-config": "*",
     "@vighnesh153/tsconfig": "*",
+    "dotenv-cli": "^7.2.1",
     "eslint-config-vighnesh153": "*",
     "husky": "^8.0.3",
     "lint-staged": "13.2.1",
