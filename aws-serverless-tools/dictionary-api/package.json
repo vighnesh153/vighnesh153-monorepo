@@ -22,7 +22,7 @@
     "local": "run-s build && run-p build:watch local:server",
     "sls:doctor": "serverless doctor",
     "sls:deploy:pre-requisites": "run-p layer build",
-    "sls:deploy:dev": "run-s sls:deploy:pre-requisites && serverless deploy --stage dev --verbose",
+    "sls:deploy:dev": "dotenv -e ../../.env.local -- run-s sls:deploy:pre-requisites && serverless deploy --stage dev --verbose",
     "sls:deploy:prod": "run-s sls:deploy:pre-requisites && serverless deploy --stage prod --verbose",
     "sls:remove": "serverless remove"
   },
