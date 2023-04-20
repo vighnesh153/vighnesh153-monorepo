@@ -40,6 +40,8 @@
       "persistent": true
     },
     "sls:deploy:prod": {
+    },
+    "cloudflare:workers:deploy:prod": {
     }
   }
 }
