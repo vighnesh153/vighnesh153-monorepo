@@ -4,10 +4,9 @@ import worker from '.';
 
 describe('Worker', () => {
   it('should return correct message if word is not provided', async () => {
-    const request = new Request(`https://open-dictionary.vighnesh153.workers.dev`);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const resp = await worker.fetch(request);
+    const resp = await worker.fetch({ url: `https://open-dictionary.vighnesh153.workers.dev` });
     if (resp) {
       const json = await resp.json();
       expect(json).toMatchObject({
@@ -17,10 +16,9 @@ describe('Worker', () => {
   });
 
   it('should return correct message if word is invalid english word', async () => {
-    const request = new Request(`https://open-dictionary.vighnesh153.workers.dev?word=vighnesh`);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const resp = await worker.fetch(request);
+    const resp = await worker.fetch({ url: `https://open-dictionary.vighnesh153.workers.dev?word=vighnesh` });
     if (resp) {
       const json = await resp.json();
       expect(json).toMatchObject({
@@ -31,10 +29,9 @@ describe('Worker', () => {
   });
 
   it('should return correct definition if word is correct english word', async () => {
-    const request = new Request(`https://open-dictionary.vighnesh153.workers.dev?word=b`);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const resp = await worker.fetch(request);
+    const resp = await worker.fetch({ url: `https://open-dictionary.vighnesh153.workers.dev?word=b` });
     if (resp) {
       const json = await resp.json();
       expect(json).toMatchObject({
