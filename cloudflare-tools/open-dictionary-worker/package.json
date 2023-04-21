@@ -17,6 +17,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230404.0",
     "@types/node": "*",
+    "@types/node-fetch": "^2.6.3",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "typescript": "^5.0.4",

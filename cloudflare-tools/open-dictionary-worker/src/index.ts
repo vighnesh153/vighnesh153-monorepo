@@ -1,4 +1,4 @@
-import { Request } from '@cloudflare/workers-types';
+import fetch, { Request, Response } from 'node-fetch';
 
 const prefix = 'https://raw.githubusercontent.com/vighnesh153/open-dictionary/main/data';
 const suffix = '_.json';
