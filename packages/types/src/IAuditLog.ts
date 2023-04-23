@@ -9,10 +9,7 @@ export interface IAuditLog {
   /**
    * Who performed the action
    */
-  actor: {
-    email: string;
-    name: string;
-  };
+  actor: { email: string };
 
   /**
    * When was the action performed.
