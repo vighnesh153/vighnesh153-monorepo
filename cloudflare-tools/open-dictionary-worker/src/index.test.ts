@@ -31,21 +31,31 @@ describe('Worker', () => {
   it('should return correct definition if word is correct english word', async () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const resp = await worker.fetch({ url: `https://open-dictionary.vighnesh153.workers.dev?word=b` });
+    const resp = await worker.fetch({ url: `https://open-dictionary.vighnesh153.workers.dev?word=ok` });
     if (resp) {
       const json = await resp.json();
       expect(json).toMatchObject({
-        word: 'b',
+        word: 'ok',
         etymologies: [
           {
-            description: [
-              'Modification of capital letter B by dropping its upper loop, from the Greek letter Β (B, “Beta”).',
+            description: [],
+            adjectives: [
+              {
+                description: 'ok',
+                definitionGroups: [
+                  {
+                    group: null,
+                    entries: [{ meaning: '(informal) Alternative letter-case form of OK', examples: [] }],
+                  },
+                ],
+              },
             ],
-            adjectives: [],
             adverbs: [],
             nouns: [],
             prepositions: [],
             verbs: [],
+            letter: [],
+            number: [],
           },
         ],
       });

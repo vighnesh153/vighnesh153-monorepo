@@ -34,18 +34,18 @@
     "changeStarToSpecificVersion": "node changeStarToSpecificVersion.js"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.5.1",
-    "@commitlint/config-conventional": "^17.4.4",
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
     "@vighnesh153/prettier-config": "*",
     "@vighnesh153/tsconfig": "*",
     "dotenv-cli": "^7.2.1",
     "eslint-config-vighnesh153": "*",
     "husky": "^8.0.3",
     "lint-staged": "13.2.1",
-    "npm-check-updates": "^16.10.7",
+    "npm-check-updates": "^16.10.9",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.7",
-    "rimraf": "^4.4.1",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
     "turbo": "*"
   },
   "engines": {
