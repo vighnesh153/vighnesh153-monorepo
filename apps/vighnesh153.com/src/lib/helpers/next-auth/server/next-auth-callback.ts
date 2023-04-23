@@ -17,6 +17,7 @@ import { updateUserInfo } from '@lib/mongoose/entity-updation';
 import { consoleLogger } from '@lib/helpers/consoleLogger';
 import { md5Hash } from '@lib/helpers/hashing';
 import { signInAuditLog } from '@lib/helpers/audit-log';
+import { getUserInfoByServerId } from '@lib/mongoose/entity-retrieval';
 
 export const AllowSignIn = true;
 export const DenySignIn = false;
@@ -38,7 +39,7 @@ function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<
     _id: email,
     clientId,
     userName,
-    permanentlyBanned: false,
+    completelyBanned: false,
     name,
     image,
     email,
@@ -90,14 +91,33 @@ async function signUp(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOr
  * @param userInfo
  */
 async function signIn(userInfo: Pick<IUserInfo, '_id' | 'name' | 'image' | 'email'>): Promise<SuccessOrFailureType> {
+  consoleLogger('Inside "signIn" function');
   const session = await createNewSessionWithTransaction();
   try {
+    consoleLogger('Inside "signIn" function: Fetching existing userInfo ⏳');
+    const existingUserInfo = await getUserInfoByServerId(userInfo._id, session);
+    consoleLogger('Inside "signIn" function: Fetched existing userInfo ✅');
+    if (existingUserInfo === null) {
+      consoleLogger('Inside "signIn" function: Existing user info not found. Denying sign-in');
+      await handleFailure(session, `Couldn't find existing user with id: "${userInfo._id}"`);
+      return 'failure';
+    }
+    // User Account is completely banned from signing in to "vighnesh153.com"
+    if (existingUserInfo.completelyBanned) {
+      consoleLogger('Inside "signIn" function: User account is completely banned. Denying sign-in');
+      log.info(`CompletelyBanned user with id: "${userInfo._id}" tried to log in`, { userInfo });
+      return 'failure';
+    }
+    consoleLogger('Inside "signIn" function: Updating userInfo...');
     await updateUserInfo(userInfo, session);
+    consoleLogger('Inside "signIn" function: Adding signInAuditLog...');
     await signInAuditLog(userInfo, session);
   } catch (error) {
+    consoleLogger('Inside "signIn" function: Some error occurred. Denying sign-in', error);
     await handleSignInFailure(session, error);
-    throw error;
+    return 'failure';
   }
+  consoleLogger('Inside "signIn" function: Sign-in successful');
   return commitTransactionAndEnd(session);
 }
 
@@ -108,40 +128,40 @@ async function signIn(userInfo: Pick<IUserInfo, '_id' | 'name' | 'image' | 'emai
  * @param account
  * @param profile
  */
-export const nextAuthSignInCallback: CallbacksOptions['signIn'] = async ({ account, profile }) => {
-  consoleLogger('Inside nextAuthSignInCallback');
+export const nextAuthCallback: CallbacksOptions['signIn'] = async ({ account, profile }) => {
+  consoleLogger('Inside nextAuthCallback');
   if (not(isGoogleProvider(account))) {
-    consoleLogger('Inside nextAuthSignInCallback: Not a google provider. Denying signing in');
+    consoleLogger('Inside nextAuthCallback: Not a google provider. Denying signing in');
     return DenySignIn;
   }
-  consoleLogger('Inside nextAuthSignInCallback: Profile is Google profile');
+  consoleLogger('Inside nextAuthCallback: Profile is Google profile');
   const googleProfile = profile as GoogleProfile;
   if (not(isGoogleProfileVerified(googleProfile))) {
-    consoleLogger('Inside nextAuthSignInCallback: Google Profile not verified. Denying signing in');
+    consoleLogger('Inside nextAuthCallback: Google Profile not verified. Denying signing in');
     return DenySignIn;
   }
-  consoleLogger('Inside nextAuthSignInCallback: Google profile is verified');
+  consoleLogger('Inside nextAuthCallback: Google profile is verified');
 
   const userInfo = constructUserInfoFromGoogleProfile(googleProfile);
 
   try {
-    consoleLogger('Inside nextAuthSignInCallback: Attempting to SignUp');
+    consoleLogger('Inside nextAuthCallback: Attempting to SignUp');
     const signUpSuccessful = (await signUp(userInfo)) === 'success';
-    consoleLogger(`Inside nextAuthSignInCallback: SignUp successful: ${signUpSuccessful}`);
+    consoleLogger(`Inside nextAuthCallback: SignUp successful: ${signUpSuccessful}`);
     return signUpSuccessful ? AllowSignIn : DenySignIn;
   } catch (error) {
-    consoleLogger(`Inside nextAuthSignInCallback: Error occurred while signing in: ${error}`);
+    consoleLogger(`Inside nextAuthCallback: Error occurred while signing in: ${error}`);
     if (not(isDuplicateMongooseDocument(error))) {
-      consoleLogger(`Inside nextAuthSignInCallback: Not duplicate document`);
+      consoleLogger(`Inside nextAuthCallback: Not duplicate document`);
       log.error('Failed to create new user', { error });
       return DenySignIn;
     }
 
-    consoleLogger(`Inside nextAuthSignInCallback: Attempting to SignIn`);
+    consoleLogger(`Inside nextAuthCallback: Attempting to SignIn`);
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { _id, name, email, image } = userInfo;
     // We need to pass only these 4 fields so that we don't override other fields like
-    // username, permanentlyBanned, etc.
+    // username, completelyBanned, etc.
     const signInSuccessful =
       (await signIn({
         _id,
@@ -149,7 +169,7 @@ export const nextAuthSignInCallback: CallbacksOptions['signIn'] = async ({ accou
         email,
         image,
       })) === 'success';
-    consoleLogger(`Inside nextAuthSignInCallback: SignIn successful: ${signInSuccessful}`);
+    consoleLogger(`Inside nextAuthCallback: SignIn successful: ${signInSuccessful}`);
     return signInSuccessful ? AllowSignIn : DenySignIn;
   }
 };

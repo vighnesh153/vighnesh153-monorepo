@@ -11,9 +11,9 @@
     "lint:fix": "eslint --fix .",
     "lint": "next lint",
     "test:frontend": "jest --config frontend.jest.config.ts",
-    "test:frontend-watch": "jest --config frontend.jest.config.ts --watch",
+    "test:frontend:watch": "jest --config frontend.jest.config.ts --watch",
     "test:backend": "jest --config backend.jest.config.ts",
-    "test:backend-watch": "jest --config backend.jest.config.ts --watch",
+    "test:backend:watch": "jest --config backend.jest.config.ts --watch",
     "test": "npm run test:frontend && npm run test:backend"
   },
   "dependencies": {
