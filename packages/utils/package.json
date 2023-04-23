@@ -32,7 +32,7 @@
     "dist"
   ],
   "devDependencies": {
-    "@types/node": "^18.15.11",
+    "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
@@ -40,6 +40,6 @@
     "ts-essentials": "^9.3.1",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "vitest": "^0.30.0"
+    "vitest": "^0.30.1"
   }
 }
