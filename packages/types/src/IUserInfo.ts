@@ -25,7 +25,7 @@ export interface IPublicUserInfo {
   /**
    * Whether this account is allowed to sign in to vighnesh153.com
    */
-  permanentlyBanned: boolean;
+  completelyBanned: boolean;
 
   /**
    * When was this entity created

@@ -48,6 +48,7 @@ Visit
 #### Tasks
 
 - Groups/Permissions
+  - When completely banning user, remember to remove their session from users to log them out
 - Projects
   - Migrate projects to `vighnesh153.com/projects/*`
 - Blog:
