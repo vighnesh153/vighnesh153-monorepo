@@ -1,8 +1,7 @@
 name: Cloudflare workers
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: read   # This is required for actions/checkout
