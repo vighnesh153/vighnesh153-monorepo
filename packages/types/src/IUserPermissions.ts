@@ -12,6 +12,13 @@ export interface IUserPermissions {
   permissions: Array<IAppPermission>;
 
   /**
+   * Ignore all the permissions specified in the above array.
+   *
+   * > User will still be able to do actions that don't require any permissions
+   */
+  softBan: boolean;
+
+  /**
    * When was this entity created
    */
   createdAt: Date;

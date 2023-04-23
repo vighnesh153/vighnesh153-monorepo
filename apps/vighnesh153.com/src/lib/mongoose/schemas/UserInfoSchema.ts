@@ -3,12 +3,13 @@ import { IUserInfo } from '@vighnesh153/types';
 
 export const UserInfoSchema = new Schema<IUserInfo>(
   {
-    _id: { type: String, required: true },
-    clientId: { type: String, required: true, unique: true },
-    userName: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    image: { type: String, required: true },
+    _id: { type: Schema.Types.String, required: true },
+    clientId: { type: Schema.Types.String, required: true, unique: true },
+    userName: { type: Schema.Types.String, required: true, unique: true },
+    permanentlyBanned: { type: Schema.Types.Boolean, default: false },
+    name: { type: Schema.Types.String, required: true },
+    email: { type: Schema.Types.String, required: true, unique: true },
+    image: { type: Schema.Types.String, required: true },
   },
   {
     collection: 'user_info',

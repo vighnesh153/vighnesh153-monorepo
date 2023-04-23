@@ -1,7 +1,7 @@
 import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserInfo } from '@vighnesh153/types';
 import { UserInfoModel } from '@lib/mongoose/models';
-import { signInAuditLog, updatedUserInfoAuditLog } from '@lib/helpers/audit-log';
+import { updatedUserInfoAuditLog } from '@lib/helpers/audit-log';
 
 type UpdateUserInfoReturnType = (MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo) | null;
 
@@ -12,12 +12,12 @@ type UpdateUserInfoReturnType = (MongooseDocument<unknown, unknown, IUserInfo> &
  * @param session
  */
 export async function updateUserInfo(
-  userInfo: Omit<IUserInfo, 'createdAt'>,
+  userInfo: Partial<Omit<IUserInfo, 'createdAt'>> & Pick<IUserInfo, '_id'>,
   session: ClientSession
 ): Promise<UpdateUserInfoReturnType> {
-  const filter = { email: userInfo.email };
+  // eslint-disable-next-line no-underscore-dangle
+  const filter = { _id: userInfo._id };
   const updatedUser = await UserInfoModel.findOneAndUpdate(filter, userInfo, { session });
-  await signInAuditLog(userInfo, session);
   await updatedUserInfoAuditLog(userInfo, session);
   return updatedUser;
 }

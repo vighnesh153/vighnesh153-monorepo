@@ -6,7 +6,6 @@ export const AuditLogSchema = new Schema<IAuditLog>(
     action: { type: String, required: true },
     actor: {
       email: { type: String, required: true },
-      name: { type: String, required: true },
     },
     fields: { type: Schema.Types.Mixed },
     message: { type: String, required: true },

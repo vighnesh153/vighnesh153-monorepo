@@ -5,6 +5,7 @@ export const UserPermissionsSchema = new Schema<IUserPermissions>(
   {
     _id: { type: Schema.Types.String, required: true },
     permissions: [{ type: String, enum: AppPermissions }],
+    softBan: { type: Schema.Types.Boolean, default: false },
   },
   {
     collection: 'user_permissions',

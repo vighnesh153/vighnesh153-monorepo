@@ -16,6 +16,7 @@ import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
 import { updateUserInfo } from '@lib/mongoose/entity-updation';
 import { consoleLogger } from '@lib/helpers/consoleLogger';
 import { md5Hash } from '@lib/helpers/hashing';
+import { signInAuditLog } from '@lib/helpers/audit-log';
 
 export const AllowSignIn = true;
 export const DenySignIn = false;
@@ -37,6 +38,7 @@ function constructUserInfoFromGoogleProfile(googleProfile: GoogleProfile): Omit<
     _id: email,
     clientId,
     userName,
+    permanentlyBanned: false,
     name,
     image,
     email,
@@ -70,6 +72,7 @@ async function signUp(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOr
       {
         // eslint-disable-next-line no-underscore-dangle
         _id: userInfo._id,
+        softBan: false,
         permissions: [],
       },
       session
@@ -86,10 +89,11 @@ async function signUp(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOr
  *
  * @param userInfo
  */
-async function signIn(userInfo: Omit<IUserInfo, 'createdAt'>): Promise<SuccessOrFailureType> {
+async function signIn(userInfo: Pick<IUserInfo, '_id' | 'name' | 'image' | 'email'>): Promise<SuccessOrFailureType> {
   const session = await createNewSessionWithTransaction();
   try {
     await updateUserInfo(userInfo, session);
+    await signInAuditLog(userInfo, session);
   } catch (error) {
     await handleSignInFailure(session, error);
     throw error;
@@ -134,7 +138,17 @@ export const nextAuthSignInCallback: CallbacksOptions['signIn'] = async ({ accou
     }
 
     consoleLogger(`Inside nextAuthSignInCallback: Attempting to SignIn`);
-    const signInSuccessful = (await signIn(userInfo)) === 'success';
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { _id, name, email, image } = userInfo;
+    // We need to pass only these 4 fields so that we don't override other fields like
+    // username, permanentlyBanned, etc.
+    const signInSuccessful =
+      (await signIn({
+        _id,
+        name,
+        email,
+        image,
+      })) === 'success';
     consoleLogger(`Inside nextAuthSignInCallback: SignIn successful: ${signInSuccessful}`);
     return signInSuccessful ? AllowSignIn : DenySignIn;
   }

@@ -12,7 +12,7 @@ type UpdateUserPermissionsReturnType = (MongooseDocument<unknown, unknown, IUser
  * @param session
  */
 export async function updateUserPermissions(
-  userPermissions: Omit<IUserPermissions, 'createdAt'>,
+  userPermissions: Partial<Omit<IUserPermissions, 'createdAt'>> & Pick<IUserPermissions, '_id'>,
   session: ClientSession
 ): Promise<UpdateUserPermissionsReturnType> {
   // eslint-disable-next-line no-underscore-dangle
