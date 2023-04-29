@@ -68,6 +68,8 @@ Visit
   - Animal prompts
     - [ANIMAL] playing in a [PARK|FOREST]
 - SECURITY.md
+- Docker tools
+  - Image compression
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
 - Audio and video libraries
@@ -269,35 +271,106 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 ### Todos for a new project
 
 - package.json config
-  - Name
-  - Author
-  - license
-  - description
-  - version
-  - scripts
-  - files
-  - private
-  - main
-  - types
-  - "type": "module"
-  - "publishConfig": { "access": "public" },
-  - keywords
-  - "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" },
-- typescript
-  - `@types/node`: Add to devDeps
-  - `@vighnesh153/tsconfig`: Add to devDeps
-  - `typescript`: Add to devDeps
-  - tsconfig
-- eslint configuration
-  - `eslint-config-vighnesh153`: Add to devDeps
-  - .eslintrc.js
-  - .eslintignore
+
+```json
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": {
+    "import": "./dist/main.js",
+    "require": "./dist/main.cjs"
+  },
+  "types": "./dist/src/index.d.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build:once:bundle": "tsup",
+    "build:once:types": "tsc",
+    "build:watch:bundle": "tsup --watch",
+    "build:watch:types": "tsc --watch",
+    "build": "npm-run-all build:once:*",
+    "dev": "npm-run-all --parallel build:watch:*",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vighnesh153/utils": "*"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "npm-run-all": "^4.1.5",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.30.1"
+  },
+  "keywords": [],
+  "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" }
+}
+```
+- tsconfig.json
+```json
+{
+  "extends": "@vighnesh153/tsconfig/base.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}
+```
+- .eslintrc.cjs
+```js
+module.exports = {
+  extends: ['vighnesh153/ts-base.eslintrc.cjs'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+};
+```
+- .eslintignore
+```ignore
+*.cjs
+*.js
+```
+
 - README.md
 
 ### Todos for a new package
 
 - extends: Todos for a new project
-- tsup
+- tsup.config.js
+```ts
+import { defineConfig } from 'tsup';
+
+export default defineConfig(() => ({
+  entry: {
+    main: './src/index.ts',
+  },
+  splitting: false,
+  clean: true,
+  minify: true,
+  treeshake: true,
+  format: ['cjs', 'esm'],
+  outExtension({ format }) {
+    let js: string | undefined;
+    if (format === 'cjs') js = `.cjs`;
+    if (format === 'esm') js = `.js`;
+    return { js };
+  },
+}));
+```
 
 #### Todos for a new application
 

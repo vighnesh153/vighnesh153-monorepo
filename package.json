@@ -8,6 +8,7 @@
     "apps/*",
     "aws-serverless-tools/*",
     "cloudflare-tools/*",
+    "docker-tools/*",
     "packages/*",
     "templates/*"
   ],
