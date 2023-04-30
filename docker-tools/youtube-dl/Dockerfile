@@ -10,11 +10,18 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | b
 RUN nvm install 18
 RUN nvm use 18
 
+RUN npm install -g @vighnesh153/ftp-server
+
 WORKDIR /app
 
-RUN mkdir src
+COPY ./ftp-server.sh ./ftp-server.sh
 
-COPY ./lol.js ./src/lol.js
+EXPOSE 3000
 
-RUN node ./src/lol.js
-#RUN youtube-dl --verbose "https://www.youtube.com/watch?v=2ueCyvI4DEo"
+# Single video
+#RUN youtube-dl --restrict-filenames "https://www.youtube.com/watch?v=siRtCe8ubUw"
+
+# Playlist
+#RUN youtube-dl --restrict-filenames "https://www.youtube.com/playlist?list=PLWjnUvtRvqfJ_KSltq8VHxGofttyge1rL"
+
+CMD ./ftp-server.sh
