@@ -14,9 +14,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "docker:build": "docker build -t vighnesh153/youtube-dl-ui:latest .",
-    "docker:run": "docker run --rm -i -p 3000:3000 vighnesh153/youtube-dl-ui",
-    "docker": "run-s docker:build docker:run"
+    "docker": "docker-compose up && docker-compose down --rmi"
   },
   "dependencies": {
   },
