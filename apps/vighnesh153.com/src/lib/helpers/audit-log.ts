@@ -1,7 +1,7 @@
 import { ClientSession } from 'mongoose';
 import { IUserInfo, IUserPermissions, SuccessOrFailureType } from '@vighnesh153/types';
 import { createAuditLog } from '@/lib/mongoose/entity-creation/createAuditLog';
-import { myPersonalizedEmail } from '@/lib/mongoose/constants';
+import { myPersonalizedEmail } from '@/modules/common';
 
 export async function signUpAuditLog(
   userInfo: Omit<IUserInfo, 'createdAt'>,

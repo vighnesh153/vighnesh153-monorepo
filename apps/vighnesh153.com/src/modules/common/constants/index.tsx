@@ -1,13 +1,19 @@
-import { FaStackOverflow, FaCodepen, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaCodepen, FaGithub, FaLinkedin, FaStackOverflow } from 'react-icons/fa';
+
+export const myPersonalizedEmail = 'me@vighnesh153.com';
+export const myGmailEmail = 'vighnesh.raut13@gmail.com';
+export const myGoogleEmail = 'rvighnesh@google.com';
+
+export const adminEmails = [myGmailEmail];
 
 export const commonConstants = {
   email: {
     personal: {
-      primary: 'vighnesh.raut13@gmail.com',
-      secondary: 'me@vighnesh153.com',
+      primary: myGmailEmail,
+      secondary: myPersonalizedEmail,
     },
     work: {
-      google: 'rvighnesh@google.com',
+      google: myGoogleEmail,
     },
   },
   appGithubLink: 'https://github.com/vighnesh153/vighnesh153-turbo',
@@ -45,6 +51,9 @@ export const commonConstants = {
     },
   ],
   pageLinks: {
+    common: {
+      adminSection: '/admin',
+    },
     homePage: {
       aboutSection: '/#about',
       experienceSection: '/#experience',

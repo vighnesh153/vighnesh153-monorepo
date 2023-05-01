@@ -31,7 +31,6 @@ export function NavDrawer({ isOpen, updateIsOpen, navItemSections }: NavDrawerPr
       sx={{
         height: '100%',
         position: 'relative',
-        background: theme.palette.primary.light,
       }}
     >
       <List
@@ -92,6 +91,7 @@ export function NavDrawer({ isOpen, updateIsOpen, navItemSections }: NavDrawerPr
         display: { xs: 'block', md: 'none' },
         '& .MuiDrawer-paper': {
           width: drawerWidth,
+          background: theme.palette.primary.light,
         },
       }}
     >
