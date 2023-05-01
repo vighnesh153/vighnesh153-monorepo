@@ -16,6 +16,7 @@ export function HideOnScroll(props: { children: React.ReactElement }) {
 
 export enum NavItemSection {
   About = 'about',
+  Admin = 'admin',
   Blog = 'blog',
   Projects = 'projects',
   Experience = 'experience',
@@ -35,6 +36,12 @@ export const navItems: NavItem[] = [
     id: NavItemSection.About,
     label: 'About',
     href: commonConstants.pageLinks.homePage.aboutSection,
+    type: 'link',
+  },
+  {
+    id: NavItemSection.Admin,
+    label: 'Admin',
+    href: commonConstants.pageLinks.common.adminSection,
     type: 'link',
   },
   {

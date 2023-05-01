@@ -1,5 +1,13 @@
 import { Box } from '@mui/material';
-import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, NavItemSection, SkipToMainContent } from '@/modules/common';
+import {
+  AsideEmailAddress,
+  AsideSocialLinks,
+  Head,
+  Navbar,
+  NavItemSection,
+  SkipToMainContent,
+  useIsAdmin,
+} from '@/modules/common';
 import { homeModuleConstants } from '../constants';
 import { AboutMeSection, ContactMeSection, ExperienceSection, FooterSection, IntroductionSection } from './sections';
 
@@ -13,7 +21,11 @@ const navItemSections: Array<NavItemSection> = [
   NavItemSection.ProfileAndSignIn,
 ];
 
+const adminNavItemSections: Array<NavItemSection> = [NavItemSection.Admin, ...navItemSections];
+
 export function HomePage() {
+  const { isAdmin } = useIsAdmin();
+
   return (
     <>
       <Head>
@@ -22,7 +34,7 @@ export function HomePage() {
       </Head>
 
       <SkipToMainContent />
-      <Navbar navItemSections={navItemSections} />
+      <Navbar navItemSections={isAdmin ? adminNavItemSections : navItemSections} />
       <AsideSocialLinks />
       <AsideEmailAddress />
 
