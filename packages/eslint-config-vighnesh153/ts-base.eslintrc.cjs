@@ -49,7 +49,7 @@ module.exports = {
         functions: 'never',
       },
     ],
-    // 'import/extensions': 'off',
+    'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off', // turning it off because it is not working ☹️
     // 'import/order': [

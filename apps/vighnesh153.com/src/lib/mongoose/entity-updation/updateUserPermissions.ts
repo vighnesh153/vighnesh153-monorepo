@@ -1,7 +1,7 @@
 import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserPermissions } from '@vighnesh153/types';
-import { UserPermissionsModel } from '@lib/mongoose/models';
-import { updateUserPermissionsAuditLog } from '@lib/helpers/audit-log';
+import { UserPermissionsModel } from '@/lib/mongoose/models';
+import { updateUserPermissionsAuditLog } from '@/lib/helpers/audit-log';
 
 type UpdateUserPermissionsReturnType = (MongooseDocument<unknown, unknown, IUserPermissions> & IUserPermissions) | null;
 

@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { BorderCornerAnimationLink, commonConstants, FocusDashedOutline } from '@modules/common';
-import { homeModuleConstants } from '@modules/home/constants';
+import { BorderCornerAnimationLink, commonConstants, FocusDashedOutline } from '@/modules/common';
+import { homeModuleConstants } from '@/modules/home/constants';
 
 const contactMeSection = homeModuleConstants.sections.contactMe;
 

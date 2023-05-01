@@ -1,7 +1,7 @@
 import { ClientSession } from 'mongoose';
 import { IAuditLog, SuccessOrFailureType } from '@vighnesh153/types';
-import { AuditLogModel } from '@lib/mongoose/models';
 import { log } from 'next-axiom';
+import { AuditLogModel } from '@/lib/mongoose/models';
 
 /**
  * Creates a new audit log and invokes the `save` method

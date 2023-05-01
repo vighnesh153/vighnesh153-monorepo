@@ -2,8 +2,8 @@ import { Account, User } from 'next-auth/core/types';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { randomEmail, randomImage, randomName, randomUuid } from '@vighnesh153/fake-data';
 
-import { updateUserInfo } from '@lib/mongoose/entity-updation';
-import { commitTransactionAndEnd, createNewSessionWithTransaction } from '@lib/mongoose/session';
+import { updateUserInfo } from '@/lib/mongoose/entity-updation';
+import { commitTransactionAndEnd, createNewSessionWithTransaction } from '@/lib/mongoose/session';
 
 import { AllowSignIn, DenySignIn, nextAuthCallback } from '../next-auth-callback';
 

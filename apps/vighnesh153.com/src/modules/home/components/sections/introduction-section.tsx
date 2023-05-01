@@ -1,7 +1,7 @@
 import React from 'react';
 import { alpha, Box, Typography, useTheme } from '@mui/material';
-import { homeModuleConstants } from '@modules/home/constants';
-import { BorderCornerAnimationLink, commonConstants, FocusDashedOutline } from '@modules/common';
+import { homeModuleConstants } from '@/modules/home/constants';
+import { BorderCornerAnimationLink, commonConstants, FocusDashedOutline } from '@/modules/common';
 
 const introductionSection = homeModuleConstants.sections.introduction;
 

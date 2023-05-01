@@ -3,7 +3,7 @@ import { TransactionOptions } from 'mongodb';
 import { log } from 'next-axiom';
 import { SuccessOrFailureType } from '@vighnesh153/types';
 
-import { mainDbConnection } from '@lib/mongoose/connection';
+import { mainDbConnection } from '@/lib/mongoose/connection';
 
 /**
  * Creates a new session instance

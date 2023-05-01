@@ -5,7 +5,7 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-import { mainDbConnection } from '@lib/mongoose/connection';
+import { mainDbConnection } from '@/lib/mongoose/connection';
 
 afterAll(async () => {
   // put your client disconnection code here, example with mongodb:

@@ -1,6 +1,6 @@
 import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserInfo } from '@vighnesh153/types';
-import { UserInfoModel } from '@lib/mongoose/models';
+import { UserInfoModel } from '@/lib/mongoose/models';
 
 type FetchUserInfoReturnType = MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo;
 

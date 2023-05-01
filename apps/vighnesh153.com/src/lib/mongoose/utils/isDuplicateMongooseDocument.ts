@@ -1,4 +1,4 @@
-import { MongooseDuplicateErrorCode } from '@lib/mongoose/constants';
+import { MongooseDuplicateErrorCode } from '@/lib/mongoose/constants';
 
 export function isDuplicateMongooseDocument(e: unknown): boolean {
   const error = e as { code: number } | undefined;

@@ -1,7 +1,7 @@
 import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserPermissions } from '@vighnesh153/types';
-import { UserPermissionsModel } from '@lib/mongoose/models';
-import { userPermissionsCreationAuditLog } from '@lib/helpers/audit-log';
+import { UserPermissionsModel } from '@/lib/mongoose/models';
+import { userPermissionsCreationAuditLog } from '@/lib/helpers/audit-log';
 
 type CreateUserPermissionsReturnType = MongooseDocument<unknown, unknown, IUserPermissions> & IUserPermissions;
 

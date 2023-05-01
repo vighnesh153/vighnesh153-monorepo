@@ -1,5 +1,5 @@
 import GoogleProvider from 'next-auth/providers/google';
-import { serverConfig } from '@modules/common/config/server-config';
+import { serverConfig } from '@/modules/common/config/server-config';
 
 export const NextAuthGoogleProvider = GoogleProvider({
   clientId: serverConfig.oauth.providers.google.clientId,

@@ -1,7 +1,7 @@
 import { alpha, Box, List, ListItem, Typography, useTheme } from '@mui/material';
-import { FocusDashedOutline, UnderlinedAnimationLink } from '@modules/common';
-import { SectionListItem } from '@modules/home/components/section-list-item';
-import { homeModuleConstants } from '@modules/home/constants';
+import { FocusDashedOutline, UnderlinedAnimationLink } from '@/modules/common';
+import { SectionListItem } from '@/modules/home/components/section-list-item';
+import { homeModuleConstants } from '@/modules/home/constants';
 import { HomePageSectionTitle } from '../section-title';
 
 const experienceSection = homeModuleConstants.sections.experience;

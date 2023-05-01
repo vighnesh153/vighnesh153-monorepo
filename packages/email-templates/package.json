@@ -30,7 +30,7 @@
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "react-email": "^1.9.1",
+    "react-email": "^1.9.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }

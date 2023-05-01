@@ -15,20 +15,20 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
-    "@mui/lab": "^5.0.0-alpha.127",
-    "@mui/material": "^5.12.1",
+    "@mui/lab": "^5.0.0-alpha.128",
+    "@mui/material": "^5.12.2",
     "@mui/utils": "^5.12.0",
     "clsx": "^1.2.1",
     "react-icons": "^4.8.0"
