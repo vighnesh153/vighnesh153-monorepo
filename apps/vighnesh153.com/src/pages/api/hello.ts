@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiResponse } from 'next';
 import { AxiomAPIRequest, withAxiom } from 'next-axiom';
-import { getNextRequestLoggerWithDefaults } from '@lib/next-request-logger';
+import { getNextRequestLoggerWithDefaults } from '@/lib/next-request-logger';
 
 type Data = {
   name: string;

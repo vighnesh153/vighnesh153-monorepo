@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, NavItemSection, SkipToMainContent } from '@modules/common';
+import { AsideEmailAddress, AsideSocialLinks, Head, Navbar, NavItemSection, SkipToMainContent } from '@/modules/common';
 import { homeModuleConstants } from '../constants';
 import { AboutMeSection, ContactMeSection, ExperienceSection, FooterSection, IntroductionSection } from './sections';
 

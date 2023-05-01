@@ -13,11 +13,16 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "es5"
   },
-  "include": ["src", "next-env.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

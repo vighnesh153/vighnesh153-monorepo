@@ -10,14 +10,14 @@ import {
   abortTransactionAndEnd,
   commitTransactionAndEnd,
   createNewSessionWithTransaction,
-} from '@lib/mongoose/session';
-import { createUserInfo, createUserPermissions } from '@lib/mongoose/entity-creation';
-import { isDuplicateMongooseDocument } from '@lib/mongoose/utils';
-import { updateUserInfo } from '@lib/mongoose/entity-updation';
-import { consoleLogger } from '@lib/helpers/consoleLogger';
-import { md5Hash } from '@lib/helpers/hashing';
-import { signInAuditLog } from '@lib/helpers/audit-log';
-import { getUserInfoByServerId } from '@lib/mongoose/entity-retrieval';
+} from '@/lib/mongoose/session';
+import { createUserInfo, createUserPermissions } from '@/lib/mongoose/entity-creation';
+import { isDuplicateMongooseDocument } from '@/lib/mongoose/utils';
+import { updateUserInfo } from '@/lib/mongoose/entity-updation';
+import { consoleLogger } from '@/lib/helpers/consoleLogger';
+import { md5Hash } from '@/lib/helpers/hashing';
+import { signInAuditLog } from '@/lib/helpers/audit-log';
+import { getUserInfoByServerId } from '@/lib/mongoose/entity-retrieval';
 
 export const AllowSignIn = true;
 export const DenySignIn = false;

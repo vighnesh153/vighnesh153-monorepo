@@ -5,7 +5,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const Dynamic404Page = dynamic(() => import('@modules/common/components/404-page'), {
+const Dynamic404Page = dynamic(() => import('@/modules/common/components/404-page'), {
   ssr: false,
 });
 

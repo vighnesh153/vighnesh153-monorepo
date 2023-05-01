@@ -1,8 +1,8 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 
-import { nextAuthMongoDbClientPromise } from '@lib/mongodb-next-auth';
-import { NextAuthGoogleProvider, nextAuthCallback } from '@lib/helpers/next-auth/server';
+import { nextAuthMongoDbClientPromise } from '@/lib/mongodb-next-auth';
+import { NextAuthGoogleProvider, nextAuthCallback } from '@/lib/helpers/next-auth/server';
 
 // const useSecureCookies = Boolean(process.env.VERCEL_URL);
 

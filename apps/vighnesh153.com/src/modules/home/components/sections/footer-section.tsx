@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { FocusDashedOutline, SocialLinks } from '@modules/common';
+import { FocusDashedOutline, SocialLinks } from '@/modules/common';
 import { homeModuleConstants } from '../../constants';
 
 const footerSection = homeModuleConstants.sections.footer;

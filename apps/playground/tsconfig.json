@@ -5,8 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@lib/*": ["./src/lib/*"],
-      "@modules/*": ["./src/modules/*"],
+      "@/*": ["./src/*"],
     }
   }
 }

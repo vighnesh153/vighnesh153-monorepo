@@ -1,7 +1,7 @@
 import { ClientSession, Document as MongooseDocument } from 'mongoose';
 import { IUserInfo } from '@vighnesh153/types';
-import { UserInfoModel } from '@lib/mongoose/models';
-import { updatedUserInfoAuditLog } from '@lib/helpers/audit-log';
+import { UserInfoModel } from '@/lib/mongoose/models';
+import { updatedUserInfoAuditLog } from '@/lib/helpers/audit-log';
 
 type UpdateUserInfoReturnType = (MongooseDocument<unknown, unknown, IUserInfo> & IUserInfo) | null;
 

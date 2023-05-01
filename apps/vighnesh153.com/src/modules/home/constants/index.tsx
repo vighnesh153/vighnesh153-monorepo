@@ -1,4 +1,4 @@
-import { commonConstants, MuiNextLink, UnderlinedAnimationLink } from '@modules/common';
+import { commonConstants, MuiNextLink, UnderlinedAnimationLink } from '@/modules/common';
 
 const appstoreDeveloperConsole = (
   <UnderlinedAnimationLink href="https://developer.amazon.com/apps-and-games" target="_blank">

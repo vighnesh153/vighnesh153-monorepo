@@ -1,6 +1,6 @@
 import { Box, List, Typography, useTheme } from '@mui/material';
-import { FocusDashedOutline } from '@modules/common';
-import { homeModuleConstants } from '@modules/home/constants';
+import { FocusDashedOutline } from '@/modules/common';
+import { homeModuleConstants } from '@/modules/home/constants';
 import { HomePageSectionTitle } from '../section-title';
 import { SectionListItem } from '../section-list-item';
 

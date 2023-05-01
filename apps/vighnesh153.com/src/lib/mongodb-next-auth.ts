@@ -2,7 +2,7 @@
 
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
 import { MongoClient, MongoClientOptions } from 'mongodb';
-import { serverConfig } from '@modules/common/config/server-config';
+import { serverConfig } from '@/modules/common/config/server-config';
 
 const uri = serverConfig.db.mongodb.connectionUri;
 const options: MongoClientOptions = {};
