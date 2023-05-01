@@ -16,7 +16,6 @@
     "test": "npm run test:frontend && npm run test:backend"
   },
   "dependencies": {
-    "@next/font": "^13.3.2",
     "@types/node": "*",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
