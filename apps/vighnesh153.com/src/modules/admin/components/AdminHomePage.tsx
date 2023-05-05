@@ -1,35 +1,20 @@
-import { Box } from '@mui/material';
-import { Head, Navbar, NavItemSection } from '@/modules/common';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { CircularProgress } from '@mui/material';
 
 import { adminModuleConstants } from '../constants';
-import { AdminPageGuard } from './AdminPageGuard';
-import { AdminSideNavigation } from './AdminSideNavigation';
-
-const navItemSections: Array<NavItemSection> = [NavItemSection.ProfileAndSignIn];
+import { AdminPageLayout } from './AdminPageLayout';
 
 export function AdminHomePage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace(adminModuleConstants.routes.dashboard);
+  }, [router]);
+
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    <AdminPageGuard>
-      <Head>
-        <title>{adminModuleConstants.pageTitle}</title>
-      </Head>
-
-      <Navbar navItemSections={navItemSections} />
-
-      <Box
-        component="main"
-        sx={{
-          pt: 12,
-          px: '2rem',
-          mx: 'auto',
-          maxWidth: 1200,
-          display: 'flex',
-        }}
-      >
-        <AdminSideNavigation />
-      </Box>
-    </AdminPageGuard>
+    <AdminPageLayout>
+      <CircularProgress color="secondary" />
+    </AdminPageLayout>
   );
 }

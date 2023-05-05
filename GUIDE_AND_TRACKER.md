@@ -40,6 +40,9 @@ ncu -u
 
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
 
+### Serverless
+* AWS credentials: https://www.serverless.com/framework/docs/providers/aws/guide/credentials/
+
 ### Publishing packages
 
 Visit
