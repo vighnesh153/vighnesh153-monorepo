@@ -35,8 +35,8 @@
     "changeStarToSpecificVersion": "node changeStarToSpecificVersion.js"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.1",
-    "@commitlint/config-conventional": "^17.6.1",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
     "@vighnesh153/prettier-config": "*",
     "@vighnesh153/tsconfig": "*",
     "dotenv-cli": "^7.2.1",
