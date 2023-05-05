@@ -8,13 +8,18 @@ import { AdminSideNavigation } from './AdminSideNavigation';
 
 const navItemSections: Array<NavItemSection> = [NavItemSection.ProfileAndSignIn];
 
-export function AdminPageLayout(props: PropsWithChildren) {
+export interface AdminPageLayoutProps {
+  pageTitle?: string;
+}
+
+export function AdminPageLayout(props: PropsWithChildren<AdminPageLayoutProps>) {
+  const { pageTitle = adminModuleConstants.pageTitles.home, children } = props;
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     <AdminPageGuard>
       <Head>
-        <title>{adminModuleConstants.pageTitle}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Navbar navItemSections={navItemSections} />
@@ -32,7 +37,7 @@ export function AdminPageLayout(props: PropsWithChildren) {
       >
         <AdminSideNavigation />
 
-        <Box sx={{ flexGrow: 1 }}>{props.children}</Box>
+        <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
     </AdminPageGuard>
   );
