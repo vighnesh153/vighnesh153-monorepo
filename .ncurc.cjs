@@ -3,5 +3,5 @@
  */
 module.exports = {
   'upgrade': true,
-  'reject': ['serverless-domain-manager'],
+  'reject': [],
 };
