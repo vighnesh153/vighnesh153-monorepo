@@ -1,5 +1,9 @@
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Dashboard as DashboardIcon, Gavel as GavelIcon } from '@mui/icons-material';
+
+import { MuiNextLink } from '@/modules/common';
+
+import { adminModuleConstants } from '../constants';
 import { useAdminSideNavigation } from '../hooks';
 
 export function AdminSideNavigation() {
@@ -13,7 +17,7 @@ export function AdminSideNavigation() {
     >
       <List>
         <ListItem>
-          <ListItemButton>
+          <ListItemButton component={MuiNextLink} href={adminModuleConstants.routes.dashboard}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
@@ -21,7 +25,7 @@ export function AdminSideNavigation() {
           </ListItemButton>
         </ListItem>
         <ListItem>
-          <ListItemButton>
+          <ListItemButton component={MuiNextLink} href={adminModuleConstants.routes.permissions}>
             <ListItemIcon>
               <GavelIcon />
             </ListItemIcon>
