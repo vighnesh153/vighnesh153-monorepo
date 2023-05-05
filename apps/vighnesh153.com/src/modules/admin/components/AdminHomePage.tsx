@@ -1,7 +1,33 @@
-import { useAdminPageGuard } from '../hooks';
+import { Box } from '@mui/material';
+import { Head, Navbar, NavItemSection } from '@/modules/common';
+
+import { adminModuleConstants } from '../constants';
+import { AdminPageGuard } from './AdminPageGuard';
+import { AdminSideNavigation } from './AdminSideNavigation';
+
+const navItemSections: Array<NavItemSection> = [NavItemSection.ProfileAndSignIn];
 
 export function AdminHomePage() {
-  useAdminPageGuard();
+  return (
+    <AdminPageGuard>
+      <Head>
+        <title>{adminModuleConstants.pageTitle}</title>
+      </Head>
 
-  return <h1>Hi from admin page</h1>;
+      <Navbar navItemSections={navItemSections} />
+
+      <Box
+        component="main"
+        sx={{
+          pt: 12,
+          px: '2rem',
+          mx: 'auto',
+          maxWidth: 1200,
+          display: 'flex',
+        }}
+      >
+        <AdminSideNavigation />
+      </Box>
+    </AdminPageGuard>
+  );
 }

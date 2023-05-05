@@ -5,6 +5,7 @@ const primaryTextColor = 'hsl(226, 70%, 88%)';
 
 export const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: 'hsl(216, 65%, 11%)',
       light: 'hsl(218, 58%, 20%)',

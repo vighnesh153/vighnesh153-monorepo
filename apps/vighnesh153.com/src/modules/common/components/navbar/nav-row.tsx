@@ -34,8 +34,8 @@ export function Navbar({ navItemSections }: NavbarProps) {
         <HideOnScroll>
           <AppBar
             component="nav"
-            color="primary"
             sx={{
+              background: theme.palette.primary.main,
               boxShadow: getAppBarBoxShadow(),
             }}
           >

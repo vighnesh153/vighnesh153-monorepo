@@ -1,1 +1,1 @@
-export * from './useAdminPageGuard';
+export * from './useAdminSideNavigation';
