@@ -1,8 +1,0 @@
-{
-  "extends": "@vighnesh153/tsconfig/react-library.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["dist", "build", "node_modules"],
-  "compilerOptions": {
-    "jsx": "react"
-  }
-}
