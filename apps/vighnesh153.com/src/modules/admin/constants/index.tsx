@@ -1,1 +1,3 @@
-export const adminModuleConstants = {};
+export const adminModuleConstants = {
+  pageTitle: 'Admin panel | Vighnesh Raut',
+};
