@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.1",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.3",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
@@ -38,9 +38,9 @@
     "@emotion/styled": "^11.10.8",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
-    "@mui/lab": "^5.0.0-alpha.128",
-    "@mui/material": "^5.12.2",
-    "@mui/utils": "^5.12.0",
+    "@mui/lab": "^5.0.0-alpha.129",
+    "@mui/material": "^5.12.3",
+    "@mui/utils": "^5.12.3",
     "clsx": "^1.2.1",
     "react-icons": "^4.8.0"
   }
