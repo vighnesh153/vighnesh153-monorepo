@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import '@vighnesh153/ui/src/imports';
+import '@vighnesh153/ui/sideEffects';
 
 import { VighneshThemeProvider } from '@vighnesh153/ui';
 import { Analytics } from '@vercel/analytics/react';

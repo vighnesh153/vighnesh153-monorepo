@@ -1,7 +1,10 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig(() => ({
-  entry: { main: './src/index.ts' },
+  entry: {
+    main: './src/index.ts',
+    sideEffects: './src/imports/index.ts',
+  },
   splitting: false,
   clean: true,
   minify: true,

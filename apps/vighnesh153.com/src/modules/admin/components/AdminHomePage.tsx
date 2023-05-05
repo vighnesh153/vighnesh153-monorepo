@@ -9,6 +9,8 @@ const navItemSections: Array<NavItemSection> = [NavItemSection.ProfileAndSignIn]
 
 export function AdminHomePage() {
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <AdminPageGuard>
       <Head>
         <title>{adminModuleConstants.pageTitle}</title>
