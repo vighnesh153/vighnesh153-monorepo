@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/node": "*",
     "@types/react": "^18.2.5",
-    "@types/react-dom": "^18.2.3",
+    "@types/react-dom": "^18.2.4",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
