@@ -5,13 +5,13 @@
   "version": "0.4.4",
   "type": "module",
   "exports": {
-    "./sideEffects": {
-      "import": "./dist/sideEffects.js",
-      "require": "./dist/sideEffects.cjs"
-    },
     ".": {
       "import": "./dist/main.js",
       "require": "./dist/main.cjs"
+    },
+    "./sideEffects": {
+      "import": "./dist/sideEffects.js",
+      "require": "./dist/sideEffects.cjs"
     }
   },
   "types": "./dist/src/index.d.ts",

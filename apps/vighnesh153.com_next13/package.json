@@ -1,0 +1,26 @@
+{
+  "name": "vighnesh153.com_next13",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@vighnesh153/ui": "*",
+    "@vercel/analytics": "^1.0.1",
+    "next": "^13.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "typescript": "^5.0.4"
+  }
+}
