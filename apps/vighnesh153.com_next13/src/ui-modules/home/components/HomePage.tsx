@@ -2,8 +2,15 @@
 
 import { Box } from '@mui/material';
 
-import { SkipToMainContent, TopNavigationBar } from '@/ui-modules/common/components';
+import {
+  AsideEmailAddress,
+  AsideSocialLinks,
+  SkipToMainContent,
+  TopNavigationBar,
+} from '@/ui-modules/common/components';
 import { NavItemType } from '@/ui-modules/common/types';
+
+import { FooterSection } from './FooterSection';
 
 const navItemTypes: Array<NavItemType> = [
   NavItemType.About,
@@ -22,18 +29,24 @@ export function HomePage() {
     <>
       <SkipToMainContent />
       <TopNavigationBar navItemTypes={navItemTypes} />
+      <AsideSocialLinks />
+      <AsideEmailAddress />
 
-      <Box component="main" id="main" sx={{ height: 2000 }}>
-        Pikachu
-        <Box component="section" id="about" sx={{ background: 'red', height: 1000 }}>
-          About
+      <Box component="main" id="main" sx={{ px: '2rem' }}>
+        <Box
+          sx={{
+            mx: 'auto',
+            px: {
+              sm: '2rem',
+              md: '4rem',
+            },
+            maxWidth: 1200,
+          }}
+        >
+          {/* other sections */}
         </Box>
-        <Box component="section" id="experience" sx={{ background: 'yellow', height: 1000 }}>
-          Experience
-        </Box>
-        <Box component="section" id="contact" sx={{ background: 'green', height: 1000 }}>
-          Contact
-        </Box>
+
+        <FooterSection />
       </Box>
     </>
   );
