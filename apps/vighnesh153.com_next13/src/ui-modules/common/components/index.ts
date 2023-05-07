@@ -8,3 +8,4 @@ export * from './MuiNextLink';
 export * from './SkipToMainContent';
 export * from './SocialLinks';
 export * from './theme';
+export * from './UnderlinedAnimationLink';
