@@ -23,8 +23,17 @@ export function HomePage() {
       <SkipToMainContent />
       <TopNavigationBar navItemTypes={navItemTypes} />
 
-      <Box component="main" id="main">
+      <Box component="main" id="main" sx={{ height: 2000 }}>
         Pikachu
+        <Box component="section" id="about" sx={{ background: 'red', height: 1000 }}>
+          About
+        </Box>
+        <Box component="section" id="experience" sx={{ background: 'yellow', height: 1000 }}>
+          Experience
+        </Box>
+        <Box component="section" id="contact" sx={{ background: 'green', height: 1000 }}>
+          Contact
+        </Box>
       </Box>
     </>
   );

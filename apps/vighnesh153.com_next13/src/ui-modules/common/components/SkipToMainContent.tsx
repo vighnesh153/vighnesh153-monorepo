@@ -1,12 +1,13 @@
 'use client';
 
-import { Link, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
+import { MuiNextLink } from './MuiNextLink';
 
 export function SkipToMainContent() {
   const theme = useTheme();
 
   return (
-    <Link
+    <MuiNextLink
       variant="button"
       href="#main"
       sx={{
@@ -30,6 +31,6 @@ export function SkipToMainContent() {
       }}
     >
       Skip to main content
-    </Link>
+    </MuiNextLink>
   );
 }

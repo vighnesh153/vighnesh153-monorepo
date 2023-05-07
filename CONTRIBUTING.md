@@ -86,11 +86,13 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    git checkout -b my-fix-branch main
    ```
 
-5. Create your patch, **including appropriate test cases**.
+5. Installation: Run the `npm install && npm run build`
 
-6. Follow our [Coding Rules](#rules).
+6. Create your patch, **including appropriate test cases**.
 
-7. Commit your changes using a descriptive commit message that follows our [commit message conventions](#commit).
+7. Follow our [Coding Rules](#rules).
+
+8. Commit your changes using a descriptive commit message that follows our [commit message conventions](#commit).
    Adherence to these conventions is necessary because release notes are automatically generated from these messages.
 
    ```shell
@@ -99,13 +101,13 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
    Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
-8. Push your branch to GitHub:
+9. Push your branch to GitHub:
 
    ```shell
    git push origin my-fix-branch
    ```
 
-9. In GitHub, send a pull request to `vighnesh153-turbo:main`.
+10. In GitHub, send a pull request to `vighnesh153-turbo:main`.
 
 ### Reviewing a Pull Request
 
@@ -322,11 +324,19 @@ The following documents can help you sort out issues with GitHub accounts and mu
 - https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
 
 [coc]: https://github.com/vighnesh153/vighnesh153-turbo/blob/main/CODE_OF_CONDUCT.md
+
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+
 [github]: https://github.com/vighnesh153/vighnesh153-turbo
+
 [stackblitz]: https://stackblitz.com/
+
 [jsfiddle]: https://jsfiddle.net/
+
 [stackoverflow]: https://stackoverflow.com/
+
 [mre]: https://stackoverflow.com/help/minimal-reproducible-example
+
 [issues]: https://github.com/vighnesh153/vighnesh153-turbo/issues
+
 [submit-issue]: https://github.com/vighnesh153/vighnesh153-turbo/issues

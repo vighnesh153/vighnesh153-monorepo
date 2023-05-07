@@ -1,12 +1,13 @@
 'use client';
 
-import { Box, Link, List, ListItem, SwipeableDrawer, Typography, useTheme } from '@mui/material';
+import { Box, List, ListItem, SwipeableDrawer, Typography, useTheme } from '@mui/material';
 import { useIsIOS } from '@vighnesh153/react-hooks';
 import { not } from '@vighnesh153/utils';
 
 import { NavItemType } from '@/ui-modules/common/types';
 
 import { FocusDashedOutline } from '../FocusDashedOutline';
+import { MuiNextLink } from '../MuiNextLink';
 import { sideNavigationDrawerWidth } from './navigationConstants';
 import { navItems } from './navItems';
 
@@ -55,7 +56,7 @@ export function SideNavigationDrawer({ isOpen, updateIsOpen, navItemTypes }: Sid
             <ListItem key={item.id} disablePadding sx={{ justifyContent: 'center' }}>
               <FocusDashedOutline>
                 {item.type === 'link' ? (
-                  <Link
+                  <MuiNextLink
                     onClick={() => toggleDrawer()}
                     href={item.href}
                     sx={{
@@ -68,7 +69,7 @@ export function SideNavigationDrawer({ isOpen, updateIsOpen, navItemTypes }: Sid
                     <Typography variant="h6" component="span">
                       {item.label}
                     </Typography>
-                  </Link>
+                  </MuiNextLink>
                 ) : (
                   item.element
                 )}
