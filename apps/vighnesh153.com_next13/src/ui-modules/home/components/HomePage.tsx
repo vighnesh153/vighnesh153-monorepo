@@ -11,6 +11,7 @@ import {
 import { NavItemType } from '@/ui-modules/common/types';
 
 import { IntroductionSection } from './IntroductionSection';
+import { AboutMeSection } from './AboutMeSection';
 import { FooterSection } from './FooterSection';
 
 const navItemTypes: Array<NavItemType> = [
@@ -44,8 +45,8 @@ export function HomePage() {
             maxWidth: 1200,
           }}
         >
-          {/* other sections */}
           <IntroductionSection />
+          <AboutMeSection />
         </Box>
 
         <FooterSection />

@@ -19,6 +19,12 @@ export const commonModuleConstants = {
   externalLinks: {
     selfGithubLink: 'https://github.com/vighnesh153/vighnesh153-turbo',
     resumeLink: 'https://bit.ly/vighnesh153-resume',
+
+    // work
+    google: 'https://about.google',
+    amazon: 'https://www.aboutamazon.com/about-us',
+    smarterCodes: 'https://smarter.codes',
+    tavisca: 'https://tavisca.com',
   },
   internalLinks: {
     common: {
@@ -57,5 +63,13 @@ export const commonModuleConstants = {
       link: 'https://codepen.io/vighnesh153',
       Icon: FaCodepen,
     },
+  ],
+  currentTechnologies: [
+    'Rust (programming language)',
+    'Typescript',
+    'Kotlin',
+    'Amazon Web Services',
+    'React.js',
+    'Java',
   ],
 };
