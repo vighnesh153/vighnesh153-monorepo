@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@types/node": "*",
-    "@types/react": "^18.2.5",
+    "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/github-gist": "*",

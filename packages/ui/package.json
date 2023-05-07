@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "@types/react": "^18.2.5",
+    "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
@@ -40,8 +40,8 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.129",

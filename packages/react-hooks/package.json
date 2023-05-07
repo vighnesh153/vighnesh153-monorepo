@@ -40,7 +40,7 @@
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
     "@types/node": "*",
-    "@types/react": "^18.2.5",
+    "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
