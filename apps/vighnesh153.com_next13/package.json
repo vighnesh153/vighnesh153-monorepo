@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vighnesh153/react-hooks": "*",
     "@vighnesh153/ui": "*",
+    "@vighnesh153/utils": "*",
     "@vercel/analytics": "^1.0.1",
     "next": "^13.4.1",
     "react": "^18.2.0",

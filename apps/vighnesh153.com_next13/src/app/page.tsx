@@ -1,7 +1,5 @@
+import { HomePage } from '@/ui-modules/home/components';
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Hi world</h1>
-    </main>
-  );
+  return <HomePage />;
 }
