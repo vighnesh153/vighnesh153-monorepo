@@ -39,15 +39,15 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.12.3",
     "@types/archiver": "^5.3.2",
     "@types/express": "^4.17.17",
     "@types/ip": "^1.1.0",
     "@types/morgan": "^1.9.4",
     "@types/node": "*",
-    "@types/react": "^18.2.5",
+    "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
