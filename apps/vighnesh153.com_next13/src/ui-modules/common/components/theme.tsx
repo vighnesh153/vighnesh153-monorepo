@@ -1,29 +1,12 @@
 'use client';
 
-import NextLink from 'next/link';
-import { alpha, Box, createTheme } from '@mui/material';
+import { alpha, Box } from '@mui/material';
 
-import { theme, VighneshThemeProvider } from '@vighnesh153/ui';
-
-const appTheme = createTheme({
-  ...theme,
-  components: {
-    ...theme.components,
-    MuiLink: {
-      ...theme.components?.MuiLink,
-      defaultProps: {
-        ...theme.components?.MuiLink?.defaultProps,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        component: NextLink,
-      },
-    },
-  },
-});
+import { VighneshThemeProvider } from '@vighnesh153/ui';
 
 export function AppTheme(props: { children: React.ReactNode }) {
   return (
-    <VighneshThemeProvider theme={appTheme}>
+    <VighneshThemeProvider>
       <Box
         sx={{
           '& ::selection': {

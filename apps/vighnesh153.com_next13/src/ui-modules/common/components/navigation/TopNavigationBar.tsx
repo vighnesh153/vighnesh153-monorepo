@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { alpha, AppBar, Box, IconButton, Link, Toolbar, Typography, useTheme } from '@mui/material';
+import { alpha, AppBar, Box, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 import { useWindowScrollAmount } from '@vighnesh153/react-hooks';
@@ -9,8 +9,9 @@ import { RVLogoIcon } from '@vighnesh153/ui';
 
 import { NavItemType } from '@/ui-modules/common/types';
 
-import { HideOnScroll } from '../HideOnScroll';
 import { FocusDashedOutline } from '../FocusDashedOutline';
+import { HideOnScroll } from '../HideOnScroll';
+import { MuiNextLink } from '../MuiNextLink';
 import { navItems } from './navItems';
 import { SideNavigationDrawer } from './SideNavigationDrawer';
 
@@ -56,16 +57,16 @@ export function TopNavigationBar({ navItemTypes }: TopNavBarProps) {
                   },
                 }}
               >
-                <Link href="/" color={theme.palette.secondary.main}>
+                <MuiNextLink href="/" color={theme.palette.secondary.main}>
                   <RVLogoIcon />
-                </Link>
+                </MuiNextLink>
               </Box>
               <Box sx={{ alignItems: 'center', display: { xs: 'none', md: 'flex', gap: '2rem' } }}>
                 {navItems
                   .filter((item) => navItemTypes.includes(item.id))
                   .map((item) =>
                     item.type === 'link' ? (
-                      <Link
+                      <MuiNextLink
                         key={item.id}
                         href={item.href}
                         sx={{
@@ -78,7 +79,7 @@ export function TopNavigationBar({ navItemTypes }: TopNavBarProps) {
                         <Typography variant="h6" component="span">
                           {item.label}
                         </Typography>
-                      </Link>
+                      </MuiNextLink>
                     ) : (
                       <Box key={item.id}>{item.element}</Box>
                     )
