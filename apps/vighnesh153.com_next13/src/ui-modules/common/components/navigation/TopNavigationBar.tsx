@@ -47,18 +47,9 @@ export function TopNavigationBar({ navItemTypes }: TopNavBarProps) {
             }}
           >
             <Toolbar sx={{ py: '1.5rem' }}>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  fontSize: 0,
-                  svg: {
-                    width: '2.5rem',
-                    height: '2.5rem',
-                  },
-                }}
-              >
+              <Box sx={{ flexGrow: 1 }}>
                 <MuiNextLink href="/" color={theme.palette.secondary.main}>
-                  <RVLogoIcon />
+                  <RVLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
                 </MuiNextLink>
               </Box>
               <Box sx={{ alignItems: 'center', display: { xs: 'none', md: 'flex', gap: '2rem' } }}>

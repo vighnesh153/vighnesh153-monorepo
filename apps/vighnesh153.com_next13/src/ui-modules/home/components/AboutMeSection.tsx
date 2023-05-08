@@ -11,11 +11,16 @@ import { HomePageSectionListItem } from './HomePageSectionListItem';
 export function AboutMeSection() {
   const theme = useTheme();
   const textColor = theme.palette.text.secondary;
+  const typographySx = {
+    xs: 'body1',
+    sm: 'h6',
+  };
+
   return (
     <Box id="about" className="about-me" component="section" sx={{ py: 12.5 }}>
       <HomePageSectionTitle count="01" title="About me" />
       <FocusDashedOutline className="about-me-summary" sx={{ mt: 6 }}>
-        <Typography color={textColor}>
+        <Typography color={textColor} sx={{ typography: typographySx }}>
           Hello. My name is Vighnesh and I enjoy creating things that live mostly on the web. My interest in software
           development started a few years back when I first learnt about Javascript. Since then, I have been building
           teeny-tiny projects for the web and cli for fun.
@@ -46,7 +51,15 @@ export function AboutMeSection() {
           </UnderlinedAnimationLink>
           .
           <br />
-          <Typography component="span" color={textColor} sx={{ display: 'inline-block', mt: 4 }}>
+          <Typography
+            component="span"
+            color={textColor}
+            sx={{
+              mt: 4,
+              display: 'inline-block',
+              typography: typographySx,
+            }}
+          >
             Here are a few technologies I have been working with recently:
           </Typography>
         </Typography>
@@ -54,7 +67,7 @@ export function AboutMeSection() {
         <List sx={{ mt: 2 }}>
           {commonModuleConstants.currentTechnologies.map((technology) => (
             <HomePageSectionListItem key={technology}>
-              <Typography component="span" color={textColor}>
+              <Typography component="span" color={textColor} sx={{ typography: typographySx }}>
                 {technology}
               </Typography>
             </HomePageSectionListItem>
