@@ -4,12 +4,18 @@
   "private": true,
   "license": "MIT",
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "exports": {
+    "import": "./dist/main.js",
+    "require": "./dist/main.cjs"
+  },
+  "types": "./dist/src/index.d.ts",
   "author": {
     "name": "Vighnesh Raut",
     "email": "me@vighnesh153.com",
     "url": "https://vighnesh153.com"
+  },
+  "scripts": {
+    "build": "tsup && tsc"
   },
   "files": [
     "src"
