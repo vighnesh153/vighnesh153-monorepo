@@ -21,6 +21,16 @@ export function publishToInstagram(props: PublishToInstagramProps): void {
 
   const { timeout = millis(20), username, password, filePath, caption } = props;
 
+  cy.on('uncaught:exception', (err) => {
+    // some temporary instagram shit
+    if (err.message.toLowerCase().includes('subspans')) {
+      return false;
+    }
+
+    // some other error
+    return true;
+  });
+
   cy.visit('https://www.instagram.com');
 
   // Click on login button
