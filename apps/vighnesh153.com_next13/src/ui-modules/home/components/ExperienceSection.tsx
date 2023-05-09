@@ -64,7 +64,7 @@ export function ExperienceSection() {
                 {company.responsibilities.map((responsibility, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <HomePageSectionListItem key={index}>
-                    <Typography component="span" sx={{ typography: { sm: 'body', md: 'h6' } }} color={textColor}>
+                    <Typography component="span" sx={{ typography: { xs: 'body', sm: 'h6' } }} color={textColor}>
                       {responsibility}
                     </Typography>
                   </HomePageSectionListItem>

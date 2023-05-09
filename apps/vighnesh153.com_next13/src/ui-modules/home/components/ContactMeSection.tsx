@@ -31,8 +31,8 @@ export function ContactMeSection() {
             mx: 'auto',
             maxWidth: 600,
             typography: {
-              sm: 'body1',
-              md: 'h6',
+              xs: 'body1',
+              sm: 'h6',
             },
           }}
         >
