@@ -17,17 +17,17 @@ source "$(dirname "$0")/sample-image.sh"
 
 npm -w @vighnesh153/instagram-automation run build
 
-#downloadRandomImage
-#downloadRandomAnimalImage
-#downloadRandomJokeImage
-#generateRandomQuote
-#generateRandomWord
+# downloadRandomImage
+# downloadRandomAnimalImage
+# downloadRandomJokeImage
+# generateRandomQuote
+# generateRandomWord
 
 # Verify if instagram publish is working
-#publishSampleImageToInstagram
+# publishSampleImageToInstagram
 
-#publishRandomImageToInstagram
-#publishRandomAnimalImageToInstagram
-#publishRandomJokeImageToInstagram
-#publishRandomQuoteToInstagram
-#publishRandomWordToInstagram
+# publishRandomImageToInstagram
+# publishRandomAnimalImageToInstagram
+# publishRandomJokeImageToInstagram
+# publishRandomQuoteToInstagram
+# publishRandomWordToInstagram
