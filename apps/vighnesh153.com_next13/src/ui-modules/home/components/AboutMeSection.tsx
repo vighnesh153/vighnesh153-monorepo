@@ -8,13 +8,14 @@ import { commonModuleConstants } from '@/ui-modules/common/constants';
 import { HomePageSectionTitle } from './HomePageSectionTitle';
 import { HomePageSectionListItem } from './HomePageSectionListItem';
 
+const typographySx = {
+  xs: 'body1',
+  sm: 'h6',
+};
+
 export function AboutMeSection() {
   const theme = useTheme();
   const textColor = theme.palette.text.secondary;
-  const typographySx = {
-    xs: 'body1',
-    sm: 'h6',
-  };
 
   return (
     <Box id="about" className="about-me" component="section" sx={{ py: 12.5 }}>
