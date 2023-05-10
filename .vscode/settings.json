@@ -1,26 +1,45 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.fontSize": 16,
-  "[typescriptreact]": {
-    "editor.tabSize": 2,
+  "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "explorer.compactFolders": false,
-  "[typescript]": {
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
     "editor.formatOnType": true
   },
-  "prettier.withNodeModules": true,
-  "[jsonc]": {
+  "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "explorer.autoReveal": false
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.detectIndentation": false,
+  "editor.fontSize": 18,
+  "editor.renderWhitespace": "all",
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "eslint.format.enable": true,
+  "explorer.autoReveal": "focusNoScroll",
+  "explorer.compactFolders": false,
+  "git.autofetch": true,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "prettier.withNodeModules": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "workbench.editorAssociations": {},
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always"
 }
