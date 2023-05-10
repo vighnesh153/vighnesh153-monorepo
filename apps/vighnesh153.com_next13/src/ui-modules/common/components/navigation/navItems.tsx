@@ -1,7 +1,12 @@
 'use client';
 
+import { lazy, Suspense } from 'react';
 import { NavItem, NavItemType } from '@/ui-modules/common/types';
 import { commonModuleConstants } from '@/ui-modules/common/constants';
+
+const TopNavAuthSection = lazy(() =>
+  import('../TopNavAuthSection').then((module) => ({ default: module.TopNavAuthSection }))
+);
 
 export const navItems: NavItem[] = [
   {
@@ -46,9 +51,13 @@ export const navItems: NavItem[] = [
     href: commonModuleConstants.externalLinks.resumeLink,
     type: 'link',
   },
-  // {
-  //   id: NavItemSection.ProfileAndSignIn,
-  //   element: <AuthBox />,
-  //   type: 'custom',
-  // },
+  {
+    id: NavItemType.ProfileAndSignIn,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <TopNavAuthSection />
+      </Suspense>
+    ),
+    type: 'custom',
+  },
 ];
