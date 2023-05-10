@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "richie5um2.vscode-sort-json",
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-rename-tag",
+    "wix.vscode-import-cost",
+    "esbenp.prettier-vscode",
+    "styled-components.vscode-styled-components",
+    "pkief.material-icon-theme",
+    "tobiasalthoff.atom-material-theme"
+  ]
+}
