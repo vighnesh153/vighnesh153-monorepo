@@ -7,6 +7,9 @@ import { bodyBgColor } from '@/ui-modules/common/utils';
 import { AppTheme } from '@/ui-modules/common/components/theme';
 import { AuthProvider } from '@/ui-modules/common/components/AuthProvider';
 
+// TODO: Check if this works
+// export { reportWebVitals } from 'next-axiom';
+
 export const metadata = {
   title: 'Vighnesh Raut - the man, the myth, the living legend himself',
   description:
