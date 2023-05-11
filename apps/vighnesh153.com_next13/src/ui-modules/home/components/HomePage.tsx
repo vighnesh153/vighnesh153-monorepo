@@ -8,6 +8,7 @@ import {
   SkipToMainContent,
   TopNavigationBar,
 } from '@/ui-modules/common/components';
+import { useIsAdmin } from '@/ui-modules/common/hooks';
 import { NavItemType } from '@/ui-modules/common/types';
 
 import { IntroductionSection } from './IntroductionSection';
@@ -26,13 +27,15 @@ const navItemTypes: Array<NavItemType> = [
   NavItemType.ProfileAndSignIn,
 ];
 
-// const adminNavItemTypes: Array<NavItemType> = [NavItemType.Admin, ...navItemTypes];
+const adminNavItemTypes: Array<NavItemType> = [NavItemType.Admin, ...navItemTypes];
 
 export function HomePage() {
+  const { isAdmin } = useIsAdmin();
+
   return (
     <>
       <SkipToMainContent />
-      <TopNavigationBar navItemTypes={navItemTypes} />
+      <TopNavigationBar navItemTypes={isAdmin ? adminNavItemTypes : navItemTypes} />
       <AsideSocialLinks />
       <AsideEmailAddress />
 
