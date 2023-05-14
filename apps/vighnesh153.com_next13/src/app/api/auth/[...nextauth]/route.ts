@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   callbacks: {
     signIn: (args) => {
       // eslint-disable-next-line no-console
