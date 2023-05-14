@@ -39,6 +39,11 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  // app specific fields
+  appUserInfo        UserInfo?
+  appUserPermissions UserPermissions?
+  appAuditLogs       AuditLog[]
 }
 
 model VerificationToken {

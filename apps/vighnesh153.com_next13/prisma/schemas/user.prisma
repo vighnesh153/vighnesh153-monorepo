@@ -1,0 +1,42 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model UserInfo {
+  id          String   @id @default(cuid())
+  // user's id from "User" model
+  userId      String   @unique
+  // user's preferred name for the portal
+  userName    String   @unique
+  // allow the account to sign-in to the portal
+  blockSignIn Boolean? @default(false)
+  // user's full name
+  name        String
+  // user's image link
+  image       String   @db.Text
+  // timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Permission {
+  ADMIN_READ  @map("admin:read")
+  ADMIN_WRITE @map("admin:write")
+}
+
+model UserPermissions {
+  id          String       @id @default(cuid())
+  // user's id from "User" model
+  userId      String       @unique
+  // list of permissions assigned to the user
+  permissions Permission[] @default([])
+  // timestamps
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
