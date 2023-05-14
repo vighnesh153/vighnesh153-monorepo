@@ -7,6 +7,7 @@
     "esbenp.prettier-vscode",
     "styled-components.vscode-styled-components",
     "pkief.material-icon-theme",
-    "tobiasalthoff.atom-material-theme"
+    "tobiasalthoff.atom-material-theme",
+    "ms-azuretools.vscode-docker"
   ]
 }

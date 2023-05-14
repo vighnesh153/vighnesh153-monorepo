@@ -4,12 +4,23 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "chmod +x ./development-server.sh",
+    "dev:with-docker": "./development-server.sh",
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "chmod +x ./build-things.sh",
+    "build": "./build-things.sh",
+    "next:build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:schema:merge": "cat ./prisma/schemas/config/config.prisma > ./prisma/schema.prisma && tail -q -n +6 ./prisma/schemas/*.prisma >> ./prisma/schema.prisma",
+    "prisma:migrate:dev": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma migrate dev",
+    "prisma:migrate:deploy": "run-s prisma:schema:merge && npx prisma migrate deploy",
+    "prisma:generate": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma generate"
   },
+  "os": ["win32"],
   "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.6",
+    "@prisma/client": "^4.14.0",
     "@vercel/analytics": "^1.0.1",
     "@vighnesh153/react-hooks": "*",
     "@vighnesh153/ui": "*",
@@ -26,6 +37,8 @@
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
+    "npm-run-all": "^4.1.5",
+    "prisma": "^4.14.0",
     "typescript": "^5.0.4"
   }
 }
