@@ -1,8 +1,9 @@
 #! /bin/zsh
 
 if [[ -z "${DATABASE_URL}" ]]; then
-  exit 0
-if
+  echo "Database url not found. Skipping prisma migrate deploy..."
+else
+  npm run prisma:migrate:deploy  
+fi
 
-npm run prisma:migrate:deploy
 next build
