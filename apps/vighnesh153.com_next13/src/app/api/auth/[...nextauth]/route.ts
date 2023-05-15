@@ -1,7 +1,10 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+
 import { PrismaClient } from '@prisma/client';
+
+import { nextAuthCallback } from './nextAuthCallback';
 
 // const useSecureCookies = Boolean(process.env.VERCEL_URL);
 
@@ -9,11 +12,7 @@ const prisma = new PrismaClient();
 
 const authOptions: AuthOptions = {
   callbacks: {
-    signIn: (args) => {
-      // eslint-disable-next-line no-console
-      console.log(args);
-      return true;
-    },
+    signIn: nextAuthCallback,
   },
   adapter: PrismaAdapter(prisma),
   providers: [
