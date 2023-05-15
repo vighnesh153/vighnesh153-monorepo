@@ -16,6 +16,8 @@ model AuditLog {
   userId    String
   // what action did the user do
   action    AuditAction
+  // Some extra information
+  extraInfo String?     @db.Text
   // timestamp
   createdAt DateTime    @default(now())
 

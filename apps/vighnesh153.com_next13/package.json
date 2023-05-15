@@ -17,7 +17,10 @@
     "prisma:migrate:deploy": "run-s prisma:schema:merge && npx prisma migrate deploy",
     "prisma:generate": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma generate"
   },
-  "os": ["win32"],
+  "os": [
+    "linux",
+    "darwin"
+  ],
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.6",
     "@prisma/client": "^4.14.0",
