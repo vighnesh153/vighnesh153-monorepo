@@ -53,7 +53,6 @@ Visit
 - Seed data in vighnesh153.com_next13
 - in-memory or sqlite DB connection for tests
 - tests for nextAuthCallback
-- axion log to console while development
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
 - Projects
