@@ -1,16 +1,26 @@
 import { User } from 'next-auth';
-import { log } from 'next-axiom';
+import { Logger } from 'next-axiom';
 import { AuditAction } from '@prisma/client';
 import { slugify } from '@vighnesh153/utils';
 import { PrismaTransaction } from '@/lib/prisma';
 import { NextAuthSuccessFailure } from './nextAuthContants';
 
-export async function nextAuthSignUpUser(tx: PrismaTransaction, user: User): Promise<NextAuthSuccessFailure> {
+export async function nextAuthSignUpUser(props: {
+  tx: PrismaTransaction;
+  user: User;
+  logger: Logger;
+}): Promise<NextAuthSuccessFailure> {
+  const { tx, user, logger } = props;
+
+  logger.debug('Inside "nextAuthSignUpUser"');
+
   const userName = (() => {
     const userNameSalt = Math.random().toString(16).split('.')[1].slice(0, 5);
     return slugify(`${user.name} ${userNameSalt}`, { convertToLowerCase: true });
   })();
+  logger.debug(`Inside "nextAuthSignUpUser": generated username is "${userName}"`);
 
+  logger.debug(`Inside "nextAuthSignUpUser": Signing up in progress ⏳`);
   try {
     await Promise.all([
       // Create UserInfo row
@@ -33,9 +43,11 @@ export async function nextAuthSignUpUser(tx: PrismaTransaction, user: User): Pro
         data: { userId: user.id, action: AuditAction.SIGN_UP },
       }),
     ]);
+    logger.debug(`Inside "nextAuthSignUpUser": Signing up in complete ✅`);
+
     return 'success';
   } catch (e) {
-    log.error('Some error occurred when signing in user', { e });
+    logger.error('Inside "nextAuthSignUpUser": Some error occurred when signing in user', { e });
     return 'failure';
   }
 }
