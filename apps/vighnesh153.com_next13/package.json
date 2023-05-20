@@ -10,6 +10,11 @@
     "prebuild": "chmod +x ./build-things.sh",
     "build": "./build-things.sh",
     "next:build": "next build",
+    "pretest": "./test/test-setup.sh",
+    "test:node": "vitest run --config ./test/vite-node.config.ts --passWithNoTests",
+    "test:jsdom": "vitest run --config ./test/vite-jsdom.config.ts --passWithNoTests",
+    "test": "run-s test:node test:jsdom",
+    "posttest": "./test/test-teardown.sh",
     "start": "next start",
     "lint": "next lint",
     "prisma:schema:merge": "cat ./prisma/schemas/config/config.prisma > ./prisma/schema.prisma && tail -q -n +6 ./prisma/schemas/*.prisma >> ./prisma/schema.prisma",
@@ -43,6 +48,7 @@
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "prisma": "^4.14.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1"
   }
 }

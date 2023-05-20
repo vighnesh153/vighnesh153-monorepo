@@ -1,22 +1,13 @@
 {
   "extends": "@vighnesh153/tsconfig/nextjs.json",
-  "include": [
-    "next-env.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "vitest.config.ts", ".next/types/**/*.ts"],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "types": ["vitest/globals"]
   }
 }
-
