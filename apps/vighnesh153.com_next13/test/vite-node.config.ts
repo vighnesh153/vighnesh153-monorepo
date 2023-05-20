@@ -1,10 +1,13 @@
-import { defineProject } from 'vitest/config';
+import { defineProject, mergeConfig } from 'vitest/config';
+import { sharedViteConfig } from './viteShared';
 
-export default defineProject({
-  test: {
-    globals: true,
-    name: 'node',
-    environment: 'node',
-    setupFiles: ['./test/node.setup.ts'],
-  },
-});
+export default mergeConfig(
+  sharedViteConfig,
+  defineProject({
+    test: {
+      name: 'node',
+      environment: 'node',
+      setupFiles: ['./test/node.setup.ts'],
+    },
+  })
+);

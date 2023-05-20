@@ -13,7 +13,7 @@
     "pretest": "./test/test-setup.sh",
     "test:node": "vitest run --config ./test/vite-node.config.ts --passWithNoTests",
     "test:jsdom": "vitest run --config ./test/vite-jsdom.config.ts --passWithNoTests",
-    "test": "run-s test:node test:jsdom",
+    "test": "dotenv -e .env.test -- run-s test:node test:jsdom",
     "posttest": "./test/test-teardown.sh",
     "start": "next start",
     "lint": "next lint",
@@ -44,11 +44,13 @@
     "@types/node": "*",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "@vighnesh153/fake-data": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "prisma": "^4.14.0",
     "typescript": "^5.0.4",
+    "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.31.1"
   }
 }
