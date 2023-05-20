@@ -1,10 +1,14 @@
-import { defineProject } from 'vitest/config';
+import { defineProject, mergeConfig } from 'vitest/config';
+import { sharedViteConfig } from './viteShared';
 
-export default defineProject({
-  test: {
-    globals: true,
-    name: 'jsdom',
-    environment: 'jsdom',
-    setupFiles: ['./test/jsdom.setup.ts'],
-  },
-});
+export default mergeConfig(
+  sharedViteConfig,
+  defineProject({
+    test: {
+      include: ['**/*.ui-{test,spec}.{ts,tsx}'],
+      name: 'jsdom',
+      environment: 'jsdom',
+      setupFiles: ['./test/jsdom.setup.ts'],
+    },
+  })
+);
