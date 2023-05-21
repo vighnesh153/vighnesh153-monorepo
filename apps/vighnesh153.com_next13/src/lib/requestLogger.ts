@@ -3,7 +3,7 @@ import { Logger, log as nextAxiomLog } from 'next-axiom';
 import { v4 as uuidv4 } from 'uuid';
 
 export function createRequestLogger(): Logger {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' || process.env.RUNNING_LOCALLY === 'true') {
     return {
       info: console.info,
       error: console.error,
