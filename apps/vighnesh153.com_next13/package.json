@@ -9,7 +9,6 @@
     "dev": "next dev",
     "prebuild": "chmod +x ./build-things.sh",
     "build": "./build-things.sh",
-    "next:build": "next build",
     "pretest": "./test/test-setup.sh",
     "test:node": "vitest run --config ./test/vite-node.config.ts --passWithNoTests",
     "test:jsdom": "vitest run --config ./test/vite-jsdom.config.ts --passWithNoTests",
@@ -18,9 +17,13 @@
     "start": "next start",
     "lint": "next lint",
     "prisma:schema:merge": "cat ./prisma/schemas/config/config.prisma > ./prisma/schema.prisma && tail -q -n +6 ./prisma/schemas/*.prisma >> ./prisma/schema.prisma",
+    "prisma:schema:merge:vercel": "cat ./prisma/schemas/config/vercelConfig.prisma > ./prisma/schema.prisma && tail -q -n +6 ./prisma/schemas/*.prisma >> ./prisma/schema.prisma",
     "prisma:migrate:dev": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma migrate dev",
     "prisma:migrate:deploy": "run-s prisma:schema:merge && npx prisma migrate deploy",
-    "prisma:generate": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma generate"
+    "prisma:migrate:deploy:vercel": "run-s prisma:schema:merge:vercel && npx prisma migrate deploy",
+    "prisma:generate:local": "run-s prisma:schema:merge && dotenv -e .env.local -- npx prisma generate",
+    "prisma:generate": "run-s prisma:schema:merge && npx prisma generate",
+    "prisma:generate:vercel": "run-s prisma:schema:merge:vercel && npx prisma generate"
   },
   "os": [
     "linux",
