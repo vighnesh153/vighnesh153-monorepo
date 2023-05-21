@@ -56,6 +56,6 @@ if [[ -z "${VERCEL}" ]]; then
   npm run prisma:migrate:deploy
 else
   # Inside of a vercel environment
-  npm run prisma:generate:vercel
-  npm run prisma:migrate:deploy:vercel
+  npm run prisma:generate:vercelTest
+  npm run prisma:migrate:deploy:vercelTest
 fi
