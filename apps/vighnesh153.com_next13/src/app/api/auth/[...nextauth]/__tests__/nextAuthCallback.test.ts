@@ -47,13 +47,8 @@ function generateGoogleProfile(overrides: Partial<GoogleProfile>): GoogleProfile
   };
 }
 
-describe(
-  '"nextAuthCallback" tests',
-  () => {
-    beforeEach(async () => {
-      await deleteEverything();
-    });
-
+describe('"nextAuthCallback" tests', () => {
+  describe('pre-logic filters', () => {
     it('should deny sign in if provider is not google', async () => {
       const isSignInAllowed = await nextAuthCallback({
         account: generateOauthAccount('amazon'),
@@ -72,6 +67,12 @@ describe(
 
       expect(isSignInAllowed).toBe(NextAuthDenySignIn);
     });
+  });
+
+  describe('db access', () => {
+    beforeEach(async () => {
+      await deleteEverything();
+    });
 
     it('should allow signing in if the user is signing up', async () => {
       const user = generateRandomUser();
@@ -87,7 +88,7 @@ describe(
       });
 
       expect(isSignInAllowed).toBe(NextAuthAllowSignIn);
-    });
+    }, 30000);
 
     it('should create the audit log for sign up', async () => {
       const user = generateRandomUser();
@@ -110,7 +111,7 @@ describe(
 
       expect(auditLogs.length).toBe(1);
       expect(auditLogs[0].action).toBe(AuditAction.SIGN_UP);
-    });
+    }, 30000);
 
     it('should allow signing in if the user is logging in', async () => {
       const oauthAccount = generateOauthAccount('google');
@@ -135,7 +136,7 @@ describe(
       });
 
       expect(isSignInAllowed).toBe(NextAuthAllowSignIn);
-    });
+    }, 30000);
 
     it('should create the audit log for log in', async () => {
       const user = generateRandomUser();
@@ -172,7 +173,7 @@ describe(
 
       expect(signUpAuditLog.action).toBe(AuditAction.SIGN_UP);
       expect(logInAuditLog.action).toBe(AuditAction.LOG_IN);
-    });
+    }, 30000);
 
     it('should deny login if user account is blocked from signing in', async () => {
       const oauthAccount = generateOauthAccount('google');
@@ -207,9 +208,6 @@ describe(
       });
 
       expect(isSignInAllowed).toBe(NextAuthDenySignIn);
-    });
-  },
-  {
-    timeout: 30000,
-  }
-);
+    }, 30000);
+  });
+});
