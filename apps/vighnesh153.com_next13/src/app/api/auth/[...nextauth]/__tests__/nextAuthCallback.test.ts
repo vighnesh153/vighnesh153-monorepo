@@ -2,18 +2,20 @@ import { Account, User } from 'next-auth/core/types';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { randomEmail, randomImage, randomName, randomUuid } from '@vighnesh153/fake-data';
 
-import { deleteEverything } from '@/lib/prisma';
+import { AuditAction } from '@prisma/client';
+
+import { deleteEverything, prisma } from '@/lib/prisma';
 
 import { nextAuthCallback } from '../nextAuthCallback';
-import { NextAuthDenySignIn } from '../nextAuthContants';
+import { NextAuthAllowSignIn, NextAuthDenySignIn } from '../nextAuthContants';
 
-function generateRandomUser(): User {
+function generateRandomUser() {
   return {
     id: randomUuid(),
     name: randomName(),
     email: randomEmail(),
     image: randomImage(),
-  };
+  } satisfies User;
 }
 
 function generateOauthAccount(provider: 'amazon' | 'google'): Account {
@@ -64,6 +66,142 @@ describe('"nextAuthCallback" tests', () => {
       account: generateOauthAccount('google'),
       user: generateRandomUser(),
       profile: generateGoogleProfile({ email_verified: false }),
+    });
+
+    expect(isSignInAllowed).toBe(NextAuthDenySignIn);
+  });
+
+  it('should allow signing in if the user is signing up', async () => {
+    const user = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true, ...user, picture: user.image });
+
+    // NextAuth will create the user entry before invoking the "nextAuthCallback"
+    await prisma.user.create({ data: { ...user } });
+
+    const isSignInAllowed = await nextAuthCallback({
+      account: generateOauthAccount('google'),
+      user,
+      profile: googleProfile,
+    });
+
+    expect(isSignInAllowed).toBe(NextAuthAllowSignIn);
+  });
+
+  it('should create the audit log for sign up', async () => {
+    const user = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true, ...user, picture: user.image });
+
+    // NextAuth will create the user entry before invoking the "nextAuthCallback"
+    await prisma.user.create({ data: { ...user } });
+
+    await nextAuthCallback({
+      account: generateOauthAccount('google'),
+      user,
+      profile: googleProfile,
+    });
+
+    const auditLogs = await prisma.auditLog.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    expect(auditLogs.length).toBe(1);
+    expect(auditLogs[0].action).toBe(AuditAction.SIGN_UP);
+  });
+
+  it('should allow signing in if the user is logging in', async () => {
+    const oauthAccount = generateOauthAccount('google');
+    const randomUser = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true, ...randomUser, picture: randomUser.image });
+
+    // NextAuth will create the user entry before invoking the "nextAuthCallback"
+    await prisma.user.create({ data: { ...randomUser } });
+
+    // signup for the first time
+    await nextAuthCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
+    });
+
+    // signing in for the second time
+    const isSignInAllowed = await nextAuthCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
+    });
+
+    expect(isSignInAllowed).toBe(NextAuthAllowSignIn);
+  });
+
+  it('should create the audit log for log in', async () => {
+    const user = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true, ...user, picture: user.image });
+
+    // NextAuth will create the user entry before invoking the "nextAuthCallback"
+    await prisma.user.create({ data: { ...user } });
+
+    await nextAuthCallback({
+      account: generateOauthAccount('google'),
+      user,
+      profile: googleProfile,
+    });
+
+    await nextAuthCallback({
+      account: generateOauthAccount('google'),
+      user,
+      profile: googleProfile,
+    });
+
+    const auditLogs = await prisma.auditLog.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+
+    expect(auditLogs.length).toBe(2);
+
+    const signUpAuditLog = auditLogs[0];
+    const logInAuditLog = auditLogs[1];
+
+    expect(signUpAuditLog.action).toBe(AuditAction.SIGN_UP);
+    expect(logInAuditLog.action).toBe(AuditAction.LOG_IN);
+  });
+
+  it('should deny login if user account is blocked from signing in', async () => {
+    const oauthAccount = generateOauthAccount('google');
+    const randomUser = generateRandomUser();
+    const googleProfile = generateGoogleProfile({ email_verified: true, ...randomUser });
+
+    // NextAuth will create the user entry before invoking the "nextAuthCallback"
+    await prisma.user.create({ data: { ...randomUser } });
+
+    // signup for the first time
+    await nextAuthCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
+    });
+
+    // block the user from signing in
+    await prisma.userInfo.update({
+      where: {
+        userId: randomUser.id,
+      },
+      data: {
+        blockSignIn: true,
+      },
+    });
+
+    // attempt logging in
+    const isSignInAllowed = await nextAuthCallback({
+      account: oauthAccount,
+      user: randomUser,
+      profile: googleProfile,
     });
 
     expect(isSignInAllowed).toBe(NextAuthDenySignIn);

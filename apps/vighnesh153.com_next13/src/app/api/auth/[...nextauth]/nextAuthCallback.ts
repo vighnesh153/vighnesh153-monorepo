@@ -50,7 +50,7 @@ export const nextAuthCallback: CallbacksOptions['signIn'] = async ({ account, pr
 
     logger.debug('Inside nextAuthCallback: Checking if user is already registered ⏳');
     const isUserRegistered = await nextAuthCheckIsUserRegistered(tx, user);
-    logger.info(`Inside nextAuthCallback: User Registeration=${isUserRegistered}`, { email: googleProfile.email });
+    logger.info(`Inside nextAuthCallback: isUserRegistered=${isUserRegistered}`, { email: googleProfile.email });
     return isUserRegistered ? nextAuthLoginUser({ tx, user, logger }) : nextAuthSignUpUser({ tx, user, logger });
   });
 
