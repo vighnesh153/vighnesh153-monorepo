@@ -4,9 +4,6 @@
 # https://stackoverflow.com/questions/2870992/automatic-exit-from-bash-shell-script-on-error
 set -exo pipefail
 
-# logs the docker version to the console
-docker -v
-
 function openDockerDaemonIfNotRunning {
   ###########################################
   #  Open docker only if it is not running  #
@@ -50,6 +47,7 @@ function turnOnDockerContainers {
 
 if [[ -z "${VERCEL}" ]]; then
   # Not inside a vercel environment
+  docker -v
   openDockerDaemonIfNotRunning
   closeExistingDockerContainers
   turnOnDockerContainers
