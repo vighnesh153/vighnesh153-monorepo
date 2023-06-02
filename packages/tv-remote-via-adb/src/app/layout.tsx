@@ -1,5 +1,5 @@
 import './globals.css';
-import '@vighnesh153/ui/sideEffects';
+import '@vighnesh153/react-ui/sideEffects';
 
 import { AppTheme, bodyBgColor } from '@/lib/AppTheme';
 

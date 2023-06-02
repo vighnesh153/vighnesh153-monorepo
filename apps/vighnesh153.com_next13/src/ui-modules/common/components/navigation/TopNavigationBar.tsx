@@ -5,7 +5,7 @@ import { alpha, AppBar, Box, IconButton, Toolbar, Typography, useTheme } from '@
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 import { useWindowScrollAmount } from '@vighnesh153/react-hooks';
-import { RVLogoIcon } from '@vighnesh153/ui';
+import { RVLogoIcon } from '@vighnesh153/react-ui';
 
 import { NavItemType } from '@/ui-modules/common/types';
 

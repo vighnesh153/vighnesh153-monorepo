@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { theme } from '@vighnesh153/ui';
+import { theme } from '@vighnesh153/react-ui';
 
 export default function Document() {
   return (

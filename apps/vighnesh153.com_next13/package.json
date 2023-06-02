@@ -34,7 +34,7 @@
     "@prisma/client": "^4.14.0",
     "@vercel/analytics": "^1.0.1",
     "@vighnesh153/react-hooks": "*",
-    "@vighnesh153/ui": "*",
+    "@vighnesh153/react-ui": "*",
     "@vighnesh153/utils": "*",
     "next": "^13.4.1",
     "next-auth": "^4.22.1",

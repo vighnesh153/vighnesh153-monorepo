@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, BoxProps } from '@mui/material';
-import { theme } from '@vighnesh153/ui';
+import { theme } from '@vighnesh153/react-ui';
 
 interface CurvedButtonProps extends BoxProps {}
 

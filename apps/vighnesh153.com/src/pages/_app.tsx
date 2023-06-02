@@ -1,7 +1,7 @@
 import '../styles/globals.css';
-import '@vighnesh153/ui/sideEffects';
+import '@vighnesh153/react-ui/sideEffects';
 
-import { VighneshThemeProvider } from '@vighnesh153/ui';
+import { VighneshThemeProvider } from '@vighnesh153/react-ui';
 import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';

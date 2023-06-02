@@ -34,7 +34,7 @@ This repository contains (will contain) source code of all the projects that I w
 
 - [@vighnesh153/email-templates](./packages/email-templates): Templates that I use to send emails to my users
 - [@vighnesh153/types](./packages/types): Utility types/interfaces
-- [@vighnesh153/ui](./packages/ui): ReactJS components made with [Material UI](https://mui.com/) and
+- [@vighnesh153/react-ui](./packages/react-ui): ReactJS components made with [Material UI](https://mui.com/) and
   [Emotion Styling](https://emotion.sh/)
 
 ### Something broken?

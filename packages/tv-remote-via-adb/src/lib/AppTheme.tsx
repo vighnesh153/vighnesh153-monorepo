@@ -2,7 +2,7 @@
 
 import { alpha, Box } from '@mui/material';
 
-import { VighneshThemeProvider, theme } from '@vighnesh153/ui';
+import { VighneshThemeProvider, theme } from '@vighnesh153/react-ui';
 
 export const bodyBgColor = theme.palette.primary.dark;
 
