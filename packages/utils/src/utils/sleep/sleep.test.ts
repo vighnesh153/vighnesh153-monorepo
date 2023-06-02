@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, vi, it } from 'vitest';
 import { sleep } from './sleep';
 
 async function flushPromises() {
-  return Promise.resolve(setImmediate);
+  return Promise.resolve(setTimeout);
 }
 
 describe('"sleep" tests', () => {

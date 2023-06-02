@@ -1,5 +1,6 @@
 export * from './useEffectOnce';
 export * from './useIsIos';
+export * from './useKeyPress';
 export * from './useOnUnmount';
 export * from './useRequestAnimationFrameState';
 export * from './useScrollAmount';

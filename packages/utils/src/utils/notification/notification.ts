@@ -38,9 +38,9 @@ export class Notification<T> {
   publish(data: T): void {
     this.latestPublishedData = data;
     Object.values(this.callbacks).forEach((cb) => {
-      setImmediate(() => {
+      setTimeout(() => {
         cb(data);
-      });
+      }, 0);
     });
   }
 

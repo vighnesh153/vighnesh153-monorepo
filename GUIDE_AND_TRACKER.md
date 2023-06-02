@@ -50,6 +50,8 @@ Visit
 
 #### Tasks
 
+- connect to IP address feature
+- dont start server if adb is not installed
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
