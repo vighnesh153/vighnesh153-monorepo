@@ -50,7 +50,8 @@ Visit
 
 #### Tasks
 
-- dont start server if adb is not installed
+- publish tv package
+- fix instagram automation
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
