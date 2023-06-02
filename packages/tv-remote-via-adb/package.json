@@ -1,9 +1,14 @@
 {
   "name": "@vighnesh153/tv-remote-via-adb",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
-  "description": "",
+  "description": "Simple adb-based remote to interact with your TV",
+  "bin": "./run.sh",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +19,11 @@
     ".next",
     "public"
   ],
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
   "dependencies": {
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.129",
@@ -38,5 +48,18 @@
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
+  },
+  "keywords": [
+    "remote",
+    "google",
+    "android",
+    "google-tv",
+    "tv",
+    "adb",
+    "android-tv"
+  ]
 }
