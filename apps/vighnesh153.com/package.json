@@ -21,7 +21,7 @@
     "@vercel/analytics": "^1.0.1",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/react-hooks": "*",
-    "@vighnesh153/ui": "*",
+    "@vighnesh153/react-ui": "*",
     "@vighnesh153/utils": "*",
     "eslint-config-vighnesh153": "*",
     "mongodb": "^5.4.0",

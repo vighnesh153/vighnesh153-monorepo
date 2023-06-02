@@ -2,7 +2,7 @@
 
 import { alpha, Box } from '@mui/material';
 
-import { VighneshThemeProvider } from '@vighnesh153/ui';
+import { VighneshThemeProvider } from '@vighnesh153/react-ui';
 
 export function AppTheme(props: { children: React.ReactNode }) {
   return (

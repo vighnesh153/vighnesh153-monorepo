@@ -30,7 +30,7 @@
     "@mui/material": "^5.12.3",
     "@mui/utils": "^5.12.3",
     "@vighnesh153/react-hooks": "*",
-    "@vighnesh153/ui": "*",
+    "@vighnesh153/react-ui": "*",
     "@vighnesh153/utils": "*",
     "clsx": "^1.2.1",
     "next": "^13.4.1",

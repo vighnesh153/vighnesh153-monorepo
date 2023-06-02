@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { alpha, AppBar, Box, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { RVLogoIcon } from '@vighnesh153/ui';
+import { RVLogoIcon } from '@vighnesh153/react-ui';
 import { useWindowScrollAmount } from '@vighnesh153/react-hooks';
 import { FocusDashedOutline } from '../focus-dashed-outline';
 import { MuiNextLink } from '../next-link';
