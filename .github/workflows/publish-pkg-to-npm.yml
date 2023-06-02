@@ -7,7 +7,7 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: false
+        default: "false"
         options:
           - true
           - false
@@ -15,7 +15,7 @@ on:
         required: true
         type: choice
         description: Create a tag commit?
-        default: false
+        default: "false"
         options:
           - true
           - false
@@ -23,7 +23,7 @@ on:
         required: true
         type: choice
         description: Publish to NPM
-        default: false
+        default: "false"
         options:
           - true
           - false
