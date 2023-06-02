@@ -12,9 +12,12 @@ export function Devices(props: BoxProps) {
 
   return (
     <Box {...props}>
+      <Typography mb={4} width={400}>
+        Device not listed? Connect to your device using adb and then refresh this page
+      </Typography>
       {devices.length === 0 && <Typography>No devices available</Typography>}
       {devices.length > 0 && (
-        <Box sx={{ minWidth: 200 }}>
+        <Box sx={{ width: 200 }}>
           <FormControl fullWidth>
             <InputLabel id="label-select-device" sx={{ color: 'hsla(226, 70%, 88%, 0.65) !important' }}>
               Select Device

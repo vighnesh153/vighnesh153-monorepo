@@ -9,7 +9,17 @@ export function HomePage() {
   return (
     <Box component="main" sx={{ maxWidth: 1200, mx: 'auto', mt: 5, display: 'flex' }}>
       <Box sx={{ width: '50%' }}>
-        <Devices sx={{ width: 'fit-content', mx: 'auto', mt: 3, mb: 5 }} />
+        <Devices
+          sx={{
+            width: 'fit-content',
+            mx: 'auto',
+            mt: 3,
+            mb: 5,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        />
         <Controls sx={{}} />
       </Box>
       <History sx={{ width: '50%' }} />
