@@ -1,12 +1,9 @@
 {
-  "extends": "@vighnesh153/tsconfig/nextjs.json",
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["dist", "build", "node_modules"],
+  "extends": "@vighnesh153/tsconfig/react-library.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "strictNullChecks": true
-  }
+    "target": "ESNext",
+    "outDir": "dist"
+  },
+  "include": [".", "vite.config.ts"],
+  "exclude": ["dist", "build", "node_modules"]
 }

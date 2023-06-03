@@ -7,7 +7,6 @@ export function Devices(props: BoxProps) {
 
   useEffect(() => {
     fetchDevices();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

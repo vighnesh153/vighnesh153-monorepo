@@ -4,8 +4,6 @@ import { theme } from '@vighnesh153/react-ui';
 import { DPad } from './DPad';
 import { useActionOnKeyPress } from './useActionOnKeyPress';
 
-export interface ControlsProps extends BoxProps {}
-
 const iconButtonSx: BoxProps['sx'] = {
   color: theme.palette.primary.main,
   backgroundColor: theme.palette.secondary.main,
@@ -17,7 +15,7 @@ const iconButtonSx: BoxProps['sx'] = {
   },
 };
 
-export function Controls({ ...props }: ControlsProps) {
+export function Controls({ ...props }: BoxProps) {
   const { onUpClick, onDownClick, onLeftClick, onRightClick, onCenterClick, onBackClick, onHomeClick } =
     useActionOnKeyPress();
 
