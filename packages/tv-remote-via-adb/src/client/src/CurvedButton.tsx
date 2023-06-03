@@ -3,9 +3,7 @@
 import { Box, BoxProps } from '@mui/material';
 import { theme } from '@vighnesh153/react-ui';
 
-interface CurvedButtonProps extends BoxProps {}
-
-export function CurvedButton({ ...props }: CurvedButtonProps) {
+export function CurvedButton({ ...props }: BoxProps) {
   return (
     <Box
       component="svg"

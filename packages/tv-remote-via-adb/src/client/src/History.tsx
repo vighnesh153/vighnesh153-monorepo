@@ -9,7 +9,6 @@ export function History({ ...props }: BoxProps) {
 
   useEffect(() => {
     fetchHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

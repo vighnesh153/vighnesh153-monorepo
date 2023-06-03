@@ -1,23 +1,24 @@
 {
   "name": "@vighnesh153/tv-remote-via-adb",
-  "version": "0.4.5-alpha02",
+  "version": "0.0.0-dev02",
   "private": false,
   "type": "module",
   "description": "Simple adb-based remote to interact with your TV",
-  "bin": "./run.sh",
+  "bin": "./dist/cli.js",
   "publishConfig": {
     "access": "public"
   },
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:backend": "tsup --watch",
+    "dev:frontend": "vite",
+    "copy": "cpy --cwd=./src/client/dist . ../../../dist/client",
+    "build:frontend": "vite build",
+    "build": "tsup && vite build && npm run copy"
   },
   "files": [
-    ".next",
-    "public"
+    "dist"
   ],
   "author": {
     "name": "Vighnesh Raut",
@@ -25,29 +26,37 @@
     "url": "https://vighnesh153.com"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
+    "express": "^4.18.2",
+    "ip": "^2.0.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.132",
     "@mui/material": "^5.13.3",
     "@mui/utils": "^5.13.1",
-    "@vighnesh153/react-hooks": "*",
-    "@vighnesh153/react-ui": "*",
-    "@vighnesh153/utils": "*",
-    "clsx": "^1.2.1",
-    "next": "^13.4.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.9.0",
-    "uuid": "^9.0.0"
-  },
-  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/ip": "^1.1.0",
+    "@types/morgan": "^1.9.4",
     "@types/node": "*",
     "@types/react": "^18.2.8",
     "@types/react-dom": "^18.2.4",
     "@vighnesh153/fake-data": "*",
+    "@vighnesh153/react-hooks": "*",
+    "@vighnesh153/react-ui": "*",
     "@vighnesh153/tsconfig": "*",
+    "@vighnesh153/utils": "*",
+    "@vitejs/plugin-react": "^4.0.0",
+    "cpy-cli": "^4.2.0",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.1.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
+    "typescript": "^5.1.3",
+    "uuid": "^9.0.0",
+    "vite": "^4.3.9"
   },
   "repository": {
     "type": "git",

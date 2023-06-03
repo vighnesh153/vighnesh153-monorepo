@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/profile.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@vighnesh153/tv-remote-via-adb</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        /*
+          Not sure why we need !important here even though I am not overriding it
+          anywhere else in my code
+        */
+        scroll-behavior: smooth !important;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        html {
+          color-scheme: dark;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useGlobalState } from '@vighnesh153/react-hooks';
-import { Log } from '@/lib/logs';
+import { Log } from '../../types';
 
 export function useHistory() {
   const [history, setHistory] = useGlobalState('history', <Log[]>[]);
