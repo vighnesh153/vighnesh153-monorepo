@@ -1,6 +1,6 @@
 'use client';
 
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Controls } from './Controls';
 import { History } from './History';
 import { Devices } from './Devices';
@@ -21,6 +21,9 @@ export function HomePage() {
           }}
         />
         <Controls sx={{}} />
+        <Box sx={{ mt: 4, textAlign: 'center' }}>
+          <Typography fontStyle="italic">You can also press keys on your keyboard to interact with the TV</Typography>
+        </Box>
       </Box>
       <History sx={{ width: '50%' }} />
     </Box>
