@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/tv-remote-via-adb",
-  "version": "0.0.0-dev02",
+  "version": "0.4.5-alpha03",
   "private": false,
   "type": "module",
   "description": "Simple adb-based remote to interact with your TV",
