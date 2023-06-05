@@ -96,6 +96,7 @@ Visit
   - `/users/:userId/username`
   - `/users/:userId` redirect to `/users/:userId/username`
   - Allow editing username
+- Clone: https://github.com/mysticatea/npm-run-all/
 - vighnesh153.com/memes
   - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when sharing url
   - Meme credit to
