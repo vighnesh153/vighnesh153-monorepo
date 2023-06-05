@@ -18,7 +18,7 @@ export function History({ ...props }: BoxProps) {
       </Typography>
       {history.length === 0 && <Typography color="yellow">No commands were run</Typography>}
       {history.length > 0 && (
-        <Box sx={{ maxHeight: '80dvh', overflow: 'scroll' }}>
+        <Box sx={{ maxHeight: '80dvh', overflow: 'auto' }}>
           {history.map((historyItem, index) => (
             <Box key={index} sx={{ mb: 1, display: 'flex', gap: '1rem' }}>
               <Typography component="p" color="yellow">
