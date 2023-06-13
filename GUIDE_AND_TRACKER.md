@@ -41,7 +41,8 @@ ncu -u
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
 
 ### Serverless
-* AWS credentials: https://www.serverless.com/framework/docs/providers/aws/guide/credentials/
+
+- AWS credentials: https://www.serverless.com/framework/docs/providers/aws/guide/credentials/
 
 ### Publishing packages
 
@@ -50,7 +51,7 @@ Visit
 
 #### Tasks
 
-- publish tv package
+- Add IP address of the command executor in the logs
 - fix instagram automation
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
@@ -107,16 +108,21 @@ Visit
 - CORS anywhere lambda
   - `cors-anywhere.aws.vighnesh153.com`
 - Response cache for a url, headers, etc (lambda)
-  - Useful for accessing GitHub APIs that have rate limits without API key (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
+  - Useful for accessing GitHub APIs that have rate limits without API key
+    (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
 - Open-dictionary
   - List of english words: https://github.com/dwyl/english-words
   - Urban dictionary api samples
     - https://api.urbandictionary.com/v0/define?term=people
     - https://api.urbandictionary.com/v0/random
   - Fetching a meaning of a word
+
 ```js
-fetch("https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw").then((res) => res.text()).then(console.log)
+fetch('https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw')
+  .then((res) => res.text())
+  .then(console.log);
 ```
+
 - send email sqs worker
 - Trigger a user account created message in SNS
 - Imgur upload library
@@ -310,9 +316,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@vighnesh153/utils": "*"
   },
@@ -329,7 +333,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" }
 }
 ```
+
 - tsconfig.json
+
 ```json
 {
   "extends": "@vighnesh153/tsconfig/base.json",
@@ -337,7 +343,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   "exclude": ["dist", "build", "node_modules"]
 }
 ```
+
 - .eslintrc.cjs
+
 ```js
 module.exports = {
   extends: ['vighnesh153/ts-base.eslintrc.cjs'],
@@ -346,7 +354,9 @@ module.exports = {
   },
 };
 ```
+
 - .eslintignore
+
 ```ignore
 *.cjs
 *.js
@@ -358,6 +368,7 @@ module.exports = {
 
 - extends: Todos for a new project
 - tsup.config.js
+
 ```ts
 import { defineConfig } from 'tsup';
 
