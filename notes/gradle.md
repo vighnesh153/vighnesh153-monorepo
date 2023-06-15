@@ -26,6 +26,9 @@ gradle wrapper
 
 # run without a daemon (performance will degrade)
 ./gradlew --no-daemon
+
+# testing buildSrc directory
+./gradlew buildSrc:test
 ```
 
 ## dependencies

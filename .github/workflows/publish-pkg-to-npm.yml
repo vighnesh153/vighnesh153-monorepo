@@ -79,7 +79,7 @@ jobs:
       - name: Publish the packages
         if: ${{ inputs.shouldPublishToNPM == 'true' }}
         run: |
-          npm run changeStarToSpecificVersion
+          cd nodejs-tools && npm run changeStarToSpecificVersion
           GIT_PAGER=cat git diff
 
           npm publish ${{ inputs.publishTag }} ${{ inputs.publishArgs }}
