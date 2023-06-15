@@ -6,7 +6,7 @@
 # pre-commits for nodejs-tools
 if git diff --cached --name-only | grep --quiet "nodejs-tools/"
 then
-  cd nodejs-tools && npm install
-  cd nodejs-tools && npm run test
-  cd nodejs-tools && npm run lint
+  cd nodejs-tools && npm install && cd ..
+  cd nodejs-tools && npm run test && cd ..
+  cd nodejs-tools && npm run lint && cd ..
 fi
