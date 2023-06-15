@@ -3,7 +3,7 @@
 ## Using this template
 ```shell
 cd aws-serverless-tools
-npx serverless create --template-path=../templates/aws-lambda-http-api --name delete-me
+npx serverless create --template-path=../nodejs-templates/aws-lambda-http-api --name delete-me
 cd ..
 npm i
 ```

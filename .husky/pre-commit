@@ -2,5 +2,11 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run lint-staged
-npm run lint
-npm run test
+
+# pre-commits for nodejs-tools
+if git diff --cached --name-only | grep --quiet "nodejs-tools/"
+then
+  cd nodejs-tools && npm install
+  cd nodejs-tools && npm run test
+  cd nodejs-tools && npm run lint
+fi
