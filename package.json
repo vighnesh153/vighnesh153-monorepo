@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "prettier": "@vighnesh153/prettier-config",
   "scripts": {
     "lint-staged": "lint-staged",
     "prepare": "husky install"
@@ -10,6 +11,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@vighnesh153/prettier-config": "latest",
     "eslint": "^8.42.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",

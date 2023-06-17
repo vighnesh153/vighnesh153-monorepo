@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# default command tasks
+COMMAND="${1:-tasks}"
+COMMAND_OPTION_1=$2
+
+# ✨ List all tasks ✨
+function tasks() {
+  echo ""
+  echo "Howdy! 👋"
+  echo "Note: If this is your first time running this script, you might want to run './run initialSetup'"
+  echo ""
+  echo "🪜  Listing available tasks ⏳"
+  echo ""
+  compgen -A function $COMMAND_OPTION_1
+}
+
+
+# ✨ Initial setup ✨
+function initialSetup() {
+  npm install
+  cd nodejs-tools/ && npm install && cd ..
+}
+
+
+# ✨ Clean Node.js Project ✨
+CLEAN_NODEJS="npx -y rimraf package-lock.json node_modules dist .turbo"
+function cleanNodeJs__root() {
+  echo "🗑️  Cleaning root nodejs generated files... ⏳"
+  $CLEAN_NODEJS
+  echo "🗑️  Cleaning root nodejs generated files completed ✅"
+}
+function cleanNodeJs__tools() {
+  echo "🗑️  Cleaning nodejs-tools generated files... ⏳"
+  cd nodejs-tools && npm exec --include-workspace-root --workspaces -- $CLEAN_NODEJS
+  echo "🗑️  Cleaning nodejs-tools generated files completed ✅"
+}
+function cleanNodeJs() {
+  echo "🗑️  Cleaning all nodejs generated files... ⏳"
+  cleanNodeJs__root
+  cleanNodeJs__tools
+  echo "🗑️  Cleaning all nodejs generated files completed ✅"
+}
+
+
+# ✨ Update NodeJs packages ✨
+function packageUpdateNodejsTools() {
+  echo "📦  Updating nodejs-tools packages... ⏳"
+  ./node_modules/.bin/ncu -u --cwd=./nodejs-tools/ --ws --root
+  echo "📦  Updating nodejs-tools packages completed ✅"
+}
+function packageUpdateRootNodeJs() {
+  echo "📦  Updating root nodejs packages... ⏳"
+  ./node_modules/.bin/ncu -u
+  echo "📦  Updating root nodejs packages completed ✅"
+}
+function packageUpdateNodeJs() {
+  echo "📦  Updating all nodejs packages... ⏳"
+  packageUpdateRootNodeJs
+  packageUpdateNodejsTools
+  echo "📦  Updating all nodejs packages completed ✅"
+}
+
+# Execute the function name provided to the script as the first argument
+$COMMAND
