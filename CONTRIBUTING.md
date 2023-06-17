@@ -23,8 +23,9 @@ Stack Overflow is a much better place to ask questions since:
 - questions and answers stay available for public viewing so your question/answer might help someone else
 - Stack Overflow's voting system assures that the best answers are prominently visible.
 
-If you have any `@vighnesh153/*` library related question, see if you can get help in the [issues](issues) section from
-the previously filed issues. If not, feel free to [create a github issue](submit-issue) if you are stuck.
+If you have any `@vighnesh153/*` or `com.vighnesh153.*` library related question, see if you can get help in the
+[issues](issues) section from the previously filed issues. If not, feel free to [create a github issue](submit-issue) if
+you are stuck.
 
 ## <a name="issue"></a> Found a Bug?
 
@@ -71,28 +72,37 @@ from you, I am going to close an issue that doesn't have enough info to be repro
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
+1. Ensure you are on a linux or a Mac machine. Some of the tools used in the repo are only configured for linux and Mac.
+   If you are using Windows, consider using a VM with linux or the new
+   [WSL](https://learn.microsoft.com/en-us/windows/wsl/) thingy.
+
 1. Search [GitHub](https://github.com/vighnesh153/vighnesh153-turbo/pulls) for an open or closed PR that relates to your
    submission. You don't want to duplicate existing efforts.
 
-2. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.
+1. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.
    Discussing the design upfront helps to ensure that I am ready to accept your work.
 
-3. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the vighnesh153/vighnesh153-turbo
+1. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the `vighnesh153/vighnesh153-turbo`
    repo.
 
-4. In your forked repository, make your changes in a new git branch:
+1. In your forked repository, make your changes in a new git branch:
 
    ```shell
    git checkout -b my-fix-branch main
    ```
 
-5. Installation: Run the `npm install && npm run build`
+1. Make sure you have the following tools installed
 
-6. Create your patch, **including appropriate test cases**.
+- `Node.js`: Consider using [nvm](https://github.com/nvm-sh/nvm)
+- [Docker](https://docs.docker.com/engine/install/)
 
-7. Follow our [Coding Rules](#rules).
+1. Installation: Run the `./run initialSetup`
 
-8. Commit your changes using a descriptive commit message that follows our [commit message conventions](#commit).
+1. Create your patch, **including appropriate test cases**.
+
+1. Follow our [Coding Rules](#rules).
+
+1. Commit your changes using a descriptive commit message that follows our [commit message conventions](#commit).
    Adherence to these conventions is necessary because release notes are automatically generated from these messages.
 
    ```shell
@@ -101,13 +111,13 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
    Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
-9. Push your branch to GitHub:
+1. Push your branch to GitHub:
 
    ```shell
    git push origin my-fix-branch
    ```
 
-10. In GitHub, send a pull request to `vighnesh153-turbo:main`.
+1. In GitHub, send a pull request to `vighnesh153-turbo:main`.
 
 ### Reviewing a Pull Request
 
@@ -190,7 +200,7 @@ repository:
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
-- All features or bug fixes **must be tested** by one or more specs (unit-tests).
+- All features or bug fixes **must be tested** by one or more specs (tests).
 - All public API methods **must be documented**.
 
 ## <a name="commit"></a> Commit Message Format
@@ -324,19 +334,11 @@ The following documents can help you sort out issues with GitHub accounts and mu
 - https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
 
 [coc]: https://github.com/vighnesh153/vighnesh153-turbo/blob/main/CODE_OF_CONDUCT.md
-
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-
 [github]: https://github.com/vighnesh153/vighnesh153-turbo
-
 [stackblitz]: https://stackblitz.com/
-
 [jsfiddle]: https://jsfiddle.net/
-
 [stackoverflow]: https://stackoverflow.com/
-
 [mre]: https://stackoverflow.com/help/minimal-reproducible-example
-
 [issues]: https://github.com/vighnesh153/vighnesh153-turbo/issues
-
 [submit-issue]: https://github.com/vighnesh153/vighnesh153-turbo/issues
