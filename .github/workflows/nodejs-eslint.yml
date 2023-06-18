@@ -1,13 +1,13 @@
-name: ESLint
+name: nodejs-eslint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-  eslint:
+  nodejs-eslint:
     name: Run eslint scanning
     runs-on: ubuntu-latest
     permissions:
@@ -18,8 +18,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install
-        run: npm install
+      - name: Install dependencies
+        run: npm install && cd nodejs-tools && npm install && cd ..
 
       - name: Run ESLint
-        run: npm run lint
+        run: cd nodejs-tools && npm run lint

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "dotenv -e ../../.env.local -- wrangler dev",
-    "cloudflare:workers:deploy:prod": "wrangler publish",
+    "deploy:prod": "wrangler publish",
     "test": "vitest run"
   },
   "devDependencies": {

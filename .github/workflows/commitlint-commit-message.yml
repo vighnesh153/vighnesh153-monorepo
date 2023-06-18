@@ -1,11 +1,11 @@
-name: Commitlint Commit Message
+name: commitlint-commit-message
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-  run-commitlint-on-pull-request:
+  commitlint-commit-message:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,7 +25,6 @@ jobs:
       - uses: wagoid/commitlint-github-action@v5
         with:
           configFile: ./commitlint.config.cjs
-
 #      - name: Validate all commits from PR
 #        run: |
 #          BASE_SHA="${{ github.event.pull_request.base.sha }}"
