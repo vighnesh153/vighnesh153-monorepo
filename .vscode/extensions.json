@@ -9,6 +9,9 @@
     "pkief.material-icon-theme",
     "tobiasalthoff.atom-material-theme",
     "ms-azuretools.vscode-docker",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "bungcip.better-toml",
+    "formulahendry.code-runner",
+    "techer.open-in-browser"
   ]
 }

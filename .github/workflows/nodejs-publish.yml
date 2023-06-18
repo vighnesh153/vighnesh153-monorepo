@@ -1,4 +1,4 @@
-name: Publish all packages to NPM
+name: nodejs-publish
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: "false"
+        default: 'false'
         options:
           - true
           - false
@@ -15,7 +15,7 @@ on:
         required: true
         type: choice
         description: Create a tag commit?
-        default: "false"
+        default: 'false'
         options:
           - true
           - false
@@ -23,43 +23,44 @@ on:
         required: true
         type: choice
         description: Publish to NPM
-        default: "false"
+        default: 'false'
         options:
           - true
           - false
       newVersion:
         required: true
         description: Specify the new version (if not updating, specify the current one)
-      publishTag:
-        required: false
-        description: The tag which should be used to publish
-        default: '--tag latest'
       publishArgs:
         required: false
         description: customize the arguments passed to 'npm publish'
-        default: '--workspace packages'
+        default: '--workspace nodejs-packages --tag latest'
 
 jobs:
-  build:
+  nodejs-publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: checkout repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: setup nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
-          registry-url: "https://registry.npmjs.org"
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
+      - name: install dependencies in root
         run: npm ci
 
-      - name: Build
-        run: npm run build:packages
+      - name: install dependencies in nodejs-tools
+        run: npm ci
+        working-directory: ./nodejs-tools
+
+      - name: build packages
+        run: npm run build -- --filter=./nodejs-packages/*
+        working-directory: ./nodejs-tools
 
       - name: Config git metadata
         run: |
@@ -69,21 +70,22 @@ jobs:
       - name: Update the version in the packages
         if: ${{ inputs.shouldUpdateVersion == 'true' }}
         run: |
-          npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./packages
+          npm version ${{ inputs.newVersion }} --git-tag-version=false --allow-same-version=true --workspace=./nodejs-packages
           git add .
           git commit -m "build: update the npm version to ${{ inputs.newVersion }}" --no-verify
           git push
+        working-directory: ./nodejs-tools
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the packages
         if: ${{ inputs.shouldPublishToNPM == 'true' }}
         run: |
-          cd nodejs-tools && npm run changeStarToSpecificVersion
+          npm run changeStarToSpecificVersion
           GIT_PAGER=cat git diff
 
-          npm publish ${{ inputs.publishTag }} ${{ inputs.publishArgs }}
-          npm logout
+          npm publish ${{ inputs.publishArgs }}
+        working-directory: ./nodejs-tools
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

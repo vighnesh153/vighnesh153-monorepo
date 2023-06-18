@@ -1,16 +1,17 @@
 console.log(`
-  This script will change the "*" version to "x.x.x" version format.
+  This script will change the "*" version to "x.y.z" version format.
   
-  This is needed because the packages/* libraries are tightly paired to other packages/* libraries
-  and any incompatible library versions could break the application
+  This is needed because the nodejs-packages/* libraries are tightly paired to other 
+  nodejs-packages/* libraries and any incompatible library versions could break the 
+  library
 `);
 
 import fs from 'node:fs';
 import path from 'node:path';
 
-const packagesDir = path.resolve(".", "nodejs-pacakges");
-const packageJsonFileName = "package.json";
-const versionTrackerPackageDirName = "version-tracker";
+const packagesDir = path.resolve('.', 'nodejs-packages');
+const packageJsonFileName = 'package.json';
+const versionTrackerPackageDirName = 'version-tracker';
 
 function readJsonFile(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf-8').toString();
@@ -22,7 +23,7 @@ function writeJsonToFile(filePath, content) {
 }
 
 function getPackageVersion() {
-  const versionTrackerPackageJson = path.resolve(packagesDir, versionTrackerPackageDirName, packageJsonFileName)
+  const versionTrackerPackageJson = path.resolve(packagesDir, versionTrackerPackageDirName, packageJsonFileName);
   const packageJson = readJsonFile(versionTrackerPackageJson);
   return packageJson.version;
 }
@@ -30,7 +31,7 @@ function getPackageVersion() {
 function getAllLocalPackages() {
   const packageContainers = fs.readdirSync(packagesDir);
   return packageContainers.map((packageContainer) => {
-    const packageJsonPath = path.resolve(packagesDir, packageContainer, packageJsonFileName)
+    const packageJsonPath = path.resolve(packagesDir, packageContainer, packageJsonFileName);
     const packageJson = readJsonFile(packageJsonPath);
     return packageJson.name;
   });
@@ -39,7 +40,7 @@ function getAllLocalPackages() {
 function updateLocalPackageVersionsToExact(localPackageNames, latestPackageVersion) {
   const packageContainers = fs.readdirSync(packagesDir);
   packageContainers.forEach((packageContainer) => {
-    const packageJsonPath = path.resolve(packagesDir, packageContainer, packageJsonFileName)
+    const packageJsonPath = path.resolve(packagesDir, packageContainer, packageJsonFileName);
     const packageJson = readJsonFile(packageJsonPath);
     for (const localPackageName of localPackageNames) {
       if (packageJson.dependencies?.hasOwnProperty(localPackageName)) {

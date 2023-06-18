@@ -44,20 +44,20 @@ function cleanNodeJs() {
 
 
 # ✨ Update NodeJs packages ✨
-function packageUpdateNodejsTools() {
+function packageUpdateNodejs__tools() {
   echo "📦  Updating nodejs-tools packages... ⏳"
   ./node_modules/.bin/ncu -u --cwd=./nodejs-tools/ --ws --root
   echo "📦  Updating nodejs-tools packages completed ✅"
 }
-function packageUpdateRootNodeJs() {
+function packageUpdateNodeJs__root() {
   echo "📦  Updating root nodejs packages... ⏳"
   ./node_modules/.bin/ncu -u
   echo "📦  Updating root nodejs packages completed ✅"
 }
 function packageUpdateNodeJs() {
   echo "📦  Updating all nodejs packages... ⏳"
-  packageUpdateRootNodeJs
-  packageUpdateNodejsTools
+  packageUpdateNodeJs__root
+  packageUpdateNodejs__tools
   echo "📦  Updating all nodejs packages completed ✅"
 }
 
