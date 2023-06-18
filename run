@@ -18,8 +18,20 @@ function tasks() {
 
 # ✨ Initial setup ✨
 function initialSetup() {
+  installDeps
+}
+
+# ✨ Install dependencies ✨
+function installDeps_nodejs() {
+  echo "📦  Installing nodejs dependencies... ⏳"
   npm install
   cd nodejs-tools/ && npm install && cd ..
+  echo "📦  Installing nodejs dependencies completed ✅"
+}
+function installDeps() {
+  echo "📦  Installing dependencies... ⏳"
+  installDeps_nodejs
+  echo "📦  Installing dependencies completed ✅"
 }
 
 
@@ -46,7 +58,7 @@ function cleanNodeJs() {
 # ✨ Update NodeJs packages ✨
 function packageUpdateNodejs__tools() {
   echo "📦  Updating nodejs-tools packages... ⏳"
-  ./node_modules/.bin/ncu -u --cwd=./nodejs-tools/ --ws --root
+  ./node_modules/.bin/ncu -u --cwd=./nodejs-tools/ -ws --root
   echo "📦  Updating nodejs-tools packages completed ✅"
 }
 function packageUpdateNodeJs__root() {
