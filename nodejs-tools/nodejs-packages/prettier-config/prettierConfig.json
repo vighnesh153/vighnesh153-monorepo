@@ -9,8 +9,17 @@
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
   "jsxSingleQuote": false,
-  "overrides": [],
-  "plugins": [],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-astro"
+  ],
   "pluginSearchDirs": [],
   "printWidth": 120,
   "proseWrap": "always",

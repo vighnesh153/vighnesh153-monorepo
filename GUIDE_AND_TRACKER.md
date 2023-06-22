@@ -67,6 +67,7 @@ Visit
 - Sub-domain auth
   - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
 - Codepen clone for my personal HTML projects (no api just local code files)
+- https://stylelint.io/user-guide/get-started
 - email template builder
   - Create welcome email template
 - Instagram automation
@@ -75,12 +76,15 @@ Visit
   - Animal prompts
     - [ANIMAL] playing in a [PARK|FOREST]
 - SECURITY.md
+- Markdown editor with math support
+  * Specs: https://spec.commonmark.org/
+  * Remark: https://remark.js.org/
 - Docker tools
   - Image compression
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
 - Audio and video libraries
-- Sound effects on `vighnesh153.com
+- Sound effects on `vighnesh153.com`
 - SQS Queues
   - Pending events
     - USER_CREATED
@@ -91,6 +95,7 @@ Visit
 - Email service
 - Embed GitHub commit snippet
 - Media CDN
+  - image optimization and standard multiple sources
 - Hide emails of users on client side
 - Profile page for all users
   - `/users` -> Show list of users (hide emails)
@@ -359,8 +364,7 @@ module.exports = {
 - .eslintignore
 
 ```ignore
-*.cjs
-*.js
+*.c?js
 ```
 
 - README.md

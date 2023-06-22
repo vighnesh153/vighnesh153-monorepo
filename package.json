@@ -11,7 +11,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
-    "@vighnesh153/prettier-config": "latest",
+    "@vighnesh153/prettier-config": "file:./nodejs-tools/nodejs-packages/prettier-config",
     "eslint": "^8.43.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
