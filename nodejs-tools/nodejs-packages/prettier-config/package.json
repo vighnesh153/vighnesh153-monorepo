@@ -33,5 +33,8 @@
     "linting",
     "configuration",
     "opinionated"
-  ]
+  ],
+  "dependencies": {
+    "prettier-plugin-astro": "^0.10.0"
+  }
 }
