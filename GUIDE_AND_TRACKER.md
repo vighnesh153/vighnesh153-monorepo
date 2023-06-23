@@ -364,7 +364,8 @@ module.exports = {
 - .eslintignore
 
 ```ignore
-*.c?js
+*.js
+*.cjs
 ```
 
 - README.md
