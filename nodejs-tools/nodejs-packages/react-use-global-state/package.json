@@ -32,6 +32,7 @@
     "build:watch:bundle": "tsup --watch",
     "build:watch:types": "tsc --watch",
     "build": "npm-run-all build:once:*",
+    "lint": "eslint .",
     "dev": "npm-run-all --parallel build:watch:*",
     "test:watch": "vitest",
     "test": "NODE_ENV=test vitest run --passWithNoTests"

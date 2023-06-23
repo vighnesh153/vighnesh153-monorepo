@@ -1,1 +1,4 @@
 *.js
+*.cjs
+*.d.ts
+dist

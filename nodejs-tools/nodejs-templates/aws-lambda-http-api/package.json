@@ -16,6 +16,7 @@
     "layer:install:deps": "cp package.json ./layer/nodejs && cd layer/nodejs && npm install --omit=dev && rm package.json package-lock.json",
     "layer:zip": "cd layer && zip -r nodejs.zip nodejs",
     "layer": "run-s layer:setup layer:install:deps layer:zip",
+    "lint": "eslint .",
     "build": "tsup",
     "build:watch": "tsup --watch",
     "local:server": "nodemon ./dist/localServer.cjs",
@@ -24,8 +25,7 @@
     "deploy:pre-requisites": "run-p layer build",
     "deploy:dev": "dotenv -e ../../.env.local -- run-s deploy:pre-requisites && serverless deploy --stage dev --verbose",
     "deploy:prod": "run-s deploy:pre-requisites && serverless deploy --stage prod --verbose",
-    "sls:remove:local": "dotenv -e ../../.env.local -- serverless remove",
-    "sls:remove": "serverless remove"
+    "sls:remove": "dotenv -e ../../.env.local -- serverless remove"
   },
   "dependencies": {
     "express": "^4.18.2",
