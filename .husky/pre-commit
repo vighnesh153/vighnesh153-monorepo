@@ -7,6 +7,6 @@
 if git diff --cached --name-only | grep --quiet "nodejs-tools/"
 then
   cd nodejs-tools && npm install && cd ..
-  cd nodejs-tools && npm run test && cd ..
   cd nodejs-tools && npm run lint && cd ..
+  cd nodejs-tools && npm run test && cd ..
 fi
