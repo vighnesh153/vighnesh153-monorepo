@@ -3,29 +3,30 @@ import { StaticSite, type StackContext } from 'sst/constructs';
 export function WebsiteStack({ stack }: StackContext) {
   const { stage } = stack;
 
-  const site = new StaticSite(stack, 'vighnesh153.com_astro', {
+  const site = new StaticSite(stack, 'Vighnesh153Astro', {
     path: '.',
     buildCommand: 'npm run build',
     buildOutput: 'dist',
     errorPage: '404.html',
     customDomain: {
-      domainName: `${stage}-ui.aws.vighnesh153.com`,
+      domainName: `${stage}.ui.aws.vighnesh153.com`,
       hostedZone: 'aws.vighnesh153.com',
     },
-    dev: {
-      url: 'http://localhost:1305',
+    environment: {
+      PUBLIC_VIGHNESH153_STAGE: stage,
     },
     cdk: {
       bucket: {
-        bucketName: `${stage}.vighnesh153.com_astro`,
+        bucketName: `vighnesh153.com-astro-${stage}`,
       },
       distribution: {
-        comment: `${stage} vighnesh153.com_astro`,
+        comment: `${stage} Vighnesh153 Astro`,
       },
     },
   });
 
   stack.addOutputs({
-    SiteUrl: site.url,
+    CloudfrontUrl: site.url,
+    CustomDomainUrl: site.customDomainUrl,
   });
 }

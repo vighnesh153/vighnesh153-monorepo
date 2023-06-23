@@ -56,6 +56,7 @@ Visit
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
+- astro eslint not working
 - Projects
   - Migrate projects to `vighnesh153.com/projects/*`
 - Blog:
@@ -357,6 +358,7 @@ module.exports = {
   extends: ['vighnesh153/ts-base.eslintrc.cjs'],
   parserOptions: {
     project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
   },
 };
 ```
