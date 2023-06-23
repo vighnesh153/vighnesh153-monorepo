@@ -1,5 +1,5 @@
 import { type SSTConfig } from 'sst';
-import { WebsiteStack } from './src/sst/WebsiteStack';
+import { WebsiteStack } from './sst/WebsiteStack';
 
 const sstConfig: SSTConfig = {
   config(input) {
