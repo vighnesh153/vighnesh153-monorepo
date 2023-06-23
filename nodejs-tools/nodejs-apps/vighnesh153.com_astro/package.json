@@ -11,11 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "sst:dev": "sst dev",
-    "sst:build": "sst build",
-    "sst:deploy": "sst deploy",
-    "sst:remove": "sst remove",
-    "sst:console": "sst console"
+    "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage dev",
+    "sst:deploy:prod": "sst deploy --stage prod",
+    "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
     "@vighnesh153/utils": "*",
@@ -28,10 +26,8 @@
     "eslint-config-vighnesh153": "*",
     "aws-cdk-lib": "2.84.0",
     "constructs": "10.1.156",
-    "npm-run-all": "^4.1.5",
     "sst": "^2.16.3",
-    "typescript": "^5.1.3",
-    "@tsconfig/node16": "^1.0.4"
+    "typescript": "^5.1.3"
   },
   "author": {
     "name": "Vighnesh Raut",
