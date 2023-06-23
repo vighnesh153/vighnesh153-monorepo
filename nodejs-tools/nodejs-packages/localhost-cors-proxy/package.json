@@ -23,6 +23,7 @@
     "url": "git@github.com:vighnesh153/vighnesh153-turbo.git"
   },
   "scripts": {
+    "lint": "eslint .",
     "build": "tsup"
   },
   "dependencies": {

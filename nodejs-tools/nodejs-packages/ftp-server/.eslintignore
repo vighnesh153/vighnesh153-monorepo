@@ -1,2 +1,4 @@
 *.js
-vite-env.d.ts
+*.cjs
+*.d.ts
+dist

@@ -15,7 +15,8 @@
     "url": "https://vighnesh153.com"
   },
   "scripts": {
-    "build": "tsup && tsc"
+    "build": "tsup && tsc",
+    "lint": "eslint ."
   },
   "files": [
     "src"

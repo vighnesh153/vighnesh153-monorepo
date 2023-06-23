@@ -12,6 +12,7 @@
   "scripts": {
     "start": "dotenv -e ../../.env.local -- wrangler dev",
     "deploy:prod": "wrangler publish",
+    "lint": "eslint .",
     "test": "vitest run"
   },
   "devDependencies": {

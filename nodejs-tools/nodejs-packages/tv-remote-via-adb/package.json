@@ -13,6 +13,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
+    "lint": "eslint .",
     "copy": "cpy --cwd=./src/client/dist . ../../../dist/client",
     "build:frontend": "vite build",
     "build": "tsup && vite build && npm run copy"

@@ -366,6 +366,8 @@ module.exports = {
 ```ignore
 *.js
 *.cjs
+*.d.ts
+dist
 ```
 
 - README.md

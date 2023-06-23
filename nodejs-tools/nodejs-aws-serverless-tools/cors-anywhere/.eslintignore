@@ -1,2 +1,6 @@
 *.js
 *.cjs
+*.d.ts
+dist
+layer
+.serverless

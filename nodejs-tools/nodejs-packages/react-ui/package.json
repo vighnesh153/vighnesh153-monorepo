@@ -20,7 +20,7 @@
   "types": "./dist/src/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/*.ts*",
+    "lint": "eslint .",
     "build:once:bundle": "tsup",
     "build:once:types": "tsc",
     "build:watch:bundle": "tsup --watch",
