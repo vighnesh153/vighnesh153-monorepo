@@ -1,0 +1,29 @@
+name: nodejs-deploy-vighnesh153.com
+
+on:
+  workflow_dispatch:
+
+jobs:
+  nodejs-deploy-vighnesh153-com:
+    name: Deploying vighnesh153.com
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
+          role-session-name: MySessionName
+          aws-region: us-east-1
+
+      - name: Install dependencies
+        run: npm install && cd nodejs-tools && npm install && cd ..
+
+      - name: Deploy
+        run: cd nodejs-tools && npm -w vighnesh153.com_astro run sst:deploy:prod
