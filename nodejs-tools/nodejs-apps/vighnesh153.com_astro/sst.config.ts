@@ -3,15 +3,22 @@ import { WebsiteStack } from './sst/WebsiteStack';
 
 const sstConfig: SSTConfig = {
   config(input) {
-    const { stage = 'dev' } = input;
+    const { stage } = input;
+    if (!stage) {
+      throw new Error('Stage is not defined in sstConfig.config() func');
+    }
     return {
       name: `${stage}-Vighnesh153Astro`,
       region: 'us-east-1',
     };
   },
   stacks(app) {
+    const { stage } = app;
+    if (!stage) {
+      throw new Error('Stage is not defined in sstConfig.stacks() func');
+    }
     app.stack(WebsiteStack, {
-      stackName: `${app.stageName || 'dev'}-Vighnesh153AstroStack`,
+      stackName: `${stage}-Vighnesh153AstroStack`,
     });
   },
 };

@@ -3,6 +3,10 @@ import { StaticSite, type StackContext } from 'sst/constructs';
 export function WebsiteStack({ stack }: StackContext) {
   const { stage } = stack;
 
+  if (!stage) {
+    throw new Error('Stage is not defined in Website stack');
+  }
+
   const site = new StaticSite(stack, 'Vighnesh153Astro', {
     path: '.',
     buildCommand: 'npm run build',

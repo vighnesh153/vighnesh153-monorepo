@@ -11,8 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage dev",
-    "sst:deploy:prod": "sst deploy --stage prod",
+    "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage=dev",
+    "sst:deploy:prod": "sst deploy --stage=prod",
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
