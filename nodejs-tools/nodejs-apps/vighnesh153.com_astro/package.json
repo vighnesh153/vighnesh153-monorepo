@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint .",
+    "lint": "eslint --max-warnings=0 .",
     "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage=dev",
     "sst:deploy:prod": "sst deploy --stage=prod",
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
@@ -23,9 +23,9 @@
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/tsconfig": "*",
-    "eslint-config-vighnesh153": "*",
     "aws-cdk-lib": "2.85.0",
     "constructs": "10.2.58",
+    "eslint-config-vighnesh153": "*",
     "sst": "^2.16.3",
     "typescript": "^5.1.3"
   },

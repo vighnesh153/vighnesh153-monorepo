@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "tsup && tsc",
-    "lint": "eslint ."
+    "lint": "eslint --max-warnings=0 ."
   },
   "files": [
     "src"

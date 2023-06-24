@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-./node_modules/.bin/lint-staged
+./node_modules/.bin/lint-staged --debug
 
 # pre-commits for nodejs-tools
 if git diff --cached --name-only | grep --quiet "nodejs-tools/"
