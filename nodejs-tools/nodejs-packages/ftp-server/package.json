@@ -22,7 +22,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
-    "lint": "eslint .",
+    "lint": "eslint --max-warnings=0 .",
     "copy": "cpy --cwd=./src/client/dist . ../../../dist/__vighnesh153-ftp-client__/",
     "build": "tsup && vite build && npm run copy"
   },

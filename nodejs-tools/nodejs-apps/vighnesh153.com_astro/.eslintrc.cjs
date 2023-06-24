@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    // 'vighnesh153/astro-ts.eslintrc.cjs',
-    'vighnesh153/ts-base.eslintrc.cjs',
-  ],
+  extends: ['vighnesh153/astro-ts.eslintrc.cjs'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,

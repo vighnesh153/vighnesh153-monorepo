@@ -18,7 +18,7 @@
     "layer": "run-s layer:setup layer:install:deps layer:zip",
     "build": "tsup",
     "build:watch": "tsup --watch",
-    "lint": "eslint .",
+    "lint": "eslint --max-warnings=0 .",
     "local:server": "nodemon ./dist/localServer.cjs",
     "local": "run-s build && run-p build:watch local:server",
     "sls:doctor": "serverless doctor",

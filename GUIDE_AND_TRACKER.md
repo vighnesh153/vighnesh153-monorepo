@@ -56,7 +56,6 @@ Visit
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
-- astro eslint not working
 - Projects
   - Migrate projects to `vighnesh153.com/projects/*`
 - Blog:
@@ -78,8 +77,8 @@ Visit
     - [ANIMAL] playing in a [PARK|FOREST]
 - SECURITY.md
 - Markdown editor with math support
-  * Specs: https://spec.commonmark.org/
-  * Remark: https://remark.js.org/
+  - Specs: https://spec.commonmark.org/
+  - Remark: https://remark.js.org/
 - Docker tools
   - Image compression
 - NextJS replacement tool (AWS deployment)

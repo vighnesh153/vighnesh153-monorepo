@@ -23,7 +23,7 @@
     "build:watch:bundle": "tsup --watch",
     "build:watch:types": "tsc --watch",
     "build": "npm-run-all build:once:*",
-    "lint": "eslint .",
+    "lint": "eslint --max-warnings=0 .",
     "dev": "npm-run-all --parallel build:watch:*",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
