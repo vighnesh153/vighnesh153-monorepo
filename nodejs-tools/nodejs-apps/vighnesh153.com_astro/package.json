@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@vighnesh153/utils": "*",
-    "astro": "^2.7.0"
+    "astro": "^2.7.0",
+    "csstype": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "*",
@@ -25,7 +26,6 @@
     "@vighnesh153/tsconfig": "*",
     "aws-cdk-lib": "2.85.0",
     "constructs": "10.2.58",
-    "csstype": "^3.1.2",
     "eslint-config-vighnesh153": "*",
     "sst": "^2.16.3",
     "typescript": "^5.1.3"
