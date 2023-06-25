@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint --max-warnings=0 .",
@@ -16,17 +16,30 @@
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
-    "@vighnesh153/utils": "*",
-    "astro": "^2.7.0"
+    "@vighnesh153/utils": "*"
   },
   "devDependencies": {
+    "@astrojs/prefetch": "^0.2.3",
+    "@astrojs/sitemap": "^1.3.3",
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/tsconfig": "*",
+    "astro": "^2.7.0",
+    "astro-compress": "^1.1.47",
+    "astro-critters": "^1.1.38",
+    "astro-rome": "^0.1.18",
+    "autoprefixer": "^10.4.14",
     "aws-cdk-lib": "2.85.0",
     "constructs": "10.2.58",
+    "cssnano": "^6.0.1",
+    "cssnano-preset-advanced": "^6.0.1",
     "csstype": "^3.1.2",
     "eslint-config-vighnesh153": "*",
+    "postcss": "^8.4.24",
+    "postcss-custom-media": "^9.1.5",
+    "postcss-import": "^15.1.0",
+    "postcss-reporter": "^7.0.5",
+    "postcss-url": "^10.1.3",
     "sass": "^1.63.6",
     "sst": "^2.16.3",
     "typescript": "^5.1.3"

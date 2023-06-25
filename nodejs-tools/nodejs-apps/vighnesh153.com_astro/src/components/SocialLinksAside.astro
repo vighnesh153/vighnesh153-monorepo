@@ -7,6 +7,8 @@ import SocialLinks from './SocialLinks.astro';
 </div>
 
 <style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+
   .aside-social-links {
     --_aside-social-links-gap: 1.5rem;
 
@@ -29,7 +31,7 @@ import SocialLinks from './SocialLinks.astro';
     }
   }
 
-  @media (--sm-up) {
+  @media (--sm-and-up) {
     .aside-social-links {
       display: block;
     }

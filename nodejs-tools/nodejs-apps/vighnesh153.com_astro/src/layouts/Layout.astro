@@ -12,12 +12,22 @@ const { title, description } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
+    <meta charset="UTF-8" />
     <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- On mobile devices, telephone numbers in html should appear as hyperlinks 
+      to initiate phone calls -->
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="twitter:dnt" content="on" />
+
+    <!-- If you want to preconnect to some origins to improve perf
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+
     <link rel="icon" href="/favicon.ico" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials" />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
