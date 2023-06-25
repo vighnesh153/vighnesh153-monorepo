@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={['dashed-outline-on-focus', className]} {...props}>
+  <slot />
+</div>
+
+<style is:global>
+  .dashed-outline-on-focus :is(a, button, input, select, textarea):focus-visible {
+    outline-width: 3px;
+    outline-style: dashed;
+    outline-color: currentColor;
+    outline-offset: 0.5rem;
+  }
+</style>
