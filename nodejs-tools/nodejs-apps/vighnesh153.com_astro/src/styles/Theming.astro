@@ -21,7 +21,24 @@ import '../styles/normalize.css';
     --z-index-modal: 1300;
     --z-index-snackbar: 1400;
     --z-index-tooltip: 1500;
+
+    /* breakpoint constants */
+    --breakpoint-xs: 0px;
+    --breakpoint-sm: 600px;
+    --breakpoint-md: 900px;
+    --breakpoint-lg: 1200px;
+    --breakpoint-xl: 1536px;
   }
+
+  @custom-media --xs (width >= var(--breakpoint-xs) and width < var(--breakpoint-sm));
+  @custom-media --xs-up (width >= var(--breakpoint-xs));
+  @custom-media --sm (width >= var(--breakpoint-sm) and width < var(--breakpoint-md));
+  @custom-media --sm-up (width >= var(--breakpoint-sm));
+  @custom-media --md (width >= var(--breakpoint-md) and width < var(--breakpoint-lg));
+  @custom-media --md-up (width >= var(--breakpoint-md));
+  @custom-media --lg (width >= var(--breakpoint-lg) and width < var(--breakpoint-xl));
+  @custom-media --lg-up (width >= var(--breakpoint-lg));
+  @custom-media --xl (width >= var(--breakpoint-xl));
 
   html:has(.theme-1) {
     /* https://realtimecolors.com/?colors=fbe2fd-0a182e-9074dc-000000-66ffdb */

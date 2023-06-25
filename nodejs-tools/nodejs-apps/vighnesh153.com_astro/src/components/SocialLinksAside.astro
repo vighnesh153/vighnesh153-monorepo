@@ -1,0 +1,37 @@
+---
+import SocialLinks from './SocialLinks.astro';
+---
+
+<div class="aside-social-links">
+  <SocialLinks direction="vertical" />
+</div>
+
+<style lang="scss">
+  .aside-social-links {
+    --_aside-social-links-gap: 1.5rem;
+
+    position: fixed;
+    bottom: 0;
+    left: var(--_aside-social-links-gap);
+    right: auto;
+
+    display: none;
+
+    &::after {
+      content: '';
+      width: 1px;
+      height: 90px;
+      margin: var(--_aside-social-links-gap) auto 0;
+
+      display: block;
+
+      background-color: var(--text);
+    }
+  }
+
+  @media (--sm-up) {
+    .aside-social-links {
+      display: block;
+    }
+  }
+</style>
