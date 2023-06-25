@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "chmod +x ./development-server.sh",
     "dev:with-docker": "./development-server.sh",
-    "dev": "next dev",
+    "dev": "next dev --port=3001",
     "prebuild": "chmod +x ./build-things.sh",
     "build": "# ./build-things.sh",
     "pretest": "./test/test-setup.sh",
