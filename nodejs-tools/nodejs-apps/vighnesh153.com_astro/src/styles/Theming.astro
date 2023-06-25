@@ -1,0 +1,56 @@
+---
+import '../styles/reset.css';
+import '../styles/normalize.css';
+---
+
+<style is:global>
+  :root {
+    /* Default to theme 1 values */
+    --text: #fbe2fd;
+    --background: #0a182e;
+    --primary: #9074dc;
+    --secondary: #000000;
+    --accent: #66ffdb;
+
+    /* z-index constants */
+    --z-index-mobile-stepper: 1000;
+    --z-index-fab: 1050;
+    --z-index-speed-dial: 1050;
+    --z-index-app-bar: 1100;
+    --z-index-drawer: 1200;
+    --z-index-modal: 1300;
+    --z-index-snackbar: 1400;
+    --z-index-tooltip: 1500;
+  }
+
+  html:has(.theme-1) {
+    /* https://realtimecolors.com/?colors=fbe2fd-0a182e-9074dc-000000-66ffdb */
+    --text: #fbe2fd;
+    --background: #0a182e;
+    --primary: #9074dc;
+    --secondary: #000000;
+    --accent: #66ffdb;
+  }
+
+  html:has(.theme-2) {
+    /* https://realtimecolors.com/?colors=fbe2fd-0a182e-8f4ca9-023350-66ffdb */
+    --text: #fbe2fd;
+    --background: #0a182e;
+    --primary: #8f4ca9;
+    --secondary: #023350;
+    --accent: #66ffdb;
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+  }
+</style>
+
+<script>
+  const theme = localStorage.getItem('theme');
+  if (theme) {
+    document.body.classList.add(theme);
+  }
+</script>

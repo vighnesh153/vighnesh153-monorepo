@@ -1,6 +1,5 @@
 ---
-import '../styles/reset.css';
-import '../styles/normalize.css';
+import Theming from '../styles/Theming.astro';
 
 export interface Props {
   title: string;
@@ -22,47 +21,7 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
+    <Theming />
     <slot />
   </body>
 </html>
-<style is:global>
-  :root {
-    /* Default to theme 1 values */
-    --text: #fbe2fd;
-    --background: #0a182e;
-    --primary: #9074dc;
-    --secondary: #000000;
-    --accent: #66ffdb;
-  }
-
-  html:has(.theme-1) {
-    /* https://realtimecolors.com/?colors=fbe2fd-0a182e-9074dc-000000-66ffdb */
-    --text: #fbe2fd;
-    --background: #0a182e;
-    --primary: #9074dc;
-    --secondary: #000000;
-    --accent: #66ffdb;
-  }
-
-  html:has(.theme-2) {
-    /* https://realtimecolors.com/?colors=fbe2fd-0a182e-8f4ca9-023350-66ffdb */
-    --text: #fbe2fd;
-    --background: #0a182e;
-    --primary: #8f4ca9;
-    --secondary: #023350;
-    --accent: #66ffdb;
-  }
-
-  html {
-    font-family: system-ui, sans-serif;
-    background-color: var(--background);
-    color: var(--text);
-  }
-</style>
-
-<script>
-  const theme = localStorage.getItem('theme');
-  if (theme) {
-    document.body.classList.add(theme);
-  }
-</script>

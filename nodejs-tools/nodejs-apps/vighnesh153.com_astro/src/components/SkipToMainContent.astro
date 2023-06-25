@@ -1,0 +1,33 @@
+---
+---
+
+<a href="#main"> Skip to main content</a>
+
+<style>
+  a {
+    padding: 1em 2em;
+    position: fixed;
+    left: 10px;
+    top: -100px;
+    display: inline-block;
+
+    color: var(--secondary);
+    background-color: var(--primary);
+    /* fontWeight: theme.typography.fontWeightBold, */
+    font-weight: ;
+
+    border-radius: 2.5px;
+    outline: none;
+    zindex: var(--z-index-tooltip) + 1;
+  }
+
+  a:focus {
+    top: 10px;
+  }
+
+  @media print {
+    a {
+      display: none;
+    }
+  }
+</style>

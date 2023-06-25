@@ -1,14 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SkipToMainContent from '../components/SkipToMainContent.astro';
 import SocialLinks from '../components/SocialLinks.astro';
+
+const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
+const description =
+  'Vighnesh is a Software Engineer who specializes in building exceptional web ' +
+  'interfaces. He also loves to dabble with Physics and Mathematics. When bored, ' +
+  'you can find him watching Netflix on his bed';
 ---
 
-<Layout
-  title="Vighnesh Raut - the man, the myth, the living legend himself"
-  description={'Vighnesh is a Software Engineer who specializes in building exceptional web ' +
-    'interfaces. He also loves to dabble with Physics and Mathematics. When bored, ' +
-    'you can find him watching Netflix on his bed'}
->
+<Layout title={title} description={description}>
+  <SkipToMainContent />
+
   <main>
     <SocialLinks direction="horizontal" />
   </main>
