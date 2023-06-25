@@ -8,7 +8,7 @@
     "dev:with-docker": "./development-server.sh",
     "dev": "next dev",
     "prebuild": "chmod +x ./build-things.sh",
-    "build": "./build-things.sh",
+    "build": "# ./build-things.sh",
     "pretest": "./test/test-setup.sh",
     "test:node": "vitest run --config ./test/vite-node.config.ts --passWithNoTests",
     "test:jsdom": "vitest run --config ./test/vite-jsdom.config.ts --passWithNoTests",
