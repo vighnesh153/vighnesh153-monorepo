@@ -51,8 +51,14 @@ Visit
 
 #### Tasks
 
+- Add tooltip component to social links
+- Update the 404 page
+- verify astro compression is working or not
+- Prefetch
+  - Add `rel="prefetch"` to any `<a />` links on the page
+  - https://docs.astro.build/en/guides/integrations-guide/prefetch/
+- https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the logs
-- fix instagram automation
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
