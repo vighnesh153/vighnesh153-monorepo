@@ -18,8 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install && cd nodejs-tools && npm install && cd ..
+      # install deps at root
+      - run: npm install
+
+      # install deps in nodejs-tools
+      - run: npm install
+        working-directory: ./nodejs-tools
+
+      - run: ls -la ./node_modules/turbo/bin/go-turbo
+        working-directory: ./nodejs-tools
 
       - name: Run ESLint
-        run: cd nodejs-tools && npm run lint
+        run: npm run lint
+        working-directory: ./nodejs-tools

@@ -34,6 +34,9 @@ jobs:
       - run: npm install
         working-directory: ./nodejs-tools
 
+      - run: ls -la ./node_modules/turbo/bin/go-turbo
+        working-directory: ./nodejs-tools
+
       # Build the project
       - run: npm run build
         working-directory: ./nodejs-tools
