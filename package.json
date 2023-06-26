@@ -9,8 +9,8 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.5",
-    "@commitlint/config-conventional": "^17.6.5",
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@vighnesh153/prettier-config": "file:./nodejs-tools/nodejs-packages/prettier-config",
     "eslint": "^8.43.0",
     "husky": "^8.0.3",
