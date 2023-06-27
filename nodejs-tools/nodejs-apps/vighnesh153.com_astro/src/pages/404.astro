@@ -3,16 +3,20 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Welcome to Astro." description="...">
-  <main>
+  <main class="loading">
     <h1>404: Not found</h1>
   </main>
 </Layout>
 
-<style>
+<style lang="scss">
   main {
     margin: auto;
     padding: 1.5rem;
     max-width: 60ch;
+
+    &.loading {
+      display: none;
+    }
   }
   h1 {
     font-size: 3rem;
@@ -20,3 +24,16 @@ import Layout from '../layouts/Layout.astro';
     margin: 0;
   }
 </style>
+
+<script>
+  import { removeTrailingSlashFromUrlPathName } from '@/utils';
+
+  const rawUrl = window.location.toString();
+  const filteredUrl = removeTrailingSlashFromUrlPathName(rawUrl);
+
+  if (filteredUrl !== rawUrl) {
+    window.location.replace(filteredUrl);
+  } else {
+    document.querySelector('main')?.classList.remove('loading');
+  }
+</script>
