@@ -1,7 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SkipToMainContent from '../components/SkipToMainContent.astro';
-import SocialLinksAside from '../components/SocialLinksAside.astro';
+import Layout from '@/layouts/Layout.astro';
+import SkipToMainContent from '@/components/SkipToMainContent.astro';
+import SocialLinksAside from '@/components/SocialLinksAside.astro';
+import EmailAddressAside from '@/components/EmailAddressAside.astro';
 
 const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
 const description =
@@ -13,6 +14,7 @@ const description =
 <Layout title={title} description={description}>
   <SkipToMainContent />
   <SocialLinksAside />
+  <EmailAddressAside />
 
   <main></main>
 </Layout>
