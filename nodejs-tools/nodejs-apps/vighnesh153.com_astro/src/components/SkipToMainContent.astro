@@ -3,7 +3,7 @@
 
 <a href="#main"> Skip to main content</a>
 
-<style>
+<style lang="scss">
   a {
     padding: 1em 2em;
     position: fixed;
@@ -18,15 +18,13 @@
 
     border-radius: 2.5px;
     outline: none;
-    zindex: var(--z-index-tooltip) + 1;
-  }
+    z-index: var(--z-index-tooltip) + 1;
 
-  a:focus {
-    top: 10px;
-  }
+    &:focus {
+      top: 10px;
+    }
 
-  @media print {
-    a {
+    @media print {
       display: none;
     }
   }
