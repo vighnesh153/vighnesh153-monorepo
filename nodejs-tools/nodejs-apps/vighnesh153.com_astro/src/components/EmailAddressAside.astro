@@ -1,0 +1,52 @@
+---
+import FocusDashedOutline from './FocusDashedOutline.astro';
+import { myPersonalizedEmail } from '@/constants/emails';
+---
+
+<FocusDashedOutline class="container">
+  <a href={`mailto:${myPersonalizedEmail}`} aria-label={`email me @ ${myPersonalizedEmail}`}>{myPersonalizedEmail}</a>
+</FocusDashedOutline>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+
+  $gap: 1.5rem;
+
+  .container {
+    position: fixed;
+    bottom: 0;
+    right: $gap;
+
+    display: none;
+
+    @media (--sm-and-up) {
+      display: block;
+    }
+
+    &::after {
+      content: '';
+      width: 1px;
+      height: 90px;
+      margin: 0 auto;
+
+      display: block;
+
+      background-color: var(--text);
+    }
+  }
+
+  a {
+    margin-bottom: $gap;
+
+    display: inline-block;
+    writing-mode: vertical-lr;
+
+    text-decoration: none;
+    color: var(--text);
+
+    &:is(:hover, :focus) {
+      text-decoration: underline;
+      color: var(--accent);
+    }
+  }
+</style>

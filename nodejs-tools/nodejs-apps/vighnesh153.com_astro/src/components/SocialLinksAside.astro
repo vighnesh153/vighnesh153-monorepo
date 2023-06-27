@@ -10,11 +10,11 @@ import SocialLinks from './SocialLinks.astro';
   @import '@/styles/breakpoints-media.css';
 
   .aside-social-links {
-    --_aside-social-links-gap: 1.5rem;
+    $gap: 1.5rem;
 
     position: fixed;
     bottom: 0;
-    left: var(--_aside-social-links-gap);
+    left: $gap;
     right: auto;
 
     display: none;
@@ -23,16 +23,14 @@ import SocialLinks from './SocialLinks.astro';
       content: '';
       width: 1px;
       height: 90px;
-      margin: var(--_aside-social-links-gap) auto 0;
+      margin: $gap auto 0;
 
       display: block;
 
       background-color: var(--text);
     }
-  }
 
-  @media (--sm-and-up) {
-    .aside-social-links {
+    @media (--sm-and-up) {
       display: block;
     }
   }
