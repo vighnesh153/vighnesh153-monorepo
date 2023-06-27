@@ -9,6 +9,7 @@ import critters from 'astro-critters';
 
 // https://astro.build/config
 export default defineConfig({
+  compressHTML: true,
   integrations: [
     // import.meta.env.MODE === 'production' ? worker() : null,
     sitemap(),
@@ -19,6 +20,7 @@ export default defineConfig({
   ],
   build: {
     inlineStylesheets: 'auto',
+    format: 'file',
   },
   vite: {
     build: {

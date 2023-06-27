@@ -10,7 +10,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint --max-warnings=0 .",
+    "lint": "eslint --max-warnings=0 . && astro check",
     "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage=dev",
     "sst:deploy:prod": "sst deploy --stage=prod",
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
