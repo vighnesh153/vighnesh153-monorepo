@@ -1,10 +1,14 @@
 ---
 import FocusDashedOutline from './FocusDashedOutline.astro';
 import { myPersonalizedEmail } from '@/constants/emails';
+
+const emailLink = `email me @ ${myPersonalizedEmail}`;
 ---
 
 <FocusDashedOutline class="container">
-  <a href={`mailto:${myPersonalizedEmail}`} aria-label={`email me @ ${myPersonalizedEmail}`}>{myPersonalizedEmail}</a>
+  <a href={`mailto:${myPersonalizedEmail}`} aria-label={emailLink} title={emailLink}>
+    {myPersonalizedEmail}
+  </a>
 </FocusDashedOutline>
 
 <style lang="scss">

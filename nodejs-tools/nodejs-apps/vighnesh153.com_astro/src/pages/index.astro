@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import SkipToMainContent from '@/components/SkipToMainContent.astro';
 import SocialLinksAside from '@/components/SocialLinksAside.astro';
 import EmailAddressAside from '@/components/EmailAddressAside.astro';
+import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
+import { homePage } from '@/constants';
 
 const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
 const description =
@@ -16,13 +18,30 @@ const description =
   <SocialLinksAside />
   <EmailAddressAside />
 
-  <main></main>
+  <main id={homePage.hashTags.main}>
+    <div>
+      <IntroductionSection />
+    </div>
+  </main>
 </Layout>
 
-<style>
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+
   main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
+    padding: 0 2rem;
+  }
+
+  main > div {
+    margin-inline: auto;
+    max-width: 1200px;
+
+    @media (--sm) {
+      padding-inline: 2rem;
+    }
+
+    @media (--md-and-up) {
+      padding-inline: 4rem;
+    }
   }
 </style>

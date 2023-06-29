@@ -1,7 +1,7 @@
-import GithubIcon from '../icons/GithubIcon.astro';
-import LinkedInIcon from '../icons/LinkedInIcon.astro';
-import StackoverflowIcon from '../icons/StackoverflowIcon.astro';
-import CodepenIcon from '../icons/CodepenIcon.astro';
+import GithubIcon from '@/icons/GithubIcon.astro';
+import LinkedInIcon from '@/icons/LinkedInIcon.astro';
+import StackoverflowIcon from '@/icons/StackoverflowIcon.astro';
+import CodepenIcon from '@/icons/CodepenIcon.astro';
 
 export const socialProfiles = [
   {

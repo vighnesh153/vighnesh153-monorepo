@@ -1,0 +1,156 @@
+@mixin h1 {
+  font-weight: var(--font-weight-light);
+  font-size: 6rem;
+  line-height: 1.167;
+  letter-spacing: -0.01562em;
+}
+
+.h1 {
+  @include h1;
+}
+
+@mixin h2 {
+  font-weight: var(--font-weight-light);
+  font-size: 3.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.00833em;
+}
+
+.h2 {
+  @include h2;
+}
+
+@mixin h3 {
+  font-weight: var(--font-weight-regular);
+  font-size: 3rem;
+  line-height: 1.167;
+  letter-spacing: 0em;
+}
+
+.h3 {
+  @include h3;
+}
+
+@mixin h4 {
+  font-weight: var(--font-weight-regular);
+  font-size: 2.125rem;
+  line-height: 1.235;
+  letter-spacing: 0.00735em;
+}
+
+.h4 {
+  @include h4;
+}
+
+@mixin h5 {
+  font-weight: var(--font-weight-regular);
+  font-size: 1.5rem;
+  line-height: 1.334;
+  letter-spacing: 0em;
+}
+
+.h5 {
+  @include h5;
+}
+
+@mixin h6 {
+  font-weight: var(--font-weight-medium);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.h6 {
+  @include h6;
+}
+
+@mixin subtitle1 {
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.00938em;
+}
+
+.subtitle1 {
+  @include subtitle1;
+}
+
+@mixin subtitle2 {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  line-height: 1.57;
+  letter-spacing: 0.00714em;
+}
+
+.subtitle2 {
+  @include subtitle2;
+}
+
+@mixin body1 {
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+.body1 {
+  @include body1;
+}
+
+@mixin body2 {
+  font-weight: var(--font-weight-regular);
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+}
+
+.body2 {
+  @include body2;
+}
+
+@mixin button {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+}
+
+.button {
+  @include button;
+}
+
+@mixin caption {
+  font-weight: var(--font-weight-regular);
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+}
+
+.caption {
+  @include caption;
+}
+
+@mixin overline {
+  font-weight: var(--font-weight-regular);
+  font-size: 0.75rem;
+  line-height: 2.66;
+  letter-spacing: 0.083333em;
+  text-transform: uppercase;
+}
+
+.overline {
+  @include overline;
+}
+
+@mixin inherit {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.inherit {
+  @include inherit;
+}

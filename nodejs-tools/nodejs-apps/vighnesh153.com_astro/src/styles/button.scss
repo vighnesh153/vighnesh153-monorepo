@@ -1,0 +1,29 @@
+@mixin button {
+  padding: 1em 2em;
+  display: inline-block;
+
+  border: none;
+  background-color: var(--_button-bg-color);
+  color: var(--_button-color);
+
+  border-radius: 6px;
+  transition: transform var(--ease) var(--duration-shorter), box-shadow var(--ease) var(--duration-shorter);
+  text-align: center;
+  cursor: pointer;
+
+  &:is(:hover, :focus-visible) {
+    box-shadow: 0 20px 80px -10px var(--_button-box-shadow-color);
+  }
+}
+
+@mixin button-primary {
+  --_button-color: var(--secondary) !important;
+  --_button-bg-color: var(--primary);
+  --_button-box-shadow-color: var(--primary);
+}
+
+@mixin button-secondary {
+  --_button-color: var(--text) !important;
+  --_button-bg-color: var(--secondary);
+  --_button-box-shadow-color: var(--primary);
+}
