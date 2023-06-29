@@ -1,6 +1,6 @@
 ---
 import FocusDashedOutline from './FocusDashedOutline.astro';
-import { socialProfiles } from '../constants/socialProfiles';
+import { socialProfiles } from '@/constants';
 
 export interface Props {
   direction: 'horizontal' | 'vertical';
@@ -10,12 +10,12 @@ const { direction } = Astro.props;
 ---
 
 <FocusDashedOutline>
-  <ul class={`layout-${direction}`}>
+  <ul class={`layout-${direction}`} aria-label="Social profiles">
     {
       socialProfiles.map((socialProfile) => (
-        <li>
+        <li aria-label={`${socialProfile.title}`}>
           <a href={socialProfile.link} title={socialProfile.title}>
-            <socialProfile.Icon width="1.25rem" height="1.25rem" />
+            <socialProfile.Icon role="img" width="1.25rem" height="1.25rem" />
           </a>
         </li>
       ))

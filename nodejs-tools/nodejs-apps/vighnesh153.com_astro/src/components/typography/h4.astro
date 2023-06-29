@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+import BaseTypography, { type TypographyVariant } from './base-typography.astro';
+
+export interface Props extends HTMLAttributes<'h4'> {
+  variant?: TypographyVariant;
+}
+
+const { variant = 'h4', ...props } = Astro.props;
+---
+
+<BaseTypography element="h4" variant={variant} htmlProps={props}>
+  <slot />
+</BaseTypography>

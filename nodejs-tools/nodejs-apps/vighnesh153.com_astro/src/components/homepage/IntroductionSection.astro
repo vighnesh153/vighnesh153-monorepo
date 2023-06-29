@@ -1,0 +1,94 @@
+---
+import { homePage } from '@/constants';
+import FocusDashedOutline from '../FocusDashedOutline.astro';
+import Link from '../Link.astro';
+import H1 from '../typography/h1.astro';
+import P from '../typography/p.astro';
+import Span from '../typography/span.astro';
+---
+
+<section class="hero">
+  <H1 class:list={['title']}>
+    <Span variant="h6" class="pre-title">Hi, my name is</Span>
+    <Span variant="h2" class="title-main">Vighnesh Raut.</Span>
+    <Span variant="h2" class="post-title">I build things, mostly for fun.</Span>
+  </H1>
+  <P class:list={['description']}>
+    I am a Software Engineer specializing in building exceptional digital experiences. Currently, I am focused on
+    building accessible, human-centered products for different causes.
+  </P>
+  <FocusDashedOutline>
+    <Link asPrimaryButton href={homePage.internalLinks.contactMe} class="get-in-touch">Get in Touch</Link>
+  </FocusDashedOutline>
+</section>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  .hero {
+    min-height: 100dvh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pre-title {
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--accent);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .title-main {
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: var(--font-weight-bold) !important;
+
+    @media (--xs-and-up) {
+      @include h4;
+    }
+    @media (--sm-and-up) {
+      @include h3;
+    }
+    @media (--md-and-up) {
+      @include h2;
+    }
+  }
+
+  .post-title {
+    margin-bottom: 1.5rem;
+    display: block;
+    color: var(--text-2);
+    font-weight: var(--font-weight-bold) !important;
+
+    @media (--xs-and-up) {
+      @include h4;
+    }
+    @media (--sm-and-up) {
+      @include h3;
+    }
+    @media (--md-and-up) {
+      @include h2;
+    }
+  }
+
+  .description {
+    display: block;
+    color: var(--text-3);
+
+    @media (--xs-and-up) {
+      @include body1;
+    }
+    @media (--sm-and-up) {
+      @include h6;
+    }
+  }
+
+  .get-in-touch {
+    --focus-dashed-outline-color: var(--primary);
+    margin-top: 1.5rem;
+  }
+</style>
