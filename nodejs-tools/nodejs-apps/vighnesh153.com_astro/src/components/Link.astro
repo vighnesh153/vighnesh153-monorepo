@@ -24,27 +24,52 @@ if (asPrimaryButton && asSecondaryButton) {
     className,
     classList,
     'LinkComponent',
-    { 'primary-button': asPrimaryButton, 'secondary-button': asSecondaryButton },
+    {
+      'regular-link': !asPrimaryButton && !asSecondaryButton,
+      'primary-button': asPrimaryButton,
+      'secondary-button': asSecondaryButton,
+    },
   ]}
   {...props}
 >
   <slot />
 </a>
 
-<style lang="scss" is:global>
+<style lang="scss">
   @import '@/styles/button.scss';
 
   a.LinkComponent {
-    display: inline-block;
+    &.regular-link {
+      display: inline-block;
+      position: relative;
 
-    color: var(--primary);
-    font-weight: var(--font-weight-bold);
-
-    text-decoration: underline;
-    cursor: pointer;
-
-    &:is(:hover, :focus-visible) {
       color: var(--accent);
+      font-weight: var(--font-weight-regular);
+
+      text-decoration: none;
+      cursor: pointer;
+
+      &::after {
+        $size: 2px;
+        content: '';
+
+        position: absolute;
+        width: 0;
+        height: $size;
+
+        left: 0;
+        bottom: -$size;
+
+        background-color: currentColor;
+
+        transition: width var(--ease-in) var(--duration-shorter);
+      }
+
+      &:is(:hover, :focus-visible) {
+        &::after {
+          width: 100%;
+        }
+      }
     }
 
     &.primary-button {

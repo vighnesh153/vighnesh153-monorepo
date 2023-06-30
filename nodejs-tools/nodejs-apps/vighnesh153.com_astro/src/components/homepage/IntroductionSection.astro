@@ -10,12 +10,12 @@ import Span from '../typography/span.astro';
 <section class="hero">
   <H1 class:list={['title']}>
     <Span variant="h6" class="pre-title">Hi, my name is</Span>
-    <Span variant="h2" class="title-main">Vighnesh Raut.</Span>
-    <Span variant="h2" class="post-title">I build things, mostly for fun.</Span>
+    <Span variant="inherit" class="title-main">Vighnesh Raut.</Span>
+    <Span variant="inherit" class="post-title">I build things, mostly for fun.</Span>
   </H1>
   <P class:list={['description']}>
     I am a Software Engineer specializing in building exceptional digital experiences. Currently, I am focused on
-    building accessible, human-centered products for different causes.
+    building accessible, developer-centered products for different causes.
   </P>
   <FocusDashedOutline>
     <Link asPrimaryButton href={homePage.internalLinks.contactMe} class="get-in-touch">Get in Touch</Link>
@@ -78,6 +78,7 @@ import Span from '../typography/span.astro';
   .description {
     display: block;
     color: var(--text-3);
+    font-weight: var(--font-weight-light) !important;
 
     @media (--xs-and-up) {
       @include body1;

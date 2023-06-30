@@ -1,0 +1,64 @@
+---
+import H2 from '../typography/h2.astro';
+import Span from '../typography/span.astro';
+
+export interface Props {
+  count: string;
+  title: string;
+}
+
+const { count, title } = Astro.props;
+---
+
+<H2 variant="inherit" class="h2"><Span variant="inherit" class="span">{count}.</Span>&nbsp;{title}</H2>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  .h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    font-weight: var(--font-weight-bold) !important;
+    white-space: nowrap;
+
+    &::after {
+      content: '';
+      margin-left: 1rem;
+      width: 100%;
+      max-width: 300px;
+      height: 1px;
+
+      display: inline-block;
+
+      background-color: var(--text-4);
+    }
+
+    @media (--xs-and-up) {
+      @include h6;
+    }
+    @media (--sm-and-up) {
+      @include h5;
+    }
+    @media (--md-and-up) {
+      @include h4;
+    }
+
+    .span {
+      color: var(--accent);
+      font-weight: var(--font-weight-bold) !important;
+
+      @media (--xs-and-up) {
+        @include h6;
+      }
+      @media (--sm-and-up) {
+        @include h5;
+      }
+      @media (--md-and-up) {
+        @include h4;
+      }
+    }
+  }
+</style>

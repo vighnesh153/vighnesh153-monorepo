@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'li'> {}
+
+const { ...props } = Astro.props;
+---
+
+<li {...props}>
+  <slot />
+</li>
+
+<style lang="scss">
+  li {
+    padding-left: 1.5rem;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+
+      color: var(--accent);
+    }
+  }
+</style>

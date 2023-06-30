@@ -22,9 +22,10 @@ const { title, description } = Astro.props;
     <meta name="format-detection" content="telephone=yes" />
     <meta name="twitter:dnt" content="on" />
 
-    <!-- If you want to preconnect to some origins to improve perf -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- preconnect to some origins to reuse the connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://vighnesh153.com" />
 
     <link rel="icon" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials" />
