@@ -2,21 +2,13 @@
 import type { HTMLAttributes } from 'astro/types';
 
 type ElementType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
-export type TypographyVariant =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'subtitle1'
-  | 'subtitle2'
-  | 'body1'
-  | 'body2'
-  | 'button'
-  | 'caption'
-  | 'overline'
-  | 'inherit';
+
+/**
+ * Splitting the following because astro compiler chokes when we format each entry on a new line
+ */
+type TypographyVariantHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type TypographyVariantOthers = 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
+export type TypographyVariant = TypographyVariantHeading | TypographyVariantOthers | 'inherit';
 
 export interface Props<T extends ElementType> {
   element: T;
