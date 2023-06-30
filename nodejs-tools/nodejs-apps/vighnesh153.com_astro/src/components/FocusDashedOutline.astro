@@ -3,10 +3,10 @@ import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'div'> {}
 
-const { class: className, ...props } = Astro.props;
+const { class: className, 'class:list': classList, ...props } = Astro.props;
 ---
 
-<div class:list={['dashed-outline-on-focus', className]} {...props}>
+<div class:list={['dashed-outline-on-focus', className, classList]} {...props}>
   <slot />
 </div>
 

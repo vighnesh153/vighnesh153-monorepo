@@ -1,0 +1,83 @@
+---
+import { homePage } from '@/constants';
+import SectionTitle from './SectionTitle.astro';
+import FocusDashedOutline from '../FocusDashedOutline.astro';
+import P from '../typography/p.astro';
+import Link from '../Link.astro';
+import Span from '../typography/span.astro';
+import SectionListItem from './SectionListItem.astro';
+---
+
+<section id={homePage.hashTags.aboutMe} class="about-me">
+  <SectionTitle count="01" title="About me" />
+  <FocusDashedOutline class="description">
+    <P class="text">
+      Hello. My name is Vighnesh and I enjoy creating projects involving graphics manipulations, cli-tools, libraries
+      and also developer tools. My interest in software development started a few years back when I first learnt about
+      Javascript. Since then, I have been building teeny-tiny projects for fun. I am also fascinated by compilers and I
+      am on a journey to master the art of building a compiler
+      <br />
+      <br />
+      Fast-forward to today, and I have had the privilege to work for{' '}
+      <Link href={homePage.companyUrls.google} target="_blank">Google</Link>
+      ,{' '}
+      <Link href={homePage.companyUrls.amazon} target="_blank">Amazon</Link>
+      ,{' '}
+      <Link href={homePage.companyUrls.smarterCodes} target="_blank">an AI startup</Link>{' '}
+      and{' '}
+      <Link href={homePage.companyUrls.tavisca} target="_blank">a loyalty rewards company</Link>
+      <br />
+      <br />
+      My Main focus these days is building next-gen developer tools for GoogleTV at{' '}
+      <Link href={homePage.companyUrls.google} target="_blank">Google</Link>
+      <br />
+      <br />
+      Here are a few technologies I have been working with recently:
+      <br />
+    </P>
+    <ul>
+      {
+        homePage.currentTechnologies.map((technology) => (
+          <SectionListItem class="li">
+            <Link href={technology.link}>
+              <Span class="text">{technology.text}</Span>
+            </Link>
+          </SectionListItem>
+        ))
+      }
+    </ul>
+  </FocusDashedOutline>
+</section>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  section {
+    max-width: 70ch;
+  }
+
+  .description {
+    margin-top: 1.5rem;
+    color: var(--text-3);
+
+    .text {
+      font-weight: var(--font-weight-light) !important;
+
+      @media (--xs-and-up) {
+        @include body1;
+      }
+      @media (--sm-and-up) {
+        @include h6;
+      }
+    }
+  }
+
+  ul {
+    margin-top: 1rem;
+
+    .li {
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>

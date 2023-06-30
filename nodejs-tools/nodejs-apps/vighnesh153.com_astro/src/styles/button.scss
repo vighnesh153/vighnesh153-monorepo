@@ -1,4 +1,8 @@
+@import './typography.scss';
+
 @mixin button {
+  @include button-typography;
+
   padding: 1em 2em;
   display: inline-block;
 
@@ -17,13 +21,13 @@
 }
 
 @mixin button-primary {
-  --_button-color: var(--secondary) !important;
+  --_button-color: var(--secondary);
   --_button-bg-color: var(--primary);
   --_button-box-shadow-color: var(--primary);
 }
 
 @mixin button-secondary {
-  --_button-color: var(--text) !important;
+  --_button-color: var(--text);
   --_button-bg-color: var(--secondary);
   --_button-box-shadow-color: var(--primary);
 }
