@@ -7,6 +7,7 @@ import IntroductionSection from '@/components/homepage/IntroductionSection.astro
 import AboutMeSection from '@/components/homepage/AboutMeSection.astro';
 import ExperienceSection from '@/components/homepage/ExperienceSection.astro';
 import ContactMeSection from '@/components/homepage/ContactMeSection.astro';
+import FooterSection from '@/components/homepage/FooterSection.astro';
 
 import { homePage } from '@/constants';
 
@@ -29,11 +30,13 @@ const description =
       <ExperienceSection />
       <ContactMeSection />
     </div>
+    <FooterSection />
   </main>
 </Layout>
 
 <style lang="scss" is:global>
-  .main-div > section {
+  .main-div > section,
+  main > footer {
     margin-inline: auto;
     max-width: 65ch;
     padding-block: 5rem;
