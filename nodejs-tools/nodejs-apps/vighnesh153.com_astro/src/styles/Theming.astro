@@ -7,6 +7,10 @@ import './typography.scss';
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
   @import './breakpoints-media.css';
 
+  * {
+    box-sizing: border-box;
+  }
+
   :root {
     /* z-index constants */
     --z-index-mobile-stepper: 1000;
@@ -47,6 +51,7 @@ import './typography.scss';
     --accent: rgb(102, 255, 219);
 
     /* derived from text */
+    --background-dark: rgb(3, 12, 28);
     --text-2: rgba(251, 226, 253, 70%);
     --text-3: rgba(251, 226, 253, 60%);
     --text-4: rgba(251, 226, 253, 30%);
@@ -61,6 +66,7 @@ import './typography.scss';
     --accent: rgb(102, 255, 219);
 
     /* derived from text */
+    --background-dark: rgb(3, 12, 28);
     --text-2: rgba(251, 226, 253, 70%);
     --text-3: rgba(251, 226, 253, 60%);
     --text-4: rgba(251, 226, 253, 30%);
