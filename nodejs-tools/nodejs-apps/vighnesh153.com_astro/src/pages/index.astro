@@ -6,6 +6,7 @@ import EmailAddressAside from '@/components/EmailAddressAside.astro';
 import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
 import AboutMeSection from '@/components/homepage/AboutMeSection.astro';
 import ExperienceSection from '@/components/homepage/ExperienceSection.astro';
+import ContactMeSection from '@/components/homepage/ContactMeSection.astro';
 
 import { homePage } from '@/constants';
 
@@ -26,6 +27,7 @@ const description =
       <IntroductionSection />
       <AboutMeSection />
       <ExperienceSection />
+      <ContactMeSection />
     </div>
   </main>
 </Layout>
@@ -33,8 +35,8 @@ const description =
 <style lang="scss" is:global>
   .main-div > section {
     margin-inline: auto;
-    max-width: 70ch;
-    padding-block: 4rem;
+    max-width: 65ch;
+    padding-block: 5rem;
   }
 </style>
 
