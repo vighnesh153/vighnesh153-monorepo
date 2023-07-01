@@ -26,8 +26,9 @@ import Span from '../typography/span.astro';
   @import '@/styles/breakpoints-media.css';
   @import '@/styles/typography.scss';
 
-  .hero {
+  section.hero {
     min-height: 100dvh;
+    padding-block: 0;
 
     display: flex;
     justify-content: center;
@@ -77,7 +78,7 @@ import Span from '../typography/span.astro';
 
   .description {
     display: block;
-    color: var(--text-3);
+    color: var(--text-2);
     font-weight: var(--font-weight-light) !important;
 
     @media (--xs-and-up) {

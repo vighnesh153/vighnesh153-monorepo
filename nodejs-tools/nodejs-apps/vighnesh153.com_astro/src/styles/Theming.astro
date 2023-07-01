@@ -4,7 +4,7 @@ import './typography.scss';
 ---
 
 <style is:global lang="scss">
-  // @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
   @import './breakpoints-media.css';
 
   :root {
@@ -63,12 +63,19 @@ import './typography.scss';
     /* derived from text */
     --text-2: rgba(251, 226, 253, 70%);
     --text-3: rgba(251, 226, 253, 60%);
+    --text-4: rgba(251, 226, 253, 30%);
   }
 
   html {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background);
     color: var(--text);
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: var(--accent) !important;
+    color: var(--background) !important;
   }
 </style>
 
