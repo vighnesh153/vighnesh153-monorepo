@@ -1,0 +1,29 @@
+---
+import Span from '../typography/span.astro';
+import SectionListItem from './SectionListItem.astro';
+---
+
+<SectionListItem class="list-item">
+  <Span class="span"><slot /></Span>
+</SectionListItem>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  .list-item {
+    margin-bottom: 0.75rem;
+  }
+
+  .span {
+    color: var(--text-2);
+    font-weight: var(--font-weight-light) !important;
+
+    @media (--xs-and-up) {
+      @include body1;
+    }
+    @media (--sm-and-up) {
+      @include h6;
+    }
+  }
+</style>

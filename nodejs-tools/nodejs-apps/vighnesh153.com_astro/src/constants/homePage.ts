@@ -2,6 +2,7 @@ const hashTags = {
   main: 'main',
   aboutMe: 'about-me',
   contactMe: 'contact-me',
+  experience: 'experience',
 };
 
 const companyUrls = {
@@ -15,6 +16,7 @@ const internalLinks = {
   main: `/#${hashTags.main}`,
   aboutMe: `/#${hashTags.aboutMe}`,
   contactMe: `/#${hashTags.contactMe}`,
+  experience: `/#${hashTags.experience}`,
 };
 
 const currentTechnologies = [
