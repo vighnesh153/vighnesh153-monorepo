@@ -1,5 +1,5 @@
 ---
-import { homePage } from '@/constants';
+import { homePage, companyUrls } from '@/constants';
 import SectionTitle from './SectionTitle.astro';
 import FocusDashedOutline from '../FocusDashedOutline.astro';
 import ExperienceSectionItem from './ExperienceSectionItem.astro';
@@ -24,7 +24,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
     <ul>
       <ExperienceSectionItem
         companyName="Google"
-        companyUrl={homePage.companyUrls.google}
+        companyUrl={companyUrls.google}
         totalDuration={getTimeDifference(new Date('2022-07-14'))}
         companyPositions={[
           {
@@ -46,7 +46,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 
       <ExperienceSectionItem
         companyName="Amazon"
-        companyUrl={homePage.companyUrls.amazon}
+        companyUrl={companyUrls.amazon}
         totalDuration={getTimeDifference(new Date('2020-09-28'), new Date('2022-07-14'))}
         companyPositions={[
           {
@@ -101,7 +101,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 
       <ExperienceSectionItem
         companyName="Smarter Codes"
-        companyUrl={homePage.companyUrls.smarterCodes}
+        companyUrl={companyUrls.smarterCodes}
         totalDuration={getTimeDifference(new Date('2020-07-06'), new Date('2020-09-25'))}
         companyPositions={[
           {
@@ -130,7 +130,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 
       <ExperienceSectionItem
         companyName="Tavisca"
-        companyUrl={homePage.companyUrls.tavisca}
+        companyUrl={companyUrls.tavisca}
         totalDuration={getTimeDifference(new Date('2019-07-15'), new Date('2020-01-25'))}
         companyPositions={[
           {

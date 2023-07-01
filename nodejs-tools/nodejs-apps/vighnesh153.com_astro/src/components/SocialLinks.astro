@@ -1,16 +1,17 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import FocusDashedOutline from './FocusDashedOutline.astro';
 import { socialProfiles } from '@/constants';
 
-export interface Props {
+export interface Props extends HTMLAttributes<'ul'> {
   direction: 'horizontal' | 'vertical';
 }
 
-const { direction } = Astro.props;
+const { direction, class: className, 'class:list': classList, ...props } = Astro.props;
 ---
 
 <FocusDashedOutline>
-  <ul class={`layout-${direction}`} aria-label="Social profiles">
+  <ul class:list={[`layout-${direction}`, className, classList]} aria-label="Social profiles" {...props}>
     {
       socialProfiles.map((socialProfile) => (
         <li aria-label={`${socialProfile.title}`}>

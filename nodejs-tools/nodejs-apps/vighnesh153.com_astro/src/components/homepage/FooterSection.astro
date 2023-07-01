@@ -1,0 +1,33 @@
+---
+import FocusDashedOutline from '../FocusDashedOutline.astro';
+import Link from '../Link.astro';
+import SocialLinks from '../SocialLinks.astro';
+
+import { homePage, externalLinks } from '@/constants';
+---
+
+<footer id={homePage.hashTags.footer}>
+  <SocialLinks direction="horizontal" class="social-links" />
+  <FocusDashedOutline>
+    <Link href={externalLinks.githubRepo} color="secondary">View on Github</Link>
+  </FocusDashedOutline>
+</footer>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  // @import '@/styles/typography.scss';
+
+  footer {
+    display: grid;
+    place-items: center;
+  }
+
+  .social-links {
+    display: flex;
+    margin-bottom: 1rem;
+
+    @media (--sm-and-up) {
+      display: none;
+    }
+  }
+</style>
