@@ -5,6 +5,8 @@ import SocialLinksAside from '@/components/SocialLinksAside.astro';
 import EmailAddressAside from '@/components/EmailAddressAside.astro';
 import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
 import AboutMeSection from '@/components/homepage/AboutMeSection.astro';
+import ExperienceSection from '@/components/homepage/ExperienceSection.astro';
+
 import { homePage } from '@/constants';
 
 const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
@@ -20,21 +22,37 @@ const description =
   <EmailAddressAside />
 
   <main id={homePage.hashTags.main}>
-    <div>
+    <div class="main-div">
       <IntroductionSection />
       <AboutMeSection />
+      <ExperienceSection />
     </div>
   </main>
 </Layout>
 
+<style lang="scss" is:global>
+  .main-div > section {
+    margin-inline: auto;
+    max-width: 70ch;
+    padding-block: 4rem;
+  }
+</style>
+
 <style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+
   main {
-    padding: 0 2rem 2rem;
+    padding-inline: 2rem;
+    padding-bottom: 2rem;
   }
 
   main > div {
     margin-inline: auto;
     max-width: 1200px;
-    padding-inline: 4rem;
+    padding-inline: 1rem;
+
+    @media (--sm-and-up) {
+      padding-inline: 5rem;
+    }
   }
 </style>

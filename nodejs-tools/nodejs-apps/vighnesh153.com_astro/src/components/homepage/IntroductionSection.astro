@@ -8,14 +8,14 @@ import Span from '../typography/span.astro';
 ---
 
 <section class="hero">
-  <H1 class:list={['title']}>
+  <H1 class="title">
     <Span variant="h6" class="pre-title">Hi, my name is</Span>
     <Span variant="inherit" class="title-main">Vighnesh Raut.</Span>
     <Span variant="inherit" class="post-title">I build things, mostly for fun.</Span>
   </H1>
   <P class:list={['description']}>
-    I am a Software Engineer specializing in building exceptional digital experiences. Currently, I am focused on
-    building accessible, developer-centered products for different causes.
+    I am a Software Engineer specializing in building exceptional digital experiences and beloved developer tools.
+    Currently, I am focused on building accessible, developer-centered products for different causes.
   </P>
   <FocusDashedOutline>
     <Link asPrimaryButton href={homePage.internalLinks.contactMe} class="get-in-touch">Get in Touch</Link>
@@ -48,13 +48,13 @@ import Span from '../typography/span.astro';
     font-weight: var(--font-weight-bold) !important;
 
     @media (--xs-and-up) {
-      @include h4;
+      @include h5;
     }
     @media (--sm-and-up) {
-      @include h3;
+      @include h4;
     }
     @media (--md-and-up) {
-      @include h2;
+      @include h3;
     }
   }
 
@@ -65,13 +65,13 @@ import Span from '../typography/span.astro';
     font-weight: var(--font-weight-bold) !important;
 
     @media (--xs-and-up) {
-      @include h4;
+      @include h5;
     }
     @media (--sm-and-up) {
-      @include h3;
+      @include h4;
     }
     @media (--md-and-up) {
-      @include h2;
+      @include h3;
     }
   }
 

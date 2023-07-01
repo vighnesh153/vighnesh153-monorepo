@@ -15,13 +15,11 @@ const { ...props } = Astro.props;
     padding-left: 1.5rem;
     position: relative;
 
-    display: flex;
-    align-items: center;
-
     &::before {
       content: '▹';
       position: absolute;
       left: 0;
+      top: 0.5em;
 
       color: var(--accent);
     }
