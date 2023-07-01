@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import SkipToMainContent from '@/components/SkipToMainContent.astro';
+import TopNavigationBar from '@/components/top-navigation/TopNavigationBar.astro';
 import SocialLinksAside from '@/components/SocialLinksAside.astro';
 import EmailAddressAside from '@/components/EmailAddressAside.astro';
 import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
@@ -9,7 +10,7 @@ import ExperienceSection from '@/components/homepage/ExperienceSection.astro';
 import ContactMeSection from '@/components/homepage/ContactMeSection.astro';
 import FooterSection from '@/components/homepage/FooterSection.astro';
 
-import { homePage } from '@/constants';
+import { hashTags } from '@/constants';
 
 const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
 const description =
@@ -20,10 +21,11 @@ const description =
 
 <Layout title={title} description={description}>
   <SkipToMainContent />
+  <TopNavigationBar />
   <SocialLinksAside />
   <EmailAddressAside />
 
-  <main id={homePage.hashTags.main}>
+  <main id={hashTags.main}>
     <div class="main-div">
       <IntroductionSection />
       <AboutMeSection />
@@ -40,6 +42,8 @@ const description =
     margin-inline: auto;
     max-width: 65ch;
     padding-block: 5rem;
+
+    scroll-margin-top: 2rem;
   }
 </style>
 

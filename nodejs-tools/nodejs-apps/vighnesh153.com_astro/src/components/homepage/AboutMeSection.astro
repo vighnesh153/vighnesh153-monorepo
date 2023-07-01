@@ -1,5 +1,5 @@
 ---
-import { homePage, companyUrls, currentTechnologies } from '@/constants';
+import { hashTags, companyUrls, currentTechnologies } from '@/constants';
 import SectionTitle from './SectionTitle.astro';
 import FocusDashedOutline from '../FocusDashedOutline.astro';
 import P from '../typography/p.astro';
@@ -8,7 +8,7 @@ import Span from '../typography/span.astro';
 import SectionListItem from './SectionListItem.astro';
 ---
 
-<section id={homePage.hashTags.aboutMe} class="about-me">
+<section id={hashTags.homePage.aboutMe} class="about-me">
   <SectionTitle count="01" title="About me" />
   <FocusDashedOutline class="description">
     <P class="text">

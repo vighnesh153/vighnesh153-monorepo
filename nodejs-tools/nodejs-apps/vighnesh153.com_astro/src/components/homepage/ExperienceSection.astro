@@ -1,5 +1,5 @@
 ---
-import { homePage, companyUrls } from '@/constants';
+import { hashTags, companyUrls } from '@/constants';
 import SectionTitle from './SectionTitle.astro';
 import FocusDashedOutline from '../FocusDashedOutline.astro';
 import ExperienceSectionItem from './ExperienceSectionItem.astro';
@@ -18,7 +18,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 }
 ---
 
-<section id={homePage.hashTags.experience} class="experience">
+<section id={hashTags.homePage.experience} class="experience">
   <SectionTitle count="02" title="Where I have worked" />
   <FocusDashedOutline>
     <ul>

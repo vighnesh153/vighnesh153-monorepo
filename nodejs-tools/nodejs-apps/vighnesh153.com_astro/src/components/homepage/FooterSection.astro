@@ -3,10 +3,10 @@ import FocusDashedOutline from '../FocusDashedOutline.astro';
 import Link from '../Link.astro';
 import SocialLinks from '../SocialLinks.astro';
 
-import { homePage, externalLinks } from '@/constants';
+import { hashTags, externalLinks } from '@/constants';
 ---
 
-<footer id={homePage.hashTags.footer}>
+<footer id={hashTags.homePage.footer}>
   <SocialLinks direction="horizontal" class="social-links" />
   <FocusDashedOutline>
     <Link href={externalLinks.githubRepo} color="secondary">View on Github</Link>
