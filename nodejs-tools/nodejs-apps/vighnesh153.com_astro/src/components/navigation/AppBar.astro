@@ -1,0 +1,217 @@
+---
+import RvLogoIcon from '@/icons/RvLogoIcon.astro';
+import HamburgerIcon from '@/icons/HamburgerIcon.astro';
+import CloseIcon from '@/icons/CloseIcon.astro';
+import FocusDashedOutline from '../FocusDashedOutline.astro';
+import NavigationItems from './NavigationItems.astro';
+---
+
+<header id="header" class="show-header" aria-label="App header">
+  <FocusDashedOutline>
+    <a href="/" aria-label="Logo" class="logo">
+      <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
+    </a>
+  </FocusDashedOutline>
+  <FocusDashedOutline>
+    <NavigationItems class="horizontal-nav" />
+    <button type="button" class="nav-toggle-button hamburger-menu" id="hamburger-menu" title="Open navigation menu">
+      <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
+    </button>
+    {/** State to keep track of whether the menu is open or not */}
+    <input type="checkbox" style="display: none" id="side-navigation-open" />
+    <NavigationItems class="vertical-nav" id="vertical-nav">
+      <button
+        type="button"
+        slot="start-item"
+        class="nav-toggle-button close-menu"
+        id="close-menu"
+        title="Close navigation menu"
+      >
+        <CloseIcon width="25" role="img" aria-label="close icon" />
+      </button>
+    </NavigationItems>
+  </FocusDashedOutline>
+</header>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  :global(html:has(#side-navigation-open:checked) body) {
+    overflow: hidden;
+  }
+
+  header {
+    padding: 1.5rem;
+    width: 100%;
+    position: fixed;
+    translate: 0 -100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--background);
+    z-index: var(--z-index-app-bar);
+
+    transition: box-shadow var(--duration-standard) var(--ease-out),
+      translate var(--duration-complex) var(--ease-in-out);
+
+    &.box-shadow {
+      box-shadow: 0 10px 30px -10px var(--background-dark);
+    }
+
+    &.show-header {
+      translate: 0 0;
+    }
+  }
+
+  .logo {
+    display: inline-block;
+
+    color: var(--accent);
+  }
+
+  .horizontal-nav {
+    display: none;
+    gap: 1.5rem;
+
+    @media (--md-and-up) {
+      display: flex;
+    }
+  }
+
+  .vertical-nav {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    background-color: var(--background);
+    z-index: var(--z-index-drawer);
+
+    @media (--md-and-up) {
+      display: none;
+    }
+  }
+
+  .nav-toggle-button {
+    padding: 0;
+
+    display: flex;
+
+    background: none;
+    border: none;
+    color: var(--text);
+
+    cursor: pointer;
+
+    &:is(:focus-visible, :hover) {
+      color: var(--accent);
+    }
+
+    @media (--md-and-up) {
+      display: none;
+    }
+  }
+
+  header:has(#side-navigation-open:not(:checked)) .vertical-nav {
+    display: none;
+  }
+</style>
+
+<script lang="ts">
+  const checkbox = document.querySelector('#side-navigation-open');
+  const header = document.querySelector('#header');
+  const hamburgerButton = document.querySelector('#hamburger-menu');
+  const closeMenuButton = document.querySelector('#close-menu');
+  const verticalNav = document.querySelector('#vertical-nav');
+
+  const boxShadowScrollYOffset = 70;
+  const showHeaderOffset = 200;
+  let previousScrollY = 0;
+
+  window.addEventListener('scroll', (e) => {
+    const currentScrollY = window.scrollY;
+    header?.classList.toggle('box-shadow', currentScrollY >= boxShadowScrollYOffset);
+    header?.classList.toggle('show-header', currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY);
+    previousScrollY = currentScrollY;
+  });
+
+  // this is needed for when header is not visible but it gets focus
+  header.addEventListener('focusin', (e) => {
+    header?.classList.toggle('show-header', true);
+  });
+
+  const toggleCheckbox = (value) => {
+    if (checkbox) {
+      checkbox.checked = value === undefined ? !checkbox.checked : value;
+    }
+  };
+
+  const closeMenu = (transferFocusToHamburger = true) => {
+    toggleCheckbox(false);
+    if (transferFocusToHamburger) {
+      hamburgerButton?.focus();
+    }
+  };
+
+  hamburgerButton.addEventListener('click', () => {
+    toggleCheckbox(true);
+    closeMenuButton?.focus();
+  });
+
+  closeMenuButton.addEventListener('click', () => {
+    closeMenu();
+  });
+
+  const getVerticalNavFocusableItems = () => Array.from(verticalNav.querySelectorAll('a, button'));
+
+  verticalNav.addEventListener('click', (e) => {
+    // const focusableItems = getVerticalNavFocusableItems();
+    const clickedElement = e.target.closest('a, button');
+    if (clickedElement.tagName === 'A') {
+      closeMenu(false);
+    }
+  });
+
+  verticalNav.addEventListener('keydown', (e) => {
+    const focusableItems = getVerticalNavFocusableItems();
+    const firstItem = focusableItems[0];
+    const lastItem = focusableItems[focusableItems.length - 1];
+
+    const isShiftTabPressed = e.shiftKey && e.key === 'Tab';
+    const isOnlyTabPressed = !e.shiftKey && e.key === 'Tab';
+    const isEscapeKeyPressed = e.key === 'Escape';
+    const isEnterKeyPressed = e.key === 'Enter';
+
+    if (isEscapeKeyPressed) {
+      e.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (e.target !== closeMenuButton && isEnterKeyPressed) {
+      closeMenu(false);
+      return;
+    }
+
+    if (e.target === lastItem && isOnlyTabPressed) {
+      e.preventDefault();
+      firstItem.focus();
+      return;
+    }
+    if (e.target === firstItem && isShiftTabPressed) {
+      e.preventDefault();
+      lastItem.focus();
+      return;
+    }
+  });
+</script>
