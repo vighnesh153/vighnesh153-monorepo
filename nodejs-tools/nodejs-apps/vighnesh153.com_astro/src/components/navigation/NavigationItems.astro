@@ -21,7 +21,7 @@ const { ...props } = Astro.props;
   <slot name="start-item" />
   {
     navItems.map((navItem) => (
-      <Link href={navItem.link}>
+      <Link href={navItem.link} rel="prefetch">
         <Span variant="h6">{navItem.text}</Span>
       </Link>
     ))
