@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import SkipToMainContent from '@/components/SkipToMainContent.astro';
-import TopNavigationBar from '@/components/top-navigation/TopNavigationBar.astro';
+import AppBar from '@/components/navigation/AppBar.astro';
 import SocialLinksAside from '@/components/SocialLinksAside.astro';
 import EmailAddressAside from '@/components/EmailAddressAside.astro';
 import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
@@ -21,7 +21,7 @@ const description =
 
 <Layout title={title} description={description}>
   <SkipToMainContent />
-  <TopNavigationBar />
+  <AppBar />
   <SocialLinksAside />
   <EmailAddressAside />
 
