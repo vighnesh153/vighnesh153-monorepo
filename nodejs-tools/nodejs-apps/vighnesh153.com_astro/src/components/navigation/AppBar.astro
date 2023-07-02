@@ -127,7 +127,9 @@ import NavigationItems from './NavigationItems.astro';
   }
 </style>
 
-<script lang="ts">
+<script>
+  import { debounce } from '@vighnesh153/utils';
+
   const checkbox = document.querySelector('#side-navigation-open');
   const header = document.querySelector('#header');
   const hamburgerButton = document.querySelector('#hamburger-menu');
@@ -138,20 +140,25 @@ import NavigationItems from './NavigationItems.astro';
   const showHeaderOffset = 200;
   let previousScrollY = 0;
 
-  window.addEventListener('scroll', (e) => {
-    const currentScrollY = window.scrollY;
-    header?.classList.toggle('box-shadow', currentScrollY >= boxShadowScrollYOffset);
-    header?.classList.toggle('show-header', currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY);
-    previousScrollY = currentScrollY;
-  });
+  window.addEventListener(
+    'scroll',
+    debounce((e) => {
+      const currentScrollY = window.scrollY;
+      header?.classList.toggle('box-shadow', currentScrollY >= boxShadowScrollYOffset);
+      header?.classList.toggle('show-header', currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY);
+      previousScrollY = currentScrollY;
+    }, 16)
+  );
 
   // this is needed for when header is not visible but it gets focus
-  header.addEventListener('focusin', (e) => {
+  header?.addEventListener('focusin', (e) => {
     header?.classList.toggle('show-header', true);
   });
 
+  // @ts-ignore
   const toggleCheckbox = (value) => {
     if (checkbox) {
+      // @ts-ignore
       checkbox.checked = value === undefined ? !checkbox.checked : value;
     }
   };
@@ -159,37 +166,44 @@ import NavigationItems from './NavigationItems.astro';
   const closeMenu = (transferFocusToHamburger = true) => {
     toggleCheckbox(false);
     if (transferFocusToHamburger) {
+      // @ts-ignore
       hamburgerButton?.focus();
     }
   };
 
-  hamburgerButton.addEventListener('click', () => {
+  hamburgerButton?.addEventListener('click', () => {
     toggleCheckbox(true);
+    // @ts-ignore
     closeMenuButton?.focus();
   });
 
-  closeMenuButton.addEventListener('click', () => {
+  closeMenuButton?.addEventListener('click', () => {
     closeMenu();
   });
 
+  // @ts-ignore
   const getVerticalNavFocusableItems = () => Array.from(verticalNav.querySelectorAll('a, button'));
 
-  verticalNav.addEventListener('click', (e) => {
-    // const focusableItems = getVerticalNavFocusableItems();
+  verticalNav?.addEventListener('click', (e) => {
+    // @ts-ignore
     const clickedElement = e.target.closest('a, button');
     if (clickedElement.tagName === 'A') {
       closeMenu(false);
     }
   });
 
-  verticalNav.addEventListener('keydown', (e) => {
+  verticalNav?.addEventListener('keydown', (e) => {
     const focusableItems = getVerticalNavFocusableItems();
     const firstItem = focusableItems[0];
     const lastItem = focusableItems[focusableItems.length - 1];
 
+    // @ts-ignore
     const isShiftTabPressed = e.shiftKey && e.key === 'Tab';
+    // @ts-ignore
     const isOnlyTabPressed = !e.shiftKey && e.key === 'Tab';
+    // @ts-ignore
     const isEscapeKeyPressed = e.key === 'Escape';
+    // @ts-ignore
     const isEnterKeyPressed = e.key === 'Enter';
 
     if (isEscapeKeyPressed) {
@@ -205,11 +219,13 @@ import NavigationItems from './NavigationItems.astro';
 
     if (e.target === lastItem && isOnlyTabPressed) {
       e.preventDefault();
+      // @ts-ignore
       firstItem.focus();
       return;
     }
     if (e.target === firstItem && isShiftTabPressed) {
       e.preventDefault();
+      // @ts-ignore
       lastItem.focus();
       return;
     }
