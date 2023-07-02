@@ -26,8 +26,6 @@
     "@vighnesh153/tsconfig": "*",
     "astro": "^2.7.0",
     "astro-compress": "^1.1.47",
-    "astro-critters": "^1.1.38",
-    "astro-rome": "^0.1.18",
     "autoprefixer": "^10.4.14",
     "aws-cdk-lib": "2.85.0",
     "constructs": "10.2.60",
