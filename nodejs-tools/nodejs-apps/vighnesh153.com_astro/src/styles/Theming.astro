@@ -4,10 +4,11 @@ import './typography.scss';
 ---
 
 <style is:global lang="scss">
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
   @import './breakpoints-media.css';
 
-  * {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -73,7 +74,7 @@ import './typography.scss';
   }
 
   html {
-    font-family: 'Roboto', sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     background-color: var(--background);
     color: var(--text);
     scroll-behavior: smooth;
