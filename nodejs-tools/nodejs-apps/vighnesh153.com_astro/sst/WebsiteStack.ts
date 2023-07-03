@@ -16,6 +16,19 @@ export function WebsiteStack({ stack }: StackContext) {
       domainName: `${stage}.ui.aws.vighnesh153.com`,
       hostedZone: 'aws.vighnesh153.com',
     },
+    fileOptions: [
+      {
+        exclude: '*',
+        include: '*.html',
+        // cacheControl: 'max-age=0,no-cache,no-store,must-revalidate',
+        cacheControl: ['max-age=300', 's-max-age=300', 'public', 'must-revalidate'].join(','),
+      },
+      {
+        exclude: '*',
+        include: ['*.js', '*.css'],
+        cacheControl: ['max-age=31536000', 'public', 'immutable'].join(','),
+      },
+    ],
     environment: {
       PUBLIC_VIGHNESH153_STAGE: stage,
     },

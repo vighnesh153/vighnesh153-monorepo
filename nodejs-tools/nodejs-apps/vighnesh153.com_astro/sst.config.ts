@@ -9,7 +9,7 @@ const sstConfig: SSTConfig = {
     }
     return {
       name: `${stage}-Vighnesh153Astro`,
-      region: 'us-east-1',
+      region: 'ap-south-2', // hyderabad
     };
   },
   stacks(app) {

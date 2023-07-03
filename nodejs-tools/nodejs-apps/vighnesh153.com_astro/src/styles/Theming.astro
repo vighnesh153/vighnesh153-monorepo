@@ -85,9 +85,7 @@ import './typography.scss';
   }
 </style>
 
-<script>
+<script is:inline>
   const theme = localStorage.getItem('theme') ?? 'theme-1';
-  if (theme) {
-    document.body.classList.add(theme);
-  }
+  document.body.classList.add(theme);
 </script>
