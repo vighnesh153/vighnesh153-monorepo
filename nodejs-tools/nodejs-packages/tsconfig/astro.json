@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5",
+    "target": "es6",
     "verbatimModuleSyntax": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.astro"],
