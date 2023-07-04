@@ -2,59 +2,23 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "test",
-        "^build"
-      ],
-      "env": [
-        "RUNNING_LOCALLY",
-
-        "AXIOM_DATASET",
-        "AXIOM_LOG_LEVEL",
-        "AXIOM_TOKEN",
-
-        "DATABASE_URL",
-        "SHADOW_DATABASE_URL",
-
-        "GOOGLE_CLIENT_ID",
-        "GOOGLE_CLIENT_SECRET",
-        
-        "GITHUB_TOKEN",
-
-        "MONGODB_URI",
-
-        "NEXTAUTH_SECRET",
-        "NEXTAUTH_URL",
-
-        "VERCEL_URL",
-
-        "NODE_ENV"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**"
-      ]
+      "dependsOn": ["test", "^build"],
+      "env": [],
+      "outputs": ["dist/**", ".next/**"]
     },
     "test": {
-      "inputs": [
-        "src/**/*.tsx",
-        "src/**/*.ts",
-        "test/**/*.ts"
-      ],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
       "outputs": [],
-      "dependsOn": [
-        "^build",
-        "^test"
-      ]
+      "dependsOn": ["^build", "^test"]
     },
     "lint": {
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
-    "deploy:prod": {
-    }
+    "deploy:prod": {}
   }
 }

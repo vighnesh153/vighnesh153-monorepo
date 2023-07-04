@@ -1,22 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+
+const title = 'Vighnesh Raut | Projects';
+const description =
+  'Vighnesh builds a lot of amazing projects in his free time. He loves to play ' +
+  'around with graphics programming and different frameworks';
 ---
 
-<Layout title="Welcome to Astro." description="bla">
-  <main>
-    <h1>Projects page</h1>
-  </main>
-</Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-</style>
+<ContentLayout title={title} description={description}>
+  <h1>Projects</h1>
+</ContentLayout>
