@@ -187,7 +187,10 @@ import NavigationItems from './NavigationItems.astro';
   verticalNav?.addEventListener('click', (e) => {
     // @ts-ignore
     const clickedElement = e.target.closest('a, button');
-    if (clickedElement.tagName === 'A') {
+    const currentPathName = window.location.pathname;
+    const navigationPathName = new URL(clickedElement.href).pathname;
+
+    if (clickedElement.tagName === 'A' && currentPathName === navigationPathName) {
       closeMenu(false);
     }
   });
