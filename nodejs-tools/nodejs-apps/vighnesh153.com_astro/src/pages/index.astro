@@ -1,67 +1,14 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import SkipToMainContent from '@/components/SkipToMainContent.astro';
-import AppBar from '@/components/navigation/AppBar.astro';
-import SocialLinksAside from '@/components/SocialLinksAside.astro';
-import EmailAddressAside from '@/components/EmailAddressAside.astro';
+import ContentLayout from '@/layouts/ContentLayout.astro';
 import IntroductionSection from '@/components/homepage/IntroductionSection.astro';
 import AboutMeSection from '@/components/homepage/AboutMeSection.astro';
 import ExperienceSection from '@/components/homepage/ExperienceSection.astro';
 import ContactMeSection from '@/components/homepage/ContactMeSection.astro';
-import FooterSection from '@/components/homepage/FooterSection.astro';
-
-import { hashTags } from '@/constants';
-
-const title = 'Vighnesh Raut - the man, the myth, the living legend himself';
-const description =
-  'Vighnesh is a Software Engineer who specializes in building exceptional web ' +
-  'interfaces. He also loves to dabble with Physics and Mathematics. When bored, ' +
-  'you can find him watching Netflix on his bed';
 ---
 
-<Layout title={title} description={description}>
-  <SkipToMainContent />
-  <AppBar />
-  <SocialLinksAside />
-  <EmailAddressAside />
-
-  <main id={hashTags.main}>
-    <div class="main-div">
-      <IntroductionSection />
-      <AboutMeSection />
-      <ExperienceSection />
-      <ContactMeSection />
-    </div>
-    <FooterSection />
-  </main>
-</Layout>
-
-<style lang="scss" is:global>
-  .main-div > section,
-  main > footer {
-    margin-inline: auto;
-    max-width: 65ch;
-    padding-block: 5rem;
-
-    scroll-margin-top: 2rem;
-  }
-</style>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-
-  main {
-    padding-inline: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  main > div {
-    margin-inline: auto;
-    max-width: 1200px;
-    padding-inline: 1rem;
-
-    @media (--sm-and-up) {
-      padding-inline: 5rem;
-    }
-  }
-</style>
+<ContentLayout>
+  <IntroductionSection />
+  <AboutMeSection />
+  <ExperienceSection />
+  <ContactMeSection />
+</ContentLayout>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SkipToMainContent from '@/components/SkipToMainContent.astro';
+import AppBar from '@/components/navigation/AppBar.astro';
+import SocialLinksAside from '@/components/SocialLinksAside.astro';
+import EmailAddressAside from '@/components/EmailAddressAside.astro';
+import FooterSection from '@/components/homepage/FooterSection.astro';
+
+import { hashTags } from '@/constants';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const defaultTitle = 'Vighnesh Raut - the man, the myth, the living legend himself';
+const defaultDescription =
+  'Vighnesh is a Software Engineer who specializes in building exceptional software ' +
+  'tools. He is fascinated by Physics, Mathematics and Computer Science. When bored, ' +
+  'you can find him watching Pokémon on his bed';
+
+const { title = defaultTitle, description = defaultDescription } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <SkipToMainContent />
+  <AppBar />
+  <SocialLinksAside />
+  <EmailAddressAside />
+
+  <main id={hashTags.main}>
+    <div class="main-div">
+      <slot />
+    </div>
+    <FooterSection />
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  .main-div > section,
+  main > footer {
+    margin-inline: auto;
+    max-width: 65ch;
+    padding-block: 5rem;
+
+    scroll-margin-top: 2rem;
+  }
+</style>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+
+  main {
+    padding-inline: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  main > div {
+    margin-inline: auto;
+    max-width: 1200px;
+    padding-inline: 1rem;
+
+    @media (--sm-and-up) {
+      padding-inline: 5rem;
+    }
+  }
+</style>
