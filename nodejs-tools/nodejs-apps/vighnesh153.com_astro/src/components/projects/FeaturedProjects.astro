@@ -1,0 +1,115 @@
+---
+import { hashTags, featuredProjects, internalLinks } from '@/constants';
+import H2 from '../typography/h2.astro';
+import Link from '../Link.astro';
+import H3 from '../typography/h3.astro';
+import P from '../typography/p.astro';
+import Span from '../typography/span.astro';
+import FocusDashedOutline from '../FocusDashedOutline.astro';
+---
+
+<section class="featured-projects" id={hashTags.projects.featuredProjects}>
+  <FocusDashedOutline>
+    <H2 class="featured-projects-heading" variant="h5">
+      <Link href={internalLinks.projects.featured}>Featured projects</Link>
+    </H2>
+
+    <ul class="featured-projects">
+      {
+        featuredProjects.map(({ imageUrl, title, description, tags, links }) => (
+          <li class="featured-project">
+            <img class="featured-project-image" src={imageUrl} alt="" />
+            <H3 variant="inherit" class="featured-project-title">
+              {title}
+            </H3>
+            <P class="featured-project-description">{description}</P>
+            <ul class="featured-project-tags">
+              {tags.map((tag) => (
+                <li>
+                  <Span>{tag}</Span>
+                </li>
+              ))}
+            </ul>
+            <ul class="featured-project-links">
+              {links.map((link) => (
+                <li>
+                  <a href={link.href} aria-label={link.ariaLabel}>
+                    <link.Icon role="img" width="1.25rem" height="1.25rem" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </FocusDashedOutline>
+</section>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  section.featured-projects {
+    margin-inline: 0;
+    padding-block: 0;
+
+    margin-top: 2rem;
+  }
+
+  .featured-projects {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featured-project-image {
+    width: 200px;
+  }
+
+  .featured-project-title {
+    font-weight: var(--font-weight-light) !important;
+
+    @media (--xs-and-up) {
+      @include h6;
+    }
+    @media (--sm-and-up) {
+      @include h5;
+    }
+  }
+
+  .featured-project-description {
+    padding: 1rem 1.5rem;
+
+    border-radius: 0.5rem;
+    background-color: var(--background-light);
+    color: var(--text-2);
+    box-shadow: 0px 0px 45px 11px var(--background-dark);
+  }
+
+  .featured-project-tags {
+    display: flex;
+    gap: 0.5rem;
+
+    li {
+      padding: 0.15rem 0.5rem;
+
+      border-radius: 0.5rem;
+      background-color: var(--secondary);
+      color: var(--primary);
+    }
+  }
+
+  .featured-project-links {
+    a {
+      display: inline-block;
+      font-size: 0;
+      color: var(--text);
+      fill: var(--text);
+    }
+
+    a:is(:hover, :focus-visible) {
+      color: var(--accent);
+      fill: var(--accent);
+    }
+  }
+</style>

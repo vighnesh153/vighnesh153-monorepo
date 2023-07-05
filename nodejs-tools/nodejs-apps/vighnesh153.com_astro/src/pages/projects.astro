@@ -1,5 +1,7 @@
 ---
+import H1 from '@/components/typography/h1.astro';
 import ContentLayout from '@/layouts/ContentLayout.astro';
+import FeaturedProjects from '@/components/projects/FeaturedProjects.astro';
 
 const title = 'Vighnesh Raut | Projects';
 const description =
@@ -8,5 +10,13 @@ const description =
 ---
 
 <ContentLayout title={title} description={description}>
-  <h1>Projects</h1>
+  <H1 class="h1" variant="h4">Projects</H1>
+  <FeaturedProjects />
 </ContentLayout>
+
+<style>
+  h1.h1 {
+    margin-top: 2rem;
+    padding-block-end: 0;
+  }
+</style>
