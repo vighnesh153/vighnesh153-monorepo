@@ -37,7 +37,7 @@ const { title = defaultTitle, description = defaultDescription } = Astro.props;
 </BaseLayout>
 
 <style lang="scss" is:global>
-  .main-div > section,
+  .main-div > *,
   main > footer {
     margin-inline: auto;
     max-width: 65ch;
@@ -59,6 +59,7 @@ const { title = defaultTitle, description = defaultDescription } = Astro.props;
     margin-inline: auto;
     max-width: 1200px;
     padding-inline: 1rem;
+    padding-top: 0.05px; // prevent collapsing margins in child components
 
     @media (--sm-and-up) {
       padding-inline: 5rem;

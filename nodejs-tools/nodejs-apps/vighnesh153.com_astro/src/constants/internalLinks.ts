@@ -8,5 +8,8 @@ export const internalLinks = {
     contactMe: `/#${hashTags.homePage.contactMe}`,
     footer: `/#${hashTags.homePage.footer}`,
   },
-  projects: '/projects',
+  projects: {
+    root: '/projects',
+    featured: `/projects#${hashTags.projects.featuredProjects}`,
+  },
 };
