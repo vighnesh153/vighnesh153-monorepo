@@ -5,12 +5,10 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "formulahendry.auto-rename-tag",
-    "formulahendry.code-runner",
     "github.vscode-github-actions",
     "ms-azuretools.vscode-docker",
     "pkief.material-icon-theme",
     "richie5um2.vscode-sort-json",
-    "styled-components.vscode-styled-components",
     "techer.open-in-browser",
     "tobiasalthoff.atom-material-theme",
     "wix.vscode-import-cost"

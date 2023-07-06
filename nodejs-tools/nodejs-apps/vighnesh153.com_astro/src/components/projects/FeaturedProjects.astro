@@ -8,39 +8,47 @@ import Span from '../typography/span.astro';
 import FocusDashedOutline from '../FocusDashedOutline.astro';
 ---
 
-<section class="featured-projects" id={hashTags.projects.featuredProjects}>
+<section class="featured-projects-section" id={hashTags.projects.featuredProjects}>
   <FocusDashedOutline>
     <H2 class="featured-projects-heading" variant="h5">
       <Link href={internalLinks.projects.featured}>Featured projects</Link>
     </H2>
 
-    <ul class="featured-projects">
+    <ul class="featured-projects-list">
       {
-        featuredProjects.map(({ imageUrl, title, description, tags, links }) => (
-          <li class="featured-project">
-            <img class="featured-project-image" src={imageUrl} alt="" />
-            <H3 variant="inherit" class="featured-project-title">
-              {title}
-            </H3>
-            <P class="featured-project-description">{description}</P>
-            <ul class="featured-project-tags">
-              {tags.map((tag) => (
-                <li>
-                  <Span>{tag}</Span>
-                </li>
-              ))}
-            </ul>
-            <ul class="featured-project-links">
-              {links.map((link) => (
-                <li>
-                  <a href={link.href} aria-label={link.ariaLabel}>
-                    <link.Icon role="img" width="1.25rem" height="1.25rem" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))
+        featuredProjects.map(({ imageUrl, title, description, tags, links }) => {
+          const demoLink = links.find((link) => link.type === 'demo')?.href;
+          return (
+            <li class="featured-project">
+              <a class="featured-project-image-link" href={demoLink}>
+                <img class="featured-project-image" src={imageUrl} alt="" />
+              </a>
+              <Link href={demoLink} class="featured-project-title-link">
+                <H3 variant="inherit" class="featured-project-title">
+                  {title}
+                </H3>
+              </Link>
+              <ul class="featured-project-tags">
+                {tags.map((tag) => (
+                  <li>
+                    <Span>{tag}</Span>
+                  </li>
+                ))}
+              </ul>
+              <P class="featured-project-description">{description}</P>
+
+              <ul class="featured-project-links">
+                {links.map((link) => (
+                  <li>
+                    <a href={link.href} aria-label={link.ariaLabel}>
+                      <link.Icon role="img" width="1.25rem" height="1.25rem" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })
       }
     </ul>
   </FocusDashedOutline>
@@ -50,45 +58,95 @@ import FocusDashedOutline from '../FocusDashedOutline.astro';
   @import '@/styles/breakpoints-media.css';
   @import '@/styles/typography.scss';
 
-  section.featured-projects {
+  section.featured-projects-section {
     margin-inline: 0;
     padding-block: 0;
-
     margin-top: 2rem;
+    max-width: unset;
   }
 
-  .featured-projects {
-    display: flex;
-    flex-direction: column;
-  }
+  .featured-projects-list {
+    width: 100%;
+    margin-top: 2rem;
 
-  .featured-project-image {
-    width: 200px;
-  }
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
 
-  .featured-project-title {
-    font-weight: var(--font-weight-light) !important;
-
-    @media (--xs-and-up) {
-      @include h6;
+    @media (--md-and-up) {
+      grid-template-columns: repeat(2, 1fr);
     }
-    @media (--sm-and-up) {
-      @include h5;
+
+    @media (--lg-and-up) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .featured-project-description {
-    padding: 1rem 1.5rem;
+  .featured-project {
+    width: 100%;
+    position: relative;
+  }
 
-    border-radius: 0.5rem;
-    background-color: var(--background-light);
-    color: var(--text-2);
-    box-shadow: 0px 0px 45px 11px var(--background-dark);
+  .featured-project-image-link {
+    --focus-dashed-outline-color: var(--accent);
+
+    width: 100%;
+    display: block;
+    position: relative;
+
+    cursor: pointer;
+
+    .featured-project-image {
+      width: 100%;
+
+      display: inline-block;
+      aspect-ratio: 16 / 9;
+      object-fit: fill;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+
+      background-color: var(--background-blend);
+      opacity: 90%;
+
+      z-index: 1;
+      transition: all var(--duration-short) var(--ease-in-out);
+    }
+
+    &:hover {
+      &::after {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .featured-project-title-link {
+    position: relative;
+
+    z-index: 1;
+
+    .featured-project-title {
+      font-weight: var(--font-weight-light) !important;
+      margin-top: 1rem;
+
+      @media (--xs-and-up) {
+        @include h6;
+      }
+      @media (--md-and-up) {
+        @include h5;
+      }
+    }
   }
 
   .featured-project-tags {
+    margin-top: 0.5rem;
+
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
 
     li {
       padding: 0.15rem 0.5rem;
@@ -99,7 +157,22 @@ import FocusDashedOutline from '../FocusDashedOutline.astro';
     }
   }
 
+  .featured-project-description {
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+
+    border-radius: 0.5rem;
+    background-color: var(--background-light);
+    color: var(--text-2);
+    box-shadow: 0px 0px 45px 11px var(--background-dark);
+  }
+
   .featured-project-links {
+    margin-top: 1rem;
+
+    display: flex;
+    gap: 1rem;
+
     a {
       display: inline-block;
       font-size: 0;
