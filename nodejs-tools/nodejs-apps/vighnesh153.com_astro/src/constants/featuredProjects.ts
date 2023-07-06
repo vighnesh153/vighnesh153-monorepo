@@ -8,6 +8,7 @@ interface FeaturedProjects {
   description: string;
   tags: string[];
   links: Array<{
+    type: 'github' | 'demo';
     Icon: (props: HTMLAttributes<'svg'>) => unknown;
     ariaLabel: string;
     href: string;
@@ -17,16 +18,18 @@ interface FeaturedProjects {
 export const featuredProjects: FeaturedProjects[] = [
   {
     imageUrl: '/static/spl.webp',
-    title: 'Simple Programming Language (SPL)',
-    description: 'A programming language interpreter with syntax which is closer to the English Grammar',
+    title: 'SPL',
+    description: `A programming language who's syntax which is closer to English Grammar`,
     tags: ['Compiler', 'Interpreter', 'Typescript'],
     links: [
       {
+        type: 'github',
         Icon: GithubIcon,
         ariaLabel: 'source code',
         href: 'https://github.com/vighnesh153/spl',
       },
       {
+        type: 'demo',
         Icon: EyeIcon,
         ariaLabel: 'project demo',
         href: 'https://spl.vighnesh153.com',
@@ -35,22 +38,18 @@ export const featuredProjects: FeaturedProjects[] = [
   },
   {
     imageUrl: '/static/tsx-playground.webp',
-    title: 'Typescript & React playground',
-    description:
-      'An interactive, browser-based, coding environment which supports importing' +
-      ' any NPM module (which works on browsers) from the NPM registry. You can use' +
-      ' this to test out any React and/or Typescript snippet directly in the browser' +
-      ' without having to create a test project. Run your code safely and securely in ' +
-      'your browser, without having to worry about anything, because your code never ' +
-      'leaves your browser',
-    tags: ['ESBuild', 'Astro', 'React', 'Typescript', 'Golang'],
+    title: 'React.js playground',
+    description: `Play with React.js code and import any npm module securely in your browser`,
+    tags: ['ESBuild', 'Astro', 'React', 'Golang'],
     links: [
       {
+        type: 'github',
         Icon: GithubIcon,
         ariaLabel: 'source code',
         href: 'https://github.com/vighnesh153/tsx-playground',
       },
       {
+        type: 'demo',
         Icon: EyeIcon,
         ariaLabel: 'project demo',
         href: 'https://tsx.vighnesh153.com',
@@ -64,11 +63,13 @@ export const featuredProjects: FeaturedProjects[] = [
     tags: ['Canvas API', 'Astro', 'Typescript'],
     links: [
       {
+        type: 'github',
         Icon: GithubIcon,
         ariaLabel: 'source code',
         href: 'https://github.com/vighnesh153/canvas-api-illustrations',
       },
       {
+        type: 'demo',
         Icon: EyeIcon,
         ariaLabel: 'project demo',
         href: 'https://graphics.vighnesh153.com',
