@@ -4,6 +4,13 @@ import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.astro';
 import FocusDashedOutline from '../FocusDashedOutline.astro';
 import NavigationItems from './NavigationItems.astro';
+import type { NavItem } from './navItems';
+
+interface Props {
+  navItems?: NavItem[];
+}
+
+const { navItems } = Astro.props;
 ---
 
 <header id="header" class="show-header" aria-label="App header">
@@ -13,13 +20,13 @@ import NavigationItems from './NavigationItems.astro';
     </a>
   </FocusDashedOutline>
   <FocusDashedOutline>
-    <NavigationItems class="horizontal-nav" />
+    <NavigationItems class="horizontal-nav" navItems={navItems} />
     <button type="button" class="nav-toggle-button hamburger-menu" id="hamburger-menu" title="Open navigation menu">
       <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
     </button>
     {/** State to keep track of whether the menu is open or not */}
     <input type="checkbox" style="display: none" id="side-navigation-open" />
-    <NavigationItems class="vertical-nav" id="vertical-nav">
+    <NavigationItems class="vertical-nav" id="vertical-nav" navItems={navItems}>
       <button
         type="button"
         slot="start-item"
