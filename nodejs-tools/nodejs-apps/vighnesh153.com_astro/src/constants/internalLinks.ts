@@ -11,5 +11,6 @@ export const internalLinks = {
   projects: {
     root: '/projects',
     featured: `/projects#${hashTags.projects.featuredProjects}`,
+    otherAwesomeProjects: `/projects#${hashTags.projects.otherAwesomeProjects}`,
   },
 };

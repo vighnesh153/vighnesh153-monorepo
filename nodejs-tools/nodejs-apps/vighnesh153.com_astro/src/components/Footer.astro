@@ -1,15 +1,15 @@
 ---
-import FocusDashedOutline from '../FocusDashedOutline.astro';
-import Link from '../Link.astro';
-import SocialLinks from '../SocialLinks.astro';
+import FocusDashedOutline from './FocusDashedOutline.astro';
+import Link from './Link.astro';
+import SocialLinks from './SocialLinks.astro';
 
 import { hashTags, externalLinks } from '@/constants';
 ---
 
-<footer id={hashTags.homePage.footer}>
+<footer id={hashTags.footer}>
   <SocialLinks direction="horizontal" class="social-links" />
   <FocusDashedOutline>
-    <Link href={externalLinks.githubRepo} color="secondary">View on Github</Link>
+    <Link href={externalLinks.githubRepo} color="secondary">Source code</Link> of this website
   </FocusDashedOutline>
 </footer>
 
@@ -18,6 +18,8 @@ import { hashTags, externalLinks } from '@/constants';
   // @import '@/styles/typography.scss';
 
   footer {
+    padding-block: 3rem !important;
+
     display: grid;
     place-items: center;
   }

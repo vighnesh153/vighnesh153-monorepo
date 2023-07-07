@@ -14,7 +14,7 @@ const { class: className, 'class:list': classList, ...props } = Astro.props;
   .dashed-outline-on-focus :is(a, button, input, select, textarea):focus-visible {
     outline-width: 3px;
     outline-style: dashed;
-    outline-color: var(--focus-dashed-outline-color, currentColor);
+    outline-color: var(--focus-dashed-outline-color, var(--accent));
     outline-offset: 0.5rem;
   }
 </style>
