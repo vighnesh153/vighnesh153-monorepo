@@ -1,0 +1,20 @@
+---
+import Span from '../typography/span.astro';
+---
+
+<li>
+  <Span><slot /></Span>
+</li>
+
+<style lang="scss">
+  @import '@/styles/breakpoints-media.css';
+  @import '@/styles/typography.scss';
+
+  li {
+    padding: 0.15rem 0.5rem;
+
+    border-radius: 0.5rem;
+    background-color: var(--secondary);
+    color: var(--primary);
+  }
+</style>

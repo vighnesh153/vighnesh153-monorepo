@@ -1,12 +1,13 @@
 export const hashTags = {
   main: 'main',
+  footer: 'footer',
   homePage: {
     aboutMe: 'about-me',
     experience: 'experience',
     contactMe: 'contact-me',
-    footer: 'footer',
   },
   projects: {
     featuredProjects: 'featured-projects',
+    otherAwesomeProjects: 'other-awesome-projects',
   },
 };

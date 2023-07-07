@@ -4,7 +4,7 @@ import SkipToMainContent from '@/components/SkipToMainContent.astro';
 import AppBar from '@/components/navigation/AppBar.astro';
 import SocialLinksAside from '@/components/SocialLinksAside.astro';
 import EmailAddressAside from '@/components/EmailAddressAside.astro';
-import FooterSection from '@/components/homepage/FooterSection.astro';
+import Footer from '@/components/Footer.astro';
 
 import { hashTags } from '@/constants';
 
@@ -32,7 +32,7 @@ const { title = defaultTitle, description = defaultDescription } = Astro.props;
     <div class="main-div">
       <slot />
     </div>
-    <FooterSection />
+    <Footer />
   </main>
 </BaseLayout>
 
