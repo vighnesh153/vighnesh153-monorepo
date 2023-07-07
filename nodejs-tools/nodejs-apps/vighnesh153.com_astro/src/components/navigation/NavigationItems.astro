@@ -1,20 +1,14 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { externalLinks, internalLinks } from '@/constants';
 import Link from '../Link.astro';
 import Span from '../typography/span.astro';
+import { defaultNavItems, type NavItem } from './navItems';
 
-interface Props extends HTMLAttributes<'nav'> {}
+interface Props extends HTMLAttributes<'nav'> {
+  navItems?: NavItem[];
+}
 
-const navItems = [
-  { text: 'About me', link: internalLinks.homePage.aboutMe },
-  { text: 'Blog', link: externalLinks.blog },
-  { text: 'Projects', link: internalLinks.projects.root },
-  { text: 'Experience', link: internalLinks.homePage.experience },
-  { text: 'Resume', link: externalLinks.resume },
-];
-
-const { ...props } = Astro.props;
+const { navItems = defaultNavItems, ...props } = Astro.props;
 ---
 
 <nav {...props} aria-label="external and internal links related to me">

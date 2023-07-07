@@ -3,6 +3,7 @@ import H1 from '@/components/typography/h1.astro';
 import ContentLayout from '@/layouts/ContentLayout.astro';
 import FeaturedProjects from '@/components/projects/FeaturedProjects.astro';
 import OtherAwesomeProjects from '@/components/projects/OtherAwesomeProjects.astro';
+import { projectNavItems } from '@/components/navigation/navItems';
 
 const title = 'Vighnesh Raut | Projects';
 const description =
@@ -10,7 +11,7 @@ const description =
   'around with graphics programming and different frameworks';
 ---
 
-<ContentLayout title={title} description={description}>
+<ContentLayout title={title} description={description} navItems={projectNavItems}>
   <H1 class="h1" variant="h4">Projects</H1>
   <FeaturedProjects />
   <OtherAwesomeProjects />
