@@ -49,14 +49,23 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 Visit
 [github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-turbo/actions/workflows/publish-pkg-to-npm.yml)
 
+#### Tools
+
+- `*` to webp: https://cloudconvert.com/
+- Compress webp: https://products.aspose.app/imaging/image-resize/webp
+
 #### Tasks
 
-- Add tooltip component to social links
-- Update the 404 page
-- verify astro compression is working or not
+- Remove unnecessary aria-labels
+- Add ui test for sidebar
+- Add tooltip component along with placement (left, top, right, bottom)
+- Add tooltip component to social links along with placement
+- Add tooltip component to aside email address
 - Prefetch
   - Add `rel="prefetch"` to any `<a />` links on the page
   - https://docs.astro.build/en/guides/integrations-guide/prefetch/
+- Migrate SPL, React & Typescript playground and Js Canvas illustrations to `vighnesh153.com_astro` and update the links
+  in the `/projects#featured-projects` section
 - https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the logs
 - Seed data in vighnesh153.com_next13
