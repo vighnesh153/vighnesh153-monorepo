@@ -47,7 +47,7 @@ Checkout [more options here](https://github.com/raineorshine/npm-check-updates#o
 ### Publishing packages
 
 Visit
-[github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-turbo/actions/workflows/publish-pkg-to-npm.yml)
+[github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-monorepo/actions/workflows/publish-pkg-to-npm.yml)
 
 #### Tools
 
@@ -130,7 +130,7 @@ Visit
   - `cors-anywhere.aws.vighnesh153.com`
 - Response cache for a url, headers, etc (lambda)
   - Useful for accessing GitHub APIs that have rate limits without API key
-    (https://api.github.com/repos/vighnesh153/vighnesh153-turbo)
+    (https://api.github.com/repos/vighnesh153/vighnesh153-monorepo)
 - Open-dictionary
   - List of english words: https://github.com/dwyl/english-words
   - Urban dictionary api samples
@@ -351,7 +351,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "vitest": "^0.30.1"
   },
   "keywords": [],
-  "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-turbo.git" }
+  "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git" }
 }
 ```
 

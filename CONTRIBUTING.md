@@ -1,6 +1,6 @@
-# Contributing to vighnesh153-turbo
+# Contributing to vighnesh153-monorepo
 
-I would love for you to contribute to `vighnesh153-turbo` and help make it even better than it is today! As a
+I would love for you to contribute to `vighnesh153-monorepo` and help make it even better than it is today! As a
 contributor, here are the guidelines I would like you to follow:
 
 - [Code of Conduct](#coc)
@@ -13,7 +13,7 @@ contributor, here are the guidelines I would like you to follow:
 
 ## <a name="coc"></a> Code of Conduct
 
-Help me keep `vighnesh153-turbo` open and inclusive. Please read and follow my [Code of Conduct][coc].
+Help me keep `vighnesh153-monorepo` open and inclusive. Please read and follow my [Code of Conduct][coc].
 
 ## <a name="question"></a> Got a Question or Problem?
 
@@ -76,14 +76,14 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    If you are using Windows, consider using a VM with linux or the new
    [WSL](https://learn.microsoft.com/en-us/windows/wsl/) thingy.
 
-1. Search [GitHub](https://github.com/vighnesh153/vighnesh153-turbo/pulls) for an open or closed PR that relates to your
-   submission. You don't want to duplicate existing efforts.
+1. Search [GitHub](https://github.com/vighnesh153/vighnesh153-monorepo/pulls) for an open or closed PR that relates to
+   your submission. You don't want to duplicate existing efforts.
 
 1. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.
    Discussing the design upfront helps to ensure that I am ready to accept your work.
 
-1. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the `vighnesh153/vighnesh153-turbo`
-   repo.
+1. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the
+   `vighnesh153/vighnesh153-monorepo` repo.
 
 1. In your forked repository, make your changes in a new git branch:
 
@@ -117,7 +117,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    git push origin my-fix-branch
    ```
 
-1. In GitHub, send a pull request to `vighnesh153-turbo:main`.
+1. In GitHub, send a pull request to `vighnesh153-monorepo:main`.
 
 ### Reviewing a Pull Request
 
@@ -333,12 +333,12 @@ The following documents can help you sort out issues with GitHub accounts and mu
 - https://help.github.com/articles/about-commit-email-addresses/
 - https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
 
-[coc]: https://github.com/vighnesh153/vighnesh153-turbo/blob/main/CODE_OF_CONDUCT.md
+[coc]: https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-[github]: https://github.com/vighnesh153/vighnesh153-turbo
+[github]: https://github.com/vighnesh153/vighnesh153-monorepo
 [stackblitz]: https://stackblitz.com/
 [jsfiddle]: https://jsfiddle.net/
 [stackoverflow]: https://stackoverflow.com/
 [mre]: https://stackoverflow.com/help/minimal-reproducible-example
-[issues]: https://github.com/vighnesh153/vighnesh153-turbo/issues
-[submit-issue]: https://github.com/vighnesh153/vighnesh153-turbo/issues
+[issues]: https://github.com/vighnesh153/vighnesh153-monorepo/issues
+[submit-issue]: https://github.com/vighnesh153/vighnesh153-monorepo/issues

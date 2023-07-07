@@ -1,4 +1,4 @@
-# @vighnesh153-turbo-nodejs
+# @vighnesh153-monorepo-nodejs
 
 [![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
 
@@ -27,8 +27,7 @@ This directory contains apps and packages built in javascript and typescript run
 - [@vighnesh153/tsconfig](https://www.npmjs.com/package/@vighnesh153/tsconfig): Typescript configuration that I like
 - [@vighnesh153/utils](https://www.npmjs.com/package/@vighnesh153/utils): Utility functions
 - [@vighnesh153/-version](https://www.npmjs.com/package/@vighnesh153/version-tracker): Published just to track the
-  current version of my packages at the
-  top of this README as a badge
+  current version of my packages at the top of this README as a badge
 
 ### Internal
 

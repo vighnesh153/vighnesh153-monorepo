@@ -16,7 +16,7 @@ export const commonConstants = {
       google: myGoogleEmail,
     },
   },
-  appGithubLink: 'https://github.com/vighnesh153/vighnesh153-turbo',
+  appGithubLink: 'https://github.com/vighnesh153/vighnesh153-monorepo',
   resumeLink: 'https://bit.ly/vighnesh153-resume',
   work: {
     google: { url: 'https://about.google' },

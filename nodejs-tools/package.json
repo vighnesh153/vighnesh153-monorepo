@@ -1,5 +1,5 @@
 {
-  "name": "vighnesh153-turbo-nodejs",
+  "name": "vighnesh153-monorepo-nodejs",
   "version": "0.0.0",
   "private": true,
   "prettier": "@vighnesh153/prettier-config",

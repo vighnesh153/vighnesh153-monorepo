@@ -3,8 +3,8 @@
 [![npm](https://img.shields.io/npm/dt/@vighnesh153/github-gist)](https://img.shields.io/npm/dt/@vighnesh153/github-gist)
 [![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/github-gist)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/github-gist)
 [![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
-[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
+[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/issues)
 
 A simple promise-based wrapper over the GitHub's REST API to play with GitHub Gists.
 
@@ -31,34 +31,34 @@ To interact with the gist in your GitHub account, you need to create a Personal 
   use this default in production because it probably isn't reliable. The owner might decide to shut it down anytime. So,
   I recommend you to build/host your own proxy or opt in for a more reliable one. Following are some helpful links (I
   found these options via a quick google search and these are just to get you started and not my recommendations):
-    - A cheap paid service option: https://cors.sh/
-    - Host one of the following proxy server code on your platform of choice
-        - https://github.com/ccoenraets/cors-proxy/blob/master/server.js
-    - Create your own CORS proxy from scratch
-        - Way 1: https://dev.to/decker67/write-your-own-cors-proxy-with-nodejs-in-no-time-30f9
-        - Way 2: https://medium.com/nodejsmadeeasy/a-simple-cors-proxy-for-javascript-applications-9b36a8d39c51
+  - A cheap paid service option: https://cors.sh/
+  - Host one of the following proxy server code on your platform of choice
+    - https://github.com/ccoenraets/cors-proxy/blob/master/server.js
+  - Create your own CORS proxy from scratch
+    - Way 1: https://dev.to/decker67/write-your-own-cors-proxy-with-nodejs-in-no-time-30f9
+    - Way 2: https://medium.com/nodejsmadeeasy/a-simple-cors-proxy-for-javascript-applications-9b36a8d39c51
 
 ## Usage
 
 ### Importing
 
-* Import/Export
+- Import/Export
 
 ```ts
 import { GithubGist } from '@vighnesh153/github-gist';
 ```
 
-* Require
+- Require
 
 ```js
 const { GithubGist } = require('@vighnesh153/github-gist');
 ```
 
-* As a script tag (UMD modules)
+- As a script tag (UMD modules)
 
 ```html
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
-<script src='https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/main.umd.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/github-gist/dist/main.umd.js"></script>
 
 <script>
   const GithubGist = GithubGistUmd.GithubGist;
@@ -161,14 +161,15 @@ const existingPikachuJson = gist.createNewFile('pikachu.json');
 
 ### Fetch the latest content of a gist
 
-If you suspect that your local gist instance is out of date with the actual GitHub Gist, you can fetch the latest content
+If you suspect that your local gist instance is out of date with the actual GitHub Gist, you can fetch the latest
+content
 
 ```ts
 // Entire gist
-await gist.fetchLatestContent()
+await gist.fetchLatestContent();
 
 // Specific file
-await pikachuJson.fetchLatestContent()
+await pikachuJson.fetchLatestContent();
 ```
 
 ### Get all the files
