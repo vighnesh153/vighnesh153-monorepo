@@ -1,5 +1,9 @@
 import { StaticSite, type StackContext } from 'sst/constructs';
 
+const oneYear = '31536000';
+const oneDay = '86400';
+const fiveMinutes = '300';
+
 export function WebsiteStack({ stack }: StackContext) {
   const { stage } = stack;
 
@@ -17,16 +21,24 @@ export function WebsiteStack({ stack }: StackContext) {
       hostedZone: 'aws.vighnesh153.com',
     },
     fileOptions: [
+      // HTML files
       {
         exclude: '*',
         include: '*.html',
         // cacheControl: 'max-age=0,no-cache,no-store,must-revalidate',
-        cacheControl: ['max-age=300', 's-max-age=300', 'public', 'must-revalidate'].join(','),
+        cacheControl: [`max-age=${fiveMinutes}`, `s-max-age=${fiveMinutes}`, 'public', 'must-revalidate'].join(','),
       },
+      // images
+      {
+        exclude: '*',
+        include: ['*.webp', '*.png', '*.jpeg', '*.jpg', '*.ico'],
+        cacheControl: [`max-age=${oneDay}`, `s-max-age=${oneDay}`, 'public', 'must-revalidate'].join(','),
+      },
+      // CSS and JS files
       {
         exclude: '*',
         include: ['*.js', '*.css'],
-        cacheControl: ['max-age=31536000', 'public', 'immutable'].join(','),
+        cacheControl: [`max-age=${oneYear}`, 'public', 'immutable'].join(','),
       },
     ],
     environment: {
