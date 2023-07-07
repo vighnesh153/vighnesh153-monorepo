@@ -3,8 +3,8 @@
 [![npm](https://img.shields.io/npm/dt/@vighnesh153/react-use-global-state)](https://img.shields.io/npm/dt/@vighnesh153/react-use-global-state)
 [![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/react-use-global-state)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/react-use-global-state)
 [![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
-[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
+[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/issues)
 
 A lightweight library (around `1KB` minified), which allows you to create a global state using a ReactJS hook. The API
 of the hook is similar to the `useState` hook with minor differences.
@@ -22,7 +22,7 @@ npm install @vighnesh153/react-use-global-state
 ## Usage
 
 ```jsx
-import { useGlobalState } from "@vighnesh153/react-use-global-state";
+import { useGlobalState } from '@vighnesh153/react-use-global-state';
 
 const Counter = ({ adder }) => {
   const [count, setCount] = useGlobalState('count', 0);
@@ -30,9 +30,7 @@ const Counter = ({ adder }) => {
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + adder)}>
-        Add {adder}
-      </button>
+      <button onClick={() => setCount(count + adder)}>Add {adder}</button>
     </div>
   );
 };
@@ -63,7 +61,7 @@ describe('Your component tests', () => {
     forgetGlobalState();
   });
 
-  // forgets those global state pieces that were marked with any one of these identifiers 
+  // forgets those global state pieces that were marked with any one of these identifiers
   beforeEach(() => {
     forgetGlobalState(['counter', 'user', 'auth']);
   });
@@ -78,39 +76,45 @@ application as you can see in the following example.
 In the following example, we have the global render time in the `<App />` component and all the counter cards are
 children of the `<App />` component.
 
-* Adding a new counter re-renders the `<App />` component because the logic of the count of counters is in the `<App />`
+- Adding a new counter re-renders the `<App />` component because the logic of the count of counters is in the `<App />`
   component
-* Adding `1` to any of the counters only re-renders the consumers of the count state (in this case, only the cards)
+- Adding `1` to any of the counters only re-renders the consumers of the count state (in this case, only the cards)
 
 ![Counters Gif](https://i.imgur.com/hyP7VWe.gif)
 
 ## Why you should use this library?
 
-* Size: `1KB` minified
-* Zero external dependencies
-* Modern hook-based state management instead of the traditional redux-like, provider-consumer approaches
-* No need of wrapping components with a long chain of Providers as there is no Provider-Consumer pattern in this hook
+- Size: `1KB` minified
+- Zero external dependencies
+- Modern hook-based state management instead of the traditional redux-like, provider-consumer approaches
+- No need of wrapping components with a long chain of Providers as there is no Provider-Consumer pattern in this hook
 
 ## Best practices
 
-* Try to keep the states very minimal. That way, to avoid re-rendering of big component trees with every minor change in
+- Try to keep the states very minimal. That way, to avoid re-rendering of big component trees with every minor change in
   the state
-* Although there is no restriction on how you want to use this, my recommendation would be to create a wrapper hook
-  around you piece of state and add some utility functions in the hook to update the state.
-  This lets you encapsulate your business logic for this piece of state in the hook, and you won't have to pass
-  the `identifier` everytime as it will be done for you by the hook.
+- Although there is no restriction on how you want to use this, my recommendation would be to create a wrapper hook
+  around you piece of state and add some utility functions in the hook to update the state. This lets you encapsulate
+  your business logic for this piece of state in the hook, and you won't have to pass the `identifier` everytime as it
+  will be done for you by the hook.
 
 ```jsx
 const useUser = (userId, initialValue) => {
   const [user, setUser] = useGlobalState(`user_${userId}`, initialValue || {});
 
-  const changeName = useCallback((newName) => {
-    setUser({ ...user, name: newName });
-  }, [user]);
+  const changeName = useCallback(
+    (newName) => {
+      setUser({ ...user, name: newName });
+    },
+    [user]
+  );
 
-  const changeAge = useCallback((newAge) => {
-    setUser({ ...user, age: newAge });
-  }, [user]);
+  const changeAge = useCallback(
+    (newAge) => {
+      setUser({ ...user, age: newAge });
+    },
+    [user]
+  );
 
   return { user, changeName, changeAge };
 };
@@ -118,6 +122,6 @@ const useUser = (userId, initialValue) => {
 
 ## How does this hook work?
 
-* This hooks makes use of the provided `identifier` to identify which global state you want to access.
-* When you change the state for an `identifier`, the new data gets published in a stream and all the components which
+- This hooks makes use of the provided `identifier` to identify which global state you want to access.
+- When you change the state for an `identifier`, the new data gets published in a stream and all the components which
   are making use of the same `identifier` will get notified about the updates

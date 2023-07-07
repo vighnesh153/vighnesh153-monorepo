@@ -3,17 +3,17 @@
 [![npm](https://img.shields.io/npm/dt/@vighnesh153/random-word)](https://img.shields.io/npm/dt/@vighnesh153/random-word)
 [![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/random-word)](https://img.shields.io/bundlephobia/minzip/@vighnesh153/random-word)
 [![npm (scoped)](https://img.shields.io/npm/v/@vighnesh153/-version)](https://www.npmjs.com/package/@vighnesh153/-version)
-[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-turbo)](https://github.com/vighnesh153/vighnesh153-turbo/issues)
+[![GitHub](https://img.shields.io/github/license/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vighnesh153/vighnesh153-monorepo)](https://github.com/vighnesh153/vighnesh153-monorepo/issues)
 
 Generate a random word (ESM only)
 
 ## Usage
 
 ```ts
-import { generateRandomWord } from "@vighnesh153/random-word"
+import { generateRandomWord } from '@vighnesh153/random-word';
 
-const randomWord = generateRandomWord()
+const randomWord = generateRandomWord();
 console.log(randomWord);
 ```
 
@@ -27,7 +27,7 @@ npx @vighnesh153/random-word
 
 ```html
 <!--More on JS Deliver: https://www.jsdelivr.com/-->
-<script src='https://cdn.jsdelivr.net/npm/@vighnesh153/random-word/dist/main.umd.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@vighnesh153/random-word/dist/main.umd.js"></script>
 
 <script>
   const randomWord = RandomWord.generateRandomWord();

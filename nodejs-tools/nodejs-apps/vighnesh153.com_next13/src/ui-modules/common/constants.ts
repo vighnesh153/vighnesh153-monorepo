@@ -17,7 +17,7 @@ export const commonModuleConstants = {
     },
   },
   externalLinks: {
-    selfGithubLink: 'https://github.com/vighnesh153/vighnesh153-turbo',
+    selfGithubLink: 'https://github.com/vighnesh153/vighnesh153-monorepo',
     resumeLink: 'https://bit.ly/vighnesh153-resume',
 
     // work
