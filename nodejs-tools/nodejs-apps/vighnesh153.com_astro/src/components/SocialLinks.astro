@@ -11,10 +11,10 @@ const { direction, class: className, 'class:list': classList, ...props } = Astro
 ---
 
 <FocusDashedOutline>
-  <ul class:list={[`layout-${direction}`, className, classList]} aria-label="Social profiles" {...props}>
+  <ul class:list={[`layout-${direction}`, className, classList]} {...props}>
     {
       socialProfiles.map((socialProfile) => (
-        <li aria-label={`${socialProfile.title}`}>
+        <li>
           <a href={socialProfile.link} title={socialProfile.title}>
             <socialProfile.Icon role="img" width="1.25rem" height="1.25rem" />
           </a>

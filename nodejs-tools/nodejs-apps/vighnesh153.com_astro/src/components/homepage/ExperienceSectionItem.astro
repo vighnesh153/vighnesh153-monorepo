@@ -14,7 +14,7 @@ const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props
 ---
 
 <li class="li-root">
-  <H3 class="h3" aria-label={companyName}>
+  <H3 class="h3">
     <Link href={companyUrl}>@{companyName}</Link>
   </H3>
   {
@@ -25,19 +25,17 @@ const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props
     ) : null
   }
   <br />
-  <ul aria-label={`Positions at ${companyName}`}>
+  <ul>
     {
       companyPositions.map((companyPosition) => (
         <li class="position-item">
-          <P class="position-title" aria-label={`${companyPosition.title}`}>
-            {companyPosition.title}
-          </P>
+          <P class="position-title">{companyPosition.title}</P>
           <P class="position-duration">{companyPosition.duration}</P>
         </li>
       ))
     }
   </ul>
-  <ul aria-label={`Responsibilities at ${companyName}`}>
+  <ul>
     <slot name="responsibilities" />
   </ul>
 </li>
