@@ -1,5 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import CircleChevronRightIcon from '@/icons/CircleChevronRightIcon.astro';
+import Span from '../typography/span.astro';
 
 interface Props extends HTMLAttributes<'li'> {}
 
@@ -7,21 +9,19 @@ const { ...props } = Astro.props;
 ---
 
 <li {...props}>
+  <Span variant="inherit" class="chevron-icon">
+    <CircleChevronRightIcon aria-hidden="true" />
+  </Span>
   <slot />
 </li>
 
 <style lang="scss">
   li {
-    padding-left: 1.5rem;
     position: relative;
 
-    &::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      top: 0.5em;
-
-      color: var(--accent);
+    .chevron-icon {
+      fill: var(--accent);
+      margin-right: 1.5rem;
     }
   }
 </style>

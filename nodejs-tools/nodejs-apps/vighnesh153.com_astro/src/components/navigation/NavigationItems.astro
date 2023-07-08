@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<'nav'> {
 const { navItems = defaultNavItems, ...props } = Astro.props;
 ---
 
-<nav {...props} aria-label="external and internal links related to me">
+<nav {...props}>
   <slot name="start-item" />
   {
     navItems.map((navItem) => (
