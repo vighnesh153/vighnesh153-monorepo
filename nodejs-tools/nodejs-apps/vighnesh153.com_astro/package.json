@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "lint": "eslint --max-warnings=0 . && astro check",
+    "test": "vitest --passWithNoTests",
     "sst:deploy:dev": "dotenv -e ../../.env.local -- sst deploy --stage=dev",
     "sst:deploy:prod": "sst deploy --stage=prod",
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
@@ -37,7 +38,8 @@
     "postcss-url": "^10.1.3",
     "sass": "^1.63.6",
     "sst": "^2.16.3",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "vitest": "^0.33.0"
   },
   "author": {
     "name": "Vighnesh Raut",
