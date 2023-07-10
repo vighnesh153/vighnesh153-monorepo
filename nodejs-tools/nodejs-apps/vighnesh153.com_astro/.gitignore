@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 cdk.context.json
 tsconfig.tsbuildinfo
+
+test-results
+playwright-report
+playwright/.cache
