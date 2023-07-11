@@ -74,6 +74,7 @@ export class Heap<T> {
     }
 
     // Element to be removed
+    // eslint-disable-next-line prefer-destructuring
     const topElement = this.items[0];
 
     // Last element will replace the first position
