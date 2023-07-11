@@ -5,7 +5,16 @@ import { trim as trimString } from '../trimUtils';
 
 const STRICT_REGEXP = /[a-zA-Z0-9_]/;
 const DEFAULT_SLUG_SAFE_CHARACTERS = /[a-zA-Z0-9\-._:@+()"'*~!]/;
-const characterMapKeys = new Set(Object.keys(characterMap));
+let characterMapKeys: Set<string> | null = null;
+
+// This is done so that the characterMapKeys calculation is pure and won't be
+// done unless someone uses `slugify` function
+function getCharacterMapKeys(): Set<string> {
+  if (characterMapKeys === null) {
+    characterMapKeys = new Set(Object.keys(characterMap));
+  }
+  return characterMapKeys;
+}
 
 export interface SlugifyOptions {
   /**
@@ -97,7 +106,7 @@ export function slugify(value: string, options: SlugifyOptions = {}): string {
       return replacementMap[originalCharacter];
     }
     // If our character map has a replacement for the character, use it
-    if (characterMapKeys.has(originalCharacter)) {
+    if (getCharacterMapKeys().has(originalCharacter)) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return slugify((characterMap as any)[originalCharacter], options);
     }
