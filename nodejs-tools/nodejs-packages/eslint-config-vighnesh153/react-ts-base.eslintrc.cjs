@@ -1,22 +1,20 @@
 module.exports = {
   extends: [
-    'airbnb',
-    'airbnb-typescript',
     'vighnesh153/ts-base.eslintrc.cjs',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react-perf/recommended',
   ],
   rules: {
-    'jsx-a11y/heading-has-content': 'warn',
-    'jsx-a11y/interactive-supports-focus': 'off',
-    'jsx-a11y/label-has-associated-control': [
-      2,
-      {
-        depth: 2,
-      },
-    ],
-    'jsx-a11y/no-autofocus': 'off',
+    // 'jsx-a11y/heading-has-content': 'warn',
+    // 'jsx-a11y/interactive-supports-focus': 'off',
+    // 'jsx-a11y/label-has-associated-control': [
+    //   2,
+    //   {
+    //     depth: 2,
+    //   },
+    // ],
+    // 'jsx-a11y/no-autofocus': 'off',
     'react/destructuring-assignment': 'off',
     'react/jsx-filename-extension': [
       2,

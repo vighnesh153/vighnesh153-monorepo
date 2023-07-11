@@ -7,8 +7,6 @@ module.exports = defineConfig({
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'airbnb-base',
-        'airbnb-typescript/base',
         'plugin:import/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
