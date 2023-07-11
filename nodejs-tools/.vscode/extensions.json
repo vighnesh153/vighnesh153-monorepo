@@ -11,6 +11,7 @@
     "richie5um2.vscode-sort-json",
     "techer.open-in-browser",
     "tobiasalthoff.atom-material-theme",
-    "wix.vscode-import-cost"
+    "wix.vscode-import-cost",
+    "bradlc.vscode-tailwindcss"
   ]
 }

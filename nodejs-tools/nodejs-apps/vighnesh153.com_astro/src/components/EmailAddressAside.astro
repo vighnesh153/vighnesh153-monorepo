@@ -3,7 +3,7 @@ import FocusDashedOutline from './FocusDashedOutline.astro';
 import { myPersonalizedEmail } from '@/constants/emails';
 ---
 
-<FocusDashedOutline class="container">
+<FocusDashedOutline class="email-address-container">
   <a href={`mailto:${myPersonalizedEmail}`}>
     {myPersonalizedEmail}
   </a>
@@ -14,7 +14,7 @@ import { myPersonalizedEmail } from '@/constants/emails';
 
   $gap: 1.5rem;
 
-  .container {
+  .email-address-container {
     position: fixed;
     bottom: 0;
     right: $gap;

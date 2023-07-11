@@ -56,8 +56,16 @@ Visit
 
 #### Tasks
 
-- Remove unnecessary aria-labels
+- airtel wifi password
+- tailwind
 - Add ui test for sidebar
+- replace vighnesh153.com with prod.ui.aws.vighnesh153.com
+- clean up vercel.com environment
+- Golang wasm
+  - html elements interaction
+  - api requests
+  - runtime type checking? assign incorrect interface to API response
+  - bundle size
 - Add tooltip component along with placement (left, top, right, bottom)
 - Add tooltip component to social links along with placement
 - Add tooltip component to aside email address
@@ -66,6 +74,8 @@ Visit
   - https://docs.astro.build/en/guides/integrations-guide/prefetch/
 - Migrate SPL, React & Typescript playground and Js Canvas illustrations to `vighnesh153.com_astro` and update the links
   in the `/projects#featured-projects` section
+- update project links on the projects page
+- add code pen link as featured projects
 - https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the logs
 - Seed data in vighnesh153.com_next13
@@ -111,6 +121,7 @@ Visit
 - Embed GitHub commit snippet
 - Media CDN
   - image optimization and standard multiple sources
+  - build a tool for compressing images
 - Hide emails of users on client side
 - Profile page for all users
   - `/users` -> Show list of users (hide emails)
