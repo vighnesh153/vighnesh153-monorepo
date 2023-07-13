@@ -1,6 +1,5 @@
 ---
-import H2 from '../typography/h2.astro';
-import Span from '../typography/span.astro';
+import { classes } from '@/utils';
 
 export interface Props {
   count: string;
@@ -10,55 +9,23 @@ export interface Props {
 const { count, title } = Astro.props;
 ---
 
-<H2 variant="inherit" class="h2"><Span variant="inherit" class="span">{count}.</Span>&nbsp;{title}</H2>
+<h2
+  class={classes(`
+  flex
+  items-center
 
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  @import '@/styles/typography.scss';
+  text-xl sm:text-2xl md:text-3xl lg:text-4xl
+  font-bold
+  whitespace-nowrap 
 
-  .h2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    font-weight: var(--font-weight-bold) !important;
-    white-space: nowrap;
-
-    &::after {
-      content: '';
-      margin-left: 1rem;
-      width: 100%;
-      max-width: 300px;
-      height: 1px;
-
-      display: inline-block;
-
-      background-color: var(--text-4);
-    }
-
-    @media (--xs-and-up) {
-      @include h6;
-    }
-    @media (--sm-and-up) {
-      @include h5;
-    }
-    @media (--md-and-up) {
-      @include h4;
-    }
-
-    .span {
-      color: var(--accent);
-      font-weight: var(--font-weight-bold) !important;
-
-      @media (--xs-and-up) {
-        @include h6;
-      }
-      @media (--sm-and-up) {
-        @include h5;
-      }
-      @media (--md-and-up) {
-        @include h4;
-      }
-    }
-  }
-</style>
+  after:ml-4 
+  after:w-full 
+  after:max-w-xs 
+  after:h-px 
+  
+  after:inline-block 
+  after:bg-text4
+`)}
+>
+  <span class="text-accent">{count}.</span>&nbsp;{title}
+</h2>

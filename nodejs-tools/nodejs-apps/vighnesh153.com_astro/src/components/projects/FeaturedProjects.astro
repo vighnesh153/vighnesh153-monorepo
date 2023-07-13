@@ -4,53 +4,50 @@ import H2 from '../typography/h2.astro';
 import Link from '../Link.astro';
 import H3 from '../typography/h3.astro';
 import P from '../typography/p.astro';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
 import ProjectIconLink from './ProjectIconLink.astro';
 import ProjectTag from './ProjectTag.astro';
 ---
 
 <section class="featured-projects-section" id={hashTags.projects.featuredProjects}>
-  <FocusDashedOutline>
-    <H2 variant="h5">
-      <Link href={internalLinks.projects.featured}>Featured projects</Link>
-    </H2>
+  <H2 variant="h5">
+    <Link href={internalLinks.projects.featured}>Featured projects</Link>
+  </H2>
 
-    <ul class="featured-projects-list">
-      {
-        featuredProjects.map(({ imageUrl, title, description, tags, links }) => (
-          <li class="featured-project">
-            <a class="featured-project-image-link" href={links.demo.href}>
-              <img class="featured-project-image" src={imageUrl} alt="" />
-            </a>
-            <Link href={links.demo.href} class="featured-project-title-link">
-              <H3 variant="inherit" class="featured-project-title">
-                {title}
-              </H3>
-            </Link>
-            <ul class="featured-project-tags">
-              {tags.map((tag) => (
-                <ProjectTag>{tag}</ProjectTag>
-              ))}
-            </ul>
-            <P class="featured-project-description">{description}</P>
+  <ul class="featured-projects-list">
+    {
+      featuredProjects.map(({ imageUrl, title, description, tags, links }) => (
+        <li class="featured-project">
+          <a class="featured-project-image-link" href={links.demo.href}>
+            <img class="featured-project-image" src={imageUrl} alt="" />
+          </a>
+          <Link href={links.demo.href} class="featured-project-title-link">
+            <H3 variant="inherit" class="featured-project-title">
+              {title}
+            </H3>
+          </Link>
+          <ul class="featured-project-tags">
+            {tags.map((tag) => (
+              <ProjectTag>{tag}</ProjectTag>
+            ))}
+          </ul>
+          <P class="featured-project-description">{description}</P>
 
-            <ul class="featured-project-links">
-              <li>
-                <ProjectIconLink href={links.github.href} aria-label="source code">
-                  <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
-                </ProjectIconLink>
-              </li>
-              <li>
-                <ProjectIconLink href={links.demo.href} aria-label="demo">
-                  <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
-                </ProjectIconLink>
-              </li>
-            </ul>
-          </li>
-        ))
-      }
-    </ul>
-  </FocusDashedOutline>
+          <ul class="featured-project-links">
+            <li>
+              <ProjectIconLink href={links.github.href} aria-label="source code">
+                <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
+              </ProjectIconLink>
+            </li>
+            <li>
+              <ProjectIconLink href={links.demo.href} aria-label="demo">
+                <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
+              </ProjectIconLink>
+            </li>
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <style lang="scss">

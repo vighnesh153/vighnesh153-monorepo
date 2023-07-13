@@ -1,7 +1,6 @@
 ---
 import { hashTags, companyUrls } from '@/constants';
 import SectionTitle from './SectionTitle.astro';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
 import ExperienceSectionItem from './ExperienceSectionItem.astro';
 import ExperienceSectionItemResponsibility from './ExperienceSectionItemResponsibility.astro';
 import Link from '../Link.astro';
@@ -18,143 +17,136 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 }
 ---
 
-<section id={hashTags.homePage.experience} class="experience">
+<section id={hashTags.homePage.experience}>
   <SectionTitle count="02" title="Where I have worked" />
-  <FocusDashedOutline>
-    <ul>
-      <ExperienceSectionItem
-        companyName="Google"
-        companyUrl={companyUrls.google}
-        totalDuration={getTimeDifference(new Date('2022-07-14'))}
-        companyPositions={[
-          {
-            title: 'Software Engineer 2',
-            duration: `July 2022 - Present · ${getTimeDifference(new Date('2022-07-14'))}`,
-          },
-        ]}
-      >
-        <Fragment slot="responsibilities">
-          <ExperienceSectionItemResponsibility>
-            Building next-gen developer tools for GoogleTV
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Google App Verification System for validating integration flows like <Span class="span-bold">Playnext</Span>
-            and <Span class="span-bold">Deeplink</Span> validation between GoogleTV and {`developer's`} apps
-          </ExperienceSectionItemResponsibility>
-        </Fragment>
-      </ExperienceSectionItem>
+  <ul>
+    <ExperienceSectionItem
+      companyName="Google"
+      companyUrl={companyUrls.google}
+      totalDuration={getTimeDifference(new Date('2022-07-14'))}
+      companyPositions={[
+        {
+          title: 'Software Engineer 2',
+          duration: `July 2022 - Present · ${getTimeDifference(new Date('2022-07-14'))}`,
+        },
+      ]}
+    >
+      <Fragment slot="responsibilities">
+        <ExperienceSectionItemResponsibility>
+          Building next-gen developer tools for GoogleTV
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Google App Verification System for validating integration flows like <Span class="span-bold">Playnext</Span>
+          and <Span class="span-bold">Deeplink</Span> validation between GoogleTV and {`developer's`} apps
+        </ExperienceSectionItemResponsibility>
+      </Fragment>
+    </ExperienceSectionItem>
 
-      <ExperienceSectionItem
-        companyName="Amazon"
-        companyUrl={companyUrls.amazon}
-        totalDuration={getTimeDifference(new Date('2020-09-28'), new Date('2022-07-14'))}
-        companyPositions={[
-          {
-            title: 'Front End Engineer 1',
-            duration: `June 2022 - July 2022 · ${getTimeDifference(new Date('2022-06-01'), new Date('2022-07-14'))}`,
-          },
-          {
-            title: 'Web Development Engineer 1',
-            duration: `September 2020 - May 2022 · ${getTimeDifference(
-              new Date('2020-09-28'),
-              new Date('2022-05-31')
-            )}`,
-          },
-        ]}
-      >
-        <Fragment slot="responsibilities">
-          <ExperienceSectionItemResponsibility>
-            Working on the revamp of App Submission flow on <AppstoreDeveloperConsoleLink /> where developers can submit
-            their mobile or web applications to be available on Amazon Appstore
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Worked on an internal tool which is a one stop solution for everything related to the{' '}
-            <Link href="https://www.amazon.jobs/en/landing_pages/about-amazon" target="_blank">Day 1 culture</Link>{' '}
-            of Amazon. The tool is accessible to all the Amazon employees
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Working on an internal React Components Library which will be used by entire Appstore to build standard and
-            accessible UI for all the web pages on <AppstoreDeveloperConsoleLink />
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Worked on an internal tool which was used by Appstore certifiers, to certify/flag all the apps that were
-            submitted on <AppstoreDeveloperConsoleLink /> based on internal policies
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Writing modern, performant, maintainable code for a diverse array of other Amazon external and internal
-            projects
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Working with a variety of different languages, platforms, frameworks, and content management systems such as
-            <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Javascript</Link>
-            , <Link href="https://www.typescriptlang.org" target="_blank">Typescript</Link>
-            , <Link href="https://reactjs.org" target="_blank">ReactJS</Link>
-            , <Link href="https://nextjs.org" target="_blank">NextJS</Link>
-            , <Link href="https://aws.amazon.com" target="_blank">AWS</Link>, internal-AWS, Java, Spring, JSP
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Communicating with multi-disciplinary teams of engineers, designers, program managers, and stakeholders on a
-            daily basis
-          </ExperienceSectionItemResponsibility>
-        </Fragment>
-      </ExperienceSectionItem>
+    <ExperienceSectionItem
+      companyName="Amazon"
+      companyUrl={companyUrls.amazon}
+      totalDuration={getTimeDifference(new Date('2020-09-28'), new Date('2022-07-14'))}
+      companyPositions={[
+        {
+          title: 'Front End Engineer 1',
+          duration: `June 2022 - July 2022 · ${getTimeDifference(new Date('2022-06-01'), new Date('2022-07-14'))}`,
+        },
+        {
+          title: 'Web Development Engineer 1',
+          duration: `September 2020 - May 2022 · ${getTimeDifference(new Date('2020-09-28'), new Date('2022-05-31'))}`,
+        },
+      ]}
+    >
+      <Fragment slot="responsibilities">
+        <ExperienceSectionItemResponsibility>
+          {/* eslint-disable-next-line max-len */}
+          Working on the revamp of App Submission flow on <AppstoreDeveloperConsoleLink /> where developers can submit their
+          mobile or web applications to be available on Amazon Appstore
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Worked on an internal tool which is a one stop solution for everything related to the{' '}
+          <Link href="https://www.amazon.jobs/en/landing_pages/about-amazon" target="_blank">Day 1 culture</Link>{' '}
+          of Amazon. The tool is accessible to all the Amazon employees
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Working on an internal React Components Library which will be used by entire Appstore to build standard and
+          accessible UI for all the web pages on <AppstoreDeveloperConsoleLink />
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Worked on an internal tool which was used by Appstore certifiers, to certify/flag all the apps that were
+          submitted on <AppstoreDeveloperConsoleLink /> based on internal policies
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Writing modern, performant, maintainable code for a diverse array of other Amazon external and internal
+          projects
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Working with a variety of different languages, platforms, frameworks, and content management systems such as
+          <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Javascript</Link>
+          , <Link href="https://www.typescriptlang.org" target="_blank">Typescript</Link>
+          , <Link href="https://reactjs.org" target="_blank">ReactJS</Link>
+          , <Link href="https://nextjs.org" target="_blank">NextJS</Link>
+          , <Link href="https://aws.amazon.com" target="_blank">AWS</Link>, internal-AWS, Java, Spring, JSP
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Communicating with multi-disciplinary teams of engineers, designers, program managers, and stakeholders on a
+          daily basis
+        </ExperienceSectionItemResponsibility>
+      </Fragment>
+    </ExperienceSectionItem>
 
-      <ExperienceSectionItem
-        companyName="Smarter Codes"
-        companyUrl={companyUrls.smarterCodes}
-        totalDuration={getTimeDifference(new Date('2020-07-06'), new Date('2020-09-25'))}
-        companyPositions={[
-          {
-            title: 'Full Stack Engineer',
-            duration: `July 2020 - September 2020 · ${getTimeDifference(
-              new Date('2020-07-06'),
-              new Date('2020-09-25')
-            )}`,
-          },
-        ]}
-      >
-        <Fragment slot="responsibilities">
-          <ExperienceSectionItemResponsibility>
-            Implemented many of the <Link href="https://rocket.chat" target="_blank">Rocket Chat</Link> features for the
-            <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat platform
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Lot of other utility plugins for the
-            <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat platform
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Worked on amazing tech stack: ReactJS, Golang and AWS
-          </ExperienceSectionItemResponsibility>
-        </Fragment>
-      </ExperienceSectionItem>
+    <ExperienceSectionItem
+      companyName="Smarter Codes"
+      companyUrl={companyUrls.smarterCodes}
+      totalDuration={getTimeDifference(new Date('2020-07-06'), new Date('2020-09-25'))}
+      companyPositions={[
+        {
+          title: 'Full Stack Engineer',
+          duration: `July 2020 - September 2020 · ${getTimeDifference(new Date('2020-07-06'), new Date('2020-09-25'))}`,
+        },
+      ]}
+    >
+      <Fragment slot="responsibilities">
+        <ExperienceSectionItemResponsibility>
+          Implemented many of the <Link href="https://rocket.chat" target="_blank">Rocket Chat</Link> features for the
+          <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat platform
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Lot of other utility plugins for the
+          <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat platform
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Worked on amazing tech stack: ReactJS, Golang and AWS
+        </ExperienceSectionItemResponsibility>
+      </Fragment>
+    </ExperienceSectionItem>
 
-      <ExperienceSectionItem
-        companyName="Tavisca"
-        companyUrl={companyUrls.tavisca}
-        totalDuration={getTimeDifference(new Date('2019-07-15'), new Date('2020-01-25'))}
-        companyPositions={[
-          {
-            title: 'Software Engineer',
-            duration: `July 2019 - January 2020 · ${getTimeDifference(new Date('2019-07-15'), new Date('2020-01-25'))}`,
-          },
-        ]}
-      >
-        <Fragment slot="responsibilities">
-          <ExperienceSectionItemResponsibility>
-            Under went Software Engineering training for 6 months and learnt a lot about Software engineering design
-            principles, clean code best practices, etc.
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Built a Road-trip Itinerary Planner (proof-of-concept) project where I applied all the things I learnt
-            during my training phase
-          </ExperienceSectionItemResponsibility>
-          <ExperienceSectionItemResponsibility>
-            Worked on fixing a bunch of bugs/issues on the production application
-          </ExperienceSectionItemResponsibility>
-        </Fragment>
-      </ExperienceSectionItem>
-    </ul>
-  </FocusDashedOutline>
+    <ExperienceSectionItem
+      companyName="Tavisca"
+      companyUrl={companyUrls.tavisca}
+      totalDuration={getTimeDifference(new Date('2019-07-15'), new Date('2020-01-25'))}
+      companyPositions={[
+        {
+          title: 'Software Engineer',
+          duration: `July 2019 - January 2020 · ${getTimeDifference(new Date('2019-07-15'), new Date('2020-01-25'))}`,
+        },
+      ]}
+    >
+      <Fragment slot="responsibilities">
+        <ExperienceSectionItemResponsibility>
+          Under went Software Engineering training for 6 months and learnt a lot about Software engineering design
+          principles, clean code best practices, etc.
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Built a Road-trip Itinerary Planner (proof-of-concept) project where I applied all the things I learnt during
+          my training phase
+        </ExperienceSectionItemResponsibility>
+        <ExperienceSectionItemResponsibility>
+          Worked on fixing a bunch of bugs/issues on the production application
+        </ExperienceSectionItemResponsibility>
+      </Fragment>
+    </ExperienceSectionItem>
+  </ul>
 </section>
 
 <style lang="scss">

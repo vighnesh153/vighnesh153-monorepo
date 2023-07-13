@@ -1,29 +1,14 @@
 ---
+import { classes } from '@/utils';
 import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'button'> {
   variant?: 'primary' | 'secondary';
 }
 
-const { variant = 'secondary', class: className, 'class:list': classList, ...props } = Astro.props;
+const { variant = 'secondary', class: className, ...props } = Astro.props;
 ---
 
-<button class:list={[className, classList, `button-${variant}`]} {...props}>
+<button class={classes(className, `${variant}-button`)} {...props}>
   <slot />
 </button>
-
-<style lang="scss">
-  @import '@/styles/button.scss';
-
-  button {
-    @include button;
-  }
-
-  .button-primary {
-    @include button-primary;
-  }
-
-  .button-secondary {
-    @include button-secondary;
-  }
-</style>

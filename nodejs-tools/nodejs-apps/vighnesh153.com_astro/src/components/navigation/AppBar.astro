@@ -2,7 +2,6 @@
 import RvLogoIcon from '@/icons/RvLogoIcon.astro';
 import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.astro';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
 import NavigationItems from './NavigationItems.astro';
 import type { NavItem } from './navItems';
 
@@ -14,30 +13,26 @@ const { navItems } = Astro.props;
 ---
 
 <header id="header" class="show-header">
-  <FocusDashedOutline>
-    <a href="/" aria-label="Logo" class="logo">
-      <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
-    </a>
-  </FocusDashedOutline>
-  <FocusDashedOutline>
-    <NavigationItems class="horizontal-nav" navItems={navItems} />
-    <button type="button" class="nav-toggle-button hamburger-menu" id="hamburger-menu" title="Open navigation menu">
-      <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
+  <a href="/" aria-label="Logo" class="logo">
+    <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
+  </a>
+  <NavigationItems class="horizontal-nav" navItems={navItems} />
+  <button type="button" class="nav-toggle-button hamburger-menu" id="hamburger-menu" title="Open navigation menu">
+    <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
+  </button>
+  {/** State to keep track of whether the menu is open or not */}
+  <input type="checkbox" style="display: none" id="side-navigation-open" />
+  <NavigationItems class="vertical-nav" id="vertical-nav" navItems={navItems}>
+    <button
+      type="button"
+      slot="start-item"
+      class="nav-toggle-button close-menu"
+      id="close-menu"
+      title="Close navigation menu"
+    >
+      <CloseIcon width="25" role="img" aria-label="close icon" />
     </button>
-    {/** State to keep track of whether the menu is open or not */}
-    <input type="checkbox" style="display: none" id="side-navigation-open" />
-    <NavigationItems class="vertical-nav" id="vertical-nav" navItems={navItems}>
-      <button
-        type="button"
-        slot="start-item"
-        class="nav-toggle-button close-menu"
-        id="close-menu"
-        title="Close navigation menu"
-      >
-        <CloseIcon width="25" role="img" aria-label="close icon" />
-      </button>
-    </NavigationItems>
-  </FocusDashedOutline>
+  </NavigationItems>
 </header>
 
 <style lang="scss">

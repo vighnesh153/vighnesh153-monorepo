@@ -1,17 +1,23 @@
 ---
 import { hashTags, companyUrls, currentTechnologies } from '@/constants';
+import { classes } from '@/utils';
 import SectionTitle from './SectionTitle.astro';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
-import P from '../typography/p.astro';
 import Link from '../Link.astro';
-import Span from '../typography/span.astro';
 import SectionListItem from './SectionListItem.astro';
 ---
 
-<section id={hashTags.homePage.aboutMe} class="about-me">
+<section id={hashTags.homePage.aboutMe}>
   <SectionTitle count="01" title="About me" />
-  <FocusDashedOutline class="description">
-    <P class="text">
+  <div
+    class={classes(`
+      mt-6
+      
+      font-light
+      text-text2 
+      text-base sm:text-lg xl:text-xl
+    `)}
+  >
+    <p>
       Hello. My name is Vighnesh and I enjoy creating projects involving graphics manipulations, cli-tools, libraries
       and also developer tools. My interest in software development started a few years back when I first learnt about
       Javascript. Since then, I have been building teeny-tiny projects for fun. I am also fascinated by compilers and I
@@ -34,46 +40,15 @@ import SectionListItem from './SectionListItem.astro';
       <br />
       Here are a few technologies I have been working with recently:
       <br />
-    </P>
-    <ul>
+    </p>
+    <ul class="mt-4">
       {
         currentTechnologies.map((technology) => (
-          <SectionListItem class="li">
-            <Link href={technology.link}>
-              <Span class="text">{technology.text}</Span>
-            </Link>
+          <SectionListItem class="li mb-2">
+            <Link href={technology.link}>{technology.text}</Link>
           </SectionListItem>
         ))
       }
     </ul>
-  </FocusDashedOutline>
+  </div>
 </section>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  @import '@/styles/typography.scss';
-
-  .description {
-    margin-top: 1.5rem;
-    color: var(--text-2);
-
-    .text {
-      font-weight: var(--font-weight-light) !important;
-
-      @media (--xs-and-up) {
-        @include body1;
-      }
-      @media (--sm-and-up) {
-        @include h6;
-      }
-    }
-  }
-
-  ul {
-    margin-top: 1rem;
-
-    .li {
-      margin-bottom: 0.5rem;
-    }
-  }
-</style>
