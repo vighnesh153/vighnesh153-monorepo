@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .base-button {
+    @apply py-[1em];
+    @apply px-[2em];
+    @apply inline-block;
+
+    @apply border-none;
+
+    @apply rounded-xl;
+    @apply transition-shadow;
+    @apply duration-200;
+    @apply ease-in-out;
+    @apply text-base;
+    @apply text-center;
+    @apply cursor-pointer;
+    @apply uppercase;
+
+    &:is(:hover, :focus-visible) {
+      @apply shadow-2xl;
+      @apply shadow-primary;
+    }
+  }
+
+  .primary-button {
+    @apply base-button;
+
+    @apply bg-primary;
+    @apply text-secondary;
+
+    &:is(:hover, :focus-visible) {
+      // @apply shadow-primary;
+    }
+  }
+
+  .secondary-button {
+    @apply base-button;
+
+    @apply bg-secondary;
+    @apply text-text;
+    @apply shadow-primary;
+
+    &:is(:hover, :focus-visible) {
+      // @apply shadow-primary;
+    }
+  }
+
+  .regular-link {
+    @apply inline-block;
+    @apply relative;
+
+    @apply text-accent;
+    @apply no-underline;
+    @apply cursor-pointer;
+
+    @apply after:absolute;
+    @apply after:w-0;
+    @apply after:h-[2px];
+
+    @apply after:left-0;
+    @apply after:bottom-[-2px];
+
+    @apply after:bg-[currentColor];
+
+    @apply after:transition-width;
+    @apply after:duration-200;
+    @apply after:ease-in;
+
+    @apply [&:is(:hover,:focus-visible)]:after:w-full;
+  }
+
+  .primary-btn-link {
+    @apply primary-button;
+  }
+
+  .secondary-btn-link {
+    @apply secondary-button;
+  }
+}

@@ -1,6 +1,5 @@
 ---
 import { hashTags } from '@/constants/hashTags';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
 import { internalLinks, otherAwesomeProjects } from '@/constants';
 import Link from '../Link.astro';
 import H2 from '../typography/h2.astro';
@@ -12,45 +11,43 @@ import ProjectTag from './ProjectTag.astro';
 ---
 
 <section class="other-awesome-projects-section" id={hashTags.projects.otherAwesomeProjects}>
-  <FocusDashedOutline>
-    <H2 variant="h5">
-      <Link href={internalLinks.projects.otherAwesomeProjects}>Other awesome projects</Link>
-    </H2>
+  <H2 variant="h5">
+    <Link href={internalLinks.projects.otherAwesomeProjects}>Other awesome projects</Link>
+  </H2>
 
-    <ul class="other-awesome-projects-list">
-      {
-        otherAwesomeProjects.map(({ title, description, tags, links }) => (
-          <li class="awesome-project">
-            <div class="awesome-project-header">
-              <FolderIcon class="awesome-project-folder-icon" role="img" height="2rem" />
+  <ul class="other-awesome-projects-list">
+    {
+      otherAwesomeProjects.map(({ title, description, tags, links }) => (
+        <li class="awesome-project">
+          <div class="awesome-project-header">
+            <FolderIcon class="awesome-project-folder-icon" role="img" height="2rem" />
 
-              <ul class="awesome-project-links">
-                <li>
-                  <ProjectIconLink href={links.github.href} aria-label="source code">
-                    <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
-                  </ProjectIconLink>
-                </li>
-                <li>
-                  <ProjectIconLink href={links.demo.href} aria-label="demo">
-                    <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
-                  </ProjectIconLink>
-                </li>
-              </ul>
-            </div>
-            <H3 variant="inherit" class="awesome-project-title">
-              {title}
-            </H3>
-            <P class="awesome-project-description">{description}</P>
-            <ul class="awesome-project-tags">
-              {tags.map((tag) => (
-                <ProjectTag>{tag}</ProjectTag>
-              ))}
+            <ul class="awesome-project-links">
+              <li>
+                <ProjectIconLink href={links.github.href} aria-label="source code">
+                  <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
+                </ProjectIconLink>
+              </li>
+              <li>
+                <ProjectIconLink href={links.demo.href} aria-label="demo">
+                  <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
+                </ProjectIconLink>
+              </li>
             </ul>
-          </li>
-        ))
-      }
-    </ul>
-  </FocusDashedOutline>
+          </div>
+          <H3 variant="inherit" class="awesome-project-title">
+            {title}
+          </H3>
+          <P class="awesome-project-description">{description}</P>
+          <ul class="awesome-project-tags">
+            {tags.map((tag) => (
+              <ProjectTag>{tag}</ProjectTag>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <style lang="scss">
@@ -73,6 +70,7 @@ import ProjectTag from './ProjectTag.astro';
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
+    grid-template-rows: masonry;
 
     @media (--md-and-up) {
       grid-template-columns: repeat(2, 1fr);

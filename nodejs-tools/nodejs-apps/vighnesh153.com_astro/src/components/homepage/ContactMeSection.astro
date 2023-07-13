@@ -1,71 +1,29 @@
 ---
 import { hashTags, myPersonalizedEmail } from '@/constants';
-import P from '../typography/p.astro';
-import H2 from '../typography/h2.astro';
-import FocusDashedOutline from '../FocusDashedOutline.astro';
+import { classes } from '@/utils';
 import Link from '../Link.astro';
 ---
 
-<section id={hashTags.homePage.contactMe} class="contact-me">
-  <P class="pre-title">04. What's next?</P>
-  <H2 class="title" variant="h4">Get In Touch</H2>
-  <P class="description">
+<section id={hashTags.homePage.contactMe} class="text-center">
+  <p class="text-accent text-base">04. What's next?</p>
+  <h2 class="mt-2 text-2xl md:text-3xl lg:text-4xl">Get In Touch</h2>
+  <p
+    class={classes(`
+      mt-2 mx-auto max-w-xl 
+
+      text-text2
+      font-light
+
+      text-base sm:text-xl
+    `)}
+  >
     My inbox is always open, whether you have a question or just to say hi. I will try my best to get back to you.
-  </P>
-  <FocusDashedOutline>
-    <Link asPrimaryButton href={`mailto:${myPersonalizedEmail}`} class="say-hello">Say Hello</Link>
-  </FocusDashedOutline>
+  </p>
+  <Link
+    linkType="primary-btn"
+    href={`mailto:${myPersonalizedEmail}`}
+    class={classes(`mt-4 focus-visible:outline-primary`)}
+  >
+    Say Hello
+  </Link>
 </section>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  @import '@/styles/typography.scss';
-
-  section {
-    text-align: center;
-  }
-
-  .pre-title {
-    color: var(--accent);
-
-    @media (--xs-and-up) {
-      @include subtitle1;
-    }
-    @media (--md-and-up) {
-      @include body1;
-    }
-  }
-
-  .title {
-    margin-top: 0.5rem;
-    font-weight: var(--font-weight-bold);
-
-    @media (--xs-and-up) {
-      @include h5;
-    }
-    @media (--md-and-up) {
-      @include h4;
-    }
-  }
-
-  .description {
-    margin-top: 0.5rem;
-    margin-inline: auto;
-    max-width: 600px;
-
-    color: var(--text-2);
-    font-weight: var(--font-weight-light) !important;
-
-    @media (--xs-and-up) {
-      @include body1;
-    }
-    @media (--sm-and-up) {
-      @include h6;
-    }
-  }
-
-  .say-hello {
-    --focus-dashed-outline-color: var(--primary);
-    margin-top: 1rem;
-  }
-</style>

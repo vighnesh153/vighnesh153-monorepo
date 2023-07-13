@@ -1,27 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import CircleChevronRightIcon from '@/icons/CircleChevronRightIcon.astro';
-import Span from '../typography/span.astro';
+import { classes } from '@/utils';
 
 interface Props extends HTMLAttributes<'li'> {}
 
-const { ...props } = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<li {...props}>
-  <Span variant="inherit" class="chevron-icon">
+<li {...props} class={classes(className, `relative flex items-start gap-4 md:gap-6`)}>
+  <span class="fill-accent mt-1">
     <CircleChevronRightIcon aria-hidden="true" />
-  </Span>
+  </span>
   <slot />
 </li>
-
-<style lang="scss">
-  li {
-    position: relative;
-
-    .chevron-icon {
-      fill: var(--accent);
-      margin-right: 1.5rem;
-    }
-  }
-</style>

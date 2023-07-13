@@ -1,13 +1,12 @@
 ---
-import FocusDashedOutline from './FocusDashedOutline.astro';
 import { myPersonalizedEmail } from '@/constants/emails';
 ---
 
-<FocusDashedOutline class="email-address-container">
+<div class="email-address-container">
   <a href={`mailto:${myPersonalizedEmail}`}>
     {myPersonalizedEmail}
   </a>
-</FocusDashedOutline>
+</div>
 
 <style lang="scss">
   @import '@/styles/breakpoints-media.css';

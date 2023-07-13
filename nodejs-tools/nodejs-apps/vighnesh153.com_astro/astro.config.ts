@@ -8,8 +8,10 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   compressHTML: true,
   integrations: [
-    // import.meta.env.MODE === 'production' ? worker() : null,
-    tailwind(),
+    tailwind({
+      configFile: './tailwind.config.js',
+      applyBaseStyles: false,
+    }),
     prefetch(),
     compress({ logger: 1 }),
   ],
