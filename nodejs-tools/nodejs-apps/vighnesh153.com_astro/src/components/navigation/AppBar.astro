@@ -35,7 +35,7 @@ const { navItems } = Astro.props;
 <header
   id={hashTags.header}
   class={classes(`
-    p-6 w-full fixed -translate-y-full
+    py-8 px-10 w-full fixed -translate-y-full
     flex items-center justify-between
     bg-background
     transition-[transform,box-shadow] duration-300 ease-in-out
@@ -47,10 +47,10 @@ const { navItems } = Astro.props;
     <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
   </a>
   {/* Horizontal navigation */}
-  <NavigationItems class="hidden gap-6 md:flex" navItems={navItems} />
+  <NavigationItems class="hidden gap-6 lg:flex" navItems={navItems} />
   <button
     type="button"
-    class={classes(`flex justify-center items-center md:hidden`)}
+    class={classes(`flex justify-center items-center lg:hidden`)}
     id="hamburger-menu"
     title="Open navigation menu"
   >
@@ -65,7 +65,7 @@ const { navItems } = Astro.props;
     flex-col justify-center items-center gap-12
     bg-background z-drawer
     peer-checked:flex
-    md:peer-checked:hidden
+    lg:peer-checked:hidden
   `)}
     id="vertical-nav"
     navItems={navItems}
@@ -79,7 +79,7 @@ const { navItems } = Astro.props;
         bg-[transparent] border-0 text-text
         cursor-pointer
         [&:is(:focus-visible,:hover)]:text-accent
-        md:hidden
+        lg:hidden
       `)}
       id="close-menu"
       title="Close navigation menu"

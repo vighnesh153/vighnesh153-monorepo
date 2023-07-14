@@ -1,9 +1,7 @@
 ---
-import H1 from '@/components/typography/h1.astro';
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import FeaturedProjects from '@/components/projects/FeaturedProjects.astro';
-import OtherAwesomeProjects from '@/components/projects/OtherAwesomeProjects.astro';
 import { projectNavItems } from '@/components/navigation/navItems';
+import ProjectsMasonry from '@/components/projects/ProjectsMasonry.astro';
 
 const title = 'Vighnesh Raut | Projects';
 const description =
@@ -12,14 +10,6 @@ const description =
 ---
 
 <ContentLayout title={title} description={description} navItems={projectNavItems}>
-  <H1 class="h1" variant="h4">Projects</H1>
-  <FeaturedProjects />
-  <OtherAwesomeProjects />
+  <h1 class="mt-40 text-3xl">Projects</h1>
+  <ProjectsMasonry />
 </ContentLayout>
-
-<style>
-  h1.h1 {
-    margin-top: 2rem;
-    padding-block-end: 0;
-  }
-</style>
