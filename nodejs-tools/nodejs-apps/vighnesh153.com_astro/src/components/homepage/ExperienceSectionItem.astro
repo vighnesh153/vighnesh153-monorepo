@@ -1,7 +1,6 @@
 ---
+import { classes } from '@/utils';
 import Link from '../Link.astro';
-import H3 from '../typography/h3.astro';
-import P from '../typography/p.astro';
 
 interface Props {
   companyName: string;
@@ -13,24 +12,30 @@ interface Props {
 const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props;
 ---
 
-<li class="li-root">
-  <H3 class="h3">
+<style></style>
+
+<li class="mb-10 flex flex-col items-start">
+  <h3 class="mb-2 text-xl font-light sm:text-2xl">
     <Link href={companyUrl}>@{companyName}</Link>
-  </H3>
+  </h3>
   {
     companyPositions.length > 1 ? (
-      <P variant="subtitle1" class="full-duration">
-        Full time · {totalDuration}
-      </P>
+      <p class={classes(`text-text3 text-base font-light`)}>Full time · {totalDuration}</p>
     ) : null
   }
-  <br />
   <ul>
     {
       companyPositions.map((companyPosition) => (
-        <li class="position-item">
-          <P class="position-title">{companyPosition.title}</P>
-          <P class="position-duration">{companyPosition.duration}</P>
+        <li class={classes(`mb-4 flex flex-col items-start`)}>
+          <p class={classes(`text-base md:text-2xl`)}>{companyPosition.title}</p>
+          {/* prettier-ignore */}
+          <p class={classes(`
+              font-light
+              text-text3
+              text-sm sm:text-sm md:text-base
+            `)}>
+            {companyPosition.duration}
+          </p>
         </li>
       ))
     }
@@ -39,64 +44,3 @@ const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props
     <slot name="responsibilities" />
   </ul>
 </li>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  @import '@/styles/typography.scss';
-
-  .li-root {
-    margin-bottom: 2.5rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .h3 {
-    font-weight: var(--font-weight-light) !important;
-
-    @media (--xs-and-up) {
-      @include h6;
-    }
-    @media (--sm-and-up) {
-      @include h5;
-    }
-    @media (--md-and-up) {
-      @include h5;
-    }
-  }
-
-  .full-duration {
-    color: var(--text-3);
-    font-weight: var(--font-weight-light) !important;
-  }
-
-  li.position-item {
-    margin-bottom: 1rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    .position-title {
-      @media (--sm-and-up) {
-        @include h6;
-      }
-      @media (--md-and-up) {
-        @include h5;
-      }
-    }
-
-    .position-duration {
-      color: var(--text-3);
-      font-weight: var(--font-weight-light) !important;
-
-      @media (--sm-and-up) {
-        @include subtitle2;
-      }
-      @media (--md-and-up) {
-        @include subtitle1;
-      }
-    }
-  }
-</style>

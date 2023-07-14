@@ -1,5 +1,6 @@
 export const hashTags = {
   main: 'main',
+  header: 'header',
   footer: 'footer',
   homePage: {
     aboutMe: 'about-me',

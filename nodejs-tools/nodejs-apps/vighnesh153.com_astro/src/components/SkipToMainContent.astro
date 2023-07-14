@@ -1,31 +1,19 @@
 ---
 import { internalLinks } from '@/constants';
+import Link from './Link.astro';
+import { classes } from '@/utils';
 ---
 
-<a href={internalLinks.main}> Skip to main content</a>
-
-<style lang="scss">
-  a {
-    padding: 1em 2em;
-    position: fixed;
-    left: 10px;
-    top: -100px;
-    display: inline-block;
-
-    color: var(--secondary);
-    background-color: var(--primary);
-    font-weight: var(--font-weight-bold);
-
-    border-radius: 2.5px;
-    outline: none;
-    z-index: calc(var(--z-index-tooltip) + 1);
-
-    &:focus {
-      top: 10px;
-    }
-
-    @media print {
-      display: none;
-    }
-  }
-</style>
+<Link
+  href={internalLinks.main}
+  linkType="primary-btn"
+  class={classes(`
+    fixed left-3 -top-24 inline-block
+    focus:top-4
+    z-tooltip
+    focus-visible:outline-primary
+    print:hidden
+  `)}
+>
+  Skip to main content
+</Link>
