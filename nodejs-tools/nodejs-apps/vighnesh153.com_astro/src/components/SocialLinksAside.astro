@@ -1,37 +1,13 @@
 ---
+import { classes } from '@/utils';
 import SocialLinks from './SocialLinks.astro';
 ---
 
-<div class="aside-social-links">
+<div
+  class={classes(
+    `fixed bottom-0 left-6 right-auto hidden sm:block`,
+    `after:w-px after:h-20 after:mt-6 after:mx-auto after:block after:bg-text`
+  )}
+>
   <SocialLinks direction="vertical" />
 </div>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-
-  .aside-social-links {
-    $gap: 1.5rem;
-
-    position: fixed;
-    bottom: 0;
-    left: $gap;
-    right: auto;
-
-    display: none;
-
-    &::after {
-      content: '';
-      width: 1px;
-      height: 90px;
-      margin: $gap auto 0;
-
-      display: block;
-
-      background-color: var(--text);
-    }
-
-    @media (--sm-and-up) {
-      display: block;
-    }
-  }
-</style>

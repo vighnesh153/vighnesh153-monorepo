@@ -1,7 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import Link from '../Link.astro';
-import Span from '../typography/span.astro';
 import { defaultNavItems, type NavItem } from './navItems';
 
 interface Props extends HTMLAttributes<'nav'> {
@@ -16,7 +15,7 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
   {
     navItems.map((navItem) => (
       <Link href={navItem.link} rel="prefetch">
-        <Span variant="h6">{navItem.text}</Span>
+        <span class="text-lg">{navItem.text}</span>
       </Link>
     ))
   }

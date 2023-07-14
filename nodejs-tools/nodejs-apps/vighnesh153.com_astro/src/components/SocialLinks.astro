@@ -1,56 +1,42 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import { socialProfiles } from '@/constants';
+import { classes } from '@/utils';
 
 export interface Props extends HTMLAttributes<'ul'> {
   direction: 'horizontal' | 'vertical';
 }
 
-const { direction, class: className, 'class:list': classList, ...props } = Astro.props;
+const { direction, class: className, ...props } = Astro.props;
 ---
 
-<ul class:list={[`layout-${direction}`, className, classList]} {...props}>
+<ul
+  class={classes(
+    className,
+    `flex gap-6 items-center list-none 
+     ${direction == 'horizontal' ? 'flex-row' : 'flex-col'}
+    `
+  )}
+  {...props}
+>
   {
     socialProfiles.map((socialProfile) => (
-      <li>
-        <a href={socialProfile.link} title={socialProfile.title}>
+      <li class="[font-size:0]">
+        <a
+          href={socialProfile.link}
+          title={socialProfile.title}
+          class={classes(
+            `
+            text-text fill-text inline-block [font-size:0]
+
+            `,
+            `[&:is(:hover,:focus-visible)]:text-accent
+            [&:is(:hover,:focus-visible)]:fill-accent`
+          )}
+        >
           <socialProfile.Icon role="img" width="1.25rem" height="1.25rem" />
         </a>
       </li>
     ))
   }
 </ul>
-
-<style>
-  ul {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-
-    list-style: none;
-  }
-
-  ul.layout-horizontal {
-    flex-direction: row;
-  }
-
-  ul.layout-vertical {
-    flex-direction: column;
-  }
-
-  li {
-    font-size: 0;
-  }
-
-  a {
-    display: inline-block;
-    font-size: 0;
-    color: var(--text);
-    fill: var(--text);
-  }
-
-  a:is(:hover, :focus-visible) {
-    color: var(--accent);
-    fill: var(--accent);
-  }
-</style>

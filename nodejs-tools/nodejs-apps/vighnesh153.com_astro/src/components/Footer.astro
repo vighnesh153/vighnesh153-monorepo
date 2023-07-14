@@ -1,32 +1,19 @@
 ---
+import { classes } from '@/utils';
 import Link from './Link.astro';
 import SocialLinks from './SocialLinks.astro';
 
 import { hashTags, externalLinks } from '@/constants';
 ---
 
-<footer id={hashTags.footer}>
-  <SocialLinks direction="horizontal" class="social-links" />
-  <Link href={externalLinks.githubRepo} color="secondary">Source code</Link> of this website
+<footer
+  id={hashTags.footer}
+  class={classes(`
+    py-12 grid place-items-center
+  `)}
+>
+  <SocialLinks direction="horizontal" class="mb-4 flex sm:hidden" />
+  <p>
+    <Link href={externalLinks.githubRepo} color="secondary">Source code</Link> of this website
+  </p>
 </footer>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  // @import '@/styles/typography.scss';
-
-  footer {
-    padding-block: 3rem !important;
-
-    display: grid;
-    place-items: center;
-  }
-
-  .social-links {
-    display: flex;
-    margin-bottom: 1rem;
-
-    @media (--sm-and-up) {
-      display: none;
-    }
-  }
-</style>

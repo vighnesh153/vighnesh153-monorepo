@@ -4,6 +4,8 @@ import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.astro';
 import NavigationItems from './NavigationItems.astro';
 import type { NavItem } from './navItems';
+import { hashTags } from '@/constants';
+import { classes } from '@/utils';
 
 interface Props {
   navItems?: NavItem[];
@@ -12,21 +14,73 @@ interface Props {
 const { navItems } = Astro.props;
 ---
 
-<header id="header" class="show-header">
-  <a href="/" aria-label="Logo" class="logo">
+<style lang="scss">
+  // prevent scrolling when side navigation is open
+  :global(html:has(#side-navigation-open:checked) body) {
+    overflow: hidden;
+  }
+
+  header {
+    &.box-shadow {
+      @apply shadow-lg;
+      @apply shadow-backgroundDark;
+    }
+
+    &.show-header {
+      @apply translate-y-0;
+    }
+  }
+</style>
+
+<header
+  id={hashTags.header}
+  class={classes(`
+    p-6 w-full fixed -translate-y-full
+    flex items-center justify-between
+    bg-background
+    transition-[transform,box-shadow] duration-300 ease-in-out
+    z-appBar
+    show-header
+  `)}
+>
+  <a href="/" aria-label="Logo" class="text-accent inline-block">
     <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
   </a>
-  <NavigationItems class="horizontal-nav" navItems={navItems} />
-  <button type="button" class="nav-toggle-button hamburger-menu" id="hamburger-menu" title="Open navigation menu">
+  {/* Horizontal navigation */}
+  <NavigationItems class="hidden gap-6 md:flex" navItems={navItems} />
+  <button
+    type="button"
+    class={classes(`flex justify-center items-center md:hidden`)}
+    id="hamburger-menu"
+    title="Open navigation menu"
+  >
     <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
   </button>
-  {/** State to keep track of whether the menu is open or not */}
-  <input type="checkbox" style="display: none" id="side-navigation-open" />
-  <NavigationItems class="vertical-nav" id="vertical-nav" navItems={navItems}>
+  {/* State to keep track of whether the menu is open or not */}
+  <input type="checkbox" class="peer hidden" id="side-navigation-open" />
+  {/* Vertical navigation */}
+  <NavigationItems
+    class={classes(`
+    fixed hidden w-[100dvw] h-[100dvh] left-0 top-0
+    flex-col justify-center items-center gap-12
+    bg-background z-drawer
+    peer-checked:flex
+    md:peer-checked:hidden
+  `)}
+    id="vertical-nav"
+    navItems={navItems}
+  >
     <button
       type="button"
       slot="start-item"
-      class="nav-toggle-button close-menu"
+      class={classes(`
+        p-0
+        flex
+        bg-[transparent] border-0 text-text
+        cursor-pointer
+        [&:is(:focus-visible,:hover)]:text-accent
+        md:hidden
+      `)}
       id="close-menu"
       title="Close navigation menu"
     >
@@ -34,100 +88,6 @@ const { navItems } = Astro.props;
     </button>
   </NavigationItems>
 </header>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-  @import '@/styles/typography.scss';
-
-  :global(html:has(#side-navigation-open:checked) body) {
-    overflow: hidden;
-  }
-
-  header {
-    padding: 1.5rem;
-    width: 100%;
-    position: fixed;
-    translate: 0 -100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: var(--background);
-    z-index: var(--z-index-app-bar);
-
-    transition: box-shadow var(--duration-standard) var(--ease-out),
-      translate var(--duration-complex) var(--ease-in-out);
-
-    &.box-shadow {
-      box-shadow: 0 10px 30px -10px var(--background-dark);
-    }
-
-    &.show-header {
-      translate: 0 0;
-    }
-  }
-
-  .logo {
-    display: inline-block;
-
-    color: var(--accent);
-  }
-
-  .horizontal-nav {
-    display: none;
-    gap: 1.5rem;
-
-    @media (--md-and-up) {
-      display: flex;
-    }
-  }
-
-  .vertical-nav {
-    position: fixed;
-    width: 100dvw;
-    height: 100dvh;
-    left: 0;
-    top: 0;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-
-    background-color: var(--background);
-    z-index: var(--z-index-drawer);
-
-    @media (--md-and-up) {
-      display: none;
-    }
-  }
-
-  .nav-toggle-button {
-    padding: 0;
-
-    display: flex;
-
-    background: none;
-    border: none;
-    color: var(--text);
-
-    cursor: pointer;
-
-    &:is(:focus-visible, :hover) {
-      color: var(--accent);
-    }
-
-    @media (--md-and-up) {
-      display: none;
-    }
-  }
-
-  header:has(#side-navigation-open:not(:checked)) .vertical-nav {
-    display: none;
-  }
-</style>
 
 <script>
   import { debounce } from '@vighnesh153/utils';
