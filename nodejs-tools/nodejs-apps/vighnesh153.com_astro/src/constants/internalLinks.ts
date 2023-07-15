@@ -3,14 +3,14 @@ import { hashTags } from './hashTags';
 export const internalLinks = {
   main: `/#${hashTags.main}`,
   homePage: {
+    root: '/',
     aboutMe: `/#${hashTags.homePage.aboutMe}`,
     experience: `/#${hashTags.homePage.experience}`,
     contactMe: `/#${hashTags.homePage.contactMe}`,
-    footer: `/#${hashTags.homePage.footer}`,
+    footer: `/#${hashTags.footer}`,
   },
   projects: {
     root: '/projects',
-    featured: `/projects#${hashTags.projects.featuredProjects}`,
-    otherAwesomeProjects: `/projects#${hashTags.projects.otherAwesomeProjects}`,
+    projectsMain: `/projects#${hashTags.projects.projectsMain}`,
   },
 };
