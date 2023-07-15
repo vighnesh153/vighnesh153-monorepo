@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "@astrojs/prefetch": "^0.2.3",
-    "@astrojs/tailwind": "^4.0.0",
     "@playwright/test": "^1.35.1",
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
