@@ -10,7 +10,7 @@ import ProjectTag from './ProjectTag.astro';
   class={classes(`
     scroll-mt-32 mt-8
 
-    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+    grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3
     gap-12
     [grid-template-rows:masonry]
     supports-[grid-template-rows:masonry]:[grid-template-rows:masonry]
@@ -19,26 +19,26 @@ import ProjectTag from './ProjectTag.astro';
 >
   {
     allProjects.map(({ title, description, tags, links }) => (
-      <li class="shadow-backgroundDark bg-backgroundLight flex flex-col rounded-lg p-6 shadow-md">
+      <li class="shadow-backgroundDark bg-backgroundLight flex max-w-lg flex-col rounded-lg p-6 shadow-md">
         <div class="flex items-center justify-between">
           <FolderIcon class="fill-accent" role="img" height="2rem" />
 
-          <ul class="flex gap-4">
-            <li>
-              <ProjectIconLink href={links.github.href} aria-label="source code">
+          <ul class="fill-text flex gap-4">
+            <li class="[&:is(:focus-within,:hover)]:fill-accent">
+              <ProjectIconLink href={links.github.href} title="source code">
                 <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
               </ProjectIconLink>
             </li>
-            <li>
-              <ProjectIconLink href={links.demo.href} aria-label="demo">
+            <li class="[&:is(:focus-within,:hover)]:fill-accent">
+              <ProjectIconLink href={links.demo.href} title="demo">
                 <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
               </ProjectIconLink>
             </li>
           </ul>
         </div>
         <h3 class="mt-5 text-xl md:text-2xl">{title}</h3>
-        <p class="text-text2 mt-2 flex-grow text-base">{description}</p>
-        <ul class="mt-4 flex flex-wrap gap-2">
+        <p class="text-text2 mt-4 flex-grow text-base">{description}</p>
+        <ul class="mt-6 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <ProjectTag>{tag}</ProjectTag>
           ))}

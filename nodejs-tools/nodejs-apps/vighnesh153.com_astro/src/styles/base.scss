@@ -15,7 +15,7 @@
     scroll-behavior: smooth;
 
     /* focus dashed outline */
-    &:is(a, button, input, select, textarea):focus-visible {
+    :is(a, button, input, select, textarea):focus-visible {
       @apply outline-dashed;
       @apply outline-4;
       @apply outline-offset-8;
