@@ -16,13 +16,13 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230628.0",
+    "@cloudflare/workers-types": "^4.20230710.1",
     "@types/node": "*",
     "@types/node-fetch": "^2.6.4",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "typescript": "^5.1.6",
     "vitest": "^0.33.0",
-    "wrangler": "3.1.2"
+    "wrangler": "3.2.0"
   }
 }
