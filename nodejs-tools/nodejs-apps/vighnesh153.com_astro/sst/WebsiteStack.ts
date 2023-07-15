@@ -1,8 +1,18 @@
-import { StaticSite, type StackContext } from 'sst/constructs';
+import { StaticSite, type StackContext, type StaticSiteDomainProps } from 'sst/constructs';
 
 const oneYear = '31536000';
 const oneDay = '86400';
 const fiveMinutes = '300';
+
+const developmentCustomDomain: StaticSiteDomainProps = {
+  domainName: 'ui.corp.vighnesh153.dev',
+  hostedZone: 'corp.vighnesh153.dev',
+};
+
+const productionCustomDomain: StaticSiteDomainProps = {
+  domainName: 'vighnesh153.dev',
+  hostedZone: 'vighnesh153.dev',
+};
 
 export function WebsiteStack({ stack }: StackContext) {
   const { stage } = stack;
@@ -16,10 +26,7 @@ export function WebsiteStack({ stack }: StackContext) {
     buildCommand: 'npm run build',
     buildOutput: 'dist',
     errorPage: '404.html',
-    customDomain: {
-      domainName: `${stage}.ui.aws.vighnesh153.com`,
-      hostedZone: 'aws.vighnesh153.com',
-    },
+    customDomain: stage === 'prod' ? productionCustomDomain : developmentCustomDomain,
     fileOptions: [
       // HTML files
       {
@@ -46,7 +53,7 @@ export function WebsiteStack({ stack }: StackContext) {
     },
     cdk: {
       bucket: {
-        bucketName: `vighnesh153.com-astro-${stage}`,
+        bucketName: `vighnesh153-astro-${stage}`,
       },
       distribution: {
         comment: `${stage} Vighnesh153 Astro`,
