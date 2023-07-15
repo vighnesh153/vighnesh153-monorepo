@@ -6,11 +6,10 @@ export interface NavItem {
 }
 
 export const AllNavigationItems = {
+  home: { text: 'Home', link: internalLinks.homePage.root },
   aboutMe: { text: 'About me', link: internalLinks.homePage.aboutMe },
   blog: { text: 'Blog', link: externalLinks.blog },
   projects: { text: 'Projects', link: internalLinks.projects.root },
-  featuredProjects: { text: 'Featured projects', link: internalLinks.projects.featured },
-  otherAwesomeProjects: { text: 'Other Awesome projects', link: internalLinks.projects.otherAwesomeProjects },
   experience: { text: 'Experience', link: internalLinks.homePage.experience },
   resume: { text: 'Resume', link: externalLinks.resume },
 } satisfies Record<string, NavItem>;
@@ -23,9 +22,4 @@ export const defaultNavItems: NavItem[] = [
   AllNavigationItems.resume,
 ];
 
-export const projectNavItems: NavItem[] = [
-  AllNavigationItems.blog,
-  AllNavigationItems.featuredProjects,
-  AllNavigationItems.otherAwesomeProjects,
-  AllNavigationItems.resume,
-];
+export const projectNavItems: NavItem[] = [AllNavigationItems.home, AllNavigationItems.blog, AllNavigationItems.resume];

@@ -182,17 +182,35 @@ const { navItems } = Astro.props;
       return;
     }
 
-    if (e.target === lastItem && isOnlyTabPressed) {
-      e.preventDefault();
-      // @ts-ignore
-      firstItem.focus();
-      return;
+    if (isOnlyTabPressed) {
+      for (let i = 0; i < focusableItems.length; i++) {
+        const currentItem = focusableItems[i];
+        if (e.target !== currentItem) continue;
+
+        e.preventDefault();
+        const loopAroundItems = [...focusableItems, firstItem];
+        const nextFocusableItem = loopAroundItems[i + 1];
+        // @ts-ignore
+        nextFocusableItem.focus();
+
+        return;
+      }
     }
-    if (e.target === firstItem && isShiftTabPressed) {
-      e.preventDefault();
-      // @ts-ignore
-      lastItem.focus();
-      return;
+
+    if (isShiftTabPressed) {
+      for (let i = 0; i < focusableItems.length; i++) {
+        const currentItem = focusableItems[i];
+        if (e.target !== currentItem) continue;
+
+        e.preventDefault();
+
+        const loopAroundItems = [lastItem, ...focusableItems];
+        const previousFocusableItem = loopAroundItems[i];
+        // @ts-ignore
+        previousFocusableItem.focus();
+
+        return;
+      }
     }
   });
 </script>

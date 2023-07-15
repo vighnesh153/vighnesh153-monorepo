@@ -8,7 +8,6 @@ export const hashTags = {
     contactMe: 'contact-me',
   },
   projects: {
-    featuredProjects: 'featured-projects',
-    otherAwesomeProjects: 'other-awesome-projects',
+    projectsMain: 'projects',
   },
 };
