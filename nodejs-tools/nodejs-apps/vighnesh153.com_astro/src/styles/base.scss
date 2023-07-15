@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply text-text;
+    @apply bg-background;
+    scroll-behavior: smooth;
+
+    /* focus dashed outline */
+    &:is(a, button, input, select, textarea):focus-visible {
+      @apply outline-dashed;
+      @apply outline-4;
+      @apply outline-offset-8;
+      @apply outline-accent;
+    }
+  }
+
+  ::selection {
+    @apply bg-accent;
+    @apply text-background;
+  }
+}
+
 @layer components {
   .base-button {
     @apply py-[1em];

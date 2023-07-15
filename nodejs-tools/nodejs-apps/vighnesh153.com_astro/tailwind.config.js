@@ -1,5 +1,3 @@
-import plugin from 'tailwindcss/plugin';
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -48,20 +46,5 @@ export default {
     'base-button',
     'primary-button',
     'secondary-button',
-  ],
-  plugins: [
-    plugin(({ addBase, theme }) => {
-      addBase({
-        html: {
-          color: theme('colors.text'),
-          ':is(a, button, input, select, textarea):focus-visible': {
-            outlineWidth: '3px',
-            outlineStyle: 'dashed',
-            outlineOffset: '0.5rem',
-            outlineColor: theme('colors.accent'),
-          },
-        },
-      });
-    }),
   ],
 };

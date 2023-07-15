@@ -30,41 +30,11 @@ const { title = defaultTitle, description = defaultDescription, navItems } = Ast
   <SocialLinksAside />
   <EmailAddressAside />
 
-  <main id={hashTags.main}>
-    <div class="main-div">
+  <main id={hashTags.main} class="px-8 pb-8">
+    {/* pt-[0.05px] prevents collapsing margins in child components */}
+    <div class="my-auto max-w-[1400px] px-4 pt-[0.05px] sm:px-20">
       <slot />
     </div>
     <Footer />
   </main>
 </BaseLayout>
-
-<style lang="scss" is:global>
-  .main-div > *,
-  main > footer {
-    // margin-inline: auto;
-    // max-width: 65ch;
-    // padding-block: 5rem;
-
-    scroll-margin-top: 2rem;
-  }
-</style>
-
-<style lang="scss">
-  @import '@/styles/breakpoints-media.css';
-
-  main {
-    padding-inline: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  main > div {
-    margin-inline: auto;
-    max-width: 1400px;
-    padding-inline: 1rem;
-    padding-top: 0.05px; // prevent collapsing margins in child components
-
-    @media (--sm-and-up) {
-      padding-inline: 5rem;
-    }
-  }
-</style>
