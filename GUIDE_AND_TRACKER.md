@@ -56,11 +56,12 @@ Visit
 
 #### Tasks
 
-- airtel wifi password
-- tailwind
 - Add ui test for sidebar
 - replace vighnesh153.com with prod.ui.aws.vighnesh153.com
 - clean up vercel.com environment
+- 404 page: https://floatui.com/components/404-pages
+- FAQs page: https://floatui.com/components/faqs
+- float ui: https://floatui.com/components
 - Golang wasm
   - html elements interaction
   - api requests

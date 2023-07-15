@@ -3,14 +3,16 @@ name: nodejs-deploy-vighnesh153.com
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+  security-events: write
+  actions: read
+
 jobs:
   nodejs-deploy-vighnesh153-com:
     name: Deploying vighnesh153.com
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
