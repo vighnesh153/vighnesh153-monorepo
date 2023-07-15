@@ -22,7 +22,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
           role-session-name: MySessionName
-          aws-region: us-east-1
+          aws-region: ap-south-2
 
       - name: Install dependencies
         run: npm install && cd nodejs-tools && npm install && cd ..
