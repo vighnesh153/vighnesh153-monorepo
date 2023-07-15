@@ -1,28 +1,12 @@
 ---
+import { classes } from '@/utils';
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'a'> {}
 
-const { ...props } = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<a {...props}>
+<a class={classes(className, `inline-block [font-size:0] fill-text [&:is(:hover,:focus)]:fill-accent`)} {...props}>
   <slot />
 </a>
-
-<style lang="scss">
-  // @import '@/styles/breakpoints-media.css';
-  // @import '@/styles/typography.scss';
-
-  a {
-    display: inline-block;
-    font-size: 0;
-    color: var(--text);
-    fill: var(--text);
-  }
-
-  a:is(:hover, :focus-visible) {
-    color: var(--accent);
-    fill: var(--accent);
-  }
-</style>
