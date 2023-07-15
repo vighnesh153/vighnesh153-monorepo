@@ -27,5 +27,10 @@ jobs:
       - name: Install dependencies
         run: npm install && cd nodejs-tools && npm install && cd ..
 
+      - name: Build
+        run: npm run build -- --filter=vighnesh153.com_astro
+        working-directory: ./nodejs-tools
+
       - name: Deploy
-        run: cd nodejs-tools && npm -w vighnesh153.com_astro run sst:deploy:prod
+        run: npm -w vighnesh153.com_astro run sst:deploy:prod
+        working-directory: ./nodejs-tools
