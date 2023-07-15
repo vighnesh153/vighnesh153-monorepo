@@ -1,4 +1,5 @@
 ---
+import { classes } from '@/utils';
 import { hashTags, companyUrls } from '@/constants';
 import SectionTitle from './SectionTitle.astro';
 import ExperienceSectionItem from './ExperienceSectionItem.astro';
@@ -16,7 +17,15 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 }
 ---
 
-<section id={hashTags.homePage.experience}>
+<section
+  id={hashTags.homePage.experience}
+  class={classes(`
+    mx-auto
+    mt-60
+    max-w-prose
+    scroll-mt-40
+  `)}
+>
   <SectionTitle count="02" title="Where I have worked" />
   <ul class="mt-3">
     <ExperienceSectionItem

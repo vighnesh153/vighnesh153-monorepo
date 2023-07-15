@@ -4,7 +4,16 @@ import { classes } from '@/utils';
 import Link from '../Link.astro';
 ---
 
-<section id={hashTags.homePage.contactMe} class="text-center">
+<section
+  id={hashTags.homePage.contactMe}
+  class={classes(`
+    mx-auto
+    my-40
+    max-w-prose
+    scroll-mt-8
+    text-center
+  `)}
+>
   <p class="text-accent text-base">04. What's next?</p>
   <h2 class="mt-2 text-2xl md:text-3xl lg:text-4xl">Get In Touch</h2>
   <p

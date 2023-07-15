@@ -6,7 +6,15 @@ import Link from '../Link.astro';
 import SectionListItem from './SectionListItem.astro';
 ---
 
-<section id={hashTags.homePage.aboutMe}>
+<section
+  id={hashTags.homePage.aboutMe}
+  class={classes(`
+    mx-auto
+    mt-20
+    max-w-prose
+    scroll-mt-40
+  `)}
+>
   <SectionTitle count="01" title="About me" />
   <div
     class={classes(`
