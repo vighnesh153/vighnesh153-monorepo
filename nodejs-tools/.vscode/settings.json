@@ -30,6 +30,8 @@
   "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
   "prettier.documentSelectors": ["**/*.astro"],
   "diffEditor.ignoreTrimWhitespace": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.detectIndentation": false,
   "editor.fontSize": 18,
   "editor.renderWhitespace": "all",
