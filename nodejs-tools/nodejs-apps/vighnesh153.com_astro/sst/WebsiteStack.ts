@@ -5,8 +5,8 @@ const oneDay = '86400';
 const fiveMinutes = '300';
 
 const developmentCustomDomain: StaticSiteDomainProps = {
-  domainName: 'ui.corp.vighnesh153.dev',
-  hostedZone: 'corp.vighnesh153.dev',
+  domainName: 'staging.vighnesh153.dev',
+  hostedZone: 'vighnesh153.dev',
 };
 
 const productionCustomDomain: StaticSiteDomainProps = {
