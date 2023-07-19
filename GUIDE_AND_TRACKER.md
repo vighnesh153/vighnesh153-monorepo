@@ -57,8 +57,6 @@ Visit
 #### Tasks
 
 - Add ui test for sidebar
-- replace vighnesh153.com with prod.ui.aws.vighnesh153.com
-- clean up vercel.com environment
 - 404 page: https://floatui.com/components/404-pages
 - FAQs page: https://floatui.com/components/faqs
 - float ui: https://floatui.com/components
@@ -96,6 +94,7 @@ Visit
 - https://stylelint.io/user-guide/get-started
 - email template builder
   - Create welcome email template
+- Awesome mouse move effect: http://alexandercoggin.com/
 - Instagram automation
   - get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
   - Store a list of quotes and background images in a json file for gottaHaveHighHopes insta account
