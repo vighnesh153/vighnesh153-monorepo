@@ -1,4 +1,34 @@
 {
   "name": "vighnesh153.com_temporary-redirect",
-  "version": "1.0.0"
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev --host",
+    "build": "astro build"
+  },
+  "devDependencies": {
+    "astro": "^2.8.3",
+    "astro-compress": "^1.1.49",
+    "autoprefixer": "^10.4.14",
+    "browserslist": "^4.21.9",
+    "cssnano": "^6.0.1",
+    "cssnano-preset-advanced": "^6.0.1",
+    "postcss": "^8.4.26",
+    "tailwindcss": "^3.3.3"
+  },
+  "browserslist": [
+    "defaults and supports es6-module",
+    "maintained node versions"
+  ],
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git"
+  }
 }
