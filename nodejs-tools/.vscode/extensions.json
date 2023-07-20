@@ -12,6 +12,7 @@
     "techer.open-in-browser",
     "tobiasalthoff.atom-material-theme",
     "wix.vscode-import-cost",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "gruntfuggly.todo-tree"
   ]
 }
