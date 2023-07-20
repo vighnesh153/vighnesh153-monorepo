@@ -54,7 +54,7 @@ const { navItems } = Astro.props;
     id="hamburger-menu"
     title="open navigation menu"
   >
-    <HamburgerIcon width="35" role="img" aria-label="hamberger icon" />
+    <HamburgerIcon width="35" role="img" aria-hidden />
   </button>
   {/* State to keep track of whether the menu is open or not */}
   <input type="checkbox" class="peer hidden" id="side-navigation-open" />
@@ -82,9 +82,9 @@ const { navItems } = Astro.props;
         lg:hidden
       `)}
       id="close-menu"
-      title="Close navigation menu"
+      title="close navigation menu"
     >
-      <CloseIcon width="25" role="img" aria-label="close icon" />
+      <CloseIcon width="25" role="img" aria-hidden />
     </button>
   </NavigationItems>
 </header>
@@ -178,6 +178,7 @@ const { navItems } = Astro.props;
     }
 
     if (e.target !== closeMenuButton && isEnterKeyPressed) {
+      // TODO: don't close menu if a.href is same as current path but only hash is different
       closeMenu(false);
       return;
     }
