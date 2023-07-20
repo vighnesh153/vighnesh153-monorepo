@@ -152,11 +152,13 @@ const { navItems } = Astro.props;
     const currentPathName = window.location.pathname;
     const navigationPathName = new URL(clickedElement.href).pathname;
 
+    // don't close menu if a.href is same as current path but only hash is different
     if (clickedElement.tagName === 'A' && currentPathName === navigationPathName) {
       closeMenu(false);
     }
   });
 
+  // a11y
   verticalNav?.addEventListener('keydown', (e) => {
     const focusableItems = getVerticalNavFocusableItems();
     const firstItem = focusableItems[0];
@@ -178,8 +180,17 @@ const { navItems } = Astro.props;
     }
 
     if (e.target !== closeMenuButton && isEnterKeyPressed) {
-      // TODO: don't close menu if a.href is same as current path but only hash is different
-      closeMenu(false);
+      const currentPathName = window.location.pathname;
+      // @ts-ignore
+      const navigationPathName = new URL(e.target?.href ?? '').pathname;
+      // @ts-ignore
+      const tagName = e.target?.tagName;
+
+      // don't close menu if a.href is same as current path but only hash is different
+      if (tagName === 'A' && currentPathName === navigationPathName) {
+        closeMenu(false);
+      }
+
       return;
     }
 
