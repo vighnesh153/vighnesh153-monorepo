@@ -6,8 +6,8 @@ plugins:
 
 provider:
   name: aws
-  stage: prod  # default stage
-  region: us-east-1
+  stage: prod # default stage
+  region: us-east-1 # https://api.serverless.com/core/meta doesn't support ap-south-2
   runtime: nodejs18.x
   deploymentMethod: direct
   httpApi:
@@ -20,13 +20,13 @@ provider:
 
 params:
   default:
-    domain: 'cors-anywhere.aws.vighnesh153.com'
+    domain: 'cors-anywhere.vighnesh153.dev'
 
 custom:
   customDomain:
     domainName: ${param:domain}
     basePath: ''
-    certificateName: '*.vighnesh153.com'
+    certificateName: '*.vighnesh153.dev'
     apiType: http
     endpointType: regional
     autoDomain: true

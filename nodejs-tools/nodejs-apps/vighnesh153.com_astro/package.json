@@ -31,7 +31,7 @@
     "astro": "^2.8.3",
     "astro-compress": "^1.1.49",
     "autoprefixer": "^10.4.14",
-    "aws-cdk-lib": "2.87.0",
+    "aws-cdk-lib": "*",
     "browserslist": "^4.21.9",
     "constructs": "10.2.69",
     "cssnano": "^6.0.1",
