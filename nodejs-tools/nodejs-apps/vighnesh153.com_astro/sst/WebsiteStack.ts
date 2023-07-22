@@ -1,17 +1,15 @@
-import { StaticSite, type StackContext, type StaticSiteDomainProps } from 'sst/constructs';
+import { StaticSite, type StackContext } from 'sst/constructs';
+import { HostedZone } from 'aws-cdk-lib/aws-route53';
+import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
 
 const oneYear = '31536000';
 const oneDay = '86400';
 const fiveMinutes = '300';
 
-const developmentCustomDomain: StaticSiteDomainProps = {
-  domainName: 'staging.vighnesh153.dev',
-  hostedZone: 'vighnesh153.dev',
-};
-
-const productionCustomDomain: StaticSiteDomainProps = {
-  domainName: 'vighnesh153.dev',
-  hostedZone: 'vighnesh153.dev',
+const hostedZoneDomainName = 'vighnesh153.dev';
+const domainNames = {
+  staging: 'staging.vighnesh153.dev',
+  production: 'vighnesh153.dev',
 };
 
 export function WebsiteStack({ stack }: StackContext) {
@@ -21,12 +19,27 @@ export function WebsiteStack({ stack }: StackContext) {
     throw new Error('Stage is not defined in Website stack');
   }
 
+  const domainName = stage === 'prod' ? domainNames.production : domainNames.staging;
+
+  const hostedZone = HostedZone.fromLookup(stack, 'Vighnesh153Astro_HostedZone', {
+    domainName: hostedZoneDomainName,
+  });
+
+  const certificate = new Certificate(stack, 'Vighnesh153Astro_ACM_Cert', {
+    domainName,
+    validation: CertificateValidation.fromDns(hostedZone),
+  });
+
   const site = new StaticSite(stack, 'Vighnesh153Astro', {
     path: '.',
     buildCommand: 'npm run build',
     buildOutput: 'dist',
     errorPage: '404.html',
-    customDomain: stage === 'prod' ? productionCustomDomain : developmentCustomDomain,
+    customDomain: {
+      domainName,
+      hostedZone: hostedZone.zoneName,
+      certificate,
+    },
     fileOptions: [
       // HTML files
       {
