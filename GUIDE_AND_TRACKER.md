@@ -56,10 +56,56 @@ Visit
 
 #### Tasks
 
-- Add ui test for sidebar
+- migrate `spl.vighnesh153.com` to `vighnesh153.dev`
+- migrate `blog.vighnesh153.com` to `vighnesh153.dev`
+  - https://docs.astro.build/en/tutorial/0-introduction/
+- migrate `draw.vighnesh153.com` to `vighnesh153.dev`
+- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
+- migrate `math.vighnesh153.com` to `vighnesh153.dev`
+- migrate `tex.vighnesh153.com` to `vighnesh153.dev`
+- migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
 - 404 page: https://floatui.com/components/404-pages
 - FAQs page: https://floatui.com/components/faqs
-- float ui: https://floatui.com/components
+- Learn Svelte
+- Experiment with svelte in vighnesh153.com_astro
+- Deno: https://deno.land/
+- Learn Golang
+- Protobuf in golang and javascript
+- RPC in golang and javascript
+- Resume as code
+
+```html
+<div id="vighnesh153-paint">
+  <div class="lol">Hi there</div>
+</div>
+
+<style>
+  .lol {
+    width: 794px;
+    height: 1123px;
+
+    display: grid;
+    place-items: center;
+
+    background: red;
+    color: white;
+    font-size: 2rem;
+  }
+
+  @media print {
+    body {
+      visibility: hidden;
+    }
+    #vighnesh153-paint {
+      visibility: visible;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+</style>
+```
+
 - Golang wasm
   - html elements interaction
   - api requests
@@ -95,11 +141,7 @@ Visit
 - email template builder
   - Create welcome email template
 - Awesome mouse move effect: http://alexandercoggin.com/
-- Instagram automation
-  - get more jokes from here: https://github.com/UltiRequiem/joke-api/blob/main/server/data.ts
-  - Store a list of quotes and background images in a json file for gottaHaveHighHopes insta account
-  - Animal prompts
-    - [ANIMAL] playing in a [PARK|FOREST]
+- Populate `cors-anywhere` and `dictionary-api` lambdas.
 - SECURITY.md
 - Markdown editor with math support
   - Specs: https://spec.commonmark.org/
@@ -357,9 +399,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
-    "tsup": "^6.7.0",
-    "typescript": "^5.0.4",
-    "vitest": "^0.30.1"
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6",
+    "vitest": "^0.33.0"
   },
   "keywords": [],
   "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git" }
