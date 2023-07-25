@@ -112,7 +112,7 @@ const { navItems } = Astro.props;
     }, 16)
   );
 
-  // this is needed for when header is not visible but it gets focus
+  // this is needed for when header is hidden and one of its children gets focus
   header?.addEventListener('focusin', () => {
     header?.classList.toggle('show-header', true);
   });

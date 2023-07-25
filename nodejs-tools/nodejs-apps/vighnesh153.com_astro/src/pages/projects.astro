@@ -1,6 +1,6 @@
 ---
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import { projectNavItems } from '@/components/navigation/navItems';
+import { projectsRootNavItems } from '@/components/navigation/navItems';
 import ProjectsMasonry from '@/components/projects/ProjectsMasonry.astro';
 import { classes } from '@/utils';
 
@@ -10,7 +10,7 @@ const description =
   'around with graphics programming and different frameworks';
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems}>
+<ContentLayout title={title} description={description} navItems={projectsRootNavItems}>
   <div class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}>
     <h1 class="text-3xl">Projects</h1>
     <ProjectsMasonry />

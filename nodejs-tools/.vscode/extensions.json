@@ -1,18 +1,18 @@
 {
   "recommendations": [
     "astro-build.astro-vscode",
-    "bungcip.better-toml",
+    "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "formulahendry.auto-rename-tag",
     "github.vscode-github-actions",
+    "gruntfuggly.todo-tree",
     "ms-azuretools.vscode-docker",
     "pkief.material-icon-theme",
     "richie5um2.vscode-sort-json",
+    "tamasfe.even-better-toml",
     "techer.open-in-browser",
     "tobiasalthoff.atom-material-theme",
-    "wix.vscode-import-cost",
-    "bradlc.vscode-tailwindcss",
-    "gruntfuggly.todo-tree"
+    "wix.vscode-import-cost"
   ]
 }

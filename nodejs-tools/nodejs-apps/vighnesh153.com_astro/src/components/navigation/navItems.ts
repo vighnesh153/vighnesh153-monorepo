@@ -22,4 +22,17 @@ export const defaultNavItems: NavItem[] = [
   AllNavigationItems.resume,
 ];
 
-export const projectNavItems: NavItem[] = [AllNavigationItems.home, AllNavigationItems.blog, AllNavigationItems.resume];
+// For "/projects"
+export const projectsRootNavItems: NavItem[] = [
+  AllNavigationItems.home,
+  AllNavigationItems.blog,
+  AllNavigationItems.resume,
+];
+
+// For "/projects/*"
+export const projectNavItems: NavItem[] = [
+  AllNavigationItems.home,
+  AllNavigationItems.blog,
+  AllNavigationItems.projects,
+  AllNavigationItems.resume,
+];
