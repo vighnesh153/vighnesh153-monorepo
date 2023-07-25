@@ -56,14 +56,21 @@ Visit
 
 #### Tasks
 
+- migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
+- migrate `draw.vighnesh153.com` to `vighnesh153.dev`
 - migrate `spl.vighnesh153.com` to `vighnesh153.dev`
+- rename `vighnesh153.com_astro` to `vighnesh153-astro`
 - migrate `blog.vighnesh153.com` to `vighnesh153.dev`
   - https://docs.astro.build/en/tutorial/0-introduction/
-- migrate `draw.vighnesh153.com` to `vighnesh153.dev`
 - migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
 - migrate `math.vighnesh153.com` to `vighnesh153.dev`
 - migrate `tex.vighnesh153.com` to `vighnesh153.dev`
-- migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
+- Check if trap focus mentioned in the below link could be useful for side bar on vighnesh153.dev:
+  https://learn.svelte.dev/tutorial/actions
+- Tooltip
+  - tippy: https://atomiks.github.io/tippyjs/
+  - usage in svelte: https://learn.svelte.dev/tutorial/adding-parameters-to-actions
+- Audio player: https://learn.svelte.dev/tutorial/media-elements
 - 404 page: https://floatui.com/components/404-pages
 - FAQs page: https://floatui.com/components/faqs
 - Learn Svelte
@@ -73,6 +80,7 @@ Visit
 - Protobuf in golang and javascript
 - RPC in golang and javascript
 - Resume as code
+- Remotion: https://www.remotion.dev/
 
 ```html
 <div id="vighnesh153-paint">
@@ -126,6 +134,7 @@ Visit
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
+- Svelte Query: https://sveltequery.vercel.app/overview
 - Projects
   - Migrate projects to `vighnesh153.com/projects/*`
 - Blog:
@@ -138,12 +147,18 @@ Visit
   - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
 - Codepen clone for my personal HTML projects (no api just local code files)
 - https://stylelint.io/user-guide/get-started
+- Javascript Intl: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
 - email template builder
   - Create welcome email template
 - Awesome mouse move effect: http://alexandercoggin.com/
 - Populate `cors-anywhere` and `dictionary-api` lambdas.
+- CSS patterns: https://projects.verou.me/css3patterns/
 - SECURITY.md
+- Changesets: https://www.npmjs.com/package/@changesets/cli
+- Dom Sanitizer:
+  - dompurify: https://www.npmjs.com/package/dompurify
 - Markdown editor with math support
+  - Marked: https://www.npmjs.com/package/marked
   - Specs: https://spec.commonmark.org/
   - Remark: https://remark.js.org/
 - Docker tools
