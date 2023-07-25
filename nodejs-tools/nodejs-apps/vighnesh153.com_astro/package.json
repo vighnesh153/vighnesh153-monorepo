@@ -20,10 +20,12 @@
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/utils": "*",
+    "svelte": "^4.1.1"
   },
   "devDependencies": {
     "@astrojs/prefetch": "^0.3.0",
+    "@astrojs/svelte": "^3.1.0",
     "@playwright/test": "^1.36.1",
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
