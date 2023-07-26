@@ -58,6 +58,7 @@ Visit
 
 - migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
 - migrate `draw.vighnesh153.com` to `vighnesh153.dev`
+- blog.vighnesh153.com
 - migrate `spl.vighnesh153.com` to `vighnesh153.dev`
 - rename `vighnesh153.com_astro` to `vighnesh153-astro`
 - migrate `blog.vighnesh153.com` to `vighnesh153.dev`
