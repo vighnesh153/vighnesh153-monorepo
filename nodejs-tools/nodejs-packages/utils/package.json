@@ -9,6 +9,7 @@
   },
   "type": "module",
   "exports": {
+    "types": "./dist/src/index.d.ts",
     "import": "./dist/main.js",
     "require": "./dist/main.cjs"
   },
