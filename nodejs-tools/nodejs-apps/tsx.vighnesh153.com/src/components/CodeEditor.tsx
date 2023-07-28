@@ -77,7 +77,6 @@ export function CodeEditor({ onChange }: CodeEditorProps): JSX.Element | null {
     >
       <div
         ref={lineNumberRef}
-        className="line-number-container"
         style={{
           position,
           ...fontStyles,
