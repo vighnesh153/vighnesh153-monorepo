@@ -25,9 +25,10 @@ const fontStyles: CSSProperties = {
 
 const sharedStyles: CSSProperties = {
   position,
-  padding,
+  paddingTop: padding,
   paddingLeft,
-  width: `calc(100% - ${padding + paddingLeft}px)`,
+  width: `calc(100% - ${padding}px)`,
+  // width: `calc(100%)`,
   height,
   overflow,
   whiteSpace: 'pre',
