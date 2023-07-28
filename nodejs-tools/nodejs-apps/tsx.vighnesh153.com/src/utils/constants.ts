@@ -34,32 +34,31 @@ export const defaultHtml = `
 export const defaultEditorCode = `import React from "react";
 import ReactDOM from "react-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
 // Learn more about my library here:
 // https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-packages/utils/src/utils
 import { isPrime } from "@vighnesh153/utils@0.4.4/dist/main.js";
 
-const App = () => {
-  const [users, setUsers] = React.useState([]);
+const is42Prime = isPrime(42).toString();
+const is43Prime = isPrime(43).toString();
+
+function App() {
+  const [users, setUsers] = React.useState(null);
 
   React.useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then(res => setUsers(res.data))
   }, []);
-  
-  const Strong = (text: any): React.ReactNode => {
-    return <strong>{text.toString()}</strong>
-  };
 
   return (
     <div>
       <h1>Pikachu supremacy ✌️ ϞϞ(๑⚈ ․̫ ⚈๑)∩ ⚡️⚡️</h1>
-      <p>Is 42 Prime: {Strong(isPrime(42))}</p>
-      <p>Is 43 Prime: {Strong(isPrime(43))}</p>
+      <p>Is 42 Prime: <strong>{is42Prime}</strong></p>
+      <p>Is 43 Prime: <strong>{is43Prime}</strong></p>
       <h2>Users</h2>
-      {users.length === 0 ? <p>Loading...</p> : <p>User count: {users.length}</p>}
+      <p>User count: {users?.length ?? 'Loading...'}</p>
     </div>
   );
 };
