@@ -36,7 +36,6 @@ export function simpleCodeToHtml(
     reservedWords: defaultReservedWords,
   }
 ): string {
-  console.log(code);
   const {
     singleLineCommentIdentifiers,
     multiLineCommentIdentifierPairs,

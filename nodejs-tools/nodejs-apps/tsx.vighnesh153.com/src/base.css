@@ -1,0 +1,24 @@
+.code-string {
+  color: #c2e88d;
+}
+
+.code-comment {
+  color: #7e7e7e;
+}
+
+.code-operator {
+  color: #ff5370;
+}
+
+.code-reserved-word {
+  color: #c792e9;
+}
+
+
+::selection {
+  background-color: rgba(13, 255, 0, 0.2);
+}
+
+.line-number-container {
+  
+}

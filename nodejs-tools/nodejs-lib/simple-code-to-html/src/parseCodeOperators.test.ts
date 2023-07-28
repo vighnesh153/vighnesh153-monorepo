@@ -14,7 +14,7 @@ test('no operators in code', () => {
 });
 
 test('operators', () => {
-  expect(parseCodeOperators(' @!# 3s', javascriptOperators)).toStrictEqual([
+  expect(parseCodeOperators(` @!# 3s &<>`, javascriptOperators)).toStrictEqual([
     {
       isOperator: false,
       value: ' ',
@@ -25,7 +25,11 @@ test('operators', () => {
     },
     {
       isOperator: false,
-      value: ' 3s',
+      value: ' 3s ',
+    },
+    {
+      isOperator: true,
+      value: '&amp;&lt;&gt;',
     },
   ]);
 });

@@ -7,14 +7,25 @@ type ParseCodeOperatorsResult = Array<{
   value: string;
 }>;
 
+const mapping: Record<string, string> = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  // '"': '&quot;',
+  // [`'`]: '&#39;',
+};
+
 export function parseCodeOperators(code: string, options: ParseCodeOperatorsOptions): ParseCodeOperatorsResult {
   const { operators } = options;
   return code
     .split('')
-    .map((ch) => ({
-      isOperator: operators.includes(ch),
-      value: ch,
-    }))
+    .map((ch) => {
+      const result = {
+        isOperator: operators.includes(ch),
+        value: mapping[ch] ?? ch,
+      };
+      return result;
+    })
     .reduce((all, item) => {
       const last = all.at(-1);
       if (!last) {
