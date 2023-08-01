@@ -1,7 +1,7 @@
 import { hashTags } from './hashTags';
 
 export const internalLinks = {
-  main: `/#${hashTags.main}`,
+  main: `#${hashTags.main}`,
   homePage: {
     root: '/',
     aboutMe: `/#${hashTags.homePage.aboutMe}`,
