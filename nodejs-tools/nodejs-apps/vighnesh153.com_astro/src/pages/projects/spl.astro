@@ -1,6 +1,7 @@
 ---
 import ContentLayout from '@/layouts/ContentLayout.astro';
 import Button from '@/components/Button.astro';
+import Textarea from '@/components/projects/spl/Textarea.svelte';
 import { projectNavItems } from '@/components/navigation/navItems';
 import { classes } from '@/utils';
 
@@ -24,9 +25,8 @@ const description = `A Simple Programming Language (SPL) with syntax closer to t
       <div class="lg:col-start-3 grid place-items-center">
         <Button variant="primary">SPL Main Menu</Button>
       </div>
-      <textarea
-        id="code-editor"
-        class={classes(`
+      <Textarea
+        className={classes(`
           w-full
           lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1
 
@@ -36,9 +36,7 @@ const description = `A Simple Programming Language (SPL) with syntax closer to t
           resize-none
           rounded-md
         `)}
-      >
-        print("Hello world")
-      </textarea>
+      />
       <div
         id="code-console"
         class={classes(`
