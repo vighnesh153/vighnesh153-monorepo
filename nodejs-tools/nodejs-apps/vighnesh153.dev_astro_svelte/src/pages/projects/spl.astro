@@ -1,56 +1,16 @@
 ---
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import Button from '@/components/Button.astro';
-import Textarea from '@/components/projects/spl/Textarea.svelte';
+import SplRoot from '@/components/projects/spl/Root.svelte';
 import { projectNavItems } from '@/components/navigation/navItems';
 import { classes } from '@/utils';
 
 const title = 'Vighnesh Raut | Project - SPL';
 const description = `A Simple Programming Language (SPL) with syntax closer to the English Grammar`;
-
-//flex flex-col lg:flex-row items-stretch gap-8 lg:gap-0
 ---
 
 <ContentLayout title={title} description={description} navItems={projectNavItems}>
   <div class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
     <h1 class="text-3xl">SPL (Simple Programming Language)</h1>
-    <div
-      class={classes(`
-        w-full mt-10 min-h-[30rem]
-        
-        grid grid-cols-1 place-items-center gap-4
-        lg:grid-cols-3 lg:place-items-stretch
-      `)}
-    >
-      <div class="lg:col-start-3 grid place-items-center">
-        <Button variant="primary">SPL Main Menu</Button>
-      </div>
-      <Textarea
-        className={classes(`
-          w-full
-          lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1
-
-          min-h-[30rem]
-          bg-backgroundDark
-          z-[1]
-          resize-none
-          rounded-md
-        `)}
-      />
-      <div
-        id="code-console"
-        class={classes(`
-            w-full
-            min-h-[30rem]
-            bg-backgroundLight
-            rounded-md
-          `)}
-      >
-      </div>
-    </div>
+    <SplRoot client:load />
   </div>
 </ContentLayout>
-
-<script>
-  const codeEditor = document.querySelector('#code-editor');
-</script>
