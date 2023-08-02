@@ -31,7 +31,7 @@
     "dist"
   ],
   "dependencies": {
-    "@ngneat/falso": "^6.4.0"
+    "@ngneat/falso": "^7.0.1"
   },
   "devDependencies": {
     "@types/node": "*",
