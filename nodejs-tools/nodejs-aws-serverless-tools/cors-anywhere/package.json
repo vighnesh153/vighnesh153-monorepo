@@ -38,7 +38,7 @@
     "nodemon": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "serverless": "^3.33.0",
-    "serverless-domain-manager": "7.0.4",
+    "serverless-domain-manager": "7.1.1",
     "tsup": "^7.1.0",
     "typescript": "^5.1.6"
   },

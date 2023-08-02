@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "@types/react": "^18.2.15",
+    "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
@@ -46,11 +46,11 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.5",
-    "@mui/icons-material": "^5.14.0",
-    "@mui/lab": "^5.0.0-alpha.136",
-    "@mui/material": "^5.14.0",
-    "@mui/utils": "^5.13.7",
-    "clsx": "^1.2.1",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/lab": "^5.0.0-alpha.138",
+    "@mui/material": "^5.14.3",
+    "@mui/utils": "^5.14.3",
+    "clsx": "^2.0.0",
     "react-icons": "^4.10.1"
   }
 }
