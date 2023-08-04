@@ -9,9 +9,10 @@
   "types": "./dist/src/index.d.ts",
   "license": "MIT",
   "scripts": {
+    "build:once:types": "tsc",
     "build:once:bundle": "tsup",
     "build:watch:bundle": "tsup --watch",
-    "build": "npm-run-all build:once:*",
+    "build": "npm-run-all build:once:bundle build:once:types",
     "dev": "npm-run-all --parallel build:watch:*",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"

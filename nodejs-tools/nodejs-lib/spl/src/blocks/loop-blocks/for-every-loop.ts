@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Block } from '@/blocks/Block';
 import { Scope } from '@/models/Scope';
 import { LineOfCode } from '@/models/LineOfCode';

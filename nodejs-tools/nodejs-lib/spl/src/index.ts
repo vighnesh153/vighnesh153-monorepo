@@ -1,5 +1,7 @@
 export { Main as SplInterpreter } from './main';
 
+export { examples as SplExamples } from './examples';
+
 export const SPLReservedKeywords = [
   'define',
   'if',
