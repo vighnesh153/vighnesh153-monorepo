@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from '@/components/Button.svelte';
-  import Textarea from '@/components/projects/spl/Textarea.svelte';
   import CodeConsole from '@/components/projects/spl/CodeConsole.svelte';
+  import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';
   import { classes } from '@/utils';
   import { SplInterpreter } from '@vighnesh153/spl';
 
@@ -27,20 +27,20 @@
   <div class="lg:col-start-3 grid place-items-center">
     <Button variant="primary">SPL Main Menu</Button>
   </div>
-  <Textarea
-    bind:value={code}
+  <div
     class={classes(
       'w-full',
-      'lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1',
-
       'min-h-[30rem]',
+      'lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1',
+      'max-h-[60vh]',
       'bg-backgroundDark',
-      'focus:outline-[transparent]',
+      'focus-within:outline-[transparent]',
       'z-[1]',
-      'resize-none',
-      'rounded-md'
+      'rounded-none'
     )}
-  />
+  >
+    <SimpleCodeEditor bind:inputCode={code} />
+  </div>
   <CodeConsole
     bind:output
     bind:outputGeneratedAt
