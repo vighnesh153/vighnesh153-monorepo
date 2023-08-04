@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { SplInterpreter, SPLReservedKeywords, SplExamples } from '@vighnesh153/spl';
+  import type { SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
+
+  import { classes } from '@/utils';
   import Button from '@/components/Button.svelte';
   import CodeConsole from '@/components/projects/spl/CodeConsole.svelte';
   import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';
-  import { classes } from '@/utils';
-  import { SplInterpreter, SPLReservedKeywords } from '@vighnesh153/spl';
-  import type { SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
 
   let code = '';
   let output = '';
@@ -25,13 +27,24 @@
     output = splInterpreter.getOutput();
     outputGeneratedAt = new Date();
   }
+
+  onMount(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const exampleId = urlSearchParams.get('example-id') ?? null;
+    const example = SplExamples.find((e) => e.id === exampleId) ?? null;
+
+    if (example !== null) {
+      code = example.code;
+    }
+  });
 </script>
 
 <div
   class={classes(
-    'w-full mt-10 min-h-[30rem]',
-    'grid grid-cols-1 place-items-center gap-4',
-    'lg:grid-cols-3 lg:place-items-stretch'
+    'w-full mt-10',
+    'lg:h-[65vh]',
+    'grid grid-cols-1 place-items-center gap-6',
+    'lg:grid-cols-3 lg:grid-rows-5 lg:place-items-stretch'
   )}
 >
   <div class="lg:col-start-3 grid place-items-center">
@@ -40,9 +53,7 @@
   <div
     class={classes(
       'w-full',
-      'min-h-[30rem]',
-      'lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1',
-      'max-h-[60vh]',
+      'lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:row-end-[-1]',
       'bg-backgroundDark',
       'focus-within:outline-[transparent]',
       'z-[1]',
@@ -55,6 +66,6 @@
     bind:output
     bind:outputGeneratedAt
     on:run-program={runProgram}
-    className={classes('w-full', 'h-[30rem]', 'bg-backgroundLight', 'rounded-md')}
+    className={classes('w-full', 'lg:row-start-2 lg:row-end-[-1]', 'bg-backgroundLight', 'rounded-md')}
   />
 </div>

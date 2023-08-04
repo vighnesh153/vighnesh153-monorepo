@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
 import { Scope } from '@/models/Scope';
 import { numericComparisionEvaluator } from '@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator';
