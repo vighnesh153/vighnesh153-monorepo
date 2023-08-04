@@ -85,3 +85,21 @@
     </div>
   </div>
 </div>
+
+<style>
+  :global(.code-string) {
+    color: #c2e88d;
+  }
+
+  :global(.code-comment) {
+    color: #7e7e7e;
+  }
+
+  :global(.code-operator) {
+    color: #ff5370;
+  }
+
+  :global(.code-reserved-word) {
+    color: #c792e9;
+  }
+</style>
