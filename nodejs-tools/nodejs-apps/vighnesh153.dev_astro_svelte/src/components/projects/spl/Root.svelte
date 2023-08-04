@@ -3,11 +3,21 @@
   import CodeConsole from '@/components/projects/spl/CodeConsole.svelte';
   import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';
   import { classes } from '@/utils';
-  import { SplInterpreter } from '@vighnesh153/spl';
+  import { SplInterpreter, SPLReservedKeywords } from '@vighnesh153/spl';
+  import type { SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
 
   let code = '';
   let output = '';
   let outputGeneratedAt: Date | null = null;
+
+  const simpleCodeToHtmlOptions: SimpleCodeToHtmlOptions = {
+    acceptableStringChars: ['"'],
+    escapeCharacters: [],
+    multiLineCommentIdentifierPairs: new Map(),
+    operators: '~!@#$%^&*()-_=+{[}]|\\:;<,>.?/',
+    reservedWords: SPLReservedKeywords,
+    singleLineCommentIdentifiers: [],
+  };
 
   function runProgram() {
     const splInterpreter = new SplInterpreter(code);
@@ -39,7 +49,7 @@
       'rounded-none'
     )}
   >
-    <SimpleCodeEditor bind:inputCode={code} />
+    <SimpleCodeEditor bind:inputCode={code} {simpleCodeToHtmlOptions} />
   </div>
   <CodeConsole
     bind:output

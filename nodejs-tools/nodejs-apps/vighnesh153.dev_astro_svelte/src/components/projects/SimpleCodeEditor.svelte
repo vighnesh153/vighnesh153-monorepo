@@ -1,35 +1,21 @@
 <script lang="ts">
-  import { simpleCodeToHtml } from '@vighnesh153/simple-code-to-html';
+  import { simpleCodeToHtml, type SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
   import { classes } from '@/utils';
 
-  // const padding = 20;
-  // const paddingLeft = 35;
-  // const height = `calc(100% - ${padding * 2}px)`;
-  // const position = 'absolute';
-  // const overflow = 'auto';
-
-  // const bgColor = '#2A2C3F';
-
-  // ROOT DIV
-  // maxWidth: 700,
-  // height: '80vh',
-
+  export let simpleCodeToHtmlOptions: SimpleCodeToHtmlOptions = {};
   export let inputCode: string;
-  $: linesCount = inputCode.split('\n').length;
-  $: codeAsHtml = simpleCodeToHtml(inputCode);
 
   let textAreaRef: HTMLTextAreaElement;
   let lineNumberContainerRef: HTMLDivElement;
   let codeAsHtmlRef: HTMLDivElement;
 
-  function handleTextareaScroll() {
-    // console.log('scrolling', textAreaRef.scrollTop);
+  $: linesCount = inputCode.split('\n').length;
+  $: codeAsHtml = simpleCodeToHtml(inputCode, simpleCodeToHtmlOptions);
 
+  function handleTextareaScroll() {
     // scroll top
     codeAsHtmlRef.scrollTop = textAreaRef.scrollTop;
     lineNumberContainerRef.scrollTop = textAreaRef.scrollTop;
-
-    console.log(codeAsHtmlRef.scrollTop, textAreaRef.scrollTop);
 
     // scroll left
     codeAsHtmlRef.scrollLeft = textAreaRef.scrollLeft;
