@@ -7,9 +7,9 @@
   }
   export let variant: $$Props['variant'] = 'secondary';
 
-  const { class: className, ...props } = $$props;
+  const { class: className } = $$props;
 </script>
 
-<button class={classes(className, `${variant}-button`)} {...props} on:click={() => console.log("lolol")}>
+<button {...$$props} class={classes(className, `${variant}-button`)}>
   <slot />
 </button>

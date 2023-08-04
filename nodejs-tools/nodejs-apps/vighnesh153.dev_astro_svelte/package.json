@@ -20,6 +20,7 @@
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
+    "@vighnesh153/spl": "*",
     "@vighnesh153/utils": "*",
     "svelte": "^4.1.2"
   },
@@ -29,7 +30,6 @@
     "@playwright/test": "^1.36.2",
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
-    "@vighnesh153/spl": "*",
     "@vighnesh153/tsconfig": "*",
     "astro": "^2.9.7",
     "astro-compress": "^1.1.50",

@@ -1,7 +1,9 @@
 <script lang="ts">
-  export let className: string;
+  import type { HTMLTextareaAttributes } from 'svelte/elements';
 
-  import { classes } from '@/utils';
+  interface $$Props extends HTMLTextareaAttributes {}
+
+  export let value: $$Props['value'] = '';
 </script>
 
-<textarea class={classes(className)}>print("Hello world");</textarea>
+<textarea {...$$props} bind:value />
