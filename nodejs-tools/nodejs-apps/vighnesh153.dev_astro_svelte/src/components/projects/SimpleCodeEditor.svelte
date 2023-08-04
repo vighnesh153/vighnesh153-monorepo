@@ -1,0 +1,87 @@
+<script lang="ts">
+  import { simpleCodeToHtml } from '@vighnesh153/simple-code-to-html';
+  import { classes } from '@/utils';
+
+  // const padding = 20;
+  // const paddingLeft = 35;
+  // const height = `calc(100% - ${padding * 2}px)`;
+  // const position = 'absolute';
+  // const overflow = 'auto';
+
+  // const bgColor = '#2A2C3F';
+
+  // ROOT DIV
+  // maxWidth: 700,
+  // height: '80vh',
+
+  export let inputCode: string;
+  $: linesCount = inputCode.split('\n').length;
+  $: codeAsHtml = simpleCodeToHtml(inputCode);
+
+  let textAreaRef: HTMLTextAreaElement;
+  let lineNumberContainerRef: HTMLDivElement;
+  let codeAsHtmlRef: HTMLDivElement;
+
+  function handleTextareaScroll() {
+    // console.log('scrolling', textAreaRef.scrollTop);
+
+    // scroll top
+    codeAsHtmlRef.scrollTop = textAreaRef.scrollTop;
+    lineNumberContainerRef.scrollTop = textAreaRef.scrollTop;
+
+    console.log(codeAsHtmlRef.scrollTop, textAreaRef.scrollTop);
+
+    // scroll left
+    codeAsHtmlRef.scrollLeft = textAreaRef.scrollLeft;
+  }
+</script>
+
+<div class={classes('w-full', 'h-full', 'overflow-hidden', 'flex', 'flex-row', 'bg-backgroundDark')}>
+  {@html '<!-- Line number container -->'}
+  <div
+    bind:this={lineNumberContainerRef}
+    class={classes('h-full', 'overflow-hidden', 'bg-backgroundDark', 'px-2', 'z-[2]')}
+  >
+    {#each Array.from({ length: linesCount }) as _, index (index)}
+      <span>
+        {index + 1}
+        <br />
+      </span>
+    {/each}
+  </div>
+
+  <div class={classes('grow', 'relative')}>
+    {@html '<!-- Textarea -->'}
+    <textarea
+      bind:this={textAreaRef}
+      on:scroll={handleTextareaScroll}
+      autoComplete="off"
+      autoCorrect="off"
+      autoCapitalize="off"
+      spellCheck="false"
+      class={classes(
+        'w-full',
+        'h-full',
+        'p-0',
+        'absolute',
+        'text-[transparent]',
+        'border-none',
+        'focus:outline-none',
+        'resize-none',
+        'whitespace-pre',
+        'z-[2]',
+        'bg-[transparent]',
+        'caret-[red]'
+      )}
+      bind:value={inputCode}
+    />
+
+    {@html '<!-- Code as HTML -->'}
+    <div
+      bind:this={codeAsHtmlRef}
+      class={classes('w-full', 'h-full', 'absolute', 'overflow-hidden', 'text-[lightblue]', 'whitespace-pre')}
+    >
+      {@html codeAsHtml + '<br>'}
+    </div>
+  </div>
+</div>
