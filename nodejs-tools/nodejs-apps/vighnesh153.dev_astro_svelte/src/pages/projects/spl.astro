@@ -1,0 +1,16 @@
+---
+import ContentLayout from '@/layouts/ContentLayout.astro';
+import SplMainMenu from '@/components/projects/spl/SplMainMenu.svelte';
+import { projectNavItems } from '@/components/navigation/navItems';
+import { classes } from '@/utils';
+
+const title = 'Vighnesh Raut | Project - SPL';
+const description = `A Simple Programming Language (SPL) with syntax closer to the English Grammar`;
+---
+
+<ContentLayout title={title} description={description} navItems={projectNavItems}>
+  <div class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+    <h1 class="text-3xl">SPL (Simple Programming Language)</h1>
+    <SplMainMenu client:load />
+  </div>
+</ContentLayout>

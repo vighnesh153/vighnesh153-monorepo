@@ -58,26 +58,26 @@ loop while num <=10:
     name: 'Fibonacci number',
     code: `
 define function fibonacci with arguments [number n] which returns number:
-  if n == 0, then do:
-      return 0
+    if n == 0, then do:
+        return 0
   
-  if n == 1, then do:
-      return 1
+    if n == 1, then do:
+        return 1
   
-  let number fibN_take_1 be result of fibonacci(n - 1)
-  let number fibN_take_2 be result of fibonacci(n - 2)
+    let number fibN_take_1 be result of fibonacci(n - 1)
+    let number fibN_take_2 be result of fibonacci(n - 2)
   
-  return fibN_take_1 + fibN_take_2
+    return fibN_take_1 + fibN_take_2
 
 
 let array of number, fibNums, be []
 let number i be 0
 loop while true:
-  let number ithFibNum be result of fibonacci(i)
-  if ithFibNum > 100, then do:
-      break
-  push ithFibNum into fibNums
-  set i to i + 1
+    let number ithFibNum be result of fibonacci(i)
+    if ithFibNum > 100, then do:
+        break
+    push ithFibNum into fibNums
+    set i to i + 1
 
 display 'Fibonacci numbers less than 100 are '
 for every fibNum in fibNums:

@@ -4,7 +4,8 @@
   import type { SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
 
   import { classes } from '@/utils';
-  import Button from '@/components/Button.svelte';
+  import { internalLinks, searchParams } from '@/constants';
+  import Link from '@/components/Link.svelte';
   import CodeConsole from '@/components/projects/spl/CodeConsole.svelte';
   import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';
 
@@ -30,11 +31,11 @@
 
   onMount(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const exampleId = urlSearchParams.get('example-id') ?? null;
+    const exampleId = urlSearchParams.get(searchParams.exampleId) ?? null;
     const example = SplExamples.find((e) => e.id === exampleId) ?? null;
 
     if (example !== null) {
-      code = example.code;
+      code = example.code.trim() + '\n';
     }
   });
 </script>
@@ -42,13 +43,13 @@
 <div
   class={classes(
     'w-full mt-10',
-    'lg:h-[65vh]',
+    'lg:h-[50vh]',
     'grid grid-cols-1 place-items-center gap-6',
     'lg:grid-cols-3 lg:grid-rows-5 lg:place-items-stretch'
   )}
 >
   <div class="lg:col-start-3 grid place-items-center">
-    <Button variant="primary">SPL Main Menu</Button>
+    <Link linkType="primary-btn" href={internalLinks.projects.spl.mainMenu}>SPL Main Menu</Link>
   </div>
   <div
     class={classes(

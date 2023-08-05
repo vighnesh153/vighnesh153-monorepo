@@ -1,4 +1,5 @@
 import { hashTags } from './hashTags';
+import { searchParams } from './searchParams';
 
 export const internalLinks = {
   main: `#${hashTags.main}`,
@@ -12,5 +13,10 @@ export const internalLinks = {
   projects: {
     root: '/projects',
     projectsMain: `/projects#${hashTags.projects.projectsMain}`,
+    spl: {
+      mainMenu: '/projects/spl',
+      editor: (exampleId?: string) =>
+        exampleId ? `/projects/spl-editor?${searchParams.exampleId}=${exampleId}` : '/projects/spl-editor',
+    },
   },
 };

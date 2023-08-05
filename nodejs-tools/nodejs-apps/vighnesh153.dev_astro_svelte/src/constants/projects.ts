@@ -1,6 +1,8 @@
 import type { HTMLAttributes } from 'astro/types';
 import GithubIcon from '@/icons/GithubIcon.astro';
 import EyeIcon from '@/icons/EyeIcon.astro';
+import { externalLinks } from './externalLinks';
+import { internalLinks } from './internalLinks';
 
 interface ProjectLink {
   Icon: (props: HTMLAttributes<'svg'>) => unknown;
@@ -25,11 +27,11 @@ export const allProjects: Project[] = [
     links: {
       github: {
         Icon: GithubIcon,
-        href: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/spl',
+        href: externalLinks.projects.spl.sourceCode,
       },
       demo: {
         Icon: EyeIcon,
-        href: 'https://spl.vighnesh153.com',
+        href: internalLinks.projects.spl.mainMenu,
       },
     },
   },
