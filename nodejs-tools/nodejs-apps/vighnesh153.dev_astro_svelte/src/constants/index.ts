@@ -5,5 +5,6 @@ export * from './externalLinks';
 export * from './hashTags';
 export * from './internalLinks';
 export * from './projects';
+export * from './searchParams';
 export * from './socialProfiles';
 export * from './stage';
