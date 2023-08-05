@@ -23,7 +23,7 @@ Stack Overflow is a much better place to ask questions since:
 - questions and answers stay available for public viewing so your question/answer might help someone else
 - Stack Overflow's voting system assures that the best answers are prominently visible.
 
-If you have any `@vighnesh153/*` or `com.vighnesh153.*` library related question, see if you can get help in the
+If you have any `@vighnesh153/*` or `dev.vighnesh153.*` library related question, see if you can get help in the
 [issues](issues) section from the previously filed issues. If not, feel free to [create a github issue](submit-issue) if
 you are stuck.
 
