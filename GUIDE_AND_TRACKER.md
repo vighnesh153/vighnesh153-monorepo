@@ -56,6 +56,9 @@ Visit
 
 #### Tasks
 
+- vighnesh153.dev/tutor
+- adb fetch continue watching row from device
+- adb launch deeplink
 - migrate `spl.vighnesh153.com` to `vighnesh153.dev`
 - migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
 - migrate `draw.vighnesh153.com` to `vighnesh153.dev`
