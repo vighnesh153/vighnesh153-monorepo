@@ -1,0 +1,113 @@
+---
+import { classes } from '@/utils';
+import type { TutorPlanProps, TutorPlanTag } from '@/constants';
+import CircleChevronRightIcon from '@/icons/CircleChevronRightIcon.astro';
+
+interface Props {
+  item: TutorPlanProps;
+}
+
+const { item } = Astro.props;
+
+const tagToColorMap: Record<TutorPlanTag, string> = {
+  beginner: 'bg-[green] text-secondary',
+  intermediate: 'bg-[#b97d01] text-secondary',
+  advanced: 'bg-[#910000] text-text',
+};
+
+const rootClasses = classes(
+  'sm:mt-0 relative',
+  'flex flex-1 items-stretch flex-col',
+  'bg-backgroundDark',
+  'border-2 rounded-xl'
+);
+---
+
+<div
+  class:list={{
+    [rootClasses]: true,
+    'mt-10 border-primary shadow-primary shadow-2xl': item.isPopular,
+    'mt-6 border-text4': !item.isPopular,
+  }}
+  class=""
+>
+  {
+    item.isPopular ? (
+      <span
+        class={classes(
+          'w-32 absolute -top-5 left-0 right-0 mx-auto px-3 py-2',
+          'rounded-full border border-text4',
+          'bg-primary text-backgroundDark text-center text-sm font-bold'
+        )}
+      >
+        Popular
+      </span>
+    ) : null
+  }
+  <div class="p-8 space-y-4 border-b border-text4">
+    <span class="font-bold text-xl">{item.name}</span>
+    <div class="text-2xl text-accent font-semibold">
+      ₹{new Intl.NumberFormat('en-IN').format(item.price)}{' '}
+      <span class="text-xl text-text3 font-normal">/mo</span>
+    </div>
+    <p class="text-text2">{item.description}</p>
+    {
+      item.tags.length > 0 ? (
+        <ul class="flex gap-4">
+          {item.tags.map((tag) => (
+            <li class={classes(tagToColorMap[tag], 'px-1 py-[1px] rounded-md')}>
+              <span class="uppercase text-xs font-bold">{tag}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null
+    }
+  </div>
+  <div class="pb-8">
+    {
+      item.prerequisites.length > 0 ? (
+        <ul class="px-8 pt-8 space-y-3">
+          <li class="pb-2 font-medium">
+            <p class="font-bold">Pre-requisites</p>
+          </li>
+          {item.prerequisites.map((prerequisite) => (
+            <li class="flex items-center gap-5">
+              <CircleChevronRightIcon class="fill-primary h-5 w-5" />
+              <span class="text-text">{prerequisite}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null
+    }
+    {
+      item.features.length > 0 ? (
+        <ul class="px-8 pt-8 space-y-3">
+          <li class="pb-2 font-medium">
+            <p class="font-bold">List of features</p>
+          </li>
+          {item.features.map((feature) => (
+            <li class="flex items-center gap-5">
+              <CircleChevronRightIcon class="fill-primary h-5 w-5" />
+              <span class="text-text">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null
+    }
+    {
+      item.options.length > 0 ? (
+        <ul class="px-8 pt-8 space-y-2">
+          <li class="pb-2 text-start font-bold">
+            <p>List of options</p>
+          </li>
+          {item.options.map((option, i) => (
+            <>
+              {i > 0 ? <p class="text-start text-text3 italic">(or)</p> : null}
+              <li class="text-start">{option}</li>
+            </>
+          ))}
+        </ul>
+      ) : null
+    }
+  </div>
+</div>

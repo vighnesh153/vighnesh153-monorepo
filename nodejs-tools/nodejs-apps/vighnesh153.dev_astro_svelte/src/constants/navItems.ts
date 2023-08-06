@@ -1,4 +1,5 @@
-import { externalLinks, internalLinks } from '@/constants';
+import { externalLinks } from './externalLinks';
+import { internalLinks } from './internalLinks';
 
 export interface NavItem {
   text: string;
@@ -36,3 +37,6 @@ export const projectNavItems: NavItem[] = [
   AllNavigationItems.projects,
   AllNavigationItems.resume,
 ];
+
+// For "/tutor"
+export const tutorNavItems: NavItem[] = [AllNavigationItems.home, AllNavigationItems.projects];

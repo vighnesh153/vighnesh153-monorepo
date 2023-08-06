@@ -1,0 +1,17 @@
+---
+import type { TutorPlanProps } from '@/constants';
+import TutorPlan from './TutorPlan.astro';
+import { classes } from '@/utils';
+
+interface Props {
+  title: string;
+  plans: TutorPlanProps[];
+}
+
+const { title, plans } = Astro.props;
+---
+
+<h2 class="text-2xl mt-16" id="math">{title}</h2>
+<div class={classes('mt-8 justify-center space-y-6', 'lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-6 xl:grid-cols-3')}>
+  {plans.map((item) => <TutorPlan item={item} />)}
+</div>
