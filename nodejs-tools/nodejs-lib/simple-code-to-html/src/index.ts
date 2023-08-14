@@ -25,24 +25,14 @@ function codeSnippetsToHtml(codeSnippets: CodeSnippet[]): string {
     .join('');
 }
 
-export function simpleCodeToHtml(
-  code: string,
-  options: SimpleCodeToHtmlOptions = {
-    singleLineCommentIdentifiers: ['//'],
-    multiLineCommentIdentifierPairs: new Map([['/*', '*/']]),
-    acceptableStringChars: [`'`, `"`, '`'],
-    escapeCharacters: ['\\'],
-    operators: '~!@#$%^&*()-_=+{[}]|\\:;<,>.?/',
-    reservedWords: defaultReservedWords,
-  }
-): string {
+export function simpleCodeToHtml(code: string, options: SimpleCodeToHtmlOptions = {}): string {
   const {
-    singleLineCommentIdentifiers,
-    multiLineCommentIdentifierPairs,
-    acceptableStringChars,
-    escapeCharacters,
-    operators,
-    reservedWords,
+    singleLineCommentIdentifiers = ['//'],
+    multiLineCommentIdentifierPairs = new Map([['/*', '*/']]),
+    acceptableStringChars = [`'`, `"`, '`'],
+    escapeCharacters = ['\\'],
+    operators = '~!@#$%^&*()-_=+{[}]|\\:;<,>.?/',
+    reservedWords = defaultReservedWords,
   } = options as Required<SimpleCodeToHtmlOptions>;
 
   // parse out strings
