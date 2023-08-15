@@ -1,4 +1,4 @@
-name: nodejs-deploy-vighnesh153.dev
+name: nodejs-deploy-vighnesh153-astro-svelte
 
 on:
   workflow_dispatch:
@@ -10,8 +10,8 @@ permissions:
   actions: read
 
 jobs:
-  nodejs-deploy-vighnesh153-dev:
-    name: Deploying vighnesh153.dev
+  nodejs-deploy-vighnesh153-astro-svelte:
+    name: Deploying vighnesh153-astro-svelte
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,9 +28,9 @@ jobs:
         run: npm install && cd nodejs-tools && npm install && cd ..
 
       - name: Build
-        run: npm run build -- --filter=vighnesh153.dev_astro_svelte
+        run: npm run build -- --filter=vighnesh153-astro-svelte
         working-directory: ./nodejs-tools
 
       - name: Deploy
-        run: npm -w vighnesh153.dev_astro_svelte run sst:deploy:prod
+        run: npm -w vighnesh153-astro-svelte run sst:deploy:prod
         working-directory: ./nodejs-tools
