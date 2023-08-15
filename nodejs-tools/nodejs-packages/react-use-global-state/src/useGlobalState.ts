@@ -11,12 +11,14 @@ export function useGlobalState<T>(
   identifier: string,
   initialState?: T
 ): readonly [T | undefined, (updatedState: T) => void] {
-  const notification = createNotificationIfAbsent<T | undefined>(identifier);
+  const notification = createNotificationIfAbsent<T | undefined>(identifier, initialState);
   const [state, setState] = useState(notification.getLatestPublishedData() ?? initialState);
 
   // Publish changes
   useEffect(() => {
-    notification.publish(state);
+    if (state !== notification.getLatestPublishedData()) {
+      notification.publish(state);
+    }
   }, [notification, state]);
 
   // Subscribe to changes
