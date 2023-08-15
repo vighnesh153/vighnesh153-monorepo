@@ -77,13 +77,11 @@ export const allProjects: Project[] = [
     links: {
       github: {
         Icon: GithubIcon,
-        href:
-          'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-apps/' +
-          'tsx.vighnesh153.com',
+        href: externalLinks.projects.tsxBundler.sourceCode,
       },
       demo: {
         Icon: EyeIcon,
-        href: 'https://tsx.vighnesh153.com',
+        href: internalLinks.projects.tsxPlayground,
       },
     },
   },
