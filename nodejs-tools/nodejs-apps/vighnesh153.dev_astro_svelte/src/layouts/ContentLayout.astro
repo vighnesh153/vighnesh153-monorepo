@@ -12,6 +12,7 @@ interface Props {
   title?: string;
   description?: string;
   navItems?: NavItem[];
+  showFooter?: boolean;
 }
 
 const defaultTitle = 'Vighnesh Raut - the man, the myth, the living legend himself';
@@ -20,7 +21,7 @@ const defaultDescription =
   'tools. He is fascinated by Physics, Mathematics and Computer Science. When bored, ' +
   'you can find him watching Pokémon on his bed';
 
-const { title = defaultTitle, description = defaultDescription, navItems } = Astro.props;
+const { title = defaultTitle, description = defaultDescription, navItems, showFooter = true } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -34,6 +35,6 @@ const { title = defaultTitle, description = defaultDescription, navItems } = Ast
     <div class="mx-auto max-w-[1400px] px-4 pt-[0.05px] sm:px-20">
       <slot />
     </div>
-    <Footer />
+    {showFooter ? <Footer /> : null}
   </main>
 </BaseLayout>

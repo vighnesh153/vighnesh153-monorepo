@@ -9,5 +9,8 @@ export const externalLinks = {
       learnSyntax:
         'https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/nodejs-tools/nodejs-lib/spl/README.md',
     },
+    tsxBundler: {
+      sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/tsx-bundler',
+    },
   },
 };

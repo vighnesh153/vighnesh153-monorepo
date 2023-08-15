@@ -22,6 +22,7 @@
   "dependencies": {
     "@vighnesh153/simple-code-to-html": "*",
     "@vighnesh153/spl": "*",
+    "@vighnesh153/tsx-bundler": "*",
     "@vighnesh153/utils": "*",
     "svelte": "^4.1.2"
   },
