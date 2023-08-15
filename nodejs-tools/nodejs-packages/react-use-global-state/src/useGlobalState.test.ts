@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, it } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
 import { sleep } from '@vighnesh153/utils';
 import { useGlobalState } from './useGlobalState';
@@ -7,61 +6,55 @@ import { forgetGlobalState } from './notifications';
 describe('useGlobalState hook tests', () => {
   beforeEach(() => forgetGlobalState());
 
-  it('should have same return signature like useState hook', () => {
-    const { result } = renderHook(() => useGlobalState(`${Math.random()}`, 42));
+  it('should return initial value when not updated', () => {
+    const { result } = renderHook(() => useGlobalState('counter', 42));
 
-    const [counter, setCounter] = result.current;
-
-    expect(counter).toBe(42);
-    expect(typeof setCounter).toBe('function');
+    expect(result.current[0]).toBe(42);
   });
 
-  it('should update the state using the setState function', () => {
-    const { result } = renderHook(() => useGlobalState(`${Math.random()}`, 42));
-
-    const [, setCounter] = result.current;
+  it('should update the state using the setState function', async () => {
+    const { result } = renderHook(() => useGlobalState('counter', 42));
 
     act(() => {
-      setCounter(100);
+      const [counter = 0, setCounter] = result.current;
+      setCounter(counter + 1);
     });
 
-    const [counter] = result.current;
-
-    expect(counter).toBe(100);
+    expect(result.current[0]).toBe(43);
   });
 
-  it('should use the previous value when instantiating the hook again', () => {
-    const identifier = `${Math.random()}`;
+  it('should use the previous value when instantiating the hook again', async () => {
+    const useMultipleHooks = () => {
+      const [counter1, setCounter1] = useGlobalState('counter', 42);
+      const [counter2, setCounter2] = useGlobalState('counter', 1000);
 
-    // first instantiation
-    renderHook(() => useGlobalState(identifier, 42));
+      return { counter1, counter2, setCounter1, setCounter2 };
+    };
+    const { result } = renderHook(() => useMultipleHooks());
 
-    // second instantiation
-    const { result } = renderHook(() => useGlobalState(identifier, 22));
-
-    const [counter] = result.current;
-    expect(counter).toBe(42);
+    expect(result.current.counter1).toBe(42);
+    expect(result.current.counter2).toBe(42);
   });
 
-  it(
-    'should update all other subscribers of the hook if any one of them publishes a new value',
-    async () => {
-      const id = `${Math.random()}`;
-      const { result: r1 } = renderHook(() => useGlobalState<number>(id));
-      const { result: r2 } = renderHook(() => useGlobalState<number>(id));
-      const { result: r3 } = renderHook(() => useGlobalState<number>(id));
+  it('should update all other subscribers of the hook if any one of them publishes a new value', async () => {
+    const useMultipleHooks = () => {
+      const [counter1, setCounter1] = useGlobalState('counter', 42);
+      const [counter2, setCounter2] = useGlobalState('counter', 43);
+      const [counter3, setCounter3] = useGlobalState('counter', 44);
 
-      act(() => {
-        r2.current[1](500);
-      });
+      return { counter1, counter2, counter3, setCounter1, setCounter2, setCounter3 };
+    };
+    const { result } = renderHook(() => useMultipleHooks());
 
-      // adding some buffer because state is updated in nextTicks
-      await sleep(10);
+    act(() => {
+      result.current.setCounter2(69);
+    });
 
-      expect(r1.current[0]).toBe(500);
-      expect(r2.current[0]).toBe(500);
-      expect(r3.current[0]).toBe(500);
-    },
-    { retry: 5 }
-  );
+    // adding some buffer because state is updated in nextTicks
+    await sleep(1_000);
+
+    expect(result.current.counter1).toBe(69);
+    expect(result.current.counter2).toBe(69);
+    expect(result.current.counter3).toBe(69);
+  });
 });

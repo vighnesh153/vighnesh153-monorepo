@@ -7,11 +7,13 @@ let notifications: Record<string, Notification<unknown>> = {};
  * created for an identifier, it will be returned instead
  *
  * @param identifier
+ * @param seedData
  * @internal
  */
-export function createNotificationIfAbsent<T>(identifier: string): Notification<T> {
+export function createNotificationIfAbsent<T>(identifier: string, seedData?: T): Notification<T> {
   if (not(Object.hasOwn(notifications, identifier))) {
     notifications[identifier] = new Notification<T>({ notifyOnSubscribe: true });
+    notifications[identifier].publish(seedData);
   }
   return notifications[identifier] as Notification<T>;
 }

@@ -8,6 +8,22 @@ describe('notifications tests', () => {
     expect(notification).not.toBeNull();
   });
 
+  it('should initialize the notification with seed data', () => {
+    const identifier = Math.random().toString();
+    const notification = createNotificationIfAbsent(identifier, 'pikachu');
+
+    expect(notification.getLatestPublishedData()).toBe('pikachu');
+  });
+
+  it('should initialize the notification with seed data only once', () => {
+    const identifier = Math.random().toString();
+    const notification1 = createNotificationIfAbsent(identifier, 'pikachu');
+    const notification2 = createNotificationIfAbsent(identifier, 'raichu');
+
+    expect(notification1.getLatestPublishedData()).toBe('pikachu');
+    expect(notification2.getLatestPublishedData()).toBe('pikachu');
+  });
+
   it('should not create a new notification for the same identifier', () => {
     const identifier = Math.random().toString();
     const notification1 = createNotificationIfAbsent(identifier);
