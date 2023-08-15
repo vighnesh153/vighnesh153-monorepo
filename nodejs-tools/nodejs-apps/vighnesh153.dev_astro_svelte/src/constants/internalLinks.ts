@@ -18,5 +18,6 @@ export const internalLinks = {
       editor: (exampleId?: string) =>
         exampleId ? `/projects/spl-editor?${searchParams.exampleId}=${exampleId}` : '/projects/spl-editor',
     },
+    tsxPlayground: '/projects/tsx-playground',
   },
 };
