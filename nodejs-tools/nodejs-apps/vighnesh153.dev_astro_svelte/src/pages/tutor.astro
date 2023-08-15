@@ -9,6 +9,9 @@ const title = 'Vighnesh Raut | Tutor';
 const description =
   'Are you interested in learning math or computer science? You have come to ' +
   'the right place! Check out our courses and find the one that excites you the most.';
+
+const mathSectionId = 'math';
+const codingSectionId = 'coding';
 ---
 
 <ContentLayout title={title} description={description} navItems={tutorNavItems}>
@@ -21,11 +24,11 @@ const description =
       assist.
     </div>
     <div class="mt-6 flex gap-5">
-      <Link linkType="primary-btn" href="#coding">Coding courses</Link>
-      <Link linkType="secondary-btn" href="#math">Math courses</Link>
+      <Link linkType="primary-btn" href={`#${codingSectionId}`}>Coding courses</Link>
+      <Link linkType="secondary-btn" href={`#${mathSectionId}`}>Math courses</Link>
     </div>
 
-    <CourseSection title="Mathematics courses" plans={mathTutorPlans} />
-    <CourseSection title="Coding courses" plans={codingTutorPlans} />
+    <CourseSection sectionId={mathSectionId} title="Mathematics courses" plans={mathTutorPlans} />
+    <CourseSection sectionId={codingSectionId} title="Coding courses" plans={codingTutorPlans} />
   </div>
 </ContentLayout>
