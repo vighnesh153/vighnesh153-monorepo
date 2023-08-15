@@ -56,11 +56,8 @@ Visit
 
 #### Tasks
 
-- vighnesh153.dev/tutor
 - adb fetch continue watching row from device
 - adb launch deeplink
-- migrate `spl.vighnesh153.com` to `vighnesh153.dev`
-- migrate `tsx.vighnesh153.com` to `vighnesh153.dev`
 - migrate `draw.vighnesh153.com` to `vighnesh153.dev`
 - blog.vighnesh153.com
 - rename `vighnesh153.com_astro` to `vighnesh153-astro`
@@ -75,16 +72,17 @@ Visit
   - tippy: https://atomiks.github.io/tippyjs/
   - usage in svelte: https://learn.svelte.dev/tutorial/adding-parameters-to-actions
 - Audio player: https://learn.svelte.dev/tutorial/media-elements
-- 404 page: https://floatui.com/components/404-pages
-- FAQs page: https://floatui.com/components/faqs
-- Learn Svelte
-- Experiment with svelte in vighnesh153.com_astro
-- Deno: https://deno.land/
+- 404 page
+  - https://floatui.com/components/404-pages
+  - https://tailwindui.com/components/marketing/feedback/404-pages
+- FAQs page
+  - https://floatui.com/components/faqs
+  - https://tailwindui.com/components/marketing/sections/faq-sections
 - Learn Golang
 - Protobuf in golang and javascript
 - RPC in golang and javascript
-- Resume as code
 - Remotion: https://www.remotion.dev/
+- Resume (CV) as code
 
 ```html
 <div id="vighnesh153-paint">
