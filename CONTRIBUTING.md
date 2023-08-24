@@ -96,7 +96,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 - `Node.js`: Consider using [nvm](https://github.com/nvm-sh/nvm)
 - [Docker](https://docs.docker.com/engine/install/)
 
-1. Installation: Run the `./run initialSetup`
+1. Installation: Run the `./run tasks`. Find the `*_initialSetup` task and run it (`*` would be the category you wish to update like `nodejs`, `jvm`, etc.).
 
 1. Create your patch, **including appropriate test cases**.
 
