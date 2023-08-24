@@ -13,6 +13,9 @@ jobs:
   nodejs-deploy-vighnesh153-astro-svelte:
     name: Deploying vighnesh153-astro-svelte
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nodejs-tools
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,12 +28,10 @@ jobs:
           aws-region: ap-south-2
 
       - name: Install dependencies
-        run: npm install && cd nodejs-tools && npm install && cd ..
+        run: npm install
 
       - name: Build
         run: npm run build -- --filter=vighnesh153-astro-svelte
-        working-directory: ./nodejs-tools
 
       - name: Deploy
         run: npm -w vighnesh153-astro-svelte run sst:deploy:prod
-        working-directory: ./nodejs-tools

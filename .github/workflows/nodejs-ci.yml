@@ -6,13 +6,17 @@ name: nodejs-ci
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   nodejs-ci:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./nodejs-tools
 
     strategy:
       matrix:
@@ -25,22 +29,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
-      # install deps at root
+      # install deps
       - run: npm install
-
-      # install deps in nodejs-tools
-      - run: npm install
-        working-directory: ./nodejs-tools
-
-      - run: ls -la ./node_modules/turbo/bin
-        working-directory: ./nodejs-tools
 
       # Build the project
       - run: npm run build
-        working-directory: ./nodejs-tools
 
       # Test the project
       - run: npm run test
-        working-directory: ./nodejs-tools

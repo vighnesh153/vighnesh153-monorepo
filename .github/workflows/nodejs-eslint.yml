@@ -2,14 +2,17 @@ name: nodejs-eslint
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   nodejs-eslint:
     name: Run eslint scanning
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nodejs-tools
     permissions:
       contents: read
       security-events: write
@@ -18,16 +21,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # install deps at root
+      # install deps
       - run: npm install
-
-      # install deps in nodejs-tools
-      - run: npm install
-        working-directory: ./nodejs-tools
-
-      - run: ls -la ./node_modules/turbo/bin
-        working-directory: ./nodejs-tools
 
       - name: Run ESLint
         run: npm run lint
-        working-directory: ./nodejs-tools
