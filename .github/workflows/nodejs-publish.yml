@@ -7,7 +7,7 @@ on:
         required: true
         type: choice
         description: Update the version?
-        default: 'false'
+        default: "false"
         options:
           - true
           - false
@@ -15,7 +15,7 @@ on:
         required: true
         type: choice
         description: Create a tag commit?
-        default: 'false'
+        default: "false"
         options:
           - true
           - false
@@ -23,7 +23,7 @@ on:
         required: true
         type: choice
         description: Publish to NPM
-        default: 'false'
+        default: "false"
         options:
           - true
           - false
@@ -33,11 +33,15 @@ on:
       publishArgs:
         required: false
         description: customize the arguments passed to 'npm publish'
-        default: '--workspace nodejs-packages --tag latest'
+        default: "--workspace nodejs-packages --tag latest"
 
 jobs:
   nodejs-publish:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./nodejs-tools
 
     steps:
       - name: checkout repo
@@ -48,19 +52,14 @@ jobs:
       - name: setup nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: install dependencies in root
-        run: npm ci
+          node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
 
       - name: install dependencies in nodejs-tools
         run: npm ci
-        working-directory: ./nodejs-tools
 
       - name: build packages
         run: npm run build -- --filter=./nodejs-packages/*
-        working-directory: ./nodejs-tools
 
       - name: Config git metadata
         run: |
@@ -74,7 +73,6 @@ jobs:
           git add .
           git commit -m "build: update the npm version to ${{ inputs.newVersion }}" --no-verify
           git push
-        working-directory: ./nodejs-tools
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -85,7 +83,6 @@ jobs:
           GIT_PAGER=cat git diff
 
           npm publish ${{ inputs.publishArgs }}
-        working-directory: ./nodejs-tools
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,6 +12,9 @@ permissions:
 jobs:
   nodejs-deploy-aws-serverless-tools:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nodejs-tools
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
@@ -23,13 +26,8 @@ jobs:
           role-session-name: MySessionName
           aws-region: us-east-1
 
-      - name: install dependencies in root
-        run: npm ci
-
       - name: install dependencies in nodejs-tools
         run: npm ci
-        working-directory: ./nodejs-tools
 
       - name: Deploy AWS tools
         run: npm run deploy:prod -- --filter=./nodejs-aws-serverless-tools/*
-        working-directory: ./nodejs-tools
