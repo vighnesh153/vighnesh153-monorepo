@@ -8,7 +8,7 @@ COMMAND_OPTION_1=$2
 function tasks() {
   echo ""
   echo "Howdy! 👋"
-  echo "Note: If this is your first time running this script, you might want to run './run initialSetup'"
+  echo "Note: If this is your first time running this script, you might want to run './run *_initialSetup'"
   echo ""
   echo "🪜  Listing available tasks ⏳"
   echo ""
@@ -17,60 +17,38 @@ function tasks() {
 
 
 # ✨ Initial setup ✨
-function initialSetup() {
-  installDeps
+function nodejs_initialSetup() {
+  nodejs_installDeps
+  nodejs_build
 }
 
-# ✨ Install dependencies ✨
-function installDeps_nodejs() {
+# ✨ Node.js install dependencies ✨
+function nodejs_installDeps() {
   echo "📦  Installing nodejs dependencies... ⏳"
-  npm install
   cd nodejs-tools/ && npm install && cd ..
   echo "📦  Installing nodejs dependencies completed ✅"
 }
-function installDeps() {
-  echo "📦  Installing dependencies... ⏳"
-  installDeps_nodejs
-  echo "📦  Installing dependencies completed ✅"
-}
 
-
-# ✨ Clean Node.js Project ✨
-CLEAN_NODEJS="npx -y rimraf package-lock.json node_modules dist .turbo"
-function cleanNodeJs__root() {
-  echo "🗑️  Cleaning root nodejs generated files... ⏳"
-  $CLEAN_NODEJS
-  echo "🗑️  Cleaning root nodejs generated files completed ✅"
-}
-function cleanNodeJs__tools() {
+# ✨ Node.js clean project ✨
+CLEAN_NODEJS="npx -y rimraf package-lock.json node_modules dist .turbo build"
+function nodejs_clean() {
   echo "🗑️  Cleaning nodejs-tools generated files... ⏳"
-  cd nodejs-tools && npm exec --include-workspace-root --workspaces -- $CLEAN_NODEJS
+  cd nodejs-tools && npm exec --include-workspace-root --workspaces -- $CLEAN_NODEJS && cd ..
   echo "🗑️  Cleaning nodejs-tools generated files completed ✅"
 }
-function cleanNodeJs() {
-  echo "🗑️  Cleaning all nodejs generated files... ⏳"
-  cleanNodeJs__root
-  cleanNodeJs__tools
-  echo "🗑️  Cleaning all nodejs generated files completed ✅"
-}
 
-
-# ✨ Update NodeJs packages ✨
-function packageUpdateNodejs__tools() {
+# ✨ Node.js update packages ✨
+function nodejs_packageUpdate() {
   echo "📦  Updating nodejs-tools packages... ⏳"
-  ./node_modules/.bin/ncu -u --cwd=./nodejs-tools/ -ws --root
+  cd nodejs-tools && ./node_modules/.bin/ncu -u -ws --root && cd ..
   echo "📦  Updating nodejs-tools packages completed ✅"
 }
-function packageUpdateNodeJs__root() {
-  echo "📦  Updating root nodejs packages... ⏳"
-  ./node_modules/.bin/ncu -u
-  echo "📦  Updating root nodejs packages completed ✅"
-}
-function packageUpdateNodeJs() {
-  echo "📦  Updating all nodejs packages... ⏳"
-  packageUpdateNodeJs__root
-  packageUpdateNodejs__tools
-  echo "📦  Updating all nodejs packages completed ✅"
+
+# ✨ Node.js build ✨
+function nodejs_build() {
+  echo "📦  Building nodejs-tools... ⏳"
+  cd nodejs-tools && npm run build && cd ..
+  echo "📦  Building nodejs-tools completed ✅"
 }
 
 # Execute the function name provided to the script as the first argument
