@@ -58,14 +58,13 @@ Visit
 
 - adb fetch continue watching row from device
 - adb launch deeplink
+- compose-query (similar to react-query by tanstack)
 - migrate `draw.vighnesh153.com` to `vighnesh153.dev`
-- blog.vighnesh153.com
-- rename `vighnesh153.com_astro` to `vighnesh153-astro`
-- migrate `blog.vighnesh153.com` to `vighnesh153.dev`
-  - https://docs.astro.build/en/tutorial/0-introduction/
-- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
 - migrate `math.vighnesh153.com` to `vighnesh153.dev`
 - migrate `tex.vighnesh153.com` to `vighnesh153.dev`
+- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
+- migrate `blog.vighnesh153.com` to `vighnesh153.dev`
+  - https://docs.astro.build/en/tutorial/0-introduction/
 - Check if trap focus mentioned in the below link could be useful for side bar on vighnesh153.dev:
   https://learn.svelte.dev/tutorial/actions
 - Tooltip
