@@ -69,8 +69,8 @@ export function handleMouseUp(
   mouseHandlerStore.state = 'idle';
   mouseHandlerStore.location = newPoint;
 
-  if (previousState === 'drag') {
-    if (appConfig.mode === 'draw') {
+  if (appConfig.mode === 'draw') {
+    if (previousState === 'drag' || previousState === 'pressed') {
       publishEvents(eventsManager, [
         buildDrawLineEvent({
           brushThickness: appConfig.brushThickness,
@@ -84,19 +84,8 @@ export function handleMouseUp(
     return;
   }
 
-  if (previousState === 'pressed') {
-    if (appConfig.mode == 'draw') {
-      publishEvents(eventsManager, [
-        buildDrawLineEvent({
-          brushThickness: appConfig.brushThickness,
-          color: appConfig.color,
-          startPoint: previousPoint,
-          endPoint: newPoint,
-        }),
-        buildCommitEvent(),
-      ]);
-    } else {
-      // fill
+  if (appConfig.mode === 'fill') {
+    if (previousState === 'pressed') {
       publishEvents(eventsManager, [
         buildFloodFillEvent({
           color: appConfig.color,
