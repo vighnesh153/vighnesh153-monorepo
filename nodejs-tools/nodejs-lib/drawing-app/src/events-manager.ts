@@ -1,9 +1,9 @@
-import { not } from '@vighnesh153/utils';
+import { Queue, not } from '@vighnesh153/utils';
 import { type AppEvent } from './events';
 
 export type EventsManager = {
   events: AppEvent[];
-  eventProcessingQueue: AppEvent[]; // list of event ids to be processed
+  eventProcessingQueue: Queue<AppEvent>; // list of event ids to be processed
   eventIndexPointer: number | null;
 };
 
@@ -49,10 +49,10 @@ export function undo(eventsManager: EventsManager): boolean {
 
   if (pointer < 0) {
     eventsManager.eventIndexPointer = null;
-    eventsManager.eventProcessingQueue = [];
+    eventsManager.eventProcessingQueue = new Queue();
   } else {
     eventsManager.eventIndexPointer = pointer;
-    eventsManager.eventProcessingQueue = eventsManager.events.slice(0, pointer);
+    eventsManager.eventProcessingQueue = new Queue(...eventsManager.events.slice(0, pointer));
   }
 
   return true;
@@ -90,7 +90,7 @@ export function publishEvents(eventsManager: EventsManager, events: AppEvent[]):
   eventsManager.events.splice(eventsManager.eventIndexPointer ?? 0, eventsManager.events.length, ...events);
 
   // push all event ids to eventProcessingQueue
-  eventsManager.eventProcessingQueue.push(...events);
+  eventsManager.eventProcessingQueue.pushRight(...events);
 
   // update the pointer to the last index
   eventsManager.eventIndexPointer = eventsManager.events.length - 1;

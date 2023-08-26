@@ -6,6 +6,7 @@ export type IColor = {
     b: number;
     a: number;
   };
+  rgbaString: string;
 };
 
 export const Color = {
@@ -17,6 +18,7 @@ export const Color = {
       b: 0,
       a: 1,
     },
+    rgbaString: '',
   },
   Gray: {
     hsl: 'hsl(0, 0%, 34%)',
@@ -26,6 +28,7 @@ export const Color = {
       b: 87,
       a: 1,
     },
+    rgbaString: '',
   },
   LightGray: {
     hsl: 'hsl(0, 0%, 63%)',
@@ -35,6 +38,7 @@ export const Color = {
       b: 161,
       a: 1,
     },
+    rgbaString: '',
   },
   Purple: {
     hsl: 'hsl(291, 64%, 42%)',
@@ -44,6 +48,7 @@ export const Color = {
       b: 176,
       a: 1,
     },
+    rgbaString: '',
   },
   LightBlue: {
     hsl: 'hsl(229, 100%, 81%)',
@@ -53,6 +58,7 @@ export const Color = {
       b: 255,
       a: 1,
     },
+    rgbaString: '',
   },
   DarkBlue: {
     hsl: 'hsl(229, 68%, 50%)',
@@ -62,6 +68,7 @@ export const Color = {
       b: 214,
       a: 1,
     },
+    rgbaString: '',
   },
   SkyBlue: {
     hsl: 'hsl(180, 67%, 49%)',
@@ -71,6 +78,7 @@ export const Color = {
       b: 209,
       a: 1,
     },
+    rgbaString: '',
   },
   LightGreen: {
     hsl: 'hsl(114, 39%, 63%)',
@@ -80,6 +88,7 @@ export const Color = {
       b: 124,
       a: 1,
     },
+    rgbaString: '',
   },
   Green: {
     hsl: 'hsl(122, 39%, 49%)',
@@ -89,6 +98,7 @@ export const Color = {
       b: 79,
       a: 1,
     },
+    rgbaString: '',
   },
   LimeGreen: {
     hsl: 'hsl(73, 100%, 50%)',
@@ -98,6 +108,7 @@ export const Color = {
       b: 0,
       a: 1,
     },
+    rgbaString: '',
   },
   Yellow: {
     hsl: 'hsl(55, 100%, 60%)',
@@ -107,6 +118,7 @@ export const Color = {
       b: 51,
       a: 1,
     },
+    rgbaString: '',
   },
   Orange: {
     hsl: 'hsl(28, 100%, 60%)',
@@ -116,6 +128,7 @@ export const Color = {
       b: 51,
       a: 1,
     },
+    rgbaString: '',
   },
   Peach: {
     hsl: 'hsl(46, 51%, 82%)',
@@ -125,6 +138,7 @@ export const Color = {
       b: 186,
       a: 1,
     },
+    rgbaString: '',
   },
   Brown: {
     hsl: 'hsl(28, 68%, 30%)',
@@ -134,6 +148,7 @@ export const Color = {
       b: 24,
       a: 1,
     },
+    rgbaString: '',
   },
   Pink: {
     hsl: 'hsl(339, 81%, 85%)',
@@ -143,6 +158,7 @@ export const Color = {
       b: 207,
       a: 1,
     },
+    rgbaString: '',
   },
   Red: {
     hsl: 'hsl(4, 90%, 58%)',
@@ -152,6 +168,7 @@ export const Color = {
       b: 52,
       a: 1,
     },
+    rgbaString: '',
   },
   DarkRed: {
     hsl: 'hsl(0, 66%, 41%)',
@@ -161,6 +178,7 @@ export const Color = {
       b: 36,
       a: 1,
     },
+    rgbaString: '',
   },
   White: {
     hsl: 'hsl(0, 0%, 100%)',
@@ -170,5 +188,12 @@ export const Color = {
       b: 255,
       a: 1,
     },
+    rgbaString: '',
   },
 } satisfies Record<string, IColor>;
+
+Object.keys(Color).forEach((colorKey) => {
+  const colorObj = Color[colorKey as keyof typeof Color];
+  const { r, g, b, a } = colorObj.rgba;
+  colorObj.rgbaString = `rgba(${r}, ${g}, ${b}, ${a})`;
+});
