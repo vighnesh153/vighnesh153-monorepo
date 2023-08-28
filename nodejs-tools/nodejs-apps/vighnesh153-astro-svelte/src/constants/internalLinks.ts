@@ -19,5 +19,6 @@ export const internalLinks = {
         exampleId ? `/projects/spl-editor?${searchParams.exampleId}=${exampleId}` : '/projects/spl-editor',
     },
     tsxPlayground: '/projects/tsx-playground',
+    drawingApp: '/projects/drawing-app',
   },
 };

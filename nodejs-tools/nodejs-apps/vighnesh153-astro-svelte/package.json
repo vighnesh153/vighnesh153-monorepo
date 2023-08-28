@@ -20,6 +20,7 @@
     "sst:remove": "dotenv -e ../../.env.local -- sst remove"
   },
   "dependencies": {
+    "@vighnesh153/drawing-app": "*",
     "@vighnesh153/simple-code-to-html": "*",
     "@vighnesh153/spl": "*",
     "@vighnesh153/tsx-bundler": "*",

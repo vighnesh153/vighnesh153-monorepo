@@ -1,9 +1,6 @@
 import { IColor } from './colors';
 
-export enum EventMode {
-  Draw = 'Draw',
-  Fill = 'Fill',
-}
+export type EventMode = 'draw' | 'fill';
 
 export enum BrushThickness {
   xs = 5,

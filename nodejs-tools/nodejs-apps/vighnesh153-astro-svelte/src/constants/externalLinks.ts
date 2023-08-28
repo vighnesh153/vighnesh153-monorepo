@@ -12,5 +12,8 @@ export const externalLinks = {
     tsxBundler: {
       sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/tsx-bundler',
     },
+    drawingApp: {
+      sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/drawing-app',
+    },
   },
 };
