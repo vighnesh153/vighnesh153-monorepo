@@ -45,13 +45,11 @@ export const allProjects: Project[] = [
     links: {
       github: {
         Icon: GithubIcon,
-        href:
-          'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-apps/' +
-          'draw.vighnesh153.com',
+        href: externalLinks.projects.drawingApp.sourceCode,
       },
       demo: {
         Icon: EyeIcon,
-        href: 'https://draw.vighnesh153.com',
+        href: internalLinks.projects.drawingApp,
       },
     },
   },
