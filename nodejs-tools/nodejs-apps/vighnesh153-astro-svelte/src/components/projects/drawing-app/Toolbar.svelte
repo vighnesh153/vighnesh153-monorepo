@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { type EventMode, type AppConfig } from '@vighnesh153/drawing-app';
+  import { type EventMode, type AppConfig, type IColor } from '@vighnesh153/drawing-app';
 
   import PenIcon from '@/icons/PenIcon.svelte';
   import FillDripIcon from '@/icons/FillDripIcon.svelte';
@@ -9,15 +9,21 @@
   import ColorButton from './ColorButton.svelte';
 
   export let appConfig: AppConfig;
+  export let colors: IColor[];
 
   type EventDispatcher = {
     modeChange: { newMode: EventMode };
+    colorChange: { newColor: IColor };
   };
 
   const dispatch = createEventDispatcher<EventDispatcher>();
 
   function onModeChange(newMode: EventMode) {
     dispatch('modeChange', { newMode });
+  }
+
+  function onColorChange(newColor: IColor) {
+    dispatch('colorChange', { newColor });
   }
 </script>
 
@@ -36,7 +42,11 @@
 
   <!-- Color button -->
   <div>
-    <ColorButton selectedColor={appConfig.color.rgbaString}></ColorButton>
+    <ColorButton
+      selectedColor={appConfig.color.rgbaString}
+      {colors}
+      on:colorChange={(e) => onColorChange(e.detail.newColor)}
+    />
   </div>
 
   <ToolbarDivider />
