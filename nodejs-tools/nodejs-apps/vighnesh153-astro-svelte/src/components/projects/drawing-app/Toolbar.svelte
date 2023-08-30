@@ -27,14 +27,16 @@
   }
 </script>
 
-<div class="w-2/3 p-6 mx-auto bg-text flex items-center gap-8 rounded-lg">
+<div class="w-2/3 px-6 pt-5 pb-4 mx-auto bg-text flex items-center gap-6 rounded-lg">
   <!-- Mode -->
   <div class="flex gap-6">
     <ModeButton isSelected={appConfig.mode === 'draw'} on:click={() => onModeChange('draw')}>
-      <PenIcon class="w-6" />
+      <PenIcon class="w-6 h-6" />
+      <p slot="title">Draw</p>
     </ModeButton>
     <ModeButton isSelected={appConfig.mode === 'fill'} on:click={() => onModeChange('fill')}>
-      <FillDripIcon class="w-6" />
+      <FillDripIcon class="w-6 h-6" />
+      <p slot="title">Fill</p>
     </ModeButton>
   </div>
 

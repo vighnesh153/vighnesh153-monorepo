@@ -30,4 +30,5 @@
       />
     {/each}
   </div>
+  <p slot="title">Color</p>
 </PopupButton>
