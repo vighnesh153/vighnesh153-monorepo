@@ -22,7 +22,7 @@
     {#each colors as color}
       <button
         style={`background-color: ${color.rgbaString}`}
-        class="w-10 h-10 rounded-full border border-secondary"
+        class="w-10 h-10 rounded-full border border-secondary focus-visible:outline-secondary"
         on:click={() => {
           onColorClick(color);
           togglePopup('closed');

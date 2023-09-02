@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { not } from '@vighnesh153/utils';
   import { classes } from '@/utils';
 
   export let isSelected = false;
@@ -7,7 +6,7 @@
 
 <div class="flex flex-col">
   <button
-    class={classes(`p-2 rounded-full`)}
+    class={classes(`p-2 rounded-full focus-visible:outline-secondary`)}
     class:outline={isSelected}
     class:outline-offset-4={isSelected}
     class:outline-2={isSelected}
@@ -18,7 +17,7 @@
   >
     <slot />
   </button>
-  {#if true || $$slots.title}
+  {#if $$slots.title}
     <div class="mt-2 text-secondary" class:font-bold={isSelected} class:underline={isSelected}>
       <slot name="title">Title</slot>
     </div>

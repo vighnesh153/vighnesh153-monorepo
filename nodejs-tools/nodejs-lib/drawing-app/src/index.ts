@@ -6,4 +6,3 @@ export * from './events-manager';
 export * from './events-processor';
 export * from './events';
 export * from './mouse-event-handlers';
-export * from './PubSub';
