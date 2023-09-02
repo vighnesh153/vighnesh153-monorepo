@@ -2,12 +2,17 @@
   import { createEventDispatcher } from 'svelte';
   import { type EventMode, type IColor, BrushThickness } from '@vighnesh153/drawing-app';
 
+  import CloseIcon from '@/icons/CloseIcon.svelte';
   import PenIcon from '@/icons/PenIcon.svelte';
   import FillDripIcon from '@/icons/FillDripIcon.svelte';
+  import RotateLeftIcon from '@/icons/RotateLeftIcon.svelte';
+  import RotateRightIcon from '@/icons/RotateRightIcon.svelte';
+
   import ModeButton from './ModeButton.svelte';
   import ToolbarDivider from './ToolbarDivider.svelte';
   import ColorButton from './ColorButton.svelte';
   import BrushThicknessButton from './BrushThicknessButton.svelte';
+  import ActionButton from './ActionButton.svelte';
 
   export let selectedColor: IColor;
   export let selectedEventMode: EventMode;
@@ -36,7 +41,7 @@
   }
 </script>
 
-<div class="w-2/3 px-6 pt-5 pb-4 mx-auto bg-text flex items-center gap-6 rounded-lg">
+<div class="w-fit px-6 pt-5 pb-4 mx-auto bg-text flex items-center gap-6 rounded-lg">
   <!-- Mode -->
   <div class="flex gap-6">
     <ModeButton isSelected={selectedEventMode === 'draw'} on:click={() => onModeChange('draw')}>
@@ -73,4 +78,26 @@
   </div>
 
   <ToolbarDivider />
+
+  <!-- Undo button -->
+  <ActionButton>
+    <RotateLeftIcon class="w-[25px]" />
+    <p slot="title">Undo</p>
+  </ActionButton>
+
+  <ToolbarDivider />
+
+  <!-- Redo button -->
+  <ActionButton>
+    <RotateRightIcon class="w-[25px]" />
+    <p slot="title">Redo</p>
+  </ActionButton>
+
+  <ToolbarDivider />
+
+  <!-- Clear button -->
+  <ActionButton>
+    <CloseIcon class="w-[20px] stroke-secondary" />
+    <p slot="title">Clear</p>
+  </ActionButton>
 </div>

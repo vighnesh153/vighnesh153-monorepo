@@ -26,7 +26,7 @@
   <div slot="popup-content" class="w-64 mx-auto flex gap-2 flex-wrap items-center justify-center" let:togglePopup>
     {#each brushThicknessValues as brushThickness}
       <button
-        class="w-[40px] aspect-square rounded-full grid place-items-center border border-secondary"
+        class="w-[40px] aspect-square rounded-full grid place-items-center border border-secondary focus-visible:outline-secondary"
         on:click={() => {
           onBrushThicknessClick(brushThickness);
           togglePopup('closed');
