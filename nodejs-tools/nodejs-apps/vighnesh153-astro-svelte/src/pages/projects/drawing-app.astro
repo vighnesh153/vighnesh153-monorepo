@@ -10,14 +10,15 @@ const description = `A drawing app made with ❤️ by Vighnesh Raut`;
 ---
 
 <ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
-  <div class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8 text-center`)}>
+  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8 text-center`)}>
     <h1 class="text-3xl">A Drawing App</h1>
-    <p class="mt-2">Made with ❤️ by <Link href={internalLinks.main}>Vighnesh Raut</Link></p>
-    <p class="mt-1">
-      Check out the source code on <Link href={externalLinks.projects.drawingApp.sourceCode}>Github</Link>
-    </p>
-    <div class="mt-10">
+    <div class="mt-6">
       <DrawingAppRoot client:load />
     </div>
+    <p class="mt-6">
+      Made with ❤️ by
+      <Link href={internalLinks.main}>Vighnesh Raut</Link>. Check out the source code on
+      <Link href={externalLinks.projects.drawingApp.sourceCode}>Github</Link>
+    </p>
   </div>
 </ContentLayout>
