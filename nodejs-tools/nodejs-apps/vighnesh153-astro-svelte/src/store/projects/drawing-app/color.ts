@@ -1,5 +1,4 @@
-import { type AppConfig, type IColor } from '@vighnesh153/drawing-app';
-import { derived, type Writable } from 'svelte/store';
-import { drawingAppConfigStore } from './app-config';
+import { Color, type IColor } from '@vighnesh153/drawing-app';
+import { writable } from 'svelte/store';
 
-export const colorStore = derived<Writable<AppConfig>, IColor>(drawingAppConfigStore, (appConfig) => appConfig.color);
+export const colorStore = writable<IColor>(Color.Black);

@@ -20,13 +20,13 @@
   <div class="flex flex-col">
     <button
       style={buttonStyles}
-      class={classes(`w-11 h-11 rounded-full border-2 border-secondary`, buttonClasses)}
+      class={classes(`w-11 h-11 grid place-items-center rounded-full border-2 border-secondary`, buttonClasses)}
       on:click={() => togglePopup()}
     >
       <slot />
     </button>
     {#if true || $$slots.title}
-      <div class="mt-1 text-secondary font-bold">
+      <div class="mt-1 text-secondary">
         <slot name="title">Title</slot>
       </div>
     {/if}
