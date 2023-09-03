@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { not } from '@vighnesh153/utils';
   import { type EventMode, type IColor, BrushThickness } from '@vighnesh153/drawing-app';
 
   import CloseIcon from '@/icons/CloseIcon.svelte';
@@ -17,12 +18,17 @@
   export let selectedColor: IColor;
   export let selectedEventMode: EventMode;
   export let selectedBrushThickness: BrushThickness;
+  export let isUndoAvailable: boolean;
+  export let isRedoAvailable: boolean;
   export let colors: IColor[];
   export let brushThicknessValues: BrushThickness[];
 
   type EventDispatcher = {
     modeChange: { newMode: EventMode };
     colorChange: { newColor: IColor };
+    undo: void;
+    redo: void;
+    clear: void;
     brushThicknessChange: { newBrushThickness: BrushThickness };
   };
 
@@ -38,6 +44,18 @@
 
   function onBrushThicknessChange(newBrushThickness: BrushThickness) {
     dispatch('brushThicknessChange', { newBrushThickness });
+  }
+
+  function onUndoButtonClick() {
+    dispatch('undo');
+  }
+
+  function onRedoButtonClick() {
+    dispatch('redo');
+  }
+
+  function onClearButtonClick() {
+    dispatch('clear');
   }
 </script>
 
@@ -80,7 +98,7 @@
   <ToolbarDivider />
 
   <!-- Undo button -->
-  <ActionButton>
+  <ActionButton disabled={not(isUndoAvailable)} on:click={onUndoButtonClick}>
     <RotateLeftIcon class="w-[25px]" />
     <p slot="title">Undo</p>
   </ActionButton>
@@ -88,7 +106,7 @@
   <ToolbarDivider />
 
   <!-- Redo button -->
-  <ActionButton>
+  <ActionButton disabled={not(isRedoAvailable)} on:click={onRedoButtonClick}>
     <RotateRightIcon class="w-[25px]" />
     <p slot="title">Redo</p>
   </ActionButton>
@@ -96,8 +114,8 @@
   <ToolbarDivider />
 
   <!-- Clear button -->
-  <ActionButton>
-    <CloseIcon class="w-[20px] stroke-secondary" />
+  <ActionButton on:click={onClearButtonClick}>
+    <CloseIcon class="w-[20px]" stroke="inherit" />
     <p slot="title">Clear</p>
   </ActionButton>
 </div>
