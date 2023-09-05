@@ -83,7 +83,7 @@ function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEve
     if (visitedNodes[x]?.[y]) continue;
 
     // Add to visited nodes
-    visitedNodes[x] = visitedNodes[x] || ({} as Record<number, boolean>);
+    visitedNodes[x] ??= {};
     visitedNodes[x][y] = true;
 
     // update the color in pixel data

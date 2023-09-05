@@ -1,5 +1,6 @@
 import { Queue, Stack, not } from '@vighnesh153/utils';
-import { type AppEvent } from './events';
+import { buildClearScreenEvent, type AppEvent } from './events';
+import { Color } from './colors';
 
 export type EventsManager = {
   undoEventsStack: Stack<AppEvent>;
@@ -51,7 +52,12 @@ export function undo(eventsManager: EventsManager): boolean {
   }
 
   // add events to pending queue
-  eventsManager.pendingQueue = new Queue(...eventsManager.undoEventsStack.toArray());
+  eventsManager.pendingQueue = new Queue(
+    buildClearScreenEvent({
+      color: Color.White,
+    }),
+    ...eventsManager.undoEventsStack.toArray()
+  );
 
   return true;
 }

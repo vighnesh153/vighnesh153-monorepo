@@ -29,9 +29,13 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     canvas.width = width * scale;
     canvas.height = height * scale;
 
-    const canvasContext = this.canvas.getContext('2d');
+    const canvasContext = this.canvas.getContext('2d', {
+      willReadFrequently: true,
+      // colorSpace: 'srgb',
+      desynchronized: true,
+    });
     if (canvasContext === null) {
-      throw new Error('CanvasContext is null. Check why that is happening.');
+      throw new Error(`canvasContext shoudn't be null`);
     }
 
     // Disable image smoothing (shows wrong color during fill operation with putImageData)
