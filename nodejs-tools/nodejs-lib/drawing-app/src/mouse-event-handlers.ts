@@ -2,10 +2,20 @@ import { Point, buildCommitEvent, buildDrawLineEvent, buildFloodFillEvent } from
 import { publishEvents, type EventsManager } from './events-manager';
 import { AppConfig } from './AppConfig';
 
-type MouseHandlerStore = {
+export type MouseHandlerStore = {
   state: 'idle' | 'pressed' | 'drag';
   location: Point;
 };
+
+export function buildMouseHandlerStore(): MouseHandlerStore {
+  return {
+    state: 'idle',
+    location: {
+      x: 0,
+      y: 0,
+    },
+  };
+}
 
 export function handleMouseDown(
   mouseHandlerStore: MouseHandlerStore,
@@ -43,10 +53,12 @@ export function handleMouseMove(
     startPoint: mouseHandlerStore.location,
     endPoint: newPoint,
   });
-  publishEvents(eventsManager, [drawLineEvent]);
 
-  // update store
-  mouseHandlerStore.state = 'drag';
+  if (mouseHandlerStore.state !== 'idle') {
+    mouseHandlerStore.state = 'drag';
+    publishEvents(eventsManager, [drawLineEvent]);
+  }
+
   mouseHandlerStore.location = newPoint;
 }
 

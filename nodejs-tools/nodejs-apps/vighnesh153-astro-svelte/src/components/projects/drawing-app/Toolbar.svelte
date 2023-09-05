@@ -14,6 +14,7 @@
   import ColorButton from './ColorButton.svelte';
   import BrushThicknessButton from './BrushThicknessButton.svelte';
   import ActionButton from './ActionButton.svelte';
+  import { classes } from '@/utils';
 
   export let selectedColor: IColor;
   export let selectedEventMode: EventMode;
@@ -59,7 +60,7 @@
   }
 </script>
 
-<div class="w-fit px-6 pt-5 pb-4 mx-auto bg-text flex items-center gap-6 rounded-lg">
+<div class={classes('w-fit px-6 pt-5 pb-4 mx-auto bg-text rounded-lg', 'flex items-center gap-6 flex-wrap')}>
   <!-- Mode -->
   <div class="flex gap-6">
     <ModeButton isSelected={selectedEventMode === 'draw'} on:click={() => onModeChange('draw')}>

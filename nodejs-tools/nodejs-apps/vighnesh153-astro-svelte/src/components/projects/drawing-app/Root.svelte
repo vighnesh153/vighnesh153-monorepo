@@ -8,6 +8,15 @@
     redo,
     publishEvents,
     buildClearScreenEvent,
+    buildCommitEvent,
+    buildMouseHandlerStore,
+    type CanvasWrapper,
+    CanvasWrapperImpl,
+    handleMouseDown,
+    handleMouseUp,
+    handleMouseMove,
+    type AppConfig,
+    processAppEvent,
   } from '@vighnesh153/drawing-app';
 
   import {
@@ -17,8 +26,15 @@
     isRedoAvailableStore,
     isUndoAvailableStore,
     eventsManagerStore,
+    pendingQueueStore,
   } from '@/store/projects/drawing-app';
+
   import Toolbar from './Toolbar.svelte';
+  import { onMount } from 'svelte';
+
+  let canvasElement: HTMLCanvasElement;
+  let canvasWrapper: CanvasWrapper;
+  let mouseHandlerStore = buildMouseHandlerStore();
 
   const colors: IColor[] = Object.values(Color);
   const brushThicknessValues = [
@@ -28,6 +44,12 @@
     BrushThickness.lg,
     BrushThickness.xl,
   ];
+
+  $: {
+    if (canvasWrapper) {
+      processAppEvent(canvasWrapper, $pendingQueueStore);
+    }
+  }
 
   function onModeChange(newMode: EventMode) {
     $drawingEventModeStore = newMode;
@@ -54,11 +76,43 @@
   function onClearButtonClick(): void {
     publishEvents($eventsManagerStore, [
       buildClearScreenEvent({
-        color: $colorStore,
+        color: Color.White,
       }),
+      buildCommitEvent(),
     ]);
     $eventsManagerStore = $eventsManagerStore;
   }
+
+  function buildAppConfig(): AppConfig {
+    return $drawingEventModeStore === 'draw'
+      ? { mode: 'draw', brushThickness: $brushThicknessStore, color: $colorStore }
+      : { mode: 'fill', color: $colorStore };
+  }
+
+  function onMouseDown(e: MouseEvent): void {
+    handleMouseDown(mouseHandlerStore, e, canvasElement);
+    $eventsManagerStore = $eventsManagerStore;
+    mouseHandlerStore = mouseHandlerStore;
+  }
+
+  function onMouseUp(e: MouseEvent): void {
+    handleMouseUp(mouseHandlerStore, $eventsManagerStore, buildAppConfig(), e, canvasElement);
+    $eventsManagerStore = $eventsManagerStore;
+    mouseHandlerStore = mouseHandlerStore;
+  }
+
+  function onMouseMove(e: MouseEvent): void {
+    handleMouseMove(mouseHandlerStore, $eventsManagerStore, buildAppConfig(), e, canvasElement);
+    $eventsManagerStore = $eventsManagerStore;
+    mouseHandlerStore = mouseHandlerStore;
+  }
+
+  onMount(() => {
+    canvasWrapper = new CanvasWrapperImpl(canvasElement, {
+      width: canvasElement.clientWidth,
+      height: canvasElement.clientHeight,
+    });
+  });
 </script>
 
 <div>
@@ -77,4 +131,14 @@
     on:redo={onRedoButtonClick}
     on:clear={onClearButtonClick}
   />
+
+  <canvas
+    bind:this={canvasElement}
+    class="mt-4 mx-auto w-full max-w-3xl aspect-video bg-[white]"
+    on:mousedown={(e) => onMouseDown(e)}
+    on:mouseup={(e) => onMouseUp(e)}
+    on:mousemove={(e) => onMouseMove(e)}
+  >
+    <p>Sorry, canvas element is not supported in your browser</p>
+  </canvas>
 </div>
