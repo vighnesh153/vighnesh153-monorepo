@@ -20,6 +20,9 @@
       "cache": false,
       "persistent": true
     },
-    "deploy:prod": {}
+    "deploy:prod": {},
+    "sst:deploy:prod:local": {
+      "cache": false
+    }
   }
 }
