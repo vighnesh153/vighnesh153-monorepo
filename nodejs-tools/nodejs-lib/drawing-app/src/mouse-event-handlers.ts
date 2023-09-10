@@ -38,25 +38,22 @@ export function handleMouseMove(
   event: MouseEvent,
   canvasElement: HTMLCanvasElement
 ) {
-  if (appConfig.mode === 'fill') return;
-
   const boundingClientRect = canvasElement.getBoundingClientRect();
   const newPoint: Point = {
     x: event.clientX - boundingClientRect.left,
     y: event.clientY - boundingClientRect.top,
   };
 
-  // trigger event
-  const drawLineEvent = buildDrawLineEvent({
-    color: appConfig.color,
-    brushThickness: appConfig.brushThickness,
-    startPoint: mouseHandlerStore.location,
-    endPoint: newPoint,
-  });
-
-  if (mouseHandlerStore.state !== 'idle') {
-    mouseHandlerStore.state = 'drag';
+  if (mouseHandlerStore.state !== 'idle' && appConfig.mode !== 'fill') {
+    const drawLineEvent = buildDrawLineEvent({
+      color: appConfig.color,
+      brushThickness: appConfig.brushThickness,
+      startPoint: mouseHandlerStore.location,
+      endPoint: newPoint,
+    });
     publishEvents(eventsManager, [drawLineEvent]);
+
+    mouseHandlerStore.state = 'drag';
   }
 
   mouseHandlerStore.location = newPoint;
@@ -101,7 +98,7 @@ export function handleMouseUp(
       publishEvents(eventsManager, [
         buildFloodFillEvent({
           color: appConfig.color,
-          startPoint: previousPoint,
+          startPoint: newPoint,
         }),
         buildCommitEvent(),
       ]);

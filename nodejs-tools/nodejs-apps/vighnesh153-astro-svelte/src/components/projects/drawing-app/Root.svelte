@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import {
     type EventMode,
     Color,
@@ -19,6 +21,7 @@
     processAppEvent,
   } from '@vighnesh153/drawing-app';
 
+  import { classes } from '@/utils';
   import {
     brushThicknessStore,
     colorStore,
@@ -30,7 +33,6 @@
   } from '@/store/projects/drawing-app';
 
   import Toolbar from './Toolbar.svelte';
-  import { onMount } from 'svelte';
 
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;
@@ -134,7 +136,7 @@
 
   <canvas
     bind:this={canvasElement}
-    class="mt-4 mx-auto w-full max-w-3xl aspect-video bg-[white]"
+    class={classes('mt-4 mx-auto bg-[white]', 'w-full max-w-3xl aspect-video')}
     on:mousedown={(e) => onMouseDown(e)}
     on:mouseup={(e) => onMouseUp(e)}
     on:mousemove={(e) => onMouseMove(e)}
