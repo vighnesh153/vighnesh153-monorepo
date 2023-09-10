@@ -22,8 +22,8 @@ export class CanvasWrapperImpl implements CanvasWrapper {
 
     // Set actual size in memory (scaled to account for extra pixel density)
     // Change to 1 on retina screens to see blurry canvas
-    const scale = window.devicePixelRatio;
-    // const scale = 1;
+    // const scale = window.devicePixelRatio;
+    const scale = 1;
     canvas.width = width * scale;
     canvas.height = height * scale;
 
