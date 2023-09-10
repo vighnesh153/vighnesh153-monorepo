@@ -40,7 +40,7 @@
     "serverless": "^3.34.0",
     "serverless-domain-manager": "7.1.2",
     "tsup": "^7.2.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",
