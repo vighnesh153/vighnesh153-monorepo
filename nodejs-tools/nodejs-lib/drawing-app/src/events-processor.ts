@@ -2,16 +2,21 @@ import { not, Queue } from '@vighnesh153/utils';
 
 import type { DrawPointEvent, AppEvent, DrawLineEvent, ClearScreenEvent, FloodFillEvent } from './events';
 import { CanvasWrapper } from './CanvasWrapper';
-import { IColor } from './colors';
+
+const PACKED_POINT_MODULO = 10000;
+const PACKED_COLOR_MODULO = 1000;
+function packPoint(x: number, y: number): number {
+  return x * PACKED_POINT_MODULO + y;
+}
 
 // returns the indices for the r,g,b,a components of the colors of the provided pixel coordinates
 function getRedColorIndicesForPixel(canvasWidth: number, x: number, y: number): number {
   const pixelsOnSingleRow = canvasWidth * 4; // 1 for each (r,g,b,a)
-  const rIndex = Math.round(y) * pixelsOnSingleRow + Math.round(x) * 4;
+  const rIndex = y * pixelsOnSingleRow + x * 4;
   return rIndex;
 }
 
-function getColorForPixel(canvasPixelData: ImageData, x: number, y: number): IColor['rgba'] {
+function getColorForPixel(canvasPixelData: ImageData, x: number, y: number): number {
   const rIndex = getRedColorIndicesForPixel(canvasPixelData.width, x, y);
   const gIndex = rIndex + 1;
   const bIndex = rIndex + 2;
@@ -20,15 +25,12 @@ function getColorForPixel(canvasPixelData: ImageData, x: number, y: number): ICo
   const g = canvasPixelData.data[gIndex];
   const b = canvasPixelData.data[bIndex];
   const a = canvasPixelData.data[aIndex];
-  return { r, g, b, a };
+  // pack colors
+  return ((r * PACKED_COLOR_MODULO + g) * PACKED_COLOR_MODULO + b) * PACKED_COLOR_MODULO + a;
 }
 
-function areColorsEqual(color1: IColor['rgba'], color2: IColor['rgba']): boolean {
-  if (color1.r !== color2.r) return false;
-  if (color1.g !== color2.g) return false;
-  if (color1.b !== color2.b) return false;
-  if (color1.a !== color2.a) return false;
-  return true;
+function areColorsEqual(packedColor1: number, packedColor2: number): boolean {
+  return packedColor1 === packedColor2;
 }
 
 function processDrawPointEvent(canvasWrapper: CanvasWrapper, event: DrawPointEvent): void {
@@ -47,14 +49,19 @@ function processClearScreenEvent(canvasWrapper: CanvasWrapper, event: ClearScree
 }
 
 function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEvent): void {
-  const { color, startPoint } = event;
+  const {
+    color,
+    startPoint: { x: startPointX, y: startPointY },
+  } = event;
+  const rounededStartPointX = Math.round(startPointX);
+  const rounededStartPointY = Math.round(startPointY);
 
   // Initial pixel information for the entire canvas. Doing it this way because invoking
   // getImageData several times is expensive than just doing it once
   const canvasPixelData = canvasWrapper.getImageData(0, 0, canvasWrapper.width, canvasWrapper.height);
 
   // Color of the starting pixel
-  const initialColor = getColorForPixel(canvasPixelData, startPoint.x, startPoint.y);
+  const initialColor = getColorForPixel(canvasPixelData, rounededStartPointX, rounededStartPointY);
   const newColor = color.rgba;
 
   // In the pixel data, "alpha" needs to be between (0 and 255)
@@ -62,12 +69,14 @@ function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEve
 
   // set of all the nodes that are already visited
   const visitedNodes: Record<number, Record<number, boolean>> = {};
-  const pixelQueue = new Queue([startPoint.x, startPoint.y]);
+  const pixelQueue = new Queue(packPoint(rounededStartPointX, rounededStartPointY));
 
   // Implementation of BFS algorithm for filling colors in
   // the region
   while (not(pixelQueue.isEmpty)) {
-    const [x, y] = pixelQueue.popLeft()!;
+    const packedPoint = pixelQueue.popLeft()!;
+    const y = packedPoint % PACKED_POINT_MODULO;
+    const x = (packedPoint - y) / PACKED_POINT_MODULO;
 
     const rIndex = getRedColorIndicesForPixel(canvasPixelData.width, x, y);
     const gIndex = rIndex + 1;
@@ -94,7 +103,7 @@ function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEve
     canvasPixelData.data[aIndex] = newColor.a;
 
     // fill the surrounding nodes
-    pixelQueue.pushRight([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+    pixelQueue.pushRight(packPoint(x + 1, y), packPoint(x - 1, y), packPoint(x, y + 1), packPoint(x, y - 1));
   }
 
   // update the canvas with the new color values
