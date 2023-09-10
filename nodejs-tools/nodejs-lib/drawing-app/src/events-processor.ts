@@ -6,12 +6,13 @@ import { IColor } from './colors';
 
 // returns the indices for the r,g,b,a components of the colors of the provided pixel coordinates
 function getRedColorIndicesForPixel(canvasWidth: number, x: number, y: number): number {
-  const rIndex = y * (canvasWidth * 4) + x * 4;
+  const pixelsOnSingleRow = canvasWidth * 4; // 1 for each (r,g,b,a)
+  const rIndex = Math.round(y) * pixelsOnSingleRow + Math.round(x) * 4;
   return rIndex;
 }
 
-function getColorForPixel(canvasPixelData: ImageData, canvasWidth: number, x: number, y: number): IColor['rgba'] {
-  const rIndex = getRedColorIndicesForPixel(canvasWidth, x, y);
+function getColorForPixel(canvasPixelData: ImageData, x: number, y: number): IColor['rgba'] {
+  const rIndex = getRedColorIndicesForPixel(canvasPixelData.width, x, y);
   const gIndex = rIndex + 1;
   const bIndex = rIndex + 2;
   const aIndex = rIndex + 3;
@@ -53,7 +54,7 @@ function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEve
   const canvasPixelData = canvasWrapper.getImageData(0, 0, canvasWrapper.width, canvasWrapper.height);
 
   // Color of the starting pixel
-  const initialColor = getColorForPixel(canvasPixelData, canvasWrapper.width, startPoint.x, startPoint.y);
+  const initialColor = getColorForPixel(canvasPixelData, startPoint.x, startPoint.y);
   const newColor = color.rgba;
 
   // In the pixel data, "alpha" needs to be between (0 and 255)
@@ -68,16 +69,16 @@ function processFloodFillEvent(canvasWrapper: CanvasWrapper, event: FloodFillEve
   while (not(pixelQueue.isEmpty)) {
     const [x, y] = pixelQueue.popLeft()!;
 
-    const rIndex = getRedColorIndicesForPixel(canvasWrapper.width, x, y);
+    const rIndex = getRedColorIndicesForPixel(canvasPixelData.width, x, y);
     const gIndex = rIndex + 1;
     const bIndex = rIndex + 2;
     const aIndex = rIndex + 3;
 
     // if index out of bounds, return
-    if (x < 0 || x >= canvasWrapper.width || y < 0 || y >= canvasWrapper.height) continue;
+    if (x < 0 || x >= canvasPixelData.width || y < 0 || y >= canvasPixelData.height) continue;
 
     // if color is not same as initial color, return
-    if (not(areColorsEqual(getColorForPixel(canvasPixelData, canvasWrapper.width, x, y), initialColor))) continue;
+    if (not(areColorsEqual(getColorForPixel(canvasPixelData, x, y), initialColor))) continue;
 
     // if already visited, return
     if (visitedNodes[x]?.[y]) continue;

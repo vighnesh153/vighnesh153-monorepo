@@ -16,22 +16,19 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     canvas: HTMLCanvasElement,
     { width = window.innerWidth, height = window.innerHeight }: { width?: number; height?: number } = {}
   ) {
-    this.canvas = canvas;
-
     // Set display size (css pixels)
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
     // Set actual size in memory (scaled to account for extra pixel density)
     // Change to 1 on retina screens to see blurry canvas
-    // const scale = window.devicePixelRatio;
-    const scale = 1;
+    const scale = window.devicePixelRatio;
+    // const scale = 1;
     canvas.width = width * scale;
     canvas.height = height * scale;
 
-    const canvasContext = this.canvas.getContext('2d', {
+    const canvasContext = canvas.getContext('2d', {
       willReadFrequently: true,
-      // colorSpace: 'srgb',
       desynchronized: true,
     });
     if (canvasContext === null) {
@@ -41,9 +38,8 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     // Disable image smoothing (shows wrong color during fill operation with putImageData)
     canvasContext.imageSmoothingEnabled = false;
 
+    this.canvas = canvas;
     this.canvasContext = canvasContext;
-    const dpr = window.devicePixelRatio;
-    this.canvasContext.scale(dpr, dpr);
     this.reset();
   }
 
