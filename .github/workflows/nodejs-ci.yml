@@ -7,8 +7,12 @@ name: nodejs-ci
 on:
   push:
     branches: ["main"]
+    paths:
+      - /nodejs-tools/*
   pull_request:
     branches: ["main"]
+    paths:
+      - /nodejs-tools/*
 
 jobs:
   nodejs-ci:
