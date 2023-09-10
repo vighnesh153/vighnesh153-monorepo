@@ -19,6 +19,7 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "deploy:prod": "turbo run deploy:prod",
+    "sst:deploy:prod:local": "turbo run sst:deploy:prod:local",
     "changeStarToSpecificVersion": "node changeStarToSpecificVersion.js"
   },
   "devDependencies": {
