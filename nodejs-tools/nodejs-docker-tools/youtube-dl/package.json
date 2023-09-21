@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "docker": "docker-compose up && docker-compose down --rmi"
+    "docker": "docker-compose up; docker-compose down --rmi all"
   },
   "dependencies": {
   },
