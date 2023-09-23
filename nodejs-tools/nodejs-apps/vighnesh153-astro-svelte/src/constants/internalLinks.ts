@@ -22,6 +22,7 @@ export const internalLinks = {
     drawingApp: '/projects/drawing-app',
     graphicsProjects: {
       root: '/projects/graphics',
+      buildProjectLinkFromId: (projectId: string) => `/projects/graphics/${projectId}`,
     },
   },
 };
