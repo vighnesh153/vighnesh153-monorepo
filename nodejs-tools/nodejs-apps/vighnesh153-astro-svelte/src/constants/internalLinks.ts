@@ -20,5 +20,8 @@ export const internalLinks = {
     },
     tsxPlayground: '/projects/tsx-playground',
     drawingApp: '/projects/drawing-app',
+    graphicsProjects: {
+      root: '/projects/graphics',
+    },
   },
 };

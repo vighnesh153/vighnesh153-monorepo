@@ -60,11 +60,11 @@ export const allProjects: Project[] = [
     links: {
       github: {
         Icon: GithubIcon,
-        href: 'https://github.com/vighnesh153/canvas-api-illustrations',
+        href: externalLinks.projects.graphicsProjects.sourceCode,
       },
       demo: {
         Icon: EyeIcon,
-        href: 'https://graphics.vighnesh153.com',
+        href: internalLinks.projects.graphicsProjects.root,
       },
     },
   },
@@ -92,13 +92,11 @@ export const allProjects: Project[] = [
     links: {
       github: {
         Icon: GithubIcon,
-        href:
-          'https://github.com/vighnesh153/vighnesh153-monorepo/tree' +
-          '/main/nodejs-tools/nodejs-packages/react-use-global-state',
+        href: externalLinks.projects.reactUseGlobalState.sourceCode,
       },
       demo: {
         Icon: EyeIcon,
-        href: 'https://www.npmjs.com/package/@vighnesh153/react-use-global-state',
+        href: externalLinks.projects.reactUseGlobalState.demo,
       },
     },
   },

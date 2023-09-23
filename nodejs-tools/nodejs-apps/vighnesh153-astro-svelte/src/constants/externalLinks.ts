@@ -1,19 +1,32 @@
+function monorepo(localPath: string): string {
+  return `https://github.com/vighnesh153/vighnesh153-monorepo/tree/main${localPath}`;
+}
+
+function nodejsLib(localPath: string): string {
+  return monorepo(`/nodejs-tools/nodejs-lib${localPath}`);
+}
+
 export const externalLinks = {
-  githubRepo:
-    'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-apps/vighnesh153.com_astro',
+  githubRepo: monorepo('/nodejs-tools/nodejs-apps/vighnesh153-astro-svelte'),
   blog: 'https://blog.vighnesh153.com',
   resume: 'https://bit.ly/vighnesh153-resume',
   projects: {
     spl: {
-      sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/spl',
-      learnSyntax:
-        'https://github.com/vighnesh153/vighnesh153-monorepo/blob/main/nodejs-tools/nodejs-lib/spl/README.md',
+      sourceCode: nodejsLib('/spl'),
+      learnSyntax: nodejsLib('/spl/README.md'),
     },
     tsxBundler: {
-      sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/tsx-bundler',
+      sourceCode: nodejsLib('/tsx-bundler'),
     },
     drawingApp: {
-      sourceCode: 'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/drawing-app',
+      sourceCode: nodejsLib('/drawing-app'),
+    },
+    graphicsProjects: {
+      sourceCode: nodejsLib('/graphics-programming'),
+    },
+    reactUseGlobalState: {
+      sourceCode: monorepo('/nodejs-tools/nodejs-packages/react-use-global-state'),
+      demo: 'https://www.npmjs.com/package/@vighnesh153/react-use-global-state',
     },
   },
 };
