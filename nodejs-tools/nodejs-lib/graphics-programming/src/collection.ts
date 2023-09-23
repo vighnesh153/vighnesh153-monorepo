@@ -88,7 +88,7 @@ const twinklingStars: GraphicsProject = {
   id: 'twinkling-stars',
 };
 
-export const graphicsProjects: GraphicsProject[] = [
+export const graphicsProjectsMap: Record<string, GraphicsProject> = {
   gridPathFinderGame,
   serpinskisTriangle,
   towerOfHanoi,
@@ -103,4 +103,6 @@ export const graphicsProjects: GraphicsProject[] = [
   snakeGame,
   flappyBlockGame,
   brickBreakerGame,
-];
+};
+
+export const graphicsProjects: GraphicsProject[] = Object.values(graphicsProjectsMap);
