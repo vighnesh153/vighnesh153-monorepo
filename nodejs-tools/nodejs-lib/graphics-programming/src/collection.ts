@@ -1,4 +1,4 @@
-interface GraphicsProject {
+export interface GraphicsProject {
   imageLink: string;
   title: string;
   id: string;
@@ -88,7 +88,7 @@ const twinklingStars: GraphicsProject = {
   id: 'twinkling-stars',
 };
 
-export const graphicsProjectsMap: Record<string, GraphicsProject> = {
+export const graphicsProjectsMap = {
   gridPathFinderGame,
   serpinskisTriangle,
   towerOfHanoi,
@@ -103,6 +103,6 @@ export const graphicsProjectsMap: Record<string, GraphicsProject> = {
   snakeGame,
   flappyBlockGame,
   brickBreakerGame,
-};
+} satisfies Record<string, GraphicsProject>;
 
 export const graphicsProjects: GraphicsProject[] = Object.values(graphicsProjectsMap);
