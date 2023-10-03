@@ -1,2 +1,1 @@
-export * from './CellColors';
-export * from './Cell';
+export * from './GameManager';
