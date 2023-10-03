@@ -1,17 +1,26 @@
+import { not } from '@vighnesh153/utils';
 import { Game } from './Game';
 
 export class GameManager {
-  constructor(private game: Game) {}
+  #game: Game;
 
-  start() {
-    this.game.start();
+  get isRunning() {
+    return this.#game.isRunning;
   }
 
-  stop() {
-    this.game.stop();
+  constructor(game: Game) {
+    this.#game = game;
   }
 
-  solve() {
-    //
+  randomize(game: Game) {
+    this.#game.stop();
+    this.#game = game;
+  }
+
+  *solve() {
+    const frames = this.#game.solve();
+    while (not(frames.next().done)) {
+      yield;
+    }
   }
 }

@@ -2,30 +2,46 @@ import { Queue, not } from '@vighnesh153/utils';
 
 import { BfsCell } from './Cell';
 import { CellsGrid } from './CellsGrid';
+import { fillGridWithStartAndEnd, fillGridWithWalls } from './factories';
 
 export class Game {
+  #grid: CellsGrid;
   #state: 'running' | 'stopped' = 'stopped';
   #visitedCellIds: Set<string> = new Set();
   #currentCellPointer: BfsCell | null = null;
   #cellParents: Map<string, BfsCell> = new Map();
   #solutionPathCellIds: Set<string> = new Set();
 
-  constructor(private grid: CellsGrid) {
-    this.grid = grid;
+  get isRunning() {
+    return this.#state === 'running';
   }
 
-  start() {
-    this.#state = 'running';
+  static createNewWithDefaults(rows: number, cols: number): Game {
+    const cellsGrid = CellsGrid.createEmpty(rows, cols);
+    fillGridWithWalls(cellsGrid);
+    fillGridWithStartAndEnd(cellsGrid);
+    return new Game(cellsGrid);
+  }
+
+  constructor(grid: CellsGrid) {
+    this.#grid = grid;
   }
 
   stop() {
     this.#state = 'stopped';
   }
 
-  solve() {
-    const startCell = this.grid.findCell((cell) => cell.isStart);
+  *solve() {
+    this.#state = 'running';
+
+    const startCell = this.#grid.findCell((cell) => cell.isStart);
     if (!startCell) {
       return;
+    }
+
+    const frames = this.bfs(startCell);
+    while (not(frames.next().done) && this.#state === 'running') {
+      yield;
     }
   }
 
@@ -53,7 +69,7 @@ export class Game {
 
       yield;
 
-      const neighbourCells = this.grid.getNeighbourCells(cell);
+      const neighbourCells = this.#grid.getNeighbourCells(cell);
       neighbourCells.forEach((neighbour) => this.updateParentIfOrphan(neighbour, cell));
       queue.pushRight(...neighbourCells);
     }
