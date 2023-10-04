@@ -1,18 +1,18 @@
 import { not } from '@vighnesh153/utils';
-import { Game } from './Game';
+import { GridPathFinderGame } from './Game';
 
-export class GameManager {
-  #game: Game;
+export class GridPathFinderGameManager {
+  #game: GridPathFinderGame;
 
   get isRunning() {
     return this.#game.isRunning;
   }
 
-  constructor(game: Game) {
+  constructor(game: GridPathFinderGame) {
     this.#game = game;
   }
 
-  randomize(game: Game) {
+  randomize(game: GridPathFinderGame) {
     this.#game.stop();
     this.#game = game;
   }

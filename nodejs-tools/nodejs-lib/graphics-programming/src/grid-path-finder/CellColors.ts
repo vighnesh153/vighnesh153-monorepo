@@ -1,9 +1,9 @@
 import { type Properties } from 'csstype';
 
-export const cellColors = {
+export const gridPathFinderCellColors = {
   emptyCell: 'white',
-  startCell: 'green',
-  endCell: 'red',
+  startCell: 'hsla(120, 100%, 47%, 1)', // green
+  endCell: 'hsla(351, 100%, 55%, 1)', // red
   visitedCell: 'lightblue',
   wallCell: 'black',
   currentPointer: 'yellow',

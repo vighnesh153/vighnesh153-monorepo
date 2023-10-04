@@ -3,8 +3,9 @@ import { Queue, not } from '@vighnesh153/utils';
 import { BfsCell } from './Cell';
 import { CellsGrid } from './CellsGrid';
 import { fillGridWithStartAndEnd, fillGridWithWalls } from './factories';
+import { CellPosition } from './CellPosition';
 
-export class Game {
+export class GridPathFinderGame {
   #grid: CellsGrid;
   #state: 'running' | 'stopped' = 'stopped';
   #visitedCellIds: Set<string> = new Set();
@@ -16,11 +17,11 @@ export class Game {
     return this.#state === 'running';
   }
 
-  static createNewWithDefaults(rows: number, cols: number): Game {
+  static createNewWithDefaults(rows: number, cols: number): GridPathFinderGame {
     const cellsGrid = CellsGrid.createEmpty(rows, cols);
     fillGridWithWalls(cellsGrid);
     fillGridWithStartAndEnd(cellsGrid);
-    return new Game(cellsGrid);
+    return new GridPathFinderGame(cellsGrid);
   }
 
   constructor(grid: CellsGrid) {
@@ -29,6 +30,22 @@ export class Game {
 
   stop() {
     this.#state = 'stopped';
+  }
+
+  getVisitedCellIds(): Set<string> {
+    return new Set(this.#visitedCellIds);
+  }
+
+  getSolutionPathCellIds(): Set<string> {
+    return new Set(this.#solutionPathCellIds);
+  }
+
+  getCurrentPointerCellId(): string | null {
+    return this.#currentCellPointer?.id ?? null;
+  }
+
+  getCell(row: number, col: number): BfsCell | null {
+    return this.#grid.getCell(new CellPosition(row, col));
   }
 
   *solve() {
