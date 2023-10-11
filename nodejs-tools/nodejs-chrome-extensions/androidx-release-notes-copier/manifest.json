@@ -1,26 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "Androidx release notes copier",
-    "version": "1.0",
-    "description": "Add a copy button before commits which will copy the commit to clipboard in the release notes format",
-    "content_scripts": [
-        {
-            "js": [
-                "lib/toastify.js",
-                "scripts/index.js"
-            ],
-            "css": [
-                "lib/toastify.css"
-            ],
-            "matches": [
-                "https://android.googlesource.com/platform/frameworks/support/*"
-            ]
-        }
-    ],
-    "icons": {
-        "16": "images/icon-16.png",
-        "32": "images/icon-32.png",
-        "48": "images/icon-48.png",
-        "128": "images/icon-128.png"
+  "manifest_version": 3,
+  "name": "Androidx release notes copier",
+  "version": "1.2",
+  "description": "Add a copy button before commits which will copy the commit to clipboard in the release notes format",
+  "content_scripts": [
+    {
+      "js": ["lib/toastify.js", "scripts/index.js"],
+      "css": ["lib/toastify.css"],
+      "matches": [
+        "https://android.googlesource.com/*",
+        "https://vighnesh153.dev/*"
+      ]
     }
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  }
 }
