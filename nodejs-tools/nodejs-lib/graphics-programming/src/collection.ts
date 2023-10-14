@@ -47,7 +47,7 @@ const pseudoHilbertCurve: GraphicsProject = {
 };
 
 const serpinskisTriangle: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/J2zUHcl.png',
+  imageLink: 'https://i.imgur.com/aqfVtT4.png',
   title: `Sierpinski's Triangle`,
   id: 'sierpinskis-triangle',
 };
