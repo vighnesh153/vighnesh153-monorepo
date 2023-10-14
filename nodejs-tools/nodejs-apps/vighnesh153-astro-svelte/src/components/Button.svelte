@@ -10,6 +10,6 @@
   const { class: className } = $$props;
 </script>
 
-<button {...$$props} class={classes(className, `${variant}-button`)}>
+<button {...$$props} class={classes(className, `${variant}-button`)} on:click>
   <slot />
 </button>
