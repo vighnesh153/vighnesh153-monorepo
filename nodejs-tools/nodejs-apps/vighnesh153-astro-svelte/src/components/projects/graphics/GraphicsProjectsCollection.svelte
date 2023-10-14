@@ -11,16 +11,16 @@
       class={classes(
         'group/card',
 
-        'min-h-[180px] w-full p-2',
+        'min-h-[180px] w-full',
 
         'flex flex-col items-center',
 
-        'cursor-pointer rounded-2xl',
+        'cursor-pointer rounded-2xl overflow-hidden',
 
         'bg-backgroundDark',
-        'hover:bg-backgroundLight focus-visible:bg-backgroundLight',
+        // 'hover:bg-backgroundLight focus-visible:bg-backgroundLight',
 
-        'shadow-md',
+        // 'shadow-md',
         'hover:shadow-xl focus-visible:shadow-xl',
 
         'shadow-text4',
@@ -29,13 +29,13 @@
       href={internalLinks.projects.graphicsProjects.buildProjectLinkFromId(graphicsProject.id)}
     >
       <img
-        class={classes('block w-10/12 h-4/5 object-contain', 'border rounded-xl border-text4')}
+        class={classes('block w-full aspect-video object-contain')}
         alt={graphicsProject.title}
         src={graphicsProject.imageLink}
       />
-      <p class={classes('mt-1 text-xl text-text2', 'group-hover/card:text-text group-focus/card:text-text')}>
+      <span class={classes('my-3 text-xl text-text2', 'group-hover/card:text-text group-focus/card:text-text')}>
         {graphicsProject.title}
-      </p>
+      </span>
     </a>
   {/each}
 </div>

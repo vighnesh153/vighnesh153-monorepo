@@ -29,7 +29,7 @@ const flappyBlockGame: GraphicsProject = {
 };
 
 const gridPathFinderGame: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/j0JsNwY.png',
+  imageLink: 'https://i.imgur.com/znf6hph.png',
   title: 'Grid Path Finder',
   id: 'grid-path-finder',
 };
