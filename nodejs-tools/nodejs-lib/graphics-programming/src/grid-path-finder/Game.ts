@@ -32,12 +32,12 @@ export class GridPathFinderGame {
     this.#state = 'stopped';
   }
 
-  getVisitedCellIds(): Set<string> {
-    return new Set(this.#visitedCellIds);
+  isCellVisited(cell: BfsCell): boolean {
+    return this.#visitedCellIds.has(cell.id);
   }
 
-  getSolutionPathCellIds(): Set<string> {
-    return new Set(this.#solutionPathCellIds);
+  isCellPartOfSolutionPath(cell: BfsCell): boolean {
+    return this.#solutionPathCellIds.has(cell.id);
   }
 
   getCurrentPointerCellId(): string | null {
@@ -70,14 +70,14 @@ export class GridPathFinderGame {
 
     while (not(queue.isEmpty)) {
       const cell = queue.popLeft()!;
-
-      this.#currentCellPointer = cell;
       const isVisited = this.#visitedCellIds.has(cell.id);
-      this.#visitedCellIds.add(cell.id);
 
-      if (isVisited || cell.isWall) {
+      if (cell.isWall || isVisited) {
         continue;
       }
+
+      this.#currentCellPointer = cell;
+      this.#visitedCellIds.add(cell.id);
 
       if (cell.isEnd) {
         solutionExists = true;
@@ -90,6 +90,10 @@ export class GridPathFinderGame {
       neighbourCells.forEach((neighbour) => this.updateParentIfOrphan(neighbour, cell));
       queue.pushRight(...neighbourCells);
     }
+
+    // By updateParentIfOrphan logic, even start cell will get assigned a parent
+    // which is actually its child. So, cleanup the startCell's parent
+    this.#cellParents.delete(startCell.id);
 
     // backtrack the path to start
     if (solutionExists) {
