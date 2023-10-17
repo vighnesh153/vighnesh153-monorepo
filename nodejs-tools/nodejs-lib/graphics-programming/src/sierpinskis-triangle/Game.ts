@@ -1,5 +1,5 @@
 import { randomInteger, repeat } from '@vighnesh153/utils';
-import { CanvasWrapper } from '..';
+import { CanvasWrapper } from '../canvas-wrapper';
 
 export interface SierpinskisTriangleGamePoint {
   x: number;
