@@ -28,9 +28,8 @@
   }
 
   onMount(() => {
-    const dpr = window.devicePixelRatio ?? 1;
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement, { devicePixelRatio: dpr });
-    game = new SierpinskisTriangleGame(canvasWrapper, { pointRadius: 1, speed: dpr * 4 });
+    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+    game = new SierpinskisTriangleGame(canvasWrapper, { pointRadius: 1, speed: 6 });
     gameManager = new SierpinskisTriangleGameManager(game);
 
     start();
