@@ -4,6 +4,7 @@ export interface CanvasWrapper {
   readonly width: number;
   readonly height: number;
   readonly canvasElement: HTMLCanvasElement;
+  readonly context: CanvasRenderingContext2D;
 
   reset(): void;
   getBoundingClientRect(): DOMRect;
@@ -33,6 +34,10 @@ export class CanvasWrapperImpl implements CanvasWrapper {
 
   get canvasElement(): HTMLCanvasElement {
     return this.#canvas;
+  }
+
+  get context(): CanvasRenderingContext2D {
+    return this.#canvasContext;
   }
 
   constructor(canvas: HTMLCanvasElement) {
