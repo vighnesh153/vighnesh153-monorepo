@@ -8,10 +8,7 @@ export class TowerOfHanoiGameManager {
   }
 
   *start() {
-    const frames = this.#game.start();
-    while (!frames.next().done) {
-      yield;
-    }
+    yield* this.#game.start();
   }
 
   stop() {

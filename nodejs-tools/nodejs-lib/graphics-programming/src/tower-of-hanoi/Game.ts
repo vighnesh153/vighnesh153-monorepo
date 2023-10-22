@@ -1,95 +1,135 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
-import { RodConfig } from './Rod';
-import { Disc } from './Disc';
-import { RodManager } from './RodManager';
-import { range } from '@vighnesh153/utils';
+import { StackConfig } from './Stack';
+import { Disc, DiscConfig } from './Disc';
+import { StacksManager } from './StacksManager';
+import { not, range } from '@vighnesh153/utils';
+import { towerOfHanoi } from './algorithm';
+import { animateDiscMovement } from './animateDiscMovement';
 
 export interface TowerOfHanoiGameOptions {
-  rodConfig?: RodConfig;
+  stackConfig?: StackConfig;
 
-  discConfig?: {
-    count?: number;
+  discCount?: number;
+  discConfig?: Omit<DiscConfig, 'center' | 'width'>;
 
-    color?: string;
-    borderColor?: string;
-    borderWidth?: number;
-    thickness?: number;
-  };
+  ceilingGap?: number;
+  animationSpeed?: number;
+
+  bgColor?: string;
 }
 
 export class TowerOfHanoiGame {
   readonly #canvasWrapper: CanvasWrapper;
 
-  static readonly rodCount = 3;
+  static readonly maxDiscCount = 10;
+  static readonly stackCount = 3;
+
+  readonly #bgColor: string;
+  readonly #ceilingGap: number;
+  readonly #animationSpeed: number;
 
   readonly #discCount: number;
-  readonly #discColor: string;
-  readonly #discBorderWidth: number;
-  readonly #discBorderColor: string;
-  readonly #discThickness: number;
+  readonly #discConfig: Omit<DiscConfig, 'center' | 'width'>;
 
-  readonly #discs: Disc[] = [];
+  readonly #stacksManager: StacksManager;
 
-  readonly #rodManager: RodManager;
+  #isRunning = false;
+
+  get isRunning(): boolean {
+    return this.#isRunning;
+  }
 
   constructor(canvasWrapper: CanvasWrapper, options: TowerOfHanoiGameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
 
     const rect = canvasWrapper.getBoundingClientRect();
-    // const canvasWidth = rect.width;
     const canvasHeight = rect.height;
 
-    this.#discCount = options.discConfig?.count ?? 10;
-    this.#discColor = options.discConfig?.color ?? 'red';
-    this.#discBorderColor = options.discConfig?.borderColor ?? 'black';
-    this.#discThickness = options.discConfig?.thickness ?? (canvasHeight * 3) / 100;
-    this.#discBorderWidth = options.discConfig?.borderWidth ?? this.#discThickness / 5;
+    this.#bgColor = options.bgColor ?? 'white';
+    this.#ceilingGap = options.ceilingGap ?? 50;
+    this.#animationSpeed = options.animationSpeed ?? 5;
 
-    this.#rodManager = new RodManager(canvasWrapper, TowerOfHanoiGame.rodCount, options.rodConfig ?? {});
+    this.#discCount = options.discCount ?? TowerOfHanoiGame.maxDiscCount;
+    const discThickness = options.discConfig?.thickness ?? (canvasHeight * 3) / 100;
+    this.#discConfig = {
+      thickness: discThickness,
+      color: 'red',
+      ...options.discConfig,
+      border: {
+        color: 'black',
+        width: discThickness / 5,
+        ...options.discConfig?.border,
+      },
+    };
 
-    this.initializeDiscs();
+    this.#stacksManager = new StacksManager(canvasWrapper, TowerOfHanoiGame.stackCount, options.stackConfig ?? {});
+
+    this.initializeDiscs(0);
+
+    this.draw();
   }
 
   *start() {
-    this.draw();
-    yield;
+    this.#isRunning = true;
+    for (const frame of this.solve()) {
+      yield frame;
+      if (not(this.#isRunning)) {
+        break;
+      }
+    }
   }
 
   stop() {
-    //
+    this.#isRunning = false;
   }
 
-  draw() {
-    this.#rodManager.drawRods();
-    this.drawDiscs();
-  }
+  private *solve() {
+    const moves = towerOfHanoi(this.#discCount, 0, 1, 2);
 
-  private drawDiscs() {
-    this.#discs.forEach((disc) => disc.draw());
-  }
+    for (const move of moves) {
+      const src = this.#stacksManager.getStack(move.from);
+      const dest = this.#stacksManager.getStack(move.to);
 
-  private initializeDiscs() {
-    const thickness = this.#discThickness;
-    const basePosition = this.#rodManager.getBaseCenterPosition(0);
-    if (basePosition === null) {
-      throw new Error('Index out of bounds');
+      const disc = src.removeDisc()!;
+
+      yield* animateDiscMovement({
+        disc,
+        src,
+        dest,
+        ceilingGap: this.#ceilingGap,
+        speed: this.#animationSpeed,
+        beforeYield: () => {
+          this.draw();
+          disc.draw();
+        },
+      });
+
+      dest.addDisc(disc);
+      this.draw();
+      yield;
     }
-    basePosition.y -= thickness / 2;
+  }
 
-    for (const i of range(1, this.#discCount)) {
-      this.#discs.push(
+  private draw() {
+    this.clearScreen();
+    this.#stacksManager.draw();
+  }
+
+  private clearScreen() {
+    const rect = this.#canvasWrapper.getBoundingClientRect();
+    const canvasWidth = rect.width;
+    const canvasHeight = rect.height;
+    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+  }
+
+  private initializeDiscs(stackIndex: number) {
+    const stack = this.#stacksManager.getStack(stackIndex);
+
+    for (const i of Array.from(range(1, this.#discCount)).toReversed()) {
+      stack.addDisc(
         new Disc(this.#canvasWrapper, {
-          border: {
-            color: this.#discBorderColor,
-            width: this.#discBorderWidth,
-          },
-          center: {
-            ...basePosition,
-            y: basePosition.y - (this.#discCount - i) * thickness,
-          },
-          color: this.#discColor,
-          thickness: thickness,
-          width: (this.#rodManager.baseWidth * (9 * i)) / 100,
+          ...this.#discConfig,
+          width: this.#stacksManager.baseWidth * ((1 / (TowerOfHanoiGame.maxDiscCount + 1)) * i),
         })
       );
     }
