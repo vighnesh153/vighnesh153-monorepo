@@ -71,7 +71,7 @@ const symmetricBinaryTree: GraphicsProject = {
 };
 
 const towerOfHanoi: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/kIsetz4.png',
+  imageLink: 'https://i.imgur.com/FgdIyOZ.png',
   title: 'Tower of Hanoi',
   id: 'tower-of-hanoi',
 };
