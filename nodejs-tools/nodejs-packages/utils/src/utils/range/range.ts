@@ -14,7 +14,7 @@ const validateStep = (step: number, start: number, end: number) => {
  * Generate a range of numbers
  *
  * @param start - start of the range
- * @param end - end of the range
+ * @param end - end of the range (inclusive)
  * @param step - difference between elements of the range
  */
 export function* range(start: number, end: number, step = 1): Generator<number> {

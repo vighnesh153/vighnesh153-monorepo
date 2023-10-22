@@ -1,7 +1,8 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { Position } from './Position';
+import { Disc } from './Disc';
 
-export interface RodConfig {
+export interface StackConfig {
   color: string;
   baseCenterPosition: Position;
   baseWidth: number;
@@ -9,12 +10,14 @@ export interface RodConfig {
   height: number;
 }
 
-export class Rod {
+export class Stack {
   readonly #canvasWrapper: CanvasWrapper;
 
-  readonly #config: RodConfig;
+  readonly #config: StackConfig;
 
-  constructor(canvasWrapper: CanvasWrapper, config: RodConfig) {
+  readonly #discs: Disc[] = [];
+
+  constructor(canvasWrapper: CanvasWrapper, config: StackConfig) {
     this.#canvasWrapper = canvasWrapper;
     this.#config = config;
   }
@@ -32,6 +35,37 @@ export class Rod {
   draw() {
     this.drawBase();
     this.drawRod();
+    this.drawDiscs();
+  }
+
+  addDisc(disc: Omit<Disc, 'center'>) {
+    const discProcessed = disc as Disc;
+    const pos = this.getPositionForNewDisc();
+    discProcessed.center = {
+      x: pos.x,
+      y: pos.y - this.#config.thickness / 2,
+    };
+    this.#discs.push(discProcessed);
+  }
+
+  removeDisc(): Disc | null {
+    return this.#discs.pop() ?? null;
+  }
+
+  getPositionForNewDisc(): Position {
+    const discCount = this.#discs.length;
+    if (discCount > 0) {
+      const disc = this.#discs[discCount - 1];
+      const discCenter = disc.center;
+      return {
+        ...discCenter,
+        y: discCenter.y - disc.thickness / 2 - disc.borderConfig.width,
+      };
+    }
+
+    return {
+      ...this.#config.baseCenterPosition,
+    };
   }
 
   private drawBase() {
@@ -52,5 +86,9 @@ export class Rod {
     const topLeftY = this.topY;
 
     this.#canvasWrapper.drawFilledRect(topLeftX, topLeftY, thickness, height, color);
+  }
+
+  private drawDiscs() {
+    this.#discs.forEach((disc) => disc.draw());
   }
 }
