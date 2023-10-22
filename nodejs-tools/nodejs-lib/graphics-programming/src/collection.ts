@@ -65,7 +65,7 @@ const sortingVisualizer: GraphicsProject = {
 };
 
 const symmetricBinaryTree: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/tzA2Pyf.png',
+  imageLink: 'https://i.imgur.com/MNqF5n3.png',
   title: 'Symmetric Binary Tree',
   id: 'symmetric-binary-tree',
 };
