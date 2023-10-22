@@ -3,5 +3,10 @@
  */
 module.exports = {
   'upgrade': true,
-  'reject': [],
+  'reject': [
+    'mongodb',
+    'mongoose',
+    'next-auth',
+    'mongodb-memory-server'
+  ],
 };
