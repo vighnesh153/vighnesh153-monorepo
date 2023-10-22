@@ -59,14 +59,16 @@ Visit
 - adb fetch continue watching row from device
 - adb launch deeplink
 - compose-query (similar to react-query by tanstack)
-- migrate `draw.vighnesh153.com` to `vighnesh153.dev`
+- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
 - migrate `math.vighnesh153.com` to `vighnesh153.dev`
 - migrate `tex.vighnesh153.com` to `vighnesh153.dev`
-- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
 - migrate `blog.vighnesh153.com` to `vighnesh153.dev`
   - https://docs.astro.build/en/tutorial/0-introduction/
+- mp3 to mp4
+- Comways game of life
 - Check if trap focus mentioned in the below link could be useful for side bar on vighnesh153.dev:
   https://learn.svelte.dev/tutorial/actions
+- privacy policy in the repo
 - Tooltip
   - tippy: https://atomiks.github.io/tippyjs/
   - usage in svelte: https://learn.svelte.dev/tutorial/adding-parameters-to-actions
@@ -126,12 +128,9 @@ Visit
 - Prefetch
   - Add `rel="prefetch"` to any `<a />` links on the page
   - https://docs.astro.build/en/guides/integrations-guide/prefetch/
-- Migrate SPL, React & Typescript playground and Js Canvas illustrations to `vighnesh153.com_astro` and update the links
-  in the `/projects#featured-projects` section
-- update project links on the projects page
 - add code pen link as featured projects
 - https://github.com/astro-community/astro-compress
-- Add IP address of the command executor in the logs
+- Add IP address of the command executor in the adb remote logs
 - Seed data in vighnesh153.com_next13
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
@@ -143,7 +142,6 @@ Visit
   - Migrate all blogs from `blog.vighnesh153.com` to `vighnesh153/blog`
   - Javascript at scale
     - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
-- Migrate `vighnesh153-main.vercel.app` to `vighnesh153.com`
 - Sub-domain auth
   - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
 - Codepen clone for my personal HTML projects (no api just local code files)
