@@ -3,11 +3,13 @@ import { dpr } from './dpr';
 export interface CanvasWrapper {
   readonly width: number;
   readonly height: number;
+  readonly rectWidth: number;
+  readonly rectHeight: number;
   readonly canvasElement: HTMLCanvasElement;
   readonly context: CanvasRenderingContext2D;
 
   reset(): void;
-  getBoundingClientRect(): DOMRect;
+  getBoundingClientRect(fresh?: boolean): DOMRect;
   getImageData(x: number, y: number, w: number, h: number, settings?: ImageDataSettings): ImageData;
   putImageData(imageData: ImageData, dx: number, dy: number): void;
   drawFilledRect(x: number, y: number, width: number, height: number, color: string): void;
@@ -24,12 +26,22 @@ export class CanvasWrapperImpl implements CanvasWrapper {
   readonly #canvas: HTMLCanvasElement;
   #canvasContext: CanvasRenderingContext2D;
 
+  #boundingClientRect: DOMRect;
+
   get width(): number {
     return this.#canvas.width / dpr();
   }
 
   get height(): number {
     return this.#canvas.height / dpr();
+  }
+
+  get rectWidth(): number {
+    return this.getBoundingClientRect().width;
+  }
+
+  get rectHeight(): number {
+    return this.getBoundingClientRect().height;
   }
 
   get canvasElement(): HTMLCanvasElement {
@@ -57,20 +69,25 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.reset();
 
     // normalize
-    const { width, height } = this.getBoundingClientRect();
+    const { width, height } = canvas.getBoundingClientRect();
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
     canvas.width = width * dpr();
     canvas.height = height * dpr();
     canvasContext.scale(dpr(), dpr());
+
+    this.#boundingClientRect = canvas.getBoundingClientRect();
   }
 
   reset(): void {
     this.#canvasContext.setTransform(1, 0, 0, 1, 0, 0);
   }
 
-  getBoundingClientRect(): DOMRect {
-    return this.#canvas.getBoundingClientRect();
+  getBoundingClientRect(fresh?: boolean): DOMRect {
+    if (fresh) {
+      this.#boundingClientRect = this.#canvas.getBoundingClientRect();
+    }
+    return this.#boundingClientRect;
   }
 
   getImageData(x: number, y: number, w: number, h: number, settings?: ImageDataSettings): ImageData {

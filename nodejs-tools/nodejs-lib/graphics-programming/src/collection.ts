@@ -16,10 +16,10 @@ const brickBreakerGame: GraphicsProject = {
   id: 'brick-breaker-game',
 };
 
-const connectingParticles: GraphicsProject = {
+const bondingParticles: GraphicsProject = {
   imageLink: 'https://i.imgur.com/ZKYXBhX.png',
-  title: 'Connecting Particles',
-  id: 'connecting-particles',
+  title: 'Bonding particles',
+  id: 'bonding-particles',
 };
 
 const flappyBlockGame: GraphicsProject = {
@@ -93,7 +93,7 @@ export const graphicsProjectsMap = {
   serpinskisTriangle,
   towerOfHanoi,
   symmetricBinaryTree,
-  connectingParticles,
+  bondingParticles,
   pseudoHilbertCurve,
   sortingVisualizer,
   twinklingStars,
