@@ -1,3 +1,4 @@
+export * from './bonding-particles';
 export * from './grid-path-finder';
 export * from './sierpinskis-triangle';
 export * from './symmetric-binary-tree';
