@@ -17,7 +17,7 @@ const brickBreakerGame: GraphicsProject = {
 };
 
 const bondingParticles: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/ZKYXBhX.png',
+  imageLink: 'https://i.imgur.com/UinfrBn.png',
   title: 'Bonding particles',
   id: 'bonding-particles',
 };
@@ -47,7 +47,7 @@ const pseudoHilbertCurve: GraphicsProject = {
 };
 
 const serpinskisTriangle: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/aqfVtT4.png',
+  imageLink: 'https://i.imgur.com/Eg4Hm1I.png',
   title: `Sierpinski's Triangle`,
   id: 'sierpinskis-triangle',
 };
@@ -65,7 +65,7 @@ const sortingVisualizer: GraphicsProject = {
 };
 
 const symmetricBinaryTree: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/MNqF5n3.png',
+  imageLink: 'https://i.imgur.com/LXe43yO.png',
   title: 'Symmetric Binary Tree',
   id: 'symmetric-binary-tree',
 };

@@ -18,6 +18,10 @@ export class Particle {
     return { ...this.#config.position };
   }
 
+  set position(newPosition: Position) {
+    this.#config.position = { ...newPosition };
+  }
+
   constructor(canvasWrapper: CanvasWrapper, config: ParticleConfig) {
     this.#canvasWrapper = canvasWrapper;
     this.#config = config;
