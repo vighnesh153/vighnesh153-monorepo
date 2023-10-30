@@ -6,6 +6,16 @@ import { euclidianDistance } from './euclidian-distance';
 
 interface GameOptions {
   mouseDeflectionDistance?: number;
+
+  particleCount?: number;
+  particleColor?: string;
+  particleRadius?: number;
+
+  bondColor?: {
+    r: number;
+    g: number;
+    b: number;
+  };
 }
 
 export class BondingParticlesGame {
@@ -16,28 +26,25 @@ export class BondingParticlesGame {
   readonly #particles: Particle[] = [];
   readonly #bonds: Bond[] = [];
 
-  // #mousePosition: Position | null = null;
-  #mousePosition: Position | null = {
-    x: 100,
-    y: 100,
-  };
+  #mousePosition: Position | null = null;
 
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
 
-    this.#mouseDeflectionDistance = options.mouseDeflectionDistance ?? 200;
+    this.#mouseDeflectionDistance = options.mouseDeflectionDistance ?? 150;
 
-    // for (let i = 0; i < 50; i++) {
-    for (let i = 0; i < 1; i++) {
+    // create particles
+    for (let i = 1; i <= (options.particleCount ?? 70); i++) {
       this.#particles.push(
         new Particle(canvasWrapper, {
-          radius: 3,
-          color: ['violet', 'purple'][Math.floor(Math.random() * 2)],
+          radius: options.particleRadius ?? 3,
+          color: options.particleColor ?? 'black',
           position: createPosition(canvasWrapper.rectWidth, canvasWrapper.rectHeight),
         })
       );
     }
 
+    // create bonds between particles
     for (let i = 0; i < this.#particles.length; i++) {
       for (let j = i + 1; j < this.#particles.length; j++) {
         const particle1 = this.#particles[i];
@@ -47,7 +54,7 @@ export class BondingParticlesGame {
           new Bond(canvasWrapper, {
             particle1,
             particle2,
-            bondColor: {
+            bondColor: options.bondColor ?? {
               r: 0,
               g: 0,
               b: 0,
@@ -65,6 +72,10 @@ export class BondingParticlesGame {
       this.draw();
       yield;
     }
+  }
+
+  updateMousePosition(newPosition: Position): void {
+    this.#mousePosition = { ...newPosition };
   }
 
   private clearScreen() {
@@ -85,6 +96,10 @@ export class BondingParticlesGame {
 
   /**
    * ![Proof](https://i.imgur.com/lQwHCzS.jpg)
+   *
+   * mx, my -> Mouse coordinates
+   * px, py -> Particle coordinates
+   * sx, sy -> Particle coordinates after deflection
    */
   private deflectParticlesBasedOnMousePosition(): void {
     if (this.#mousePosition === null) {
@@ -107,24 +122,16 @@ export class BondingParticlesGame {
       const sx = px + ((px - mx) * (r - d)) / d;
       const sy = py + ((py - my) * (r - d)) / d;
 
-      particle.position.x = sx;
-      particle.position.y = sy;
+      particle.position = {
+        x: sx,
+        y: sy,
+      };
     }
   }
 
   private draw() {
     this.drawParticles();
     this.drawBonds();
-
-    if (this.#mousePosition !== null) {
-      this.#canvasWrapper.drawFilledCircle(this.#mousePosition.x, this.#mousePosition.y, 2, 'red');
-      this.#canvasWrapper.drawFilledCircle(
-        this.#mousePosition.x,
-        this.#mousePosition.y,
-        this.#mouseDeflectionDistance,
-        'rgba(255,0,0,0.2)'
-      );
-    }
   }
 
   private drawParticles() {

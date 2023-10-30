@@ -8,7 +8,7 @@ export function calculateStrength(pos1: Position, pos2: Position): Strength {
   if (dist < 10) return 'XL';
   if (dist < 35) return 'L';
   if (dist < 75) return 'M';
-  if (dist < 150) return 'S';
-  if (dist < 300) return 'XS';
+  if (dist < 125) return 'S';
+  if (dist < 200) return 'XS';
   return 'NIL';
 }

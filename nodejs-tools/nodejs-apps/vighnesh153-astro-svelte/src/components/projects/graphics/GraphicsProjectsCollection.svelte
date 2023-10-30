@@ -32,6 +32,7 @@
         class={classes('block w-full aspect-video object-contain')}
         alt={graphicsProject.title}
         src={graphicsProject.imageLink}
+        loading="lazy"
       />
       <span class={classes('my-3 text-xl text-text2', 'group-hover/card:text-text group-focus/card:text-text')}>
         {graphicsProject.title}
