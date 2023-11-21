@@ -11,15 +11,12 @@ export class PseudoHilbertCurveGame {
   }
 
   *start() {
-    for (const level of [3]) {
-      const p1 = new Point(100, 100);
-      const p2 = new Point(100, 200);
-      const p3 = new Point(200, 200);
-      const p4 = new Point(200, 100);
-      const curves = generateCurve(p1, p2, p3, p4, level);
-
-      this.drawLines(curves);
-    }
+    const p1 = new Point(100, 100);
+    const p2 = new Point(100, 200);
+    const p3 = new Point(200, 200);
+    const p4 = new Point(200, 100);
+    const curves = generateCurve(p1, p2, p3, p4, 6);
+    this.drawLines(curves);
 
     yield;
   }
