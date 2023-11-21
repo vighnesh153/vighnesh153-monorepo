@@ -1,0 +1,21 @@
+---
+import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
+
+import { classes, verifyGraphicsProjectPath } from '@/utils';
+import { projectNavItems } from '@/constants';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+import ProjectRoot from '@/components/projects/graphics/pseudo-hilbert-curve/ProjectRoot.svelte';
+
+const project = graphicsProjectsMap.pseudoHilbertCurve;
+verifyGraphicsProjectPath(project, Astro.request.url);
+
+const title = `Vighnesh Raut | Graphics Projects - Pseudo Hilbert Curve`;
+const description = `A Hilbert curve is a continuous fractal space-filling curve`;
+---
+
+<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
+  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+    <h1 class="text-3xl mb-6 text-center">Pseudo Hilbert Curve</h1>
+    <ProjectRoot client:load />
+  </div>
+</ContentLayout>
