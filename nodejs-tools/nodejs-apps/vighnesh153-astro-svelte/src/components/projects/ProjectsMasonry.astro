@@ -4,6 +4,7 @@ import { classes } from '@/utils';
 import FolderIcon from '@/icons/FolderIcon.astro';
 import ProjectIconLink from './ProjectIconLink.astro';
 import ProjectTag from './ProjectTag.astro';
+import Link from '../Link.svelte';
 ---
 
 <ul
@@ -36,7 +37,9 @@ import ProjectTag from './ProjectTag.astro';
             </li>
           </ul>
         </div>
-        <h3 class="mt-5 text-xl md:text-2xl">{title}</h3>
+        <h3 class="mt-5 text-xl md:text-2xl">
+          <Link href={links.demo.href}>{title}</Link>
+        </h3>
         <p class="text-text2 mt-4 flex-grow text-base">{description}</p>
         <ul class="mt-6 flex flex-wrap gap-2">
           {tags.map((tag) => (

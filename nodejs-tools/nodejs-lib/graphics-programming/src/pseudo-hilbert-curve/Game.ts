@@ -2,17 +2,33 @@ import { CanvasWrapper } from '@/canvas-wrapper';
 import { generateCurve } from './generateCurve';
 import { Point } from './point';
 import { Line } from './line';
+import { not } from '@vighnesh153/utils';
+
+interface GameConfig {
+  bgColor?: string;
+  lineWidth?: number;
+  lineColor?: string;
+}
 
 export class PseudoHilbertCurveGame {
   #canvasWrapper: CanvasWrapper;
+  #isRunning = true;
 
-  constructor(canvasWrapper: CanvasWrapper) {
+  readonly #bgColor: string;
+  readonly #lineWidth: number;
+  readonly #lineColor: string;
+
+  constructor(canvasWrapper: CanvasWrapper, config: GameConfig) {
     this.#canvasWrapper = canvasWrapper;
+    this.#bgColor = config.bgColor ?? 'white';
+    this.#lineWidth = config.lineWidth ?? 2;
+    this.#lineColor = config.lineColor ?? 'black';
   }
 
-  *start() {
+  *start(level: number) {
+    this.#isRunning = true;
+
     const { width, height } = this.#canvasWrapper;
-    const level = 5;
     const size = Math.round((height * 5) / 11);
 
     const x1 = width / 2 - size / 2;
@@ -26,14 +42,35 @@ export class PseudoHilbertCurveGame {
     const p4 = new Point(x2, y1);
 
     const curves = generateCurve(p1, p2, p3, p4, level);
-    this.drawLines(curves);
 
-    yield;
+    for (const line of curves) {
+      if (not(this.#isRunning)) {
+        break;
+      }
+      this.drawLine(line);
+      yield;
+    }
   }
 
-  private drawLines(lines: Line[]): void {
-    for (const line of lines) {
-      this.#canvasWrapper.drawLine(line.point1.x, line.point1.y, line.point2.x, line.point2.y, 2, 'black');
-    }
+  stop() {
+    this.#isRunning = false;
+  }
+
+  clear() {
+    const rect = this.#canvasWrapper.getBoundingClientRect();
+    const canvasWidth = rect.width;
+    const canvasHeight = rect.height;
+    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+  }
+
+  private drawLine(line: Line): void {
+    this.#canvasWrapper.drawLine(
+      line.point1.x,
+      line.point1.y,
+      line.point2.x,
+      line.point2.y,
+      this.#lineWidth,
+      this.#lineColor
+    );
   }
 }
