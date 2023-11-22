@@ -41,7 +41,7 @@ const pongGame: GraphicsProject = {
 };
 
 const pseudoHilbertCurve: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/Lcyw7DQ.png',
+  imageLink: 'https://i.imgur.com/dZwla4S.png',
   title: 'Pseudo Hilbert Curve',
   id: 'pseudo-hilbert-curve',
 };
