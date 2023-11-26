@@ -21,7 +21,7 @@ export class PseudoHilbertCurveGame {
   constructor(canvasWrapper: CanvasWrapper, config: GameConfig) {
     this.#canvasWrapper = canvasWrapper;
     this.#bgColor = config.bgColor ?? 'white';
-    this.#lineWidth = config.lineWidth ?? 2;
+    this.#lineWidth = config.lineWidth ?? 3;
     this.#lineColor = config.lineColor ?? 'black';
   }
 
