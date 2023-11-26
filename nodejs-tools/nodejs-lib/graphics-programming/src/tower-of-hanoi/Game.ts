@@ -5,6 +5,7 @@ import { StacksManager } from './StacksManager';
 import { not, range } from '@vighnesh153/utils';
 import { towerOfHanoi } from './algorithm';
 import { animateDiscMovement } from './animateDiscMovement';
+import { getCanvasBgColor } from '@/getCanvasBgColor';
 
 export interface TowerOfHanoiGameOptions {
   stackConfig?: StackConfig;
@@ -45,7 +46,7 @@ export class TowerOfHanoiGame {
     const rect = canvasWrapper.getBoundingClientRect();
     const canvasHeight = rect.height;
 
-    this.#bgColor = options.bgColor ?? 'white';
+    this.#bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
     this.#ceilingGap = options.ceilingGap ?? 50;
     this.#animationSpeed = options.animationSpeed ?? 5;
 

@@ -3,6 +3,7 @@ import { generateCurve } from './generateCurve';
 import { Point } from './point';
 import { Line } from './line';
 import { not } from '@vighnesh153/utils';
+import { getCanvasBgColor } from '@/getCanvasBgColor';
 
 interface GameConfig {
   bgColor?: string;
@@ -18,9 +19,9 @@ export class PseudoHilbertCurveGame {
   readonly #lineWidth: number;
   readonly #lineColor: string;
 
-  constructor(canvasWrapper: CanvasWrapper, config: GameConfig) {
+  constructor(canvasWrapper: CanvasWrapper, config: GameConfig = {}) {
     this.#canvasWrapper = canvasWrapper;
-    this.#bgColor = config.bgColor ?? 'white';
+    this.#bgColor = config.bgColor ?? getCanvasBgColor(canvasWrapper);
     this.#lineWidth = config.lineWidth ?? 3;
     this.#lineColor = config.lineColor ?? 'black';
   }

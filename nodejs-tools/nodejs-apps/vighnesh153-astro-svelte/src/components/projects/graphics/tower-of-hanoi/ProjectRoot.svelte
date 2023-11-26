@@ -27,8 +27,7 @@
   function initializeNewGame() {
     if (not(canvasElement)) return;
     const canvasWrapper = new CanvasWrapperImpl(canvasElement);
-    const bgColor = canvasElement.computedStyleMap().get('background-color')?.toString() ?? 'white';
-    game = new TowerOfHanoiGame(canvasWrapper, { bgColor, discCount });
+    game = new TowerOfHanoiGame(canvasWrapper, { discCount });
     gameManager = new TowerOfHanoiGameManager(game);
   }
 

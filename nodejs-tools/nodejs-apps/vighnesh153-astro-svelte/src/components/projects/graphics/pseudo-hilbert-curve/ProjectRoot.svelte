@@ -8,7 +8,6 @@
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;
   let game: PseudoHilbertCurveGame;
-  let bgColor: string;
 
   let level = 4;
   let minLevel = 2;
@@ -21,7 +20,7 @@
     }
 
     if (canvasWrapper) {
-      game = new PseudoHilbertCurveGame(canvasWrapper, { bgColor });
+      game = new PseudoHilbertCurveGame(canvasWrapper);
       const frames = game.start(level);
       function showNextFrame() {
         if (!frames.next().done) {
@@ -33,7 +32,6 @@
   }
 
   onMount(() => {
-    bgColor = canvasElement.computedStyleMap().get('background-color')?.toString() ?? 'white';
     canvasWrapper = new CanvasWrapperImpl(canvasElement);
     newGame();
   });
