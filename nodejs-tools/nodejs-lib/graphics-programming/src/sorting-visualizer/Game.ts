@@ -1,6 +1,7 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray';
 import { SortingAlgorithm } from './SortingAlgorithm';
+import { getCanvasBgColor } from '@/getCanvasBgColor';
 
 interface GameOptions {
   gap?: number;
@@ -24,7 +25,7 @@ export class SortingVisualizerGame {
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
 
-    this.#bgColor = options.bgColor ?? 'white';
+    this.#bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
 
     this.#gap = options.gap ?? 20;
     this.#lineWidth = options.lineWidth ?? 2;

@@ -13,14 +13,13 @@
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;
   let game: SortingVisualizerGame;
-  let bgColor: string;
 
   const allAlgorithms = ['Bubble sort', 'Merge sort', 'Selection sort', 'Insertion sort'];
   let algorithm = allAlgorithms[0];
 
   function newGame() {
     if (canvasWrapper) {
-      game = new SortingVisualizerGame(canvasWrapper, { bgColor });
+      game = new SortingVisualizerGame(canvasWrapper);
       const frames = game.start(new BubbleSortSortingAlgorithm());
       function showNextFrame() {
         if (!frames.next().done) {
@@ -32,7 +31,6 @@
   }
 
   onMount(() => {
-    bgColor = canvasElement.computedStyleMap().get('background-color')?.toString() ?? 'white';
     canvasWrapper = new CanvasWrapperImpl(canvasElement);
     newGame();
   });
