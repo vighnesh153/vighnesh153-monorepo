@@ -5,6 +5,7 @@
     SortingVisualizerGame,
     CanvasWrapperImpl,
     BubbleSortSortingAlgorithm,
+    MergeSortSortingAlgorithm,
   } from '@vighnesh153/graphics-programming';
   import type { CanvasWrapper } from '@vighnesh153/graphics-programming';
 
@@ -20,7 +21,7 @@
   function newGame() {
     if (canvasWrapper) {
       game = new SortingVisualizerGame(canvasWrapper);
-      const frames = game.start(new BubbleSortSortingAlgorithm());
+      const frames = game.start(new MergeSortSortingAlgorithm());
       function showNextFrame() {
         if (!frames.next().done) {
           requestAnimationFrame(showNextFrame);
