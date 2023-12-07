@@ -132,9 +132,12 @@ Visit
 - https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the adb remote logs
 - Seed data in vighnesh153.com_next13
+- Brainf*ck interpreter
+  * https://github.com/vighnesh153/brainf.ck-interpreter
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
 - Svelte Query: https://sveltequery.vercel.app/overview
+- https://github.com/vighnesh153/my-favourite
 - Projects
   - Migrate projects to `vighnesh153.com/projects/*`
 - Blog:
