@@ -4,13 +4,13 @@ import { lcm } from './lcm';
 describe('Math > lcm tests', () => {
   it('should throw error if negative number is passed', () => {
     expect(() => lcm(-1)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"n\\" to be a positive integer, found \\"-1\\""'
+      '[Error: Expected "n" to be a positive integer, found "-1"]'
     );
   });
 
   it('should throw error if decimal number is passed', () => {
     expect(() => lcm(0.5)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"n\\" to be a positive integer, found \\"0.5\\""'
+      '[Error: Expected "n" to be a positive integer, found "0.5"]'
     );
   });
 

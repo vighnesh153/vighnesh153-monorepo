@@ -15,7 +15,7 @@ describe('DeepFreeze tests', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (deepFrozenObj as any).a = 101;
-    }).toThrowErrorMatchingInlineSnapshot(`"Cannot assign to read only property 'a' of object '#<Object>'"`);
+    }).toThrowErrorMatchingInlineSnapshot(`[TypeError: Cannot assign to read only property 'a' of object '#<Object>']`);
   });
 
   it('should freeze a deep object', () => {
@@ -25,6 +25,6 @@ describe('DeepFreeze tests', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (deepFrozenObj.a.a as any).a = 101;
-    }).toThrowErrorMatchingInlineSnapshot(`"Cannot assign to read only property 'a' of object '#<Object>'"`);
+    }).toThrowErrorMatchingInlineSnapshot(`[TypeError: Cannot assign to read only property 'a' of object '#<Object>']`);
   });
 });

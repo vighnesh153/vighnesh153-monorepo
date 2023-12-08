@@ -21,7 +21,7 @@ describe('Data Structures > Heap tests', () => {
     const heap = new Heap([]);
     expect(() => {
       heap.pop();
-    }).toThrowErrorMatchingInlineSnapshot(`"Heap is empty"`);
+    }).toThrowErrorMatchingInlineSnapshot(`[Error: Heap is empty]`);
   });
 
   it('should pop the smallest element from the heap', () => {
