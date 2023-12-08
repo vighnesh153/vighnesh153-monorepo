@@ -4,13 +4,13 @@ import { gcd } from './gcd';
 describe('Math > gcd tests', () => {
   it('should throw error if negative number is passed', () => {
     expect(() => gcd(-1)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"n\\" to be a positive integer, found \\"-1\\""'
+      '[Error: Expected "n" to be a positive integer, found "-1"]'
     );
   });
 
   it('should throw error if decimal number is passed', () => {
     expect(() => gcd(0.5)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"n\\" to be a positive integer, found \\"0.5\\""'
+      '[Error: Expected "n" to be a positive integer, found "0.5"]'
     );
   });
 

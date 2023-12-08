@@ -4,19 +4,19 @@ import { range } from './range';
 describe('"range" tests', () => {
   it('should throw error if step is 0', () => {
     expect(() => Array.from(range(1, 10, 0))).toThrowErrorMatchingInlineSnapshot(
-      `"Expected \\"step\\" to be non-zero, found \\"0\\""`
+      `[Error: Expected "step" to be non-zero, found "0"]`
     );
   });
 
   it('should throw error if start < end and step < 0', () => {
     expect(() => Array.from(range(1, 10, -2))).toThrowErrorMatchingInlineSnapshot(
-      `"Expected \\"step\\" to be positive if \\"start\\" is less than \\"end\\""`
+      `[Error: Expected "step" to be positive if "start" is less than "end"]`
     );
   });
 
   it('should throw error if start > end and step > 0', () => {
     expect(() => Array.from(range(100, 10, 2))).toThrowErrorMatchingInlineSnapshot(
-      `"Expected \\"step\\" to be negative if \\"start\\" is greater than \\"end\\""`
+      `[Error: Expected "step" to be negative if "start" is greater than "end"]`
     );
   });
 

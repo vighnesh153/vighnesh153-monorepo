@@ -17,7 +17,7 @@ describe('"verifyGithubPAT" function tests', () => {
     mockAxiosImplementation(() => Promise.reject(new Error('Unauthorized')));
 
     await expect(verifyGithubPAT(GITHUB_PERSONAL_ACCESS_TOKEN)).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Token is invalid."`
+      `[Error: Token is invalid.]`
     );
   });
 
@@ -32,7 +32,7 @@ describe('"verifyGithubPAT" function tests', () => {
     });
 
     await expect(verifyGithubPAT(GITHUB_PERSONAL_ACCESS_TOKEN)).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Token doesn't have gist access."`
+      `[Error: Token doesn't have gist access.]`
     );
   });
 

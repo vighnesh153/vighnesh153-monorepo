@@ -4,12 +4,14 @@ import { factorial } from './factorial';
 describe('Math > factorial tests', () => {
   it('should throw if input number is not an integer', () => {
     expect(() => factorial(2213.3)).toThrowErrorMatchingInlineSnapshot(
-      '"Factorial of fractional numbers is not defined"'
+      '[Error: Factorial of fractional numbers is not defined]'
     );
   });
 
   it('should throw if input number is not positive', () => {
-    expect(() => factorial(-4)).toThrowErrorMatchingInlineSnapshot('"Factorial of negative numbers is not defined"');
+    expect(() => factorial(-4)).toThrowErrorMatchingInlineSnapshot(
+      '[Error: Factorial of negative numbers is not defined]'
+    );
   });
 
   test.each([

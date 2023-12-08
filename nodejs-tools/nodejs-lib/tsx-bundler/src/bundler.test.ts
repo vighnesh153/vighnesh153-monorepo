@@ -1,3 +1,5 @@
+// @vitest-environment node
+
 import { JSDOM } from 'jsdom';
 import { sleep } from '@vighnesh153/utils';
 

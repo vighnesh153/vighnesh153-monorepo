@@ -4,37 +4,37 @@ import { randomInteger } from './randomInteger';
 describe('Random > randomInteger tests', () => {
   it('should throw if start is not an integer', () => {
     expect(() => randomInteger(0.4, 3, 1)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"start\\" to be an integer, but found \\"0.4\\""'
+      '[Error: Expected "start" to be an integer, but found "0.4"]'
     );
   });
 
   it('should throw if end is not an integer', () => {
     expect(() => randomInteger(0, 3.5, 1)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"end\\" to be an integer, but found \\"3.5\\""'
+      '[Error: Expected "end" to be an integer, but found "3.5"]'
     );
   });
 
   it('should throw if step is 0', () => {
     expect(() => randomInteger(1, 3, 0)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"step\\" to be non-zero, found \\"0\\""'
+      '[Error: Expected "step" to be non-zero, found "0"]'
     );
   });
 
   it('should throw if step is not an integer', () => {
     expect(() => randomInteger(0, 10, 5.1)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"step\\" to be an integer, but found \\"5.1\\""'
+      '[Error: Expected "step" to be an integer, but found "5.1"]'
     );
   });
 
   it('should throw if start is less than end, and step is negative', () => {
     expect(() => randomInteger(1, 5, -2)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"step\\" to be positive if \\"start\\" is less than \\"end\\""'
+      '[Error: Expected "step" to be positive if "start" is less than "end"]'
     );
   });
 
   it('should throw if start is greater than end and step is positive', () => {
     expect(() => randomInteger(10, 4, 3)).toThrowErrorMatchingInlineSnapshot(
-      '"Expected \\"step\\" to be negative if \\"start\\" is greater than \\"end\\""'
+      '[Error: Expected "step" to be negative if "start" is greater than "end"]'
     );
   });
 

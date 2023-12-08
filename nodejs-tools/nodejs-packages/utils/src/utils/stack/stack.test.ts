@@ -32,7 +32,7 @@ describe('Data Structures > Stack tests', () => {
 
   it('should throw if trying to pop from an empty stack', () => {
     const stack = new Stack();
-    expect(() => stack.pop()).toThrowErrorMatchingInlineSnapshot(`"Stack is empty"`);
+    expect(() => stack.pop()).toThrowErrorMatchingInlineSnapshot(`[Error: Stack is empty]`);
   });
 
   it('should allow to peek into the stack', () => {
@@ -49,7 +49,7 @@ describe('Data Structures > Stack tests', () => {
 
   it('should throw if peeking into an empty stack', () => {
     const stack = new Stack();
-    expect(() => stack.peek()).toThrowErrorMatchingInlineSnapshot(`"Stack is empty"`);
+    expect(() => stack.peek()).toThrowErrorMatchingInlineSnapshot(`[Error: Stack is empty]`);
   });
 
   it('should return the size of the stack as 0 if empty', () => {
