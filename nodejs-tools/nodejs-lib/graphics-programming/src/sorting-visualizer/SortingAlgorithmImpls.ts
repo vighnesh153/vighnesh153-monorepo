@@ -126,7 +126,36 @@ export class MergeSortSortingAlgorithm extends SortingAlgorithm {
 
 export class SelectionSortSortingAlgorithm extends SortingAlgorithm {
   *sort() {
+    const { array } = this;
+    const n = array.length;
+
+    for (let i = 0; i < n; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < n; j++) {
+        if (array[j] < array[minIndex]) {
+          minIndex = j;
+        }
+
+        // for animation
+        this.modifiedIndices = [minIndex, j];
+        yield;
+      }
+
+      this.swap(i, minIndex);
+
+      // for animation
+      this.modifiedIndices = [minIndex, i];
+      yield;
+    }
+
+    this.modifiedIndices = [];
     yield;
+  }
+
+  private swap(index1: number, index2: number): void {
+    const temp = this.array[index1];
+    this.array[index1] = this.array[index2];
+    this.array[index2] = temp;
   }
 }
 
