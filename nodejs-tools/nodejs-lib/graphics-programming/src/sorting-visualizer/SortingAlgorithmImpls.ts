@@ -161,6 +161,30 @@ export class SelectionSortSortingAlgorithm extends SortingAlgorithm {
 
 export class InsertionSortSortingAlgorithm extends SortingAlgorithm {
   *sort() {
+    const { array } = this;
+    const n = array.length;
+
+    for (let i = 0; i < n; i++) {
+      let j = i;
+      while (j > 0 && array[j - 1] > array[j]) {
+        this.swap(j, j - 1);
+
+        // for animation
+        this.modifiedIndices = [j, j - 1];
+        yield;
+
+        j--;
+      }
+      yield;
+    }
+
+    this.modifiedIndices = [];
     yield;
+  }
+
+  private swap(index1: number, index2: number): void {
+    const temp = this.array[index1];
+    this.array[index1] = this.array[index2];
+    this.array[index2] = temp;
   }
 }
