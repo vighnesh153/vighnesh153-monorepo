@@ -59,7 +59,7 @@ const snakeGame: GraphicsProject = {
 };
 
 const sortingVisualizer: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/YHKu6TN.png',
+  imageLink: 'https://i.imgur.com/i1AXIQK.png',
   title: 'Sorting Visualizer',
   id: 'sorting-visualizer',
 };
