@@ -45,42 +45,37 @@ export class BubbleSortSortingAlgorithm extends SortingAlgorithm {
 }
 
 export class MergeSortSortingAlgorithm extends SortingAlgorithm {
-  private originalArray: number[] = [];
-
   *sort() {
-    const { array } = this;
-    this.originalArray = [...array];
-    console.log('Starting');
-    const sortedArray = this.mergeSort(array, 0, array.length - 1);
-    this.array = sortedArray;
-    console.log('Ending');
-    yield;
+    yield* this.mergeSort(0, this.array.length - 1);
   }
 
-  private mergeSort(array: number[], startIndex: number, endIndex: number): number[] {
-    if (startIndex === endIndex) return [array[startIndex]];
+  private *mergeSort(startIndex: number, endIndex: number): Iterable<undefined> {
+    if (startIndex === endIndex) {
+      return;
+    }
 
     const midIndex = Math.floor((startIndex + endIndex) / 2);
-    const left = this.mergeSort(array, startIndex, midIndex);
-    const right = this.mergeSort(array, midIndex + 1, endIndex);
+    // left
+    yield* this.mergeSort(startIndex, midIndex);
+    // right
+    yield* this.mergeSort(midIndex + 1, endIndex);
 
-    return this.merge(left, right);
+    const leftSortedArray = this.array.slice(startIndex, midIndex + 1);
+    const rightSortedArray = this.array.slice(midIndex + 1, endIndex + 1);
+    yield* this.merge(leftSortedArray, rightSortedArray, startIndex);
   }
 
-  private merge(array1: number[], array2: number[]): number[] {
+  private *merge(array1: number[], array2: number[], startIndex: number): Iterable<undefined> {
+    let resultIndex = startIndex;
+    const { array } = this;
     let index1 = 0;
     let index2 = 0;
 
-    const size1 = array1.length;
-    const size2 = array2.length;
-
-    let index = 0;
-    const mergedArray: number[] = Array.from({ length: size1 + size2 });
     function addToMergedArray(entry: number): void {
-      mergedArray[index++] = entry;
+      array[resultIndex++] = entry;
     }
 
-    while (index1 < size1 && index2 < size2) {
+    while (index1 < array1.length && index2 < array2.length) {
       const element1 = array1[index1];
       const element2 = array2[index2];
 
@@ -91,17 +86,41 @@ export class MergeSortSortingAlgorithm extends SortingAlgorithm {
         addToMergedArray(element2);
         index2++;
       }
+
+      // for animation
+      this.overwriteArray(resultIndex, array1.slice(index1), array2.slice(index2));
+      this.modifiedIndices = [startIndex + index1, startIndex + array1.length + index2];
+      yield;
     }
 
-    while (index1 < size1) {
+    while (index1 < array1.length) {
       addToMergedArray(array1[index1++]);
+
+      // for animation
+      this.overwriteArray(resultIndex, array1.slice(index1));
+      this.modifiedIndices = [startIndex + index1];
+      yield;
     }
 
-    while (index2 < size2) {
+    while (index2 < array2.length) {
       addToMergedArray(array2[index2++]);
+
+      // for animation
+      this.overwriteArray(resultIndex, array2.slice(index2));
+      this.modifiedIndices = [startIndex + array1.length + index2];
+      yield;
     }
 
-    return mergedArray;
+    this.modifiedIndices = [];
+    yield;
+  }
+
+  private overwriteArray(startIndex: number, ...arrays: number[][]) {
+    for (const array of arrays) {
+      for (const item of array) {
+        this.array[startIndex++] = item;
+      }
+    }
   }
 }
 

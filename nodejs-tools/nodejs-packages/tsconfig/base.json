@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
