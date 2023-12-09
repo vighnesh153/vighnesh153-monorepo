@@ -1,7 +1,8 @@
+import { not } from '@vighnesh153/utils';
 import { CanvasWrapper } from '@/canvas-wrapper';
+import { getCanvasBgColor } from '@/getCanvasBgColor';
 import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray';
 import { SortingAlgorithm } from './SortingAlgorithm';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
 
 interface GameOptions {
   gap?: number;
@@ -22,6 +23,8 @@ export class SortingVisualizerGame {
 
   #lineHeightPercents: number[];
 
+  #isRunning = false;
+
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
 
@@ -37,14 +40,22 @@ export class SortingVisualizerGame {
   }
 
   *start(sortingAlgorithm: SortingAlgorithm) {
+    this.#isRunning = true;
     sortingAlgorithm.initializeArray(this.#lineHeightPercents);
 
     for (const frame of sortingAlgorithm.sort()) {
+      if (not(this.#isRunning)) {
+        break;
+      }
       this.#lineHeightPercents = sortingAlgorithm.intermediateArrayState;
       this.clear();
       this.drawLines(sortingAlgorithm.intermediateModifiedIndicesState);
       yield frame;
     }
+  }
+
+  stop() {
+    this.#isRunning = false;
   }
 
   clear() {

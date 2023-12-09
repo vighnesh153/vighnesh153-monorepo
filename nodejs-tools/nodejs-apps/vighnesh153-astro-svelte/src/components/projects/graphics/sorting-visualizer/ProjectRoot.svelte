@@ -1,29 +1,27 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import {
-    SortingVisualizerGame,
-    CanvasWrapperImpl,
-    BubbleSortSortingAlgorithm,
-    MergeSortSortingAlgorithm,
-    SelectionSortSortingAlgorithm,
-    InsertionSortSortingAlgorithm,
-  } from '@vighnesh153/graphics-programming';
+  import { SortingVisualizerGame, CanvasWrapperImpl, sortingAlgorithms } from '@vighnesh153/graphics-programming';
+  import type { SortingAlgorithm } from '@vighnesh153/graphics-programming';
   import type { CanvasWrapper } from '@vighnesh153/graphics-programming';
-
-  import Button from '@/components/Button.svelte';
 
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;
   let game: SortingVisualizerGame;
 
-  const allAlgorithms = ['Bubble sort', 'Merge sort', 'Selection sort', 'Insertion sort'];
-  let algorithm = allAlgorithms[0];
+  let algorithmTitle = sortingAlgorithms[1].displayName;
+
+  function getAlgorithmImpl(): SortingAlgorithm {
+    return sortingAlgorithms.find((algorithm) => algorithm.displayName === algorithmTitle)!!.algorithmFactory();
+  }
 
   function newGame() {
+    if (game) {
+      game.stop();
+    }
     if (canvasWrapper) {
       game = new SortingVisualizerGame(canvasWrapper);
-      const frames = game.start(new InsertionSortSortingAlgorithm());
+      const frames = game.start(getAlgorithmImpl());
       function showNextFrame() {
         if (!frames.next().done) {
           requestAnimationFrame(showNextFrame);
@@ -40,21 +38,17 @@
 
   $: {
     // this log is needed so that this block runs when algorithm changes
-    console.log(`Algorithm changed: ${algorithm}`);
+    console.log(`Algorithm changed: ${algorithmTitle}`);
     newGame();
   }
 </script>
 
 <div class="flex justify-center items-center gap-10">
-  <Button variant="primary">Start</Button>
-
-  <Button>Randomize Array</Button>
-
   <div class="flex flex-col items-center gap-1">
     <label for="algorithm">Algorithm</label>
-    <select name="algorithm" id="algorithm" class="min-w-[100px] text-secondary" bind:value={algorithm}>
-      {#each allAlgorithms as algorithm (algorithm)}
-        <option value={algorithm}>{algorithm}</option>
+    <select name="algorithm" id="algorithm" class="min-w-[100px] text-secondary" bind:value={algorithmTitle}>
+      {#each sortingAlgorithms as algorithm (algorithm)}
+        <option value={algorithm.displayName}>{algorithm.displayName}</option>
       {/each}
     </select>
   </div>
