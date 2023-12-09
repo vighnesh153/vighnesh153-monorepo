@@ -6,7 +6,6 @@
     "declarationMap": false,
     "emitDeclarationOnly": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
     "outDir": "dist",
     "removeComments": false,
