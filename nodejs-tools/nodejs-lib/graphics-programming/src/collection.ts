@@ -83,7 +83,7 @@ const treePathFinder: GraphicsProject = {
 };
 
 const twinklingStars: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/Zhk91iE.png',
+  imageLink: 'https://i.imgur.com/rAL2V18.jpg',
   title: 'Twinkling Stars',
   id: 'twinkling-stars',
 };
