@@ -5,6 +5,7 @@ export * from './sierpinskis-triangle';
 export * from './sorting-visualizer';
 export * from './symmetric-binary-tree';
 export * from './tower-of-hanoi';
+export * from './tree-path-finder';
 export * from './twinkling-stars';
 
 export * from './canvas-wrapper';

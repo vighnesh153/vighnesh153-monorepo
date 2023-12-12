@@ -1,0 +1,1 @@
+export { TreePathFinderGame } from './Game';
