@@ -77,7 +77,7 @@ const towerOfHanoi: GraphicsProject = {
 };
 
 const treePathFinder: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/879Zf9b.png',
+  imageLink: 'https://i.imgur.com/XjLALF7.png',
   title: 'Tree Path Finder',
   id: 'tree-path-finder',
 };
