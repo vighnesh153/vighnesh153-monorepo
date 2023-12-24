@@ -2,6 +2,7 @@ export interface GraphicsProject {
   imageLink: string;
   title: string;
   id: string;
+  description?: string;
 }
 
 const barnsleysFern: GraphicsProject = {
