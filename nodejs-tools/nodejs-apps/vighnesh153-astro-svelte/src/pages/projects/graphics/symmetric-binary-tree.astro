@@ -1,23 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
-
-import { classes, verifyGraphicsProjectPath } from '@/utils';
-import { projectNavItems } from '@/constants';
-import ContentLayout from '@/layouts/ContentLayout.astro';
+import GraphicsProjectLayout from '@/layouts/GraphicsProjectLayout.astro';
 import ProjectRoot from '@/components/projects/graphics/symmetric-binary-tree/ProjectRoot.svelte';
 
 const project = graphicsProjectsMap.symmetricBinaryTree;
-verifyGraphicsProjectPath(project, Astro.request.url);
-
-const title = `Vighnesh Raut | Graphics Projects - Symmetric Binary Tree`;
-const description =
-  `A binary tree representation by its branches and how the final shape is ` +
-  `different for even a slight change in the angle`;
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
-  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
-    <h1 class="text-3xl mb-6 text-center">Symmetric Binary Tree</h1>
-    <ProjectRoot client:load />
-  </div>
-</ContentLayout>
+<GraphicsProjectLayout project={project}>
+  <ProjectRoot client:load />
+</GraphicsProjectLayout>

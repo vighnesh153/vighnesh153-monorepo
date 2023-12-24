@@ -1,0 +1,24 @@
+---
+import { type GraphicsProject } from '@vighnesh153/graphics-programming';
+
+import { classes, verifyGraphicsProjectPath } from '@/utils';
+import { projectNavItems } from '@/constants';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+
+interface Props {
+  project: GraphicsProject;
+}
+
+const { project } = Astro.props;
+
+verifyGraphicsProjectPath(project, Astro.request.url);
+
+const title = `Vighnesh Raut | Graphics Projects - ${project.title}`;
+---
+
+<ContentLayout title={title} description={project.description} navItems={projectNavItems} showFooter={false}>
+  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+    <h1 class="text-3xl mb-6 text-center">{project.title}</h1>
+    <slot />
+  </div>
+</ContentLayout>

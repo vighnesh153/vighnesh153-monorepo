@@ -1,23 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
-
-import { classes, verifyGraphicsProjectPath } from '@/utils';
-import { projectNavItems } from '@/constants';
-import ContentLayout from '@/layouts/ContentLayout.astro';
+import GraphicsProjectLayout from '@/layouts/GraphicsProjectLayout.astro';
 import ProjectRoot from '@/components/projects/graphics/sierpinskis-triangle/ProjectRoot.svelte';
 
-const project = graphicsProjectsMap.serpinskisTriangle;
-verifyGraphicsProjectPath(project, Astro.request.url);
-
-const title = `Vighnesh Raut | Graphics Projects - Sierpinski's Triangle`;
-const description =
-  `A sierpinski's triangle is a fractal attractive fixed set with ` +
-  'the overall shape of an equilateral triangle, subdivided recursively into smaller equilateral triangles';
+const project = graphicsProjectsMap.sierpinskisTriangle;
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
-  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
-    <h1 class="text-3xl mb-6 text-center">Sierpinski's Triangle</h1>
-    <ProjectRoot client:load />
-  </div>
-</ContentLayout>
+<GraphicsProjectLayout project={project}>
+  <ProjectRoot client:load />
+</GraphicsProjectLayout>
