@@ -1,22 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
-
-import { classes, verifyGraphicsProjectPath } from '@/utils';
-import { projectNavItems } from '@/constants';
-import ContentLayout from '@/layouts/ContentLayout.astro';
+import GraphicsProjectLayout from '@/layouts/GraphicsProjectLayout.astro';
 import ProjectRoot from '@/components/projects/graphics/grid-path-finder/ProjectRoot.svelte';
 
 const project = graphicsProjectsMap.gridPathFinderGame;
-verifyGraphicsProjectPath(project, Astro.request.url);
-
-const title = 'Vighnesh Raut | Graphics Projects - Grid Path Finder';
-const description =
-  'A pathfinding project that uses a graph algorithm to find the path from the start point to the end point.';
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
-  <div class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
-    <h1 class="text-3xl mb-6 text-center">Grid Path finder</h1>
-    <ProjectRoot client:load />
-  </div>
-</ContentLayout>
+<GraphicsProjectLayout project={project}>
+  <ProjectRoot client:load />
+</GraphicsProjectLayout>
