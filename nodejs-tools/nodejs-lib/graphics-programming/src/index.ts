@@ -1,5 +1,6 @@
 export * from './bonding-particles';
 export * from './grid-path-finder';
+export * from './pong-game';
 export * from './pseudo-hilbert-curve';
 export * from './sierpinskis-triangle';
 export * from './sorting-visualizer';
