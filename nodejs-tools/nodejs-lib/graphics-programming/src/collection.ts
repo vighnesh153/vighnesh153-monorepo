@@ -6,7 +6,7 @@ export interface GraphicsProject {
 }
 
 const barnsleysFern: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/8F9Y1DQ.png',
+  imageLink: 'https://i.imgur.com/BsS8tiu.png',
   title: `Barnsley's Fern`,
   id: 'barnsleys-fern',
   description: `Drawing a barnsley's fern, an infinite fractal which resembles a black spleenwort, using mathematics`,
