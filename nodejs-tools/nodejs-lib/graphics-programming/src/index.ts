@@ -1,3 +1,4 @@
+export * from './barnsleys-fern';
 export * from './bonding-particles';
 export * from './grid-path-finder';
 export * from './pong-game';
