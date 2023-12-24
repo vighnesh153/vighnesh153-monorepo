@@ -35,7 +35,7 @@ const gridPathFinderGame: GraphicsProject = {
 };
 
 const pongGame: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/9c0kEFU.png',
+  imageLink: 'https://i.imgur.com/QYa6CDW.png',
   title: 'Pong Game',
   id: 'pong-game',
 };

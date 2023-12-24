@@ -3,6 +3,7 @@ import { dpr } from './dpr';
 export interface CanvasWrapper {
   readonly width: number;
   readonly height: number;
+  readonly rect: DOMRect;
   readonly rectWidth: number;
   readonly rectHeight: number;
   readonly canvasElement: HTMLCanvasElement;
@@ -16,6 +17,7 @@ export interface CanvasWrapper {
   drawOutlinedRect(x: number, y: number, width: number, height: number, thickness: number, color: string): void;
   drawLine(x1: number, y1: number, x2: number, y2: number, lineWidth: number, color: string): void;
   drawFilledCircle(centerX: number, centerY: number, radius: number, color: string): void;
+  writeText(text: string, x: number, y: number, color: string, fontSize: number): void;
   translate(x: number, y: number): void;
   rotate(angle: number): void;
   scale(x: number, y: number): void;
@@ -34,6 +36,10 @@ export class CanvasWrapperImpl implements CanvasWrapper {
 
   get height(): number {
     return this.#canvas.height / dpr();
+  }
+
+  get rect() {
+    return this.getBoundingClientRect();
   }
 
   get rectWidth(): number {
@@ -126,6 +132,18 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.#canvasContext.fillStyle = color;
     this.#canvasContext.arc(centerX, centerY, radius, 0, 2 * Math.PI, true);
     this.#canvasContext.fill();
+  }
+
+  writeText(text: string, x: number, y: number, color: string, fontSize: number) {
+    this.#canvasContext.fillStyle = color;
+    // set the font
+    {
+      const span = document.createElement('span');
+      span.style.font = this.#canvasContext.font;
+      span.style.fontSize = `${fontSize}px`;
+      this.#canvasContext.font = span.style.font;
+    }
+    this.#canvasContext.fillText(text, x, y);
   }
 
   translate(x: number, y: number): void {
