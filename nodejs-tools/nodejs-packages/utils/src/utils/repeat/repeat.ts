@@ -1,11 +1,11 @@
 /**
- * Repeats the callback, count number of times
+ * Repeats the callback for a specified number of times
  *
- * @param count
+ * @param times
  * @param callback
  */
-export function repeat(count: number, callback: () => void): void {
-  for (let i = 0; i < count; i++) {
-    callback();
+export function repeat(times: number, callback: (count: number) => void): void {
+  for (let i = 0; i < times; i++) {
+    callback(i + 1);
   }
 }

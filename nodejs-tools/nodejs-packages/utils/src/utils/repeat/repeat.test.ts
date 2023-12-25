@@ -10,4 +10,16 @@ describe('"repeat" tests', () => {
 
     expect(dummyFunction).toBeCalledTimes(count);
   });
+
+  it('should execute the callback, with the count', () => {
+    const count = 4;
+    const dummyFunction = vi.fn();
+
+    repeat(count, dummyFunction);
+
+    expect(dummyFunction).toHaveBeenCalledTimes(count);
+    for (let i = 1; i <= count; i++) {
+      expect(dummyFunction).toHaveBeenNthCalledWith(i, i);
+    }
+  });
 });
