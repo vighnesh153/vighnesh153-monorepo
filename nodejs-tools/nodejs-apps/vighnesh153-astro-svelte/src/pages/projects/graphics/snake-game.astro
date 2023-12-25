@@ -1,0 +1,11 @@
+---
+import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
+import GraphicsProjectLayout from '@/layouts/GraphicsProjectLayout.astro';
+import ProjectRoot from '@/components/projects/graphics/snake-game/ProjectRoot.svelte';
+
+const project = graphicsProjectsMap.snakeGame;
+---
+
+<GraphicsProjectLayout project={project}>
+  <ProjectRoot client:load />
+</GraphicsProjectLayout>

@@ -65,7 +65,7 @@ const sierpinskisTriangle: GraphicsProject = {
 };
 
 const snakeGame: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/spwnsPX.png',
+  imageLink: 'https://i.imgur.com/8VKUEFj.png',
   title: 'Snake Game',
   id: 'snake-game',
   description:
