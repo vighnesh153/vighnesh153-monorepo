@@ -35,6 +35,12 @@ const { title = defaultTitle, description = defaultDescription, navItems, showFo
     <div class="mx-auto max-w-[1400px] px-4 pt-[0.05px] sm:px-20">
       <slot />
     </div>
-    {showFooter ? <Footer /> : null}
+    {
+      showFooter ? (
+        <Footer>
+          <slot name="custom-source-code" slot="custom-source-code" />
+        </Footer>
+      ) : null
+    }
   </main>
 </BaseLayout>

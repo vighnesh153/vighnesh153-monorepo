@@ -27,7 +27,7 @@ const bondingParticles: GraphicsProject = {
 };
 
 const flappyBlockGame: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/hKgLkKy.png',
+  imageLink: 'https://i.imgur.com/wurPeGP.png',
   title: 'Flappy Block Game',
   id: 'flappy-block-game',
   description: 'Flappy block is an infinite world game which is inspired by the infamous "Flappy Bird" game.',
@@ -130,3 +130,6 @@ export const graphicsProjectsMap = {
 } satisfies Record<string, GraphicsProject>;
 
 export const graphicsProjects: GraphicsProject[] = Object.values(graphicsProjectsMap);
+
+export const graphicsProjectSourceCodeLink =
+  'https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/graphics-programming/src';
