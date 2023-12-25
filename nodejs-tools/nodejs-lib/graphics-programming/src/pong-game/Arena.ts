@@ -49,10 +49,6 @@ export class Arena {
       ball: this.#ball,
       computerPad: this.#computerPad,
     });
-
-    canvasWrapper.canvasElement.addEventListener('mousemove', (e) => {
-      this.handleMouseHover(e);
-    });
   }
 
   draw() {
@@ -154,7 +150,7 @@ export class Arena {
     }
   }
 
-  private handleMouseHover(e: MouseEvent) {
+  handleMouseMove(e: MouseEvent) {
     const { rect } = this.#canvasWrapper;
     const mouseY = e.clientY - rect.top - document.documentElement.scrollTop;
 

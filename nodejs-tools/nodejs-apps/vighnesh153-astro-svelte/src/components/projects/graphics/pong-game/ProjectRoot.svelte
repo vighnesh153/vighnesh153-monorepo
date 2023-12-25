@@ -8,6 +8,10 @@
   let canvasWrapper: CanvasWrapper;
   let game: PongGame;
 
+  function handleMouseMove(e: MouseEvent) {
+    game.handleMouseMove(e);
+  }
+
   function newGame() {
     if (canvasWrapper) {
       game = new PongGame(canvasWrapper);
@@ -27,6 +31,10 @@
   });
 </script>
 
-<canvas class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text" bind:this={canvasElement}>
+<canvas
+  class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+  bind:this={canvasElement}
+  on:mousemove={handleMouseMove}
+>
   Sorry your browser doesn't support the canvas element
 </canvas>

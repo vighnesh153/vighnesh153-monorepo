@@ -63,4 +63,8 @@ export class PongGame {
     const canvasHeight = rect.height;
     this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
   }
+
+  handleMouseMove(e: MouseEvent) {
+    this.#arena.handleMouseMove(e);
+  }
 }
