@@ -1,5 +1,6 @@
 export * from './barnsleys-fern';
 export * from './bonding-particles';
+export * from './flappy-block-game';
 export * from './grid-path-finder';
 export * from './pong-game';
 export * from './pseudo-hilbert-curve';
