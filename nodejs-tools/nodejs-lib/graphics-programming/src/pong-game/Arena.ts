@@ -150,11 +150,11 @@ export class Arena {
     }
   }
 
-  handleMouseMove(e: MouseEvent) {
+  handleMouseMove(e: MouseEvent, scrollTop: number) {
     const { rect } = this.#canvasWrapper;
-    const mouseY = e.clientY - rect.top - document.documentElement.scrollTop;
+    const mouseY = e.clientY - rect.top - scrollTop;
 
-    // we subtract y to align the mouse position with pad's center
+    // we subtract height/2 to align the mouse position with pad's center
     const playerPadY = mouseY - this.#playerPad.height / 2;
 
     this.#playerPad.setPosition(playerPadY);

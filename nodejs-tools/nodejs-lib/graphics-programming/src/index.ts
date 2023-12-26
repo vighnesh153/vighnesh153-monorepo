@@ -1,5 +1,6 @@
 export * from './barnsleys-fern';
 export * from './bonding-particles';
+export * from './brick-breaker-game';
 export * from './flappy-block-game';
 export * from './grid-path-finder';
 export * from './pong-game';

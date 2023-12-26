@@ -1,0 +1,1 @@
+export { BrickBreakerGame } from './Game';
