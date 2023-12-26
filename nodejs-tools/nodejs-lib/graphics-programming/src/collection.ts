@@ -13,7 +13,7 @@ const barnsleysFern: GraphicsProject = {
 };
 
 const brickBreakerGame: GraphicsProject = {
-  imageLink: 'https://i.imgur.com/C0N3twn.png',
+  imageLink: 'https://i.imgur.com/yauRTBv.png',
   title: 'Brick Breaker Game',
   id: 'brick-breaker-game',
   description: 'Brick breaker is a arcade game emulation, which destroys the bricks by shooting a ball at them',

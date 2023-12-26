@@ -1,20 +1,26 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { PongGame, CanvasWrapperImpl } from '@vighnesh153/graphics-programming';
+  import { BrickBreakerGame, CanvasWrapperImpl } from '@vighnesh153/graphics-programming';
   import type { CanvasWrapper } from '@vighnesh153/graphics-programming';
 
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;
-  let game: PongGame;
+  let game: BrickBreakerGame;
 
   function handleMouseMove(e: MouseEvent) {
-    game.handleMouseMove(e, document.documentElement.scrollTop);
+    game.handleMouseMove(e, document.documentElement.scrollLeft);
   }
 
   function newGame() {
     if (canvasWrapper) {
-      game = new PongGame(canvasWrapper);
+      game = new BrickBreakerGame(canvasWrapper, {
+        onGameOver() {
+          game.stop();
+          alert('Game over! You win!');
+          window.location.reload();
+        },
+      });
       const frames = game.start();
       function showNextFrame() {
         if (!frames.next().done) {
