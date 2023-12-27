@@ -7,7 +7,7 @@ import compress from 'astro-compress';
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  integrations: [prefetch(), compress({ logger: 1 }), svelte()],
+  integrations: [prefetch(), compress({ Logger: 2 }), svelte()],
   build: {
     inlineStylesheets: 'auto',
     format: 'file',
