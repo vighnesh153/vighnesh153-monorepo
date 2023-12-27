@@ -1,6 +1,6 @@
 import { StaticSite, type StackContext } from 'sst/constructs';
 import { HostedZone } from 'aws-cdk-lib/aws-route53';
-import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
+import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 
 const oneYear = '31536000';
 const oneDay = '86400';
@@ -11,6 +11,10 @@ const domainNames = {
   staging: 'staging.vighnesh153.dev',
   production: 'vighnesh153.dev',
 };
+const createCertificateArn = (accountNumber: string) => ({
+  staging: `arn:aws:acm:us-east-1:${accountNumber}:certificate/a57e0ab8-c09c-4571-9731-56c18d7358d5`,
+  production: `arn:aws:acm:us-east-1:${accountNumber}:certificate/4d626d87-33e4-4c01-9dc0-a3e81ac7c4c9`,
+});
 
 export function WebsiteStack({ stack }: StackContext) {
   const { stage } = stack;
@@ -20,15 +24,14 @@ export function WebsiteStack({ stack }: StackContext) {
   }
 
   const domainName = stage === 'prod' ? domainNames.production : domainNames.staging;
+  const certificateArn =
+    stage === 'prod' ? createCertificateArn(stack.account).production : createCertificateArn(stack.account).staging;
 
   const hostedZone = HostedZone.fromLookup(stack, 'Vighnesh153Astro_HostedZone', {
     domainName: hostedZoneDomainName,
   });
 
-  const certificate = new Certificate(stack, 'Vighnesh153Astro_ACM_Cert', {
-    domainName,
-    validation: CertificateValidation.fromDns(hostedZone),
-  });
+  const certificate = Certificate.fromCertificateArn(stack, 'Vighnesh153Astro_ACM_Cert', certificateArn);
 
   const site = new StaticSite(stack, 'Vighnesh153Astro', {
     path: '.',
@@ -38,29 +41,30 @@ export function WebsiteStack({ stack }: StackContext) {
     customDomain: {
       domainName,
       hostedZone: hostedZone.zoneName,
-      certificate,
+      cdk: {
+        certificate,
+      },
     },
-    fileOptions: [
-      // HTML files
-      {
-        exclude: '*',
-        include: '*.html',
-        // cacheControl: 'max-age=0,no-cache,no-store,must-revalidate',
-        cacheControl: [`max-age=${fiveMinutes}`, `s-max-age=${fiveMinutes}`, 'public', 'must-revalidate'].join(','),
-      },
-      // images
-      {
-        exclude: '*',
-        include: ['*.webp', '*.png', '*.jpeg', '*.jpg', '*.ico'],
-        cacheControl: [`max-age=${oneDay}`, `s-max-age=${oneDay}`, 'public', 'must-revalidate'].join(','),
-      },
-      // CSS and JS files
-      {
-        exclude: '*',
-        include: ['*.js', '*.css'],
-        cacheControl: [`max-age=${oneYear}`, 'public', 'immutable'].join(','),
-      },
-    ],
+    assets: {
+      fileOptions: [
+        // HTML files
+        {
+          files: '**/*.html',
+          // cacheControl: 'max-age=0,no-cache,no-store,must-revalidate',
+          cacheControl: [`max-age=${fiveMinutes}`, `s-max-age=${fiveMinutes}`, 'public', 'must-revalidate'].join(','),
+        },
+        // images
+        ...['**/*.webp', '**/*.png', '**/*.jpeg', '**/*.jpg', '**/*.ico'].map((imageRegex) => ({
+          files: imageRegex,
+          cacheControl: [`max-age=${oneDay}`, `s-max-age=${oneDay}`, 'public', 'must-revalidate'].join(','),
+        })),
+        // CSS and JS files
+        ...['*.js', '*.css'].map((jsCssFilesRegex) => ({
+          files: jsCssFilesRegex,
+          cacheControl: [`max-age=${oneYear}`, 'public', 'immutable'].join(','),
+        })),
+      ],
+    },
     environment: {
       PUBLIC_VIGHNESH153_STAGE: stage,
     },
