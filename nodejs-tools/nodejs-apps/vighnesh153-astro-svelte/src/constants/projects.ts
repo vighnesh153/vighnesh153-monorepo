@@ -100,4 +100,19 @@ export const allProjects: Project[] = [
       },
     },
   },
+  {
+    title: 'HTML5 Canvas Games',
+    description: 'Simple arcade style games built using the HTML Canvas API in Typescript',
+    tags: ['Canvas API', 'Astro', 'Typescript'],
+    links: {
+      github: {
+        Icon: GithubIcon,
+        href: externalLinks.projects.games.sourceCode,
+      },
+      demo: {
+        Icon: EyeIcon,
+        href: internalLinks.projects.games.root,
+      },
+    },
+  },
 ];

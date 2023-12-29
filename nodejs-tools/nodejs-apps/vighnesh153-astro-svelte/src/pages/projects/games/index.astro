@@ -3,17 +3,17 @@ import { canvasProjectSourceCodeLink } from '@vighnesh153/graphics-programming';
 import { classes } from '@/utils';
 import { projectNavItems } from '@/constants';
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import GraphicsProjectsCollection from '@/components/projects/graphics/GraphicsProjectsCollection.svelte';
+import GamesCollection from '@/components/projects/games/GamesCollection.svelte';
 import Link from '@/components/Link.svelte';
 
-const title = 'Vighnesh Raut | Graphics Projects';
-const description = `Graphics programming projects built with HTML Canvas API`;
+const title = 'Vighnesh Raut | Games';
+const description = `Games built with HTML Canvas API`;
 ---
 
 <ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={true}>
   <div class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}>
-    <h1 class="text-3xl mb-8">Graphics Programming Projects</h1>
-    <GraphicsProjectsCollection client:load />
+    <h1 class="text-3xl mb-8">Games</h1>
+    <GamesCollection client:load />
   </div>
   <p slot="custom-source-code">
     See the <Link href={canvasProjectSourceCodeLink}>project's source code</Link>

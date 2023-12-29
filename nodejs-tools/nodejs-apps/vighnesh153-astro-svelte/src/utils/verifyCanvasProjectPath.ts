@@ -1,11 +1,13 @@
-import { type GraphicsProject } from '@vighnesh153/graphics-programming';
+import { type CanvasProject } from '@vighnesh153/graphics-programming';
 
-import { internalLinks } from '@/constants';
-
-export function verifyGraphicsProjectPath(project: GraphicsProject, url: string): void {
+export function verifyCanvasProjectPath(
+  project: CanvasProject,
+  url: string,
+  linkBuilder: (projectId: string) => string
+): void {
   // remove trailing ".html"
   const actualPathName = new URL(url).pathname.replace(/\.html$/, '');
-  const expectedPathName = internalLinks.projects.graphicsProjects.buildProjectLinkFromId(project.id);
+  const expectedPathName = linkBuilder(project.id);
 
   if (actualPathName !== expectedPathName) {
     throw new Error(
