@@ -24,5 +24,9 @@ export const internalLinks = {
       root: '/projects/graphics',
       buildProjectLinkFromId: (projectId: string) => `/projects/graphics/${projectId}`,
     },
+    games: {
+      root: '/projects/games',
+      buildProjectLinkFromId: (projectId: string) => `/projects/games/${projectId}`,
+    },
   },
 };

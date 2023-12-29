@@ -1,0 +1,11 @@
+---
+import { gamesProjectsMap } from '@vighnesh153/graphics-programming';
+import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
+import ProjectRoot from '@/components/projects/games/flappy-block-game/ProjectRoot.svelte';
+
+const project = gamesProjectsMap.flappyBlockGame;
+---
+
+<CanvasProjectLayout project={project} type="game">
+  <ProjectRoot client:load />
+</CanvasProjectLayout>

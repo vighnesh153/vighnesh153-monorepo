@@ -1,3 +1,3 @@
 export * from './classes';
 export * from './removeTrailingSlashFromUrlPathName';
-export * from './verifyGraphicsProjectPath';
+export * from './verifyCanvasProjectPath';
