@@ -29,4 +29,10 @@ export const internalLinks = {
       buildProjectLinkFromId: (projectId: string) => `/projects/games/${projectId}`,
     },
   },
+  tools: {
+    root: '/tools',
+    calculators: {
+      root: '/tools/calculators',
+    },
+  },
 };
