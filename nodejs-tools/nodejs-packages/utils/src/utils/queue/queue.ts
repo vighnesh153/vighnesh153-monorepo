@@ -146,15 +146,12 @@ export class Queue<T> {
    * Creates an array instance with the entries from this queue. Order is from left to right.
    */
   toArray(): T[] {
-    const result: T[] = [];
-
     let currentNode = this.head;
-    while (currentNode !== null) {
-      result.push(currentNode.value);
-      currentNode = currentNode.rightPointsTo;
-    }
-
-    return result;
+    return Array.from({ length: this.size }).map(() => {
+      const returnValue = currentNode!.value;
+      currentNode = currentNode!.rightPointsTo;
+      return returnValue;
+    });
   }
 
   /**
