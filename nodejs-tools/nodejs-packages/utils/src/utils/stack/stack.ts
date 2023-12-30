@@ -87,16 +87,17 @@ export class Stack<T> {
    * Creates and returns an array with the entries from this stack. First entry will be the first element in the array
    */
   toArray(): T[] {
-    const result: T[] = [];
-
     let currentNode = this.head;
-    while (currentNode !== null) {
-      result.push(currentNode.entry);
-      currentNode = currentNode.pointsTo;
-    }
-
-    // Should return in reverse as we want the order to be from bottom to top of the stack
-    return result.reverse();
+    return (
+      Array.from({ length: this.size })
+        .map(() => {
+          const returnValue = currentNode!.entry;
+          currentNode = currentNode!.pointsTo;
+          return returnValue;
+        })
+        // Should return in reverse as we want the order to be from bottom to top of the stack
+        .toReversed()
+    );
   }
 
   /**
