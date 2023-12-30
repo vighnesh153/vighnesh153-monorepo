@@ -96,7 +96,7 @@ export class Stack<T> {
           return returnValue;
         })
         // Should return in reverse as we want the order to be from bottom to top of the stack
-        .toReversed()
+        .reverse()
     );
   }
 
