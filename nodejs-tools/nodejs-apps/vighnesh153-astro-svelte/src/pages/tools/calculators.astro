@@ -1,0 +1,19 @@
+---
+import { classes } from '@/utils';
+import { projectsRootNavItems } from '@/constants';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+import PrimesCalculators from '@/components/tools/PrimesCalculators.svelte';
+
+const title = 'Vighnesh Raut | Calculators';
+const description = 'A collection of calculators to make life easier';
+---
+
+<ContentLayout title={title} description={description} navItems={projectsRootNavItems}>
+  <div class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+    <h1 class="text-3xl">Calculators</h1>
+
+    <div class="mt-5">
+      <PrimesCalculators client:load />
+    </div>
+  </div>
+</ContentLayout>
