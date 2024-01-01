@@ -1,6 +1,8 @@
 go 1.21.5
 
 use (
-	./apps/auth/auth-app
-	./apps/auth/auth-test
+	./apps/identity/identity-app
+	./apps/identity/identity-test
+	./packages/structs
+	./packages/utils
 )

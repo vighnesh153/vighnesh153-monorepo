@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"vighnesh153/auth-app/handlers"
-	"vighnesh153/auth-app/utils"
+
+	"github.com/vighnesh153/identity-app/handlers"
+	"github.com/vighnesh153/identity-app/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"

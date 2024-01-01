@@ -4,7 +4,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"strings"
-	"vighnesh153/auth-app/models"
+
+	"github.com/vighnesh153/structs"
 )
 
 const emptyJsonString = "{}"
@@ -12,7 +13,7 @@ const emptyJsonString = "{}"
 /*
  * @returns UserInfo, UserInfoAsJson, Error
  */
-func DecodeUserInfoFromJWTToken(token string) (*models.UserInfo, string, error) {
+func DecodeUserInfoFromJWTToken(token string) (*structs.GoogleOAuthUserInfo, string, error) {
 	userInfoSegment := strings.Split(token, ".")[1]
 
 	jsonStringBytes, err := base64.StdEncoding.DecodeString(userInfoSegment)
@@ -20,7 +21,7 @@ func DecodeUserInfoFromJWTToken(token string) (*models.UserInfo, string, error) 
 		return nil, emptyJsonString, err
 	}
 
-	var userInfo models.UserInfo
+	var userInfo structs.GoogleOAuthUserInfo
 	err = json.Unmarshal(jsonStringBytes, &userInfo)
 	if err != nil {
 		return nil, emptyJsonString, err

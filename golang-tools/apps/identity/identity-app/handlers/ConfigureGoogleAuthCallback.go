@@ -5,7 +5,8 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"vighnesh153/auth-app/utils"
+
+	"github.com/vighnesh153/identity-app/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -60,11 +61,19 @@ func ConfigureGoogleAuthCallback(e *gin.Engine, httpClient *http.Client, options
 			return
 		}
 
-		_, userInfoAsJson, err := utils.DecodeUserInfoFromJWTToken(tokenData.AccessToken)
+		userInfo, userInfoAsJson, err := utils.DecodeUserInfoFromJWTToken(tokenData.AccessToken)
 		if err != nil {
 			log.Fatalln("Error occurred while decoding user info from token:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to extract user info from token",
+			})
+			return
+		}
+
+		if userInfo.EmailVerified == false {
+			log.Println("Email address is not verified:", userInfo)
+			c.JSON(http.StatusNotAcceptable, gin.H{
+				"message": "Email address is not verified",
 			})
 			return
 		}
