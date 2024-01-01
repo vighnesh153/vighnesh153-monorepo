@@ -11,16 +11,9 @@ import (
 	"github.com/vighnesh153/identity-app/utils"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-		os.Exit(1)
-	}
-
 	serverRootUri := os.Getenv("AUTH_SERVER_ROOT_URI")
 	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
