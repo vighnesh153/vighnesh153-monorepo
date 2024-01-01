@@ -2,8 +2,6 @@
 
 ### Quick links
 
-- Vercel project: https://vercel.com/vighnesh153/vighnesh153-main
-- Logging, Monitoring: https://cloud.axiom.co/vighnesh153-GNaU/datasets
 - Cloudflare workers: https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
 
 ### Integrations
@@ -59,13 +57,12 @@ Visit
 - adb fetch continue watching row from device
 - adb launch deeplink
 - compose-query (similar to react-query by tanstack)
-- migrate `graphics.vighnesh153.com` to `vighnesh153.dev`
-- migrate `math.vighnesh153.com` to `vighnesh153.dev`
 - migrate `tex.vighnesh153.com` to `vighnesh153.dev`
+  - Build your own math jax equation parser using XML
 - migrate `blog.vighnesh153.com` to `vighnesh153.dev`
   - https://docs.astro.build/en/tutorial/0-introduction/
+- https://go.dev/wiki/SQLDrivers
 - mp3 to mp4
-- Comways game of life
 - Check if trap focus mentioned in the below link could be useful for side bar on vighnesh153.dev:
   https://learn.svelte.dev/tutorial/actions
 - privacy policy in the repo
@@ -73,6 +70,10 @@ Visit
   - tippy: https://atomiks.github.io/tippyjs/
   - usage in svelte: https://learn.svelte.dev/tutorial/adding-parameters-to-actions
 - Audio player: https://learn.svelte.dev/tutorial/media-elements
+- https://youtube.com/shorts/GOSezO0CHss?si=-056zvtt3KRLp_CI
+- terminal emulator
+- Comways game of life
+- rubiks cube
 - 404 page
   - https://floatui.com/components/404-pages
   - https://tailwindui.com/components/marketing/feedback/404-pages
@@ -83,6 +84,7 @@ Visit
 - Protobuf in golang and javascript
 - RPC in golang and javascript
 - Remotion: https://www.remotion.dev/
+- https://park-ui.com/
 - Resume (CV) as code
 
 ```html
@@ -138,8 +140,10 @@ Visit
   - When completely banning user, remember to remove their session from users to log them out
 - Svelte Query: https://sveltequery.vercel.app/overview
 - https://github.com/vighnesh153/my-favourite
-- Projects
-  - Migrate projects to `vighnesh153.com/projects/*`
+- Interview stuff
+  - Project: /Users/rvighnesh/practice/interview-hilbert-curve
+- Cool js packages 
+  - https://unjs.io/packages
 - Blog:
   - Create a blog page under `vighnesh153.com/blog`
   - Migrate all blogs from `blog.vighnesh153.com` to `vighnesh153/blog`
@@ -168,7 +172,6 @@ Visit
 - NextJS replacement tool (AWS deployment)
 - Video editing tool
 - Audio and video libraries
-- Sound effects on `vighnesh153.com`
 - SQS Queues
   - Pending events
     - USER_CREATED
