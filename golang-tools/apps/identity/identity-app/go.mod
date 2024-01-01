@@ -1,10 +1,13 @@
-module vighnesh153/auth-app
+module github.com/vighnesh153/identity-app
 
 go 1.21.5
+
+replace github.com/vighnesh153/structs => ../../../packages/structs
 
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/joho/godotenv v1.5.1
+	github.com/vighnesh153/structs v0.0.0-00010101000000-000000000000
 )
 
 require (

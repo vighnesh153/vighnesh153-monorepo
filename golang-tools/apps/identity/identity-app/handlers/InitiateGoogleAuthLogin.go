@@ -2,7 +2,8 @@ package handlers
 
 import (
 	"net/http"
-	"vighnesh153/auth-app/utils"
+
+	"github.com/vighnesh153/identity-app/utils"
 
 	"github.com/gin-gonic/gin"
 )
