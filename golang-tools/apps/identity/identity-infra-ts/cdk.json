@@ -1,5 +1,5 @@
 {
-  "app": "go mod download && go run identity-infra.go",
+  "app": "npx ts-node --prefer-ts-exts bin/identity-infra.ts",
   "watch": {
     "include": [
       "**"
@@ -7,9 +7,13 @@
     "exclude": [
       "README.md",
       "cdk*.json",
-      "go.mod",
-      "go.sum",
-      "**/*test.go"
+      "**/*.d.ts",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "yarn.lock",
+      "node_modules",
+      "test"
     ]
   },
   "context": {

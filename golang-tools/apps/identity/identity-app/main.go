@@ -37,13 +37,6 @@ func main() {
 		Timeout: time.Duration(10 * time.Second),
 	}
 
-	handlers.ConfigureInitiateGoogleAuthLogin(r, handlers.ConfigureInitiateGoogleAuthLoginOptions{
-		RequestPath:      utils.RequestPathGetGoogleAuthUri,
-		GoogleClientId:   googleClientId,
-		AuthRedirectUri:  authRedirectUri,
-		GoogleAuthScopes: utils.GoogleAuthScopes,
-	})
-
 	handlers.ConfigureGoogleAuthCallback(r, &httpClient, handlers.ConfigureGoogleAuthCallbackOptions{
 		RequestPath:        utils.RequestPathAuthGoogleCallbackUri,
 		GoogleClientId:     googleClientId,

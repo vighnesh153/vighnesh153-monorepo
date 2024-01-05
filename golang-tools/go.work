@@ -2,8 +2,7 @@ go 1.21.5
 
 use (
 	./apps/identity/identity-app
-	./apps/identity/identity-infra
-	./apps/identity/identity-test
+	./apps/identity/initiate-google-login
 	./packages/structs
 	./packages/utils
 )
