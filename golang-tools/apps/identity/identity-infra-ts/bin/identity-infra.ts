@@ -17,7 +17,8 @@ new IdentityInfraStack(app, stage, {
    * and Region that are implied by the current CLI configuration. */
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: "ap-south-2", // Hyderabad
+    // region: "ap-south-2", // Hyderabad
+    region: "ap-south-1", // Mumbai
   },
 
   /* Uncomment the next line if you know exactly what Account and Region you

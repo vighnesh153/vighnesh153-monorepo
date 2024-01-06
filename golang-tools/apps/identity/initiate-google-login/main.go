@@ -13,9 +13,16 @@ import (
 type Request events.APIGatewayProxyRequest
 type Response events.APIGatewayProxyResponse
 
-var authUrl string
+var authUrl string = ""
 
-func handleInitiateGoogleLoginRequest(ctx context.Context, request Request) (Response, error) {
+func handleInitiateGoogleLoginRequest(_ context.Context, _ Request) (Response, error) {
+	if authUrl == "" {
+		return Response{
+			StatusCode: http.StatusInternalServerError,
+			Body:       "Auth url empty",
+		}, nil
+	}
+
 	return Response{
 		StatusCode: http.StatusTemporaryRedirect,
 		Headers: map[string]string{
@@ -24,17 +31,21 @@ func handleInitiateGoogleLoginRequest(ctx context.Context, request Request) (Res
 	}, nil
 }
 
+func initialize() {
+	serverRootUri := os.Getenv(EnvVarAuthServerRootUri)
+	googleClientId := os.Getenv(EnvVarGoogleClientId)
+
+	if serverRootUri != "" && googleClientId != "" {
+		authRedirectUri := fmt.Sprintf("%s%s", serverRootUri, GoogleAuthCallback)
+		authUrl = ConstructGoogleAuthUrl(ConstructGoogleAuthUrlOptions{
+			GoogleClientId:   googleClientId,
+			AuthRedirectUri:  authRedirectUri,
+			GoogleAuthScopes: GoogleAuthScopes,
+		})
+	}
+}
+
 func main() {
-	serverRootUri := os.Getenv("AUTH_SERVER_ROOT_URI")
-	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
-
-	authRedirectUri := fmt.Sprintf("%s%s", serverRootUri, GoogleAuthCallback)
-
-	authUrl = ConstructGoogleAuthUrl(ConstructGoogleAuthUrlOptions{
-		GoogleClientId:   googleClientId,
-		AuthRedirectUri:  authRedirectUri,
-		GoogleAuthScopes: GoogleAuthScopes,
-	})
-
+	initialize()
 	lambda.Start(handleInitiateGoogleLoginRequest)
 }
