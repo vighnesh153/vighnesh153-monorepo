@@ -43,7 +43,7 @@ export function route53Configuration(
     recordName: `${stage}.identity`,
   });
 
-  const aaaaRecord = new route53.AaaaRecord(scope, "ARecord", {
+  const aaaaRecord = new route53.AaaaRecord(scope, "AaaaRecord", {
     zone: myHostedZone,
     target: recordTarget,
     recordName: `${stage}.identity`,

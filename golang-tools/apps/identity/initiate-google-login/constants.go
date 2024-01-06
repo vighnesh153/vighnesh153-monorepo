@@ -16,7 +16,12 @@ const (
 	QueryParamCodeValue    = "code"
 	QueryParamConsentValue = "consent"
 
-	GoogleAuthCallback = "/auth/google/callback"
+	GoogleAuthCallback = "/googleAuthCallback"
+)
+
+const (
+	EnvVarAuthServerRootUri = "AUTH_SERVER_ROOT_URI"
+	EnvVarGoogleClientId    = "GOOGLE_CLIENT_ID"
 )
 
 var (
