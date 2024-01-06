@@ -2,11 +2,15 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { IdentityInfraStack } from "../lib/identity-infra-stack";
+import { Stage } from "../lib/stage";
 
 const app = new cdk.App();
 
-// todo
-const stage = "dev";
+const stage: Stage = (() => {
+  if (["prod", "dev"].includes(process.env.STAGE ?? "dev"))
+    return process.env.STAGE as Stage;
+  return "dev";
+})();
 
 new IdentityInfraStack(app, stage, {
   /* If you don't specify 'env', this stack will be environment-agnostic.
