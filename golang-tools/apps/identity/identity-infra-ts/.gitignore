@@ -9,4 +9,5 @@ cdk.out
 
 cdk.context.json
 
-.env.local
+.env.dev
+.env.prod
