@@ -3,19 +3,17 @@ import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as goLambda from "@aws-cdk/aws-lambda-go-alpha";
 
-import { Stage } from "./stage";
-
 function envVariableNotFound(): string {
   throw new Error("Environment variable not initialized");
 }
 
-export function configureLambdaFunctions(scope: Construct, stage: Stage) {
+export function configureLambdaFunctions(scope: Construct, domainName: string) {
   const functionProps: Omit<goLambda.GoFunctionProps, "entry"> = {
     environment: {
-      // TABLE_NAME: dynamoTable.tableName,
       GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? envVariableNotFound(),
-      AUTH_SERVER_ROOT_URI:
-        process.env.AUTH_SERVER_ROOT_URI ?? envVariableNotFound(),
+      AUTH_SERVER_ROOT_URI: domainName.startsWith("http")
+        ? domainName
+        : `https://${domainName}`,
     },
     runtime: lambda.Runtime.PROVIDED_AL2023,
   };

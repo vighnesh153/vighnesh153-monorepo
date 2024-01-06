@@ -22,7 +22,7 @@ export class IdentityInfraStack extends cdk.Stack {
     // Create Lambda function for each CRUD operation
     const { initiateGoogleLoginLambda } = configureLambdaFunctions(
       scope,
-      stage
+      domainName
     );
 
     // Grant the lambda function read/write access to the DynammoDB table
