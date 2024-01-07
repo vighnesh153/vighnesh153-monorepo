@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/vighnesh153/structs"
 )
 
 var (
@@ -61,7 +62,7 @@ func handleGoogleAuthCallback(_ context.Context, request Request) (Response, err
 	defer tokenResponse.Body.Close()
 
 	// parse token data
-	var tokenData GoogleAuthTokenData
+	var tokenData structs.GoogleOAuthTokenData
 	err = json.NewDecoder(tokenResponse.Body).Decode(&tokenData)
 	if err != nil {
 		log.Println("Error occurred while parsing google token response:", err)

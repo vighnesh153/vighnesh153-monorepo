@@ -15,7 +15,7 @@ func TestDecodeUserInfoFromJwtSuccess(t *testing.T) {
 		"picture": "%s",
 		"email_verified": %t
 	}`, name, email, picture, emailVerified)
-	b64String := base64.StdEncoding.EncodeToString([]byte(randomString))
+	b64String := base64.RawURLEncoding.EncodeToString([]byte(randomString))
 	token := fmt.Sprintf("bla.%s.bla", b64String)
 
 	// act
@@ -23,7 +23,7 @@ func TestDecodeUserInfoFromJwtSuccess(t *testing.T) {
 
 	// assert
 	if userInfo == nil {
-		t.Fatalf("Expected userInfo to not be 'nil', but it 'nil'")
+		t.Fatalf("Expected userInfo to not be 'nil', but it is 'nil'")
 	}
 	if userInfo.Name != name {
 		t.Fatalf("Expected userInfo.Name to be '%s', found '%s'", name, userInfo.Name)

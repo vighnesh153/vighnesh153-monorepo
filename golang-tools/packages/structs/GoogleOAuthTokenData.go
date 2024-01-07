@@ -1,6 +1,6 @@
-package main
+package structs
 
-type GoogleAuthTokenData struct {
+type GoogleOAuthTokenData struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	IdToken      string `json:"id_token"`
