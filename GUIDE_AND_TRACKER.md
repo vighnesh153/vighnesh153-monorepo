@@ -74,6 +74,8 @@ Visit
 - terminal emulator
 - Comways game of life
 - rubiks cube
+- mermaid js like clone but in code instead of a DSL
+- visualize windmill problem: https://www.youtube.com/watch?v=M64HUIJFTZM
 - 404 page
   - https://floatui.com/components/404-pages
   - https://tailwindui.com/components/marketing/feedback/404-pages
