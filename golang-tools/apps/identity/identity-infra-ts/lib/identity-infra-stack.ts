@@ -9,6 +9,7 @@ import { dynamoTableConfig } from "./dynamoTable";
 import { Stage } from "./stage";
 import { httpApiConfig } from "./httpApi";
 import { configureLambdaFunctions } from "./lambdaFunctions";
+import { uiDomains } from "./uiDomains";
 
 export class IdentityInfraStack extends cdk.Stack {
   constructor(scope: Construct, stage: Stage, props?: cdk.StackProps) {
@@ -20,13 +21,11 @@ export class IdentityInfraStack extends cdk.Stack {
     const { dynamoTable } = dynamoTableConfig(this, "UserInfo");
 
     // Create Lambda function for each CRUD operation
-    const { initiateGoogleLoginLambda } = configureLambdaFunctions(
-      scope,
-      domainName
-    );
+    const { initiateGoogleLoginLambda, googleAuthCallbackLamdba } =
+      configureLambdaFunctions(this, stage, domainName, uiDomains[stage]);
 
     // Grant the lambda function read/write access to the DynammoDB table
-    dynamoTable.grantReadWriteData(initiateGoogleLoginLambda);
+    dynamoTable.grantReadWriteData(googleAuthCallbackLamdba);
 
     // Associate a lambda function to a route in HttpApi
     httpApi.addRoutes({
@@ -35,6 +34,14 @@ export class IdentityInfraStack extends cdk.Stack {
       integration: new apiGatewayIntegrations.HttpLambdaIntegration(
         "InitiateGoogleLoginFunctionHttpIntegration",
         initiateGoogleLoginLambda
+      ),
+    });
+    httpApi.addRoutes({
+      path: "/googleAuthCallback",
+      methods: [apiGatewayv2.HttpMethod.GET],
+      integration: new apiGatewayIntegrations.HttpLambdaIntegration(
+        "GoogleAuthCallbackFunctionHttpIntegration",
+        googleAuthCallbackLamdba
       ),
     });
   }

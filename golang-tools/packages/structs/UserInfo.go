@@ -8,14 +8,16 @@ type GoogleOAuthUserInfo struct {
 }
 
 type PublicUserInfo struct {
+	Id                    string `json:"id"`
+	Name                  string `json:"name"`
+	ProfilePictureUrl     string `json:"profile_picture_url"`
+	SignupTimeEpochMillis int64  `json:"signup_time_millis"`
+}
+
+type CompleteUserInfo struct {
+	Id                    string `json:"id"`
 	Name                  string `json:"name"`
 	Email                 string `json:"email"`
 	ProfilePictureUrl     string `json:"profile_picture_url"`
 	SignupTimeEpochMillis int64  `json:"signup_time_millis"`
-	ClientId              string `json:"client_id"`
-}
-
-type ServerUserInfo struct {
-	PublicUserInfo  `json:"public_user_info"`
-	PrivateServerId string `json:"private_server_id"`
 }
