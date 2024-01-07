@@ -9,8 +9,8 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "cdk:deploy:dev": "dotenv -e .env.dev -- STAGE=dev npx cdk deploy",
-    "cdk:deploy:prod": "dotenv -e .env.prod -- STAGE=prod npx cdk deploy"
+    "cdk:deploy:dev": "STAGE=dev dotenv -e .env.dev -- npx cdk deploy",
+    "cdk:deploy:prod": "STAGE=prod dotenv -e .env.prod -- npx cdk deploy"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",

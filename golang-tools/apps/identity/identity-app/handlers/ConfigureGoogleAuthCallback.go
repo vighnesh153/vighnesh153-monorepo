@@ -33,7 +33,7 @@ func ConfigureGoogleAuthCallback(e *gin.Engine, httpClient *http.Client, options
 	e.GET(options.RequestPath, func(c *gin.Context) {
 		tokenUrl, err := constructTokenUrl(c.Query(utils.QueryParamCodeKey), options.GoogleClientId, options.GoogleClientSecret, options.AuthRedirectUri)
 		if err != nil {
-			log.Fatalln("Error occurred while constructing google token url:", err)
+			log.Println("Error occurred while constructing google token url:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to construct token url",
 			})
@@ -43,7 +43,7 @@ func ConfigureGoogleAuthCallback(e *gin.Engine, httpClient *http.Client, options
 		// fetch token
 		tokenResponse, err := httpClient.PostForm(tokenUrl.String(), url.Values{})
 		if err != nil {
-			log.Fatalln("Error occurred while fetching google token:", err)
+			log.Println("Error occurred while fetching google token:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to get token",
 			})
@@ -54,7 +54,7 @@ func ConfigureGoogleAuthCallback(e *gin.Engine, httpClient *http.Client, options
 		var tokenData googleAuthTokenData
 		err = json.NewDecoder(tokenResponse.Body).Decode(&tokenData)
 		if err != nil {
-			log.Fatalln("Error occurred while parsing google token response:", err)
+			log.Println("Error occurred while parsing google token response:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to parse token response",
 			})
@@ -63,7 +63,7 @@ func ConfigureGoogleAuthCallback(e *gin.Engine, httpClient *http.Client, options
 
 		userInfo, userInfoAsJson, err := utils.DecodeUserInfoFromJWTToken(tokenData.AccessToken)
 		if err != nil {
-			log.Fatalln("Error occurred while decoding user info from token:", err)
+			log.Println("Error occurred while decoding user info from token:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to extract user info from token",
 			})
