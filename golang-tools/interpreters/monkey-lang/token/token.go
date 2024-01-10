@@ -16,8 +16,16 @@ const (
 	INTEGER    = "INTEGER"    // 1, 42
 
 	// Operators
-	ASSIGN = "="
-	PLUS   = "+"
+	ASSIGN        = "="
+	PLUS          = "+"
+	MINUS         = "-"
+	BANG          = "!"
+	ASTERISK      = "*"
+	FORWARD_SLASH = "/"
+	LESS_THAN     = "<"
+	GREATER_THAN  = ">"
+	DOUBLE_EQUALS = "=="
+	NOT_EQUALS    = "!="
 
 	// Delimiters
 	COMMA     = ","
@@ -31,6 +39,11 @@ const (
 	// Keywords
 	FUNCTION = "function"
 	LET      = "let"
+	IF       = "if"
+	ELSE     = "else"
+	RETURN   = "return"
+	TRUE     = "true"
+	FALSE    = "false"
 )
 
 func NewToken(tokenType TokenType, character byte) Token {
@@ -43,6 +56,11 @@ func NewToken(tokenType TokenType, character byte) Token {
 var keywords = map[string]TokenType{
 	"function": FUNCTION,
 	"let":      LET,
+	"if":       IF,
+	"else":     ELSE,
+	"return":   RETURN,
+	"true":     TRUE,
+	"false":    FALSE,
 }
 
 func LookupIdentifier(identifier string) TokenType {
