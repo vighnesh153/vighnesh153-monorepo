@@ -206,14 +206,14 @@ func (p *Parser) parseExpression(precedence int) ast.Expression {
 	leftExpression := prefix()
 
 	for !p.peekTokenIs(token.SEMICOLON) && precedence < p.peekPrecedence() {
-		inficParseFunction := p.infixParseFunctions[p.peekToken.Type]
-		if inficParseFunction == nil {
+		infixParseFunction := p.infixParseFunctions[p.peekToken.Type]
+		if infixParseFunction == nil {
 			return leftExpression
 		}
 
 		p.nextToken()
 
-		leftExpression = inficParseFunction(leftExpression)
+		leftExpression = infixParseFunction(leftExpression)
 	}
 
 	return leftExpression
