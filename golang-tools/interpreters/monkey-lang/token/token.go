@@ -54,13 +54,13 @@ func NewToken(tokenType TokenType, character byte) Token {
 }
 
 var keywords = map[string]TokenType{
-	"function": FUNCTION,
-	"let":      LET,
-	"if":       IF,
-	"else":     ELSE,
-	"return":   RETURN,
-	"true":     TRUE,
-	"false":    FALSE,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+	"true":   TRUE,
+	"false":  FALSE,
 }
 
 func LookupIdentifier(identifier string) TokenType {
