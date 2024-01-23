@@ -9,7 +9,7 @@ func TestNextToken(t *testing.T) {
 	input := `let five = 5;
 	let ten = 10;
 
-	let add = function(x, y) {
+	let add = fn(x, y) {
 		x + y;
 	};
 
@@ -44,7 +44,7 @@ func TestNextToken(t *testing.T) {
 		{Type: token.LET, Literal: "let"},
 		{Type: token.IDENTIFIER, Literal: "add"},
 		{Type: token.ASSIGN, Literal: "="},
-		{Type: token.FUNCTION, Literal: "function"},
+		{Type: token.FUNCTION, Literal: "fn"},
 		{Type: token.LEFT_PARENTHESIS, Literal: "("},
 		{Type: token.IDENTIFIER, Literal: "x"},
 		{Type: token.COMMA, Literal: ","},
