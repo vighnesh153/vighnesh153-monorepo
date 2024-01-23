@@ -56,6 +56,7 @@ func NewParser(l *lexer.Lexer) *Parser {
 	p.registerPrefixParseFn(token.TRUE, p.parseBoolean)
 	p.registerPrefixParseFn(token.FALSE, p.parseBoolean)
 	p.registerPrefixParseFn(token.LEFT_PARENTHESIS, p.parseGroupedExpression)
+	p.registerPrefixParseFn(token.IF, p.parseIfExpression)
 
 	p.infixParseFunctions = make(map[token.TokenType]infixParseFunction)
 	p.registerInfixParseFn(token.PLUS, p.parseInfixExpression)
@@ -304,4 +305,54 @@ func (p *Parser) parseGroupedExpression() ast.Expression {
 		return nil
 	}
 	return exp
+}
+
+func (p *Parser) parseIfExpression() ast.Expression {
+	expression := &ast.IfExpression{Token: p.currentToken}
+
+	if !p.expectPeek(token.LEFT_PARENTHESIS) {
+		return nil
+	}
+
+	p.nextToken()
+	expression.Condition = p.parseExpression(LOWEST)
+	if !p.expectPeek(token.RIGHT_PARENTHESIS) {
+		return nil
+	}
+
+	if !p.expectPeek(token.LEFT_CURLY_BRACE) {
+		return nil
+	}
+
+	expression.Consequence = p.parseBlockStatement()
+
+	if p.peekTokenIs(token.ELSE) {
+		p.nextToken()
+
+		if !p.expectPeek(token.LEFT_CURLY_BRACE) {
+			return nil
+		}
+
+		expression.Alternative = p.parseBlockStatement()
+	}
+
+	return expression
+}
+
+func (p *Parser) parseBlockStatement() *ast.BlockStatement {
+	block := &ast.BlockStatement{Token: p.currentToken}
+	block.Statements = []ast.Statement{}
+	p.nextToken()
+
+	for !p.currentTokenIs(token.RIGHT_CURLY_BRACE) && !p.currentTokenIs(token.EOF) {
+		stmt := p.parseStatement()
+
+		if stmt != nil {
+			block.Statements = append(block.Statements, stmt)
+		}
+
+		p.nextToken()
+	}
+
+	return block
 }
