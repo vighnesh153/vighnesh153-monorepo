@@ -14,6 +14,7 @@ const (
 	// Identifiers + Literals
 	IDENTIFIER = "IDENTIFIER" // x, y, add
 	INTEGER    = "INTEGER"    // 1, 42
+	STRING     = "STRING"
 
 	// Operators
 	ASSIGN        = "="
