@@ -26,6 +26,8 @@ func TestNextToken(t *testing.T) {
 
 	10 == 10;
 	10 != 9;
+	"foobar"
+    "foo bar"
 	`
 
 	tests := []token.Token{
@@ -109,6 +111,9 @@ func TestNextToken(t *testing.T) {
 		{Type: token.NOT_EQUALS, Literal: "!="},
 		{Type: token.INTEGER, Literal: "9"},
 		{Type: token.SEMICOLON, Literal: ";"},
+
+		{Type: token.STRING, Literal: "foobar"},
+		{Type: token.STRING, Literal: "foo bar"},
 
 		{Type: token.EOF, Literal: ""},
 	}
