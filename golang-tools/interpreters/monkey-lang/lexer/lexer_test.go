@@ -26,8 +26,11 @@ func TestNextToken(t *testing.T) {
 
 	10 == 10;
 	10 != 9;
+
 	"foobar"
     "foo bar"
+
+	[1, 2];
 	`
 
 	tests := []token.Token{
@@ -114,6 +117,13 @@ func TestNextToken(t *testing.T) {
 
 		{Type: token.STRING, Literal: "foobar"},
 		{Type: token.STRING, Literal: "foo bar"},
+
+		{Type: token.LEFT_BRACKET, Literal: "["},
+		{Type: token.INTEGER, Literal: "1"},
+		{Type: token.COMMA, Literal: ","},
+		{Type: token.INTEGER, Literal: "2"},
+		{Type: token.RIGHT_BRACKET, Literal: "]"},
+		{Type: token.SEMICOLON, Literal: ";"},
 
 		{Type: token.EOF, Literal: ""},
 	}
