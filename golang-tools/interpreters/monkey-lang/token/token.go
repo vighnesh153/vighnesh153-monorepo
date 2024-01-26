@@ -36,6 +36,8 @@ const (
 	RIGHT_PARENTHESIS = ")"
 	LEFT_CURLY_BRACE  = "{"
 	RIGHT_CURLY_BRACE = "}"
+	LEFT_BRACKET      = "["
+	RIGHT_BRACKET     = "]"
 
 	// Keywords
 	FUNCTION = "function"
