@@ -31,6 +31,7 @@ const (
 	// Delimiters
 	COMMA     = ","
 	SEMICOLON = ";"
+	COLON     = ":"
 
 	LEFT_PARENTHESIS  = "("
 	RIGHT_PARENTHESIS = ")"
