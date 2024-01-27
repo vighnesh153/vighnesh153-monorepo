@@ -31,6 +31,8 @@ func TestNextToken(t *testing.T) {
     "foo bar"
 
 	[1, 2];
+
+	{"foo": "bar"}
 	`
 
 	tests := []token.Token{
@@ -124,6 +126,12 @@ func TestNextToken(t *testing.T) {
 		{Type: token.INTEGER, Literal: "2"},
 		{Type: token.RIGHT_BRACKET, Literal: "]"},
 		{Type: token.SEMICOLON, Literal: ";"},
+
+		{Type: token.LEFT_CURLY_BRACE, Literal: "{"},
+		{Type: token.STRING, Literal: "foo"},
+		{Type: token.COLON, Literal: ":"},
+		{Type: token.STRING, Literal: "bar"},
+		{Type: token.RIGHT_CURLY_BRACE, Literal: "}"},
 
 		{Type: token.EOF, Literal: ""},
 	}
