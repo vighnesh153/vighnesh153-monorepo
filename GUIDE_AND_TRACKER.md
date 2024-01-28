@@ -86,6 +86,7 @@ Visit
 - Protobuf in golang and javascript
 - RPC in golang and javascript
 - Remotion: https://www.remotion.dev/
+- Building Macro-Systems: https://interpreterbook.com/lost/
 - https://park-ui.com/
 - Resume (CV) as code
 

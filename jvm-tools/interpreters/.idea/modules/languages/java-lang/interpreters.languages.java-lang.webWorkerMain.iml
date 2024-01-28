@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JavaScript " allPlatforms="JS []" useProjectSettings="false" isTestModule="false" externalProjectId=":languages:java-lang" isHmppProject="true">
+        <dependsOnModuleNames>:languages:java-lang:commonMain</dependsOnModuleNames>
+        <sourceSets>
+          <sourceSet>interpreters.languages.java-lang.commonMain</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="irOnly" arg="true" />
+            <flagArg name="irProduceKlibDir" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="irModuleName" arg="interpreters.languages:java-lang" />
+            <stringArg name="irPerModuleOutputName" arg="interpreters-languages-java-lang-web-worker" />
+            <stringArg name="apiVersion" arg="1.9" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths" />
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>

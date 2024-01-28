@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="java-lang-webworker">
+    <output-path>$PROJECT_DIR$/languages/java-lang/build/libs</output-path>
+    <root id="archive" name="java-lang-webworker.jar">
+      <element id="module-output" name="interpreters.languages.java-lang.webWorkerMain" />
+    </root>
+  </artifact>
+</component>
