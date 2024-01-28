@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JavaScript " allPlatforms="JS []" useProjectSettings="false" isTestModule="true" externalProjectId=":languages:java-lang" isHmppProject="true">
+        <dependsOnModuleNames>:languages:java-lang:commonTest</dependsOnModuleNames>
+        <additionalVisibleModuleNames>
+          <friend>:languages:java-lang:webWorkerMain</friend>
+          <friend>:languages:java-lang:commonMain</friend>
+        </additionalVisibleModuleNames>
+        <sourceSets>
+          <sourceSet>interpreters.languages.java-lang.commonTest</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <externalSystemTestTasks>
+          <externalSystemTestTask>webWorkerBrowserTest|:languages:java-lang|webWorker|js</externalSystemTestTask>
+        </externalSystemTestTasks>
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="irOnly" arg="true" />
+            <flagArg name="irProduceKlibDir" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="irModuleName" arg="interpreters.languages:java-lang_test" />
+            <stringArg name="irPerModuleOutputName" arg="interpreters-languages-java-lang-web-worker-test" />
+            <stringArg name="apiVersion" arg="1.9" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths" />
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>
