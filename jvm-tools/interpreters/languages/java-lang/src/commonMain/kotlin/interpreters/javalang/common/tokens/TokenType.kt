@@ -1,0 +1,111 @@
+package interpreters.javalang.common.tokens
+
+/**
+ * TODO: The following stuff is not needed for basic interpreter
+ *  * assert   (keyword)
+ *  * const   (keyword)
+ *  * default  (keyword)
+ *  * synchronized  (keyword)
+ *  * transient  (keyword)
+ *  * strictfp  (keyword)
+ *  * volatile  (keyword)
+ */
+
+enum class TokenType(val value: String) {
+    ILLEGAL("ILLEGAL"),
+    EOF("EOF"),
+
+    IDENTIFIER("IDENTIFIER"),
+    INTEGER_LITERAL("INTEGER_LITERAL"),
+    FLOAT_LITERAL("FLOAT_LITERAL"),
+    DOUBLE_LITERAL("DOUBLE_LITERAL"),
+    STRING_LITERAL("STRING_LITERAL"),
+    CHARACTER_LITERAL("CHARACTER_LITERAL"),
+
+    EQUALS("="),
+    DOUBLE_EQUALS("=="),
+    PLUS("+"),
+    INCREMENT("++"),
+    MINUS("-"),
+    DECREMENT("--"),
+    ASTERISK("*"),
+    FORWARD_SLASH("/"),
+    MODULUS("%"),
+    BANG("!"),
+    NOT_EQUALS("!="),
+    GREATER_THAN_EQUALS_TO(">="),
+    LESS_THAN_EQUALS_TO("<="),
+
+    AMPERSAND("&"),
+    DOUBLE_AMPERSAND("&&"),
+    VERTICAL_BAR("|"),
+    DOUBLE_VERTICAL_BAR("||"),
+    CARET("^"),
+    QUESTION("?"),
+    COLON(":"),
+    SEMICOLON(";"),
+    COMMA(","),
+    DOT("."),
+
+    TILDE("~"),
+    LEFT_SHIFT("<<"),
+    RIGHT_SHIFT(">>"),
+    UNSIGNED_RIGHT_SHIFT(">>>"),
+
+    SINGLE_QUOTE("'"),
+    DOUBLE_QUOTE("\""),
+    BACKTICK("`"),
+
+    LEFT_PARENTHESIS("("),
+    RIGHT_PARENTHESIS(")"),
+    LEFT_CURLY_BRACE("{"),
+    RIGHT_CURLY_BRACE("}"),
+    LEFT_SQUARE_BRACKET("["),
+    RIGHT_SQUARE_BRACKET("]"),
+    LEFT_ANGLE_BRACKET("<"),
+    RIGHT_ANGLE_BRACKET(">"),
+
+    // keywords
+    ABSTRACT_KEYWORD("ABSTRACT"),
+    CONTINUE_KEYWORD("CONTINUE"),
+    FOR_KEYWORD("FOR"),
+    NEW_KEYWORD("NEW"),
+    SWITCH_KEYWORD("SWITCH"),
+    DEFAULT_KEYWORD("DEFAULT"),
+    PACKAGE_KEYWORD("PACKAGE"),
+    BOOLEAN_KEYWORD("BOOLEAN"),
+    DO_KEYWORD("DO"),
+    IF_KEYWORD("IF"),
+    PRIVATE_KEYWORD("PRIVATE"),
+    THIS_KEYWORD("THIS"),
+    BREAK_KEYWORD("BREAK"),
+    DOUBLE_KEYWORD("DOUBLE"),
+    IMPLEMENTS_KEYWORD("IMPLEMENTS"),
+    PROTECTED_KEYWORD("PROTECTED"),
+    THROW_KEYWORD("THROW"),
+    THROWS_KEYWORD("THROWS"),
+    BYTE_KEYWORD("BYTE"),
+    ELSE_KEYWORD("ELSE"),
+    IMPORT_KEYWORD("IMPORT"),
+    PUBLIC_KEYWORD("PUBLIC"),
+    CASE_KEYWORD("CASE"),
+    ENUM_KEYWORD("ENUM"),
+    INSTANCEOF_OPERATOR("INSTANCEOF"),
+    RETURN_KEYWORD("RETURN"),
+    CATCH_KEYWORD("CATCH"),
+    EXTENDS_KEYWORD("EXTENDS"),
+    INTEGER_KEYWORD("INTEGER_KEYWORD"),
+    SHORT_KEYWORD("SHORT_KEYWORD"),
+    TRY_KEYWORD("TRY"),
+    CHARACTER_KEYWORD("CHAR_KEYWORD"),
+    FINAL_KEYWORD("FINAL"),
+    INTERFACE_KEYWORD("INTERFACE"),
+    STATIC_KEYWORD("STATIC"),
+    VOID_KEYWORD("VOID"),
+    CLASS_KEYWORD("CLASS"),
+    FINALLY_KEYWORD("FINALLY"),
+    LONG_KEYWORD("LONG_KEYWORD"),
+    FLOAT_KEYWORD("FLOAT_KEYWORD"),
+    SUPER_KEYWORD("SUPER"),
+    WHILE_KEYWORD("WHILE"),
+}
