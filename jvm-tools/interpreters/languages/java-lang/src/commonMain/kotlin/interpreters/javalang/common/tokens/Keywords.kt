@@ -1,10 +1,6 @@
 package interpreters.javalang.common.tokens
 
-fun lookupIdentifier(identifier: String): TokenType {
-    return keywords[identifier] ?: TokenType.IDENTIFIER
-}
-
-private val keywords = mapOf(
+internal val keywords = mapOf(
     "instanceof" to TokenType.INSTANCEOF_OPERATOR,
 
     "abstract" to TokenType.ABSTRACT_KEYWORD,
