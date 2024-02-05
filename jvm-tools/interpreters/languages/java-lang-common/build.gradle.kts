@@ -10,7 +10,7 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
 
-    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.jvm)
 }
 
 repositories {
@@ -18,24 +18,12 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation(project(":languages:java-lang-common"))
-}
-
-kotlin {
-    js("webWorker", IR) {
-        browser {
-            commonWebpackConfig {
-                outputFileName = "JavaLang.js"
-                sourceMaps = false
-            }
-        }
-        binaries.executable()
-    }
-
-    sourceSets {
-        val webWorkerMain by getting {
-
+testing {
+    suites {
+        // Configure the built-in test suite
+        val test by getting(JvmTestSuite::class) {
+            // Use "kotlin.test" testing framework
+            useKotlinTest(libs.versions.kotlin)
         }
     }
 }
@@ -46,3 +34,4 @@ java {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
+

@@ -12,4 +12,6 @@ plugins {
 }
 
 rootProject.name = "interpreters"
+
 include(":languages:java-lang")
+include(":languages:java-lang-common")

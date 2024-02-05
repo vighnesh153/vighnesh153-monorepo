@@ -22,6 +22,8 @@ enum class TokenType(val value: String) {
     STRING_LITERAL("STRING_LITERAL"),
     CHARACTER_LITERAL("CHARACTER_LITERAL"),
 
+    AT_SIGN("@"),
+
     EQUALS("="),
     DOUBLE_EQUALS("=="),
     PLUS("+"),
