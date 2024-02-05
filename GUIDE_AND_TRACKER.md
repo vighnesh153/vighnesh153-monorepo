@@ -76,6 +76,12 @@ Visit
 - rubiks cube
 - mermaid js like clone but in code instead of a DSL
 - visualize windmill problem: https://www.youtube.com/watch?v=M64HUIJFTZM
+- Kotlin:
+  - Asynchronous Programming With Kotlin Coroutines: https://kotlinlang.org/docs/coroutines-guide.html
+  - Kotlin Web Development with Ktor: https://ktor.io/learn/
+  - (Java baggage) Reactive Spring Boot With Coroutines and Virtual Threads
+  - https://medium.com/androiddevelopers/cancellation-in-coroutines-aa6b90163629
+- Image compression
 - 404 page
   - https://floatui.com/components/404-pages
   - https://tailwindui.com/components/marketing/feedback/404-pages
@@ -137,15 +143,15 @@ Visit
 - https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the adb remote logs
 - Seed data in vighnesh153.com_next13
-- Brainf*ck interpreter
-  * https://github.com/vighnesh153/brainf.ck-interpreter
+- Brainf\*ck interpreter
+  - https://github.com/vighnesh153/brainf.ck-interpreter
 - Groups/Permissions
   - When completely banning user, remember to remove their session from users to log them out
 - Svelte Query: https://sveltequery.vercel.app/overview
 - https://github.com/vighnesh153/my-favourite
 - Interview stuff
   - Project: /Users/rvighnesh/practice/interview-hilbert-curve
-- Cool js packages 
+- Cool js packages
   - https://unjs.io/packages
 - Blog:
   - Create a blog page under `vighnesh153.com/blog`
@@ -215,7 +221,9 @@ Visit
   - Fetching a meaning of a word
 
 ```js
-fetch('https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw')
+fetch(
+  "https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw"
+)
   .then((res) => res.text())
   .then(console.log);
 ```
@@ -427,7 +435,10 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "vitest": "^0.33.0"
   },
   "keywords": [],
-  "repository": { "type": "git", "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git" }
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git"
+  }
 }
 ```
 
@@ -445,9 +456,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 
 ```js
 module.exports = {
-  extends: ['vighnesh153/ts-base.eslintrc.cjs'],
+  extends: ["vighnesh153/ts-base.eslintrc.cjs"],
   parserOptions: {
-    project: './tsconfig.json',
+    project: "./tsconfig.json",
     tsconfigRootDir: __dirname,
   },
 };
@@ -470,21 +481,21 @@ dist
 - tsup.config.js
 
 ```ts
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig(() => ({
   entry: {
-    main: './src/index.ts',
+    main: "./src/index.ts",
   },
   splitting: false,
   clean: true,
   minify: true,
   treeshake: true,
-  format: ['cjs', 'esm'],
+  format: ["cjs", "esm"],
   outExtension({ format }) {
     let js: string | undefined;
-    if (format === 'cjs') js = `.cjs`;
-    if (format === 'esm') js = `.js`;
+    if (format === "cjs") js = `.cjs`;
+    if (format === "esm") js = `.js`;
     return { js };
   },
 }));

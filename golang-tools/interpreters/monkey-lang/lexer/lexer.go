@@ -6,7 +6,7 @@ type Lexer struct {
 	input            string
 	position         int  // current position in input
 	readPosition     int  // current reading position in input (after current char)
-	currentCharacter byte // character character under examination
+	currentCharacter byte // current character under examination
 }
 
 func NewLexer(input string) *Lexer {
