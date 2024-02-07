@@ -36,6 +36,7 @@ enum class TokenType(val value: String) {
     ASTERISK_EQUALS("*="),
     FORWARD_SLASH("/"),
     FORWARD_SLASH_EQUALS("/="),
+    BACK_SLASH("/"),
     MODULUS("%"),
     MODULUS_EQUALS("%="),
     BANG("!"),
