@@ -27,7 +27,16 @@ fun Lexer.nextToken(): Token {
     // todo: add row and column number in the token
 
     when (currentCharacter) {
-        '=' -> t = Token(tokenType = TokenType.EQUALS, tokenLiteral = TokenType.EQUALS.value)
+        '=' -> {
+            val p = peekCharacter()
+            t = if (p == '=') {
+                readNextCharacter()
+                Token(tokenType = TokenType.DOUBLE_EQUALS, tokenLiteral = TokenType.DOUBLE_EQUALS.value)
+            } else {
+                Token(tokenType = TokenType.EQUALS, tokenLiteral = TokenType.EQUALS.value)
+            }
+        }
+
         ',' -> t = Token(tokenType = TokenType.COMMA, tokenLiteral = TokenType.COMMA.value)
         '+' -> t = Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
         ';' -> t = Token(tokenType = TokenType.SEMICOLON, tokenLiteral = TokenType.SEMICOLON.value)
@@ -62,7 +71,9 @@ fun Lexer.nextToken(): Token {
         Char.MIN_VALUE -> t = Token.EOF
         else -> {
             if (currentCharacter.isAcceptableIdentifierStart()) {
-                t = Token(
+                // this return is necessary to avoid the unnecessary readNextCharacter
+                // call after when block
+                return Token(
                     tokenType = TokenType.IDENTIFIER,
                     tokenLiteral = readIdentifier()
                 )
@@ -70,6 +81,7 @@ fun Lexer.nextToken(): Token {
                 // read integer
                 // read float
                 // read double
+                // todo: return token
             }
         }
     }
