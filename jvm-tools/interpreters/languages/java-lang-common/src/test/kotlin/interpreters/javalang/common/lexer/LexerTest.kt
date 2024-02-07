@@ -20,6 +20,9 @@ abc _aa a123 __11 _
 
 a == b== c
 
+a ++
+b += c + ++d
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -103,6 +106,17 @@ a == b== c
             ExpectedToken(id = 35, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
             ExpectedToken(id = 36, tokenType = TokenType.DOUBLE_EQUALS, tokenLiteral = "=="),
             ExpectedToken(id = 37, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+
+            // a ++
+            // b +=    c + ++d
+            ExpectedToken(id = 38, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 39, tokenType = TokenType.INCREMENT, tokenLiteral = "++"),
+            ExpectedToken(id = 40, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 41, tokenType = TokenType.PLUS_EQUALS, tokenLiteral = "+="),
+            ExpectedToken(id = 42, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 43, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 44, tokenType = TokenType.INCREMENT, tokenLiteral = "++"),
+            ExpectedToken(id = 45, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),

@@ -28,8 +28,7 @@ fun Lexer.nextToken(): Token {
 
     when (currentCharacter) {
         '=' -> {
-            val p = peekCharacter()
-            t = if (p == '=') {
+            t = if (peekCharacter() == '=') {
                 readNextCharacter()
                 Token(tokenType = TokenType.DOUBLE_EQUALS, tokenLiteral = TokenType.DOUBLE_EQUALS.value)
             } else {
@@ -38,7 +37,25 @@ fun Lexer.nextToken(): Token {
         }
 
         ',' -> t = Token(tokenType = TokenType.COMMA, tokenLiteral = TokenType.COMMA.value)
-        '+' -> t = Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
+        '+' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '+' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.INCREMENT, tokenLiteral = TokenType.INCREMENT.value)
+                }
+
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.PLUS_EQUALS, tokenLiteral = TokenType.PLUS_EQUALS.value)
+                }
+
+                else -> {
+                    Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
+                }
+            }
+        }
+
         ';' -> t = Token(tokenType = TokenType.SEMICOLON, tokenLiteral = TokenType.SEMICOLON.value)
         '@' -> t = Token(tokenType = TokenType.AT_SIGN, tokenLiteral = TokenType.AT_SIGN.value)
 
