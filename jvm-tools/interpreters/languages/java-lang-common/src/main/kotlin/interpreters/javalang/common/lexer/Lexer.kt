@@ -20,7 +20,7 @@ class Lexer private constructor(
 }
 
 fun Lexer.nextToken(): Token {
-    var t = Token(tokenType = TokenType.ILLEGAL, tokenLiteral = "")
+    lateinit var t: Token
 
     skipWhitespace()
 
@@ -59,7 +59,25 @@ fun Lexer.nextToken(): Token {
         ';' -> t = Token(tokenType = TokenType.SEMICOLON, tokenLiteral = TokenType.SEMICOLON.value)
         '@' -> t = Token(tokenType = TokenType.AT_SIGN, tokenLiteral = TokenType.AT_SIGN.value)
 
-        '-' -> t = Token(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
+        '-' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '-' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.DECREMENT, tokenLiteral = TokenType.DECREMENT.value)
+                }
+
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.MINUS_EQUALS, tokenLiteral = TokenType.MINUS_EQUALS.value)
+                }
+
+                else -> {
+                    Token(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
+                }
+            }
+        }
+
         '*' -> t = Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
         '/' -> t = Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
         '\\' -> t = Token(tokenType = TokenType.BACK_SLASH, tokenLiteral = TokenType.BACK_SLASH.value)
@@ -99,6 +117,8 @@ fun Lexer.nextToken(): Token {
                 // read float
                 // read double
                 // todo: return token
+            } else {
+                t = Token(tokenType = TokenType.ILLEGAL, tokenLiteral = "")
             }
         }
     }
