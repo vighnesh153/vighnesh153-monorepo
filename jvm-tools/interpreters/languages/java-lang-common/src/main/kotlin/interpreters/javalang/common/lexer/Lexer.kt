@@ -78,7 +78,20 @@ fun Lexer.nextToken(): Token {
             }
         }
 
-        '*' -> t = Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
+        '*' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.ASTERISK_EQUALS, tokenLiteral = TokenType.ASTERISK_EQUALS.value)
+                }
+
+                else -> {
+                    Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
+                }
+            }
+        }
+
         '/' -> t = Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
         '\\' -> t = Token(tokenType = TokenType.BACK_SLASH, tokenLiteral = TokenType.BACK_SLASH.value)
         '%' -> t = Token(tokenType = TokenType.MODULUS, tokenLiteral = TokenType.MODULUS.value)
