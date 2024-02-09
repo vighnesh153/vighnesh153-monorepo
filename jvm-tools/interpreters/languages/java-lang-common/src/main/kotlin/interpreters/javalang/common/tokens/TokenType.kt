@@ -41,8 +41,6 @@ enum class TokenType(val value: String) {
     MODULUS_EQUALS("%="),
     BANG("!"),
     NOT_EQUALS("!="),
-    GREATER_THAN_EQUALS_TO(">="),
-    LESS_THAN_EQUALS_TO("<="),
 
     AMPERSAND("&"),
     DOUBLE_AMPERSAND("&&"),
@@ -69,8 +67,10 @@ enum class TokenType(val value: String) {
     RIGHT_SQUARE_BRACKET("]"),
     LEFT_ANGLE_BRACKET("<"),
     DOUBLE_LEFT_ANGLE_BRACKET("<<"),
+    LEFT_ANGLE_BRACKET_EQUALS("<="),
     RIGHT_ANGLE_BRACKET(">"),
     DOUBLE_RIGHT_ANGLE_BRACKET(">>"),
+    RIGHT_ANGLE_BRACKET_EQUALS(">="),
     TRIPLE_RIGHT_ANGLE_BRACKET(">>>"),
 
     // keywords

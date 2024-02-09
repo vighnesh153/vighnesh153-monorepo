@@ -28,6 +28,10 @@ y-= z++ - --a
 
 a *=b*= c = d
 
+a /= b/c = d
+
+a %=  b  %c = d
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -143,6 +147,24 @@ a *=b*= c = d
             ExpectedToken(id = 59, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
             ExpectedToken(id = 60, tokenType = TokenType.EQUALS, tokenLiteral = "="),
             ExpectedToken(id = 61, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+
+            // a /= b/c = d
+            ExpectedToken(id = 62, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 63, tokenType = TokenType.FORWARD_SLASH_EQUALS, tokenLiteral = "/="),
+            ExpectedToken(id = 64, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 65, tokenType = TokenType.FORWARD_SLASH, tokenLiteral = "/"),
+            ExpectedToken(id = 66, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 67, tokenType = TokenType.EQUALS, tokenLiteral = "="),
+            ExpectedToken(id = 68, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+
+            //a %=  b  %c = d
+            ExpectedToken(id = 69, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 70, tokenType = TokenType.MODULUS_EQUALS, tokenLiteral = "%="),
+            ExpectedToken(id = 71, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 72, tokenType = TokenType.MODULUS, tokenLiteral = "%"),
+            ExpectedToken(id = 73, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 74, tokenType = TokenType.EQUALS, tokenLiteral = "="),
+            ExpectedToken(id = 75, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),

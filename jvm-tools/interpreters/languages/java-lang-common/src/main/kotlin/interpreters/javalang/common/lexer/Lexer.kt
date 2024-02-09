@@ -50,9 +50,7 @@ fun Lexer.nextToken(): Token {
                     Token(tokenType = TokenType.PLUS_EQUALS, tokenLiteral = TokenType.PLUS_EQUALS.value)
                 }
 
-                else -> {
-                    Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
-                }
+                else -> Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
             }
         }
 
@@ -72,9 +70,7 @@ fun Lexer.nextToken(): Token {
                     Token(tokenType = TokenType.MINUS_EQUALS, tokenLiteral = TokenType.MINUS_EQUALS.value)
                 }
 
-                else -> {
-                    Token(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
-                }
+                else -> Token(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
             }
         }
 
@@ -86,15 +82,38 @@ fun Lexer.nextToken(): Token {
                     Token(tokenType = TokenType.ASTERISK_EQUALS, tokenLiteral = TokenType.ASTERISK_EQUALS.value)
                 }
 
-                else -> {
-                    Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
-                }
+                else -> Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
             }
         }
 
-        '/' -> t = Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
+        '/' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    Token(
+                        tokenType = TokenType.FORWARD_SLASH_EQUALS,
+                        tokenLiteral = TokenType.FORWARD_SLASH_EQUALS.value
+                    )
+                }
+
+                else -> Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
+            }
+        }
+
         '\\' -> t = Token(tokenType = TokenType.BACK_SLASH, tokenLiteral = TokenType.BACK_SLASH.value)
-        '%' -> t = Token(tokenType = TokenType.MODULUS, tokenLiteral = TokenType.MODULUS.value)
+        '%' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.MODULUS_EQUALS, tokenLiteral = TokenType.MODULUS_EQUALS.value)
+                }
+
+                else -> Token(tokenType = TokenType.MODULUS, tokenLiteral = TokenType.MODULUS.value)
+            }
+        }
+
         '!' -> t = Token(tokenType = TokenType.BANG, tokenLiteral = TokenType.BANG.value)
         '&' -> t = Token(tokenType = TokenType.AMPERSAND, tokenLiteral = TokenType.AMPERSAND.value)
         '|' -> t = Token(tokenType = TokenType.VERTICAL_BAR, tokenLiteral = TokenType.VERTICAL_BAR.value)
