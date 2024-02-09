@@ -26,6 +26,8 @@ b += c + ++d
 x --
 y-= z++ - --a
 
+a *=b*= c = d
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -132,6 +134,15 @@ y-= z++ - --a
             ExpectedToken(id = 52, tokenType = TokenType.MINUS, tokenLiteral = "-"),
             ExpectedToken(id = 53, tokenType = TokenType.DECREMENT, tokenLiteral = "--"),
             ExpectedToken(id = 54, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+
+            // a *=b*= c = d
+            ExpectedToken(id = 55, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 56, tokenType = TokenType.ASTERISK_EQUALS, tokenLiteral = "*="),
+            ExpectedToken(id = 57, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 58, tokenType = TokenType.ASTERISK_EQUALS, tokenLiteral = "*="),
+            ExpectedToken(id = 59, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 60, tokenType = TokenType.EQUALS, tokenLiteral = "="),
+            ExpectedToken(id = 61, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
