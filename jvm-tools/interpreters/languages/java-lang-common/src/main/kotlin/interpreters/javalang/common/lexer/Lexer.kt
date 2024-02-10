@@ -178,8 +178,66 @@ fun Lexer.nextToken(): Token {
         ']' -> t =
             Token(tokenType = TokenType.RIGHT_SQUARE_BRACKET, tokenLiteral = TokenType.RIGHT_SQUARE_BRACKET.value)
 
-        '<' -> t = Token(tokenType = TokenType.LEFT_ANGLE_BRACKET, tokenLiteral = TokenType.LEFT_ANGLE_BRACKET.value)
-        '>' -> t = Token(tokenType = TokenType.RIGHT_ANGLE_BRACKET, tokenLiteral = TokenType.RIGHT_ANGLE_BRACKET.value)
+        '<' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '<' -> {
+                    readNextCharacter()
+                    Token(
+                        tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET,
+                        tokenLiteral = TokenType.DOUBLE_LEFT_ANGLE_BRACKET.value
+                    )
+                }
+
+                '=' -> {
+                    readNextCharacter()
+                    Token(
+                        tokenType = TokenType.LEFT_ANGLE_BRACKET_EQUALS,
+                        tokenLiteral = TokenType.LEFT_ANGLE_BRACKET_EQUALS.value
+                    )
+                }
+
+                else -> Token(
+                    tokenType = TokenType.LEFT_ANGLE_BRACKET,
+                    tokenLiteral = TokenType.LEFT_ANGLE_BRACKET.value
+                )
+            }
+        }
+
+        '>' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '>' -> {
+                    readNextCharacter()
+                    if (peekCharacter() == '>') {
+                        readNextCharacter()
+                        Token(
+                            tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET,
+                            tokenLiteral = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET.value
+                        )
+                    } else {
+                        Token(
+                            tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET,
+                            tokenLiteral = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET.value
+                        )
+                    }
+                }
+
+                '=' -> {
+                    readNextCharacter()
+                    Token(
+                        tokenType = TokenType.RIGHT_ANGLE_BRACKET_EQUALS,
+                        tokenLiteral = TokenType.RIGHT_ANGLE_BRACKET_EQUALS.value
+                    )
+                }
+
+                else -> Token(
+                    tokenType = TokenType.RIGHT_ANGLE_BRACKET,
+                    tokenLiteral = TokenType.RIGHT_ANGLE_BRACKET.value
+                )
+            }
+        }
+
         Char.MIN_VALUE -> t = Token.EOF
         else -> {
             if (currentCharacter.isAcceptableIdentifierStart()) {

@@ -46,6 +46,12 @@ throw throws byte else
 import public case enum return catch extends int short try char
 final interface static void class finally long float super while
 
+a < b <<c <= d
+
+a >> b > c >>> d >= e
+
+a + b
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -270,6 +276,30 @@ final interface static void class finally long float super while
             ExpectedToken(id = 150, tokenType = TokenType.SUPER_KEYWORD, tokenLiteral = "super"),
             ExpectedToken(id = 151, tokenType = TokenType.WHILE_KEYWORD, tokenLiteral = "while"),
 
+            // a < b <<c <= d
+            ExpectedToken(id = 152, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 153, tokenType = TokenType.LEFT_ANGLE_BRACKET, tokenLiteral = "<"),
+            ExpectedToken(id = 154, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 155, tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET, tokenLiteral = "<<"),
+            ExpectedToken(id = 156, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 157, tokenType = TokenType.LEFT_ANGLE_BRACKET_EQUALS, tokenLiteral = "<="),
+            ExpectedToken(id = 158, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+
+            // a >> b > c >>> d >> e
+            ExpectedToken(id = 159, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 160, tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET, tokenLiteral = ">>"),
+            ExpectedToken(id = 161, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 162, tokenType = TokenType.RIGHT_ANGLE_BRACKET, tokenLiteral = ">"),
+            ExpectedToken(id = 163, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 164, tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET, tokenLiteral = ">>>"),
+            ExpectedToken(id = 165, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+            ExpectedToken(id = 166, tokenType = TokenType.RIGHT_ANGLE_BRACKET_EQUALS, tokenLiteral = ">="),
+            ExpectedToken(id = 167, tokenType = TokenType.IDENTIFIER, tokenLiteral = "e"),
+
+            // a + b
+            ExpectedToken(id = 168, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 169, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 170, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
