@@ -114,10 +114,54 @@ fun Lexer.nextToken(): Token {
             }
         }
 
-        '!' -> t = Token(tokenType = TokenType.BANG, tokenLiteral = TokenType.BANG.value)
-        '&' -> t = Token(tokenType = TokenType.AMPERSAND, tokenLiteral = TokenType.AMPERSAND.value)
-        '|' -> t = Token(tokenType = TokenType.VERTICAL_BAR, tokenLiteral = TokenType.VERTICAL_BAR.value)
-        '^' -> t = Token(tokenType = TokenType.CARET, tokenLiteral = TokenType.CARET.value)
+        '!' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.BANG_EQUALS, tokenLiteral = TokenType.BANG_EQUALS.value)
+                }
+
+                else -> Token(tokenType = TokenType.BANG, tokenLiteral = TokenType.BANG.value)
+            }
+        }
+
+        '&' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '&' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.DOUBLE_AMPERSAND, tokenLiteral = TokenType.DOUBLE_AMPERSAND.value)
+                }
+
+                else -> Token(tokenType = TokenType.AMPERSAND, tokenLiteral = TokenType.AMPERSAND.value)
+            }
+        }
+
+        '|' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '|' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.DOUBLE_VERTICAL_BAR, tokenLiteral = TokenType.DOUBLE_VERTICAL_BAR.value)
+                }
+
+                else -> Token(tokenType = TokenType.VERTICAL_BAR, tokenLiteral = TokenType.VERTICAL_BAR.value)
+            }
+        }
+
+        '^' -> {
+            val peek = peekCharacter()
+            t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    Token(tokenType = TokenType.CARET_EQUALS, tokenLiteral = TokenType.CARET_EQUALS.value)
+                }
+
+                else -> Token(tokenType = TokenType.CARET, tokenLiteral = TokenType.CARET.value)
+            }
+        }
+
         '?' -> t = Token(tokenType = TokenType.QUESTION, tokenLiteral = TokenType.QUESTION.value)
         ':' -> t = Token(tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value)
         '.' -> t = Token(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
