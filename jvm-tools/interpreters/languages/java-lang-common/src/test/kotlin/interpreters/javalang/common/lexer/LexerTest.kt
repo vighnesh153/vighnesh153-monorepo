@@ -40,6 +40,12 @@ a|b||c||d|e
 
 a^b^c^=d^e
 
+instanceof abstract continue for new switch default package 
+boolean do if private this break double implements protected 
+throw throws byte else 
+import public case enum return catch extends int short try char
+final interface static void class finally long float super while
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -215,6 +221,55 @@ a^b^c^=d^e
             ExpectedToken(id = 107, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
             ExpectedToken(id = 108, tokenType = TokenType.CARET, tokenLiteral = "^"),
             ExpectedToken(id = 109, tokenType = TokenType.IDENTIFIER, tokenLiteral = "e"),
+
+            // instanceof abstract continue for new switch default package
+            // boolean do if private this break double implements protected
+            // throw throws byte else
+            // import public case enum return catch extends int short try char
+            // final interface static void class finally long float super while
+            ExpectedToken(id = 110, tokenType = TokenType.INSTANCEOF_OPERATOR, tokenLiteral = "instanceof"),
+            ExpectedToken(id = 111, tokenType = TokenType.ABSTRACT_KEYWORD, tokenLiteral = "abstract"),
+            ExpectedToken(id = 112, tokenType = TokenType.CONTINUE_KEYWORD, tokenLiteral = "continue"),
+            ExpectedToken(id = 113, tokenType = TokenType.FOR_KEYWORD, tokenLiteral = "for"),
+            ExpectedToken(id = 114, tokenType = TokenType.NEW_KEYWORD, tokenLiteral = "new"),
+            ExpectedToken(id = 115, tokenType = TokenType.SWITCH_KEYWORD, tokenLiteral = "switch"),
+            ExpectedToken(id = 116, tokenType = TokenType.DEFAULT_KEYWORD, tokenLiteral = "default"),
+            ExpectedToken(id = 117, tokenType = TokenType.PACKAGE_KEYWORD, tokenLiteral = "package"),
+            ExpectedToken(id = 118, tokenType = TokenType.BOOLEAN_KEYWORD, tokenLiteral = "boolean"),
+            ExpectedToken(id = 119, tokenType = TokenType.DO_KEYWORD, tokenLiteral = "do"),
+            ExpectedToken(id = 120, tokenType = TokenType.IF_KEYWORD, tokenLiteral = "if"),
+            ExpectedToken(id = 121, tokenType = TokenType.PRIVATE_KEYWORD, tokenLiteral = "private"),
+            ExpectedToken(id = 122, tokenType = TokenType.THIS_KEYWORD, tokenLiteral = "this"),
+            ExpectedToken(id = 123, tokenType = TokenType.BREAK_KEYWORD, tokenLiteral = "break"),
+            ExpectedToken(id = 124, tokenType = TokenType.DOUBLE_KEYWORD, tokenLiteral = "double"),
+            ExpectedToken(id = 125, tokenType = TokenType.IMPLEMENTS_KEYWORD, tokenLiteral = "implements"),
+            ExpectedToken(id = 126, tokenType = TokenType.PROTECTED_KEYWORD, tokenLiteral = "protected"),
+            ExpectedToken(id = 127, tokenType = TokenType.THROW_KEYWORD, tokenLiteral = "throw"),
+            ExpectedToken(id = 128, tokenType = TokenType.THROWS_KEYWORD, tokenLiteral = "throws"),
+            ExpectedToken(id = 129, tokenType = TokenType.BYTE_KEYWORD, tokenLiteral = "byte"),
+            ExpectedToken(id = 130, tokenType = TokenType.ELSE_KEYWORD, tokenLiteral = "else"),
+            ExpectedToken(id = 131, tokenType = TokenType.IMPORT_KEYWORD, tokenLiteral = "import"),
+            ExpectedToken(id = 132, tokenType = TokenType.PUBLIC_KEYWORD, tokenLiteral = "public"),
+            ExpectedToken(id = 133, tokenType = TokenType.CASE_KEYWORD, tokenLiteral = "case"),
+            ExpectedToken(id = 134, tokenType = TokenType.ENUM_KEYWORD, tokenLiteral = "enum"),
+            ExpectedToken(id = 135, tokenType = TokenType.RETURN_KEYWORD, tokenLiteral = "return"),
+            ExpectedToken(id = 136, tokenType = TokenType.CATCH_KEYWORD, tokenLiteral = "catch"),
+            ExpectedToken(id = 137, tokenType = TokenType.EXTENDS_KEYWORD, tokenLiteral = "extends"),
+            ExpectedToken(id = 138, tokenType = TokenType.INTEGER_KEYWORD, tokenLiteral = "int"),
+            ExpectedToken(id = 139, tokenType = TokenType.SHORT_KEYWORD, tokenLiteral = "short"),
+            ExpectedToken(id = 140, tokenType = TokenType.TRY_KEYWORD, tokenLiteral = "try"),
+            ExpectedToken(id = 141, tokenType = TokenType.CHARACTER_KEYWORD, tokenLiteral = "char"),
+            ExpectedToken(id = 142, tokenType = TokenType.FINAL_KEYWORD, tokenLiteral = "final"),
+            ExpectedToken(id = 143, tokenType = TokenType.INTERFACE_KEYWORD, tokenLiteral = "interface"),
+            ExpectedToken(id = 144, tokenType = TokenType.STATIC_KEYWORD, tokenLiteral = "static"),
+            ExpectedToken(id = 145, tokenType = TokenType.VOID_KEYWORD, tokenLiteral = "void"),
+            ExpectedToken(id = 146, tokenType = TokenType.CLASS_KEYWORD, tokenLiteral = "class"),
+            ExpectedToken(id = 147, tokenType = TokenType.FINALLY_KEYWORD, tokenLiteral = "finally"),
+            ExpectedToken(id = 148, tokenType = TokenType.LONG_KEYWORD, tokenLiteral = "long"),
+            ExpectedToken(id = 149, tokenType = TokenType.FLOAT_KEYWORD, tokenLiteral = "float"),
+            ExpectedToken(id = 150, tokenType = TokenType.SUPER_KEYWORD, tokenLiteral = "super"),
+            ExpectedToken(id = 151, tokenType = TokenType.WHILE_KEYWORD, tokenLiteral = "while"),
+
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),

@@ -2,6 +2,7 @@ package interpreters.javalang.common.lexer
 
 import interpreters.javalang.common.tokens.Token
 import interpreters.javalang.common.tokens.TokenType
+import interpreters.javalang.common.tokens.lookupIdentifier
 
 class Lexer private constructor(
     internal val input: String,
@@ -182,11 +183,12 @@ fun Lexer.nextToken(): Token {
         Char.MIN_VALUE -> t = Token.EOF
         else -> {
             if (currentCharacter.isAcceptableIdentifierStart()) {
+                val identifier = readIdentifier()
                 // this return is necessary to avoid the unnecessary readNextCharacter
                 // call after when block
                 return Token(
-                    tokenType = TokenType.IDENTIFIER,
-                    tokenLiteral = readIdentifier()
+                    tokenType = lookupIdentifier(identifier),
+                    tokenLiteral = identifier,
                 )
             } else if (currentCharacter.isDigit()) {
                 // read integer
