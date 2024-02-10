@@ -32,6 +32,14 @@ a /= b/c = d
 
 a %=  b  %c = d
 
+a!=b !c =d
+
+a &&b &c&&d &e
+
+a|b||c||d|e
+
+a^b^c^=d^e
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -165,6 +173,48 @@ a %=  b  %c = d
             ExpectedToken(id = 73, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
             ExpectedToken(id = 74, tokenType = TokenType.EQUALS, tokenLiteral = "="),
             ExpectedToken(id = 75, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+
+            // a!=b !c =d
+            ExpectedToken(id = 76, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 77, tokenType = TokenType.BANG_EQUALS, tokenLiteral = "!="),
+            ExpectedToken(id = 78, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 79, tokenType = TokenType.BANG, tokenLiteral = "!"),
+            ExpectedToken(id = 80, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 81, tokenType = TokenType.EQUALS, tokenLiteral = "="),
+            ExpectedToken(id = 82, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+
+            //a &&b &c&&d &e
+            ExpectedToken(id = 83, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 84, tokenType = TokenType.DOUBLE_AMPERSAND, tokenLiteral = "&&"),
+            ExpectedToken(id = 85, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 86, tokenType = TokenType.AMPERSAND, tokenLiteral = "&"),
+            ExpectedToken(id = 87, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 88, tokenType = TokenType.DOUBLE_AMPERSAND, tokenLiteral = "&&"),
+            ExpectedToken(id = 89, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+            ExpectedToken(id = 90, tokenType = TokenType.AMPERSAND, tokenLiteral = "&"),
+            ExpectedToken(id = 91, tokenType = TokenType.IDENTIFIER, tokenLiteral = "e"),
+
+            // a|b||c||d|e
+            ExpectedToken(id = 92, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 93, tokenType = TokenType.VERTICAL_BAR, tokenLiteral = "|"),
+            ExpectedToken(id = 94, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 95, tokenType = TokenType.DOUBLE_VERTICAL_BAR, tokenLiteral = "||"),
+            ExpectedToken(id = 96, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 97, tokenType = TokenType.DOUBLE_VERTICAL_BAR, tokenLiteral = "||"),
+            ExpectedToken(id = 98, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+            ExpectedToken(id = 99, tokenType = TokenType.VERTICAL_BAR, tokenLiteral = "|"),
+            ExpectedToken(id = 100, tokenType = TokenType.IDENTIFIER, tokenLiteral = "e"),
+
+            // a^b^c^=d^e
+            ExpectedToken(id = 101, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 102, tokenType = TokenType.CARET, tokenLiteral = "^"),
+            ExpectedToken(id = 103, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 104, tokenType = TokenType.CARET, tokenLiteral = "^"),
+            ExpectedToken(id = 105, tokenType = TokenType.IDENTIFIER, tokenLiteral = "c"),
+            ExpectedToken(id = 106, tokenType = TokenType.CARET_EQUALS, tokenLiteral = "^="),
+            ExpectedToken(id = 107, tokenType = TokenType.IDENTIFIER, tokenLiteral = "d"),
+            ExpectedToken(id = 108, tokenType = TokenType.CARET, tokenLiteral = "^"),
+            ExpectedToken(id = 109, tokenType = TokenType.IDENTIFIER, tokenLiteral = "e"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),

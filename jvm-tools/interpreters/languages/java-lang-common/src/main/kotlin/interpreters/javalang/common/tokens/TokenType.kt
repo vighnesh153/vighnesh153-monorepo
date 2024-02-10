@@ -40,7 +40,7 @@ enum class TokenType(val value: String) {
     MODULUS("%"),
     MODULUS_EQUALS("%="),
     BANG("!"),
-    NOT_EQUALS("!="),
+    BANG_EQUALS("!="),
 
     AMPERSAND("&"),
     DOUBLE_AMPERSAND("&&"),
