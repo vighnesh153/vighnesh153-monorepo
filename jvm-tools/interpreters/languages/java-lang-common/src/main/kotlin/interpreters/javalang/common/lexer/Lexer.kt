@@ -1,22 +1,32 @@
 package interpreters.javalang.common.lexer
 
+import interpreters.javalang.common.errors.InterpreterError
+import interpreters.javalang.common.errors.InterpreterErrorType
 import interpreters.javalang.common.tokens.Token
 import interpreters.javalang.common.tokens.TokenType
 import interpreters.javalang.common.tokens.lookupIdentifier
 
-class Lexer private constructor(
-    internal val input: String,
-    internal var currentIndex: Int,      // index pointing to the current position in input
-    internal var peekIndex: Int,         // points to immediate next index to currentIndex
-    internal var currentCharacter: Char, // current character under examination
-) {
-    constructor(input: String) : this(
-        input = input,
-        currentIndex = 0,
-        peekIndex = 0,
-        currentCharacter = Char.MIN_VALUE
-    ) {
+
+class Lexer constructor(internal val input: String) {
+    // index pointing to the current position in input
+    internal var currentIndex = 0
+
+    // points to immediate next index to currentIndex
+    internal var peekIndex = 0
+
+    // current character under examination
+    internal var currentCharacter = Char.MIN_VALUE
+
+    private val errors = mutableListOf<InterpreterError>()
+
+    init {
         readNextCharacter()
+    }
+
+    fun getErrors(): List<InterpreterError> = errors
+
+    fun addError(error: InterpreterError) {
+        errors.add(error)
     }
 }
 
@@ -291,4 +301,16 @@ fun Lexer.skipWhitespace() {
     while (whiteSpaceCharacters.contains(currentCharacter)) {
         readNextCharacter()
     }
+}
+
+fun Lexer.createLexerError(errorMessage: String): InterpreterError {
+    val lines = input.slice(0..currentIndex).split('\n')
+    val lineNumber = lines.size
+    val columnNumber = currentIndex - lines.subList(0, lines.lastIndex - 1).sumOf { it.length }
+    return InterpreterError(
+        errorMessage = errorMessage,
+        errorType = InterpreterErrorType.LEXER_ERROR,
+        lineNumber = lineNumber,
+        columnNumber = columnNumber,
+    )
 }
