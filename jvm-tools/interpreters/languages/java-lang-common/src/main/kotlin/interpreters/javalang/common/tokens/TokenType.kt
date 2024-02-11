@@ -55,10 +55,6 @@ enum class TokenType(val value: String) {
     DOT("."),
     TILDE("~"),
 
-    SINGLE_QUOTE("'"),
-    DOUBLE_QUOTE("\""),
-    BACKTICK("`"),
-
     LEFT_PARENTHESIS("("),
     RIGHT_PARENTHESIS(")"),
     LEFT_CURLY_BRACE("{"),

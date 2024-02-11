@@ -5,7 +5,11 @@ import interpreters.javalang.common.errors.InterpreterErrorType
 import interpreters.javalang.common.tokens.Token
 import interpreters.javalang.common.tokens.TokenType
 import interpreters.javalang.common.tokens.lookupIdentifier
+import kotlin.math.min
 
+const val EOF_CHARACTER = Char.MIN_VALUE
+const val SINGLE_QUOTE = '\''
+const val DOUBLE_QUOTE = '"'
 
 class Lexer constructor(internal val input: String) {
     // index pointing to the current position in input
@@ -15,7 +19,7 @@ class Lexer constructor(internal val input: String) {
     internal var peekIndex = 0
 
     // current character under examination
-    internal var currentCharacter = Char.MIN_VALUE
+    internal var currentCharacter = EOF_CHARACTER
 
     private val errors = mutableListOf<InterpreterError>()
 
@@ -36,6 +40,7 @@ fun Lexer.nextToken(): Token {
     skipWhitespace()
 
     // todo: add row and column number in the token
+    // todo: comments parsing
 
     when (currentCharacter) {
         '=' -> {
@@ -177,9 +182,8 @@ fun Lexer.nextToken(): Token {
         ':' -> t = Token(tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value)
         '.' -> t = Token(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
         '~' -> t = Token(tokenType = TokenType.TILDE, tokenLiteral = TokenType.TILDE.value)
-        '\'' -> t = Token(tokenType = TokenType.SINGLE_QUOTE, tokenLiteral = TokenType.SINGLE_QUOTE.value)
-        '"' -> t = Token(tokenType = TokenType.DOUBLE_QUOTE, tokenLiteral = TokenType.DOUBLE_QUOTE.value)
-        '`' -> t = Token(tokenType = TokenType.BACKTICK, tokenLiteral = TokenType.BACKTICK.value)
+        '\'' -> t = Token(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = readCharacterLiteral())
+        '"' -> t = Token(tokenType = TokenType.STRING_LITERAL, tokenLiteral = readStringLiteral())
         '(' -> t = Token(tokenType = TokenType.LEFT_PARENTHESIS, tokenLiteral = TokenType.LEFT_PARENTHESIS.value)
         ')' -> t = Token(tokenType = TokenType.RIGHT_PARENTHESIS, tokenLiteral = TokenType.RIGHT_PARENTHESIS.value)
         '{' -> t = Token(tokenType = TokenType.LEFT_CURLY_BRACE, tokenLiteral = TokenType.LEFT_CURLY_BRACE.value)
@@ -248,7 +252,7 @@ fun Lexer.nextToken(): Token {
             }
         }
 
-        Char.MIN_VALUE -> t = Token.EOF
+        EOF_CHARACTER -> t = Token.EOF
         else -> {
             if (currentCharacter.isAcceptableIdentifierStart()) {
                 val identifier = readIdentifier()
@@ -274,11 +278,11 @@ fun Lexer.nextToken(): Token {
     return t
 }
 
-fun Char.isUnderscore(): Boolean = this == '_'
-fun Char.isAcceptableIdentifierStart(): Boolean = isUnderscore() || isLetter()
-fun Char.isAcceptableIdentifierNonStart(): Boolean = isAcceptableIdentifierStart() || isDigit()
+internal fun Char.isUnderscore(): Boolean = this == '_'
+internal fun Char.isAcceptableIdentifierStart(): Boolean = isUnderscore() || isLetter()
+internal fun Char.isAcceptableIdentifierNonStart(): Boolean = isAcceptableIdentifierStart() || isDigit()
 
-fun Lexer.readIdentifier(): String {
+internal fun Lexer.readIdentifier(): String {
     val startIndex = currentIndex
     if (!currentCharacter.isAcceptableIdentifierStart()) {
         throw Error("You should not attempt to read an identifier which doesn't start with '_' or a letter")
@@ -289,22 +293,22 @@ fun Lexer.readIdentifier(): String {
     return input.slice(startIndex..<currentIndex)
 }
 
-fun Lexer.peekCharacter(): Char {
+internal fun Lexer.peekCharacter(): Char {
     if (peekIndex >= input.length) {
-        return Char.MIN_VALUE
+        return EOF_CHARACTER
     }
     return input[peekIndex]
 }
 
-fun Lexer.skipWhitespace() {
+internal fun Lexer.skipWhitespace() {
     val whiteSpaceCharacters = listOf(' ', '\t', '\n', '\r')
     while (whiteSpaceCharacters.contains(currentCharacter)) {
         readNextCharacter()
     }
 }
 
-fun Lexer.createLexerError(errorMessage: String): InterpreterError {
-    val lines = input.slice(0..currentIndex).split('\n')
+internal fun Lexer.createLexerError(errorMessage: String): InterpreterError {
+    val lines = input.slice(0..min(input.lastIndex, currentIndex)).split('\n')
     val lineNumber = lines.size
     val columnNumber = currentIndex - lines.subList(0, lines.lastIndex - 1).sumOf { it.length }
     return InterpreterError(
@@ -313,4 +317,60 @@ fun Lexer.createLexerError(errorMessage: String): InterpreterError {
         lineNumber = lineNumber,
         columnNumber = columnNumber,
     )
+}
+
+internal fun Lexer.readCharacterLiteral(): String {
+    if (currentCharacter != SINGLE_QUOTE) {
+        throw Error("You should not attempt to read a character literal if it doesn't start with \"'\"")
+    }
+    readNextCharacter()
+    val startIndex = currentIndex
+
+    while (currentCharacter != SINGLE_QUOTE && currentCharacter != EOF_CHARACTER) {
+        if (currentCharacter == '\\') {
+            readEscapeSequence()
+        }
+        readNextCharacter()
+    }
+    if (currentCharacter == EOF_CHARACTER) {
+        addError(
+            createLexerError("Unclosed character token")
+        )
+        return "<ILLEGAL> EOF reached"
+    }
+    // current character is ending single quote
+    val character = input.slice(startIndex..<currentIndex)
+    if (character.length == 1) {
+        return character
+    }
+    if (isEscapeSequence(character).not()) {
+        addError(
+            createLexerError("Too many characters in the character literal")
+        )
+        return "<ILLEGAL> Invalid character sequence"
+    }
+    return character
+}
+
+internal fun Lexer.readStringLiteral(): String {
+    if (currentCharacter != DOUBLE_QUOTE) {
+        throw Error("You should not attempt to read a string literal if it doesn't start with '\"'")
+    }
+    readNextCharacter()
+    val startIndex = currentIndex
+
+    while (currentCharacter != DOUBLE_QUOTE && currentCharacter != EOF_CHARACTER) {
+        if (currentCharacter == '\\') {
+            readEscapeSequence()
+        }
+        readNextCharacter()
+    }
+    if (currentCharacter == EOF_CHARACTER) {
+        addError(
+            createLexerError("Unclosed string literal")
+        )
+        return "<ILLEGAL> Unclosed string literal"
+    }
+    // current character is ending double quote
+    return input.slice(startIndex..<currentIndex)
 }
