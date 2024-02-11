@@ -10,29 +10,13 @@ internal fun Lexer.readEscapeSequence(): String {
     // move past '\'
     readNextCharacter()
 
-    return when (peekCharacter()) {
-        'u' -> {
-            // unicode
-            readNextCharacter()
-            val startIndex = currentIndex + 1
-            for (i in 1..4) {
-                if (peekCharacter().isDigit()) {
-                    readNextCharacter()
-                } else {
-                    addError(
-                        createLexerError("Invalid unicode sequence '\\${peekCharacter()}'")
-                    )
-                    return "<ILLEGAL> Invalid unicode"
-                }
-            }
-            input.slice(startIndex..currentIndex)
-        }
-
+    return when (currentCharacter) {
+        'u' -> parseUnicode()
         't' -> "\\t"
         'n' -> "\\n"
-        '\'' -> "'"
-        '"' -> "\""
-        '\\' -> "\\"
+        '\'' -> "\\'"
+        '"' -> "\\\""
+        '\\' -> "\\\\"
         EOF_CHARACTER -> {
             // no more characters in the file
             addError(
@@ -49,6 +33,29 @@ internal fun Lexer.readEscapeSequence(): String {
             "<ILLEGAL> Invalid escape sequence"
         }
     }
+}
+
+internal fun Lexer.parseUnicode(): String {
+    if (currentCharacter != 'u') {
+        throw Error("You should not try to parse a unicode sequence that doesn't begin with 'u'")
+    }
+
+    val startIndex = currentIndex
+
+    // unicode: \u0000 to \uFFFF
+    for (i in 1..4) {
+        val peek = peekCharacter()
+        if (peek.isDigit() || peek.lowercase() in "abcdef") {
+            readNextCharacter()
+        } else {
+            addError(
+                createLexerError("Invalid unicode sequence '\\${peekCharacter()}'")
+            )
+            return "<ILLEGAL> Invalid unicode"
+        }
+    }
+
+    return "\\${input.slice(startIndex..currentIndex)}"
 }
 
 internal fun isEscapeSequence(input: String): Boolean {

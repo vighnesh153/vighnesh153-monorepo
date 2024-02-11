@@ -54,7 +54,7 @@ a + b
 
  "pikachu"  "pika \n chu" "pika \t\u1244 chu\n" 
 
-        """.trimIndent()
+        """
 
         val expectedTokens = listOf(
 
@@ -323,10 +323,40 @@ a + b
 
         val lexer = Lexer(input)
 
-        assertEquals(lexer.getErrors().size, 0, "Lexer has errors")
-        for (err in lexer.getErrors()) {
-            println("Error: ${err.errorMessage}")
+        for (expectedToken in expectedTokens) {
+            val actualToken = lexer.nextToken()
+
+            assertEquals(lexer.getErrors().size, 0, "id: ${expectedToken.id}, error: ${lexer.getErrors().firstOrNull()}")
+
+            assertEquals(expectedToken.tokenType.name, actualToken.tokenType.name, "id: ${expectedToken.id}")
+            assertEquals(expectedToken.tokenLiteral, actualToken.tokenLiteral, "id: ${expectedToken.id}")
         }
+    }
+
+//    @Test
+    fun lexerNextToken_errors() {
+        val input = """
+'a
+        """.trimIndent()
+
+        val expectedTokens = listOf(
+
+            // ,;@+-*/\%!&|^?:.~
+            ExpectedToken(id = 0, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "<ILLEGAL>"),
+
+            // eof
+            ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
+        )
+
+        // In the expectedTokens, if ids are not unique, throw error
+        if (expectedTokens.map { it.id }.toSet().size != expectedTokens.size) {
+            throw Error("Some of the id's are not unique")
+        }
+
+        val lexer = Lexer(input)
+
+        // no errors
+        assertEquals(lexer.getErrors().size, 0, "Lexer has errors")
 
         for (expectedToken in expectedTokens) {
             val actualToken = lexer.nextToken()
