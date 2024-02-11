@@ -53,8 +53,11 @@ a + b
 'a' '\n' '\t' '\'' '"' '\\' '\u1323' 
 
  "pikachu"  "pika \n chu" "pika \t\u1244 chu\n" 
+ 
+a + b // hi there
 
-        """
+x-y/**pikachu
+greninja*/z"""
 
         val expectedTokens = listOf(
 
@@ -312,6 +315,20 @@ a + b
             ExpectedToken(id = 179, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\n chu"),
             ExpectedToken(id = 180, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\t\\u1244 chu\\n"),
 
+            // a + b // hi there
+            ExpectedToken(id = 181, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 182, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 183, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
+            ExpectedToken(id = 184, tokenType = TokenType.SINGLE_LINE_COMMENT, tokenLiteral = " hi there\n"),
+
+            // x-y/**pikachu
+            // greninja*/z
+            ExpectedToken(id = 185, tokenType = TokenType.IDENTIFIER, tokenLiteral = "x"),
+            ExpectedToken(id = 186, tokenType = TokenType.MINUS, tokenLiteral = "-"),
+            ExpectedToken(id = 187, tokenType = TokenType.IDENTIFIER, tokenLiteral = "y"),
+            ExpectedToken(id = 188, tokenType = TokenType.MULTI_LINE_COMMENT, tokenLiteral = "*pikachu\ngreninja"),
+            ExpectedToken(id = 189, tokenType = TokenType.IDENTIFIER, tokenLiteral = "z"),
+
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
         )
@@ -326,14 +343,15 @@ a + b
         for (expectedToken in expectedTokens) {
             val actualToken = lexer.nextToken()
 
-            assertEquals(lexer.getErrors().size, 0, "id: ${expectedToken.id}, error: ${lexer.getErrors().firstOrNull()}")
+            val errors = lexer.getErrors()
+            assertEquals(0, errors.size, "id: ${expectedToken.id}, error: ${errors.firstOrNull()}")
 
             assertEquals(expectedToken.tokenType.name, actualToken.tokenType.name, "id: ${expectedToken.id}")
             assertEquals(expectedToken.tokenLiteral, actualToken.tokenLiteral, "id: ${expectedToken.id}")
         }
     }
 
-//    @Test
+    //    @Test
     fun lexerNextToken_errors() {
         val input = """
 'a

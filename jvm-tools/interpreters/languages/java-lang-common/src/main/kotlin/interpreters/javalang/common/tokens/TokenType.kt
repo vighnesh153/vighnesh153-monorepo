@@ -16,6 +16,8 @@ enum class TokenType(val value: String) {
     EOF("EOF"),
 
     IDENTIFIER("IDENTIFIER"),
+    SINGLE_LINE_COMMENT("SINGLE_LINE_COMMENT"),
+    MULTI_LINE_COMMENT("MULTI_LINE_COMMENT"),
     INTEGER_LITERAL("INTEGER_LITERAL"),
     FLOAT_LITERAL("FLOAT_LITERAL"),
     DOUBLE_LITERAL("DOUBLE_LITERAL"),
@@ -23,7 +25,6 @@ enum class TokenType(val value: String) {
     CHARACTER_LITERAL("CHARACTER_LITERAL"),
 
     AT_SIGN("@"),
-
     EQUALS("="),
     DOUBLE_EQUALS("=="),
     PLUS("+"),

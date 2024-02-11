@@ -40,7 +40,6 @@ fun Lexer.nextToken(): Token {
     skipWhitespace()
 
     // todo: add row and column number in the token
-    // todo: comments parsing
 
     when (currentCharacter) {
         '=' -> {
@@ -112,6 +111,9 @@ fun Lexer.nextToken(): Token {
                         tokenLiteral = TokenType.FORWARD_SLASH_EQUALS.value
                     )
                 }
+
+                '/' -> Token(tokenType = TokenType.SINGLE_LINE_COMMENT, tokenLiteral = readSingleLineComment())
+                '*' -> Token(tokenType = TokenType.MULTI_LINE_COMMENT, tokenLiteral = readMultilineComment())
 
                 else -> Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
             }
@@ -373,4 +375,49 @@ internal fun Lexer.readStringLiteral(): String {
     }
     // current character is ending double quote
     return input.slice(startIndex..<currentIndex)
+}
+
+internal fun Lexer.readSingleLineComment(): String {
+    if (currentCharacter != '/' || peekCharacter() != '/') {
+        throw Error("You should not attempt to read single line comment that doesn't start with '//'")
+    }
+
+    // get past second '/'
+    readNextCharacter()
+    readNextCharacter()
+
+    val startIndex = currentIndex
+    while (currentCharacter != EOF_CHARACTER && currentCharacter != '\n') {
+        readNextCharacter()
+    }
+    return input.slice(startIndex..min(currentIndex, input.lastIndex))
+}
+
+internal fun Lexer.readMultilineComment(): String {
+    if (currentCharacter != '/' || peekCharacter() != '*') {
+        throw Error("You should not attempt to read multiline comment that doesn't start with '/*'")
+    }
+
+    // get past '/*'
+    readNextCharacter()
+    readNextCharacter()
+
+    val startIndex = currentIndex
+    while (
+    // end of multiline comment
+        (currentCharacter != '*' || peekCharacter() != '/') &&
+        // end of file
+        currentCharacter != EOF_CHARACTER
+    ) {
+        readNextCharacter()
+    }
+    if (currentCharacter == EOF_CHARACTER) {
+        addError(
+            createLexerError("Unclosed multiline comment")
+        )
+        return "<ILLEGAL> Unclosed multiline comment"
+    }
+    val endIndex = currentIndex
+    readNextCharacter()
+    return input.slice(startIndex..<endIndex)
 }
