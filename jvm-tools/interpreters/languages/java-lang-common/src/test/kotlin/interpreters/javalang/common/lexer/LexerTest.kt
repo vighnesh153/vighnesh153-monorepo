@@ -12,8 +12,6 @@ class LexerTest {
 
 ,;@+-*/\%!&|^?:.~
 
-'"`
-
 (){}[]<>
 
 abc _aa a123 __11 _
@@ -52,6 +50,10 @@ a >> b > c >>> d >= e
 
 a + b
 
+'a' '\n' '\t' '\'' '"' '\\' '\u1323' 
+
+ "pikachu"  "pika \n chu" "pika \t\u1244 chu\n" 
+
         """.trimIndent()
 
         val expectedTokens = listOf(
@@ -74,11 +76,6 @@ a + b
             ExpectedToken(id = 14, tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value),
             ExpectedToken(id = 15, tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value),
             ExpectedToken(id = 16, tokenType = TokenType.TILDE, tokenLiteral = TokenType.TILDE.value),
-
-            // '"`
-            ExpectedToken(id = 17, tokenType = TokenType.SINGLE_QUOTE, tokenLiteral = TokenType.SINGLE_QUOTE.value),
-            ExpectedToken(id = 18, tokenType = TokenType.DOUBLE_QUOTE, tokenLiteral = TokenType.DOUBLE_QUOTE.value),
-            ExpectedToken(id = 19, tokenType = TokenType.BACKTICK, tokenLiteral = TokenType.BACKTICK.value),
 
             // (){}[]<>
             ExpectedToken(
@@ -301,6 +298,20 @@ a + b
             ExpectedToken(id = 169, tokenType = TokenType.PLUS, tokenLiteral = "+"),
             ExpectedToken(id = 170, tokenType = TokenType.IDENTIFIER, tokenLiteral = "b"),
 
+            // 'a' '\n' '\t' '\'' '"' '\\' '\u1323'
+            ExpectedToken(id = 171, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "a"),
+            ExpectedToken(id = 172, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\n"),
+            ExpectedToken(id = 173, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\t"),
+            ExpectedToken(id = 174, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\'"),
+            ExpectedToken(id = 175, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\""),
+            ExpectedToken(id = 176, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\\\"),
+            ExpectedToken(id = 177, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\u1323"),
+
+            // "pikachu"  "pika \n chu" "pika \t\u1244 chu\n"
+            ExpectedToken(id = 178, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pikachu"),
+            ExpectedToken(id = 179, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\n chu"),
+            ExpectedToken(id = 180, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\t\\u1244 chu\\n"),
+
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
         )
@@ -311,6 +322,11 @@ a + b
         }
 
         val lexer = Lexer(input)
+
+        assertEquals(lexer.getErrors().size, 0, "Lexer has errors")
+        for (err in lexer.getErrors()) {
+            println("Error: ${err.errorMessage}")
+        }
 
         for (expectedToken in expectedTokens) {
             val actualToken = lexer.nextToken()
