@@ -182,7 +182,14 @@ fun Lexer.nextToken(): Token {
 
         '?' -> t = Token(tokenType = TokenType.QUESTION, tokenLiteral = TokenType.QUESTION.value)
         ':' -> t = Token(tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value)
-        '.' -> t = Token(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
+        '.' -> {
+            t = if (peekCharacter().isDigit()) {
+                readNumberLiteral()
+            } else {
+                Token(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
+            }
+        }
+
         '~' -> t = Token(tokenType = TokenType.TILDE, tokenLiteral = TokenType.TILDE.value)
         '\'' -> t = Token(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = readCharacterLiteral())
         '"' -> t = Token(tokenType = TokenType.STRING_LITERAL, tokenLiteral = readStringLiteral())
@@ -256,7 +263,7 @@ fun Lexer.nextToken(): Token {
 
         EOF_CHARACTER -> t = Token.EOF
         else -> {
-            if (currentCharacter.isAcceptableIdentifierStart()) {
+            t = if (currentCharacter.isAcceptableIdentifierStart()) {
                 val identifier = readIdentifier()
                 // this return is necessary to avoid the unnecessary readNextCharacter
                 // call after when block
@@ -265,12 +272,9 @@ fun Lexer.nextToken(): Token {
                     tokenLiteral = identifier,
                 )
             } else if (currentCharacter.isDigit()) {
-                // read integer
-                // read float
-                // read double
-                // todo: return token
+                readNumberLiteral()
             } else {
-                t = Token(tokenType = TokenType.ILLEGAL, tokenLiteral = "")
+                Token(tokenType = TokenType.ILLEGAL, tokenLiteral = "")
             }
         }
     }
@@ -420,4 +424,83 @@ internal fun Lexer.readMultilineComment(): String {
     val endIndex = currentIndex
     readNextCharacter()
     return input.slice(startIndex..<endIndex)
+}
+
+internal fun Lexer.readNumberLiteral(): Token {
+    if (currentCharacter.isDigit().not() && currentCharacter != '.') {
+        throw Error("You should not attempt to read a number that doesn't start with a digit or a floating point, found=$currentCharacter")
+    }
+
+    val startIndex = currentIndex
+    var containsDecimalPoint = false
+
+    var peek = peekCharacter()
+    while (true) {
+        if (peek == '.') {
+            if (containsDecimalPoint) {
+                return when (currentCharacter.lowercase()) {
+                    "f" -> Token(
+                        tokenType = TokenType.FLOAT_LITERAL,
+                        tokenLiteral = input.slice(startIndex..currentIndex),
+                    )
+
+                    "l" -> {
+                        addError(
+                            createLexerError("A number with decimal point can either be a 'float' or a 'double' and not 'long'")
+                        )
+                        Token(
+                            tokenType = TokenType.ILLEGAL,
+                            tokenLiteral = "l"
+                        )
+                    }
+
+                    else -> Token(
+                        tokenType = TokenType.DOUBLE_LITERAL,
+                        tokenLiteral = input.slice(startIndex..currentIndex),
+                    )
+                }
+            }
+            // In Kotlin, check if this is decimal point or object access point
+            containsDecimalPoint = true
+        } else if (peek.lowercase() == "f") {
+            readNextCharacter()
+            return Token(
+                tokenType = TokenType.FLOAT_LITERAL,
+                tokenLiteral = input.slice(startIndex..currentIndex),
+            )
+        } else if (peek.lowercase() == "l") {
+            readNextCharacter()
+            if (containsDecimalPoint) {
+                addError(
+                    createLexerError("A floating point number cannot be long at the same time")
+                )
+                return Token(
+                    tokenType = TokenType.ILLEGAL,
+                    tokenLiteral = "$currentCharacter"
+                )
+            }
+            return Token(
+                tokenType = TokenType.LONG_LITERAL,
+                tokenLiteral = input.slice(startIndex..currentIndex)
+            )
+        } else if (peek.isDigit()) {
+            // continue with the loop
+        } else {
+            break
+        }
+
+        readNextCharacter()
+        peek = peekCharacter()
+    }
+
+    if (containsDecimalPoint) {
+        return Token(
+            tokenType = TokenType.DOUBLE_LITERAL,
+            tokenLiteral = input.slice(startIndex..currentIndex)
+        )
+    }
+    return Token(
+        tokenType = TokenType.INTEGER_LITERAL,
+        tokenLiteral = input.slice(startIndex..currentIndex)
+    )
 }
