@@ -57,7 +57,16 @@ a + b
 a + b // hi there
 
 x-y/**pikachu
-greninja*/z"""
+greninja*/z
+
+// hello
+a
+
+1 23l 34.4 41.42 100.42f 1.f .0f
+
+a=1.312f+231l+121.f+2121
+
+"""
 
         val expectedTokens = listOf(
 
@@ -328,6 +337,31 @@ greninja*/z"""
             ExpectedToken(id = 187, tokenType = TokenType.IDENTIFIER, tokenLiteral = "y"),
             ExpectedToken(id = 188, tokenType = TokenType.MULTI_LINE_COMMENT, tokenLiteral = "*pikachu\ngreninja"),
             ExpectedToken(id = 189, tokenType = TokenType.IDENTIFIER, tokenLiteral = "z"),
+
+            // // hello
+            // a
+            ExpectedToken(id = 190, tokenType = TokenType.SINGLE_LINE_COMMENT, tokenLiteral = " hello\n"),
+            ExpectedToken(id = 191, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+
+            // 1 23l 34.4 41.42 100.42f 1.f .0f
+            ExpectedToken(id = 192, tokenType = TokenType.INTEGER_LITERAL, tokenLiteral = "1"),
+            ExpectedToken(id = 193, tokenType = TokenType.LONG_LITERAL, tokenLiteral = "23l"),
+            ExpectedToken(id = 194, tokenType = TokenType.DOUBLE_LITERAL, tokenLiteral = "34.4"),
+            ExpectedToken(id = 195, tokenType = TokenType.DOUBLE_LITERAL, tokenLiteral = "41.42"),
+            ExpectedToken(id = 196, tokenType = TokenType.FLOAT_LITERAL, tokenLiteral = "100.42f"),
+            ExpectedToken(id = 197, tokenType = TokenType.FLOAT_LITERAL, tokenLiteral = "1.f"),
+            ExpectedToken(id = 198, tokenType = TokenType.FLOAT_LITERAL, tokenLiteral = ".0f"),
+
+            // a=1.312f+231l+121.f+2121
+            ExpectedToken(id = 199, tokenType = TokenType.IDENTIFIER, tokenLiteral = "a"),
+            ExpectedToken(id = 200, tokenType = TokenType.EQUALS, tokenLiteral = "="),
+            ExpectedToken(id = 201, tokenType = TokenType.FLOAT_LITERAL, tokenLiteral = "1.312f"),
+            ExpectedToken(id = 202, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 203, tokenType = TokenType.LONG_LITERAL, tokenLiteral = "231l"),
+            ExpectedToken(id = 204, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 205, tokenType = TokenType.FLOAT_LITERAL, tokenLiteral = "121.f"),
+            ExpectedToken(id = 206, tokenType = TokenType.PLUS, tokenLiteral = "+"),
+            ExpectedToken(id = 207, tokenType = TokenType.INTEGER_LITERAL, tokenLiteral = "2121"),
 
             // eof
             ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
