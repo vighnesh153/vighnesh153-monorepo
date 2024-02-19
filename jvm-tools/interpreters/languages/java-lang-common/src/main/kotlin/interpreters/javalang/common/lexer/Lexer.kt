@@ -47,15 +47,14 @@ fun Lexer.lineNumber(): Int {
 }
 
 fun Lexer.columnNumber(): Int {
-    val allLines = input.split("\n")
     if (currentCharacter == EOF_CHARACTER) {
-        return allLines.size
+        return 0
     }
 
     val linesUptoCurrentIndex = input.slice(0..currentIndex).split("\n").toMutableList()
     linesUptoCurrentIndex.removeLast()
-    // currentIndex - (count of characters upto previous line
-    return currentIndex - linesUptoCurrentIndex.sumOf { it.length }
+    // currentIndex - (count of characters upto previous line)
+    return currentIndex + 1 - linesUptoCurrentIndex.sumOf { it.length + 1 }
 }
 
 fun Lexer.createNewToken(tokenType: TokenType, tokenLiteral: String): Token {
@@ -77,10 +76,8 @@ fun Lexer.nextToken(): Token {
 
     skipWhitespace()
 
-    // todo: add row and column number in the token
-
     tokenStartLineNumber = lineNumber()
-    tokenStartColumnNumber = lineNumber()
+    tokenStartColumnNumber = columnNumber()
 
     when (currentCharacter) {
         '=' -> {
@@ -352,6 +349,9 @@ fun Lexer.nextToken(): Token {
     }
 
     readNextCharacter()
+
+    tokenStartLineNumber = null
+    tokenStartColumnNumber = null
 
     return t
 }
