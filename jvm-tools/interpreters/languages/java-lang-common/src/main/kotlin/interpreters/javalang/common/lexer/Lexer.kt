@@ -409,9 +409,9 @@ internal fun Lexer.readCharacterLiteral(): String {
     }
     if (currentCharacter == EOF_CHARACTER) {
         addError(
-            createLexerError("Unclosed character token")
+            createLexerError("Unclosed character literal")
         )
-        return "<ILLEGAL> EOF reached"
+        return "<ILLEGAL> Unclosed character literal"
     }
     // current character is ending single quote
     val character = input.slice(startIndex..<currentIndex)
@@ -512,16 +512,6 @@ internal fun Lexer.readNumberLiteral(): Token {
                         tokenType = TokenType.FLOAT_LITERAL,
                         tokenLiteral = input.slice(startIndex..currentIndex),
                     )
-
-                    "l" -> {
-                        addError(
-                            createLexerError("A number with decimal point can either be a 'float' or a 'double' and not 'long'")
-                        )
-                        createNewToken(
-                            tokenType = TokenType.ILLEGAL,
-                            tokenLiteral = "l"
-                        )
-                    }
 
                     else -> createNewToken(
                         tokenType = TokenType.DOUBLE_LITERAL,
