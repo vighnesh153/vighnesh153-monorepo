@@ -364,7 +364,7 @@ a=1.312f+231l+121.f+2121
             ExpectedToken(id = 207, tokenType = TokenType.INTEGER_LITERAL, tokenLiteral = "2121"),
 
             // eof
-            ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
+            ExpectedToken(id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL),
         )
 
         // In the expectedTokens, if ids are not unique, throw error
@@ -397,7 +397,7 @@ a=1.312f+231l+121.f+2121
             ExpectedToken(id = 0, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "<ILLEGAL>"),
 
             // eof
-            ExpectedToken(id = -1, tokenType = Token.EOF.tokenType, tokenLiteral = Token.EOF.tokenLiteral),
+            ExpectedToken(id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL),
         )
 
         // In the expectedTokens, if ids are not unique, throw error
