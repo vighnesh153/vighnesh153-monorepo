@@ -5,7 +5,7 @@ import interpreters.javalang.common.tokens.TokenType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class LexerTest {
+class LexerNextTokenSuccessTest {
     @Test
     fun lexerNextToken() {
         val input = """
@@ -383,39 +383,8 @@ a=1.312f+231l+121.f+2121
             assertEquals(expectedToken.tokenType.name, actualToken.tokenType.name, "id: ${expectedToken.id}")
             assertEquals(expectedToken.tokenLiteral, actualToken.tokenLiteral, "id: ${expectedToken.id}")
         }
-    }
 
-    //    @Test
-    fun lexerNextToken_errors() {
-        val input = """
-'a
-        """.trimIndent()
-
-        val expectedTokens = listOf(
-
-            // ,;@+-*/\%!&|^?:.~
-            ExpectedToken(id = 0, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "<ILLEGAL>"),
-
-            // eof
-            ExpectedToken(id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL),
-        )
-
-        // In the expectedTokens, if ids are not unique, throw error
-        if (expectedTokens.map { it.id }.toSet().size != expectedTokens.size) {
-            throw Error("Some of the id's are not unique")
-        }
-
-        val lexer = Lexer(input)
-
-        // no errors
         assertEquals(lexer.getErrors().size, 0, "Lexer has errors")
-
-        for (expectedToken in expectedTokens) {
-            val actualToken = lexer.nextToken()
-
-            assertEquals(expectedToken.tokenType.name, actualToken.tokenType.name, "id: ${expectedToken.id}")
-            assertEquals(expectedToken.tokenLiteral, actualToken.tokenLiteral, "id: ${expectedToken.id}")
-        }
     }
 }
 
