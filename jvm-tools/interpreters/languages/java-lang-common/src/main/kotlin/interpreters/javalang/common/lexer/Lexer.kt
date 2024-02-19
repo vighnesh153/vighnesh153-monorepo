@@ -21,6 +21,10 @@ class Lexer constructor(internal val input: String) {
     // current character under examination
     internal var currentCharacter = EOF_CHARACTER
 
+    // These fields will be used while creating token
+    internal var tokenStartLineNumber: Int? = null
+    internal var tokenStartColumnNumber: Int? = null
+
     private val errors = mutableListOf<InterpreterError>()
 
     init {
@@ -34,6 +38,40 @@ class Lexer constructor(internal val input: String) {
     }
 }
 
+fun Lexer.lineNumber(): Int {
+    if (currentCharacter == EOF_CHARACTER) {
+        return input.split("\n").size
+    }
+
+    return input.slice(0..currentIndex).count { it == '\n' } + 1
+}
+
+fun Lexer.columnNumber(): Int {
+    val allLines = input.split("\n")
+    if (currentCharacter == EOF_CHARACTER) {
+        return allLines.size
+    }
+
+    val linesUptoCurrentIndex = input.slice(0..currentIndex).split("\n").toMutableList()
+    linesUptoCurrentIndex.removeLast()
+    // currentIndex - (count of characters upto previous line
+    return currentIndex - linesUptoCurrentIndex.sumOf { it.length }
+}
+
+fun Lexer.createNewToken(tokenType: TokenType, tokenLiteral: String): Token {
+    val lineNumber = tokenStartLineNumber
+    val columnNumber = tokenStartColumnNumber
+    if (lineNumber == null || columnNumber == null) {
+        throw Error("lineNumber and columnNumber are not initialized!!")
+    }
+    return Token(
+        tokenType = tokenType,
+        tokenLiteral = tokenLiteral,
+        lineNumber = lineNumber,
+        columnNumber = columnNumber,
+    )
+}
+
 fun Lexer.nextToken(): Token {
     lateinit var t: Token
 
@@ -41,51 +79,54 @@ fun Lexer.nextToken(): Token {
 
     // todo: add row and column number in the token
 
+    tokenStartLineNumber = lineNumber()
+    tokenStartColumnNumber = lineNumber()
+
     when (currentCharacter) {
         '=' -> {
             t = if (peekCharacter() == '=') {
                 readNextCharacter()
-                Token(tokenType = TokenType.DOUBLE_EQUALS, tokenLiteral = TokenType.DOUBLE_EQUALS.value)
+                createNewToken(tokenType = TokenType.DOUBLE_EQUALS, tokenLiteral = TokenType.DOUBLE_EQUALS.value)
             } else {
-                Token(tokenType = TokenType.EQUALS, tokenLiteral = TokenType.EQUALS.value)
+                createNewToken(tokenType = TokenType.EQUALS, tokenLiteral = TokenType.EQUALS.value)
             }
         }
 
-        ',' -> t = Token(tokenType = TokenType.COMMA, tokenLiteral = TokenType.COMMA.value)
+        ',' -> t = createNewToken(tokenType = TokenType.COMMA, tokenLiteral = TokenType.COMMA.value)
         '+' -> {
             val peek = peekCharacter()
             t = when (peek) {
                 '+' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.INCREMENT, tokenLiteral = TokenType.INCREMENT.value)
+                    createNewToken(tokenType = TokenType.INCREMENT, tokenLiteral = TokenType.INCREMENT.value)
                 }
 
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.PLUS_EQUALS, tokenLiteral = TokenType.PLUS_EQUALS.value)
+                    createNewToken(tokenType = TokenType.PLUS_EQUALS, tokenLiteral = TokenType.PLUS_EQUALS.value)
                 }
 
-                else -> Token(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
+                else -> createNewToken(tokenType = TokenType.PLUS, tokenLiteral = TokenType.PLUS.value)
             }
         }
 
-        ';' -> t = Token(tokenType = TokenType.SEMICOLON, tokenLiteral = TokenType.SEMICOLON.value)
-        '@' -> t = Token(tokenType = TokenType.AT_SIGN, tokenLiteral = TokenType.AT_SIGN.value)
+        ';' -> t = createNewToken(tokenType = TokenType.SEMICOLON, tokenLiteral = TokenType.SEMICOLON.value)
+        '@' -> t = createNewToken(tokenType = TokenType.AT_SIGN, tokenLiteral = TokenType.AT_SIGN.value)
 
         '-' -> {
             val peek = peekCharacter()
             t = when (peek) {
                 '-' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.DECREMENT, tokenLiteral = TokenType.DECREMENT.value)
+                    createNewToken(tokenType = TokenType.DECREMENT, tokenLiteral = TokenType.DECREMENT.value)
                 }
 
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.MINUS_EQUALS, tokenLiteral = TokenType.MINUS_EQUALS.value)
+                    createNewToken(tokenType = TokenType.MINUS_EQUALS, tokenLiteral = TokenType.MINUS_EQUALS.value)
                 }
 
-                else -> Token(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
+                else -> createNewToken(tokenType = TokenType.MINUS, tokenLiteral = TokenType.MINUS.value)
             }
         }
 
@@ -94,10 +135,13 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.ASTERISK_EQUALS, tokenLiteral = TokenType.ASTERISK_EQUALS.value)
+                    createNewToken(
+                        tokenType = TokenType.ASTERISK_EQUALS,
+                        tokenLiteral = TokenType.ASTERISK_EQUALS.value
+                    )
                 }
 
-                else -> Token(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
+                else -> createNewToken(tokenType = TokenType.ASTERISK, tokenLiteral = TokenType.ASTERISK.value)
             }
         }
 
@@ -106,29 +150,32 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '=' -> {
                     readNextCharacter()
-                    Token(
+                    createNewToken(
                         tokenType = TokenType.FORWARD_SLASH_EQUALS,
                         tokenLiteral = TokenType.FORWARD_SLASH_EQUALS.value
                     )
                 }
 
-                '/' -> Token(tokenType = TokenType.SINGLE_LINE_COMMENT, tokenLiteral = readSingleLineComment())
-                '*' -> Token(tokenType = TokenType.MULTI_LINE_COMMENT, tokenLiteral = readMultilineComment())
+                '/' -> createNewToken(tokenType = TokenType.SINGLE_LINE_COMMENT, tokenLiteral = readSingleLineComment())
+                '*' -> createNewToken(tokenType = TokenType.MULTI_LINE_COMMENT, tokenLiteral = readMultilineComment())
 
-                else -> Token(tokenType = TokenType.FORWARD_SLASH, tokenLiteral = TokenType.FORWARD_SLASH.value)
+                else -> createNewToken(
+                    tokenType = TokenType.FORWARD_SLASH,
+                    tokenLiteral = TokenType.FORWARD_SLASH.value
+                )
             }
         }
 
-        '\\' -> t = Token(tokenType = TokenType.BACK_SLASH, tokenLiteral = TokenType.BACK_SLASH.value)
+        '\\' -> t = createNewToken(tokenType = TokenType.BACK_SLASH, tokenLiteral = TokenType.BACK_SLASH.value)
         '%' -> {
             val peek = peekCharacter()
             t = when (peek) {
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.MODULUS_EQUALS, tokenLiteral = TokenType.MODULUS_EQUALS.value)
+                    createNewToken(tokenType = TokenType.MODULUS_EQUALS, tokenLiteral = TokenType.MODULUS_EQUALS.value)
                 }
 
-                else -> Token(tokenType = TokenType.MODULUS, tokenLiteral = TokenType.MODULUS.value)
+                else -> createNewToken(tokenType = TokenType.MODULUS, tokenLiteral = TokenType.MODULUS.value)
             }
         }
 
@@ -137,10 +184,10 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.BANG_EQUALS, tokenLiteral = TokenType.BANG_EQUALS.value)
+                    createNewToken(tokenType = TokenType.BANG_EQUALS, tokenLiteral = TokenType.BANG_EQUALS.value)
                 }
 
-                else -> Token(tokenType = TokenType.BANG, tokenLiteral = TokenType.BANG.value)
+                else -> createNewToken(tokenType = TokenType.BANG, tokenLiteral = TokenType.BANG.value)
             }
         }
 
@@ -149,10 +196,13 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '&' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.DOUBLE_AMPERSAND, tokenLiteral = TokenType.DOUBLE_AMPERSAND.value)
+                    createNewToken(
+                        tokenType = TokenType.DOUBLE_AMPERSAND,
+                        tokenLiteral = TokenType.DOUBLE_AMPERSAND.value
+                    )
                 }
 
-                else -> Token(tokenType = TokenType.AMPERSAND, tokenLiteral = TokenType.AMPERSAND.value)
+                else -> createNewToken(tokenType = TokenType.AMPERSAND, tokenLiteral = TokenType.AMPERSAND.value)
             }
         }
 
@@ -161,10 +211,13 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '|' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.DOUBLE_VERTICAL_BAR, tokenLiteral = TokenType.DOUBLE_VERTICAL_BAR.value)
+                    createNewToken(
+                        tokenType = TokenType.DOUBLE_VERTICAL_BAR,
+                        tokenLiteral = TokenType.DOUBLE_VERTICAL_BAR.value
+                    )
                 }
 
-                else -> Token(tokenType = TokenType.VERTICAL_BAR, tokenLiteral = TokenType.VERTICAL_BAR.value)
+                else -> createNewToken(tokenType = TokenType.VERTICAL_BAR, tokenLiteral = TokenType.VERTICAL_BAR.value)
             }
         }
 
@@ -173,40 +226,55 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '=' -> {
                     readNextCharacter()
-                    Token(tokenType = TokenType.CARET_EQUALS, tokenLiteral = TokenType.CARET_EQUALS.value)
+                    createNewToken(tokenType = TokenType.CARET_EQUALS, tokenLiteral = TokenType.CARET_EQUALS.value)
                 }
 
-                else -> Token(tokenType = TokenType.CARET, tokenLiteral = TokenType.CARET.value)
+                else -> createNewToken(tokenType = TokenType.CARET, tokenLiteral = TokenType.CARET.value)
             }
         }
 
-        '?' -> t = Token(tokenType = TokenType.QUESTION, tokenLiteral = TokenType.QUESTION.value)
-        ':' -> t = Token(tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value)
+        '?' -> t = createNewToken(tokenType = TokenType.QUESTION, tokenLiteral = TokenType.QUESTION.value)
+        ':' -> t = createNewToken(tokenType = TokenType.COLON, tokenLiteral = TokenType.COLON.value)
         '.' -> {
             t = if (peekCharacter().isDigit()) {
                 readNumberLiteral()
             } else {
-                Token(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
+                createNewToken(tokenType = TokenType.DOT, tokenLiteral = TokenType.DOT.value)
             }
         }
 
-        '~' -> t = Token(tokenType = TokenType.TILDE, tokenLiteral = TokenType.TILDE.value)
-        '\'' -> t = Token(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = readCharacterLiteral())
-        '"' -> t = Token(tokenType = TokenType.STRING_LITERAL, tokenLiteral = readStringLiteral())
-        '(' -> t = Token(tokenType = TokenType.LEFT_PARENTHESIS, tokenLiteral = TokenType.LEFT_PARENTHESIS.value)
-        ')' -> t = Token(tokenType = TokenType.RIGHT_PARENTHESIS, tokenLiteral = TokenType.RIGHT_PARENTHESIS.value)
-        '{' -> t = Token(tokenType = TokenType.LEFT_CURLY_BRACE, tokenLiteral = TokenType.LEFT_CURLY_BRACE.value)
-        '}' -> t = Token(tokenType = TokenType.RIGHT_CURLY_BRACE, tokenLiteral = TokenType.RIGHT_CURLY_BRACE.value)
-        '[' -> t = Token(tokenType = TokenType.LEFT_SQUARE_BRACKET, tokenLiteral = TokenType.LEFT_SQUARE_BRACKET.value)
+        '~' -> t = createNewToken(tokenType = TokenType.TILDE, tokenLiteral = TokenType.TILDE.value)
+        '\'' -> t = createNewToken(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = readCharacterLiteral())
+        '"' -> t = createNewToken(tokenType = TokenType.STRING_LITERAL, tokenLiteral = readStringLiteral())
+        '(' -> t =
+            createNewToken(tokenType = TokenType.LEFT_PARENTHESIS, tokenLiteral = TokenType.LEFT_PARENTHESIS.value)
+
+        ')' -> t =
+            createNewToken(tokenType = TokenType.RIGHT_PARENTHESIS, tokenLiteral = TokenType.RIGHT_PARENTHESIS.value)
+
+        '{' -> t =
+            createNewToken(tokenType = TokenType.LEFT_CURLY_BRACE, tokenLiteral = TokenType.LEFT_CURLY_BRACE.value)
+
+        '}' -> t =
+            createNewToken(tokenType = TokenType.RIGHT_CURLY_BRACE, tokenLiteral = TokenType.RIGHT_CURLY_BRACE.value)
+
+        '[' -> t = createNewToken(
+            tokenType = TokenType.LEFT_SQUARE_BRACKET,
+            tokenLiteral = TokenType.LEFT_SQUARE_BRACKET.value
+        )
+
         ']' -> t =
-            Token(tokenType = TokenType.RIGHT_SQUARE_BRACKET, tokenLiteral = TokenType.RIGHT_SQUARE_BRACKET.value)
+            createNewToken(
+                tokenType = TokenType.RIGHT_SQUARE_BRACKET,
+                tokenLiteral = TokenType.RIGHT_SQUARE_BRACKET.value
+            )
 
         '<' -> {
             val peek = peekCharacter()
             t = when (peek) {
                 '<' -> {
                     readNextCharacter()
-                    Token(
+                    createNewToken(
                         tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET,
                         tokenLiteral = TokenType.DOUBLE_LEFT_ANGLE_BRACKET.value
                     )
@@ -214,13 +282,13 @@ fun Lexer.nextToken(): Token {
 
                 '=' -> {
                     readNextCharacter()
-                    Token(
+                    createNewToken(
                         tokenType = TokenType.LEFT_ANGLE_BRACKET_EQUALS,
                         tokenLiteral = TokenType.LEFT_ANGLE_BRACKET_EQUALS.value
                     )
                 }
 
-                else -> Token(
+                else -> createNewToken(
                     tokenType = TokenType.LEFT_ANGLE_BRACKET,
                     tokenLiteral = TokenType.LEFT_ANGLE_BRACKET.value
                 )
@@ -234,12 +302,12 @@ fun Lexer.nextToken(): Token {
                     readNextCharacter()
                     if (peekCharacter() == '>') {
                         readNextCharacter()
-                        Token(
+                        createNewToken(
                             tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET,
                             tokenLiteral = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET.value
                         )
                     } else {
-                        Token(
+                        createNewToken(
                             tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET,
                             tokenLiteral = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET.value
                         )
@@ -248,33 +316,37 @@ fun Lexer.nextToken(): Token {
 
                 '=' -> {
                     readNextCharacter()
-                    Token(
+                    createNewToken(
                         tokenType = TokenType.RIGHT_ANGLE_BRACKET_EQUALS,
                         tokenLiteral = TokenType.RIGHT_ANGLE_BRACKET_EQUALS.value
                     )
                 }
 
-                else -> Token(
+                else -> createNewToken(
                     tokenType = TokenType.RIGHT_ANGLE_BRACKET,
                     tokenLiteral = TokenType.RIGHT_ANGLE_BRACKET.value
                 )
             }
         }
 
-        EOF_CHARACTER -> t = Token.EOF
+        EOF_CHARACTER -> t = Token.buildEOF(
+            lineNumber = tokenStartLineNumber!!,
+            columnNumber = tokenStartColumnNumber!!,
+        )
+
         else -> {
             t = if (currentCharacter.isAcceptableIdentifierStart()) {
                 val identifier = readIdentifier()
                 // this return is necessary to avoid the unnecessary readNextCharacter
                 // call after when block
-                return Token(
+                return createNewToken(
                     tokenType = lookupIdentifier(identifier),
                     tokenLiteral = identifier,
                 )
             } else if (currentCharacter.isDigit()) {
                 readNumberLiteral()
             } else {
-                Token(tokenType = TokenType.ILLEGAL, tokenLiteral = "")
+                createNewToken(tokenType = TokenType.ILLEGAL, tokenLiteral = "$currentCharacter")
             }
         }
     }
@@ -314,14 +386,11 @@ internal fun Lexer.skipWhitespace() {
 }
 
 internal fun Lexer.createLexerError(errorMessage: String): InterpreterError {
-    val lines = input.slice(0..min(input.lastIndex, currentIndex)).split('\n')
-    val lineNumber = lines.size
-    val columnNumber = currentIndex - lines.subList(0, lines.lastIndex - 1).sumOf { it.length }
     return InterpreterError(
         errorMessage = errorMessage,
         errorType = InterpreterErrorType.LEXER_ERROR,
-        lineNumber = lineNumber,
-        columnNumber = columnNumber,
+        lineNumber = lineNumber(),
+        columnNumber = columnNumber(),
     )
 }
 
@@ -439,7 +508,7 @@ internal fun Lexer.readNumberLiteral(): Token {
         if (peek == '.') {
             if (containsDecimalPoint) {
                 return when (currentCharacter.lowercase()) {
-                    "f" -> Token(
+                    "f" -> createNewToken(
                         tokenType = TokenType.FLOAT_LITERAL,
                         tokenLiteral = input.slice(startIndex..currentIndex),
                     )
@@ -448,13 +517,13 @@ internal fun Lexer.readNumberLiteral(): Token {
                         addError(
                             createLexerError("A number with decimal point can either be a 'float' or a 'double' and not 'long'")
                         )
-                        Token(
+                        createNewToken(
                             tokenType = TokenType.ILLEGAL,
                             tokenLiteral = "l"
                         )
                     }
 
-                    else -> Token(
+                    else -> createNewToken(
                         tokenType = TokenType.DOUBLE_LITERAL,
                         tokenLiteral = input.slice(startIndex..currentIndex),
                     )
@@ -464,7 +533,7 @@ internal fun Lexer.readNumberLiteral(): Token {
             containsDecimalPoint = true
         } else if (peek.lowercase() == "f") {
             readNextCharacter()
-            return Token(
+            return createNewToken(
                 tokenType = TokenType.FLOAT_LITERAL,
                 tokenLiteral = input.slice(startIndex..currentIndex),
             )
@@ -474,12 +543,12 @@ internal fun Lexer.readNumberLiteral(): Token {
                 addError(
                     createLexerError("A floating point number cannot be long at the same time")
                 )
-                return Token(
+                return createNewToken(
                     tokenType = TokenType.ILLEGAL,
                     tokenLiteral = "$currentCharacter"
                 )
             }
-            return Token(
+            return createNewToken(
                 tokenType = TokenType.LONG_LITERAL,
                 tokenLiteral = input.slice(startIndex..currentIndex)
             )
@@ -494,12 +563,12 @@ internal fun Lexer.readNumberLiteral(): Token {
     }
 
     if (containsDecimalPoint) {
-        return Token(
+        return createNewToken(
             tokenType = TokenType.DOUBLE_LITERAL,
             tokenLiteral = input.slice(startIndex..currentIndex)
         )
     }
-    return Token(
+    return createNewToken(
         tokenType = TokenType.INTEGER_LITERAL,
         tokenLiteral = input.slice(startIndex..currentIndex)
     )
