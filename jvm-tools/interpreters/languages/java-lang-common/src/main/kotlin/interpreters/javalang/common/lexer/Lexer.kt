@@ -1,11 +1,6 @@
 package interpreters.javalang.common.lexer
 
 import interpreters.javalang.common.errors.InterpreterError
-import interpreters.javalang.common.errors.InterpreterErrorType
-import interpreters.javalang.common.tokens.Token
-import interpreters.javalang.common.tokens.TokenType
-import interpreters.javalang.common.tokens.lookupIdentifier
-import kotlin.math.min
 
 const val EOF_CHARACTER = Char.MIN_VALUE
 const val SINGLE_QUOTE = '\''
