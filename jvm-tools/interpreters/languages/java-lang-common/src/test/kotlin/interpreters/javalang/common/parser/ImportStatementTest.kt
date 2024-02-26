@@ -5,11 +5,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ImportStatementTest {
+    private data class ExpectedImportStatement(
+        val identifiersForEachImport: List<String>,
+        val isStaticImport: Boolean,
+    )
+
     private data class ImportStatementsTestcase(
         val id: Int,
         val input: String,
-        val expectedStatementCount: Int,
-        val expectedIdentifiersForEachImport: List<List<String>>,
+        val expectedImportStatements: List<ExpectedImportStatement>,
     )
 
     @Test
@@ -18,14 +22,22 @@ class ImportStatementTest {
             ImportStatementsTestcase(
                 id = 1,
                 input = "import pokemon;",
-                expectedStatementCount = 1,
-                expectedIdentifiersForEachImport = listOf(listOf("pokemon"))
+                expectedImportStatements = listOf(
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("pokemon"),
+                        isStaticImport = false,
+                    )
+                ),
             ),
             ImportStatementsTestcase(
                 id = 2,
                 input = "import com.pikachu.is.the.best;",
-                expectedStatementCount = 1,
-                expectedIdentifiersForEachImport = listOf(listOf("com", "pikachu", "is", "the", "best"))
+                expectedImportStatements = listOf(
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("com", "pikachu", "is", "the", "best"),
+                        isStaticImport = false,
+                    )
+                ),
             ),
             ImportStatementsTestcase(
                 id = 3,
@@ -33,11 +45,43 @@ class ImportStatementTest {
                     import com.pikachu.is.the.best;
                     import greninja.is.the.best.too;
                 """.trimIndent(),
-                expectedStatementCount = 2,
-                expectedIdentifiersForEachImport = listOf(
-                    listOf("com", "pikachu", "is", "the", "best"),
-                    listOf("greninja", "is", "the", "best", "too"),
-                )
+                expectedImportStatements = listOf(
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("com", "pikachu", "is", "the", "best"),
+                        isStaticImport = false,
+                    ),
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("greninja", "is", "the", "best", "too"),
+                        isStaticImport = false,
+                    ),
+                ),
+            ),
+            ImportStatementsTestcase(
+                id = 4,
+                input = """
+                    import static com.pikachu.is.the.best;
+                    import greninja.is.the.best.too;
+                    import static greninja.is.the.best.too;
+                    import com.pikachu.is.the.best;
+                """.trimIndent(),
+                expectedImportStatements = listOf(
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("com", "pikachu", "is", "the", "best"),
+                        isStaticImport = true,
+                    ),
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("greninja", "is", "the", "best", "too"),
+                        isStaticImport = false,
+                    ),
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("greninja", "is", "the", "best", "too"),
+                        isStaticImport = true,
+                    ),
+                    ExpectedImportStatement(
+                        identifiersForEachImport = listOf("com", "pikachu", "is", "the", "best"),
+                        isStaticImport = false,
+                    ),
+                ),
             ),
         )
 
@@ -47,15 +91,19 @@ class ImportStatementTest {
 
             parser.checkForParserErrors()
 
-            assertEquals(testcase.expectedStatementCount, program.getStatements().size)
+            assertEquals(testcase.expectedImportStatements.size, program.getStatements().size)
 
             for (i in program.getStatements().indices) {
                 val statement = program.getStatements()[i] as ImportStatement
-                val expectedIdentifiers = testcase.expectedIdentifiersForEachImport[i]
+                val expectedImportStatement = testcase.expectedImportStatements[i]
 
                 assertEquals(
-                    expectedIdentifiers,
+                    expectedImportStatement.identifiersForEachImport,
                     statement.dotSeparatedIdentifiers.map { it.tokenLiteral },
+                )
+                assertEquals(
+                    expectedImportStatement.isStaticImport,
+                    statement.isStaticImport,
                 )
             }
         }

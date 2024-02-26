@@ -70,10 +70,17 @@ internal fun Parser.parsePackageStatement(): StatementNode? {
 
 internal fun Parser.parseImportStatement(): StatementNode? {
     val dotSeparatedIdentifiers = mutableListOf<Token>()
+
+    val isStaticImport = isPeekToken(TokenType.STATIC_KEYWORD)
     val packageStatement = ImportStatement(
         token = currentToken,
-        dotSeparatedIdentifiers = dotSeparatedIdentifiers
+        dotSeparatedIdentifiers = dotSeparatedIdentifiers,
+        isStaticImport = isStaticImport,
     )
+
+    if (isStaticImport) {
+        nextToken()
+    }
 
     if (parseDotSeparatedIdentifiers(dotSeparatedIdentifiers).not()) {
         return null

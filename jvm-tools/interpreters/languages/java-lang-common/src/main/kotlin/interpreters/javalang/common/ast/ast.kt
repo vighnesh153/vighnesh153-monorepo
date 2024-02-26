@@ -49,6 +49,7 @@ class PackageStatement(
 class ImportStatement(
     val token: Token,  // The TokenType.IMPORT_KEYWORD token
     val dotSeparatedIdentifiers: List<Token>,
+    val isStaticImport: Boolean,
 ) : StatementNode() {
 
     override fun tokenLiteral(): String {
@@ -56,6 +57,9 @@ class ImportStatement(
     }
 
     override fun toString(): String {
+        if (isStaticImport) {
+            return "${token.tokenLiteral} static ${dotSeparatedIdentifiers.joinToString { "." }};"
+        }
         return "${token.tokenLiteral} ${dotSeparatedIdentifiers.joinToString { "." }};"
     }
 }
