@@ -4,6 +4,13 @@ import interpreters.javalang.common.tokens.TokenType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+private fun createLexer(input: String): Lexer {
+    return Lexer(
+        input = input,
+        errors = mutableListOf(),
+    )
+}
+
 class LexerErrorsTest {
     @Test
     fun lexerNextToken_readCharacterLiteral_errors() {
@@ -12,7 +19,7 @@ class LexerErrorsTest {
             'b
         """.trimIndent()
 
-        val lexer = Lexer(input)
+        val lexer = createLexer(input)
         var token = lexer.nextToken()
         while (token.tokenType != TokenType.EOF) {
             token = lexer.nextToken()
@@ -33,7 +40,7 @@ class LexerErrorsTest {
             "aa
         """.trimIndent()
 
-        val lexer = Lexer(input)
+        val lexer = createLexer(input)
         var token = lexer.nextToken()
         while (token.tokenType != TokenType.EOF) {
             token = lexer.nextToken()
@@ -54,7 +61,7 @@ class LexerErrorsTest {
             dalkmsd
         """.trimIndent()
 
-        val lexer = Lexer(input)
+        val lexer = createLexer(input)
         var token = lexer.nextToken()
         while (token.tokenType != TokenType.EOF) {
             token = lexer.nextToken()
@@ -74,7 +81,7 @@ class LexerErrorsTest {
             1.4l
         """.trimIndent()
 
-        val lexer = Lexer(input)
+        val lexer = createLexer(input)
         var token = lexer.nextToken()
         while (token.tokenType != TokenType.EOF) {
             token = lexer.nextToken()

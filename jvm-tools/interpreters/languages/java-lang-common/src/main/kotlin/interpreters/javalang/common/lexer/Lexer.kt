@@ -11,7 +11,10 @@ const val EOF_CHARACTER = Char.MIN_VALUE
 const val SINGLE_QUOTE = '\''
 const val DOUBLE_QUOTE = '"'
 
-class Lexer constructor(internal val input: String) {
+class Lexer constructor(
+    internal val input: String,
+    private val errors: MutableList<InterpreterError>,
+) {
     // index pointing to the current position in input
     internal var currentIndex = 0
 
@@ -24,8 +27,6 @@ class Lexer constructor(internal val input: String) {
     // These fields will be used while creating token
     internal var tokenStartLineNumber: Int? = null
     internal var tokenStartColumnNumber: Int? = null
-
-    private val errors = mutableListOf<InterpreterError>()
 
     init {
         readNextCharacter()

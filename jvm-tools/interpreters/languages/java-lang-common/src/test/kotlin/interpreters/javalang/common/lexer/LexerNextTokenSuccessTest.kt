@@ -1119,7 +1119,7 @@ a=1.312f+231l+121.f+2121
             throw Error("Some of the id's are not unique")
         }
 
-        val lexer = Lexer(input)
+        val lexer = Lexer(input, mutableListOf())
 
         for (expectedToken in expectedTokens) {
             val actualToken = lexer.nextToken()
