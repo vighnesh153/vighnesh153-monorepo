@@ -113,5 +113,9 @@ enum class TokenType(val value: String) {
     LONG_KEYWORD("LONG_KEYWORD"),
     FLOAT_KEYWORD("FLOAT_KEYWORD"),
     SUPER_KEYWORD("SUPER"),
-    WHILE_KEYWORD("WHILE"),
+    WHILE_KEYWORD("WHILE");
+
+    override fun toString(): String {
+        return value
+    }
 }

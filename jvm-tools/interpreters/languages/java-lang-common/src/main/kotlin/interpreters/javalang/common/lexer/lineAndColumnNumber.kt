@@ -2,7 +2,7 @@ package interpreters.javalang.common.lexer
 
 fun Lexer.lineNumber(): Int {
     if (currentCharacter == EOF_CHARACTER) {
-        return input.split("\n").size
+        return input.split("\n").size + 1
     }
 
     return input.slice(0..currentIndex).count { it == '\n' } + 1
