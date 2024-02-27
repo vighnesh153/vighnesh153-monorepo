@@ -5,6 +5,7 @@ import interpreters.javalang.common.errors.InterpreterError
 import interpreters.javalang.common.lexer.Lexer
 import interpreters.javalang.common.tokens.Token
 import interpreters.javalang.common.tokens.TokenType
+import java.lang.NumberFormatException
 
 
 class Parser(
@@ -21,6 +22,8 @@ class Parser(
     fun isPeekTokenInitialized(): Boolean = this::peekToken.isInitialized
 
     init {
+        prefixParseFunctions[TokenType.INTEGER_LITERAL] = PrefixParseFunction { parseIntegerLiteral() }
+
         nextToken()
         nextToken()
     }
@@ -32,24 +35,10 @@ class Parser(
     }
 }
 
-internal fun Parser.parseProgram(): ProgramNode {
-    val programNode = ProgramNode()
-
-    while (isCurrentToken(TokenType.EOF).not()) {
-        val statement = parseStatement()
-        if (statement != null) {
-            programNode.addStatement(statement)
-        }
-        nextToken()
-    }
-
-    return programNode
-}
-
 internal fun Parser.parseStatement(): StatementNode? {
     return when (currentToken.tokenType) {
         TokenType.PACKAGE_KEYWORD -> parsePackageStatement()
         TokenType.IMPORT_KEYWORD -> parseImportStatement()
-        else -> throw Error("Not implemented")
+        else -> parseExpressionStatement()
     }
 }

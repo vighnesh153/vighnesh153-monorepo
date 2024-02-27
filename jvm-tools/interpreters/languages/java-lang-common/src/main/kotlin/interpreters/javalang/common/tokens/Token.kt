@@ -18,4 +18,8 @@ data class Token(
             )
         }
     }
+
+    override fun toString(): String {
+        return "Token(tokenType=$tokenType, tokenLiteral='$tokenLiteral', lineNumber=$lineNumber, columnNumber=$columnNumber)"
+    }
 }
