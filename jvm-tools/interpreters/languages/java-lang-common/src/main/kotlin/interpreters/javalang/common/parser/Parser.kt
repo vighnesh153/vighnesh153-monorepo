@@ -24,6 +24,7 @@ class Parser(
     init {
         prefixParseFunctions[TokenType.INTEGER_LITERAL] = PrefixParseFunction { parseIntegerLiteral() }
         prefixParseFunctions[TokenType.FLOAT_LITERAL] = PrefixParseFunction { parseFloatLiteral() }
+        prefixParseFunctions[TokenType.LONG_LITERAL] = PrefixParseFunction { parseLongLiteral() }
 
         nextToken()
         nextToken()

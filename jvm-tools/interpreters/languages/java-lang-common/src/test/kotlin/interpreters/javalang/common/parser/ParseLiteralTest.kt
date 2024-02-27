@@ -1,9 +1,6 @@
 package interpreters.javalang.common.parser
 
-import interpreters.javalang.common.ast.ExpressionStatement
-import interpreters.javalang.common.ast.FloatLiteral
-import interpreters.javalang.common.ast.ImportStatement
-import interpreters.javalang.common.ast.IntegerLiteral
+import interpreters.javalang.common.ast.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -67,6 +64,37 @@ class ParseLiteralTest {
             val floatLiteral = statement.expression as FloatLiteral
 
             assertEquals(testcase.expectedOutput, floatLiteral.value)
+        }
+    }
+
+    @Test
+    fun shouldParseLongLiterals() {
+        data class LongTestCase(
+            val id: Int,
+            val input: String,
+            val expectedOutput: Long,
+        )
+
+        val testcases = listOf(
+            LongTestCase(id = 1, input = "5L", expectedOutput = 5L),
+            LongTestCase(id = 2, input = "42L", expectedOutput = 42L),
+            LongTestCase(id = 3, input = "101L", expectedOutput = 101L),
+            LongTestCase(id = 4, input = "404L", expectedOutput = 404L),
+            LongTestCase(id = 5, input = "9999L", expectedOutput = 9999L),
+        )
+
+        for (testcase in testcases) {
+            val parser = createParser(input = testcase.input)
+            val program = parser.parseProgram()
+
+            parser.checkForParserErrors()
+
+            assertEquals(1, program.getStatements().size)
+
+            val statement = program.getStatements()[0] as ExpressionStatement
+            val longLiteral = statement.expression as LongLiteral
+
+            assertEquals(testcase.expectedOutput, longLiteral.value)
         }
     }
 }
