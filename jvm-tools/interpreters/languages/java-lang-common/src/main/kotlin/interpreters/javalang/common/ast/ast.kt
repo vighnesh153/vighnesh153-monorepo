@@ -63,3 +63,29 @@ class ImportStatement(
         return "${token.tokenLiteral} ${dotSeparatedIdentifiers.joinToString { "." }};"
     }
 }
+
+class ExpressionStatement(
+    val token: Token,
+    val expression: ExpressionNode?,
+): StatementNode() {
+    override fun tokenLiteral(): String {
+        return expression?.tokenLiteral() ?: token.tokenLiteral
+    }
+
+    override fun toString(): String {
+        return expression?.toString() ?: token.toString()
+    }
+}
+
+class IntegerLiteral(
+    val token: Token,
+    val value: Int,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return token.tokenLiteral
+    }
+
+    override fun toString(): String {
+        return token.tokenLiteral
+    }
+}

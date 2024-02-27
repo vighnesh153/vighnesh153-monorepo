@@ -14,3 +14,23 @@ internal fun Parser.createUnexpectedPeekError(expectedTokenType: TokenType, actu
     )
     addError(error)
 }
+
+internal fun Parser.createNoPrefixParseFunctionFoundError(actualToken: Token) {
+    val error = InterpreterError(
+        errorMessage = "No prefix parse function found for token=$actualToken",
+        errorType = InterpreterErrorType.PARSER_ERROR,
+        lineNumber = actualToken.lineNumber,
+        columnNumber = actualToken.columnNumber,
+    )
+    addError(error)
+}
+
+internal fun Parser.createUnexpectedNumberFormatError(errorMessage: String, actualToken: Token) {
+    val error = InterpreterError(
+        errorMessage = "Could not parse token=$actualToken. Error = $errorMessage",
+        errorType = InterpreterErrorType.PARSER_ERROR,
+        lineNumber = actualToken.lineNumber,
+        columnNumber = actualToken.columnNumber,
+    )
+    addError(error)
+}
