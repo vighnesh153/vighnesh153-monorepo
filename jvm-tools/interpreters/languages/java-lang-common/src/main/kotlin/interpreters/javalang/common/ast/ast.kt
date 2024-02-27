@@ -102,3 +102,16 @@ class FloatLiteral(
         return token.tokenLiteral
     }
 }
+
+class LongLiteral(
+    val token: Token,
+    val value: Long,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return token.tokenLiteral
+    }
+
+    override fun toString(): String {
+        return token.tokenLiteral
+    }
+}

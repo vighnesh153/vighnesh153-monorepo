@@ -3,6 +3,7 @@ package interpreters.javalang.common.parser
 import interpreters.javalang.common.ast.ExpressionNode
 import interpreters.javalang.common.ast.FloatLiteral
 import interpreters.javalang.common.ast.IntegerLiteral
+import interpreters.javalang.common.ast.LongLiteral
 import java.lang.NumberFormatException
 
 fun Parser.parseIntegerLiteral(): ExpressionNode? {
@@ -26,6 +27,22 @@ fun Parser.parseFloatLiteral(): ExpressionNode? {
             value = token.tokenLiteral.toFloat(),
         )
     } catch (e: NumberFormatException) {
+        createUnexpectedNumberFormatError(e.message ?: "Unknown error occurred", token)
+        null
+    }
+}
+
+fun Parser.parseLongLiteral(): ExpressionNode? {
+    val token = currentToken
+    return try {
+        val tokenLiteral = token.tokenLiteral
+        LongLiteral(
+            token = token,
+            // remove the trailing "L"
+            value = tokenLiteral.slice(0..<tokenLiteral.lastIndex).toLong(),
+        )
+    } catch (e: NumberFormatException) {
+        e.printStackTrace()
         createUnexpectedNumberFormatError(e.message ?: "Unknown error occurred", token)
         null
     }
