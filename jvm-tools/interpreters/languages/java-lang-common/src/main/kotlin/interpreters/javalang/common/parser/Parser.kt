@@ -5,16 +5,15 @@ import interpreters.javalang.common.errors.InterpreterError
 import interpreters.javalang.common.lexer.Lexer
 import interpreters.javalang.common.tokens.Token
 import interpreters.javalang.common.tokens.TokenType
-import java.lang.NumberFormatException
 
 
 class Parser(
     internal val lexer: Lexer,
     private val errors: MutableList<InterpreterError>
 ) {
-    internal val prefixParseFunctions = mutableMapOf<TokenType, PrefixParseFunction>()
-    internal val infixParseFunctions = mutableMapOf<TokenType, InfixParseFunction>()
-    internal val postfixParseFunctions = mutableMapOf<TokenType, PostfixParseFunction>()
+    internal val prefixParseFunctions: Map<TokenType, PrefixParseFunction>
+    internal val infixParseFunctions: Map<TokenType, InfixParseFunction>
+    internal val postfixParseFunctions: Map<TokenType, PostfixParseFunction>
 
     internal lateinit var currentToken: Token
     internal lateinit var peekToken: Token
@@ -22,9 +21,14 @@ class Parser(
     fun isPeekTokenInitialized(): Boolean = this::peekToken.isInitialized
 
     init {
-        prefixParseFunctions[TokenType.INTEGER_LITERAL] = PrefixParseFunction { parseIntegerLiteral() }
-        prefixParseFunctions[TokenType.FLOAT_LITERAL] = PrefixParseFunction { parseFloatLiteral() }
-        prefixParseFunctions[TokenType.LONG_LITERAL] = PrefixParseFunction { parseLongLiteral() }
+        prefixParseFunctions = mutableMapOf(
+            TokenType.INTEGER_LITERAL to PrefixParseFunction { parseIntegerLiteral() },
+            TokenType.FLOAT_LITERAL to PrefixParseFunction { parseFloatLiteral() },
+            TokenType.LONG_LITERAL to PrefixParseFunction { parseLongLiteral() },
+            TokenType.DOUBLE_LITERAL to PrefixParseFunction { parseDoubleLiteral() },
+        )
+        infixParseFunctions = mutableMapOf()
+        postfixParseFunctions = mutableMapOf()
 
         nextToken()
         nextToken()

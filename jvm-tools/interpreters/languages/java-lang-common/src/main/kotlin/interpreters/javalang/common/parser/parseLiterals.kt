@@ -1,9 +1,6 @@
 package interpreters.javalang.common.parser
 
-import interpreters.javalang.common.ast.ExpressionNode
-import interpreters.javalang.common.ast.FloatLiteral
-import interpreters.javalang.common.ast.IntegerLiteral
-import interpreters.javalang.common.ast.LongLiteral
+import interpreters.javalang.common.ast.*
 import java.lang.NumberFormatException
 
 fun Parser.parseIntegerLiteral(): ExpressionNode? {
@@ -40,6 +37,21 @@ fun Parser.parseLongLiteral(): ExpressionNode? {
             token = token,
             // remove the trailing "L"
             value = tokenLiteral.slice(0..<tokenLiteral.lastIndex).toLong(),
+        )
+    } catch (e: NumberFormatException) {
+        e.printStackTrace()
+        createUnexpectedNumberFormatError(e.message ?: "Unknown error occurred", token)
+        null
+    }
+}
+
+fun Parser.parseDoubleLiteral(): ExpressionNode? {
+    val token = currentToken
+    return try {
+        val tokenLiteral = token.tokenLiteral
+        DoubleLiteral(
+            token = token,
+            value = tokenLiteral.toDouble(),
         )
     } catch (e: NumberFormatException) {
         e.printStackTrace()
