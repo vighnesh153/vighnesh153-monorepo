@@ -66,6 +66,8 @@ a
 
 a=1.312f+231l+121.f+2121
 
+.101
+
 """
 
         val expectedTokens = listOf(
@@ -1107,10 +1109,16 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 57, columnNumber = 21
             ),
 
+            // .101
+            ExpectedToken(
+                id = 208, tokenType = TokenType.DOUBLE_LITERAL, tokenLiteral = ".101",
+                lineNumber = 59, columnNumber = 1
+            ),
+
             // eof
             ExpectedToken(
                 id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL,
-                lineNumber = 59, columnNumber = 0
+                lineNumber = 61, columnNumber = 0
             ),
         )
 

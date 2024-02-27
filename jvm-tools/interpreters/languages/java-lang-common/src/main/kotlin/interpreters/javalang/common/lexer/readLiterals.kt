@@ -65,7 +65,7 @@ internal fun Lexer.readNumberLiteral(): Token {
     }
 
     val startIndex = currentIndex
-    var containsDecimalPoint = false
+    var containsDecimalPoint = currentCharacter == '.'
 
     var peek = peekCharacter()
     while (true) {

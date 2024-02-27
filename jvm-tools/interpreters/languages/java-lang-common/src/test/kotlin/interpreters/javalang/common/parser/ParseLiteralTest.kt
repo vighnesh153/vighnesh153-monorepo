@@ -97,4 +97,35 @@ class ParseLiteralTest {
             assertEquals(testcase.expectedOutput, longLiteral.value)
         }
     }
+
+    @Test
+    fun shouldParseDoubleLiterals() {
+        data class DoubleTestCase(
+            val id: Int,
+            val input: String,
+            val expectedOutput: Double,
+        )
+
+        val testcases = listOf(
+            DoubleTestCase(id = 1, input = "5.0", expectedOutput = 5.0),
+            DoubleTestCase(id = 2, input = "42.0", expectedOutput = 42.0),
+            DoubleTestCase(id = 3, input = ".101", expectedOutput = 0.101),
+            DoubleTestCase(id = 4, input = "404.232", expectedOutput = 404.232),
+            DoubleTestCase(id = 5, input = "9999.13", expectedOutput = 9999.13),
+        )
+
+        for (testcase in testcases) {
+            val parser = createParser(input = testcase.input)
+            val program = parser.parseProgram()
+
+            parser.checkForParserErrors()
+
+            assertEquals(1, program.getStatements().size)
+
+            val statement = program.getStatements()[0] as ExpressionStatement
+            val floatLiteral = statement.expression as DoubleLiteral
+
+            assertEquals(testcase.expectedOutput, floatLiteral.value)
+        }
+    }
 }
