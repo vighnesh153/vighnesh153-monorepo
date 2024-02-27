@@ -27,7 +27,7 @@ internal fun Parser.createNoPrefixParseFunctionFoundError(actualToken: Token) {
 
 internal fun Parser.createUnexpectedNumberFormatError(errorMessage: String, actualToken: Token) {
     val error = InterpreterError(
-        errorMessage = "Could not parse token=$actualToken. Error = $errorMessage",
+        errorMessage = "Could not parse number token=$actualToken. Error = $errorMessage",
         errorType = InterpreterErrorType.PARSER_ERROR,
         lineNumber = actualToken.lineNumber,
         columnNumber = actualToken.columnNumber,

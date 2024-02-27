@@ -89,3 +89,16 @@ class IntegerLiteral(
         return token.tokenLiteral
     }
 }
+
+class FloatLiteral(
+    val token: Token,
+    val value: Float,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return token.tokenLiteral
+    }
+
+    override fun toString(): String {
+        return token.tokenLiteral
+    }
+}
