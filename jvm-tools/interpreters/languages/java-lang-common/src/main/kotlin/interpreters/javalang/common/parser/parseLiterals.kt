@@ -66,3 +66,13 @@ fun Parser.parseStringLiteral(): ExpressionNode {
         value = currentToken.tokenLiteral
     )
 }
+
+fun Parser.parseCharacterLiteral(): ExpressionNode {
+    if (currentToken.tokenLiteral.length != 1) {
+        throw Error("Character can only have length 1, found token=$currentToken")
+    }
+    return CharacterLiteral(
+        token = currentToken,
+        value = currentToken.tokenLiteral[0]
+    )
+}
