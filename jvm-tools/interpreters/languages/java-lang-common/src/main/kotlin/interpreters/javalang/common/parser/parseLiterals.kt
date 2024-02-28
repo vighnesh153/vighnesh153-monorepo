@@ -59,3 +59,10 @@ fun Parser.parseDoubleLiteral(): ExpressionNode? {
         null
     }
 }
+
+fun Parser.parseStringLiteral(): ExpressionNode {
+    return StringLiteral(
+        token = currentToken,
+        value = currentToken.tokenLiteral
+    )
+}

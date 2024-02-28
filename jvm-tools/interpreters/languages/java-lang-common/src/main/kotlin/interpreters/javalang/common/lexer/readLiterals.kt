@@ -8,22 +8,27 @@ internal fun Lexer.readCharacterLiteral(): String {
         throw Error("You should not attempt to read a character literal if it doesn't start with \"'\"")
     }
     readNextCharacter()
-    val startIndex = currentIndex
+    val stringBuilder = StringBuilder()
 
     while (currentCharacter != SINGLE_QUOTE && currentCharacter != EOF_CHARACTER) {
         if (currentCharacter == '\\') {
-            readEscapeSequence()
+            stringBuilder.append(readEscapeSequence())
+        } else {
+            stringBuilder.append(currentCharacter)
         }
         readNextCharacter()
     }
+
     if (currentCharacter == EOF_CHARACTER) {
         addError(
             createLexerError("Unclosed character literal")
         )
         return "<ILLEGAL> Unclosed character literal"
     }
+
     // current character is ending single quote
-    val character = input.slice(startIndex..<currentIndex)
+
+    val character = stringBuilder.toString()
     if (character.length == 1) {
         return character
     }
@@ -41,11 +46,13 @@ internal fun Lexer.readStringLiteral(): String {
         throw Error("You should not attempt to read a string literal if it doesn't start with '\"'")
     }
     readNextCharacter()
-    val startIndex = currentIndex
+    val stringBuilder = StringBuilder()
 
     while (currentCharacter != DOUBLE_QUOTE && currentCharacter != EOF_CHARACTER) {
         if (currentCharacter == '\\') {
-            readEscapeSequence()
+            stringBuilder.append(readEscapeSequence())
+        } else {
+            stringBuilder.append(currentCharacter)
         }
         readNextCharacter()
     }
@@ -55,8 +62,10 @@ internal fun Lexer.readStringLiteral(): String {
         )
         return "<ILLEGAL> Unclosed string literal"
     }
+
     // current character is ending double quote
-    return input.slice(startIndex..<currentIndex)
+
+    return stringBuilder.toString()
 }
 
 internal fun Lexer.readNumberLiteral(): Token {

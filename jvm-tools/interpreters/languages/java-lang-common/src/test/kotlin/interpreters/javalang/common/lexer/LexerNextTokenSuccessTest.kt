@@ -66,7 +66,7 @@ a
 
 a=1.312f+231l+121.f+2121
 
-.101
+.101  "" "hello \" hola"
 
 """
 
@@ -951,15 +951,15 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 43, columnNumber = 1
             ),
             ExpectedToken(
-                id = 172, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\n",
+                id = 172, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\n",
                 lineNumber = 43, columnNumber = 5
             ),
             ExpectedToken(
-                id = 173, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\t",
+                id = 173, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\t",
                 lineNumber = 43, columnNumber = 10
             ),
             ExpectedToken(
-                id = 174, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\'",
+                id = 174, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\'",
                 lineNumber = 43, columnNumber = 15
             ),
             ExpectedToken(
@@ -967,11 +967,11 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 43, columnNumber = 20
             ),
             ExpectedToken(
-                id = 176, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\\\",
+                id = 176, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\",
                 lineNumber = 43, columnNumber = 24
             ),
             ExpectedToken(
-                id = 177, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\\u1323",
+                id = 177, tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "\u1323",
                 lineNumber = 43, columnNumber = 29
             ),
 
@@ -981,11 +981,11 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 45, columnNumber = 2
             ),
             ExpectedToken(
-                id = 179, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\n chu",
+                id = 179, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \n chu",
                 lineNumber = 45, columnNumber = 13
             ),
             ExpectedToken(
-                id = 180, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \\t\\u1244 chu\\n",
+                id = 180, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "pika \t\u1244 chu\n",
                 lineNumber = 45, columnNumber = 27
             ),
 
@@ -1109,10 +1109,18 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 57, columnNumber = 21
             ),
 
-            // .101
+            // .101  "" "hello \" hola"
             ExpectedToken(
                 id = 208, tokenType = TokenType.DOUBLE_LITERAL, tokenLiteral = ".101",
                 lineNumber = 59, columnNumber = 1
+            ),
+            ExpectedToken(
+                id = 209, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "",
+                lineNumber = 59, columnNumber = 7
+            ),
+            ExpectedToken(
+                id = 210, tokenType = TokenType.STRING_LITERAL, tokenLiteral = "hello \" hola",
+                lineNumber = 59, columnNumber = 10
             ),
 
             // eof
@@ -1142,6 +1150,19 @@ a=1.312f+231l+121.f+2121
         }
 
         assertEquals(lexer.getErrors().size, 0, "Lexer has errors")
+    }
+
+    @Test
+    fun playgroundTest() {
+        val input = """
+            '\u1323'
+        """.trimIndent()
+
+        val lexer = Lexer(input, mutableListOf())
+        val token = lexer.nextToken()
+
+        assertEquals(TokenType.CHARACTER_LITERAL.name, token.tokenType.name)
+        assertEquals("\u1323", token.tokenLiteral)
     }
 }
 
