@@ -141,3 +141,16 @@ class StringLiteral(
         return token.tokenLiteral
     }
 }
+
+class CharacterLiteral(
+    val token: Token,
+    val value: Char,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return token.tokenLiteral
+    }
+
+    override fun toString(): String {
+        return "$value"
+    }
+}

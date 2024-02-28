@@ -158,13 +158,47 @@ class ParseLiteralTest {
             val parser = createParser(input = testcase.input)
             val program = parser.parseProgram()
 
-            println("id=${testcase.id}")
             parser.checkForParserErrors()
 
             assertEquals(1, program.getStatements().size)
 
             val statement = program.getStatements()[0] as ExpressionStatement
             val literal = statement.expression as StringLiteral
+
+            assertEquals(testcase.expectedOutput, literal.value)
+        }
+    }
+
+    @Test
+    fun shouldParseCharacterLiterals() {
+        data class CharacterTestCase(
+            val id: Int,
+            val input: String,
+            val expectedOutput: Char,
+        )
+
+        val testcases = listOf(
+            CharacterTestCase(id = 1, input = "'\\u1233'", expectedOutput = '\u1233'),
+            CharacterTestCase(id = 2, input = "'a'", expectedOutput = 'a'),
+            CharacterTestCase(id = 3, input = "'\\n'", expectedOutput = '\n'),
+            CharacterTestCase(id = 4, input = "'\\t'", expectedOutput = '\t'),
+            CharacterTestCase(id = 5, input = "'\\\\'", expectedOutput = '\\'),
+            CharacterTestCase(id = 6, input = "'\\''", expectedOutput = '\''),
+            CharacterTestCase(id = 7, input = "'\"'", expectedOutput = '"'),
+        )
+
+        assertEquals(testcases.size, testcases.map { it.id }.toSet().size, "Testcases don't have unique ids")
+
+        for (testcase in testcases) {
+            val parser = createParser(input = testcase.input)
+            val program = parser.parseProgram()
+
+            parser.checkForParserErrors()
+
+            assertEquals(1, program.getStatements().size)
+
+            val statement = program.getStatements()[0] as ExpressionStatement
+            val literal = statement.expression as CharacterLiteral
 
             assertEquals(testcase.expectedOutput, literal.value)
         }
