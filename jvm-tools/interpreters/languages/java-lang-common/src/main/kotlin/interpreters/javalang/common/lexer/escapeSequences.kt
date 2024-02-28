@@ -12,11 +12,11 @@ internal fun Lexer.readEscapeSequence(): String {
 
     return when (currentCharacter) {
         'u' -> parseUnicode()
-        't' -> "\\t"
-        'n' -> "\\n"
-        '\'' -> "\\'"
-        '"' -> "\\\""
-        '\\' -> "\\\\"
+        't' -> "\t"
+        'n' -> "\n"
+        '\'' -> "\'"
+        '"' -> "\""
+        '\\' -> "\\"
         EOF_CHARACTER -> {
             // no more characters in the file
             addError(
@@ -55,7 +55,9 @@ internal fun Lexer.parseUnicode(): String {
         }
     }
 
-    return "\\${input.slice(startIndex..currentIndex)}"
+    // Source: https://stackoverflow.com/a/45273638/8822610
+    val unicodeNumber = input.slice((startIndex + 1)..currentIndex)
+    return Character.toString(Integer.parseInt(unicodeNumber, 16))
 }
 
 internal fun isEscapeSequence(input: String): Boolean {

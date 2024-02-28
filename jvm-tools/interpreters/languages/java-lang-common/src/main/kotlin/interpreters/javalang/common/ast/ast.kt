@@ -128,3 +128,16 @@ class DoubleLiteral(
         return token.tokenLiteral
     }
 }
+
+class StringLiteral(
+    val token: Token,
+    val value: String,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return value
+    }
+
+    override fun toString(): String {
+        return token.tokenLiteral
+    }
+}

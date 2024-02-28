@@ -26,6 +26,7 @@ class Parser(
             TokenType.FLOAT_LITERAL to PrefixParseFunction { parseFloatLiteral() },
             TokenType.LONG_LITERAL to PrefixParseFunction { parseLongLiteral() },
             TokenType.DOUBLE_LITERAL to PrefixParseFunction { parseDoubleLiteral() },
+            TokenType.STRING_LITERAL to PrefixParseFunction { parseStringLiteral() },
         )
         infixParseFunctions = mutableMapOf()
         postfixParseFunctions = mutableMapOf()
