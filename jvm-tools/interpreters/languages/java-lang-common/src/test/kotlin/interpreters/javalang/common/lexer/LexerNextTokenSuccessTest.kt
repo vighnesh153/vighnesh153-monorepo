@@ -68,6 +68,8 @@ a=1.312f+231l+121.f+2121
 
 .101  "" "hello \" hola"
 
+true = false
+
 """
 
         val expectedTokens = listOf(
@@ -1123,10 +1125,24 @@ a=1.312f+231l+121.f+2121
                 lineNumber = 59, columnNumber = 10
             ),
 
+            // true = false
+            ExpectedToken(
+                id = 211, tokenType = TokenType.TRUE_KEYWORD, tokenLiteral = "true",
+                lineNumber = 61, columnNumber = 1
+            ),
+            ExpectedToken(
+                id = 212, tokenType = TokenType.EQUALS, tokenLiteral = "=",
+                lineNumber = 61, columnNumber = 6
+            ),
+            ExpectedToken(
+                id = 213, tokenType = TokenType.FALSE_KEYWORD, tokenLiteral = "false",
+                lineNumber = 61, columnNumber = 8
+            ),
+
             // eof
             ExpectedToken(
                 id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL,
-                lineNumber = 61, columnNumber = 0
+                lineNumber = 63, columnNumber = 0
             ),
         )
 
