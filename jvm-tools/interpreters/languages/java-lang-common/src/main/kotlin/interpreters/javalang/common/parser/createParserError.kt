@@ -34,3 +34,13 @@ internal fun Parser.createUnexpectedNumberFormatError(errorMessage: String, actu
     )
     addError(error)
 }
+
+internal fun Parser.createUnableToParseExpressionAfterToken(token: Token) {
+    val error = InterpreterError(
+        errorMessage = "Could not parse expression after token=$token",
+        errorType = InterpreterErrorType.PARSER_ERROR,
+        lineNumber = token.lineNumber,
+        columnNumber = token.columnNumber,
+    )
+    addError(error)
+}

@@ -41,6 +41,8 @@ class PackageStatementTest {
             ),
         )
 
+        assertEquals(testcases.map { it.id }.toSet().size, testcases.size, "Testcases don't have unique ids")
+
         for (testcase in testcases) {
             val parser = createParser(input = testcase.input)
             val program = parser.parseProgram()

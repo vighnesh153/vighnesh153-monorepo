@@ -7,11 +7,11 @@ import interpreters.javalang.common.ast.StatementNode
 internal fun Parser.parseExpressionStatement(): StatementNode {
     return ExpressionStatement(
         token = currentToken,
-        expression = parseExpression(),
+        expression = parseExpression(Precedence.Lowest),
     )
 }
 
-internal fun Parser.parseExpression(): ExpressionNode? {
+internal fun Parser.parseExpression(precedence: Precedence): ExpressionNode? {
     val prefixParseFunction = prefixParseFunctions[currentToken.tokenType]
 
     if (prefixParseFunction == null) {

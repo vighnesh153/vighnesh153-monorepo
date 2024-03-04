@@ -22,12 +22,21 @@ class Parser(
 
     init {
         prefixParseFunctions = mutableMapOf(
+            // literals
             TokenType.INTEGER_LITERAL to PrefixParseFunction { parseIntegerLiteral() },
             TokenType.FLOAT_LITERAL to PrefixParseFunction { parseFloatLiteral() },
             TokenType.LONG_LITERAL to PrefixParseFunction { parseLongLiteral() },
             TokenType.DOUBLE_LITERAL to PrefixParseFunction { parseDoubleLiteral() },
             TokenType.STRING_LITERAL to PrefixParseFunction { parseStringLiteral() },
             TokenType.CHARACTER_LITERAL to PrefixParseFunction { parseCharacterLiteral() },
+
+            // TODO: parse boolean literals
+
+            // prefix expressions
+            TokenType.INCREMENT to PrefixParseFunction { parsePrefixExpression() },
+            TokenType.DECREMENT to PrefixParseFunction { parsePrefixExpression() },
+            TokenType.BANG to PrefixParseFunction { parsePrefixExpression() },
+            TokenType.MINUS to PrefixParseFunction { parsePrefixExpression() },
         )
         infixParseFunctions = mutableMapOf()
         postfixParseFunctions = mutableMapOf()
