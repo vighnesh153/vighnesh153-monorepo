@@ -77,80 +77,16 @@ class ExpressionStatement(
     }
 }
 
-class IntegerLiteral(
+class PrefixExpression(
     val token: Token,
-    val value: Int,
+    val right: ExpressionNode,
 ) : ExpressionNode() {
     override fun tokenLiteral(): String {
-        return token.tokenLiteral
+        return "${token.tokenLiteral}${right.tokenLiteral()}"
     }
 
     override fun toString(): String {
-        return token.tokenLiteral
+        return "${token.tokenLiteral}$right"
     }
 }
 
-class FloatLiteral(
-    val token: Token,
-    val value: Float,
-) : ExpressionNode() {
-    override fun tokenLiteral(): String {
-        return token.tokenLiteral
-    }
-
-    override fun toString(): String {
-        return token.tokenLiteral
-    }
-}
-
-class LongLiteral(
-    val token: Token,
-    val value: Long,
-) : ExpressionNode() {
-    override fun tokenLiteral(): String {
-        return token.tokenLiteral
-    }
-
-    override fun toString(): String {
-        return token.tokenLiteral
-    }
-}
-
-class DoubleLiteral(
-    val token: Token,
-    val value: Double,
-) : ExpressionNode() {
-    override fun tokenLiteral(): String {
-        return token.tokenLiteral
-    }
-
-    override fun toString(): String {
-        return token.tokenLiteral
-    }
-}
-
-class StringLiteral(
-    val token: Token,
-    val value: String,
-) : ExpressionNode() {
-    override fun tokenLiteral(): String {
-        return value
-    }
-
-    override fun toString(): String {
-        return token.tokenLiteral
-    }
-}
-
-class CharacterLiteral(
-    val token: Token,
-    val value: Char,
-) : ExpressionNode() {
-    override fun tokenLiteral(): String {
-        return token.tokenLiteral
-    }
-
-    override fun toString(): String {
-        return "$value"
-    }
-}
