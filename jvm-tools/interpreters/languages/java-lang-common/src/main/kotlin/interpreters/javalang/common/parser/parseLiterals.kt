@@ -76,3 +76,10 @@ fun Parser.parseCharacterLiteral(): ExpressionNode {
         value = currentToken.tokenLiteral[0]
     )
 }
+
+fun Parser.parseBooleanLiteral(): ExpressionNode {
+    return BooleanLiteral(
+        token = currentToken,
+        value = currentToken.tokenLiteral == "true"
+    )
+}

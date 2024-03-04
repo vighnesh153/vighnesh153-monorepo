@@ -29,8 +29,8 @@ class Parser(
             TokenType.DOUBLE_LITERAL to PrefixParseFunction { parseDoubleLiteral() },
             TokenType.STRING_LITERAL to PrefixParseFunction { parseStringLiteral() },
             TokenType.CHARACTER_LITERAL to PrefixParseFunction { parseCharacterLiteral() },
-
-            // TODO: parse boolean literals
+            TokenType.TRUE_KEYWORD to PrefixParseFunction { parseBooleanLiteral() },
+            TokenType.FALSE_KEYWORD to PrefixParseFunction { parseBooleanLiteral() },
 
             // prefix expressions
             TokenType.INCREMENT to PrefixParseFunction { parsePrefixExpression() },

@@ -203,4 +203,34 @@ class ParseLiteralTest {
             assertEquals(testcase.expectedOutput, literal.value)
         }
     }
+
+    @Test
+    fun shouldParseBooleanLiterals() {
+        data class BooleanTestCase(
+            val id: Int,
+            val input: String,
+            val expectedOutput: Boolean,
+        )
+
+        val testcases = listOf(
+            BooleanTestCase(id = 1, input = "true", expectedOutput = true),
+            BooleanTestCase(id = 2, input = "false", expectedOutput = false),
+        )
+
+        assertEquals(testcases.size, testcases.map { it.id }.toSet().size, "Testcases don't have unique ids")
+
+        for (testcase in testcases) {
+            val parser = createParser(input = testcase.input)
+            val program = parser.parseProgram()
+
+            parser.checkForParserErrors()
+
+            assertEquals(1, program.getStatements().size)
+
+            val statement = program.getStatements()[0] as ExpressionStatement
+            val literal = statement.expression as BooleanLiteral
+
+            assertEquals(testcase.expectedOutput, literal.value)
+        }
+    }
 }
