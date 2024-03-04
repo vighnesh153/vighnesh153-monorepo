@@ -44,4 +44,6 @@ internal val keywords = mapOf(
     "float" to TokenType.FLOAT_KEYWORD,
     "super" to TokenType.SUPER_KEYWORD,
     "while" to TokenType.WHILE_KEYWORD,
+    "true" to TokenType.TRUE_KEYWORD,
+    "false" to TokenType.FALSE_KEYWORD,
 )
