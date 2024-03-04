@@ -31,14 +31,14 @@
     "dist"
   ],
   "dependencies": {
-    "@ngneat/falso": "^7.1.1"
+    "@ngneat/falso": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
-    "tsup": "^8.0.1",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   }
 }
