@@ -20,9 +20,9 @@ internal fun Parser.parseExpression(precedence: Precedence): ExpressionNode? {
 
     var leftExpression = prefixParseFunction.invoke()
 
-    nextToken()
+    if (postfixParseFunctions.containsKey(peekToken.tokenType)) {
+        nextToken()
 
-    if (postfixParseFunctions.containsKey(currentToken.tokenType)) {
         val postfixParseFunction = postfixParseFunctions[currentToken.tokenType]
         leftExpression = postfixParseFunction?.invoke(leftExpression)
     }
