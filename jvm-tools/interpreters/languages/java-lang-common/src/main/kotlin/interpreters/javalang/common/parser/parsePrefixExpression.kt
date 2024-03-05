@@ -16,7 +16,7 @@ fun Parser.parsePrefixExpression(): ExpressionNode? {
     }
 
     return PrefixExpression(
-        token = operatorToken,
+        operatorToken = operatorToken,
         right = rightExpression,
     )
 }

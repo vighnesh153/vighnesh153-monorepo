@@ -13,6 +13,7 @@ fun ExpressionNode.isSameAs(other: ExpressionNode): Boolean {
         is DoubleLiteral -> isSameAs(other)
         is CharacterLiteral -> isSameAs(other)
         is StringLiteral -> isSameAs(other)
+        is BooleanLiteral -> isSameAs(other)
         else -> false
     }
 }
@@ -54,6 +55,13 @@ fun ExpressionNode.isSameAs(other: StringLiteral): Boolean {
 
 fun ExpressionNode.isSameAs(other: CharacterLiteral): Boolean {
     if (this !is CharacterLiteral) {
+        return false
+    }
+    return this.value == other.value
+}
+
+fun ExpressionNode.isSameAs(other: BooleanLiteral): Boolean {
+    if (this !is BooleanLiteral) {
         return false
     }
     return this.value == other.value

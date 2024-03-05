@@ -11,5 +11,5 @@ internal fun interface InfixParseFunction {
 }
 
 internal fun interface PostfixParseFunction {
-    fun invoke(left: ExpressionNode): ExpressionNode
+    fun invoke(left: ExpressionNode?): ExpressionNode?
 }

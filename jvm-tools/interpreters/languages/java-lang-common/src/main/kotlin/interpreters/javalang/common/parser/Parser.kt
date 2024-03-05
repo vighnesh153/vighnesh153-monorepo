@@ -32,14 +32,18 @@ class Parser(
             TokenType.TRUE_KEYWORD to PrefixParseFunction { parseBooleanLiteral() },
             TokenType.FALSE_KEYWORD to PrefixParseFunction { parseBooleanLiteral() },
 
-            // prefix expressions
+            // operators
             TokenType.INCREMENT to PrefixParseFunction { parsePrefixExpression() },
             TokenType.DECREMENT to PrefixParseFunction { parsePrefixExpression() },
             TokenType.BANG to PrefixParseFunction { parsePrefixExpression() },
             TokenType.MINUS to PrefixParseFunction { parsePrefixExpression() },
         )
         infixParseFunctions = mutableMapOf()
-        postfixParseFunctions = mutableMapOf()
+        postfixParseFunctions = mutableMapOf(
+            // operators
+            TokenType.INCREMENT to PostfixParseFunction { parsePostfixExpression(it) },
+            TokenType.DECREMENT to PostfixParseFunction { parsePostfixExpression(it) },
+        )
 
         nextToken()
         nextToken()
