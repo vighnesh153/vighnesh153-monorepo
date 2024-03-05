@@ -1,7 +1,6 @@
 package interpreters.javalang.common.ast
 
 import interpreters.javalang.common.tokens.Token
-import interpreters.javalang.common.tokens.TokenType
 import kotlin.text.StringBuilder
 
 abstract class LanguageNode {
@@ -67,7 +66,7 @@ class ImportStatement(
 class ExpressionStatement(
     val token: Token,
     val expression: ExpressionNode?,
-): StatementNode() {
+) : StatementNode() {
     override fun tokenLiteral(): String {
         return expression?.tokenLiteral() ?: token.tokenLiteral
     }
@@ -78,15 +77,28 @@ class ExpressionStatement(
 }
 
 class PrefixExpression(
-    val token: Token,
+    val operatorToken: Token,
     val right: ExpressionNode,
 ) : ExpressionNode() {
     override fun tokenLiteral(): String {
-        return "${token.tokenLiteral}${right.tokenLiteral()}"
+        return "${operatorToken.tokenLiteral}${right.tokenLiteral()}"
     }
 
     override fun toString(): String {
-        return "${token.tokenLiteral}$right"
+        return "${operatorToken.tokenLiteral}$right"
+    }
+}
+
+class PostfixExpression(
+    val operatorToken: Token,
+    val left: ExpressionNode,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return "${left.tokenLiteral()}${operatorToken.tokenLiteral}"
+    }
+
+    override fun toString(): String {
+        return "$left${operatorToken.tokenLiteral}"
     }
 }
 

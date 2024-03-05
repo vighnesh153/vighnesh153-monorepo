@@ -13,12 +13,19 @@ internal fun Parser.parseExpressionStatement(): StatementNode {
 
 internal fun Parser.parseExpression(precedence: Precedence): ExpressionNode? {
     val prefixParseFunction = prefixParseFunctions[currentToken.tokenType]
-
     if (prefixParseFunction == null) {
         createNoPrefixParseFunctionFoundError(currentToken)
         return null
     }
 
-    val leftExpression = prefixParseFunction.invoke()
+    var leftExpression = prefixParseFunction.invoke()
+
+    nextToken()
+
+    if (postfixParseFunctions.containsKey(currentToken.tokenType)) {
+        val postfixParseFunction = postfixParseFunctions[currentToken.tokenType]
+        leftExpression = postfixParseFunction?.invoke(leftExpression)
+    }
+
     return leftExpression
 }
