@@ -1,8 +1,9 @@
 import process from 'node:process';
 
 import { beforeAll, afterAll, test, expect } from 'vitest';
-import { app } from './testServer';
 import { Server } from 'http';
+
+import { app } from './testServer';
 import { JsonHttpClientImpl } from '../JsonHttpClientImpl';
 
 let server: Server;
@@ -56,7 +57,7 @@ afterAll(async () => {
   });
 });
 
-test('should send headers and query parameters through the request', async () => {
+test('for GET Request, send headers and query parameters through the request', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.get({ path: '/200', headers, queryParameters });
 
@@ -79,7 +80,32 @@ test('should send headers and query parameters through the request', async () =>
   });
 });
 
-test('should parse the 4xx response as text error', async () => {
+test('for GET Request, should abort the request', async () => {
+  const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
+  const executor = client.get({ path: '/201', headers, queryParameters });
+
+  const [response] = await Promise.all([
+    // actual request (takes 1 second)
+    executor.execute(),
+    // simulate abort after 100 milliseconds
+    new Promise((resolve) => {
+      executor.abortController.abort();
+      resolve(null);
+    }),
+  ]);
+
+  expect(response.isSuccess()).toBe(false);
+  expect(response.isError()).toBe(true);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+
+  const errorResponse = response.getErrorResponse();
+  expect(errorResponse.type).toBe('error');
+  expect(errorResponse.statusCode).toBeNull();
+  expect(errorResponse.errorMessage).toBe('This operation was aborted');
+  expect(errorResponse.error).toMatchInlineSnapshot(`[AbortError: This operation was aborted]`);
+});
+
+test('for GET Request, parse the 4xx response as text error', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.get({ path: '/401', headers, queryParameters });
 
@@ -95,7 +121,7 @@ test('should parse the 4xx response as text error', async () => {
   expect(errorResponse.error).toBeNull();
 });
 
-test('should parse the 4xx response as json error', async () => {
+test('for GET Request, parse the 4xx response as json error', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.get({ path: '/403', headers, queryParameters });
 
@@ -118,7 +144,7 @@ test('should parse the 4xx response as json error', async () => {
   });
 });
 
-test('should parse the 5xx response as error', async () => {
+test('for GET Request, parse the 5xx response as error', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.get({ path: '/500', headers, queryParameters });
 
@@ -133,3 +159,5 @@ test('should parse the 5xx response as error', async () => {
   expect(errorResponse.errorMessage).toMatchInlineSnapshot(`"Something went wrong on the server"`);
   expect(errorResponse.error).toMatchInlineSnapshot(`"Oh crap! Something went wrong..."`);
 });
+
+// todo: post

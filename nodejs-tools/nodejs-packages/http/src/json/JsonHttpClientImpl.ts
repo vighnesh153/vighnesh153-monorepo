@@ -140,12 +140,13 @@ export class JsonHttpClientImpl implements JsonHttpClient {
   }
 
   private async constructPromiseRejectionResponse<T>(error: unknown): Promise<JsonHttpResponse<T>> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const errorMessage = (error as any).message;
     return new JsonHttpResponse({
       type: 'error',
       error,
       statusCode: null,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      errorMessage: (error as any).messsage ?? 'Some unknown error occurred',
+      errorMessage: errorMessage ?? 'Some unknown error occurred',
     });
   }
 }
