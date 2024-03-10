@@ -1,7 +1,7 @@
 {
-  "name": "@vighnesh153/dependency-injection",
+  "name": "@vighnesh153/factory",
   "version": "1.0.0",
-  "description": "A tiny dependency injection framework for my projects",
+  "description": "A tiny factory creator.",
   "private": true,
   "publishConfig": {
     "access": "public"
