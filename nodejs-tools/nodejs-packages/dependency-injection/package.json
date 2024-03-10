@@ -1,0 +1,51 @@
+{
+  "name": "@vighnesh153/dependency-injection",
+  "version": "1.0.0",
+  "description": "A tiny dependency injection framework for my projects",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": {
+    "import": "./dist/main.js",
+    "require": "./dist/main.cjs"
+  },
+  "types": "./dist/src/index.d.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.com",
+    "url": "https://vighnesh153.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build:once:bundle": "tsup",
+    "build:once:types": "tsc",
+    "build:watch:bundle": "tsup --watch",
+    "build:watch:types": "tsc --watch",
+    "build": "npm-run-all build:once:*",
+    "dev": "npm-run-all --parallel build:watch:*",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vighnesh153/utils": "*"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "npm-run-all": "^4.1.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git"
+  }
+}
