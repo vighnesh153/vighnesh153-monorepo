@@ -93,7 +93,7 @@ export class JsonHttpClientImpl implements JsonHttpClient {
     if (userRequest.data != null) {
       requestConfig.body = JSON.stringify(userRequest.data);
       requestConfig.headers = {
-        'content-type': 'application-json',
+        'content-type': 'application/json',
         ...requestConfig.headers,
       };
     }
