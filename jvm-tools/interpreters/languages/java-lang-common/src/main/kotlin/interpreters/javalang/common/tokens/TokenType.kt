@@ -1,16 +1,5 @@
 package interpreters.javalang.common.tokens
 
-/**
- * TODO: The following stuff is not needed for basic interpreter
- *  * assert   (keyword)
- *  * const   (keyword)
- *  * default  (keyword)
- *  * synchronized  (keyword)
- *  * transient  (keyword)
- *  * strictfp  (keyword)
- *  * volatile  (keyword)
- */
-
 enum class TokenType(val value: String) {
     ILLEGAL("ILLEGAL"),
     EOF("EOF"),
@@ -45,8 +34,10 @@ enum class TokenType(val value: String) {
     BANG_EQUALS("!="),
 
     AMPERSAND("&"),
+    AMPERSAND_EQUALS("&="),
     DOUBLE_AMPERSAND("&&"),
     VERTICAL_BAR("|"),
+    VERTICAL_BAR_EQUALS("|="),
     DOUBLE_VERTICAL_BAR("||"),
     CARET("^"),
     CARET_EQUALS("^="),
@@ -65,11 +56,14 @@ enum class TokenType(val value: String) {
     RIGHT_SQUARE_BRACKET("]"),
     LEFT_ANGLE_BRACKET("<"),
     DOUBLE_LEFT_ANGLE_BRACKET("<<"),
+    DOUBLE_LEFT_ANGLE_BRACKET_EQUALS("<<="),
     LEFT_ANGLE_BRACKET_EQUALS("<="),
     RIGHT_ANGLE_BRACKET(">"),
     DOUBLE_RIGHT_ANGLE_BRACKET(">>"),
+    DOUBLE_RIGHT_ANGLE_BRACKET_EQUALS(">>="),
     RIGHT_ANGLE_BRACKET_EQUALS(">="),
     TRIPLE_RIGHT_ANGLE_BRACKET(">>>"),
+    TRIPLE_RIGHT_ANGLE_BRACKET_EQUALS(">>>="),
 
     // keywords
     ABSTRACT_KEYWORD("ABSTRACT"),

@@ -21,3 +21,11 @@ internal fun Parser.expectPeek(tokenType: TokenType): Boolean {
     )
     return false
 }
+
+internal fun Parser.currentPrecedence(): Precedence {
+    return precedences.getOrDefault(currentToken.tokenType, Precedence.Lowest)
+}
+
+internal fun Parser.peekPrecedence(): Precedence {
+    return precedences.getOrDefault(peekToken.tokenType, Precedence.Lowest)
+}

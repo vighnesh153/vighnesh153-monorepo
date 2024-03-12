@@ -25,6 +25,16 @@ internal fun Parser.createNoPrefixParseFunctionFoundError(actualToken: Token) {
     addError(error)
 }
 
+internal fun Parser.createNoInfixParseFunctionFoundError(actualToken: Token) {
+    val error = InterpreterError(
+        errorMessage = "No infix parse function found for token=$actualToken",
+        errorType = InterpreterErrorType.PARSER_ERROR,
+        lineNumber = actualToken.lineNumber,
+        columnNumber = actualToken.columnNumber,
+    )
+    addError(error)
+}
+
 internal fun Parser.createUnexpectedNumberFormatError(errorMessage: String, actualToken: Token) {
     val error = InterpreterError(
         errorMessage = "Could not parse number token=$actualToken. Error = $errorMessage",

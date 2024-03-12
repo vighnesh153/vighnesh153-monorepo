@@ -79,7 +79,7 @@ class PrefixExpressionTest {
 
             assertTrue(
                 prefixExpression.right.isSameAs(testcase.expectedOutput.right),
-                "For testcase=${testcase.id}, expected '${prefixExpression.right}' to be '${testcase.expectedOutput.right}'"
+                "For testcase=${testcase.id}, expected '${prefixExpression.right}', found '${testcase.expectedOutput.right}'"
             )
         }
     }

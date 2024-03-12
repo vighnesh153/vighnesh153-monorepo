@@ -124,6 +124,14 @@ fun Lexer.nextToken(): Token {
         '&' -> {
             val peek = peekCharacter()
             t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    createNewToken(
+                        tokenType = TokenType.AMPERSAND_EQUALS,
+                        tokenLiteral = TokenType.AMPERSAND_EQUALS.value
+                    )
+                }
+
                 '&' -> {
                     readNextCharacter()
                     createNewToken(
@@ -139,6 +147,14 @@ fun Lexer.nextToken(): Token {
         '|' -> {
             val peek = peekCharacter()
             t = when (peek) {
+                '=' -> {
+                    readNextCharacter()
+                    createNewToken(
+                        tokenType = TokenType.VERTICAL_BAR_EQUALS,
+                        tokenLiteral = TokenType.VERTICAL_BAR_EQUALS.value
+                    )
+                }
+
                 '|' -> {
                     readNextCharacter()
                     createNewToken(
@@ -204,10 +220,24 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '<' -> {
                     readNextCharacter()
-                    createNewToken(
-                        tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET,
-                        tokenLiteral = TokenType.DOUBLE_LEFT_ANGLE_BRACKET.value
-                    )
+                    val peek2 = peekCharacter()
+
+                    when (peek2) {
+                        '=' -> {
+                            readNextCharacter()
+                            createNewToken(
+                                tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET_EQUALS,
+                                tokenLiteral = TokenType.DOUBLE_LEFT_ANGLE_BRACKET_EQUALS.value
+                            )
+                        }
+
+                        else -> {
+                            createNewToken(
+                                tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET,
+                                tokenLiteral = TokenType.DOUBLE_LEFT_ANGLE_BRACKET.value
+                            )
+                        }
+                    }
                 }
 
                 '=' -> {
@@ -230,14 +260,38 @@ fun Lexer.nextToken(): Token {
             t = when (peek) {
                 '>' -> {
                     readNextCharacter()
-                    if (peekCharacter() == '>') {
-                        readNextCharacter()
-                        createNewToken(
-                            tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET,
-                            tokenLiteral = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET.value
-                        )
-                    } else {
-                        createNewToken(
+                    val peek2 = peekCharacter()
+
+                    when (peek2) {
+                        '>' -> {
+                            readNextCharacter()
+                            val peek3 = peekCharacter()
+
+                            when (peek3) {
+                                '=' -> {
+                                    readNextCharacter()
+                                    createNewToken(
+                                        tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET_EQUALS,
+                                        tokenLiteral = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET_EQUALS.value
+                                    )
+                                }
+
+                                else -> createNewToken(
+                                    tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET,
+                                    tokenLiteral = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET.value
+                                )
+                            }
+                        }
+
+                        '=' -> {
+                            readNextCharacter()
+                            createNewToken(
+                                tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET_EQUALS,
+                                tokenLiteral = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET_EQUALS.value
+                            )
+                        }
+
+                        else -> createNewToken(
                             tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET,
                             tokenLiteral = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET.value
                         )

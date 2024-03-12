@@ -102,3 +102,17 @@ class PostfixExpression(
     }
 }
 
+class InfixExpression(
+    val operatorToken: Token,
+    val left: ExpressionNode,
+    val right: ExpressionNode,
+) : ExpressionNode() {
+    override fun tokenLiteral(): String {
+        return "${left.tokenLiteral()} ${operatorToken.tokenLiteral} ${right.tokenLiteral()}"
+    }
+
+    override fun toString(): String {
+        return "$left ${operatorToken.tokenLiteral} $right"
+    }
+}
+

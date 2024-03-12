@@ -8,7 +8,7 @@ fun Parser.parsePrefixExpression(): ExpressionNode? {
 
     nextToken()
 
-    val rightExpression = parseExpression(Precedence.PrefixOperator)
+    val rightExpression = parseExpression(Precedence.PrefixPostfixOperator)
 
     if (rightExpression == null) {
         createUnableToParseExpressionAfterToken(operatorToken)
