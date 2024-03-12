@@ -38,7 +38,32 @@ class Parser(
             TokenType.BANG to PrefixParseFunction { parsePrefixExpression() },
             TokenType.MINUS to PrefixParseFunction { parsePrefixExpression() },
         )
-        infixParseFunctions = mutableMapOf()
+        infixParseFunctions = mutableMapOf(
+            // operators
+            TokenType.PLUS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.MINUS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.ASTERISK to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.FORWARD_SLASH to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.CARET to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.AMPERSAND to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.VERTICAL_BAR to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.DOUBLE_AMPERSAND to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.DOUBLE_VERTICAL_BAR to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.LEFT_ANGLE_BRACKET to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.RIGHT_ANGLE_BRACKET to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.LEFT_ANGLE_BRACKET_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.RIGHT_ANGLE_BRACKET_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.PLUS_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.MINUS_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.ASTERISK_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.FORWARD_SLASH_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.MODULUS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.MODULUS_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.CARET_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.DOUBLE_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+            TokenType.BANG_EQUALS to InfixParseFunction { parseInfixExpression(it) },
+        )
         postfixParseFunctions = mutableMapOf(
             // operators
             TokenType.INCREMENT to PostfixParseFunction { parsePostfixExpression(it) },

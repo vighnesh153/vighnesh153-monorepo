@@ -70,6 +70,8 @@ a=1.312f+231l+121.f+2121
 
 true = false
 
+&= |= <<= >>= >>>=
+
 """
 
         val expectedTokens = listOf(
@@ -1139,10 +1141,32 @@ true = false
                 lineNumber = 61, columnNumber = 8
             ),
 
+            // &= |= <<= >>= >>>=
+            ExpectedToken(
+                id = 214, tokenType = TokenType.AMPERSAND_EQUALS, tokenLiteral = "&=",
+                lineNumber = 63, columnNumber = 1
+            ),
+            ExpectedToken(
+                id = 215, tokenType = TokenType.VERTICAL_BAR_EQUALS, tokenLiteral = "|=",
+                lineNumber = 63, columnNumber = 4
+            ),
+            ExpectedToken(
+                id = 216, tokenType = TokenType.DOUBLE_LEFT_ANGLE_BRACKET_EQUALS, tokenLiteral = "<<=",
+                lineNumber = 63, columnNumber = 7
+            ),
+            ExpectedToken(
+                id = 217, tokenType = TokenType.DOUBLE_RIGHT_ANGLE_BRACKET_EQUALS, tokenLiteral = ">>=",
+                lineNumber = 63, columnNumber = 11
+            ),
+            ExpectedToken(
+                id = 218, tokenType = TokenType.TRIPLE_RIGHT_ANGLE_BRACKET_EQUALS, tokenLiteral = ">>>=",
+                lineNumber = 63, columnNumber = 15
+            ),
+
             // eof
             ExpectedToken(
                 id = -1, tokenType = TokenType.EOF, tokenLiteral = Token.EOF_TOKEN_LITERAL,
-                lineNumber = 63, columnNumber = 0
+                lineNumber = 65, columnNumber = 0
             ),
         )
 

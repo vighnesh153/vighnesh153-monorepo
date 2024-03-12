@@ -57,7 +57,7 @@ class PostfixExpressionTest {
 
             assertTrue(
                 postfixExpression.left.isSameAs(testcase.expectedOutput.left),
-                "For testcase=${testcase.id}, expected '${postfixExpression.left}' to be '${testcase.expectedOutput.left}'"
+                "For testcase=${testcase.id}, expected '${postfixExpression.left}', found '${testcase.expectedOutput.left}'"
             )
         }
     }
