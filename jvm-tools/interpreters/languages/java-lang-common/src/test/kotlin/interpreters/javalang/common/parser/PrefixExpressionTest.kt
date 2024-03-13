@@ -33,7 +33,7 @@ class PrefixExpressionTest {
                 expectedOutput = PrefixExpression(
                     operatorToken = createTestToken(tokenType = TokenType.BANG, tokenLiteral = "!"),
                     right = CharacterLiteral(
-                        token = createTestToken(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "'a'"),
+                        token = createTestToken(tokenType = TokenType.CHARACTER_LITERAL, tokenLiteral = "a"),
                         value = 'a',
                     )
                 )

@@ -22,6 +22,9 @@ class Parser(
 
     init {
         prefixParseFunctions = mutableMapOf(
+            // identifier
+            TokenType.IDENTIFIER to PrefixParseFunction { parseIdentifier() },
+
             // literals
             TokenType.INTEGER_LITERAL to PrefixParseFunction { parseIntegerLiteral() },
             TokenType.FLOAT_LITERAL to PrefixParseFunction { parseFloatLiteral() },
