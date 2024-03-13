@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/react-hooks",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": false,
   "publishConfig": {
     "access": "public"
