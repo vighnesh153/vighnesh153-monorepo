@@ -9,6 +9,9 @@ android {
   defaultConfig {
     vectorDrawables.useSupportLibrary = true
   }
+  buildFeatures {
+    databinding = true
+  }
 }
 ```
 

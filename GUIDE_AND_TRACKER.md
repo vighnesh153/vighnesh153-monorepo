@@ -82,6 +82,9 @@ Visit
   - (Java baggage) Reactive Spring Boot With Coroutines and Virtual Threads
   - https://medium.com/androiddevelopers/cancellation-in-coroutines-aa6b90163629
 - Image compression
+- python interpreter for the web in kotlin
+- Remix course by Maximilian swartzmillar
+- https://roadmap.sh/guides
 - 404 page
   - https://floatui.com/components/404-pages
   - https://tailwindui.com/components/marketing/feedback/404-pages
@@ -430,9 +433,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
-    "tsup": "^7.1.0",
-    "typescript": "^5.1.6",
-    "vitest": "^0.33.0"
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
   },
   "keywords": [],
   "repository": {
@@ -446,7 +449,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 
 ```json
 {
-  "extends": "@vighnesh153/tsconfig/base.json",
+  "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }
@@ -478,7 +481,7 @@ dist
 ### Todos for a new package
 
 - extends: Todos for a new project
-- tsup.config.js
+- tsup.config.ts
 
 ```ts
 import { defineConfig } from "tsup";

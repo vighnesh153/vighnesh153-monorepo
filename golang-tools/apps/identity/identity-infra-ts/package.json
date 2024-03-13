@@ -10,6 +10,7 @@
     "test": "jest",
     "cdk": "cdk",
     "cdk:deploy:dev": "dotenv -e .env.dev -- npx cdk deploy",
+    "cdk:destroy:dev": "dotenv -e .env.dev -- npx cdk destroy",
     "cdk:deploy:prod": "dotenv -e .env.prod -- npx cdk deploy"
   },
   "devDependencies": {
