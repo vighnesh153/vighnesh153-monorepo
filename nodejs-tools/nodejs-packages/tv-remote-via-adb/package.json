@@ -14,7 +14,7 @@
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
     "lint": "eslint --max-warnings=0 .",
-    "copy": "cpy --cwd=./src/client/dist . ../../../dist/client",
+    "copy": "mkdir ./dist/client && mv ./src/client/dist/* ./dist/client",
     "build:frontend": "vite build",
     "build": "tsup && vite build && npm run copy"
   },
@@ -49,7 +49,6 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
     "@vitejs/plugin-react": "^4.2.1",
-    "cpy-cli": "^5.0.0",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "react": "^18.2.0",

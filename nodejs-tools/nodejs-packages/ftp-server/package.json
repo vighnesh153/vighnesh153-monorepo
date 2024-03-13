@@ -23,7 +23,7 @@
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
     "lint": "eslint --max-warnings=0 .",
-    "copy": "cpy --cwd=./src/client/dist . ../../../dist/__vighnesh153-ftp-client__/",
+    "copy": "mkdir ./dist/__vighnesh153-ftp-client__ && mv ./src/client/dist/* ./dist/__vighnesh153-ftp-client__",
     "build": "tsup && vite build && npm run copy"
   },
   "files": [
@@ -53,7 +53,6 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
     "@vitejs/plugin-react": "^4.2.1",
-    "cpy-cli": "^5.0.0",
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
