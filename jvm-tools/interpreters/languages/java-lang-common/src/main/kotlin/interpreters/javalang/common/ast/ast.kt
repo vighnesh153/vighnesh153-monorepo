@@ -108,11 +108,11 @@ class InfixExpression(
     val right: ExpressionNode,
 ) : ExpressionNode() {
     override fun tokenLiteral(): String {
-        return "${left.tokenLiteral()} ${operatorToken.tokenLiteral} ${right.tokenLiteral()}"
+        return "(${left.tokenLiteral()} ${operatorToken.tokenLiteral} ${right.tokenLiteral()})"
     }
 
     override fun toString(): String {
-        return "$left ${operatorToken.tokenLiteral} $right"
+        return "($left ${operatorToken.tokenLiteral} $right)"
     }
 }
 

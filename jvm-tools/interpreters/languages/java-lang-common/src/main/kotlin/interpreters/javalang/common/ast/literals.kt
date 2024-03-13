@@ -72,11 +72,11 @@ class CharacterLiteral(
     val value: Char,
 ) : ExpressionNode() {
     override fun tokenLiteral(): String {
-        return token.tokenLiteral
+        return "'${token.tokenLiteral}'"
     }
 
     override fun toString(): String {
-        return "$value"
+        return "'$value'"
     }
 }
 

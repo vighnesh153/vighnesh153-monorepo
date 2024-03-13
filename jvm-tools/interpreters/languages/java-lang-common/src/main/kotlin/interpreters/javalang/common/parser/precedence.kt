@@ -50,7 +50,7 @@ enum class Precedence {
 
 // Source: https://introcs.cs.princeton.edu/java/11precedence/
 val precedences = mapOf(
-    // TODO: lambda expression arrow
+    // TODO: lambda expression arrow: ->
 
     // assignment
     TokenType.EQUALS to Precedence.Assignment,
@@ -106,12 +106,12 @@ val precedences = mapOf(
     // TODO: object creation using "new"
 
     // prefix/postfix
-    TokenType.PLUS to Precedence.PrefixPostfixOperator,
-    TokenType.MINUS to Precedence.PrefixPostfixOperator,
-    TokenType.BANG to Precedence.PrefixPostfixOperator,
-    TokenType.TILDE to Precedence.PrefixPostfixOperator,
-    TokenType.INCREMENT to Precedence.PrefixPostfixOperator,
-    TokenType.DECREMENT to Precedence.PrefixPostfixOperator,
+//    TokenType.PLUS to Precedence.PrefixPostfixOperator,
+//    TokenType.MINUS to Precedence.PrefixPostfixOperator,
+//    TokenType.BANG to Precedence.PrefixPostfixOperator,
+//    TokenType.TILDE to Precedence.PrefixPostfixOperator,
+//    TokenType.INCREMENT to Precedence.PrefixPostfixOperator,
+//    TokenType.DECREMENT to Precedence.PrefixPostfixOperator,
 
     // TODO: parentheses: (), array access: [], member access: .
 )
