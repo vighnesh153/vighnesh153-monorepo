@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/http-client",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "A client to do http stuff",
   "private": true,
   "publishConfig": {

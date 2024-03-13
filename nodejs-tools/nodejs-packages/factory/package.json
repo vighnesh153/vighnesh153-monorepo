@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/factory",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "A tiny factory creator.",
   "private": true,
   "publishConfig": {

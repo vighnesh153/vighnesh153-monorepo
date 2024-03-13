@@ -1,7 +1,7 @@
 {
   "name": "@vighnesh153/rapid-api",
   "description": "A wrapper over the HTTP RapidAPI endpoints",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": false,
   "main": "./dist/main.js",
   "types": "./dist/src/index.d.ts",
