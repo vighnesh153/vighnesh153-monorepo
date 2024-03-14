@@ -23,6 +23,7 @@ import interpreters.javalang.common.tokens.TokenType.LONG_LITERAL
 import interpreters.javalang.common.tokens.TokenType.FALSE_KEYWORD
 import interpreters.javalang.common.tokens.TokenType.TRUE_KEYWORD
 import interpreters.javalang.common.tokens.TokenType.DOUBLE_LITERAL
+import interpreters.javalang.common.tokens.TokenType.FORWARD_SLASH
 import interpreters.javalang.common.tokens.TokenType.IDENTIFIER
 import interpreters.javalang.common.tokens.TokenType.INCREMENT
 import interpreters.javalang.common.tokens.TokenType.MINUS
@@ -96,6 +97,42 @@ class MixedExpressionParsingTest {
                 )
             )
         ),
+
+        Testcase(
+            12, "12 + 23 / 2 * 1 - 2",
+            InfixExpression(
+                operatorToken = createTestToken(MINUS, "-"),
+                left = InfixExpression(
+                    operatorToken = createTestToken(PLUS, "+"),
+                    left = IntegerLiteral(
+                        createTestToken(INTEGER_LITERAL, "12"),
+                        value = 12,
+                    ),
+                    right = InfixExpression(
+                        operatorToken = createTestToken(ASTERISK, "*"),
+                        left = InfixExpression(
+                            operatorToken = createTestToken(FORWARD_SLASH, "/"),
+                            left = IntegerLiteral(
+                                createTestToken(INTEGER_LITERAL, "23"),
+                                value = 23,
+                            ),
+                            right = IntegerLiteral(
+                                createTestToken(INTEGER_LITERAL, "2"),
+                                value = 2,
+                            )
+                        ),
+                        right = IntegerLiteral(
+                            createTestToken(INTEGER_LITERAL, "1"),
+                            value = 1,
+                        )
+                    )
+                ),
+                right = IntegerLiteral(
+                    createTestToken(INTEGER_LITERAL, "2"),
+                    value = 2,
+                )
+            )
+        )
     )
 
     @Test
