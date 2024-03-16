@@ -29,6 +29,9 @@ const postData = {
   types: ['thunder', 'normal'],
 };
 
+const formData = new FormData();
+formData.append('pokemon', 'pikachu');
+
 const getCommonReceivedHeaders = () => ({
   accept: 'application/json',
   'accept-encoding': 'gzip, deflate',
@@ -193,9 +196,7 @@ test('for GET Request, parse the 5xx response as error', async () => {
   expect(errorResponse.error).toMatchInlineSnapshot(`"Oh crap! Something went wrong..."`);
 });
 
-// todo: post
-
-test('for POST Request, send headers, query parameters and data through the request', async () => {
+test('for POST Request, send headers, query parameters and json data through the request', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.post({ path: '/200', headers, queryParameters, data: postData });
 
@@ -217,6 +218,36 @@ test('for POST Request, send headers, query parameters and data through the requ
     },
     receivedSearchParams,
     receivedData: postData,
+  });
+});
+
+test('for POST Request, send headers, query parameters and form data through the request', async () => {
+  const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
+  const executor = client.post({ path: '/200', headers, queryParameters, data: formData });
+
+  const response = await executor.execute();
+
+  expect(response.isSuccess()).toBe(true);
+  expect(response.isError()).toBe(false);
+  expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+
+  const successResponse = response.getSuccessResponse();
+  expect(successResponse.type).toBe('success');
+  expect(successResponse.statusCode).toBe(200);
+
+  const responseData = successResponse.data as { receivedHeaders: Record<string, string> };
+  expect(responseData.receivedHeaders['content-type'].startsWith('multipart/form-data;'));
+  delete responseData.receivedHeaders['content-type'];
+
+  expect(successResponse.data).toStrictEqual({
+    message: '200',
+    receivedHeaders: {
+      ...getCommonReceivedHeaders(),
+      ...headers,
+      'content-length': '131',
+    },
+    receivedSearchParams,
+    receivedData: {},
   });
 });
 
