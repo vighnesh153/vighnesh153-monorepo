@@ -27,6 +27,7 @@
     "localforage": "^1.10.0"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.6",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/utils": "*",
