@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "exports": {
+    "types": "./dist/src/index.d.ts",
     "import": "./dist/main.js",
     "require": "./dist/main.cjs"
   },
@@ -16,7 +17,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsup && tsc",
+    "build": "rm -rf dist && tsc && tsup",
     "test": "vitest run --passWithNoTests"
   },
   "files": [

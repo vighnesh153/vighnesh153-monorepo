@@ -1,4 +1,4 @@
-import { ConsoleLogger, Logger } from '../logger';
+import { ConsoleLogger, Logger } from '@vighnesh153/logger';
 import { LambdaAuthCallbackPath, authScopes } from './constants';
 
 export function constructAuthRedirectUrl({
