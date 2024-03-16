@@ -1,3 +1,5 @@
-export async function handler() {
-  console.log('Pikachu from googleAuthCallback');
-}
+import { type Handler } from 'aws-lambda';
+import { controller } from './controller';
+
+export const handler: Handler<{ queryStringParameters: Record<string, string> }> = async (event) =>
+  controller({ searchParameters: event.queryStringParameters });

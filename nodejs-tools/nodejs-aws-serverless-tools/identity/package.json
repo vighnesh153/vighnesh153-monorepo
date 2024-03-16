@@ -21,6 +21,8 @@
     "dist"
   ],
   "dependencies": {
+    "@vighnesh153/factory": "*",
+    "@vighnesh153/http-client": "*",
     "@vighnesh153/logger": "*",
     "@vighnesh153/utils": "*"
   },

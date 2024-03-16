@@ -27,12 +27,14 @@ export function IdentityStack({ stack }: StackContext) {
         function: {
           functionName: `HttpApiGet-${initiateGoogleLogin}-${stage}`,
           handler: `dist/${initiateGoogleLogin}.handler`,
+          logRetention: 'two_weeks',
         },
       },
       [`GET /${googleAuthCallback}`]: {
         function: {
           functionName: `HttpApiGet-${googleAuthCallback}-${stage}`,
           handler: `dist/${googleAuthCallback}.handler`,
+          logRetention: 'two_weeks',
         },
       },
     },
