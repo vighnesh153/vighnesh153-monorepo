@@ -94,7 +94,6 @@ export class JsonHttpClientImpl implements JsonHttpClient {
     if (userRequest.data == null) {
       return requestConfig;
     }
-    // TODO: test form data
     // form data
     if (userRequest.data instanceof FormData) {
       // if we set body as FormData, browser will automatically set the content-type header as multipart/form-data
