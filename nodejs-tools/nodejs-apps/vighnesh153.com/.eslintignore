@@ -1,6 +1,0 @@
-*.js
-*.cjs
-*.d.ts
-dist
-.next
-.swc

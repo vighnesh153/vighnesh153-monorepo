@@ -1,10 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
-import { IScrollAmount } from '@vighnesh153/types';
 import { debounce } from '@vighnesh153/utils';
 import { useEffectOnce } from './useEffectOnce';
 
+interface ScrollAmount {
+  scrollX: number;
+  scrollY: number;
+}
+
 export interface UseWindowScrollAmountProps {
-  initialScrollAmount?: IScrollAmount;
+  initialScrollAmount?: ScrollAmount;
   debounceUpdateDuration?: number;
 }
 
@@ -21,8 +25,8 @@ export function useWindowScrollAmount({
   },
   debounceUpdateDuration = 100,
 }: UseWindowScrollAmountProps = {}) {
-  const scrollAmountRef = useRef<IScrollAmount>(initialScrollAmount);
-  const [scrollAmount, setScrollAmount] = useState<IScrollAmount>(initialScrollAmount);
+  const scrollAmountRef = useRef<ScrollAmount>(initialScrollAmount);
+  const [scrollAmount, setScrollAmount] = useState<ScrollAmount>(initialScrollAmount);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetScrollAmount = useCallback(debounce(setScrollAmount, debounceUpdateDuration), [
     debounceUpdateDuration,
@@ -33,7 +37,7 @@ export function useWindowScrollAmount({
       const newScrollAmount = {
         scrollX: window.scrollX,
         scrollY: window.scrollY,
-      } satisfies IScrollAmount;
+      } satisfies ScrollAmount;
       scrollAmountRef.current = newScrollAmount;
       debouncedSetScrollAmount(newScrollAmount);
     }

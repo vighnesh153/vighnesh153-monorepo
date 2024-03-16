@@ -90,13 +90,23 @@ export class JsonHttpClientImpl implements JsonHttpClient {
       accept: 'application/json',
       ...requestConfig.headers,
     };
-    if (userRequest.data != null) {
-      requestConfig.body = JSON.stringify(userRequest.data);
-      requestConfig.headers = {
-        'content-type': 'application/json',
-        ...requestConfig.headers,
-      };
+    // no data
+    if (userRequest.data == null) {
+      return requestConfig;
     }
+    // TODO: test form data
+    // form data
+    if (userRequest.data instanceof FormData) {
+      // if we set body as FormData, browser will automatically set the content-type header as multipart/form-data
+      requestConfig.body = userRequest.data;
+      return requestConfig;
+    }
+    // json data
+    requestConfig.body = JSON.stringify(userRequest.data);
+    requestConfig.headers = {
+      'content-type': 'application/json',
+      ...requestConfig.headers,
+    };
     return requestConfig;
   }
 
