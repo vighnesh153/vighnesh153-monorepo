@@ -10,6 +10,7 @@
     "nodejs-chrome-extensions/*",
     "nodejs-cloudflare-tools/*",
     "nodejs-docker-tools/*",
+    "nodejs-firebase-functions/*/functions",
     "nodejs-lib/*",
     "nodejs-packages/*",
     "nodejs-templates/*"
