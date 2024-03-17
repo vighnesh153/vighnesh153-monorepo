@@ -1,11 +1,12 @@
 import http2 from 'node:http2';
 
 import { JsonHttpClient } from '@vighnesh153/http-client';
-import { ConsoleLogger, Logger } from '@vighnesh153/logger';
+import { Logger } from '@vighnesh153/logger';
 import { not } from '@vighnesh153/utils';
 
 import { TokenFetchRequestBuilderImpl, TokenFetchRequestBuilder } from './buildTokenFetchRequest';
-import { httpClientSingletonFactory } from './factories';
+import { httpClientSingletonFactory, loggerSingletonFactory, userInfoDecoderSingletonFactory } from './factories';
+import { UserInfoDecoder } from './UserInfoDecoder';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
@@ -16,6 +17,8 @@ type LambdaResponse = {
   body?: string;
   headers?: Record<string, string>;
 };
+
+// FIREBASE_SERVICE_ACCOUNT_CREDENTIALS
 
 export async function controller({
   // environment variables
@@ -30,9 +33,10 @@ export async function controller({
   searchParameters = {},
 
   // tools
-  logger = ConsoleLogger.getInstance(),
+  logger = loggerSingletonFactory(),
   tokenFetchRequestBuilder = new TokenFetchRequestBuilderImpl(),
   httpClient = httpClientSingletonFactory(),
+  userInfoDecoder = userInfoDecoderSingletonFactory(),
 }: {
   // environment variables
   uiBaseUrl?: string;
@@ -49,6 +53,7 @@ export async function controller({
   logger?: Logger;
   tokenFetchRequestBuilder?: TokenFetchRequestBuilder;
   httpClient?: JsonHttpClient;
+  userInfoDecoder?: UserInfoDecoder;
 } = {}): Promise<LambdaResponse> {
   if (
     not(uiBaseUrl) ||
@@ -101,6 +106,27 @@ export async function controller({
   }
 
   const tokenData = tokenResponse.getSuccessResponse();
+
+  // extract user info from token
+  const userInfo = userInfoDecoder.decodeFromGoogleOAuthJwt(tokenData.data.id_token);
+  if (userInfo === null) {
+    return {
+      statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
+      body: 'Failed to extract user info from token',
+    };
+  }
+
+  // user's email is not verified. deny signing in
+  if (not(userInfo.email_verified)) {
+    logger.log(`User's email address is not verified`);
+    logger.log(userInfo);
+    return {
+      statusCode: http2.constants.HTTP_STATUS_NOT_ACCEPTABLE,
+      body: 'Email address is not verified.',
+    };
+  }
+
+  // TODO: check if the user already exists.
 
   return {
     statusCode: 200,
