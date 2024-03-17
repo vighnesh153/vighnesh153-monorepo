@@ -84,6 +84,20 @@ class Parser(
     }
 }
 
+internal fun Parser.parseProgram(): ProgramNode {
+    val programNode = ProgramNode()
+
+    while (isCurrentToken(TokenType.EOF).not()) {
+        val statement = parseStatement()
+        if (statement != null) {
+            programNode.addStatement(statement)
+        }
+        nextToken()
+    }
+
+    return programNode
+}
+
 internal fun Parser.parseStatement(): StatementNode? {
     return when (currentToken.tokenType) {
         TokenType.PACKAGE_KEYWORD -> parsePackageStatement()
