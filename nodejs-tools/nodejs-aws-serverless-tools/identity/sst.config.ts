@@ -1,17 +1,44 @@
 import { type SSTConfig } from 'sst';
-import { type StackContext, Api } from 'sst/constructs';
+import { type StackContext, Api, Table } from 'sst/constructs';
+
+import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
 const stackName = 'Vighnesh153IdentityStack';
 
-function validateStage(stage?: string) {
+function validateStage(stage: string): stage is 'dev' | 'prod' {
   if (!['dev', 'prod'].includes(`${stage}`)) {
     throw new Error(`Stage should either be "dev" or "prod", found "${stage}"`);
   }
+  return true;
 }
+
+const stageConfig = {
+  dev: {
+    uiBaseUrl: 'https://staging.vighnesh153.dev',
+    authRedirectUrl: 'https://dev.identity.vighnesh153.dev/googleAuthCallback',
+  },
+  prod: {
+    uiBaseUrl: 'https://vighnesh153.dev',
+    authRedirectUrl: 'https://prod.identity.vighnesh153.dev/googleAuthCallback',
+  },
+};
 
 export function IdentityStack({ stack }: StackContext) {
   const { stage } = stack;
-  validateStage(stage);
+  if (!validateStage(stage)) {
+    return;
+  }
+
+  // user info table
+  const userInfoTable = new Table(stack, 'UserInfo', {
+    fields: userInfoFields,
+    primaryIndex: { partitionKey: 'email', sortKey: 'userId' },
+    cdk: {
+      table: {
+        tableName: `UserInfo-${stage}`,
+      },
+    },
+  });
 
   const initiateGoogleLogin = 'initiateGoogleLogin';
   const googleAuthCallback = 'googleAuthCallback';
@@ -32,9 +59,15 @@ export function IdentityStack({ stack }: StackContext) {
       },
       [`GET /${googleAuthCallback}`]: {
         function: {
+          bind: [userInfoTable],
           functionName: `HttpApiGet-${googleAuthCallback}-${stage}`,
           handler: `dist/${googleAuthCallback}.handler`,
           logRetention: 'two_weeks',
+          environment: {
+            UI_BASE_URL: stageConfig[stage].uiBaseUrl,
+            AUTH_REDIRECT_URL: stageConfig[stage].authRedirectUrl,
+            STAGE: stage,
+          },
         },
       },
     },
@@ -44,13 +77,16 @@ export function IdentityStack({ stack }: StackContext) {
     ApiEndpoint: api.url,
     CustomDomain: api.customDomainUrl,
     Routes: api.routes.join(', '),
+    UserInfoTableName: userInfoTable.tableName,
   });
 }
 
 const sstConfig: SSTConfig = {
   config(input) {
     const { stage } = input;
-    validateStage(stage);
+    if (!validateStage(stage ?? '')) {
+      throw new Error('Invalid stage');
+    }
     return {
       name: `Vighnesh153-Identity-${stage}`,
       region: 'ap-south-1', // Mumbai
