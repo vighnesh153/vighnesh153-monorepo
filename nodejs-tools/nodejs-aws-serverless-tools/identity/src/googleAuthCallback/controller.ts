@@ -1,11 +1,19 @@
 import http2 from 'node:http2';
 
+import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import { JsonHttpClient } from '@vighnesh153/http-client';
 import { Logger } from '@vighnesh153/logger';
+import { CompleteUserInfo } from '@vighnesh153/types';
 import { not } from '@vighnesh153/utils';
 
 import { TokenFetchRequestBuilderImpl, TokenFetchRequestBuilder } from './buildTokenFetchRequest';
-import { httpClientSingletonFactory, loggerSingletonFactory, userInfoDecoderSingletonFactory } from './factories';
+import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
+import {
+  httpClientSingletonFactory,
+  loggerSingletonFactory,
+  userInfoDecoderSingletonFactory,
+  userInfoTableSingletonFactory,
+} from './factories';
 import { UserInfoDecoder } from './UserInfoDecoder';
 
 function mask(s?: string | null): string {
@@ -18,8 +26,6 @@ type LambdaResponse = {
   headers?: Record<string, string>;
 };
 
-// FIREBASE_SERVICE_ACCOUNT_CREDENTIALS
-
 export async function controller({
   // environment variables
   uiBaseUrl = process.env.UI_BASE_URL,
@@ -28,6 +34,7 @@ export async function controller({
   googleClientSecret = process.env.GOOGLE_CLIENT_SECRET,
   cookieSecret = process.env.COOKIE_SECRET,
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
+  userInfoTableName = process.env.SST_Table_tableName_UserInfo,
 
   // request info
   searchParameters = {},
@@ -37,6 +44,7 @@ export async function controller({
   tokenFetchRequestBuilder = new TokenFetchRequestBuilderImpl(),
   httpClient = httpClientSingletonFactory(),
   userInfoDecoder = userInfoDecoderSingletonFactory(),
+  userInfoDynamoTable = userInfoTableSingletonFactory(),
 }: {
   // environment variables
   uiBaseUrl?: string;
@@ -45,6 +53,7 @@ export async function controller({
   googleClientSecret?: string;
   cookieSecret?: string;
   environmentStage?: 'dev' | 'prod';
+  userInfoTableName?: string;
 
   // request info
   searchParameters?: Record<string, string>;
@@ -54,6 +63,7 @@ export async function controller({
   tokenFetchRequestBuilder?: TokenFetchRequestBuilder;
   httpClient?: JsonHttpClient;
   userInfoDecoder?: UserInfoDecoder;
+  userInfoDynamoTable?: DynamoDBTable<typeof UserInfoTableMetadata>;
 } = {}): Promise<LambdaResponse> {
   if (
     not(uiBaseUrl) ||
@@ -61,17 +71,20 @@ export async function controller({
     not(googleClientId) ||
     not(googleClientSecret) ||
     not(cookieSecret) ||
-    not(['dev', 'prod'].includes(environmentStage!))
+    not(['dev', 'prod'].includes(environmentStage!)) ||
+    not(userInfoTableName)
   ) {
     logger.log(
       `Some environment variables are missing or incorrect: ` +
-        `uiBaseUrl='${uiBaseUrl}', ` +
-        `authRedirectUrl='${authRedirectUrl}', ` +
-        `googleClientId='${mask(googleClientId)}', ` +
-        `googleClientSecret='${mask(googleClientSecret)}', ` +
-        `cookieSecret='${mask(cookieSecret)}', ` +
-        `environmentStage='${environmentStage}', ` +
-        ''
+        [
+          `uiBaseUrl='${uiBaseUrl}'`,
+          `authRedirectUrl='${authRedirectUrl}'`,
+          `googleClientId='${mask(googleClientId)}'`,
+          `googleClientSecret='${mask(googleClientSecret)}'`,
+          `cookieSecret='${mask(cookieSecret)}'`,
+          `environmentStage='${environmentStage}'`,
+          `userInfoTableName='${userInfoTableName}'`,
+        ].join(', ')
     );
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
@@ -108,8 +121,8 @@ export async function controller({
   const tokenData = tokenResponse.getSuccessResponse();
 
   // extract user info from token
-  const userInfo = userInfoDecoder.decodeFromGoogleOAuthJwt(tokenData.data.id_token);
-  if (userInfo === null) {
+  const decodedUserInfo = userInfoDecoder.decodeFromGoogleOAuthJwt(tokenData.data.id_token);
+  if (decodedUserInfo === null) {
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Failed to extract user info from token',
@@ -117,9 +130,9 @@ export async function controller({
   }
 
   // user's email is not verified. deny signing in
-  if (not(userInfo.email_verified)) {
+  if (not(decodedUserInfo.email_verified)) {
     logger.log(`User's email address is not verified`);
-    logger.log(userInfo);
+    logger.log(decodedUserInfo);
     return {
       statusCode: http2.constants.HTTP_STATUS_NOT_ACCEPTABLE,
       body: 'Email address is not verified.',
@@ -127,6 +140,26 @@ export async function controller({
   }
 
   // TODO: check if the user already exists.
+  const userInfoFromTable = await userInfoDynamoTable.getOne({ filterBy: { email: decodedUserInfo.email } });
+  if (userInfoFromTable.error !== null && userInfoFromTable.error.message !== 'OBJECT_NOT_FOUND') {
+    return {
+      statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
+      body: 'Failed to fetch existing user info from database',
+    };
+  }
+
+  console.log('userInfoFromTable:', userInfoFromTable);
+
+  let userInfo: CompleteUserInfo;
+  if (userInfoFromTable.error === null) {
+    // user exists
+    userInfo = userInfoFromTable.data;
+  } else {
+    // create new user
+    userInfo = {} as CompleteUserInfo;
+  }
+
+  console.log('userInfo=', userInfo);
 
   return {
     statusCode: 200,

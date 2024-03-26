@@ -6,13 +6,12 @@ export type GoogleOAuthUserInfo = {
 };
 
 export interface PublicUserInfo {
-  publicId: string;
+  userId: string;
   name: string;
   profilePictureUrl: string;
   createdAtMillis: number;
 }
 
 export interface CompleteUserInfo extends PublicUserInfo {
-  internalId: string;
   email: string;
 }

@@ -2,13 +2,13 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig(() => ({
   entry: {
-    googleAuthCallback: './src/googleAuthCallback/index.ts',
-    initiateGoogleLogin: './src/initiateGoogleLogin/index.ts',
+    main: './src/index.ts',
   },
   splitting: false,
-  external: ['aws-sdk'],
   clean: true,
   minify: true,
+  external: ['aws-sdk'],
   treeshake: true,
   format: 'esm',
+  outExtension: () => ({ js: '.js' }),
 }));
