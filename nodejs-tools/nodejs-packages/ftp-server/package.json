@@ -23,7 +23,7 @@
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
     "lint": "eslint --max-warnings=0 .",
-    "copy": "mkdir ./dist/__vighnesh153-ftp-client__ && mv ./src/client/dist/* ./dist/__vighnesh153-ftp-client__",
+    "copy": "mkdir -p ./dist/__vighnesh153-ftp-client__ && mv ./src/client/dist/* ./dist/__vighnesh153-ftp-client__",
     "build": "tsup && vite build && npm run copy"
   },
   "files": [
