@@ -8,19 +8,42 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
     private tableMetadata: T
   ) {}
 
-  async getOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
+  async queryOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
     filterBy: { [key in TFilterBy]: DynamoTypeMap[T['fields'][key]] };
   }): Promise<Optional<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
-    const processedParams: DynamoDB.DocumentClient.GetItemInput = {
-      Key: params.filterBy,
+    const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
+    const expressionAttributeValues = keys
+      // Expected attribute values format:
+      // { ":email": { S: "email@email.com" }, ":age": { N: 25 } }
+      .reduce(
+        (exprAttrValues, key) => {
+          const value = params.filterBy[key];
+          const formattedKey = `:${String(key)}`;
+          switch (typeof value) {
+            case 'number':
+            case 'string':
+              exprAttrValues[formattedKey] = value;
+              break;
+            default:
+              throw new Error(`Unknown value type: "${typeof value}"`);
+          }
+          return exprAttrValues;
+        },
+        {} as Record<string, unknown>
+      );
+    const keyConditionExpression = (keys as string[]).map((key) => `${key} = :${key}`).join(' and ');
+    const processedParams: DynamoDB.DocumentClient.QueryInput = {
+      KeyConditionExpression: keyConditionExpression,
+      ExpressionAttributeValues: expressionAttributeValues,
       TableName: this.tableMetadata.tableName,
     };
     try {
-      const result = await this.client.get(processedParams).promise();
-      if (result.Item) {
+      const result = await this.client.query(processedParams).promise();
+      const item = result.Items?.[0] ?? null;
+      if (item != null) {
         return {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data: result.Item as any,
+          data: item as any,
           error: null,
         };
       }

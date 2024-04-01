@@ -1,5 +1,5 @@
 import { type SSTConfig } from 'sst';
-import { type StackContext, Api, Table } from 'sst/constructs';
+import { type StackContext, Api, Table, Config } from 'sst/constructs';
 
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
@@ -15,10 +15,12 @@ function validateStage(stage: string): stage is 'dev' | 'prod' {
 const stageConfig = {
   dev: {
     uiBaseUrl: 'https://staging.vighnesh153.dev',
+    baseUrl: 'https://dev.identity.vighnesh153.dev',
     authRedirectUrl: 'https://dev.identity.vighnesh153.dev/googleAuthCallback',
   },
   prod: {
     uiBaseUrl: 'https://vighnesh153.dev',
+    baseUrl: 'https://prod.identity.vighnesh153.dev',
     authRedirectUrl: 'https://prod.identity.vighnesh153.dev/googleAuthCallback',
   },
 };
@@ -28,6 +30,11 @@ export function IdentityStack({ stack }: StackContext) {
   if (!validateStage(stage)) {
     return;
   }
+
+  // secrets
+  const GOOGLE_CLIENT_ID = new Config.Secret(stack, 'GOOGLE_CLIENT_ID');
+  const GOOGLE_CLIENT_SECRET = new Config.Secret(stack, 'GOOGLE_CLIENT_SECRET');
+  const COOKIE_SECRET = new Config.Secret(stack, 'COOKIE_SECRET');
 
   // user info table
   const userInfoTable = new Table(stack, 'UserInfo', {
@@ -52,17 +59,21 @@ export function IdentityStack({ stack }: StackContext) {
     routes: {
       [`GET /${initiateGoogleLogin}`]: {
         function: {
+          bind: [GOOGLE_CLIENT_ID],
           functionName: `HttpApiGet-${initiateGoogleLogin}-${stage}`,
           handler: `dist/${initiateGoogleLogin}.handler`,
-          logRetention: 'two_weeks',
+          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
+          environment: {
+            IDENTITY_LAMBDA_BASE_URI: stageConfig[stage].baseUrl,
+          },
         },
       },
       [`GET /${googleAuthCallback}`]: {
         function: {
-          bind: [userInfoTable],
+          bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
           functionName: `HttpApiGet-${googleAuthCallback}-${stage}`,
           handler: `dist/${googleAuthCallback}.handler`,
-          logRetention: 'two_weeks',
+          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
             UI_BASE_URL: stageConfig[stage].uiBaseUrl,
             AUTH_REDIRECT_URL: stageConfig[stage].authRedirectUrl,

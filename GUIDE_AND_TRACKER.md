@@ -404,6 +404,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "type": "module",
   "exports": {
+    "types": "./dist/src/index.d.ts",
     "import": "./dist/main.js",
     "require": "./dist/main.cjs"
   },
@@ -415,12 +416,10 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "license": "MIT",
   "scripts": {
-    "build:once:bundle": "tsup",
-    "build:once:types": "tsc",
     "build:watch:bundle": "tsup --watch",
     "build:watch:types": "tsc --watch",
-    "build": "npm-run-all build:once:*",
-    "dev": "npm-run-all --parallel build:watch:*",
+    "build": "tsup && tsc",
+    "dev": "run-p build:watch:*",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },
@@ -450,6 +449,9 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 ```json
 {
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }
