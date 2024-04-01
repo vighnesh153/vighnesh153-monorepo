@@ -1,20 +1,25 @@
 import http2 from 'node:http2';
 
-import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { JsonHttpClient } from '@vighnesh153/http-client';
-import { Logger } from '@vighnesh153/logger';
-import { CompleteUserInfo } from '@vighnesh153/types';
-import { not } from '@vighnesh153/utils';
+import { Config } from 'sst/node/config';
+import { Table } from 'sst/node/table';
 
-import { TokenFetchRequestBuilderImpl, TokenFetchRequestBuilder } from './buildTokenFetchRequest';
+import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
+import { type JsonHttpClient } from '@vighnesh153/http-client';
+import { type Logger } from '@vighnesh153/logger';
+import { type CompleteUserInfo } from '@vighnesh153/types';
+import { not, slugify } from '@vighnesh153/utils';
+
+import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import {
   httpClientSingletonFactory,
   loggerSingletonFactory,
+  randomStringGeneratorSingletonFactory,
   userInfoDecoderSingletonFactory,
   userInfoTableSingletonFactory,
 } from './factories';
-import { UserInfoDecoder } from './UserInfoDecoder';
+import { type UserInfoDecoder } from './UserInfoDecoder';
+import { type RandomStringGenerator } from './randomStringGenerator';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
@@ -30,11 +35,19 @@ export async function controller({
   // environment variables
   uiBaseUrl = process.env.UI_BASE_URL,
   authRedirectUrl = process.env.AUTH_REDIRECT_URL,
-  googleClientId = process.env.GOOGLE_CLIENT_ID,
-  googleClientSecret = process.env.GOOGLE_CLIENT_SECRET,
-  cookieSecret = process.env.COOKIE_SECRET,
+  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+  // @ts-ignore: SSM Secret type auto-complete not working
+  googleClientId = Config.GOOGLE_CLIENT_ID,
+  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+  // @ts-ignore: SSM Secret type auto-complete not working
+  googleClientSecret = Config.GOOGLE_CLIENT_SECRET,
+  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+  // @ts-ignore: SSM Secret type auto-complete not working
+  cookieSecret = Config.COOKIE_SECRET,
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
-  userInfoTableName = process.env.SST_Table_tableName_UserInfo,
+  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+  // @ts-ignore: SSM Secret type auto-complete not working
+  userInfoTableName = Table.UserInfo.tableName,
 
   // request info
   searchParameters = {},
@@ -45,6 +58,7 @@ export async function controller({
   httpClient = httpClientSingletonFactory(),
   userInfoDecoder = userInfoDecoderSingletonFactory(),
   userInfoDynamoTable = userInfoTableSingletonFactory(),
+  randomStringGenerator = randomStringGeneratorSingletonFactory(),
 }: {
   // environment variables
   uiBaseUrl?: string;
@@ -64,6 +78,7 @@ export async function controller({
   httpClient?: JsonHttpClient;
   userInfoDecoder?: UserInfoDecoder;
   userInfoDynamoTable?: DynamoDBTable<typeof UserInfoTableMetadata>;
+  randomStringGenerator?: RandomStringGenerator;
 } = {}): Promise<LambdaResponse> {
   if (
     not(uiBaseUrl) ||
@@ -139,27 +154,35 @@ export async function controller({
     };
   }
 
-  // TODO: check if the user already exists.
-  const userInfoFromTable = await userInfoDynamoTable.getOne({ filterBy: { email: decodedUserInfo.email } });
+  const userInfoFromTable = await userInfoDynamoTable.queryOne({ filterBy: { email: decodedUserInfo.email } });
   if (userInfoFromTable.error !== null && userInfoFromTable.error.message !== 'OBJECT_NOT_FOUND') {
+    logger.log('Failed to fetch existing user info from DB.');
+    logger.log(userInfoFromTable.error);
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Failed to fetch existing user info from database',
     };
   }
 
-  console.log('userInfoFromTable:', userInfoFromTable);
-
-  let userInfo: CompleteUserInfo;
+  let completeUserInfo: CompleteUserInfo;
   if (userInfoFromTable.error === null) {
     // user exists
-    userInfo = userInfoFromTable.data;
+    completeUserInfo = userInfoFromTable.data;
   } else {
     // create new user
-    userInfo = {} as CompleteUserInfo;
-  }
+    completeUserInfo = {
+      userId: `${slugify(decodedUserInfo.name)}-${randomStringGenerator.generate(5)}`.toLowerCase(),
+      name: decodedUserInfo.name,
+      email: decodedUserInfo.email,
+      profilePictureUrl: decodedUserInfo.picture,
+      createdAtMillis: Date.now(),
+    } as CompleteUserInfo;
 
-  console.log('userInfo=', userInfo);
+    // await userInfoDynamoTable.createOne();
+  }
+  name;
+
+  logger.log('completeUserInfo=', completeUserInfo);
 
   return {
     statusCode: 200,

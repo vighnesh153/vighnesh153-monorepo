@@ -7,6 +7,7 @@ import { ConsoleLogger, Logger } from '@vighnesh153/logger';
 
 import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
+import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
@@ -29,4 +30,8 @@ const dynamoDBClientSingletonFactory = createSingletonFactory<DynamoDB.DocumentC
 export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof UserInfoTableMetadata>>(() => {
   const dynamoDBClient = dynamoDBClientSingletonFactory();
   return new DynamoDBTableImpl(dynamoDBClient, UserInfoTableMetadata);
+});
+
+export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {
+  return new RandomStringGeneratorImpl();
 });
