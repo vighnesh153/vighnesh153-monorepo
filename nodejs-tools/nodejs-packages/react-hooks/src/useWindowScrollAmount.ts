@@ -27,7 +27,6 @@ export function useWindowScrollAmount({
 }: UseWindowScrollAmountProps = {}) {
   const scrollAmountRef = useRef<ScrollAmount>(initialScrollAmount);
   const [scrollAmount, setScrollAmount] = useState<ScrollAmount>(initialScrollAmount);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetScrollAmount = useCallback(debounce(setScrollAmount, debounceUpdateDuration), [
     debounceUpdateDuration,
   ]);

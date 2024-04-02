@@ -5,6 +5,5 @@ import { EffectCallback, useEffect } from 'react';
  * @param effect
  */
 export function useEffectOnce(effect: EffectCallback) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effect, []);
 }
