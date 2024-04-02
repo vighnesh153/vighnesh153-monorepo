@@ -54,6 +54,7 @@ Visit
 
 #### Tasks
 
+- Move @vighnesh153/random-word to @vighnesh153/utils
 - adb fetch continue watching row from device
 - adb launch deeplink
 - compose-query (similar to react-query by tanstack)

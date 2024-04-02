@@ -40,7 +40,6 @@ export function useScrollAmount(ref: RefObject<HTMLElement | undefined>): State 
     });
 
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       ref.current?.removeEventListener('scroll', handler);
     };
   }, [ref, setState]);
