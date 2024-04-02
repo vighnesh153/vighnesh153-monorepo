@@ -32,5 +32,3 @@ This directory contains apps and packages built in javascript and typescript run
 ### Internal
 
 - [@vighnesh153/types](./packages/types): Utility types/interfaces
-- [@vighnesh153/react-ui](./packages/react-ui): ReactJS components made with [Material UI](https://mui.com/) and
-  [Emotion Styling](https://emotion.sh/)

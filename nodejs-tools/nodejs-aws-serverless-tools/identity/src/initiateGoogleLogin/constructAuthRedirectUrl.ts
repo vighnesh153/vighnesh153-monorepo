@@ -1,13 +1,13 @@
 import { Config } from 'sst/node/config';
 
 import { ConsoleLogger, Logger } from '@vighnesh153/logger';
-import { LambdaAuthCallbackPath, authScopes } from './constants';
+import { LambdaAuthCallbackPath, authScopes, inProduction } from './constants';
 
 export function constructAuthRedirectUrl({
   identityLambdaBaseUri = process.env.IDENTITY_LAMBDA_BASE_URI,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientId = Config.GOOGLE_CLIENT_ID,
+  googleClientId = inProduction(() => Config.GOOGLE_CLIENT_ID),
   logger = ConsoleLogger.getInstance(),
 }: {
   identityLambdaBaseUri?: string;
