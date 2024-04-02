@@ -1,6 +1,6 @@
 import { Box, IconButton, BoxProps } from '@mui/material';
 import { FaArrowLeft, FaHome } from 'react-icons/fa';
-import { theme } from '@vighnesh153/react-ui';
+import { theme } from './theme';
 import { DPad } from './DPad';
 import { useActionOnKeyPress } from './useActionOnKeyPress';
 

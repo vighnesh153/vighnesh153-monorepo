@@ -34,10 +34,10 @@
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
-    "sst": "^2.40.6",
+    "sst": "^2.41.4",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3",
-    "vitest": "^1.3.1"
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
   },
   "keywords": [],
   "repository": {

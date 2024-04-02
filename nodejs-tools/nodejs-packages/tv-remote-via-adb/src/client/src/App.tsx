@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { theme } from '@vighnesh153/react-ui';
+import { theme } from './theme';
 import { HomePage } from './HomePage';
 
 export function App() {

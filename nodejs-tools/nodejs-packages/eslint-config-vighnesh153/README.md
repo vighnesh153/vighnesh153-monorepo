@@ -62,22 +62,11 @@ module.exports = {
 };
 ```
 
-- ReactJS typescript library
+- Astro JS project
 
 ```js
 module.exports = {
-  extends: ['vighnesh153/react-ts-library.eslintrc'],
-  parserOptions: {
-    project: './tsconfig.json',
-  },
-};
-```
-
-- NextJS typescript app
-
-```js
-module.exports = {
-  extends: ['vighnesh153/next-ts.eslintrc'],
+  extends: ['vighnesh153/astro-ts.eslintrc'],
   parserOptions: {
     project: './tsconfig.json',
   },

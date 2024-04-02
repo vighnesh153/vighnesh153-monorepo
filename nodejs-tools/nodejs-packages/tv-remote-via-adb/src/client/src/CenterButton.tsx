@@ -2,7 +2,7 @@
 
 import { CSSProperties } from 'react';
 import { Box, BoxProps } from '@mui/material';
-import { theme } from '@vighnesh153/react-ui';
+import { theme } from './theme';
 
 export interface CenterButtonProps extends BoxProps {
   buttonColor?: CSSProperties['color'];
