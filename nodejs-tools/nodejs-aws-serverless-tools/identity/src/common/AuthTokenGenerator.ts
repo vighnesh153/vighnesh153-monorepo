@@ -15,3 +15,11 @@ export class AuthTokenGeneratorImpl implements AuthTokenGenerator {
     return crypto.createHash('sha256').update(data, 'binary').digest('hex');
   }
 }
+
+export class FakeAuthTokenGenerator implements AuthTokenGenerator {
+  authToken: string | null = null;
+
+  generate({ userId, cookieSecret }: AuthTokenGeneratorParams): string {
+    return this.authToken ?? `hashed(${userId}-${cookieSecret})`;
+  }
+}
