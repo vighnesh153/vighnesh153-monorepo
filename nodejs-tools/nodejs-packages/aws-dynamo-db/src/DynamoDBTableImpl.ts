@@ -1,6 +1,6 @@
 import { DynamoDB } from 'aws-sdk';
 import { DynamoTypeMap, TableMetadata } from './TableMetadata';
-import { DynamoDBTable, Optional } from './DynamoDBTable';
+import { DynamoDBTable, OptionalQueryOne, OptionalCreateOne } from './DynamoDBTable';
 
 export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable<T> {
   constructor(
@@ -10,7 +10,7 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
 
   async queryOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
     filterBy: { [key in TFilterBy]: DynamoTypeMap[T['fields'][key]] };
-  }): Promise<Optional<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
+  }): Promise<OptionalQueryOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
     const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
     const expressionAttributeValues = keys
       // Expected attribute values format:
@@ -65,7 +65,19 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
     }
   }
 
-  async createOne(): Promise<void> {
-    // const result = await this.client.query()
+  async createOne<TField extends keyof T['fields']>(params: {
+    data: { [key in TField]: DynamoTypeMap[T['fields'][key]] };
+  }): Promise<OptionalCreateOne> {
+    try {
+      await this.client.put({ TableName: this.tableMetadata.tableName, Item: params.data }).promise();
+      return { error: null };
+    } catch (e) {
+      return {
+        error: {
+          message: 'CREATION_FAILED',
+          errorObject: e,
+        },
+      };
+    }
   }
 }

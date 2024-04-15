@@ -8,6 +8,7 @@ import { ConsoleLogger, Logger } from '@vighnesh153/logger';
 import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
+import { AuthTokenGenerator, AuthTokenGeneratorImpl } from '../common/AuthTokenGenerator';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
@@ -34,4 +35,8 @@ export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTabl
 
 export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {
   return new RandomStringGeneratorImpl();
+});
+
+export const authTokenGeneratorSingletonFactory = createSingletonFactory<AuthTokenGenerator>(() => {
+  return new AuthTokenGeneratorImpl();
 });
