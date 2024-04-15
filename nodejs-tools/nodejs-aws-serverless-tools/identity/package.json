@@ -25,11 +25,13 @@
     "@vighnesh153/factory": "*",
     "@vighnesh153/http-client": "*",
     "@vighnesh153/logger": "*",
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/utils": "*",
+    "cookie": "^0.6.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.136",
     "@types/aws-sdk": "^2.7.0",
+    "@types/cookie": "^0.6.0",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
