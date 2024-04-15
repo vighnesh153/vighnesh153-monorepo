@@ -209,7 +209,7 @@ export async function controller({
   }
 
   const authToken = authTokenGenerator.generate({
-    userInfo: completeUserInfo,
+    userId: completeUserInfo.userId,
     cookieSecret,
   });
 
