@@ -15,3 +15,11 @@ export class RandomStringGeneratorImpl implements RandomStringGenerator {
     return characters.slice(0, length).join('');
   }
 }
+
+export class FakeRandomStringGenerator implements RandomStringGenerator {
+  randomString: string = '';
+
+  generate(): string {
+    return this.randomString;
+  }
+}
