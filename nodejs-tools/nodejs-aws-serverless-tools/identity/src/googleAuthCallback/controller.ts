@@ -41,7 +41,7 @@ type LambdaResponse = {
 
 export async function controller({
   // environment variables
-  uiBaseUrl = process.env.UI_BASE_URL,
+  uiAuthCompleteUrl = process.env.UI_AUTH_COMPLETE_URL,
   authRedirectUrl = process.env.AUTH_REDIRECT_URL,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
@@ -71,7 +71,7 @@ export async function controller({
   cookieSerializer = cookieSerializerFactory(),
 }: {
   // environment variables
-  uiBaseUrl?: string;
+  uiAuthCompleteUrl?: string;
   authRedirectUrl?: string;
   googleClientId?: string;
   googleClientSecret?: string;
@@ -93,7 +93,7 @@ export async function controller({
   cookieSerializer?: CookieSerializer;
 } = {}): Promise<LambdaResponse> {
   if (
-    not(uiBaseUrl) ||
+    not(uiAuthCompleteUrl) ||
     not(authRedirectUrl) ||
     not(googleClientId) ||
     not(googleClientSecret) ||
@@ -104,7 +104,7 @@ export async function controller({
     logger.log(
       `Some environment variables are missing or incorrect: ` +
         [
-          `uiBaseUrl='${uiBaseUrl}'`,
+          `uiAuthCompleteUrl='${uiAuthCompleteUrl}'`,
           `authRedirectUrl='${authRedirectUrl}'`,
           `googleClientId='${mask(googleClientId)}'`,
           `googleClientSecret='${mask(googleClientSecret)}'`,
@@ -227,7 +227,7 @@ export async function controller({
   };
 
   const response: LambdaResponse = {
-    statusCode: 200,
+    statusCode: http2.constants.HTTP_STATUS_TEMPORARY_REDIRECT,
     cookies: [
       cookieSerializer.serialize(`${environmentStage}-user-info`, JSON.stringify(completeUserInfo), {
         ...commonCookieOptions,
@@ -239,6 +239,9 @@ export async function controller({
         secure: true,
       }),
     ],
+    headers: {
+      Location: uiAuthCompleteUrl!,
+    },
   };
   logger.log('User login process completed. Sending response...');
   logger.log(response);

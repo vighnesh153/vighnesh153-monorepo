@@ -15,8 +15,10 @@ let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<typeof UserInfoTableMetadata>;
 let fakeCookieSerializer: FakeCookieSerializer;
 
+const UI_AUTH_COMPLETE_URL = 'https://dev-vighnesh153.com/auth/callback';
+
 const validEnvironmentVariables = {
-  uiBaseUrl: 'https://dev-vighnesh153.com',
+  uiAuthCompleteUrl: UI_AUTH_COMPLETE_URL,
   authRedirectUrl: 'https://dev-vighnesh153.com/google/auth/callback',
   googleClientId: 'google-client-id',
   googleClientSecret: 'google-client-secret',
@@ -71,10 +73,10 @@ test('should return 5xx if any of the environment variables are not provided', a
   }
 
   await validateErrorHandling((environmentVariables) => {
-    delete environmentVariables['uiBaseUrl'];
+    delete environmentVariables['uiAuthCompleteUrl'];
   });
   await validateErrorHandling((environmentVariables) => {
-    environmentVariables['uiBaseUrl'] = '';
+    environmentVariables['uiAuthCompleteUrl'] = '';
   });
   await validateErrorHandling((environmentVariables) => {
     delete environmentVariables['authRedirectUrl'];
@@ -274,8 +276,11 @@ test('should use existing user info for login if user already exists', async () 
   });
 
   expect(result).toStrictEqual({
-    statusCode: 200,
+    statusCode: 307,
     cookies: ['serialized-cookie', 'serialized-cookie'],
+    headers: {
+      Location: UI_AUTH_COMPLETE_URL,
+    },
   });
   expect(fakeUserInfoTable.createOneCalledTimes).toEqual(0);
 });
@@ -359,8 +364,11 @@ test(`should create new user if user doesn't exist and use that info for login`,
   });
 
   expect(result).toStrictEqual({
-    statusCode: 200,
+    statusCode: 307,
     cookies: ['serialized-cookie', 'serialized-cookie'],
+    headers: {
+      Location: UI_AUTH_COMPLETE_URL,
+    },
   });
   expect(fakeUserInfoTable.createOneCalledTimes).toEqual(1);
 });

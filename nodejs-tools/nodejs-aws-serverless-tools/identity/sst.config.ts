@@ -14,12 +14,12 @@ function validateStage(stage: string): stage is 'dev' | 'prod' {
 
 const stageConfig = {
   dev: {
-    uiBaseUrl: 'https://staging.vighnesh153.dev',
+    uiAuthCompleteUrl: 'https://staging.vighnesh153.dev/auth/callback',
     baseUrl: 'https://dev.identity.vighnesh153.dev',
     authRedirectUrl: 'https://dev.identity.vighnesh153.dev/googleAuthCallback',
   },
   prod: {
-    uiBaseUrl: 'https://vighnesh153.dev',
+    uiAuthCompleteUrl: 'https://vighnesh153.dev/auth/callback',
     baseUrl: 'https://prod.identity.vighnesh153.dev',
     authRedirectUrl: 'https://prod.identity.vighnesh153.dev/googleAuthCallback',
   },
@@ -75,7 +75,7 @@ export function IdentityStack({ stack }: StackContext) {
           handler: `dist/${googleAuthCallback}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
-            UI_BASE_URL: stageConfig[stage].uiBaseUrl,
+            UI_AUTH_COMPLETE_URL: stageConfig[stage].uiAuthCompleteUrl,
             AUTH_REDIRECT_URL: stageConfig[stage].authRedirectUrl,
             STAGE: stage,
           },
