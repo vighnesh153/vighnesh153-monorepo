@@ -1,7 +1,10 @@
-import { type DynamoDBClient } from '@aws-sdk/client-dynamodb';
-
-import { DynamoDBTable, DynamoDBTableImpl, createDynamoDBClient } from '@vighnesh153/aws-dynamo-db';
-import { createSingletonFactory } from '@vighnesh153/factory';
+import {
+  DynamoDBTable,
+  DynamoDBTableImpl,
+  createDynamoDBDocumentClient,
+  type IDynamoDBDocumentClient,
+} from '@vighnesh153/aws-dynamo-db';
+import { createFactory, createSingletonFactory } from '@vighnesh153/factory';
 import { JsonHttpClient, JsonHttpClientImpl } from '@vighnesh153/http-client';
 import { ConsoleLogger, Logger } from '@vighnesh153/logger';
 
@@ -9,6 +12,7 @@ import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
 import { AuthTokenGenerator, AuthTokenGeneratorImpl } from '../common/AuthTokenGenerator';
+import { CookieSerializer, CookieSerializerImpl } from '../common/CookieSerializer';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
@@ -24,13 +28,13 @@ export const userInfoDecoderSingletonFactory = createSingletonFactory<UserInfoDe
   return new UserInfoDecoderImpl(loggerSingletonFactory());
 });
 
-const dynamoDBClientSingletonFactory = createSingletonFactory<DynamoDBClient>(() => {
-  return createDynamoDBClient();
+const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<IDynamoDBDocumentClient>(() => {
+  return createDynamoDBDocumentClient();
 });
 
 export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof UserInfoTableMetadata>>(() => {
-  const dynamoDBClient = dynamoDBClientSingletonFactory();
-  return new DynamoDBTableImpl(dynamoDBClient, UserInfoTableMetadata);
+  const dynamoDBdocumentClient = dynamoDBDocumentClientSingletonFactory();
+  return new DynamoDBTableImpl(dynamoDBdocumentClient, UserInfoTableMetadata);
 });
 
 export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {
@@ -39,4 +43,8 @@ export const randomStringGeneratorSingletonFactory = createSingletonFactory<Rand
 
 export const authTokenGeneratorSingletonFactory = createSingletonFactory<AuthTokenGenerator>(() => {
   return new AuthTokenGeneratorImpl();
+});
+
+export const cookieSerializerFactory = createFactory<CookieSerializer>(() => {
+  return new CookieSerializerImpl();
 });

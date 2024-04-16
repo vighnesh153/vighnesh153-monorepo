@@ -3,7 +3,7 @@ import http2 from 'node:http2';
 import { Config } from 'sst/node/config';
 import { Table } from 'sst/node/table';
 
-import cookie, { type CookieSerializeOptions } from 'cookie';
+import { type CookieSerializeOptions } from 'cookie';
 
 import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import { type JsonHttpClient } from '@vighnesh153/http-client';
@@ -15,6 +15,7 @@ import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './b
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import {
   authTokenGeneratorSingletonFactory,
+  cookieSerializerFactory,
   httpClientSingletonFactory,
   loggerSingletonFactory,
   randomStringGeneratorSingletonFactory,
@@ -25,6 +26,7 @@ import { type UserInfoDecoder } from './UserInfoDecoder';
 import { type RandomStringGenerator } from './randomStringGenerator';
 import { type AuthTokenGenerator } from '../common/AuthTokenGenerator';
 import { inProduction } from './utils';
+import { CookieSerializer } from '../common/CookieSerializer';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
@@ -66,6 +68,7 @@ export async function controller({
   userInfoDynamoTable = userInfoTableSingletonFactory(),
   randomStringGenerator = randomStringGeneratorSingletonFactory(),
   authTokenGenerator = authTokenGeneratorSingletonFactory(),
+  cookieSerializer = cookieSerializerFactory(),
 }: {
   // environment variables
   uiBaseUrl?: string;
@@ -87,6 +90,7 @@ export async function controller({
   userInfoDynamoTable?: DynamoDBTable<typeof UserInfoTableMetadata>;
   randomStringGenerator?: RandomStringGenerator;
   authTokenGenerator?: AuthTokenGenerator;
+  cookieSerializer?: CookieSerializer;
 } = {}): Promise<LambdaResponse> {
   if (
     not(uiBaseUrl) ||
@@ -170,7 +174,9 @@ export async function controller({
   }
   logger.log(`User's email address is verified`);
 
-  const userInfoFromTable = await userInfoDynamoTable.queryOne({ filterBy: { email: decodedUserInfo.email } });
+  const userInfoFromTable = await userInfoDynamoTable.queryOne({
+    filterBy: { email: { value: decodedUserInfo.email } },
+  });
   logger.log('Fetching existing user info from DynamoDB.');
   if (userInfoFromTable.error !== null && userInfoFromTable.error.message !== 'OBJECT_NOT_FOUND') {
     logger.log('Failed to fetch existing user info from DB.');
@@ -223,10 +229,10 @@ export async function controller({
   const response: LambdaResponse = {
     statusCode: 200,
     cookies: [
-      cookie.serialize(`${environmentStage}-user-info`, JSON.stringify(completeUserInfo), {
+      cookieSerializer.serialize(`${environmentStage}-user-info`, JSON.stringify(completeUserInfo), {
         ...commonCookieOptions,
       }),
-      cookie.serialize(`${environmentStage}-auth-token`, authToken, {
+      cookieSerializer.serialize(`${environmentStage}-auth-token`, authToken, {
         ...commonCookieOptions,
 
         httpOnly: true,
