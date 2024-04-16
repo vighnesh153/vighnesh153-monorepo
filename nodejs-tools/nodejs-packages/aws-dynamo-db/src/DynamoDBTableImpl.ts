@@ -1,23 +1,29 @@
-import { DynamoDB } from 'aws-sdk';
+import { PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { DynamoTypeMap, TableMetadata } from './TableMetadata';
 import { DynamoDBTable, OptionalQueryOne, OptionalCreateOne } from './DynamoDBTable';
+import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
 
 export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable<T> {
   constructor(
-    private client: DynamoDB.DocumentClient,
+    private client: IDynamoDBDocumentClient,
     private tableMetadata: T
   ) {}
 
   async queryOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
-    filterBy: { [key in TFilterBy]: DynamoTypeMap[T['fields'][key]] };
+    filterBy: {
+      [key in TFilterBy]: {
+        value: DynamoTypeMap[T['fields'][key]];
+        filterExpression?: (key: string) => string;
+      };
+    };
   }): Promise<OptionalQueryOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
     const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
     const expressionAttributeValues = keys
       // Expected attribute values format:
-      // { ":email": { S: "email@email.com" }, ":age": { N: 25 } }
+      // { ":email": "email@email.com", ":age": 25 }
       .reduce(
         (exprAttrValues, key) => {
-          const value = params.filterBy[key];
+          const { value } = params.filterBy[key];
           const formattedKey = `:${String(key)}`;
           switch (typeof value) {
             case 'number':
@@ -31,14 +37,20 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
         },
         {} as Record<string, unknown>
       );
-    const keyConditionExpression = (keys as string[]).map((key) => `${key} = :${key}`).join(' and ');
-    const processedParams: DynamoDB.DocumentClient.QueryInput = {
+    const keyConditionExpression = (keys as string[])
+      .map((key) => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        const { filterExpression = equalityFilterExpression } = params.filterBy[key as TFilterBy];
+        return filterExpression(key);
+      })
+      .join(' and ');
+    const queryCommand = new QueryCommand({
+      TableName: this.tableMetadata.tableName,
       KeyConditionExpression: keyConditionExpression,
       ExpressionAttributeValues: expressionAttributeValues,
-      TableName: this.tableMetadata.tableName,
-    };
+    });
     try {
-      const result = await this.client.query(processedParams).promise();
+      const result = await this.client.send(queryCommand);
       const item = result.Items?.[0] ?? null;
       if (item != null) {
         return {
@@ -51,7 +63,7 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
         data: null,
         error: {
           message: 'OBJECT_NOT_FOUND',
-          errorObject: result.$response.error,
+          errorObject: null,
         },
       };
     } catch (e) {
@@ -69,7 +81,7 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
     data: { [key in TField]: DynamoTypeMap[T['fields'][key]] };
   }): Promise<OptionalCreateOne> {
     try {
-      await this.client.put({ TableName: this.tableMetadata.tableName, Item: params.data }).promise();
+      await this.client.send(new PutCommand({ TableName: this.tableMetadata.tableName, Item: params.data }));
       return { error: null };
     } catch (e) {
       return {
@@ -80,4 +92,8 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
       };
     }
   }
+}
+
+function equalityFilterExpression(key: string): string {
+  return `${key} = :${key}`;
 }

@@ -24,6 +24,7 @@ import {
 import { type UserInfoDecoder } from './UserInfoDecoder';
 import { type RandomStringGenerator } from './randomStringGenerator';
 import { type AuthTokenGenerator } from '../common/AuthTokenGenerator';
+import { inProduction } from './utils';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
@@ -42,17 +43,17 @@ export async function controller({
   authRedirectUrl = process.env.AUTH_REDIRECT_URL,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientId = Config.GOOGLE_CLIENT_ID,
+  googleClientId = inProduction(() => Config.GOOGLE_CLIENT_ID),
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientSecret = Config.GOOGLE_CLIENT_SECRET,
+  googleClientSecret = inProduction(() => Config.GOOGLE_CLIENT_SECRET),
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  cookieSecret = Config.COOKIE_SECRET,
+  cookieSecret = inProduction(() => Config.COOKIE_SECRET),
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  userInfoTableName = Table.UserInfo.tableName,
+  userInfoTableName = inProduction(() => Table.UserInfo.tableName),
 
   // request info
   searchParameters = {},

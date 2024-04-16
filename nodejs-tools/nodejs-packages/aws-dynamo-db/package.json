@@ -27,7 +27,8 @@
     "@vighnesh153/utils": "*"
   },
   "devDependencies": {
-    "@types/aws-sdk": "^2.7.0",
+    "@aws-sdk/client-dynamodb": "^3.554.0",
+    "@aws-sdk/lib-dynamodb": "^3.554.0",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",

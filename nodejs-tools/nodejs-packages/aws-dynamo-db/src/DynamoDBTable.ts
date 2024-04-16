@@ -8,7 +8,12 @@ export type OptionalCreateOne = { error: null } | { error: { message: 'CREATION_
 
 export interface DynamoDBTable<T extends TableMetadata> {
   queryOne: <TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
-    filterBy: { [key in TFilterBy]: DynamoTypeMap[T['fields'][key]] };
+    filterBy: {
+      [key in TFilterBy]: {
+        value: DynamoTypeMap[T['fields'][key]];
+        filterExpression?: (key: string) => string;
+      };
+    };
   }) => Promise<OptionalQueryOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>>;
 
   createOne<TField extends keyof T['fields']>(params: {
