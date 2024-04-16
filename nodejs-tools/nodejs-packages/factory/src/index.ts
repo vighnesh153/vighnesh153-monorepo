@@ -1,4 +1,4 @@
-export function createFactory<TFunction extends () => TReturn, TReturn>(factoryFunction: TFunction): TFunction {
+export function createFactory<T>(factoryFunction: () => T): () => T {
   return factoryFunction;
 }
 
