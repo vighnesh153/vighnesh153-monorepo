@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
-import { AWSError, DynamoDB, Request } from 'aws-sdk';
+import { type ServiceOutputTypes, QueryCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { FakeDynamoDBDocumentClient } from './FakeDynamoDBDocumentClient';
 import { DynamoDBTableImpl } from './DynamoDBTableImpl';
 import { TableMetadata } from './TableMetadata';
@@ -24,22 +24,24 @@ beforeEach(() => {
 describe('queryOne tests', () => {
   test('should return item if no errors', async () => {
     const result = { name: 'pikachu', type: 'electric', strength: 60 };
-    fakeDocumentClient.queryResult = {
-      promise: () =>
-        Promise.resolve({
-          Items: [result],
-        }),
-    } as unknown as Request<DynamoDB.DocumentClient.QueryOutput, AWSError>;
+    fakeDocumentClient.sendReturnValues.pushRight({
+      Items: [result],
+    } as unknown as ServiceOutputTypes);
 
-    const actual = await dynamoDBTableImpl.queryOne({ filterBy: { name: 'Pikachu' } });
-
-    expect(fakeDocumentClient.queryCalledWithArgs).toStrictEqual({
-      ExpressionAttributeValues: {
-        ':name': 'Pikachu',
-      },
-      KeyConditionExpression: 'name = :name',
-      TableName: tableName,
+    const actual = await dynamoDBTableImpl.queryOne({
+      filterBy: { name: { value: 'Pikachu' } },
     });
+
+    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+      new QueryCommand({
+        ExpressionAttributeValues: {
+          ':name': 'Pikachu',
+        },
+        KeyConditionExpression: 'name = :name',
+        TableName: tableName,
+      }).input
+    );
+    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
     expect(actual).toStrictEqual({
       error: null,
       data: { ...result },
@@ -47,24 +49,26 @@ describe('queryOne tests', () => {
   });
 
   test('should return error if item not found', async () => {
-    const error = new Error('No item matches the given filter');
-    fakeDocumentClient.queryResult = {
-      promise: () => Promise.resolve({ $response: { error } }),
-    } as unknown as Request<DynamoDB.DocumentClient.QueryOutput, AWSError>;
+    fakeDocumentClient.sendReturnValues.pushRight({
+      Items: [],
+    } as unknown as ServiceOutputTypes);
 
-    const actual = await dynamoDBTableImpl.queryOne({ filterBy: { name: 'Pikachu' } });
+    const actual = await dynamoDBTableImpl.queryOne({ filterBy: { name: { value: 'Pikachu' } } });
 
-    expect(fakeDocumentClient.queryCalledWithArgs).toStrictEqual({
-      ExpressionAttributeValues: {
-        ':name': 'Pikachu',
-      },
-      KeyConditionExpression: 'name = :name',
-      TableName: tableName,
-    });
+    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+      new QueryCommand({
+        ExpressionAttributeValues: {
+          ':name': 'Pikachu',
+        },
+        KeyConditionExpression: 'name = :name',
+        TableName: tableName,
+      }).input
+    );
+    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
     expect(actual).toStrictEqual({
       error: {
         message: 'OBJECT_NOT_FOUND',
-        errorObject: error,
+        errorObject: null,
       },
       data: null,
     });
@@ -72,17 +76,20 @@ describe('queryOne tests', () => {
 
   test('should return error if error occurs while fetching', async () => {
     const error = new Error('Some random error');
-    fakeDocumentClient.queryError = error;
+    fakeDocumentClient.sendError = error;
 
-    const actual = await dynamoDBTableImpl.queryOne({ filterBy: { name: 'Pikachu' } });
+    const actual = await dynamoDBTableImpl.queryOne({ filterBy: { name: { value: 'Pikachu' } } });
 
-    expect(fakeDocumentClient.queryCalledWithArgs).toStrictEqual({
-      ExpressionAttributeValues: {
-        ':name': 'Pikachu',
-      },
-      KeyConditionExpression: 'name = :name',
-      TableName: tableName,
-    });
+    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+      new QueryCommand({
+        ExpressionAttributeValues: {
+          ':name': 'Pikachu',
+        },
+        KeyConditionExpression: 'name = :name',
+        TableName: tableName,
+      }).input
+    );
+    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
     expect(actual).toStrictEqual({
       error: {
         message: 'ERROR_WHILE_FETCHING',
@@ -100,15 +107,19 @@ describe('createOne tests', () => {
       type: 'thunder',
       strength: 70,
     };
+    fakeDocumentClient.sendReturnValues.pushRight({} as unknown as ServiceOutputTypes);
 
     const result = await dynamoDBTableImpl.createOne({
       data: item,
     });
 
-    expect(fakeDocumentClient.putCalledWithArgs).toStrictEqual({
-      Item: item,
-      TableName: tableName,
-    });
+    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+      new PutCommand({
+        Item: item,
+        TableName: tableName,
+      }).input
+    );
+    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
     expect(result).toStrictEqual({ error: null });
   });
 
@@ -119,16 +130,19 @@ describe('createOne tests', () => {
       strength: 70,
     };
     const error = new Error('Some error occurred while creating the item');
-    fakeDocumentClient.putError = error;
+    fakeDocumentClient.sendError = error;
 
     const result = await dynamoDBTableImpl.createOne({
       data: item,
     });
 
-    expect(fakeDocumentClient.putCalledWithArgs).toStrictEqual({
-      Item: item,
-      TableName: tableName,
-    });
+    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+      new PutCommand({
+        Item: item,
+        TableName: tableName,
+      }).input
+    );
+    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
     expect(result).toStrictEqual({
       error: {
         message: 'CREATION_FAILED',

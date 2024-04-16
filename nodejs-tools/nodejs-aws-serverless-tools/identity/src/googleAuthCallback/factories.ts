@@ -1,4 +1,4 @@
-import { DynamoDB } from 'aws-sdk';
+import { type DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 import { DynamoDBTable, DynamoDBTableImpl, createDynamoDBClient } from '@vighnesh153/aws-dynamo-db';
 import { createSingletonFactory } from '@vighnesh153/factory';
@@ -24,7 +24,7 @@ export const userInfoDecoderSingletonFactory = createSingletonFactory<UserInfoDe
   return new UserInfoDecoderImpl(loggerSingletonFactory());
 });
 
-const dynamoDBClientSingletonFactory = createSingletonFactory<DynamoDB.DocumentClient>(() => {
+const dynamoDBClientSingletonFactory = createSingletonFactory<DynamoDBClient>(() => {
   return createDynamoDBClient();
 });
 

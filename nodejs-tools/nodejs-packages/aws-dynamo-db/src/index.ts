@@ -1,4 +1,4 @@
-export * from './createDynamoDBClient';
+export * from './createDynamoDBDocumentClient';
 export * from './DynamoDBTable';
 export * from './DynamoDBTableImpl';
 export * from './TableMetadata';

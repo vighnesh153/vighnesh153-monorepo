@@ -1,116 +1,34 @@
-import { AWSError, DynamoDB, Request, Service } from 'aws-sdk';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import type { ServiceInputTypes, ServiceOutputTypes } from '@aws-sdk/lib-dynamodb';
+import { Queue } from '@vighnesh153/utils';
+import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
 
-export class FakeDynamoDBDocumentClient implements DynamoDB.DocumentClient {
-  createSetResult: DynamoDB.DocumentClient.DynamoDbSet = { type: 'Number', values: [] };
+import type { Command, MetadataBearer, HttpHandlerOptions } from '@smithy/types';
+import type { SmithyResolvedConfiguration } from '@smithy/smithy-client';
 
-  batchGetResult: Request<DynamoDB.DocumentClient.BatchGetItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.BatchGetItemOutput,
-    AWSError
-  >(new Service({}), '');
+export class FakeDynamoDBDocumentClient<
+  HandlerOptions = HttpHandlerOptions,
+  ClientInput extends object = ServiceInputTypes,
+  ClientOutput extends MetadataBearer = ServiceOutputTypes,
+> implements IDynamoDBDocumentClient<HandlerOptions, ClientInput, ClientOutput>
+{
+  sendError: Error | null = null;
+  sendReturnValues: Queue<ServiceOutputTypes> = new Queue();
+  sendCalledWithArgs:
+    | [
+        Command<ClientInput, ClientInput, ClientOutput, ClientOutput, SmithyResolvedConfiguration<HandlerOptions>>,
+        HandlerOptions?,
+      ]
+    | null = null;
 
-  batchWriteResult: Request<DynamoDB.DocumentClient.BatchWriteItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.BatchWriteItemOutput,
-    AWSError
-  >(new Service({}), '');
-
-  deleteResult: Request<DynamoDB.DocumentClient.DeleteItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.DeleteItemOutput,
-    AWSError
-  >(new Service({}), '');
-
-  getResult: Request<DynamoDB.DocumentClient.GetItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.GetItemOutput,
-    AWSError
-  >(new Service({}), '');
-
-  putCalledWithArgs: DocumentClient.PutItemInput = { TableName: '', Item: {} };
-
-  putError: Error | null = null;
-
-  putResult: Request<DynamoDB.DocumentClient.PutItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.PutItemOutput,
-    AWSError
-  >(new Service({}), '');
-
-  queryCalledWithArgs: DocumentClient.QueryInput = { TableName: '' };
-
-  queryError: Error | null = null;
-
-  queryResult: Request<DynamoDB.DocumentClient.QueryOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.QueryOutput,
-    AWSError
-  >(new Service({}), '');
-
-  scanResult: Request<DynamoDB.DocumentClient.ScanOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.ScanOutput,
-    AWSError
-  >(new Service({}), '');
-
-  updateResult: Request<DynamoDB.DocumentClient.UpdateItemOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.UpdateItemOutput,
-    AWSError
-  >(new Service({}), '');
-
-  transactGetResult: Request<DynamoDB.DocumentClient.TransactGetItemsOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.TransactGetItemsOutput,
-    AWSError
-  >(new Service({}), '');
-
-  transactWriteResult: Request<DynamoDB.DocumentClient.TransactWriteItemsOutput, AWSError> = new Request<
-    DynamoDB.DocumentClient.TransactWriteItemsOutput,
-    AWSError
-  >(new Service({}), '');
-
-  createSet(): DynamoDB.DocumentClient.DynamoDbSet {
-    return this.createSetResult;
-  }
-
-  batchGet(): Request<DynamoDB.DocumentClient.BatchGetItemOutput, AWSError> {
-    return this.batchGetResult;
-  }
-
-  batchWrite(): Request<DynamoDB.DocumentClient.BatchWriteItemOutput, AWSError> {
-    return this.batchWriteResult;
-  }
-
-  delete(): Request<DynamoDB.DocumentClient.DeleteItemOutput, AWSError> {
-    return this.deleteResult;
-  }
-
-  get(): Request<DynamoDB.DocumentClient.GetItemOutput, AWSError> {
-    return this.getResult;
-  }
-
-  put(params: DocumentClient.PutItemInput): Request<DynamoDB.DocumentClient.PutItemOutput, AWSError> {
-    this.putCalledWithArgs = params;
-    if (this.putError !== null) {
-      throw this.putError;
+  async send<InputType extends ClientInput, OutputType extends ClientOutput>(
+    command: Command<ClientInput, InputType, ClientOutput, OutputType, SmithyResolvedConfiguration<HandlerOptions>>,
+    options?: HandlerOptions
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.sendCalledWithArgs = [command as any, options];
+    if (this.sendError != null) {
+      throw this.sendError;
     }
-    return this.putResult;
-  }
-
-  query(params: DocumentClient.QueryInput): Request<DynamoDB.DocumentClient.QueryOutput, AWSError> {
-    this.queryCalledWithArgs = params;
-    if (this.queryError !== null) {
-      throw this.queryError;
-    }
-    return this.queryResult;
-  }
-
-  scan(): Request<DynamoDB.DocumentClient.ScanOutput, AWSError> {
-    return this.scanResult;
-  }
-
-  update(): Request<DynamoDB.DocumentClient.UpdateItemOutput, AWSError> {
-    return this.updateResult;
-  }
-
-  transactGet(): Request<DynamoDB.DocumentClient.TransactGetItemsOutput, AWSError> {
-    return this.transactGetResult;
-  }
-
-  transactWrite(): Request<DynamoDB.DocumentClient.TransactWriteItemsOutput, AWSError> {
-    return this.transactWriteResult;
+    return this.sendReturnValues.popLeft() as OutputType;
   }
 }
