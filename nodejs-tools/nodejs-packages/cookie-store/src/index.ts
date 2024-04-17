@@ -17,7 +17,10 @@ export interface CookieStoreWrapper {
 export class CookieStoreWrapperImpl implements CookieStoreWrapper {
   async getCookieValue(cookieName: string): Promise<string> {
     if (window.cookieStore?.get) {
-      return window.cookieStore.get(cookieName).then((cookie) => cookie.value);
+      return window.cookieStore
+        .get(cookieName)
+        .then((cookie) => cookie?.value ?? '')
+        .then((cookieValue) => (cookieValue ? decodeURIComponent(cookieValue) : ''));
     }
     const jsCookie = await JsCookie.getInstance();
     return jsCookie.get(cookieName) ?? '';
