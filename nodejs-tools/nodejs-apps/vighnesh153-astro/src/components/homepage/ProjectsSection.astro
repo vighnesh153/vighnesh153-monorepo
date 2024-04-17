@@ -1,0 +1,20 @@
+---
+import { hashTags } from '@/constants';
+import { classes } from '@/utils';
+import ProjectsMasonry from '@/components/projects/ProjectsMasonry.astro';
+import SectionTitle from './SectionTitle.astro';
+---
+
+<section
+  id={hashTags.homePage.projects}
+  class={classes(`
+    mx-auto
+    my-40
+    scroll-mt-8
+  `)}
+>
+  <div class="mx-auto max-w-prose">
+    <SectionTitle count="03" title="Projects" />
+  </div>
+  <ProjectsMasonry />
+</section>
