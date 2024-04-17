@@ -7,6 +7,7 @@ export const internalLinks = {
     root: '/',
     aboutMe: `/#${hashTags.homePage.aboutMe}`,
     experience: `/#${hashTags.homePage.experience}`,
+    projects: `/#${hashTags.homePage.projects}`,
     contactMe: `/#${hashTags.homePage.contactMe}`,
     footer: `/#${hashTags.footer}`,
   },

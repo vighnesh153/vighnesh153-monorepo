@@ -10,7 +10,7 @@ export const AllNavigationItems = {
   home: { text: 'Home', link: internalLinks.homePage.root },
   aboutMe: { text: 'About me', link: internalLinks.homePage.aboutMe },
   blog: { text: 'Blog', link: externalLinks.blog },
-  projects: { text: 'Projects', link: internalLinks.projects.root },
+  projects: { text: 'Projects', link: internalLinks.homePage.projects },
   experience: { text: 'Experience', link: internalLinks.homePage.experience },
   resume: { text: 'Resume', link: externalLinks.resume },
 } satisfies Record<string, NavItem>;

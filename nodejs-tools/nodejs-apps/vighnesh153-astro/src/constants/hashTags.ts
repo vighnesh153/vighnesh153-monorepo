@@ -5,6 +5,7 @@ export const hashTags = {
   homePage: {
     aboutMe: 'about-me',
     experience: 'experience',
+    projects: 'projects',
     contactMe: 'contact-me',
   },
   projects: {
