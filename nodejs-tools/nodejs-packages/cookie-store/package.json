@@ -23,9 +23,11 @@
     "dist"
   ],
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/utils": "*",
+    "js-cookie": "^3.0.5"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
