@@ -10,6 +10,7 @@ import { type JsonHttpClient } from '@vighnesh153/http-client';
 import { type Logger } from '@vighnesh153/logger';
 import { type CompleteUserInfo } from '@vighnesh153/types';
 import { milliseconds, not, slugify } from '@vighnesh153/utils';
+import { cookieKeys } from 'vighnesh153-cookies';
 
 import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
@@ -229,10 +230,10 @@ export async function controller({
   const response: LambdaResponse = {
     statusCode: http2.constants.HTTP_STATUS_TEMPORARY_REDIRECT,
     cookies: [
-      cookieSerializer.serialize(`${environmentStage}-user-info`, JSON.stringify(completeUserInfo), {
+      cookieSerializer.serialize(cookieKeys.userInfo(environmentStage!), JSON.stringify(completeUserInfo), {
         ...commonCookieOptions,
       }),
-      cookieSerializer.serialize(`${environmentStage}-auth-token`, authToken, {
+      cookieSerializer.serialize(cookieKeys.authToken(environmentStage!), authToken, {
         ...commonCookieOptions,
 
         httpOnly: true,
