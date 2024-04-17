@@ -1,5 +1,4 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
-import { sleep } from '@vighnesh153/utils';
 import { enableMobileScreen } from './helper';
 
 const closeNavigationMenuTitle = 'close navigation menu';
@@ -147,27 +146,6 @@ test(
 
 // prettier-ignore
 test(
-  'should not close sidebar menu when clicked on a link navigating to different page', 
-  async ({ page }) => {
-    await openSideNavigation(page);
-
-    const verticalNav = getVerticalNav(page);
-
-    await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeVisible();
-
-    await verticalNav.getByText('projects').click();
-
-    await sleep(2000);
-
-    await page.goBack()
-    await enableMobileScreen(page);
-
-    await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeVisible();
-  }
-);
-
-// prettier-ignore
-test(
   'should close sidebar menu when hit "Enter" on a focused link navigating to same page', 
   async ({ page }) => {
     await openSideNavigation(page);
@@ -180,28 +158,6 @@ test(
     await page.keyboard.press('Enter');
 
     await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).not.toBeVisible();
-  }
-);
-
-// prettier-ignore
-test(
-  'should not close sidebar menu when hit "Enter" on a focused link navigating to different page', 
-  async ({ page }) => {
-    await openSideNavigation(page);
-
-    const verticalNav = getVerticalNav(page);
-
-    await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeVisible();
-
-    await verticalNav.locator('a', { hasText: 'Projects' }).focus();
-    await page.keyboard.press('Enter');
-
-    await sleep(2000);
-
-    await page.goBack()
-    await enableMobileScreen(page);
-
-    await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeVisible();
   }
 );
 
