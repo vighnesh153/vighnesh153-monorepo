@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/bonding-particles/ProjectRoot.svelte';
+import BondingParticlesRoot from '@/components/projects/graphics/bonding-particles/BondingParticlesRoot.svelte';
 
 const project = graphicsProjectsMap.bondingParticles;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <BondingParticlesRoot client:load />
 </CanvasProjectLayout>

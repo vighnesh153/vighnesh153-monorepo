@@ -3,7 +3,7 @@ import { classes } from '@/utils';
 import { externalLinks, projectNavItems } from '@/constants';
 import ContentLayout from '@/layouts/ContentLayout.astro';
 import Link from '@/components/Link.svelte';
-import TsxRoot from '@/components/projects/tsx-playground/Root.svelte';
+import TsxPlaygroundRoot from '@/components/projects/tsx-playground/TsxPlaygroundRoot.svelte';
 
 const title = 'Vighnesh Raut | Project - TSX Playground';
 const description = `A in-browser transpiler and bundler for React.js and Typescript`;
@@ -16,6 +16,6 @@ const description = `A in-browser transpiler and bundler for React.js and Typesc
     <p class="mt-2 text-center">
       Checkout the source code on <Link href={externalLinks.projects.tsxBundler.sourceCode}>Github</Link>
     </p>
-    <TsxRoot client:only="svelte" />
+    <TsxPlaygroundRoot client:only="svelte" />
   </div>
 </ContentLayout>

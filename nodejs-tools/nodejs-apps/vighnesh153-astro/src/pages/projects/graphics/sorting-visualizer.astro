@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/sorting-visualizer/ProjectRoot.svelte';
+import SortingVisualizerRoot from '@/components/projects/graphics/sorting-visualizer/SortingVisualizerRoot.svelte';
 
 const project = graphicsProjectsMap.sortingVisualizer;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <SortingVisualizerRoot client:load />
 </CanvasProjectLayout>

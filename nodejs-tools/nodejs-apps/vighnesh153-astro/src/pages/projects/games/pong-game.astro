@@ -1,11 +1,11 @@
 ---
 import { gamesProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/games/pong-game/ProjectRoot.svelte';
+import PongGameRoot from '@/components/projects/games/pong-game/PongGameRoot.svelte';
 
 const project = gamesProjectsMap.pongGame;
 ---
 
 <CanvasProjectLayout project={project} type="game">
-  <ProjectRoot client:load />
+  <PongGameRoot client:load />
 </CanvasProjectLayout>
