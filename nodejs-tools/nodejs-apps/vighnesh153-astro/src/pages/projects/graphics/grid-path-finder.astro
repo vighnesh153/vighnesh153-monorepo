@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/grid-path-finder/ProjectRoot.svelte';
+import GridPathFinderRoot from '@/components/projects/graphics/grid-path-finder/GridPathFinderRoot.svelte';
 
 const project = graphicsProjectsMap.gridPathFinderGame;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <GridPathFinderRoot client:load />
 </CanvasProjectLayout>

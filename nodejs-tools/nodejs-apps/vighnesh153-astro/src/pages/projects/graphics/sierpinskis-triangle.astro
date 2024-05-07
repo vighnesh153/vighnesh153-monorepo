@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/sierpinskis-triangle/ProjectRoot.svelte';
+import SierpinskisTriangleRoot from '@/components/projects/graphics/sierpinskis-triangle/SierpinskisTriangleRoot.svelte';
 
 const project = graphicsProjectsMap.sierpinskisTriangle;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <SierpinskisTriangleRoot client:load />
 </CanvasProjectLayout>

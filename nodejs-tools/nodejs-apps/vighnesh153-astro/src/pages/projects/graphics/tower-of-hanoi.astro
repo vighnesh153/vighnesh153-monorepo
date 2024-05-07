@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/tower-of-hanoi/ProjectRoot.svelte';
+import TowerOfHanoiRoot from '@/components/projects/graphics/tower-of-hanoi/TowerOfHanoiRoot.svelte';
 
 const project = graphicsProjectsMap.towerOfHanoi;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <TowerOfHanoiRoot client:load />
 </CanvasProjectLayout>

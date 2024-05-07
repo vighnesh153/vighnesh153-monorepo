@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/pseudo-hilbert-curve/ProjectRoot.svelte';
+import PseudoHilbertCurveRoot from '@/components/projects/graphics/pseudo-hilbert-curve/PseudoHilbertCurveRoot.svelte';
 
 const project = graphicsProjectsMap.pseudoHilbertCurve;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <PseudoHilbertCurveRoot client:load />
 </CanvasProjectLayout>

@@ -1,11 +1,11 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/barnsleys-fern/ProjectRoot.svelte';
+import BarnsleysFernRoot from '@/components/projects/graphics/barnsleys-fern/BarnsleysFernRoot.svelte';
 
 const project = graphicsProjectsMap.barnsleysFern;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <BarnsleysFernRoot client:load />
 </CanvasProjectLayout>

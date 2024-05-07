@@ -1,11 +1,12 @@
 ---
 import { graphicsProjectsMap } from '@vighnesh153/graphics-programming';
 import CanvasProjectLayout from '@/layouts/CanvasProjectLayout.astro';
-import ProjectRoot from '@/components/projects/graphics/symmetric-binary-tree/ProjectRoot.svelte';
+// eslint-disable-next-line max-len
+import SymmetricBinaryTreeRoot from '@/components/projects/graphics/symmetric-binary-tree/SymmetricBinaryTreeRoot.svelte';
 
 const project = graphicsProjectsMap.symmetricBinaryTree;
 ---
 
 <CanvasProjectLayout project={project} type="illustration">
-  <ProjectRoot client:load />
+  <SymmetricBinaryTreeRoot client:load />
 </CanvasProjectLayout>
