@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "axios": "^1.6.8",
-    "esbuild-wasm": "0.21.0",
+    "esbuild-wasm": "0.20.2",
     "localforage": "^1.10.0"
   },
   "devDependencies": {
