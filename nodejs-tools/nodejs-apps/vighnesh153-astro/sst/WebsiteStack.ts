@@ -70,7 +70,7 @@ export function WebsiteStack({ stack }: StackContext) {
     },
     cdk: {
       bucket: {
-        bucketName: `vighnesh153-astro-${stage}`,
+        // bucketName: `vighnesh153-astro-${stage}`,
       },
       distribution: {
         comment: `${stage} Vighnesh153 Astro`,

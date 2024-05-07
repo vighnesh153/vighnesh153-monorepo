@@ -1,5 +1,8 @@
 {
   "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
@@ -17,8 +20,17 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[python]": {
     "editor.formatOnType": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -27,25 +39,37 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
-  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
-  "prettier.documentSelectors": ["**/*.astro"],
+  "chat.editor.fontSize": 20,
+  "cSpell.userWords": ["astro", "Millis", "Pikachu", "Raut", "treeshake", "tsup", "Vighnesh"],
+  "debug.console.fontSize": 20,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.detectIndentation": false,
   "editor.fontSize": 18,
+  "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "eslint.format.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
   "explorer.autoReveal": "focusNoScroll",
   "explorer.compactFolders": false,
   "git.autofetch": true,
+  "git.openRepositoryInParentFolders": "never",
   "javascript.updateImportsOnFileMove.enabled": "never",
+  "markdown.preview.fontSize": 20,
   "prettier.withNodeModules": true,
+  "redhat.telemetry.enabled": true,
+  "scm.inputFontSize": 16,
+  "security.workspace.trust.untrustedFiles": "open",
+  "svelte.enable-ts-plugin": true,
+  "terminal.integrated.fontSize": 20,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Dark Dimmed",
-  "workbench.editorAssociations": {},
+  "workbench.colorTheme": "Atom One Dark",
+  "workbench.editorAssociations": {
+    "*.class": "default"
+  },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always"
