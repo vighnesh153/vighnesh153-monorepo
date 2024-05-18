@@ -1,0 +1,42 @@
+{
+  "name": "@vighnesh153/solid-js-components",
+  "version": "1.0.0",
+  "description": "A collection of solid js components used in my ui projects.",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "types": "./dist/src/index.d.ts",
+    "import": "./dist/main.js"
+  },
+  "types": "./dist/src/index.d.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.dev",
+    "url": "https://vighnesh153.dev"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup && tsc",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vighnesh153/utils": "*"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "eslint-config-vighnesh153": "*",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git"
+  }
+}
