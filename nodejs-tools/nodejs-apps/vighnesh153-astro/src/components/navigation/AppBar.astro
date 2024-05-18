@@ -2,9 +2,12 @@
 import RvLogoIcon from '@/icons/RvLogoIcon.astro';
 import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.svelte';
-import NavigationItems from './NavigationItems.astro';
+
+import { GoogleSignInButton } from '@/components/solid';
 import { hashTags, type NavItem } from '@/constants';
 import { classes } from '@/utils';
+
+import NavigationItems from './NavigationItems.astro';
 
 interface Props {
   navItems?: NavItem[];
@@ -45,8 +48,11 @@ const { navItems } = Astro.props;
   <a href="/" aria-label="Logo" class="text-accent inline-block">
     <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
   </a>
+
   {/* Horizontal navigation */}
-  <NavigationItems class="hidden gap-6 lg:flex" navItems={navItems} />
+  <NavigationItems class="hidden gap-6 lg:flex lg:items-center" navItems={navItems}>
+    <GoogleSignInButton slot="end" client:load />
+  </NavigationItems>
   <button
     type="button"
     class={classes(`flex justify-center items-center lg:hidden`)}
@@ -55,8 +61,10 @@ const { navItems } = Astro.props;
   >
     <HamburgerIcon width="35" role="img" aria-hidden />
   </button>
+
   {/* State to keep track of whether the menu is open or not */}
   <input type="checkbox" class="peer hidden" id="side-navigation-open" />
+
   {/* Vertical navigation */}
   <NavigationItems
     class={classes(`
@@ -71,7 +79,7 @@ const { navItems } = Astro.props;
   >
     <button
       type="button"
-      slot="start-item"
+      slot="start"
       class={classes(`
         p-0
         flex
@@ -85,6 +93,7 @@ const { navItems } = Astro.props;
     >
       <CloseIcon width="25" role="img" aria-hidden />
     </button>
+    <GoogleSignInButton slot="end" client:load />
   </NavigationItems>
 </header>
 
