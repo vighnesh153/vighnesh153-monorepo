@@ -434,8 +434,8 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3",
-    "vitest": "^1.3.1"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "keywords": [],
   "repository": {
