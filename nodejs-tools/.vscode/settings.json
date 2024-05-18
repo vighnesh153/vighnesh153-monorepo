@@ -73,5 +73,5 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
-  "cSpell.words": ["tseslint", "astro", "Millis", "Pikachu", "Raut", "treeshake", "tsup", "Vighnesh"]
+  "cSpell.words": ["astro", "Millis", "Pikachu", "Raut", "tailwindcss", "treeshake", "tseslint", "tsup", "Vighnesh"]
 }
