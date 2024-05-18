@@ -412,8 +412,8 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   "types": "./dist/src/index.d.ts",
   "author": {
     "name": "Vighnesh Raut",
-    "email": "me@vighnesh153.com",
-    "url": "https://vighnesh153.com"
+    "email": "me@vighnesh153.dev",
+    "url": "https://vighnesh153.dev"
   },
   "license": "MIT",
   "scripts": {
