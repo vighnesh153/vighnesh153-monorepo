@@ -15,11 +15,11 @@ let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<typeof UserInfoTableMetadata>;
 let fakeCookieSerializer: FakeCookieSerializer;
 
-const UI_AUTH_COMPLETE_URL = 'https://dev-vighnesh153.com/auth/callback';
+const UI_AUTH_COMPLETE_URL = 'https://dev-vighnesh153.dev/auth/callback';
 
 const validEnvironmentVariables = {
   uiAuthCompleteUrl: UI_AUTH_COMPLETE_URL,
-  authRedirectUrl: 'https://dev-vighnesh153.com/google/auth/callback',
+  authRedirectUrl: 'https://dev-vighnesh153.dev/google/auth/callback',
   googleClientId: 'google-client-id',
   googleClientSecret: 'google-client-secret',
   cookieSecret: 'cookie-secret',
