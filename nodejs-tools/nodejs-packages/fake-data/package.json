@@ -14,9 +14,9 @@
   },
   "types": "./dist/src/index.d.ts",
   "author": {
-    "email": "me@vighnesh153.com",
+    "email": "me@vighnesh153.dev",
     "name": "Vighnesh Raut",
-    "url": "https://vighnesh153.com"
+    "url": "https://vighnesh153.dev"
   },
   "scripts": {
     "build:once:bundle": "tsup",

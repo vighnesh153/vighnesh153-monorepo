@@ -4,8 +4,8 @@
   "description": "A cors anywhere lambda for bypassing CORS block on links",
   "author": {
     "name": "Vighnesh Raut",
-    "email": "me@vighnesh153.com",
-    "url": "https://vighnesh153.com"
+    "email": "me@vighnesh153.dev",
+    "url": "https://vighnesh153.dev"
   },
   "license": "MIT",
   "main": "./dist/index.cjs",
