@@ -27,10 +27,12 @@
     "@vighnesh153/spl": "*",
     "@vighnesh153/tsx-bundler": "*",
     "@vighnesh153/utils": "*",
+    "solid-js": "^1.8.17",
     "svelte": "^4.2.15"
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.10",
+    "@astrojs/solid-js": "^4.2.0",
     "@astrojs/svelte": "^5.4.0",
     "@playform/compress": "^0.0.3",
     "@playwright/test": "^1.44.0",
