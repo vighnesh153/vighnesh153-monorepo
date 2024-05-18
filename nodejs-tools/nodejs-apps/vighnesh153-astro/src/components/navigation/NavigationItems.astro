@@ -11,7 +11,7 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
 ---
 
 <nav {...props}>
-  <slot name="start-item" />
+  <slot name="start" />
   {
     navItems.map((navItem) => (
       <Link href={navItem.link} rel="prefetch">
@@ -19,4 +19,5 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
       </Link>
     ))
   }
+  <slot name="end" />
 </nav>

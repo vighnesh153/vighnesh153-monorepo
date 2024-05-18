@@ -1,5 +1,6 @@
-import { uiOrigins } from '@/constants/uiOrigins';
+import { stage } from '@/constants';
 
 export function isProd(): boolean {
-  return window.location.origin === uiOrigins.production;
+  console.log(`Current stage: ${stage}`);
+  return stage === 'prod';
 }
