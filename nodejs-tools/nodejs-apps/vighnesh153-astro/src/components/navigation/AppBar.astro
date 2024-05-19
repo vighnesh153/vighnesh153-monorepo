@@ -3,7 +3,7 @@ import RvLogoIcon from '@/icons/RvLogoIcon.astro';
 import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.svelte';
 
-import { GoogleSignInButton } from '@/components/solid';
+import { GoogleSignInButton, PopoverPlayground } from '@/components/solid';
 import { hashTags, type NavItem } from '@/constants';
 import { classes } from '@/utils';
 
@@ -51,7 +51,8 @@ const { navItems } = Astro.props;
 
   {/* Horizontal navigation */}
   <NavigationItems class="hidden gap-6 lg:flex lg:items-center" navItems={navItems}>
-    <GoogleSignInButton slot="end" client:load />
+    <PopoverPlayground slot="end" client:load />
+    <!-- <GoogleSignInButton slot="end" client:load /> -->
   </NavigationItems>
   <button
     type="button"

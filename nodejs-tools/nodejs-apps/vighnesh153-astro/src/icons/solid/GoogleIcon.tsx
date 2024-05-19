@@ -15,5 +15,3 @@ export function GoogleIcon(incomingProps: GoogleIconProps): JSX.Element {
     </svg>
   );
 }
-
-<GoogleIcon />;
