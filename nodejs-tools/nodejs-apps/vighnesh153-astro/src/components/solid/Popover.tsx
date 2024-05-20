@@ -22,6 +22,7 @@ export type PopoverProps = ParentProps<{
 
   // TODO: add alignment (top, bottom, center) and arrangement (left, right, center)
   // TODO: click outside listener
+  // TODO: smart alignment based on scrolling
 
   // Interaction with this element triggers the popover
   controlElement: JSX.Element;
