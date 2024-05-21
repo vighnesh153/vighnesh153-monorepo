@@ -276,6 +276,79 @@ fetch(
   - [gm](https://www.npmjs.com/package/gm)
   - [@squoosh/lib](https://www.npmjs.com/package/@squoosh/lib)
   - [@squoosh/cli](https://www.npmjs.com/package/@squoosh/cli)
+- Javascript hacks and creative coding: https://aem1k.com/
+- Kevin Powell : Animating Glowing Border : https://www.youtube.com/watch?v=fcnDBP3k3BE
+- Kevin Powell : 3D Tilting Card effect with mouse tracking: https://www.youtube.com/watch?v=Z-3tPXf9a7M
+- The super tiny compiler: https://github.com/jamiebuilds/the-super-tiny-compiler
+- Jack Herrington: Vite and Module Federation Makes Micro frontends easy: https://www.youtube.com/watch?v=t-nchkL9yIg
+- Frontend masters algorithms: https://frontendmasters.com/courses/algorithms/
+- Kevin Powell : How to create a responsive HTML table: https://www.youtube.com/watch?v=czZ1PvNW5hk
+- Kevin Powell : Creating a CSS only directionally aware button: https://www.youtube.com/watch?v=e3w9liPXSi4
+- Kevin Powell : You probably want position sticky instead of fixed: https://www.youtube.com/watch?v=8MaCTDkoVd8
+- Kevin Powell : Create accessible tabs: https://www.youtube.com/watch?v=fI9VM5zzpu8
+- Kevin Powell : The unknown fundamentals of CSS: Offset parents and Stacking Context explained: https://www.youtube.com/watch?v=GS6b9p6edfk
+- Kevin Powell : CSS only particle animations: https://www.youtube.com/watch?v=9dEIg2xOphE
+- https://http.cat/404
+- Lighthouse: https://developer.chrome.com/docs/lighthouse/overview/
+- Unlighthouse: scans every page in website: https://unlighthouse.dev/guide/getting-started/how-it-works
+- Dr. Trefor Bazett: The fastest multiplication algorithm: https://www.youtube.com/watch?v=frT1UPiJUO0
+- Introducing WebGPU: Unlocking modern GPU access for Javascript: https://www.youtube.com/watch?v=m6T-Mq1BPXg
+- https://compilerbook.com/
+- Rant about frontend frameworks: https://hackmd.io/@roguegpu/r1RKQMdt3
+- Inside look at modern web browser: https://developer.chrome.com/blog/inside-browser-part1/
+- Khan academy math: https://www.khanacademy.org/math
+
+* Brilliant premium: https://brilliant.org/subscribe/
+
+- Interesting blogs: https://irian.to/blogs/
+- Stephen Grider: Microservices with Node JS and React: https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=LEADERSALE24A
+- Stephen Grider: NestJS: The Complete Developer's Guide: https://www.udemy.com/course/nestjs-the-complete-developers-guide/?couponCode=LEADERSALE24A
+- Stephen Grider: The complete React Native + Hooks course: https://www.udemy.com/course/the-complete-react-native-and-redux-course/
+- Stephen Grider: React Native : Advanced Concepts: https://www.udemy.com/course/react-native-advanced/
+- Stephen Grider: Electron for Desktop Apps: The Complete Developer's Guide: https://www.udemy.com/course/electron-react-tutorial/?couponCode=LEADERSALE24A
+- Data Oriented design Resources: https://github.com/dbartolini/data-oriented-design
+- Entity Component System: An introductory Guide: https://www.simplilearn.com/entity-component-system-introductory-guide-article
+- Kevin Powell: Create an infinite horizontal scroll animation: https://www.youtube.com/watch?v=iLmBy-HKIAw
+- Kevin Powell: Using CSS custom properties like this is a waste: https://www.youtube.com/watch?v=_2LwjfYc1x8
+- Kevin Powell: CSS Position deepdive: https://www.youtube.com/watch?v=fF_NVrd1s14
+- Philipp Lackner: How to build an animated splash screen on Android: https://www.youtube.com/watch?v=eFZmMSm1G1c
+- 3Blue1Brown: But what are hamming codes? The origin of error correction: https://www.youtube.com/watch?v=X8jsijhllIA
+- Philipp Lackner: Performance Optimization with @Stable and @Immutable in Jetpack Compose: https://www.youtube.com/watch?v=_FtKhWvHiTg
+- 3Blue1Brown: Why do prime numbers make these spirals? | Dirichlet’s theorem and pi approximations: https://www.youtube.com/watch?v=EK32jo7i5LQ
+- Java concurrency and multi threading: https://www.youtube.com/playlist?list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4
+- https://www.procosplay.com/
+- Challenging projects every programmer should try: https://austinhenley.com/blog/challengingprojects.html
+  - Text editor
+  - 2D game - Space Invaders
+  - Compiler - Tiny BASIC
+  - Mini operating system
+  - Spreadsheet (hard!)
+  - Video game console emulator (hard!)
+- Philipp Lackner : Is it okay to use runBlocking?: https://www.youtube.com/watch?v=PXnVry_emns
+- Philipp Lackner: The Ultimate guide to kotlin flows: https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC
+- Amazing UX designs: https://www.behance.net/jarredfourie/projects
+- Cute fox cute vectors: https://www.freepik.com/vectors/cute-fox%27%3ECute
+- Android clean architecture
+- Philipp Lackner: This is how you create custom shapes in jetpack compose: https://www.youtube.com/watch?v=LEuxvDVA9pA
+- Deep dive in to Jetpack Compose Layouts: https://www.youtube.com/watch?v=zMKMwh9gZuI
+- Kevin powell: Create a cool bubble zoom effect with CSS: https://www.youtube.com/watch?v=2f4JAsTFRLA
+- Jetpack compose tutorials: https://github.com/SmartToolFactory/Jetpack-Compose-Tutorials
+- Canva: We put half a million files in one git repository, here's what we learnt: https://www.canva.dev/blog/engineering/we-put-half-a-million-files-in-one-git-repository-heres-what-we-learned/
+- Game programming patterns: https://gameprogrammingpatterns.com/contents.html
+- Thorsten ball: writing a compiler in Golang
+- Intuit Mailchimp: https://mailchimp.com/
+- automata theory
+- Theory of Computation A.pdf: https://drive.google.com/file/d/1MVx9ytN5EvPx6r2Shhh8M3mRbJ2Fiv2x/view?usp=sharing
+- BNF grammar for EcmaScript: https://tomcopeland.blogs.com/EcmaScript.html
+- Dreams of code: I have been using Redis wrong this whole time: https://www.youtube.com/watch?v=WQ61RL1GpEE
+- Android app architecture: https://developer.android.com/topic/architecture
+  - Samples: https://github.com/android/architecture-samples
+- Implementing a language server, how hard can it be: https://medium.com/ballerina-techblog/implementing-a-language-server-how-hard-can-it-be-part-1-introduction-c915d2437076
+- https://nix.dev/
+- https://cpu.land/
+- Kevin Powell: Make position absolute work with you, not against you: https://www.youtube.com/watch?v=ZrZ-ZzacGXs
+- Mark rober engineering: https://studio.com/mark-rober-engineering/login
+- Android Interface Definition Language (AIDL): https://developer.android.com/develop/background-work/services/aidl
 
 #### Embed GitHub files/commits/gists into html
 
