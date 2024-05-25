@@ -14,7 +14,16 @@ export type JsonHttpResponseErrorValue = {
   errorMessage: string;
 };
 
-export type JsonHttpResponseValue<T> = JsonHttpResponseSuccessValue<T> | JsonHttpResponseErrorValue;
+export type JsonHttpResponseAbortValue = {
+  type: 'abort';
+  reasonMessage: string;
+  reason: Error;
+};
+
+export type JsonHttpResponseValue<T> =
+  | JsonHttpResponseSuccessValue<T>
+  | JsonHttpResponseErrorValue
+  | JsonHttpResponseAbortValue;
 
 export class JsonHttpResponse<T> {
   constructor(private value: JsonHttpResponseValue<T>) {}
@@ -25,6 +34,10 @@ export class JsonHttpResponse<T> {
 
   isError(): boolean {
     return this.value.type === 'error';
+  }
+
+  isAbort(): boolean {
+    return this.value.type === 'abort';
   }
 
   getSuccessResponse(): JsonHttpResponseSuccessValue<T> {
@@ -39,5 +52,12 @@ export class JsonHttpResponse<T> {
       throw new Error('Not an error response');
     }
     return this.value as JsonHttpResponseErrorValue;
+  }
+
+  getAbortResponse(): JsonHttpResponseAbortValue {
+    if (not(this.isAbort())) {
+      throw new Error('Request is not aborted');
+    }
+    return this.value as JsonHttpResponseAbortValue;
   }
 }
