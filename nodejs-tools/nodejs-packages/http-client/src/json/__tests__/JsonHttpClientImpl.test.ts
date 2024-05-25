@@ -5,6 +5,7 @@ import { Server } from 'http';
 
 import { app } from './testServer';
 import { JsonHttpClientImpl } from '../JsonHttpClientImpl';
+import { milliseconds } from '@vighnesh153/utils';
 
 let server: Server;
 let serverAddress: string = '';
@@ -78,7 +79,9 @@ test('for GET Request, send headers and query parameters through the request', a
 
   expect(response.isSuccess()).toBe(true);
   expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(false);
   expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const successResponse = response.getSuccessResponse();
   expect(successResponse.type).toBe('success');
@@ -93,6 +96,29 @@ test('for GET Request, send headers and query parameters through the request', a
   });
 });
 
+test('for GET Request, abort the request if it takes longer than timeout.', async () => {
+  const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
+  const executor = client.get({
+    path: `/delay/${milliseconds({ seconds: 3 })}`,
+    timeoutMillis: 500,
+    headers,
+    queryParameters,
+  });
+
+  const response = await executor.execute();
+
+  expect(response.isSuccess()).toBe(false);
+  expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(true);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+
+  const abortResponse = response.getAbortResponse();
+  expect(abortResponse.type).toBe('abort');
+  expect(abortResponse.reasonMessage).toBe('Request timed out after 500 milliseconds.');
+  expect(abortResponse.reason).toStrictEqual(new Error('Request timed out after 500 milliseconds.'));
+});
+
 test('for GET Request, send headers and query parameters through the request using absolute url', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.get({ path: `${serverAddress}/200`, headers, queryParameters });
@@ -101,7 +127,9 @@ test('for GET Request, send headers and query parameters through the request usi
 
   expect(response.isSuccess()).toBe(true);
   expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(false);
   expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const successResponse = response.getSuccessResponse();
   expect(successResponse.type).toBe('success');
@@ -125,20 +153,21 @@ test('for GET Request, should abort the request', async () => {
     executor.execute(),
     // simulate abort after 100 milliseconds
     new Promise((resolve) => {
-      executor.abortController.abort();
+      executor.abort(new Error(`Aborting because user changed page.`));
       resolve(null);
     }),
   ]);
 
   expect(response.isSuccess()).toBe(false);
-  expect(response.isError()).toBe(true);
+  expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(true);
   expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
 
-  const errorResponse = response.getErrorResponse();
-  expect(errorResponse.type).toBe('error');
-  expect(errorResponse.statusCode).toBeNull();
-  expect(errorResponse.errorMessage).toBe('This operation was aborted');
-  expect(errorResponse.error).toMatchInlineSnapshot(`[AbortError: This operation was aborted]`);
+  const abortResponse = response.getAbortResponse();
+  expect(abortResponse.type).toBe('abort');
+  expect(abortResponse.reasonMessage).toBe(`Aborting because user changed page.`);
+  expect(abortResponse.reason).toStrictEqual(new Error(`Aborting because user changed page.`));
 });
 
 test('for GET Request, parse the 4xx response as text error', async () => {
@@ -148,8 +177,10 @@ test('for GET Request, parse the 4xx response as text error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');
@@ -164,8 +195,10 @@ test('for GET Request, parse the 4xx response as json error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');
@@ -187,8 +220,10 @@ test('for GET Request, parse the 5xx response as error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');
@@ -204,7 +239,9 @@ test('for POST Request, send headers, query parameters and json data through the
 
   expect(response.isSuccess()).toBe(true);
   expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(false);
   expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const successResponse = response.getSuccessResponse();
   expect(successResponse.type).toBe('success');
@@ -221,6 +258,30 @@ test('for POST Request, send headers, query parameters and json data through the
   });
 });
 
+test('for POST Request, abort the request if it takes longer than timeout.', async () => {
+  const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
+  const executor = client.post({
+    path: `/delay/${milliseconds({ seconds: 3 })}`,
+    timeoutMillis: 500,
+    data: {},
+    headers,
+    queryParameters,
+  });
+
+  const response = await executor.execute();
+
+  expect(response.isSuccess()).toBe(false);
+  expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(true);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+
+  const abortResponse = response.getAbortResponse();
+  expect(abortResponse.type).toBe('abort');
+  expect(abortResponse.reasonMessage).toBe('Request timed out after 500 milliseconds.');
+  expect(abortResponse.reason).toStrictEqual(new Error('Request timed out after 500 milliseconds.'));
+});
+
 test('for POST Request, send headers, query parameters and form data through the request', async () => {
   const client = new JsonHttpClientImpl({ baseUrl: serverAddress });
   const executor = client.post({ path: '/200', headers, queryParameters, data: formData });
@@ -229,7 +290,9 @@ test('for POST Request, send headers, query parameters and form data through the
 
   expect(response.isSuccess()).toBe(true);
   expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(false);
   expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const successResponse = response.getSuccessResponse();
   expect(successResponse.type).toBe('success');
@@ -259,7 +322,9 @@ test('for POST Request, send headers, query parameters and data through the requ
 
   expect(response.isSuccess()).toBe(true);
   expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(false);
   expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const successResponse = response.getSuccessResponse();
   expect(successResponse.type).toBe('success');
@@ -285,20 +350,21 @@ test('for POST Request, should abort the request', async () => {
     executor.execute(),
     // simulate abort after 100 milliseconds
     new Promise((resolve) => {
-      executor.abortController.abort();
+      executor.abort(new Error(`Aborting because user changed page.`));
       resolve(null);
     }),
   ]);
 
   expect(response.isSuccess()).toBe(false);
-  expect(response.isError()).toBe(true);
+  expect(response.isError()).toBe(false);
+  expect(response.isAbort()).toBe(true);
   expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getErrorResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not an error response]`);
 
-  const errorResponse = response.getErrorResponse();
-  expect(errorResponse.type).toBe('error');
-  expect(errorResponse.statusCode).toBeNull();
-  expect(errorResponse.errorMessage).toBe('This operation was aborted');
-  expect(errorResponse.error).toMatchInlineSnapshot(`[AbortError: This operation was aborted]`);
+  const abortResponse = response.getAbortResponse();
+  expect(abortResponse.type).toBe('abort');
+  expect(abortResponse.reasonMessage).toBe('Aborting because user changed page.');
+  expect(abortResponse.reason).toStrictEqual(new Error('Aborting because user changed page.'));
 });
 
 test('for POST Request, parse the 4xx response as text error', async () => {
@@ -308,8 +374,10 @@ test('for POST Request, parse the 4xx response as text error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');
@@ -324,8 +392,10 @@ test('for POST Request, parse the 4xx response as json error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');
@@ -349,8 +419,10 @@ test('for POST Request, parse the 5xx response as error', async () => {
   const response = await executor.execute();
 
   expect(response.isSuccess()).toBe(false);
-  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
   expect(response.isError()).toBe(true);
+  expect(response.isAbort()).toBe(false);
+  expect(() => response.getSuccessResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Not a success response]`);
+  expect(() => response.getAbortResponse()).toThrowErrorMatchingInlineSnapshot(`[Error: Request is not aborted]`);
 
   const errorResponse = response.getErrorResponse();
   expect(errorResponse.type).toBe('error');

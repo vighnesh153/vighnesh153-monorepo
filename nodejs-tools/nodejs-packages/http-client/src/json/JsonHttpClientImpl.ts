@@ -8,6 +8,9 @@ import {
 } from './JsonHttpClient';
 import { JsonHttpResponse } from './JsonHttpResponse';
 import { HttpQueryParameters } from '../common';
+import { milliseconds } from '@vighnesh153/utils';
+
+export const JSON_HTTP_CLIENT_TIMEOUT = milliseconds({ seconds: 10 });
 
 export interface JsonHttpClientImplProps {
   baseUrl: string;
@@ -24,14 +27,20 @@ export class JsonHttpClientImpl implements JsonHttpClient {
     request: JsonHttpGetRequest,
     responseMiddleWare?: JsonHttpResponseMiddleware<TResponse>
   ): JsonHttpRequestExecutor<TResponse> {
-    return this.makeRequestExecutor({ ...request, method: 'get' }, responseMiddleWare);
+    return this.makeRequestExecutor(
+      { timeoutMillis: JSON_HTTP_CLIENT_TIMEOUT, method: 'get', ...request },
+      responseMiddleWare
+    );
   }
 
   post<TRequest, TResponse>(
     request: JsonHttpPostRequest<TRequest>,
     responseMiddleWare?: JsonHttpResponseMiddleware<TResponse>
   ): JsonHttpRequestExecutor<TResponse> {
-    return this.makeRequestExecutor({ ...request, method: 'post' }, responseMiddleWare);
+    return this.makeRequestExecutor(
+      { timeoutMillis: JSON_HTTP_CLIENT_TIMEOUT, method: 'post', ...request },
+      responseMiddleWare
+    );
   }
 
   private makeRequestExecutor<TRequest, TResponse>(
@@ -40,12 +49,22 @@ export class JsonHttpClientImpl implements JsonHttpClient {
   ): JsonHttpRequestExecutor<TResponse> {
     const params = this.constructUrlSearchParams(request.queryParameters);
     const abortController = new AbortController();
+    const { timeoutMillis } = request;
+    const timeout = setTimeout(
+      () => abortController.abort(new Error(`Request timed out after ${timeoutMillis} milliseconds.`)),
+      timeoutMillis
+    );
+    const cancelTimeoutAbort = () => clearTimeout(timeout);
     return {
-      abortController,
+      abort(reason) {
+        cancelTimeoutAbort();
+        abortController.abort(reason);
+      },
       execute: async () => {
         try {
           const requestOptions = this.constructRequestOptions(request, abortController);
           const response = await fetch(this.constructUrl(request.path, params).toString(), requestOptions);
+          cancelTimeoutAbort();
 
           // custom response middleware
           if (responseMiddleWare) {
@@ -54,7 +73,7 @@ export class JsonHttpClientImpl implements JsonHttpClient {
 
           return this.constructPromiseResolutionResponse(response);
         } catch (e) {
-          return this.constructPromiseRejectionResponse<TResponse>(e);
+          return this.constructPromiseRejectionResponse<TResponse>(e, abortController.signal);
         }
       },
     };
@@ -148,9 +167,21 @@ export class JsonHttpClientImpl implements JsonHttpClient {
     });
   }
 
-  private async constructPromiseRejectionResponse<T>(error: unknown): Promise<JsonHttpResponse<T>> {
+  private async constructPromiseRejectionResponse<T>(
+    error: unknown,
+    signal: AbortSignal
+  ): Promise<JsonHttpResponse<T>> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const errorMessage = (error as any).message;
+    const errorMessage = (error as any)?.message;
+
+    if (signal.aborted) {
+      return new JsonHttpResponse({
+        type: 'abort',
+        reason: error as Error,
+        reasonMessage: errorMessage ?? 'Aborted with unknown reason.',
+      });
+    }
+
     return new JsonHttpResponse({
       type: 'error',
       error,

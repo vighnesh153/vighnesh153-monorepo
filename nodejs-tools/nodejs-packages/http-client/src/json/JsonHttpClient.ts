@@ -9,6 +9,7 @@ export interface JsonHttpRequest<T> {
   headers?: Record<string, string> | null;
   mode?: RequestMode;
   credentials?: RequestCredentials;
+  timeoutMillis?: number;
 }
 
 export type JsonHttpGetRequest = Omit<JsonHttpRequest<unknown>, 'data' | 'method'>;
@@ -16,7 +17,7 @@ export type JsonHttpGetRequest = Omit<JsonHttpRequest<unknown>, 'data' | 'method
 export type JsonHttpPostRequest<T> = Omit<JsonHttpRequest<T> & Required<Pick<JsonHttpRequest<T>, 'data'>>, 'method'>;
 
 export interface JsonHttpRequestExecutor<T> {
-  abortController: AbortController;
+  abort: (reason: Error) => void;
   execute(): Promise<JsonHttpResponse<T>>;
 }
 

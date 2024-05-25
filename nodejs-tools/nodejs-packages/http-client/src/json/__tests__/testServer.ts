@@ -1,5 +1,5 @@
 import express from 'express';
-import { sleep } from '@vighnesh153/utils';
+import { milliseconds, sleep } from '@vighnesh153/utils';
 
 const app = express();
 
@@ -10,6 +10,17 @@ app.get('/200', (req, res) => {
     message: '200',
     receivedSearchParams: req.query,
     receivedHeaders: req.headers,
+  });
+});
+
+app.get('/delay/:millis', async (req, res) => {
+  const delay = parseInt(req.params.millis) ?? milliseconds({ seconds: 10 });
+  await sleep(delay);
+  res.json({
+    message: '200',
+    receivedSearchParams: req.query,
+    receivedHeaders: req.headers,
+    params: req.params,
   });
 });
 
@@ -43,6 +54,18 @@ app.post('/200', (req, res) => {
     message: '200',
     receivedSearchParams: req.query,
     receivedHeaders: req.headers,
+    receivedData: req.body,
+  });
+});
+
+app.post('/delay/:millis', async (req, res) => {
+  const delay = parseInt(req.params.millis) ?? milliseconds({ seconds: 10 });
+  await sleep(delay);
+  res.json({
+    message: '200',
+    receivedSearchParams: req.query,
+    receivedHeaders: req.headers,
+    params: req.params,
     receivedData: req.body,
   });
 });
