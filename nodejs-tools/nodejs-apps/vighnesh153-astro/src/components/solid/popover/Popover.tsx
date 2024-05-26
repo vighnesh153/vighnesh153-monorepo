@@ -11,7 +11,7 @@ import { updatePopoverPlacementBasedOnPlacement } from './popover-placement';
 export function Popover(incomingProps: PopoverProps): JSX.Element {
   const [, props] = splitProps(
     mergeProps<Partial<PopoverProps>[]>(
-      { placement: 'bottom-end', layoutDirection: null },
+      { placement: 'bottom-center', layoutDirection: null, flipPlacement: true },
       incomingProps
     ) as Required<PopoverProps>,
     []
