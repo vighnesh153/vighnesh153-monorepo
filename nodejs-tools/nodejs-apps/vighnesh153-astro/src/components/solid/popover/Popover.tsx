@@ -5,8 +5,19 @@ import { Portal } from 'solid-js/web';
 import { not } from '@vighnesh153/utils';
 
 import { classes } from '@/utils';
+
+import { clickOutside } from '../clickOutside';
 import type { PopoverLayoutDirection, PopoverPlacement, PopoverProps } from './externalTypes';
 import { updatePopoverPlacementBasedOnPlacement } from './popover-placement';
+
+declare module 'solid-js' {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface Directives {
+      clickOutside: ReturnType<Parameters<typeof clickOutside>[1]>;
+    }
+  }
+}
 
 export function Popover(incomingProps: PopoverProps): JSX.Element {
   const [, props] = splitProps(
@@ -58,7 +69,11 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
     <div ref={root}>
       {controlElement()}
       <Portal>
-        <div ref={popoverContentRoot} class={classes(`fixed z-tooltip`)}>
+        <div
+          ref={popoverContentRoot}
+          class={classes(`fixed z-tooltip`)}
+          use:clickOutside={{ ignoreElements: [controlElement() as HTMLElement], clickOutsideCallback: props.close }}
+        >
           <Show when={props.open}>{props.popoverContent}</Show>
         </div>
       </Portal>
@@ -71,12 +86,12 @@ export function PopoverPlayground(props: { placement?: PopoverPlacement }) {
 
   return (
     <Popover
+      {...props}
       open={open()}
       close={() => setOpen(false)}
       popoverContent={<div class="w-[200px] aspect-square bg-primary text-secondary">Hello world</div>}
-      {...props}
       controlElement={
-        <button aria-expanded={`${open()}`} class="border-2" onClick={() => setOpen((oldOpen) => !oldOpen)}>
+        <button aria-expanded={`${open()}`} class="border-2" onClick={() => setOpen((oldOpen) => not(oldOpen))}>
           Lol
         </button>
       }
