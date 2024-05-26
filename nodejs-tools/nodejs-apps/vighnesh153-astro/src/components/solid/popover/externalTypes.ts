@@ -33,9 +33,10 @@ export type PopoverProps = ParentProps<{
    */
   close: () => void;
 
-  // TODO: click outside listener (make use of the close callback above)
   // TODO: add tiny-triangle to popover
   // TODO: accessibility
+  // TODO: testing
+  // TODO: styling
 
   /**
    * Where to place the floating element relative to its reference element.
