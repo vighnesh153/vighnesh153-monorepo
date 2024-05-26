@@ -11,7 +11,7 @@ import { updatePopoverPlacementBasedOnPlacement } from './popover-placement';
 export function Popover(incomingProps: PopoverProps): JSX.Element {
   const [, props] = splitProps(
     mergeProps<Partial<PopoverProps>[]>(
-      { placement: 'bottom-center', layoutDirection: null, flipPlacement: true },
+      { placement: 'bottom-center', layoutDirection: null },
       incomingProps
     ) as Required<PopoverProps>,
     []
@@ -66,7 +66,7 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
   );
 }
 
-export function PopoverPlayground(props: { placement: PopoverPlacement }) {
+export function PopoverPlayground(props: { placement?: PopoverPlacement }) {
   const [open, setOpen] = createSignal(false);
 
   return (
@@ -74,7 +74,7 @@ export function PopoverPlayground(props: { placement: PopoverPlacement }) {
       open={open()}
       close={() => setOpen(false)}
       popoverContent={<div class="w-[200px] aspect-square bg-primary text-secondary">Hello world</div>}
-      placement={props.placement}
+      {...props}
       controlElement={
         <button aria-expanded={`${open()}`} class="border-2" onClick={() => setOpen((oldOpen) => !oldOpen)}>
           Lol

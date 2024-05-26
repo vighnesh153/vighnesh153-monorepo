@@ -16,6 +16,12 @@ export type PopoverPlacement =
 
 export type PopoverLayoutDirection = 'ltr' | 'rtl';
 
+/**
+ * Props for the Popover component.
+ *
+ * Future To-dos:
+ * 1. Flip placement based on scrolling to keep the popover in view
+ */
 export type PopoverProps = ParentProps<{
   /**
    * State to track whether the popover is open or closed.
@@ -27,8 +33,7 @@ export type PopoverProps = ParentProps<{
    */
   close: () => void;
 
-  // TODO: click outside listener
-  // TODO: smart alignment based on scrolling
+  // TODO: click outside listener (make use of the close callback above)
   // TODO: add tiny-triangle to popover
   // TODO: accessibility
 
@@ -38,13 +43,6 @@ export type PopoverProps = ParentProps<{
    * @default 'bottom-center'
    */
   placement?: PopoverPlacement;
-
-  /**
-   * Changes the placement of the floating element to keep it in view.
-   *
-   * @default true
-   */
-  flipPlacement?: boolean;
 
   /**
    * Interaction with this element triggers the popover
