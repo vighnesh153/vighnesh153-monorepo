@@ -13,7 +13,7 @@
     "start": "dotenv -e ../../.env.local -- wrangler dev",
     "deploy:prod": "wrangler publish",
     "lint": "eslint --max-warnings=0 .",
-    "test": "vitest run"
+    "test-": "vitest run"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240620.0",

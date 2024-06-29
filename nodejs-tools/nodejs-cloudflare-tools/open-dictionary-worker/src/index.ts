@@ -1,4 +1,4 @@
-import fetch, { Request, Response } from 'node-fetch';
+import nodeFetch, { Request, Response } from 'node-fetch';
 
 const prefix = 'https://raw.githubusercontent.com/vighnesh153/open-dictionary/main/data';
 const suffix = '_.json';
@@ -22,7 +22,7 @@ export default {
     }
 
     const definitionUrl = [prefix, ...word.split(''), suffix].join('/');
-    const definitionText = await fetch(definitionUrl).then((res) => res.text());
+    const definitionText = await nodeFetch(definitionUrl).then((res) => res.text());
 
     if (definitionText === '404: Not Found') {
       return buildResponse(
