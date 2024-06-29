@@ -2,7 +2,6 @@
 import { internalLinks } from '@/constants';
 import { classes } from '@/utils';
 import Link from '../Link.svelte';
-import { PopoverPlayground } from '@/components/solid';
 ---
 
 <section
@@ -17,7 +16,6 @@ import { PopoverPlayground } from '@/components/solid';
   justify-center items-start
 `)}
 >
-  <PopoverPlayground slot="end" client:load />
   <h1>
     <span
       class={classes(`

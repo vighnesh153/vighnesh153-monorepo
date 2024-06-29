@@ -105,17 +105,17 @@ const rtlPlacementMapping: Record<PopoverPlacement, AbsolutePlacement> = {
   'top-center': 'top-center',
   'top-end': 'top-left',
 
-  'right-start': 'right-bottom',
+  'right-start': 'right-top',
   'right-center': 'right-center',
-  'right-end': 'right-top',
+  'right-end': 'right-bottom',
 
   'bottom-start': 'bottom-right',
   'bottom-center': 'bottom-center',
   'bottom-end': 'bottom-left',
 
-  'left-start': 'left-bottom',
+  'left-start': 'left-top',
   'left-center': 'left-center',
-  'left-end': 'left-top',
+  'left-end': 'left-bottom',
 };
 
 function calculateAbsolutePlacementBasedOnDirection(
@@ -183,4 +183,25 @@ function alignPopoverBottomWithControlElementTop(
   popoverRect: DOMRect
 ) {
   popoverContentRoot.style.top = `${controlElRect.top - popoverRect.height}px`;
+}
+
+export function computeFlexClassesForPopoverContentRootBasedOnPlacement(placement: PopoverPlacement): string {
+  const outputClasses: string[] = [];
+  const [topBottomLeftRight, startCenterEnd] = placement.split('-');
+  switch (topBottomLeftRight) {
+    case 'top':
+      outputClasses.push('flex-col-reverse');
+      break;
+    case 'right':
+      outputClasses.push('flex-row-reverse');
+      break;
+    case 'bottom':
+      outputClasses.push('flex-col');
+      break;
+    case 'left':
+      outputClasses.push('flex-row');
+      break;
+  }
+  outputClasses.push(`items-${startCenterEnd}`);
+  return outputClasses.join(' ');
 }

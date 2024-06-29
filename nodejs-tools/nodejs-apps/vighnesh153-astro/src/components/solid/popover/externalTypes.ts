@@ -33,11 +33,6 @@ export type PopoverProps = ParentProps<{
    */
   close: () => void;
 
-  // TODO: add tiny-triangle to popover
-  // TODO: accessibility
-  // TODO: testing
-  // TODO: styling
-
   /**
    * Where to place the floating element relative to its reference element.
    *
@@ -68,4 +63,9 @@ export type PopoverProps = ParentProps<{
    * @default 'ltr'
    */
   layoutDirection?: PopoverLayoutDirection | null;
+
+  /**
+   * Classes to be assigned to triangular popover bump.
+   */
+  triangleBumpCssClasses: string;
 }>;

@@ -46,5 +46,21 @@ export default {
     'base-button',
     'primary-button',
     'secondary-button',
+    // popover
+    'popover-content-root',
+    // flex
+    'flex-col',
+    'flex-col-reverse',
+    'flex-row',
+    'flex-row-reverse',
+    'items-start',
+    'items-center',
+    'items-end',
+    // rotation
+    'before:rotate-90',
+    'before:-rotate-90',
+    'before:rotate-180',
+    // before pseudo elements
+    'before:text-primary',
   ],
 };
