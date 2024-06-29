@@ -4,30 +4,6 @@
 
 - Cloudflare workers: https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
 
-### Integrations
-
-- Database: Mongodb
-  - Backend Testing: [mongodb-memory-server](https://www.npmjs.com/package/mongodb-memory-server)
-- Logging
-  - General Logs
-    - Service: [Axiom](https://www.axiom.co/)
-    - Email alerts
-      - 4xx responses >= 5, in past 10 minutes
-      - 5xx responses >= 5, in past 10 minutes
-      - General errors >= 5, in past 10 minutes
-  - Audit logs
-    - Mongodb
-
-### Commitlint
-
-Common types according to commitlint-config-conventional (based on the Angular convention) can be:
-
-- [Understand what it is](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Local setup](https://commitlint.js.org/#/guides-local-setup)
-- [API Reference](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/index.js)
-- [Commit rules](https://commitlint.js.org/#/reference-rules)
-- [Configurations](https://github.com/conventional-changelog/commitlint#config)
-
 ### Check updates
 
 ```shell
@@ -37,10 +13,6 @@ ncu -u
 ```
 
 Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
-
-### Serverless
-
-- AWS credentials: https://www.serverless.com/framework/docs/providers/aws/guide/credentials/
 
 ### Publishing packages
 
@@ -54,6 +26,12 @@ Visit
 
 #### Tasks
 
+- Popover accessibility
+- Popover testing
+- Popover styling
+- Vighnesh153 Login
+- vighnesh153 media
+- vighnesh153 private.vighnesh153.com
 - Move @vighnesh153/random-word to @vighnesh153/utils
 - adb fetch continue watching row from device
 - adb launch deeplink
@@ -349,6 +327,7 @@ fetch(
 - Kevin Powell: Make position absolute work with you, not against you: https://www.youtube.com/watch?v=ZrZ-ZzacGXs
 - Mark rober engineering: https://studio.com/mark-rober-engineering/login
 - Android Interface Definition Language (AIDL): https://developer.android.com/develop/background-work/services/aidl
+- Structure and interpretation of computer programs: https://drive.google.com/file/d/1tBu3gMhWEsptTAdLbWN-wmQDgAsw5Jzs/view?usp=drive_link
 
 #### Embed GitHub files/commits/gists into html
 
