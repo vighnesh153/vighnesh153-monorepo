@@ -166,8 +166,8 @@ test('focus should loop around to when using "Tab" to navigate', async ({ page }
 
   const verticalNav = getVerticalNav(page);
 
-  await verticalNav.locator('a', { hasText: 'Resume' }).focus();
-  expect(await verticalNav.locator('*:focus').textContent()).toBe(' Resume ');
+  await verticalNav.locator('button', { hasText: 'Sign in' }).focus();
+  expect(await verticalNav.locator('*:focus').textContent()).toBe('Sign in');
 
   await page.keyboard.press('Tab');
 
@@ -183,5 +183,5 @@ test('focus should loop around backwards to when using "Shift + Tab" to navigate
 
   await page.keyboard.press('Shift+Tab');
 
-  expect(await verticalNav.locator('*:focus').textContent()).toBe(' Resume ');
+  expect(await verticalNav.locator('*:focus').textContent()).toBe('Sign in');
 });

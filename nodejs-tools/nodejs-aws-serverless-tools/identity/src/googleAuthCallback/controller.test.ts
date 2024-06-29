@@ -1,6 +1,6 @@
-import { expect, test, beforeEach } from 'vitest';
+import { expect, test, beforeEach, vi } from 'vitest';
 
-import { FakeJsonHttpClient, JsonHttpResponse } from '@vighnesh153/http-client';
+import { JsonHttpResponse, JsonHttpClient } from '@vighnesh153/http-client';
 import { FakeLogger } from '@vighnesh153/logger';
 import { CompleteUserInfo, GoogleOAuthUserInfo } from '@vighnesh153/types';
 
@@ -10,7 +10,6 @@ import { FakeDynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import { FakeCookieSerializer } from '../common/CookieSerializer';
 
-let fakeHttpClient: FakeJsonHttpClient;
 let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<typeof UserInfoTableMetadata>;
 let fakeCookieSerializer: FakeCookieSerializer;
@@ -47,8 +46,15 @@ const baseEnvironmentVariables = {
   logger: new FakeLogger(),
 };
 
+function constructFakePostRequestHttpClient<T>(response: JsonHttpResponse<T>): JsonHttpClient {
+  return {
+    post: vi.fn(() => ({
+      execute: () => Promise.resolve(response),
+    })),
+  } as unknown as JsonHttpClient;
+}
+
 beforeEach(() => {
-  fakeHttpClient = new FakeJsonHttpClient();
   fakeUserInfoDecoder = new FakeUserInfoDecoder();
   fakeUserInfoTable = new FakeDynamoDBTable();
   fakeCookieSerializer = new FakeCookieSerializer();
@@ -127,15 +133,13 @@ test('should return 4xx if searchParams.code is not set', async () => {
 });
 
 test('should return 5xx if error occurs while fetching token', async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'error',
-        error: new Error('Some error'),
-        errorMessage: 'Some error occurred',
-        statusCode: 500,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'error',
+      error: new Error('Some error'),
+      errorMessage: 'Some error occurred',
+      statusCode: 500,
+    })
   );
 
   const result = await controller({
@@ -153,15 +157,13 @@ test('should return 5xx if error occurs while fetching token', async () => {
 });
 
 test('should return 5xx if error occurs while parsing auth token', async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
 
   const result = await controller({
@@ -180,15 +182,13 @@ test('should return 5xx if error occurs while parsing auth token', async () => {
 });
 
 test(`should return 4xx if user's email is not verified`, async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
   fakeUserInfoDecoder.userInfo = {
     ...validGoogleOAuthUserInfo,
@@ -211,15 +211,13 @@ test(`should return 4xx if user's email is not verified`, async () => {
 });
 
 test('should return 5xx if error occurs while fetching existing user info', async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
   fakeUserInfoDecoder.userInfo = { ...validGoogleOAuthUserInfo };
   fakeUserInfoTable.queryOneResult = {
@@ -247,15 +245,13 @@ test('should return 5xx if error occurs while fetching existing user info', asyn
 });
 
 test('should use existing user info for login if user already exists', async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
   fakeUserInfoDecoder.userInfo = { ...validGoogleOAuthUserInfo };
   fakeUserInfoTable.queryOneResult = {
@@ -286,15 +282,13 @@ test('should use existing user info for login if user already exists', async () 
 });
 
 test(`when user doesn't exist, should return 5xx if create new user fails`, async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
   fakeUserInfoDecoder.userInfo = { ...validGoogleOAuthUserInfo };
   fakeUserInfoTable.queryOneResult = {
@@ -331,15 +325,13 @@ test(`when user doesn't exist, should return 5xx if create new user fails`, asyn
 });
 
 test(`should create new user if user doesn't exist and use that info for login`, async () => {
-  fakeHttpClient.setPostRequestResponse(() =>
-    Promise.resolve(
-      new JsonHttpResponse({
-        type: 'success',
-        data: 'fake-token',
-        headers: new Headers(),
-        statusCode: 200,
-      })
-    )
+  const fakeHttpClient = constructFakePostRequestHttpClient(
+    new JsonHttpResponse({
+      type: 'success',
+      data: 'fake-token',
+      headers: new Headers(),
+      statusCode: 200,
+    })
   );
   fakeUserInfoDecoder.userInfo = { ...validGoogleOAuthUserInfo };
   fakeUserInfoTable.queryOneResult = {

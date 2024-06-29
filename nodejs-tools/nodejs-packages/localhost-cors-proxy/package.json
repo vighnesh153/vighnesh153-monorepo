@@ -27,7 +27,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "commander": "^12.0.0",
+    "commander": "^12.1.0",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "http-proxy-middleware": "^3.0.0",
@@ -40,7 +40,7 @@
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
   }
 }
