@@ -35,12 +35,12 @@
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "nodemon": "^3.1.0",
+    "nodemon": "^3.1.4",
     "npm-run-all": "^4.1.5",
-    "serverless": "^3.38.0",
+    "serverless": "^4.1.7",
     "serverless-domain-manager": "7.3.8",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
   },
   "repository": {
     "type": "git",

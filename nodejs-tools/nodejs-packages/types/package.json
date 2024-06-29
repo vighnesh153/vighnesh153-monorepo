@@ -26,6 +26,6 @@
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   }
 }
