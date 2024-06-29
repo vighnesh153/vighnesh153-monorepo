@@ -5,10 +5,14 @@ import { Portal } from 'solid-js/web';
 import { not } from '@vighnesh153/utils';
 
 import { classes } from '@/utils';
+import styles from './popover.module.scss';
 
 import { clickOutside } from '../clickOutside';
 import type { PopoverLayoutDirection, PopoverPlacement, PopoverProps } from './externalTypes';
-import { updatePopoverPlacementBasedOnPlacement } from './popover-placement';
+import {
+  computeFlexClassesForPopoverContentRootBasedOnPlacement,
+  updatePopoverPlacementBasedOnPlacement,
+} from './popover-placement';
 
 declare module 'solid-js' {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -71,7 +75,22 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
       <Portal>
         <div
           ref={popoverContentRoot}
-          class={classes(`fixed z-tooltip`)}
+          role={props.open ? 'tooltip' : 'none'}
+          class={classes(
+            `${styles['popover-content-root']}
+            ${styles[`popover-placement-${props.placement.split('-')[0]}`]}
+
+            fixed z-tooltip
+            flex 
+            ${computeFlexClassesForPopoverContentRootBasedOnPlacement(props.placement)}
+            ${props.open ? 'before:inline-block' : 'before:hidden'}
+            ${props.triangleBumpCssClasses
+              .split(' ')
+              .map((cssClass) => `before:${cssClass}`)
+              .join(' ')}
+            `
+          )}
+          style="--triangle-size: 10px"
           use:clickOutside={{ ignoreElements: [controlElement() as HTMLElement], clickOutsideCallback: props.close }}
         >
           <Show when={props.open}>{props.popoverContent}</Show>
@@ -81,7 +100,7 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
   );
 }
 
-export function PopoverPlayground(props: { placement?: PopoverPlacement }) {
+export function PopoverPlayground(props: { placement?: PopoverPlacement; text: string }) {
   const [open, setOpen] = createSignal(false);
 
   return (
@@ -89,10 +108,23 @@ export function PopoverPlayground(props: { placement?: PopoverPlacement }) {
       {...props}
       open={open()}
       close={() => setOpen(false)}
-      popoverContent={<div class="w-[200px] aspect-square bg-primary text-secondary">Hello world</div>}
+      triangleBumpCssClasses="text-primary"
+      popoverContent={
+        <div class="w-[200px] aspect-square bg-primary text-secondary">
+          Hello World
+          <div>
+            <button>First</button>
+            <button>First</button>
+          </div>
+        </div>
+      }
       controlElement={
-        <button aria-expanded={`${open()}`} class="border-2" onClick={() => setOpen((oldOpen) => not(oldOpen))}>
-          Lol
+        <button
+          aria-expanded={`${open()}`}
+          class="border-2 min-w-40"
+          onClick={() => setOpen((oldOpen) => not(oldOpen))}
+        >
+          {props.text}
         </button>
       }
     />

@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PopoverPlayground } from '@/components/solid';
+---
+
+<BaseLayout title="Playground" description="A playground page for different components.">
+  <div class="w-full h-dvh flex flex-col items-center justify-center gap-2">
+    <PopoverPlayground slot="end" client:load placement="top-start" text="top-start" />
+    <PopoverPlayground slot="end" client:load placement="top-center" text="top-center" />
+    <PopoverPlayground slot="end" client:load placement="top-end" text="top-end" />
+    <PopoverPlayground slot="end" client:load placement="right-start" text="right-start" />
+    <PopoverPlayground slot="end" client:load placement="right-center" text="right-center" />
+    <PopoverPlayground slot="end" client:load placement="right-end" text="right-end" />
+    <PopoverPlayground slot="end" client:load placement="bottom-start" text="bottom-start" />
+    <PopoverPlayground slot="end" client:load placement="bottom-center" text="bottom-center" />
+    <PopoverPlayground slot="end" client:load placement="bottom-end" text="bottom-end" />
+    <PopoverPlayground slot="end" client:load placement="left-start" text="left-start" />
+    <PopoverPlayground slot="end" client:load placement="left-center" text="left-center" />
+    <PopoverPlayground slot="end" client:load placement="left-end" text="left-end" />
+  </div>
+</BaseLayout>
+
+<script>
+  document.documentElement.setAttribute('dir', 'rtl');
+</script>

@@ -1,0 +1,27 @@
+.popover-content-root::before {
+  --_triangle-size: var(--triangle-size, 20px);
+
+  content: '';
+
+  border: var(--_triangle-size) solid transparent;
+}
+
+.popover-content-root.popover-placement-top::before {
+  border-bottom: 0;
+  border-top: var(--_triangle-size) solid currentColor;
+}
+
+.popover-content-root.popover-placement-right::before {
+  border-left: 0;
+  border-right: var(--_triangle-size) solid currentColor;
+}
+
+.popover-content-root.popover-placement-bottom::before {
+  border-top: 0;
+  border-bottom: var(--_triangle-size) solid currentColor;
+}
+
+.popover-content-root.popover-placement-left::before {
+  border-right: 0;
+  border-left: var(--_triangle-size) solid currentColor;
+}
