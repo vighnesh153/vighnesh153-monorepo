@@ -146,11 +146,11 @@ function alignPopoverRightWithControlElementRight(
   controlElRect: DOMRect,
   popoverRect: DOMRect
 ) {
-  popoverContentRoot.style.left = `${controlElRect.right - popoverRect.width}px`;
+  popoverContentRoot.style.left = `${controlElRect.left + controlElRect.width - popoverRect.width}px`;
 }
 
 function alignPopoverLeftWithControlElementRight(popoverContentRoot: HTMLDivElement, controlElRect: DOMRect) {
-  popoverContentRoot.style.left = `${controlElRect.right}px`;
+  popoverContentRoot.style.left = `${controlElRect.left + controlElRect.width}px`;
 }
 
 function alignPopoverRightWithControlElementLeft(
@@ -170,11 +170,11 @@ function alignPopoverBottomWithControlElementBottom(
   controlElRect: DOMRect,
   popoverRect: DOMRect
 ) {
-  popoverContentRoot.style.top = `${controlElRect.bottom - popoverRect.height}px`;
+  popoverContentRoot.style.top = `${controlElRect.top + controlElRect.height - popoverRect.height}px`;
 }
 
 function alignPopoverTopWithControlElementBottom(popoverContentRoot: HTMLDivElement, controlElRect: DOMRect) {
-  popoverContentRoot.style.top = `${controlElRect.bottom}px`;
+  popoverContentRoot.style.top = `${controlElRect.top + controlElRect.height}px`;
 }
 
 function alignPopoverBottomWithControlElementTop(
