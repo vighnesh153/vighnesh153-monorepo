@@ -52,7 +52,7 @@ test('should show and hide the popover content based on open signal', async () =
   expect(screen.queryByTestId('popover-content')).toBeVisible();
 });
 
-test.only('popover default placement ltr bottom center', async () => {
+test('popover default placement ltr bottom center', async () => {
   await popoverPlacementTest({
     popoverDimensions: {
       width: 100,
@@ -69,7 +69,7 @@ test.only('popover default placement ltr bottom center', async () => {
   });
 });
 
-test.only('popover default placement rtl bottom center', async () => {
+test('popover default placement rtl bottom center', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     popoverDimensions: {
@@ -87,7 +87,7 @@ test.only('popover default placement rtl bottom center', async () => {
   });
 });
 
-test.only('popover ltr bottom-start placement', async () => {
+test('popover ltr bottom-start placement', async () => {
   await popoverPlacementTest({
     placement: 'bottom-start',
     popoverDimensions: {
@@ -105,7 +105,7 @@ test.only('popover ltr bottom-start placement', async () => {
   });
 });
 
-test.only('popover ltr bottom-center placement', async () => {
+test('popover ltr bottom-center placement', async () => {
   await popoverPlacementTest({
     placement: 'bottom-center',
     popoverDimensions: {
@@ -123,7 +123,7 @@ test.only('popover ltr bottom-center placement', async () => {
   });
 });
 
-test.only('popover ltr bottom-end placement', async () => {
+test('popover ltr bottom-end placement', async () => {
   await popoverPlacementTest({
     placement: 'bottom-end',
     popoverDimensions: {
@@ -141,7 +141,7 @@ test.only('popover ltr bottom-end placement', async () => {
   });
 });
 
-test.only('popover ltr right-start placement', async () => {
+test('popover ltr right-start placement', async () => {
   await popoverPlacementTest({
     placement: 'right-start',
     popoverDimensions: {
@@ -159,7 +159,7 @@ test.only('popover ltr right-start placement', async () => {
   });
 });
 
-test.only('popover ltr right-center placement', async () => {
+test('popover ltr right-center placement', async () => {
   await popoverPlacementTest({
     placement: 'right-center',
     popoverDimensions: {
@@ -177,7 +177,7 @@ test.only('popover ltr right-center placement', async () => {
   });
 });
 
-test.only('popover ltr right-end placement', async () => {
+test('popover ltr right-end placement', async () => {
   await popoverPlacementTest({
     placement: 'right-end',
     popoverDimensions: {
@@ -195,7 +195,7 @@ test.only('popover ltr right-end placement', async () => {
   });
 });
 
-test.only('popover ltr top-start placement', async () => {
+test('popover ltr top-start placement', async () => {
   await popoverPlacementTest({
     placement: 'top-start',
     popoverDimensions: {
@@ -213,7 +213,7 @@ test.only('popover ltr top-start placement', async () => {
   });
 });
 
-test.only('popover ltr top-center placement', async () => {
+test('popover ltr top-center placement', async () => {
   await popoverPlacementTest({
     placement: 'top-center',
     popoverDimensions: {
@@ -231,7 +231,7 @@ test.only('popover ltr top-center placement', async () => {
   });
 });
 
-test.only('popover ltr top-end placement', async () => {
+test('popover ltr top-end placement', async () => {
   await popoverPlacementTest({
     placement: 'top-end',
     popoverDimensions: {
@@ -249,7 +249,7 @@ test.only('popover ltr top-end placement', async () => {
   });
 });
 
-test.only('popover ltr left-start placement', async () => {
+test('popover ltr left-start placement', async () => {
   await popoverPlacementTest({
     placement: 'left-start',
     popoverDimensions: {
@@ -267,7 +267,7 @@ test.only('popover ltr left-start placement', async () => {
   });
 });
 
-test.only('popover ltr left-center placement', async () => {
+test('popover ltr left-center placement', async () => {
   await popoverPlacementTest({
     placement: 'left-center',
     popoverDimensions: {
@@ -285,7 +285,7 @@ test.only('popover ltr left-center placement', async () => {
   });
 });
 
-test.only('popover ltr left-end placement', async () => {
+test('popover ltr left-end placement', async () => {
   await popoverPlacementTest({
     placement: 'left-end',
     popoverDimensions: {
@@ -303,7 +303,7 @@ test.only('popover ltr left-end placement', async () => {
   });
 });
 
-test.only('popover rtl left-start placement', async () => {
+test('popover rtl left-start placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'left-start',
@@ -322,7 +322,7 @@ test.only('popover rtl left-start placement', async () => {
   });
 });
 
-test.only('popover rtl left-center placement', async () => {
+test('popover rtl left-center placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'left-center',
@@ -341,7 +341,7 @@ test.only('popover rtl left-center placement', async () => {
   });
 });
 
-test.only('popover rtl left-end placement', async () => {
+test('popover rtl left-end placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'left-end',
@@ -360,7 +360,7 @@ test.only('popover rtl left-end placement', async () => {
   });
 });
 
-test.only('popover rtl right-start placement', async () => {
+test('popover rtl right-start placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'right-start',
@@ -379,7 +379,7 @@ test.only('popover rtl right-start placement', async () => {
   });
 });
 
-test.only('popover rtl right-center placement', async () => {
+test('popover rtl right-center placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'right-center',
@@ -398,7 +398,7 @@ test.only('popover rtl right-center placement', async () => {
   });
 });
 
-test.only('popover rtl right-end placement', async () => {
+test('popover rtl right-end placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'right-end',
@@ -417,7 +417,7 @@ test.only('popover rtl right-end placement', async () => {
   });
 });
 
-test.only('popover rtl top-start placement', async () => {
+test('popover rtl top-start placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'top-start',
@@ -436,7 +436,7 @@ test.only('popover rtl top-start placement', async () => {
   });
 });
 
-test.only('popover rtl top-center placement', async () => {
+test('popover rtl top-center placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'top-center',
@@ -455,7 +455,7 @@ test.only('popover rtl top-center placement', async () => {
   });
 });
 
-test.only('popover rtl top-end placement', async () => {
+test('popover rtl top-end placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'top-end',
@@ -474,7 +474,7 @@ test.only('popover rtl top-end placement', async () => {
   });
 });
 
-test.only('popover rtl bottom-start placement', async () => {
+test('popover rtl bottom-start placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'bottom-start',
@@ -493,7 +493,7 @@ test.only('popover rtl bottom-start placement', async () => {
   });
 });
 
-test.only('popover rtl bottom-center placement', async () => {
+test('popover rtl bottom-center placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'bottom-center',
@@ -512,7 +512,7 @@ test.only('popover rtl bottom-center placement', async () => {
   });
 });
 
-test.only('popover rtl bottom-end placement', async () => {
+test('popover rtl bottom-end placement', async () => {
   await popoverPlacementTest({
     layoutDirection: 'rtl',
     placement: 'bottom-end',
