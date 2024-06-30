@@ -5,7 +5,8 @@
     "jsxImportSource": "solid-js",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client", "@testing-library/jest-dom"]
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.astro"],
   "exclude": ["dist", "build", "node_modules"]

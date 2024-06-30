@@ -76,6 +76,7 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
         <div
           ref={popoverContentRoot}
           role={props.open ? 'tooltip' : 'none'}
+          data-testid="popover-content-root"
           class={classes(
             `${styles['popover-content-root']}
             ${styles[`popover-placement-${props.placement.split('-')[0]}`]}
