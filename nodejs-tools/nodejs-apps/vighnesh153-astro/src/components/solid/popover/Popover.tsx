@@ -122,7 +122,7 @@ export function PopoverPlayground(props: { placement?: PopoverPlacement; text: s
           Hello World
           <div>
             <button>First</button>
-            <button>First</button>
+            <button>Second</button>
           </div>
         </div>
       }
