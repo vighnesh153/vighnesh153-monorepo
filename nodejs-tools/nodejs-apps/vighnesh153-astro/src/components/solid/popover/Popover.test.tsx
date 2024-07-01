@@ -28,6 +28,19 @@ beforeEach(() => {
   cleanup();
 });
 
+test('popover should have a tooltip role', async () => {
+  render(() => (
+    <Popover
+      open
+      close={() => null}
+      popoverContent={<div data-testid="popover-content">Popover content</div>}
+      controlElement={<button>Toggle Popover</button>}
+    />
+  ));
+
+  expect(screen.queryByRole('tooltip')).toBeVisible();
+});
+
 test('should show and hide the popover content based on open signal', async () => {
   render(() => {
     const [open, setOpen] = createSignal(false);
@@ -47,6 +60,85 @@ test('should show and hide the popover content based on open signal', async () =
   expect(screen.queryByTestId('popover-content')).toBeNull();
 
   await user.click(popoverToggleButton);
+
+  expect(screen.queryByTestId('popover-content')).toBeVisible();
+});
+
+test('should hide popover if clicked outside', async () => {
+  render(() => {
+    const [open, setOpen] = createSignal(false);
+    return (
+      <div>
+        <div style={{ height: '500px' }}>
+          <Popover
+            open={open()}
+            close={() => setOpen(false)}
+            popoverContent={<div data-testid="popover-content">Popover content</div>}
+            controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
+          />
+        </div>
+        <div>
+          <p>Some outside text</p>
+        </div>
+      </div>
+    );
+  });
+
+  const popoverToggleButton = screen.getByRole('button', { name: 'Toggle Popover' });
+  expect(popoverToggleButton).toBeVisible();
+
+  expect(screen.queryByTestId('popover-content')).toBeNull();
+
+  await user.click(popoverToggleButton);
+
+  expect(screen.queryByTestId('popover-content')).toBeVisible();
+
+  const someOutsideText = screen.getByText('Some outside text');
+  expect(someOutsideText).toBeVisible();
+
+  await user.click(someOutsideText);
+
+  expect(screen.queryByTestId('popover-content')).toBeNull();
+});
+
+test('should not hide popover if clicked inside', async () => {
+  render(() => {
+    const [open, setOpen] = createSignal(false);
+    return (
+      <div>
+        <div style={{ height: '500px' }}>
+          <Popover
+            open={open()}
+            close={() => setOpen(false)}
+            popoverContent={
+              <div data-testid="popover-content">
+                <p>Popover content</p>
+                <p>Some inside text</p>
+              </div>
+            }
+            controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
+          />
+        </div>
+        <div>
+          <p>Some outside text</p>
+        </div>
+      </div>
+    );
+  });
+
+  const popoverToggleButton = screen.getByRole('button', { name: 'Toggle Popover' });
+  expect(popoverToggleButton).toBeVisible();
+
+  expect(screen.queryByTestId('popover-content')).toBeNull();
+
+  await user.click(popoverToggleButton);
+
+  expect(screen.queryByTestId('popover-content')).toBeVisible();
+
+  const someInsideText = screen.getByText('Some inside text');
+  expect(someInsideText).toBeVisible();
+
+  await user.click(someInsideText);
 
   expect(screen.queryByTestId('popover-content')).toBeVisible();
 });
