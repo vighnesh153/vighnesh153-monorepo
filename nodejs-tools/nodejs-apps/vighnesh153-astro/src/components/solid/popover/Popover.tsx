@@ -36,6 +36,7 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
   let popoverContentRoot!: HTMLDivElement;
 
   const controlElement = children(() => props.controlElement);
+  const [popoverBgColor, setPopoverBgColor] = createSignal('transparent');
 
   const anchorPopoverToControlElement = (placement: PopoverPlacement, layoutDirection: PopoverLayoutDirection) => {
     updatePopoverPlacementBasedOnPlacement(
@@ -52,20 +53,28 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
       return;
     }
 
+    const { backgroundColor } = getComputedStyle(popoverContentRoot.children[0] as HTMLElement);
+    setPopoverBgColor(backgroundColor);
+
     const layoutDirection =
       props.layoutDirection ?? (document.documentElement.getAttribute('dir') as PopoverLayoutDirection) ?? 'ltr';
 
     // anchor the popover to the control element
     anchorPopoverToControlElement(props.placement, layoutDirection);
 
-    function scrollListener() {
+    function scrollElementEventListener() {
       anchorPopoverToControlElement(props.placement, layoutDirection);
     }
 
     const scrollElement = (props.scrollElement ?? window) as HTMLElement;
-    scrollElement.addEventListener('scroll', scrollListener);
+    scrollElement.addEventListener('scroll', scrollElementEventListener);
     onCleanup(() => {
-      scrollElement.removeEventListener('scroll', scrollListener);
+      scrollElement.removeEventListener('scroll', scrollElementEventListener);
+    });
+
+    scrollElement.addEventListener('resize', scrollElementEventListener);
+    onCleanup(() => {
+      scrollElement.removeEventListener('resize', scrollElementEventListener);
     });
   });
 
@@ -85,13 +94,12 @@ export function Popover(incomingProps: PopoverProps): JSX.Element {
             flex 
             ${computeFlexClassesForPopoverContentRootBasedOnPlacement(props.placement)}
             ${props.open ? 'before:inline-block' : 'before:hidden'}
-            ${props.triangleBumpCssClasses
-              .split(' ')
-              .map((cssClass) => `before:${cssClass}`)
-              .join(' ')}
             `
           )}
-          style="--triangle-size: 10px"
+          style={{
+            '--triangle-size': '10px',
+            '--triangle-color': popoverBgColor(),
+          }}
           use:clickOutside={{ ignoreElements: [controlElement() as HTMLElement], clickOutsideCallback: props.close }}
         >
           <Show when={props.open}>{props.popoverContent}</Show>
@@ -109,7 +117,6 @@ export function PopoverPlayground(props: { placement?: PopoverPlacement; text: s
       {...props}
       open={open()}
       close={() => setOpen(false)}
-      triangleBumpCssClasses="text-primary"
       popoverContent={
         <div class="w-[200px] aspect-square bg-primary text-secondary">
           Hello World
