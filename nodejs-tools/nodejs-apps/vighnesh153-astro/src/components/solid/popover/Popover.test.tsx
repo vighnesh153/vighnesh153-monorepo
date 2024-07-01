@@ -35,7 +35,6 @@ test('should show and hide the popover content based on open signal', async () =
       <Popover
         open={open()}
         close={() => null}
-        triangleBumpCssClasses="text-primary"
         popoverContent={<div data-testid="popover-content">Popover content</div>}
         controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
       />
@@ -547,7 +546,6 @@ async function popoverPlacementTest(props: {
         open={open()}
         {...{ placement: props.placement, layoutDirection: props.layoutDirection }}
         close={() => null}
-        triangleBumpCssClasses="text-primary"
         popoverContent={
           <div style={{ width: '100px', 'aspect-ratio': 1 }} data-testid="popover-content">
             Popover content

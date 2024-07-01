@@ -63,9 +63,4 @@ export type PopoverProps = ParentProps<{
    * @default 'ltr'
    */
   layoutDirection?: PopoverLayoutDirection | null;
-
-  /**
-   * Classes to be assigned to triangular popover bump.
-   */
-  triangleBumpCssClasses: string;
 }>;
