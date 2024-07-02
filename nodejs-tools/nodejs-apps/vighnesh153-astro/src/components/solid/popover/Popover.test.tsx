@@ -622,7 +622,8 @@ test('popover rtl bottom-end placement', async () => {
   });
 });
 
-// TODO: triangle bump tests
+// TODO: triangle bump tests (unable to test :before pseudo element styles.
+// will have to wait for image snapshot API in vitest 2.x)
 
 async function popoverPlacementTest(props: {
   placement?: PopoverPlacement;
