@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { test, expect, beforeEach, assert, vi } from 'vitest';
+import { test, expect, beforeEach, assert, vi, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@solidjs/testing-library';
 import { userEvent } from '@testing-library/user-event';
 import { Popover } from './Popover';
-import { createSignal } from 'solid-js';
-import type { PopoverPlacement } from './externalTypes';
+import type { PopoverPlacement, PopoverToggle } from './externalTypes';
 
 function constructBoundingClientRect(rect: Partial<DOMRect>): DOMRect {
   return {
@@ -26,33 +25,34 @@ const user = userEvent.setup();
 
 beforeEach(() => {
   cleanup();
+  document.dir = 'ltr';
+});
+
+afterEach(() => {
+  document.dir = 'ltr';
 });
 
 test('popover should have a tooltip role', async () => {
   render(() => (
     <Popover
-      open
-      close={() => null}
       popoverContent={<div data-testid="popover-content">Popover content</div>}
-      controlElement={<button>Toggle Popover</button>}
+      controlElement={(_, toggle) => <button onClick={() => toggle()}>Toggle Popover</button>}
     />
   ));
+
+  const popoverToggleButton = screen.getByRole('button', { name: 'Toggle Popover' });
+  await user.click(popoverToggleButton);
 
   expect(screen.queryByRole('tooltip')).toBeVisible();
 });
 
 test('should show and hide the popover content based on open signal', async () => {
-  render(() => {
-    const [open, setOpen] = createSignal(false);
-    return (
-      <Popover
-        open={open()}
-        close={() => null}
-        popoverContent={<div data-testid="popover-content">Popover content</div>}
-        controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
-      />
-    );
-  });
+  render(() => (
+    <Popover
+      popoverContent={<div data-testid="popover-content">Popover content</div>}
+      controlElement={(_, toggle) => <button onClick={() => toggle()}>Toggle Popover</button>}
+    />
+  ));
 
   const popoverToggleButton = screen.getByRole('button', { name: 'Toggle Popover' });
   expect(popoverToggleButton).toBeVisible();
@@ -66,15 +66,12 @@ test('should show and hide the popover content based on open signal', async () =
 
 test('should hide popover if clicked outside', async () => {
   render(() => {
-    const [open, setOpen] = createSignal(false);
     return (
       <div>
         <div style={{ height: '500px' }}>
           <Popover
-            open={open()}
-            close={() => setOpen(false)}
             popoverContent={<div data-testid="popover-content">Popover content</div>}
-            controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
+            controlElement={(_, toggle) => <button onClick={() => toggle()}>Toggle Popover</button>}
           />
         </div>
         <div>
@@ -102,29 +99,24 @@ test('should hide popover if clicked outside', async () => {
 });
 
 test('should not hide popover if clicked inside', async () => {
-  render(() => {
-    const [open, setOpen] = createSignal(false);
-    return (
-      <div>
-        <div style={{ height: '500px' }}>
-          <Popover
-            open={open()}
-            close={() => setOpen(false)}
-            popoverContent={
-              <div data-testid="popover-content">
-                <p>Popover content</p>
-                <p>Some inside text</p>
-              </div>
-            }
-            controlElement={<button onClick={() => setOpen((o) => !o)}>Toggle Popover</button>}
-          />
-        </div>
-        <div>
-          <p>Some outside text</p>
-        </div>
+  render(() => (
+    <div>
+      <div style={{ height: '500px' }}>
+        <Popover
+          popoverContent={
+            <div data-testid="popover-content">
+              <p>Popover content</p>
+              <p>Some inside text</p>
+            </div>
+          }
+          controlElement={(_, toggle) => <button onClick={() => toggle()}>Toggle Popover</button>}
+        />
       </div>
-    );
-  });
+      <div>
+        <p>Some outside text</p>
+      </div>
+    </div>
+  ));
 
   const popoverToggleButton = screen.getByRole('button', { name: 'Toggle Popover' });
   expect(popoverToggleButton).toBeVisible();
@@ -632,27 +624,30 @@ async function popoverPlacementTest(props: {
   toggleButtonDimensions?: Partial<DOMRect>;
   expectedStyles: Record<string, unknown>;
 }) {
+  if (props.layoutDirection) {
+    document.dir = 'rtl';
+  }
+
   render(() => {
-    const [open, setOpen] = createSignal(false);
+    const controlElement = (open: boolean, toggle: PopoverToggle) => {
+      const button = (
+        <button style={{ width: '200px', height: '100px' }} onClick={() => toggle()}>
+          Toggle Popover
+        </button>
+      );
+      // @ts-ignore
+      button.getBoundingClientRect = vi.fn(() => constructBoundingClientRect(props.toggleButtonDimensions));
+      return button;
+    };
     return (
       <Popover
-        open={open()}
-        {...{ placement: props.placement, layoutDirection: props.layoutDirection }}
-        close={() => null}
+        {...{ placement: props.placement }}
         popoverContent={
           <div style={{ width: '100px', 'aspect-ratio': 1 }} data-testid="popover-content">
             Popover content
           </div>
         }
-        controlElement={
-          <button
-            data-testid="control-element"
-            style={{ width: '200px', height: '100px' }}
-            onClick={() => setOpen((o) => !o)}
-          >
-            Toggle Popover
-          </button>
-        }
+        controlElement={controlElement}
       />
     );
   });
@@ -665,8 +660,6 @@ async function popoverPlacementTest(props: {
 
   // @ts-ignore
   popoverContentRoot.getBoundingClientRect = vi.fn(() => constructBoundingClientRect(props.popoverDimensions));
-  // @ts-ignore
-  popoverToggleButton.getBoundingClientRect = vi.fn(() => constructBoundingClientRect(props.toggleButtonDimensions));
 
   // open popover
   await user.click(popoverToggleButton);
