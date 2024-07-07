@@ -13,10 +13,11 @@ export function GoogleSignInButton() {
       class={classes(`
       min-w-fit px-5 py-2 rounded-md
       flex gap-2 items-center
-      bg-[dodgerblue]
+      bg-text
+      text-secondary
       `)}
     >
-      <GoogleIcon class="fill-text inline-block w-5" />
+      <GoogleIcon class="inline-block w-5 aspect-square" />
       Sign in
     </button>
   );
