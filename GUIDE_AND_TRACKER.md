@@ -26,10 +26,7 @@ Visit
 
 #### Tasks
 
-- Popover accessibility
-- Popover testing
-- Popover styling
-- Vighnesh153 Login
+- Popover testing triangle bump
 - vighnesh153 media
 - vighnesh153 private.vighnesh153.com
 - Move @vighnesh153/random-word to @vighnesh153/utils

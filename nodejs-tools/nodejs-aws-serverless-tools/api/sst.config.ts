@@ -5,7 +5,7 @@ import { constructRoutesForDev, constructRoutesForProd } from '@vighnesh153/tool
 
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
-const stackName = 'Vighnesh153IdentityStack';
+const stackName = 'Vighnesh153ApiStack';
 
 function validateStage(stage: string): stage is 'dev' | 'prod' {
   if (!['dev', 'prod'].includes(`${stage}`)) {
@@ -19,7 +19,7 @@ const STAGE_CONFIG = {
   prod: constructRoutesForProd(),
 };
 
-export function IdentityStack({ stack }: StackContext) {
+function ApiStack({ stack }: StackContext) {
   const { stage } = stack;
   if (!validateStage(stage)) {
     return;
@@ -39,6 +39,7 @@ export function IdentityStack({ stack }: StackContext) {
     cdk: {
       table: {
         tableName: `UserInfo-${stage}`,
+        deletionProtection: true,
       },
     },
   });
@@ -103,14 +104,14 @@ const sstConfig: SSTConfig = {
       throw new Error('Invalid stage');
     }
     return {
-      name: `Vighnesh153-Identity-${stage}`,
+      name: `Vighnesh153-Api-${stage}`,
       region: 'ap-south-1', // Mumbai
     };
   },
   stacks(app) {
     const { stage } = app;
     validateStage(stage);
-    app.stack(IdentityStack, {
+    app.stack(ApiStack, {
       stackName: `${stackName}-${stage}`,
     });
   },
