@@ -1,4 +1,4 @@
-import type { ParentProps, JSX } from 'solid-js';
+import type { JSX } from 'solid-js';
 
 export type PopoverPlacement =
   | 'top-start'
@@ -24,7 +24,7 @@ export type PopoverToggle = (forceToggleTo?: boolean) => void;
  * Future To-dos:
  * 1. Flip placement based on scrolling to keep the popover in view
  */
-export type PopoverProps = ParentProps<{
+export type PopoverProps = {
   /**
    * Where to place the floating element relative to its reference element.
    *
@@ -48,7 +48,7 @@ export type PopoverProps = ParentProps<{
    * @default window
    */
   scrollElement?: JSX.Element;
-}>;
+};
 
 /**
  * Props for the Popover component.

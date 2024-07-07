@@ -158,10 +158,9 @@ const { navItems } = Astro.props;
     // @ts-ignore
     const clickedElement = e.target.closest('a, button');
     const currentPathName = window.location.pathname;
-    const navigationPathName = new URL(clickedElement.href).pathname;
 
     // don't close menu if a.href is same as current path but only hash is different
-    if (clickedElement.tagName === 'A' && currentPathName === navigationPathName) {
+    if (clickedElement?.tagName === 'A' && currentPathName === new URL(clickedElement.href).pathname) {
       closeMenu(false);
     }
   });

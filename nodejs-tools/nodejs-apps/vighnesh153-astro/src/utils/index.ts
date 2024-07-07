@@ -5,5 +5,6 @@ export * from './factories';
 export * from './getAuthServerOrigin';
 export * from './initiateLogin';
 export * from './isProd';
+export * from './logout';
 export * from './removeTrailingSlashFromUrlPathName';
 export * from './verifyCanvasProjectPath';
