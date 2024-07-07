@@ -3,8 +3,9 @@ export const authServerOrigins = {
   production: 'https://prod.identity.vighnesh153.dev',
 };
 
-export const authLoginPaths = {
-  googleLogin: '/initiateGoogleLogin',
+export const authPaths = {
+  login: '/initiateGoogleLogin',
+  logout: '/initiateGoogleLogout',
 };
 
 export const onSuccessRedirectPathKey = 'on_success_redirect_path';
