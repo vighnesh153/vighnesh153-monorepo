@@ -1,6 +1,6 @@
-import { authServerOrigins, authPaths, onSuccessRedirectPathKey, type StageType } from '@/constants';
-
+import { authPaths, authServerOrigins, onSuccessRedirectPathKey } from './authConstants';
 import { stageFactory } from './factories';
+import type { StageType } from './stage';
 
 export function isProd(stage: StageType = stageFactory()): boolean {
   console.log(`Current stage: ${stage}`);

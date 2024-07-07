@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onSuccessRedirectPathKey } from '@/constants/authConstants';
+  import { onSuccessRedirectPathKey } from '@/utils';
   import { onMount } from 'svelte';
 
   onMount(() => {
