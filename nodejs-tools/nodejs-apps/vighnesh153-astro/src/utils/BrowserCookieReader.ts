@@ -21,7 +21,7 @@ export class BrowserCookieReaderImpl implements BrowserCookieReader {
       const cookieValueString = await this.cookieStoreWrapper.getCookieValue(cookieKey);
       return JSON.parse(cookieValueString) as CompleteUserInfo;
     } catch (e) {
-      console.error(`Couldn't parse user info cookie:`, e);
+      console.warn(`Couldn't get or parse user info cookie:`, e);
       return null;
     }
   }

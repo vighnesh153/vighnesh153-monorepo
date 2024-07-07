@@ -12,6 +12,7 @@ class JsCookie {
 
 export interface CookieStoreWrapper {
   getCookieValue: (name: string) => Promise<string>;
+  removeCookie: (name: string) => Promise<void>;
 }
 
 export class CookieStoreWrapperImpl implements CookieStoreWrapper {
@@ -25,12 +26,21 @@ export class CookieStoreWrapperImpl implements CookieStoreWrapper {
     const jsCookie = await JsCookie.getInstance();
     return jsCookie.get(cookieName) ?? '';
   }
+
+  async removeCookie(cookieName: string): Promise<void> {
+    if (window.cookieStore?.delete) {
+      return window.cookieStore.delete(cookieName);
+    }
+    const jsCookie = await JsCookie.getInstance();
+    return jsCookie.remove(cookieName);
+  }
 }
 
 declare global {
   interface Window {
     cookieStore: {
       get: (name: string) => Promise<{ value: string }>;
+      delete: (name: string) => Promise<void>;
     };
   }
 }
