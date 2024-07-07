@@ -1,8 +1,7 @@
 import { type ParentProps } from 'solid-js';
 
-import { initiateLoginWithGoogle } from '@/utils/initiateLogin';
+import { classes, initiateLoginWithGoogle } from '@/utils';
 import { GoogleIcon } from '@/icons/solid/GoogleIcon';
-import { classes } from '@/utils';
 
 export type GoogleSignInButtonProps = ParentProps;
 
