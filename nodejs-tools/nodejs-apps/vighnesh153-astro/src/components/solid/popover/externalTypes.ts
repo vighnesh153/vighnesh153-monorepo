@@ -16,6 +16,8 @@ export type PopoverPlacement =
 
 export type PopoverLayoutDirection = 'ltr' | 'rtl';
 
+export type PopoverToggle = (forceToggleTo?: boolean) => void;
+
 /**
  * Props for the Popover component.
  *
@@ -23,16 +25,6 @@ export type PopoverLayoutDirection = 'ltr' | 'rtl';
  * 1. Flip placement based on scrolling to keep the popover in view
  */
 export type PopoverProps = ParentProps<{
-  /**
-   * State to track whether the popover is open or closed.
-   */
-  open: boolean;
-
-  /**
-   * Callback to close the popover. Toggling of the open state should be handled by the parent.
-   */
-  close: () => void;
-
   /**
    * Where to place the floating element relative to its reference element.
    *
@@ -43,7 +35,7 @@ export type PopoverProps = ParentProps<{
   /**
    * Interaction with this element triggers the popover
    */
-  controlElement: JSX.Element;
+  controlElement: (isOpen: boolean, toggle: PopoverToggle) => JSX.Element;
 
   /**
    * Content inside of popover balloon
@@ -56,11 +48,22 @@ export type PopoverProps = ParentProps<{
    * @default window
    */
   scrollElement?: JSX.Element;
+}>;
+
+/**
+ * Props for the Popover component.
+ *
+ * Future To-dos:
+ * 1. Flip placement based on scrolling to keep the popover in view
+ */
+export type ControlledPopoverProps = PopoverProps & {
+  /**
+   * State to track whether the popover is open or closed.
+   */
+  open: boolean;
 
   /**
-   * Whether the layout is a LTR or RTL
-   *
-   * @default 'ltr'
+   * Callback to close the popover. Toggling of the open state should be handled by the parent.
    */
-  layoutDirection?: PopoverLayoutDirection | null;
-}>;
+  toggle: PopoverToggle;
+};

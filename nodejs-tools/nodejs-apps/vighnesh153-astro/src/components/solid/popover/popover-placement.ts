@@ -185,21 +185,34 @@ function alignPopoverBottomWithControlElementTop(
   popoverContentRoot.style.top = `${controlElRect.top - popoverRect.height}px`;
 }
 
-export function computeFlexClassesForPopoverContentRootBasedOnPlacement(placement: PopoverPlacement): string {
+export function computeFlexClassesForPopoverContentRootBasedOnPlacement(
+  placement: PopoverPlacement,
+  layoutDirection: PopoverLayoutDirection
+): string {
+  const absolutePlacement = calculateAbsolutePlacementBasedOnDirection(placement, layoutDirection);
   const outputClasses: string[] = [];
-  const [topBottomLeftRight, startCenterEnd] = placement.split('-');
+  const [topBottomLeftRight] = absolutePlacement.split('-');
+  const [, startCenterEnd] = placement.split('-');
   switch (topBottomLeftRight) {
     case 'top':
       outputClasses.push('flex-col-reverse');
       break;
     case 'right':
-      outputClasses.push('flex-row-reverse');
+      if (layoutDirection === 'ltr') {
+        outputClasses.push('flex-row');
+      } else {
+        outputClasses.push('flex-row-reverse');
+      }
       break;
     case 'bottom':
       outputClasses.push('flex-col');
       break;
     case 'left':
-      outputClasses.push('flex-row');
+      if (layoutDirection === 'ltr') {
+        outputClasses.push('flex-row-reverse');
+      } else {
+        outputClasses.push('flex-row');
+      }
       break;
   }
   outputClasses.push(`items-${startCenterEnd}`);
