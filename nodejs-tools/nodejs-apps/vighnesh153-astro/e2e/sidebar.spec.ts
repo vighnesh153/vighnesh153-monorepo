@@ -181,6 +181,8 @@ test('focus should loop around backwards to when using "Shift + Tab" to navigate
 
   await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeFocused();
 
+  expect(verticalNav.locator('button', { hasText: 'Sign in' })).toBeVisible();
+
   await page.keyboard.press('Shift+Tab');
 
   expect(await verticalNav.locator('*:focus').textContent()).toBe('Sign in');

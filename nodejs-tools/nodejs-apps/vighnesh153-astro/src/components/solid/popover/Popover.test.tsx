@@ -629,7 +629,7 @@ async function popoverPlacementTest(props: {
   }
 
   render(() => {
-    const controlElement = (open: boolean, toggle: PopoverToggle) => {
+    const controlElement = (_: boolean, toggle: PopoverToggle) => {
       const button = (
         <button style={{ width: '200px', height: '100px' }} onClick={() => toggle()}>
           Toggle Popover

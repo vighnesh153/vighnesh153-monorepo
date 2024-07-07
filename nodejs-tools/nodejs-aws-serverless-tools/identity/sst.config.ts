@@ -49,6 +49,7 @@ export function IdentityStack({ stack }: StackContext) {
 
   const initiateGoogleLogin = 'initiateGoogleLogin';
   const googleAuthCallback = 'googleAuthCallback';
+  const initiateGoogleLogout = 'initiateGoogleLogout';
 
   // http api
   const api = new Api(stack, 'HttpApi', {
@@ -77,6 +78,17 @@ export function IdentityStack({ stack }: StackContext) {
           environment: {
             UI_AUTH_COMPLETE_URL: stageConfig[stage].uiAuthCompleteUrl,
             AUTH_REDIRECT_URL: stageConfig[stage].authRedirectUrl,
+            STAGE: stage,
+          },
+        },
+      },
+      [`GET /${initiateGoogleLogout}`]: {
+        function: {
+          functionName: `HttpApiGet-${initiateGoogleLogout}-${stage}`,
+          handler: `dist/${initiateGoogleLogout}.handler`,
+          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
+          environment: {
+            UI_AUTH_COMPLETE_URL: stageConfig[stage].uiAuthCompleteUrl,
             STAGE: stage,
           },
         },

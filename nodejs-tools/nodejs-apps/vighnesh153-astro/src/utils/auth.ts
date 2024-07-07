@@ -1,9 +1,6 @@
-import { cookieKeys } from 'vighnesh153-cookies';
-import type { CookieStoreWrapper } from '@vighnesh153/cookie-store';
+import { authServerOrigins, authPaths, onSuccessRedirectPathKey, type StageType } from '@/constants';
 
-import { authServerOrigins, authLoginPaths, onSuccessRedirectPathKey, type StageType } from '@/constants';
-
-import { cookieStoreWrapperFactory, stageFactory } from './factories';
+import { stageFactory } from './factories';
 
 export function isProd(stage: StageType = stageFactory()): boolean {
   console.log(`Current stage: ${stage}`);
@@ -18,16 +15,12 @@ export function getAuthServerOrigin(): string {
 
 export function initiateLoginWithGoogle() {
   localStorage.setItem(onSuccessRedirectPathKey, window.location.toString());
-  const loginWithGoogleUrl = getAuthServerOrigin() + authLoginPaths.googleLogin;
+  const loginWithGoogleUrl = getAuthServerOrigin() + authPaths.login;
   window.location.assign(loginWithGoogleUrl);
 }
 
-export function initiateLogout(
-  cookieStoreWrapper: CookieStoreWrapper = cookieStoreWrapperFactory(),
-  stage: StageType = stageFactory()
-) {
-  const userInfoCookieName = cookieKeys.userInfo(stage);
-  cookieStoreWrapper.removeCookie(userInfoCookieName);
-
-  window.location.reload();
+export async function initiateLogout() {
+  localStorage.setItem(onSuccessRedirectPathKey, window.location.toString());
+  const logoutUrl = getAuthServerOrigin() + authPaths.logout;
+  window.location.assign(logoutUrl);
 }
