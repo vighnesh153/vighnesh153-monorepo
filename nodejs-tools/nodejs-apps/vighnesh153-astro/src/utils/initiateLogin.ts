@@ -2,8 +2,7 @@ import { authLoginPaths, onSuccessRedirectPathKey } from '@/constants/authConsta
 import { getAuthServerOrigin } from './getAuthServerOrigin';
 
 export function initiateLoginWithGoogle() {
-  const [, redirectPath] = window.location.toString().split(window.location.origin);
-  localStorage.setItem(onSuccessRedirectPathKey, redirectPath);
+  localStorage.setItem(onSuccessRedirectPathKey, window.location.toString());
   const loginWithGoogleUrl = getAuthServerOrigin() + authLoginPaths.googleLogin;
   window.location.assign(loginWithGoogleUrl);
 }
