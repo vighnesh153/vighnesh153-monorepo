@@ -1,26 +1,13 @@
-import { authPaths, authServerOrigins, onSuccessRedirectPathKey } from './authConstants';
-import { stageFactory } from './factories';
-import type { StageType } from './stage';
+import { API_PATHS } from './content/urls';
 
-export function isProd(stage: StageType = stageFactory()): boolean {
-  console.log(`Current stage: ${stage}`);
-  return stage === 'prod';
-}
-export function getAuthServerOrigin(): string {
-  if (isProd()) {
-    return authServerOrigins.production;
-  }
-  return authServerOrigins.default;
-}
+export const onAuthSuccessRedirectPathKey = 'on_auth_success_redirect_path';
 
 export function initiateLoginWithGoogle() {
-  localStorage.setItem(onSuccessRedirectPathKey, window.location.toString());
-  const loginWithGoogleUrl = getAuthServerOrigin() + authPaths.login;
-  window.location.assign(loginWithGoogleUrl);
+  localStorage.setItem(onAuthSuccessRedirectPathKey, window.location.toString());
+  window.location.assign(API_PATHS.login);
 }
 
 export async function initiateLogout() {
-  localStorage.setItem(onSuccessRedirectPathKey, window.location.toString());
-  const logoutUrl = getAuthServerOrigin() + authPaths.logout;
-  window.location.assign(logoutUrl);
+  localStorage.setItem(onAuthSuccessRedirectPathKey, window.location.toString());
+  window.location.assign(API_PATHS.logout);
 }

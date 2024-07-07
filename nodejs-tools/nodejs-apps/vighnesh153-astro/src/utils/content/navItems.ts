@@ -1,5 +1,4 @@
-import { externalLinks } from './externalLinks';
-import { internalLinks } from './internalLinks';
+import { internalLinks, externalLinks } from './links';
 
 export interface NavItem {
   text: string;

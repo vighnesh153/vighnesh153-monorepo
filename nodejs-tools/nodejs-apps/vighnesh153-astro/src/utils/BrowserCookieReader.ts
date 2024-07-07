@@ -2,8 +2,8 @@ import type { CookieStoreWrapper } from '@vighnesh153/cookie-store';
 import { cookieKeys } from 'vighnesh153-cookies';
 import type { CompleteUserInfo } from '@vighnesh153/types';
 
-import type { StageType } from '@/utils';
-import { cookieStoreWrapperFactory, stageFactory } from './factories';
+import { stage as actualStage, type StageType } from '@/utils';
+import { cookieStoreWrapperFactory } from './factories';
 
 export interface BrowserCookieReader {
   readUserInfo: () => Promise<CompleteUserInfo | null>;
@@ -11,7 +11,7 @@ export interface BrowserCookieReader {
 
 export class BrowserCookieReaderImpl implements BrowserCookieReader {
   constructor(
-    private stage: StageType = stageFactory(),
+    private stage: StageType = actualStage,
     private cookieStoreWrapper: CookieStoreWrapper = cookieStoreWrapperFactory()
   ) {}
 
