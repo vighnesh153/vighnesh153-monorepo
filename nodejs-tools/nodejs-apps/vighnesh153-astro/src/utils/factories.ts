@@ -3,7 +3,7 @@ import { createSingletonFactory } from '@vighnesh153/factory';
 import { type JsonHttpClient, JsonHttpClientImpl } from '@vighnesh153/http-client';
 
 import { type BrowserCookieReader, BrowserCookieReaderImpl } from './BrowserCookieReader';
-import { stage, type StageType } from '@/constants';
+import { stage, type StageType } from '@/utils';
 
 export const stageFactory = createSingletonFactory<StageType>(() => stage);
 

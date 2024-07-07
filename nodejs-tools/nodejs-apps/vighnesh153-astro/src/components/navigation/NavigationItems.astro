@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import Link from '../Link.svelte';
-import { defaultNavItems, type NavItem } from '@/constants';
+import { defaultNavItems, type NavItem } from '@/utils';
 
 interface Props extends HTMLAttributes<'nav'> {
   navItems?: NavItem[];
