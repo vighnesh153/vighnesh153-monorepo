@@ -1,6 +1,8 @@
 import { type SSTConfig } from 'sst';
 import { type StackContext, Api, Table, Config } from 'sst/constructs';
 
+import { constructRoutesForDev, constructRoutesForProd } from '@vighnesh153/tools-platform-independent';
+
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
 const stackName = 'Vighnesh153IdentityStack';
@@ -12,17 +14,9 @@ function validateStage(stage: string): stage is 'dev' | 'prod' {
   return true;
 }
 
-const stageConfig = {
-  dev: {
-    uiAuthCompleteUrl: 'https://staging.vighnesh153.dev/auth/callback',
-    baseUrl: 'https://dev.identity.vighnesh153.dev',
-    authRedirectUrl: 'https://dev.identity.vighnesh153.dev/googleAuthCallback',
-  },
-  prod: {
-    uiAuthCompleteUrl: 'https://vighnesh153.dev/auth/callback',
-    baseUrl: 'https://prod.identity.vighnesh153.dev',
-    authRedirectUrl: 'https://prod.identity.vighnesh153.dev/googleAuthCallback',
-  },
+const STAGE_CONFIG = {
+  dev: constructRoutesForDev(),
+  prod: constructRoutesForProd(),
 };
 
 export function IdentityStack({ stack }: StackContext) {
@@ -30,6 +24,8 @@ export function IdentityStack({ stack }: StackContext) {
   if (!validateStage(stage)) {
     return;
   }
+
+  const stageConfig = STAGE_CONFIG[stage];
 
   // secrets
   const GOOGLE_CLIENT_ID = new Config.Secret(stack, 'GOOGLE_CLIENT_ID');
@@ -47,48 +43,44 @@ export function IdentityStack({ stack }: StackContext) {
     },
   });
 
-  const initiateGoogleLogin = 'initiateGoogleLogin';
-  const googleAuthCallback = 'googleAuthCallback';
-  const initiateGoogleLogout = 'initiateGoogleLogout';
-
   // http api
   const api = new Api(stack, 'HttpApi', {
     customDomain: {
-      domainName: `${stage}.identity.vighnesh153.dev`,
+      domainName: stageConfig.api.baseHost,
       hostedZone: 'vighnesh153.dev',
     },
     routes: {
-      [`GET /${initiateGoogleLogin}`]: {
+      [`GET /${stageConfig.api.initiateLogin.identifier}`]: {
         function: {
           bind: [GOOGLE_CLIENT_ID],
-          functionName: `HttpApiGet-${initiateGoogleLogin}-${stage}`,
-          handler: `dist/${initiateGoogleLogin}.handler`,
+          functionName: `HttpApiGet-${stageConfig.api.initiateLogin.identifier}-${stage}`,
+          handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
-            IDENTITY_LAMBDA_BASE_URI: stageConfig[stage].baseUrl,
+            AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
           },
         },
       },
-      [`GET /${googleAuthCallback}`]: {
+      [`GET /${stageConfig.api.authCallback.identifier}`]: {
         function: {
           bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
-          functionName: `HttpApiGet-${googleAuthCallback}-${stage}`,
-          handler: `dist/${googleAuthCallback}.handler`,
+          functionName: `HttpApiGet-${stageConfig.api.authCallback.identifier}-${stage}`,
+          handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
-            UI_AUTH_COMPLETE_URL: stageConfig[stage].uiAuthCompleteUrl,
-            AUTH_REDIRECT_URL: stageConfig[stage].authRedirectUrl,
+            UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
+            AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
             STAGE: stage,
           },
         },
       },
-      [`GET /${initiateGoogleLogout}`]: {
+      [`GET /${stageConfig.api.initiateLogout.identifier}`]: {
         function: {
-          functionName: `HttpApiGet-${initiateGoogleLogout}-${stage}`,
-          handler: `dist/${initiateGoogleLogout}.handler`,
+          functionName: `HttpApiGet-${stageConfig.api.initiateLogout.identifier}-${stage}`,
+          handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
-            UI_AUTH_COMPLETE_URL: stageConfig[stage].uiAuthCompleteUrl,
+            UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
             STAGE: stage,
           },
         },

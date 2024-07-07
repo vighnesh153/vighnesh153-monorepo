@@ -25,6 +25,7 @@
     "@vighnesh153/factory": "*",
     "@vighnesh153/http-client": "*",
     "@vighnesh153/logger": "*",
+    "@vighnesh153/tools-platform-independent": "*",
     "@vighnesh153/utils": "*",
     "cookie": "^0.6.0",
     "vighnesh153-cookies": "*"

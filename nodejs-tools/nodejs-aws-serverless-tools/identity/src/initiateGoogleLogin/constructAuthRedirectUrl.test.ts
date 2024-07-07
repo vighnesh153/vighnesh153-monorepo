@@ -2,44 +2,42 @@ import { test, expect } from 'vitest';
 import { constructAuthRedirectUrl } from './constructAuthRedirectUrl';
 import { FakeLogger } from '@vighnesh153/logger';
 
-test('should return null if identityLambdaBaseUri is empty', () => {
+test('should return null if authRedirectUri is empty', () => {
   expect(
-    constructAuthRedirectUrl({ identityLambdaBaseUri: undefined, googleClientId: 'hello', logger: new FakeLogger() })
+    constructAuthRedirectUrl({ authRedirectUri: undefined, googleClientId: 'hello', logger: new FakeLogger() })
   ).toBeNull();
   expect(
-    constructAuthRedirectUrl({ identityLambdaBaseUri: '', googleClientId: 'hello', logger: new FakeLogger() })
+    constructAuthRedirectUrl({ authRedirectUri: '', googleClientId: 'hello', logger: new FakeLogger() })
   ).toBeNull();
 });
 
 test('should return null if googleClientId is empty', () => {
   expect(
     constructAuthRedirectUrl({
-      identityLambdaBaseUri: 'https://pikachu.dev',
+      authRedirectUri: 'https://pikachu.dev',
       googleClientId: undefined,
       logger: new FakeLogger(),
     })
   ).toBeNull();
   expect(
     constructAuthRedirectUrl({
-      identityLambdaBaseUri: 'https://pikachu.dev',
+      authRedirectUri: 'https://pikachu.dev',
       googleClientId: '',
       logger: new FakeLogger(),
     })
   ).toBeNull();
 });
 
-test('should return null if both identityLambdaBaseUri and googleClientId is empty', () => {
+test('should return null if both authRedirectUri and googleClientId is empty', () => {
   expect(constructAuthRedirectUrl({ logger: new FakeLogger() })).toBeNull();
-  expect(
-    constructAuthRedirectUrl({ identityLambdaBaseUri: '', googleClientId: '', logger: new FakeLogger() })
-  ).toBeNull();
+  expect(constructAuthRedirectUrl({ authRedirectUri: '', googleClientId: '', logger: new FakeLogger() })).toBeNull();
 });
 
-test('should construct auth redirect url if both identityLambdaBaseUri and googleClientId are provided', () => {
+test('should construct auth redirect url if both authRedirectUri and googleClientId are provided', () => {
   const result = constructAuthRedirectUrl({
     logger: new FakeLogger(),
     googleClientId: 'pikachu',
-    identityLambdaBaseUri: 'https://auth-prod.vighnesh153.dev',
+    authRedirectUri: 'https://auth-prod.vighnesh153.dev/googleAuthCallback',
   });
 
   const actualUrl = new URL(result!);
