@@ -27,13 +27,13 @@
     "@vighnesh153/utils": "*"
   },
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.606.0",
-    "@aws-sdk/lib-dynamodb": "^3.606.0",
+    "@aws-sdk/client-dynamodb": "^3.609.0",
+    "@aws-sdk/lib-dynamodb": "^3.610.0",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.1.0",
-    "typescript": "^5.5.2",
+    "typescript": "^5.5.3",
     "vitest": "^1.6.0"
   },
   "keywords": [],
