@@ -17,7 +17,7 @@ export function ListItem(props: ListItemProps) {
       bg-secondary text-text 
       flex gap-1
 
-      hover:bg-background
+      hover:bg-background hover:text-accent
       `
       )}
       role="button"
