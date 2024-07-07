@@ -20,15 +20,17 @@
     "sst:remove": "dotenv -e ../../.env.local -- sst remove --stage=dev"
   },
   "dependencies": {
-    "@vighnesh153/cookie-store": "*",
+    "@vighnesh153/cookie-store": "^1.0.0",
     "@vighnesh153/drawing-app": "*",
+    "@vighnesh153/factory": "^0.4.7",
     "@vighnesh153/graphics-programming": "*",
     "@vighnesh153/simple-code-to-html": "*",
     "@vighnesh153/spl": "*",
     "@vighnesh153/tsx-bundler": "*",
     "@vighnesh153/utils": "*",
     "solid-js": "^1.8.18",
-    "svelte": "^4.2.18"
+    "svelte": "^4.2.18",
+    "vighnesh153-cookies": "^1.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.7.0",
@@ -42,6 +44,7 @@
     "@types/node": "*",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/tsconfig": "*",
+    "@vighnesh153/types": "^0.4.7",
     "astro": "^4.11.3",
     "autoprefixer": "^10.4.19",
     "browserslist": "^4.23.1",

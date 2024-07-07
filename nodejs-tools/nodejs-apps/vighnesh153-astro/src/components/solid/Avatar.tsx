@@ -1,21 +1,25 @@
-import { splitProps, type JSX } from 'solid-js';
+import { type JSX } from 'solid-js';
 
 import { classes } from '@/utils';
 
 export type AvatarProps = {
   imageLink: string;
   userInitials: string;
-} & Omit<JSX.ImgHTMLAttributes<HTMLImageElement>, 'src'>;
+  onClick: () => void;
+};
 
-export function Avatar(incomingProps: AvatarProps): JSX.Element {
-  const [local, props] = splitProps(incomingProps, ['imageLink', 'userInitials']);
+export function Avatar(props: AvatarProps): JSX.Element {
   return (
-    <img
-      {...props}
-      src={local.imageLink}
-      class={classes(`
-      w-[20px] aspect-square rounded-full
-    `)}
-    />
+    // TODO: add user initials as background
+    <button type="button" onClick={props.onClick}>
+      <img
+        {...props}
+        src={props.imageLink}
+        alt="logged in user"
+        class={classes(`
+          w-[20px] aspect-square rounded-full
+        `)}
+      />
+    </button>
   );
 }
