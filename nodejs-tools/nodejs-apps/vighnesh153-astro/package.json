@@ -23,7 +23,6 @@
   "dependencies": {
     "@vighnesh153/cookie-store": "^1.0.0",
     "@vighnesh153/drawing-app": "*",
-    "@vighnesh153/factory": "^0.4.7",
     "@vighnesh153/graphics-programming": "*",
     "@vighnesh153/simple-code-to-html": "*",
     "@vighnesh153/spl": "*",
