@@ -1,7 +1,7 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { Screen } from './Screen';
 import { ScoreTracker } from './ScoreTracker';
-import { Queue } from '@vighnesh153/utils';
+import { Queue } from '@vighnesh153/tools-platform-independent';
 import { TwoWayPipe } from './TwoWayPipe';
 import { Block } from './Block';
 

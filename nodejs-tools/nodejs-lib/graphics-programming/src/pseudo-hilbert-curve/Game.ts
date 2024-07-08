@@ -2,7 +2,7 @@ import { CanvasWrapper } from '@/canvas-wrapper';
 import { generateCurve } from './generateCurve';
 import { Point } from './point';
 import { Line } from './line';
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import { getCanvasBgColor } from '@/getCanvasBgColor';
 
 interface GameConfig {

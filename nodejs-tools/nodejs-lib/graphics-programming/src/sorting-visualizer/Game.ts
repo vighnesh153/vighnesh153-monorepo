@@ -1,4 +1,4 @@
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { getCanvasBgColor } from '@/getCanvasBgColor';
 import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray';

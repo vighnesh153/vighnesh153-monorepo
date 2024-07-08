@@ -1,4 +1,4 @@
-import { not, Notification } from '@vighnesh153/utils';
+import { not, Notification } from '@vighnesh153/tools-platform-independent';
 
 let notifications: Record<string, Notification<unknown>> = {};
 

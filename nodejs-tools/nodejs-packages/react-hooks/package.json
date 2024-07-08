@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@vighnesh153/react-use-global-state": "*",
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.0",

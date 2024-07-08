@@ -1,4 +1,4 @@
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import axios from 'axios';
 import { withAuthConfig } from './utils';
 import { constants } from './constants';

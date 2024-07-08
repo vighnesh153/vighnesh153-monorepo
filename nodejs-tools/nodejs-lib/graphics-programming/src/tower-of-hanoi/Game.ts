@@ -2,7 +2,7 @@ import { CanvasWrapper } from '@/canvas-wrapper';
 import { StackConfig } from './Stack';
 import { Disc, DiscConfig } from './Disc';
 import { StacksManager } from './StacksManager';
-import { not, range } from '@vighnesh153/utils';
+import { not, range } from '@vighnesh153/tools-platform-independent';
 import { towerOfHanoi } from './algorithm';
 import { animateDiscMovement } from './animateDiscMovement';
 import { getCanvasBgColor } from '@/getCanvasBgColor';

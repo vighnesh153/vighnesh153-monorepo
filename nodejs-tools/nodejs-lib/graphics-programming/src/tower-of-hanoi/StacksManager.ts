@@ -1,4 +1,4 @@
-import { range } from '@vighnesh153/utils';
+import { range } from '@vighnesh153/tools-platform-independent';
 
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { Stack, type StackConfig } from './Stack';

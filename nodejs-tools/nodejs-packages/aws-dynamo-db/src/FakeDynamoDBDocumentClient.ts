@@ -1,5 +1,5 @@
 import type { ServiceInputTypes, ServiceOutputTypes } from '@aws-sdk/lib-dynamodb';
-import { Queue } from '@vighnesh153/utils';
+import { Queue } from '@vighnesh153/tools-platform-independent';
 import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
 
 import type { Command, MetadataBearer, HttpHandlerOptions } from '@smithy/types';

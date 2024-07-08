@@ -1,4 +1,4 @@
-import { Queue, Stack, not } from '@vighnesh153/utils';
+import { Queue, Stack, not } from '@vighnesh153/tools-platform-independent';
 import { buildClearScreenEvent, type AppEvent } from './events';
 import { Color } from './colors';
 

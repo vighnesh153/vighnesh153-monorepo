@@ -9,7 +9,7 @@ import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import { type JsonHttpClient } from '@vighnesh153/http-client';
 import { type Logger } from '@vighnesh153/logger';
 import { type CompleteUserInfo } from '@vighnesh153/types';
-import { milliseconds, not, slugify } from '@vighnesh153/utils';
+import { milliseconds, not, slugify } from '@vighnesh153/tools-platform-independent';
 import { cookieKeys } from 'vighnesh153-cookies';
 
 import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';

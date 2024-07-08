@@ -3,7 +3,7 @@
 
   import { PseudoHilbertCurveGame, CanvasWrapperImpl } from '@vighnesh153/graphics-programming';
   import type { CanvasWrapper } from '@vighnesh153/graphics-programming';
-  import { range } from '@vighnesh153/utils';
+  import { range } from '@vighnesh153/tools-platform-independent';
 
   let canvasElement: HTMLCanvasElement;
   let canvasWrapper: CanvasWrapper;

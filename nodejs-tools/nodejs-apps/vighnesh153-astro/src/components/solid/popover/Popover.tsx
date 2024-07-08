@@ -2,7 +2,7 @@
 import { type JSX, children, splitProps, onCleanup, Show, createEffect, createSignal, mergeProps } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 
 import { classes } from '@/utils';
 import styles from './popover.module.scss';

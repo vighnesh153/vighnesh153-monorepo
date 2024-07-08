@@ -23,7 +23,7 @@
     "dist"
   ],
   "dependencies": {
-    "@vighnesh153/utils": "*",
+    "@vighnesh153/tools-platform-independent": "*",
     "js-cookie": "^3.0.5"
   },
   "devDependencies": {

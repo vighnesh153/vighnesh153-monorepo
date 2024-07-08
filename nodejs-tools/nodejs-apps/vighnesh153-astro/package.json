@@ -30,7 +30,6 @@
     "@vighnesh153/spl": "*",
     "@vighnesh153/tools-platform-independent": "*",
     "@vighnesh153/tsx-bundler": "*",
-    "@vighnesh153/utils": "*",
     "solid-js": "^1.8.18",
     "svelte": "^4.2.18",
     "vighnesh153-cookies": "^1.0.0"

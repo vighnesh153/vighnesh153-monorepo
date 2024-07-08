@@ -1,7 +1,7 @@
 <script lang="ts">
   import { classes } from '@/utils';
   import type { HTMLButtonAttributes } from 'svelte/elements';
-  import { not } from '@vighnesh153/utils';
+  import { not } from '@vighnesh153/tools-platform-independent';
 
   interface $$Props extends HTMLButtonAttributes {}
 

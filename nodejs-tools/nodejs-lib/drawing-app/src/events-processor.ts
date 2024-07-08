@@ -1,4 +1,4 @@
-import { not, Queue } from '@vighnesh153/utils';
+import { not, Queue } from '@vighnesh153/tools-platform-independent';
 
 import type { DrawPointEvent, AppEvent, DrawLineEvent, ClearScreenEvent, FloodFillEvent } from './events';
 import { CanvasWrapper } from './CanvasWrapper';

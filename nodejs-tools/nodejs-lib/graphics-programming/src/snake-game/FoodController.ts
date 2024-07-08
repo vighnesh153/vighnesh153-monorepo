@@ -1,5 +1,5 @@
 import { GameGrid } from './GameGrid';
-import { shuffle } from '@vighnesh153/utils';
+import { shuffle } from '@vighnesh153/tools-platform-independent';
 import { GameGridCell } from './GameGridCell';
 
 interface FoodControllerConfig {

@@ -1,4 +1,4 @@
-import { Queue } from '@vighnesh153/utils';
+import { Queue } from '@vighnesh153/tools-platform-independent';
 import { Color } from './colors';
 import { buildClearScreenEvent, buildCommitEvent } from './events';
 import { buildEventsManager, isRedoAvailable, isUndoAvailable, publishEvents, redo, undo } from './events-manager';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { not } from '@vighnesh153/utils';
+  import { not } from '@vighnesh153/tools-platform-independent';
   import { type EventMode, type IColor, BrushThickness } from '@vighnesh153/drawing-app';
 
   import CloseIcon from '@/icons/CloseIcon.svelte';

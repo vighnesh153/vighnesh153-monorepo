@@ -1,4 +1,4 @@
-import { randomInteger } from '@vighnesh153/utils';
+import { randomInteger } from '@vighnesh153/tools-platform-independent';
 
 export interface Position {
   x: number;

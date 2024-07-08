@@ -1,5 +1,5 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 
 interface BrickOptions {
   readonly row: number;

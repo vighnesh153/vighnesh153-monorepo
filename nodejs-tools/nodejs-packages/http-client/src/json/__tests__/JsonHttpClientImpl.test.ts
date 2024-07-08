@@ -5,7 +5,7 @@ import { Server } from 'http';
 
 import { app } from './testServer';
 import { JsonHttpClientImpl } from '../JsonHttpClientImpl';
-import { milliseconds } from '@vighnesh153/utils';
+import { milliseconds } from '@vighnesh153/tools-platform-independent';
 
 let server: Server;
 let serverAddress: string = '';

@@ -1,4 +1,4 @@
-import { shuffle } from '@vighnesh153/utils';
+import { shuffle } from '@vighnesh153/tools-platform-independent';
 
 const colors = ['red', 'green', 'black', 'blue', 'yellow', 'orange', 'purple'];
 

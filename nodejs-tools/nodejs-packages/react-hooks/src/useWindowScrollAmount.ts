@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { debounce } from '@vighnesh153/utils';
+import { debounce } from '@vighnesh153/tools-platform-independent';
 import { useEffectOnce } from './useEffectOnce';
 
 interface ScrollAmount {

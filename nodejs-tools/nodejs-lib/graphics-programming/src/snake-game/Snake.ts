@@ -1,4 +1,4 @@
-import { Queue } from '@vighnesh153/utils';
+import { Queue } from '@vighnesh153/tools-platform-independent';
 import { PositionDelta } from './PositionDelta';
 import { GameGrid } from './GameGrid';
 import { GameGridCell } from './GameGridCell';

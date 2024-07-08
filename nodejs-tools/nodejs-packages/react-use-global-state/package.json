@@ -41,7 +41,7 @@
     "react": ">=18.0.0"
   },
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.0",
