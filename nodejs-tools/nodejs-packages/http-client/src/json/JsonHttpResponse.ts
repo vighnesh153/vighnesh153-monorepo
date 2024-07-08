@@ -1,4 +1,4 @@
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 
 export type JsonHttpResponseSuccessValue<T> = {
   type: 'success';

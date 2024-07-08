@@ -1,4 +1,4 @@
-import { repeat } from '@vighnesh153/utils';
+import { repeat } from '@vighnesh153/tools-platform-independent';
 import { Brick } from './Brick';
 
 type BrickCreator = (row: number, column: number) => Brick;

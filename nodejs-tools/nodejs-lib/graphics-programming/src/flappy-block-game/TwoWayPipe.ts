@@ -1,5 +1,5 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
-import { randomInteger } from '@vighnesh153/utils';
+import { randomInteger } from '@vighnesh153/tools-platform-independent';
 
 interface TwoWayPipeOptions {
   verticalPadding: number;

@@ -1,4 +1,4 @@
-import { randomInteger } from '@vighnesh153/utils';
+import { randomInteger } from '@vighnesh153/tools-platform-independent';
 import { Position } from './Position';
 
 export function generateRandomPosition(boundX: number, boundY: number): Position {

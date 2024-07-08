@@ -60,6 +60,6 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   }
 }

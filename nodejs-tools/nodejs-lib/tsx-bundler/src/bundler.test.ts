@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import { JSDOM } from 'jsdom';
-import { sleep } from '@vighnesh153/utils';
+import { sleep } from '@vighnesh153/tools-platform-independent';
 
 import { bundle } from './bundler';
 import { starterCode } from './constants';

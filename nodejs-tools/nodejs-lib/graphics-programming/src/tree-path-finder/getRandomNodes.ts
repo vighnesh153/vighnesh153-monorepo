@@ -1,4 +1,4 @@
-import { Queue, not, shuffle } from '@vighnesh153/utils';
+import { Queue, not, shuffle } from '@vighnesh153/tools-platform-independent';
 import { TreeNode } from './TreeNode';
 
 export function getRandomNodes(rootNode: TreeNode, count = 1): TreeNode[] {

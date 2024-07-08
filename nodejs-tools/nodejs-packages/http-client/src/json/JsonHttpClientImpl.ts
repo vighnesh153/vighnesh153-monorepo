@@ -8,7 +8,7 @@ import {
 } from './JsonHttpClient';
 import { JsonHttpResponse } from './JsonHttpResponse';
 import { HttpQueryParameters } from '../common';
-import { milliseconds } from '@vighnesh153/utils';
+import { milliseconds } from '@vighnesh153/tools-platform-independent';
 
 export const JSON_HTTP_CLIENT_TIMEOUT = milliseconds({ seconds: 10 });
 

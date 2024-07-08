@@ -5,7 +5,7 @@ import { Ball } from './Ball';
 import { ScoreTracker } from './ScoreTracker';
 import { Brick } from './Brick';
 import { createBricksGrid } from './createBricksGrid';
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 
 interface BrickBreakerGameOptions {
   readonly bgColor?: string;

@@ -1,4 +1,4 @@
-import { randomInteger, repeat } from '@vighnesh153/utils';
+import { randomInteger, repeat } from '@vighnesh153/tools-platform-independent';
 import { CanvasWrapper } from '../canvas-wrapper';
 
 export interface SierpinskisTriangleGamePoint {

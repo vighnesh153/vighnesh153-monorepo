@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import { constants } from '../constants';
 
 async function isTokenValid(token: string): Promise<boolean> {

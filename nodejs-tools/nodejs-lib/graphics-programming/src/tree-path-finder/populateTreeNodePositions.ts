@@ -1,4 +1,4 @@
-import { Queue, not } from '@vighnesh153/utils';
+import { Queue, not } from '@vighnesh153/tools-platform-independent';
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { TreeNode } from './TreeNode';
 

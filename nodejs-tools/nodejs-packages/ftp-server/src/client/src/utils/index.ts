@@ -1,4 +1,4 @@
-import { not, trimEnd } from '@vighnesh153/utils';
+import { not, trimEnd } from '@vighnesh153/tools-platform-independent';
 import { Vighnesh153File } from '../../../types';
 
 export const isDirectory = (fileType: Vighnesh153File['type']) => fileType === 'directory';

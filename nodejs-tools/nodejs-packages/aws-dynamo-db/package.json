@@ -24,7 +24,7 @@
     "dist"
   ],
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.609.0",

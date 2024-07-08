@@ -1,5 +1,5 @@
 import express from 'express';
-import { milliseconds, sleep } from '@vighnesh153/utils';
+import { milliseconds, sleep } from '@vighnesh153/tools-platform-independent';
 
 const app = express();
 

@@ -1,4 +1,4 @@
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 
 import { CellPosition } from './CellPosition';
 import { CellsGrid } from './CellsGrid';

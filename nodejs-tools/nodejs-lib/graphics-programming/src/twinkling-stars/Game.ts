@@ -1,7 +1,7 @@
 import { CanvasWrapper } from '@/canvas-wrapper';
 import { getCanvasBgColor } from '@/getCanvasBgColor';
 import { Star } from './star';
-import { repeat } from '@vighnesh153/utils';
+import { repeat } from '@vighnesh153/tools-platform-independent';
 
 interface GameOptions {
   bgColor?: string;

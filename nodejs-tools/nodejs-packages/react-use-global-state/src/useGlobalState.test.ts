@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { sleep } from '@vighnesh153/utils';
+import { sleep } from '@vighnesh153/tools-platform-independent';
 import { useGlobalState } from './useGlobalState';
 import { forgetGlobalState } from './notifications';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { classes } from '@/utils';
-  import { debounce } from '@vighnesh153/utils';
+  import { debounce } from '@vighnesh153/tools-platform-independent';
   import { starterCode, bundle } from '@vighnesh153/tsx-bundler';
 
   import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';

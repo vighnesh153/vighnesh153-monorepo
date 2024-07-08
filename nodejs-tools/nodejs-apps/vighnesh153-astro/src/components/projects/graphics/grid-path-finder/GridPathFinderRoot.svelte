@@ -1,6 +1,6 @@
 <script lang="ts">
   import { GridPathFinderGameManager, GridPathFinderGame, getCellColor } from '@vighnesh153/graphics-programming';
-  import { range, sleep } from '@vighnesh153/utils';
+  import { range, sleep } from '@vighnesh153/tools-platform-independent';
   import { onMount } from 'svelte';
 
   import Button from '@/components/Button.svelte';

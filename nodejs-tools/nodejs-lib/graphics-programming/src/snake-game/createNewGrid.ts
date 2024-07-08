@@ -1,4 +1,4 @@
-import { repeat } from '@vighnesh153/utils';
+import { repeat } from '@vighnesh153/tools-platform-independent';
 import { GameGridCell } from './GameGridCell';
 
 type CellInitializer = (row: number, col: number) => GameGridCell;
