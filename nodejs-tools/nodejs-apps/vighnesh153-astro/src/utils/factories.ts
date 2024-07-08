@@ -1,6 +1,9 @@
 import { CookieStoreWrapperImpl, type CookieStoreWrapper } from '@vighnesh153/cookie-store';
-import { createSingletonFactory } from '@vighnesh153/factory';
-import { type JsonHttpClient, JsonHttpClientImpl } from '@vighnesh153/tools-platform-independent';
+import {
+  createSingletonFactory,
+  type JsonHttpClient,
+  JsonHttpClientImpl,
+} from '@vighnesh153/tools-platform-independent';
 
 import { type BrowserCookieReader, BrowserCookieReaderImpl } from './BrowserCookieReader';
 import { stage } from './stage';
