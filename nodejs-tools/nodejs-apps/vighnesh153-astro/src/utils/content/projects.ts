@@ -83,23 +83,6 @@ export const allProjects: Project[] = [
     },
   },
   {
-    title: 'React useGlobalState library',
-    description:
-      'A React.js hook to hold a piece of global state. It is similar to the ' +
-      'useState hook but with the only addition that this hook persists the state globally.',
-    tags: ['React.js', 'Typescript', 'NPM'],
-    links: {
-      github: {
-        Icon: GithubIcon,
-        href: externalLinks.projects.reactUseGlobalState.sourceCode,
-      },
-      demo: {
-        Icon: EyeIcon,
-        href: externalLinks.projects.reactUseGlobalState.demo,
-      },
-    },
-  },
-  {
     title: 'HTML5 Canvas Games',
     description: 'Simple arcade style games built using the HTML Canvas API in Typescript',
     tags: ['Canvas API', 'Astro', 'Typescript'],

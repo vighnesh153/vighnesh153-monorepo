@@ -46,10 +46,6 @@ export const externalLinks = {
     games: {
       sourceCode: nodejsLib('/graphics-programming'),
     },
-    reactUseGlobalState: {
-      sourceCode: monorepo('/nodejs-tools/nodejs-packages/react-use-global-state'),
-      demo: 'https://www.npmjs.com/package/@vighnesh153/react-use-global-state',
-    },
   },
 };
 

@@ -20,10 +20,6 @@ This directory contains apps and packages built in javascript and typescript run
   server for unlocking CORS disabled urls on localhost
 - [@vighnesh153/prettier-config](https://www.npmjs.com/package/@vighnesh153/prettier-config): My preferred prettier
   configuration
-- [@vighnesh153/react-hooks](https://www.npmjs.com/package/@vighnesh153/react-hooks): A bunch of utility hooks for
-  ReactJS
-- [@vighnesh153/react-use-global-state](https://www.npmjs.com/package/@vighnesh153/react-use-global-state): A global
-  state management hook
 - [@vighnesh153/tsconfig](https://www.npmjs.com/package/@vighnesh153/tsconfig): Typescript configuration that I like
 - [@vighnesh153/-version](https://www.npmjs.com/package/@vighnesh153/version-tracker): Published just to track the
   current version of my packages at the top of this README as a badge
