@@ -7,7 +7,7 @@ import { cookieKeys } from 'vighnesh153-cookies';
 
 import { CookieSerializer } from '../common/CookieSerializer';
 import { cookieSerializerFactory, loggerSingletonFactory } from './factories';
-import { Logger } from '@vighnesh153/logger';
+import { type Logger } from '@vighnesh153/tools-platform-independent';
 
 type LambdaResponse = {
   statusCode: number;

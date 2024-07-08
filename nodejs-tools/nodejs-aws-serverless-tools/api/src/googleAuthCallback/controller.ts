@@ -6,9 +6,8 @@ import { Table } from 'sst/node/table';
 import { type CookieSerializeOptions } from 'cookie';
 
 import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { type Logger } from '@vighnesh153/logger';
 import { type CompleteUserInfo } from '@vighnesh153/types';
-import { type JsonHttpClient, milliseconds, not, slugify } from '@vighnesh153/tools-platform-independent';
+import { type Logger, type JsonHttpClient, milliseconds, not, slugify } from '@vighnesh153/tools-platform-independent';
 import { cookieKeys } from 'vighnesh153-cookies';
 
 import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';

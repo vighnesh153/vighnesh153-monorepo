@@ -1,5 +1,5 @@
 import { createFactory, createSingletonFactory } from '@vighnesh153/factory';
-import { ConsoleLogger, Logger } from '@vighnesh153/logger';
+import { ConsoleLogger, type Logger } from '@vighnesh153/tools-platform-independent';
 
 import { CookieSerializer, CookieSerializerImpl } from '../common/CookieSerializer';
 

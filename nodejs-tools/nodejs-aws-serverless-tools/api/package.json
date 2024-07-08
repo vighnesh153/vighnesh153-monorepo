@@ -25,7 +25,6 @@
   "dependencies": {
     "@vighnesh153/aws-dynamo-db": "*",
     "@vighnesh153/factory": "*",
-    "@vighnesh153/logger": "*",
     "@vighnesh153/tools-platform-independent": "*",
     "cookie": "^0.6.0",
     "vighnesh153-cookies": "*"

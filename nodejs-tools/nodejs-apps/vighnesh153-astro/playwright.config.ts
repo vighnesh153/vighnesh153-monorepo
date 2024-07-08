@@ -13,7 +13,7 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: 3,
+  retries: process.env.CI ? 2 : undefined,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   expect: {
