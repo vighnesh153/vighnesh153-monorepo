@@ -16,7 +16,7 @@
     "lint": "eslint --max-warnings=0 .",
     "copy": "mkdir ./dist/client && mv ./src/client/dist/* ./dist/client",
     "build:frontend": "vite build",
-    "build": "tsup && vite build && npm run copy"
+    "build": "rimraf dist && tsup && vite build && npm run copy"
   },
   "files": [
     "dist"
@@ -54,6 +54,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
+    "rimraf": "^5.0.8",
     "typescript": "^5.5.3",
     "uuid": "^10.0.0",
     "vite": "^5.3.3"

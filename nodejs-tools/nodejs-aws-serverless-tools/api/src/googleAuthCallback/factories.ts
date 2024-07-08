@@ -5,8 +5,7 @@ import {
   type IDynamoDBDocumentClient,
 } from '@vighnesh153/aws-dynamo-db';
 import { createFactory, createSingletonFactory } from '@vighnesh153/factory';
-import { JsonHttpClient, JsonHttpClientImpl } from '@vighnesh153/tools-platform-independent';
-import { ConsoleLogger, Logger } from '@vighnesh153/logger';
+import { ConsoleLogger, Logger, JsonHttpClient, JsonHttpClientImpl } from '@vighnesh153/tools-platform-independent';
 
 import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 import { UserInfoTableMetadata } from './dynamoDBTableMetadata';

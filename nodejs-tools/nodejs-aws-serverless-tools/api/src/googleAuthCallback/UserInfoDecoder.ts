@@ -1,4 +1,4 @@
-import { Logger } from '@vighnesh153/logger';
+import { Logger } from '@vighnesh153/tools-platform-independent';
 import { type GoogleOAuthUserInfo } from '@vighnesh153/types';
 
 export interface UserInfoDecoder {

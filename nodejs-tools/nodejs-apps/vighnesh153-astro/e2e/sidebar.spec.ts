@@ -174,14 +174,14 @@ test('focus should loop around to when using "Tab" to navigate', async ({ page }
   await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeFocused();
 });
 
-test('focus should loop around backwards to when using "Shift + Tab" to navigate', async ({ page }) => {
+test('focus should loop around backwards when using "Shift + Tab" to navigate', async ({ page }) => {
   await openSideNavigation(page);
 
   const verticalNav = getVerticalNav(page);
 
   await expect(verticalNav.getByTitle(closeNavigationMenuTitle)).toBeFocused();
 
-  expect(verticalNav.locator('button', { hasText: 'Sign in' })).toBeVisible();
+  await expect(verticalNav.locator('button', { hasText: 'Sign in' })).toBeVisible();
 
   await page.keyboard.press('Shift+Tab');
 
