@@ -3,9 +3,10 @@ import process from 'node:process';
 import { beforeAll, afterAll, test, expect } from 'vitest';
 import { Server } from 'http';
 
+import { milliseconds } from '@/utils';
+
 import { app } from './testServer';
 import { JsonHttpClientImpl } from '../JsonHttpClientImpl';
-import { milliseconds } from '@vighnesh153/tools-platform-independent';
 
 let server: Server;
 let serverAddress: string = '';

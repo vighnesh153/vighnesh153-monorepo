@@ -1,7 +1,12 @@
 {
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["vite/client"]
   },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]

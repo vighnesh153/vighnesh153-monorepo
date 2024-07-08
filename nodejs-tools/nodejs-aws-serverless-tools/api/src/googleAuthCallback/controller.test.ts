@@ -1,6 +1,6 @@
 import { expect, test, beforeEach, vi } from 'vitest';
 
-import { JsonHttpResponse, JsonHttpClient } from '@vighnesh153/http-client';
+import { JsonHttpResponse, JsonHttpClient } from '@vighnesh153/tools-platform-independent';
 import { FakeLogger } from '@vighnesh153/logger';
 import { CompleteUserInfo, GoogleOAuthUserInfo } from '@vighnesh153/types';
 
