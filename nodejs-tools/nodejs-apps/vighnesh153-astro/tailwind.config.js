@@ -62,5 +62,7 @@ export default {
     'before:rotate-180',
     // before pseudo elements
     'before:text-primary',
+    // progress bar
+    'progress-bar',
   ],
 };
