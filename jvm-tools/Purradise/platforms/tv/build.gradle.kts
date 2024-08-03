@@ -5,28 +5,34 @@ plugins {
 
 android {
     namespace = "dev.vighnesh153.purradise"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "dev.vighnesh153.purradise"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
+        targetSdk = 35
+        versionCode = 9
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        resourceConfigurations.addAll(listOf("en"))
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
         }
     }
     compileOptions {
@@ -59,6 +65,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics:1.6.8")
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.8")
     implementation("androidx.tv:tv-material:1.0.0-rc01")
+
+    implementation(project(":common"))
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

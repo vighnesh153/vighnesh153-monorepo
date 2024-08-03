@@ -4,11 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
+import dev.vighnesh153.common.ImagesForFirstRelease
 import dev.vighnesh153.purradise.ui.theme.PurradiseTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,11 +21,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PurradiseTheme {
-                Surface(Modifier.fillMaxSize()) {
-                    Text(
-                        text = "Hello Kitty!",
-                        modifier = Modifier.align(Alignment.Center),
-                    )
+                Surface {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(20.dp),
+                        verticalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        Text(text = "Purr-adise")
+
+                        ImagesForFirstRelease()
+                    }
                 }
             }
         }
