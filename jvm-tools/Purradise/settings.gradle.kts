@@ -24,3 +24,4 @@ rootProject.name = "Purr-adise"
 include(":platforms:mobile")
 include(":platforms:tv")
 include(":platforms:web")
+include(":common")
