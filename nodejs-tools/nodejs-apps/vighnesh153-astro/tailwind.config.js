@@ -3,19 +3,19 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     colors: {
-      primary: 'rgb(144, 116, 220)',
-      secondary: 'rgb(0, 0, 0)',
-      accent: 'rgb(102, 255, 219)',
-      background: 'rgb(10, 24, 46)',
-      text: 'rgb(251, 226, 253)',
+      primary: 'rgb(var(--color-primary))',
+      secondary: 'rgb(var(--color-secondary))',
+      accent: 'rgb(var(--color-accent))',
+      background: 'rgb(var(--color-background))',
+      text: 'rgb(var(--color-text))',
 
-      backgroundDark: 'rgb(3, 12, 28)',
-      backgroundLight: 'rgb(18, 36, 67)',
-      backgroundBlend: 'rgb(19, 44, 63)',
+      backgroundDark: 'rgb(var(--color-bg-dark))',
+      backgroundLight: 'rgb(var(--color-bg-light))',
+      backgroundBlend: 'rgb(var(--color-bg-blend))',
 
-      text2: 'rgba(251, 226, 253, 70%)',
-      text3: 'rgba(251, 226, 253, 60%)',
-      text4: 'rgba(251, 226, 253, 30%)',
+      text2: 'rgba(var(--color-text) / 70%)',
+      text3: 'rgba(var(--color-text) / 60%)',
+      text4: 'rgba(var(--color-text) / 30%)',
     },
     fontFamily: {
       sans: ['Helvetica', 'Arial', 'sans-serif'],
@@ -24,8 +24,19 @@ export default {
       transitionProperty: {
         width: 'width',
       },
+      animation: {
+        'reverse-spin': 'reverse-spin 1s linear infinite',
+      },
+      keyframes: {
+        'reverse-spin': {
+          from: {
+            transform: 'rotate(360deg)',
+          },
+        },
+      },
     },
     zIndex: {
+      px: 1,
       mobileStepper: 1000,
       fab: 1050,
       speedDial: 1050,
