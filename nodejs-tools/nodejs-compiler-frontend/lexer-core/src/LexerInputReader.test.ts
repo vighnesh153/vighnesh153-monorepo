@@ -80,3 +80,53 @@ test('should update peekCharacter when readNextCharacter is called', () => {
   reader.readNextCharacter();
   expect(reader.peekCharacter).toBe(EOF_CHARACTER);
 });
+
+test('should correctly calculate the line and column numbers', () => {
+  const input = new StringLexerInput(`
+pi
+pikachu
+`);
+  const reader = new LexerInputReader(input);
+
+  // current character is the first character of the above string which is a
+  // new line character. Move to next character
+  reader.readNextCharacter();
+
+  // line 2
+  expect(reader.lineNumber).toBe(2);
+  expect(reader.columnNumber).toBe(1);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(2);
+  expect(reader.columnNumber).toBe(2);
+
+  reader.readNextCharacter();
+  reader.readNextCharacter();
+
+  // line 3
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(1);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(2);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(3);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(4);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(5);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(6);
+  reader.readNextCharacter();
+  expect(reader.lineNumber).toBe(3);
+  expect(reader.columnNumber).toBe(7);
+
+  reader.readNextCharacter();
+  reader.readNextCharacter();
+
+  expect(reader.lineNumber).toBe(4);
+  expect(reader.columnNumber).toBe(1);
+});
