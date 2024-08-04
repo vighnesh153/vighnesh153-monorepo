@@ -35,7 +35,7 @@
     "opinionated"
   ],
   "dependencies": {
-    "prettier-plugin-astro": "^0.14.0",
-    "prettier-plugin-svelte": "^3.2.5"
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^3.2.6"
   }
 }
