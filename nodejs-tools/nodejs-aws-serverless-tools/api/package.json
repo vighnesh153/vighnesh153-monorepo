@@ -29,18 +29,18 @@
     "vighnesh153-cookies": "*"
   },
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.609.0",
+    "@aws-sdk/client-dynamodb": "^3.623.0",
     "@aws-sdk/types": "^3.609.0",
-    "@types/aws-lambda": "^8.10.140",
+    "@types/aws-lambda": "^8.10.142",
     "@types/cookie": "^0.6.0",
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
     "eslint-config-vighnesh153": "*",
-    "sst": "^2.43.3",
-    "tsup": "^8.1.0",
-    "typescript": "^5.5.3",
-    "vitest": "^1.6.0"
+    "sst": "^2.43.4",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   },
   "keywords": [],
   "repository": {
