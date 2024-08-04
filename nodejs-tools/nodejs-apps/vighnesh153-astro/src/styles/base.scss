@@ -9,6 +9,18 @@
     box-sizing: border-box;
   }
 
+  :root {
+    --color-primary: 144 116 220;
+    --color-secondary: 0 0 0;
+    --color-accent: 102 255 219;
+    --color-background: 10 24 46;
+    --color-text: 251 226 253;
+
+    --color-bg-dark: 3 12 28;
+    --color-bg-light: 18 36 67;
+    --color-bg-blend: 19 44 63;
+  }
+
   html {
     @apply text-text;
     @apply bg-background;

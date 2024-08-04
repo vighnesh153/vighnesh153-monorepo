@@ -9,6 +9,7 @@ export type UploadManagerProps = {
 
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
 export function UploadManager(props: UploadManagerProps): JSX.Element {
+  const [draggingOver, setDraggingOver] = createSignal<boolean>(false);
   const [filesToUpload, setFilesToUpload] = createSignal<File[]>([
     // {
     //   name: 'Pikachu.png',
@@ -41,11 +42,49 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
     });
   });
 
-  // TODO: Handle drag and drop event
+  // Handle drag and drop events
+  createEffect(() => {
+    function handleDragEnter(e: DragEvent) {
+      e.preventDefault();
+      setDraggingOver(true);
+    }
+
+    function handleDragLeave(e: DragEvent) {
+      e.preventDefault();
+      setDraggingOver(false);
+    }
+
+    function handleDragOverEvent(e: DragEvent) {
+      e.preventDefault();
+    }
+
+    function handleDropEvent(e: DragEvent) {
+      e.preventDefault();
+      setDraggingOver(false);
+      const files = Array.from(e.dataTransfer?.files ?? []);
+      if (files.length > 0) {
+        setFilesToUpload((o) => [...files, ...o]);
+      }
+    }
+
+    window.addEventListener('dragover', handleDragOverEvent);
+    window.addEventListener('drop', handleDropEvent);
+    window.addEventListener('dragenter', handleDragEnter);
+    window.addEventListener('dragleave', handleDragLeave);
+    onCleanup(() => {
+      window.removeEventListener('dragover', handleDragOverEvent);
+      window.removeEventListener('drop', handleDropEvent);
+      window.removeEventListener('dragenter', handleDragEnter);
+      window.removeEventListener('dragleave', handleDragLeave);
+    });
+  });
 
   return (
     <div>
-      <UploadInputBox onFilesChange={(newFiles) => setFilesToUpload((o) => [...newFiles, ...o])} />
+      <UploadInputBox
+        draggingOver={draggingOver()}
+        onFilesChange={(newFiles) => setFilesToUpload((o) => [...newFiles, ...o])}
+      />
       <FilesUploadTracker files={filesToUpload()} class="mt-4" />
     </div>
   );
