@@ -1,8 +1,8 @@
 // Imports mocha for the browser, defining the `mocha` global.
-import "mocha/mocha";
+import 'mocha/mocha';
 
 mocha.setup({
-  ui: "tdd",
+  ui: 'tdd',
   reporter: undefined,
 });
 
