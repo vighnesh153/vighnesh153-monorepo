@@ -2,6 +2,7 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "bradlc.vscode-tailwindcss",
+    "connor4312.esbuild-problem-matchers",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "formulahendry.auto-rename-tag",
