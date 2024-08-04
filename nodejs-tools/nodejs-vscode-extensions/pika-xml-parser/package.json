@@ -28,7 +28,7 @@
     "compile-web": "npm run check-types && npm run lint && node esbuild.cjs",
     "watch-web": "npm-run-all -p watch-web:*",
     "watch-web:esbuild": "node esbuild.cjs --watch",
-    "watch-web:tsc": "tsc --watch --project tsconfig.json",
+    "watch-web:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "package-web": "npm run check-types && npm run lint && node esbuild.cjs --production",
     "check-types": "tsc --noEmit",
     "lint": "eslint src --ext ts",
