@@ -546,13 +546,8 @@ export default defineConfig(() => ({
   clean: true,
   minify: true,
   treeshake: true,
-  format: ["cjs", "esm"],
-  outExtension({ format }) {
-    let js: string | undefined;
-    if (format === "cjs") js = `.cjs`;
-    if (format === "esm") js = `.js`;
-    return { js };
-  },
+  format: "esm",
+  outExtension: () => ({ js: `.js` }),
 }));
 ```
 
