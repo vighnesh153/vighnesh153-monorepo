@@ -70,15 +70,42 @@ test('should update peekCharacter when readNextCharacter is called', () => {
   const input = new StringLexerInput('pika');
   const reader = new LexerInputReader(input);
 
-  expect(reader.peekCharacter).toBe('i');
+  expect(reader.peekCharacter()).toBe('i');
   reader.readNextCharacter();
-  expect(reader.peekCharacter).toBe('k');
+  expect(reader.peekCharacter()).toBe('k');
   reader.readNextCharacter();
-  expect(reader.peekCharacter).toBe('a');
+  expect(reader.peekCharacter()).toBe('a');
   reader.readNextCharacter();
-  expect(reader.peekCharacter).toBe(EOF_CHARACTER);
+  expect(reader.peekCharacter()).toBe(EOF_CHARACTER);
   reader.readNextCharacter();
-  expect(reader.peekCharacter).toBe(EOF_CHARACTER);
+  expect(reader.peekCharacter()).toBe(EOF_CHARACTER);
+});
+
+test('should throw error if futureOffset is negative integer', () => {
+  const input = new StringLexerInput('pika');
+  const reader = new LexerInputReader(input);
+
+  expect(() => reader.peekCharacter(-1)).toThrowErrorMatchingInlineSnapshot(
+    `[Error: Expected future offset to be a non-negative integer, found '-1']`
+  );
+});
+
+test('should throw error if futureOffset is fraction', () => {
+  const input = new StringLexerInput('pika');
+  const reader = new LexerInputReader(input);
+
+  expect(() => reader.peekCharacter(0.6)).toThrowErrorMatchingInlineSnapshot(
+    `[Error: Expected future offset to be a non-negative integer, found '0.6']`
+  );
+});
+
+test('should return correct peekCharacter when futureOffset is provided', () => {
+  const input = new StringLexerInput('pika');
+  const reader = new LexerInputReader(input);
+
+  expect(reader.peekCharacter(1)).toBe('k');
+  expect(reader.peekCharacter(2)).toBe('a');
+  expect(reader.peekCharacter(3)).toBe(EOF_CHARACTER);
 });
 
 test('should correctly calculate the line and column numbers', () => {

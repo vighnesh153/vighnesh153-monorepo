@@ -1,3 +1,4 @@
+import { not } from '@vighnesh153/utils';
 import { LexerInput } from './LexerInput';
 import { EOF_CHARACTER } from './utils';
 
@@ -16,13 +17,6 @@ export class LexerInputReader {
 
   get currentIndex(): number {
     return Math.min(this.#currentIndex, this.lexerInput.getSize());
-  }
-
-  get peekCharacter(): string | EOF_CHARACTER {
-    if (this.#peekIndex >= this.lexerInput.getSize()) {
-      return EOF_CHARACTER;
-    }
-    return this.lexerInput.getCharacterAt(this.#peekIndex);
   }
 
   get lineNumber(): number {
@@ -52,5 +46,16 @@ export class LexerInputReader {
     }
     this.#currentIndex = this.#peekIndex;
     this.#peekIndex = Math.min(1 + this.#peekIndex, this.lexerInput.getSize());
+  }
+
+  peekCharacter(futureOffset: number = 0): string | EOF_CHARACTER {
+    if (futureOffset < 0 || not(Number.isInteger(futureOffset))) {
+      throw new Error(`Expected future offset to be a non-negative integer, found '${futureOffset}'`);
+    }
+    const peekIndex = this.#peekIndex + futureOffset;
+    if (peekIndex >= this.lexerInput.getSize()) {
+      return EOF_CHARACTER;
+    }
+    return this.lexerInput.getCharacterAt(peekIndex);
   }
 }
