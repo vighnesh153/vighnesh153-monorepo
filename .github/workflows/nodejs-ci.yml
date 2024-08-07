@@ -8,11 +8,11 @@ on:
   push:
     branches: ["main"]
     paths:
-      - 'nodejs-tools/**'
+      - "nodejs-tools/**"
   pull_request:
     branches: ["main"]
     paths:
-      - 'nodejs-tools/**'
+      - "nodejs-tools/**"
 
 jobs:
   nodejs-ci:
@@ -24,6 +24,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       # install deps
       - run: npm install
