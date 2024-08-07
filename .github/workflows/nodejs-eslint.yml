@@ -4,11 +4,11 @@ on:
   push:
     branches: ["main"]
     paths:
-      - 'nodejs-tools/**'
+      - "nodejs-tools/**"
   pull_request:
     branches: ["main"]
     paths:
-      - 'nodejs-tools/**'
+      - "nodejs-tools/**"
 
 jobs:
   nodejs-eslint:
