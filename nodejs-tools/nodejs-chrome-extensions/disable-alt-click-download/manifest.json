@@ -12,7 +12,13 @@
   "content_scripts": [
     {
       "js": ["scripts/index.js"],
-      "matches": ["http://*/*", "https://*/*"]
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "https://google.com/*",
+        "https://youtube.com/*",
+        "https://developer.android.com/*"
+      ]
     }
   ]
 }
