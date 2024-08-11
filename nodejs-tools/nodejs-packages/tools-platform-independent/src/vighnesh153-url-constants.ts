@@ -39,6 +39,11 @@ export interface Vighnesh153Routes {
 function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
   const apiOrigin = `https://${apiHost}`;
   const uiOrigin = `https://${uiHost}`;
+
+  const initiateGoogleLogin = `initiateGoogleLogin`;
+  const initiateLogout = `initiateLogout`;
+  const googleAuthCallback = `googleAuthCallback`;
+
   return {
     ui: {
       baseHost: uiHost,
@@ -49,16 +54,16 @@ function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
       baseHost: apiHost,
       basePath: apiOrigin,
       initiateLogin: {
-        path: `${apiOrigin}/initiateGoogleLogin`,
-        identifier: 'initiateGoogleLogin',
+        path: `${apiOrigin}/${initiateGoogleLogin}`,
+        identifier: initiateGoogleLogin,
       },
       initiateLogout: {
-        path: `${apiOrigin}/initiateLogout`,
-        identifier: 'initiateLogout',
+        path: `${apiOrigin}/${initiateLogout}`,
+        identifier: initiateLogout,
       },
       authCallback: {
-        path: `${apiOrigin}/googleAuthCallback`,
-        identifier: 'googleAuthCallback',
+        path: `${apiOrigin}/${googleAuthCallback}`,
+        identifier: googleAuthCallback,
       },
     },
   };

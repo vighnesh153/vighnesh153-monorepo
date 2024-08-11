@@ -1,7 +1,12 @@
 import { type SSTConfig } from 'sst';
-import { type StackContext, Api, Table, Config } from 'sst/constructs';
+import { type StackContext, Api, Table, Config, Function } from 'sst/constructs';
 
-import { constructRoutesForDev, constructRoutesForProd } from '@vighnesh153/tools-platform-independent';
+import {
+  constructRoutesForDev,
+  constructRoutesForProd,
+  constructHttpApiLambdaName,
+  DEFAULT_AWS_REGION,
+} from '@vighnesh153/tools-platform-independent';
 
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
@@ -44,6 +49,16 @@ function ApiStack({ stack }: StackContext) {
     },
   });
 
+  new Function(stack, 'LambdaFunctionPikachu', {
+    bind: [],
+    functionName: `HttpApiGet-pikachu-${stage}`,
+    handler: `dist/pikachu.handler`,
+    logRetention: 'one_day',
+    environment: {
+      PIKACHU_ENV: 'pikachu-secret',
+    },
+  });
+
   // http api
   const api = new Api(stack, 'HttpApi', {
     customDomain: {
@@ -54,7 +69,11 @@ function ApiStack({ stack }: StackContext) {
       [`GET /${stageConfig.api.initiateLogin.identifier}`]: {
         function: {
           bind: [GOOGLE_CLIENT_ID],
-          functionName: `HttpApiGet-${stageConfig.api.initiateLogin.identifier}-${stage}`,
+          functionName: constructHttpApiLambdaName({
+            stage,
+            functionIdentifier: stageConfig.api.initiateLogin.identifier,
+            method: 'Get',
+          }),
           handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
@@ -65,7 +84,11 @@ function ApiStack({ stack }: StackContext) {
       [`GET /${stageConfig.api.authCallback.identifier}`]: {
         function: {
           bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
-          functionName: `HttpApiGet-${stageConfig.api.authCallback.identifier}-${stage}`,
+          functionName: constructHttpApiLambdaName({
+            stage,
+            functionIdentifier: stageConfig.api.authCallback.identifier,
+            method: 'Get',
+          }),
           handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
@@ -77,7 +100,11 @@ function ApiStack({ stack }: StackContext) {
       },
       [`GET /${stageConfig.api.initiateLogout.identifier}`]: {
         function: {
-          functionName: `HttpApiGet-${stageConfig.api.initiateLogout.identifier}-${stage}`,
+          functionName: constructHttpApiLambdaName({
+            stage,
+            functionIdentifier: stageConfig.api.initiateLogout.identifier,
+            method: 'Get',
+          }),
           handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
           environment: {
@@ -105,7 +132,7 @@ const sstConfig: SSTConfig = {
     }
     return {
       name: `Vighnesh153-Api-${stage}`,
-      region: 'ap-south-1', // Mumbai
+      region: DEFAULT_AWS_REGION,
     };
   },
   stacks(app) {
