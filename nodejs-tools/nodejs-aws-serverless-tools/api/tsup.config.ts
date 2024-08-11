@@ -5,6 +5,7 @@ export default defineConfig(() => ({
     googleAuthCallback: './src/googleAuthCallback/index.ts',
     initiateGoogleLogin: './src/initiateGoogleLogin/index.ts',
     initiateLogout: './src/initiateLogout/index.ts',
+    pikachu: './src/pikachu/index.ts',
   },
   splitting: false,
   external: ['aws-sdk'],

@@ -22,24 +22,22 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@vighnesh153/aws-dynamo-db": "*",
-    "@vighnesh153/tools-platform-independent": "*",
-    "cookie": "^0.6.0",
-    "vighnesh153-cookies": "*"
-  },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.624.0",
     "@aws-sdk/types": "^3.609.0",
     "@types/aws-lambda": "^8.10.143",
     "@types/cookie": "^0.6.0",
     "@types/node": "*",
+    "@vighnesh153/aws-dynamo-db": "*",
+    "@vighnesh153/tools-platform-independent": "*",
     "@vighnesh153/tsconfig": "*",
     "@vighnesh153/types": "*",
+    "cookie": "^0.6.0",
     "eslint-config-vighnesh153": "*",
     "sst": "^2.43.4",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
+    "vighnesh153-cookies": "*",
     "vitest": "^2.0.5"
   },
   "keywords": [],
