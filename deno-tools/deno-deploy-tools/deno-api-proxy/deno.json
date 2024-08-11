@@ -1,0 +1,15 @@
+{
+    "tasks": {
+        "prepare": "./prepare.sh",
+        "deploy:dev": "deno task prepare && deployctl deploy --project=deno-api-proxy-dev",
+        "deploy:prod": "deno task prepare && deployctl deploy --project=deno-api-proxy-prod"
+    },
+    "deploy": {
+        "include": [".", ".local"],
+        "entrypoint": "main.ts",
+        "prod": true
+    },
+    "imports": {
+        "@aws-sdk/client-lambda": "npm:@aws-sdk/client-lambda@3.624.0"
+    }
+}
