@@ -26,9 +26,12 @@ Visit
 
 #### Tasks
 
+- Remove API GW and proxy lambdas from Deno
 - Popover testing triangle bump
+- Add a list of Chrome and Vscode extensions to projects on vighnesh153.dev
+- Look at removing Config usage from lambda
 - vighnesh153 media
-- vighnesh153 private.vighnesh153.com
+- vighnesh153 private.vighnesh153.dev
 - Move @vighnesh153/random-word to @vighnesh153/utils
 - adb fetch continue watching row from device
 - adb launch deeplink
