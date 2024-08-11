@@ -3,7 +3,7 @@
         "members": ["./deno-deploy-tools/deno-api-proxy"]
     },
     "tasks": {
-        "ok": "deno lint && deno fmt --check && deno test"
+        "ok": "deno lint && deno fmt --check && deno test --allow-none"
     },
     "imports": {
         "@std/assert": "jsr:@std/assert@1"
