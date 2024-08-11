@@ -1,0 +1,30 @@
+name: deno-ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "deno-tools/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "deno-tools/**"
+
+jobs:
+  nodejs-ci:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./deno-tools
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: vx.x.x
+
+      # Check if deno is ok
+      - run: deno task ok
