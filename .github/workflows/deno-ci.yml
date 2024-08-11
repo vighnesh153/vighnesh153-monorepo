@@ -12,7 +12,7 @@ on:
       - "deno-tools/**"
 
 jobs:
-  nodejs-ci:
+  deno-ci:
     runs-on: ubuntu-latest
 
     defaults:
