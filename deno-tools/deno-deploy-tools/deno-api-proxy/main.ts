@@ -20,6 +20,7 @@ app.use(express.json());
 
 app.use(async (req, res) => {
     const data = {
+        // @ts-ignore: for some reason, @types/express doesn't have req.headers
         headers: req.headers,
         method: req.method,
         path: req.path,
