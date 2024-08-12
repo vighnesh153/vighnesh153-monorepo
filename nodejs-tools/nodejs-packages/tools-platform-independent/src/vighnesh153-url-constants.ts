@@ -1,12 +1,14 @@
+import { LambdaFunctionConfig, LambdaFunctionName, StageType } from './aws_config';
+
 const API_HOSTS = {
-  DEV: 'dev.api.vighnesh153.dev',
-  PROD: 'prod.api.vighnesh153.dev',
-};
+  dev: 'dev.api.vighnesh153.dev',
+  prod: 'prod.api.vighnesh153.dev',
+} satisfies Record<StageType, string>;
 
 const UI_HOSTS = {
-  DEV: 'staging.vighnesh153.dev',
-  PROD: 'vighnesh153.dev',
-};
+  dev: 'staging.vighnesh153.dev',
+  prod: 'vighnesh153.dev',
+} satisfies Record<StageType, string>;
 
 export interface Vighnesh153Routes {
   ui: {
@@ -23,15 +25,15 @@ export interface Vighnesh153Routes {
     // auth
     initiateLogin: {
       path: string;
-      identifier: string;
+      identifier: LambdaFunctionName;
     };
     initiateLogout: {
       path: string;
-      identifier: string;
+      identifier: LambdaFunctionName;
     };
     authCallback: {
       path: string;
-      identifier: string;
+      identifier: LambdaFunctionName;
     };
   };
 }
@@ -39,10 +41,6 @@ export interface Vighnesh153Routes {
 function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
   const apiOrigin = `https://${apiHost}`;
   const uiOrigin = `https://${uiHost}`;
-
-  const initiateGoogleLogin = `initiateGoogleLogin`;
-  const initiateLogout = `initiateLogout`;
-  const googleAuthCallback = `googleAuthCallback`;
 
   return {
     ui: {
@@ -54,25 +52,25 @@ function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
       baseHost: apiHost,
       basePath: apiOrigin,
       initiateLogin: {
-        path: `${apiOrigin}/${initiateGoogleLogin}`,
-        identifier: initiateGoogleLogin,
+        path: `${apiOrigin}/${LambdaFunctionConfig.initiateGoogleLogin.name}`,
+        identifier: LambdaFunctionConfig.initiateGoogleLogin.name,
       },
       initiateLogout: {
-        path: `${apiOrigin}/${initiateLogout}`,
-        identifier: initiateLogout,
+        path: `${apiOrigin}/${LambdaFunctionConfig.initiateLogout.name}`,
+        identifier: LambdaFunctionConfig.initiateLogout.name,
       },
       authCallback: {
-        path: `${apiOrigin}/${googleAuthCallback}`,
-        identifier: googleAuthCallback,
+        path: `${apiOrigin}/${LambdaFunctionConfig.googleAuthCallback.name}`,
+        identifier: LambdaFunctionConfig.googleAuthCallback.name,
       },
     },
   };
 }
 
 export function constructRoutesForDev(): Vighnesh153Routes {
-  return constructRoutes(API_HOSTS.DEV, UI_HOSTS.DEV);
+  return constructRoutes(API_HOSTS.dev, UI_HOSTS.dev);
 }
 
 export function constructRoutesForProd(): Vighnesh153Routes {
-  return constructRoutes(API_HOSTS.PROD, UI_HOSTS.PROD);
+  return constructRoutes(API_HOSTS.prod, UI_HOSTS.prod);
 }
