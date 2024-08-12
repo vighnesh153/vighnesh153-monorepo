@@ -72,7 +72,7 @@ function ApiStack({ stack }: StackContext) {
           functionName: constructHttpApiLambdaName({
             stage,
             functionIdentifier: stageConfig.api.initiateLogin.identifier,
-            method: 'Get',
+            method: 'get',
           }),
           handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
@@ -87,7 +87,7 @@ function ApiStack({ stack }: StackContext) {
           functionName: constructHttpApiLambdaName({
             stage,
             functionIdentifier: stageConfig.api.authCallback.identifier,
-            method: 'Get',
+            method: 'get',
           }),
           handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
@@ -103,7 +103,7 @@ function ApiStack({ stack }: StackContext) {
           functionName: constructHttpApiLambdaName({
             stage,
             functionIdentifier: stageConfig.api.initiateLogout.identifier,
-            method: 'Get',
+            method: 'get',
           }),
           handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
           logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',

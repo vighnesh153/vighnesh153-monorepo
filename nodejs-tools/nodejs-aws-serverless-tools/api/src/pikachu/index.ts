@@ -9,7 +9,7 @@ type LambdaResponse = {
 export const handler: Handler = (request: unknown) =>
   Promise.resolve({
     statusCode: 201,
-    body: JSON.stringify({ requestData: request, env: process.env }),
+    body: JSON.stringify({ requestData: request }),
     headers: {
       pikachu: 'pika-cookie',
     },
