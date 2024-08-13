@@ -2,7 +2,8 @@ import type { CookieStoreWrapper } from '@vighnesh153/cookie-store';
 import { cookieKeys } from 'vighnesh153-cookies';
 import type { CompleteUserInfo } from '@vighnesh153/types';
 
-import { stage as actualStage, type StageType } from '@/utils';
+import { type StageType } from '@vighnesh153/tools-platform-independent';
+import { stage as actualStage } from '@/utils';
 import { cookieStoreWrapperFactory } from './factories';
 
 export interface BrowserCookieReader {
