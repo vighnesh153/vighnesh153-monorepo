@@ -12,5 +12,6 @@ export const handler: Handler = (request: unknown) =>
     body: JSON.stringify({ requestData: request }),
     headers: {
       pikachu: 'pika-cookie',
+      'Content-Type': 'application/json',
     },
   } satisfies LambdaResponse);

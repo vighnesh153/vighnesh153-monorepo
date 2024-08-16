@@ -1,9 +1,15 @@
 import { InvocationRequest, InvocationType, InvokeCommand, LambdaClient, LogType } from '@aws-sdk/client-lambda';
 
-import express from 'npm:express@4';
-import type { Express } from 'npm:@types/express@4';
-
-import { DEFAULT_AWS_REGION } from './.local/aws_config.ts';
+import {
+    constructHttpApiLambdaName,
+    DEFAULT_AWS_REGION,
+    isValidLambdaMethod,
+    isValidStageType,
+    LambdaFunctionName,
+    LambdaFunctionNames,
+    LambdaRequestPayload,
+    LambdaResponsePayload,
+} from './.local/aws_config.ts';
 
 const client = new LambdaClient({
     credentials: {
@@ -13,49 +19,128 @@ const client = new LambdaClient({
     region: DEFAULT_AWS_REGION,
 });
 
-const app: Express = express();
+const stage = Deno.env.get('STAGE') ?? 'dev';
 
-// @ts-ignore: express.json type is not identified by Deno
-app.use(express.json());
+// TODO: configure payload limit
 
-app.use(async (req, res) => {
-    const data = {
-        // @ts-ignore: for some reason, @types/express doesn't have req.headers
-        headers: req.headers,
-        method: req.method,
-        path: req.path,
-        pathParams: req.params,
-        searchParams: req.query,
-        body: req.body,
+// TODO: add rate limiting using KV db
+
+function isJsonRequest(req: Request): boolean {
+    return req.headers.get('content-type') === 'application/json';
+}
+
+function convertHeaders(req: Request): Record<string, string> {
+    const headers: Record<string, string> = {};
+
+    Array.from(req.headers.keys()).forEach((key) => {
+        headers[key] = req.headers.get(key)!;
+    });
+
+    return headers;
+}
+
+function convertUrlSearchParams(urlSearchParams: URLSearchParams): Record<string, string> {
+    const params: Record<string, string> = {};
+
+    for (const [key, value] of urlSearchParams.entries()) {
+        params[key] = value;
+    }
+
+    return params;
+}
+
+async function handler(req: Request): Promise<Response> {
+    if (!isValidStageType(stage)) {
+        console.error(`Stage is not configured in the project.`);
+        return new Response(JSON.stringify({ error: 'Stage is not configured.' }), {
+            status: 500,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    const method = req.method;
+    const url = new URL(req.url);
+    const headers = convertHeaders(req);
+
+    const functionName =
+        (Object.keys(LambdaFunctionNames) as LambdaFunctionName[]).find((functionName) =>
+            url.pathname === `/${functionName}`
+        ) ?? null;
+
+    if (!isValidLambdaMethod(method)) {
+        console.log(`Received request with unsupported http method:`, method, ` with headers:`, headers);
+        return new Response(
+            JSON.stringify({ error: 'Unsupported http method', method }),
+            {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
+    }
+
+    if (functionName === null) {
+        console.log('Received request for unrecognized function name:', functionName, ' with headers:', headers);
+        return new Response(
+            JSON.stringify({ error: 'No function found for the corresponding path', path: url.pathname }),
+            {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
+    }
+
+    let body: unknown | null = null;
+    if (isJsonRequest(req)) {
+        body = await req.json();
+    }
+
+    const payload: LambdaRequestPayload = {
+        method,
+        headers,
+        body,
+        filterParams: convertUrlSearchParams(url.searchParams),
     };
 
-    console.log(`Data from request: ${JSON.stringify(data)}`);
-
-    const encodedBody = new TextEncoder().encode(JSON.stringify(data));
+    const encodedBody = new TextEncoder().encode(JSON.stringify(payload));
 
     const input: InvocationRequest = {
-        FunctionName: 'HttpApiGet-pikachu-dev',
+        FunctionName: constructHttpApiLambdaName({
+            functionIdentifier: functionName,
+            method,
+            stage,
+        }),
         InvocationType: InvocationType.RequestResponse,
         LogType: LogType.Tail,
         Payload: encodedBody,
     };
 
-    const command = new InvokeCommand(input);
-
     try {
-        const response = await client.send(command);
-        console.log(`Response from lambda: ${JSON.stringify(response)}`);
+        const lambdaResponse = await client.send(new InvokeCommand(input));
 
-        const payload = JSON.parse(new TextDecoder().decode(response.Payload));
-        res.json({
-            ...payload,
-            body: JSON.parse(payload.body),
+        const payload: LambdaResponsePayload = JSON.parse(new TextDecoder().decode(lambdaResponse.Payload));
+
+        return new Response(payload.body, {
+            status: payload.statusCode,
+            headers: payload.headers ?? {},
         });
     } catch (e: unknown) {
         const err = e as { message?: string };
-        console.log(`Error: ${err?.message}`, e);
-        res.json({ errorOccurred: e });
-    }
-});
+        console.error(`Some error occurred while processing a request:`, err?.message, e);
+        console.log('method=', method, ' path=', req.url, ' headers=', headers, ' body=', body);
 
-app.listen(8000);
+        return new Response(JSON.stringify({ error: err?.message ?? 'Some error occurred' }), {
+            status: 500,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+}
+
+export default { fetch: handler };
