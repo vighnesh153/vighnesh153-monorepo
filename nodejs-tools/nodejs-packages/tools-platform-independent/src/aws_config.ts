@@ -1,20 +1,47 @@
 export const DEFAULT_AWS_REGION = 'ap-south-1'; // Mumbai
 
-export type StageType = 'dev' | 'prod';
+const StageTypes = ['dev', 'prod'] as const;
+
+export type StageType = (typeof StageTypes)[number];
 
 export function isValidStageType(stage: string): stage is StageType {
-  return ['dev', 'prod'].includes(stage);
+  return (StageTypes as readonly string[]).includes(stage);
 }
 
-const LambdaFunctionNames = {
-  initiateGoogleLogin: 'initiateGoogleLogin',
-  initiateLogout: 'initiateLogout',
-  googleAuthCallback: 'googleAuthCallback',
+const LambdaMethodTypes = ['get', 'post'] as const;
+
+export type LambdaMethodType = (typeof LambdaMethodTypes)[number];
+
+export function isValidLambdaMethod(method: string): method is LambdaMethodType {
+  return (LambdaMethodTypes as readonly string[]).includes(method.toLowerCase());
+}
+
+export type LambdaRequestPayload<T = unknown> = {
+  method: LambdaMethodType;
+  headers: Record<string, string>;
+  body: T;
+  filterParams: Record<string, string>;
 };
 
-export type LambdaMethodType = 'get' | 'post';
+export type LambdaResponsePayload = {
+  statusCode: number;
+  body: string | null;
+  headers: LambdaRequestPayload['headers'] | null;
+};
 
-export type LambdaFunctionName = keyof typeof LambdaFunctionNames;
+const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback', 'pikachu'] as const;
+
+export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
+
+export const LambdaFunctionNames = LambdaFunctionNameList.reduce(
+  (acc, curr) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: some
+    acc[curr] = curr;
+    return acc;
+  },
+  {} as { [key in LambdaFunctionName]: key }
+);
 
 export const LambdaFunctionConfig = {
   initiateGoogleLogin: {
@@ -29,14 +56,17 @@ export const LambdaFunctionConfig = {
     name: 'googleAuthCallback',
     method: 'get',
   },
-} satisfies Record<LambdaFunctionName, { name: LambdaFunctionName; method: LambdaMethodType }>;
+  pikachu: {
+    name: 'pikachu',
+    method: 'get',
+  },
+} satisfies { [key in LambdaFunctionName]: { name: key; method: LambdaMethodType } };
 
-export type LambdaNameOptions = {
+export function constructHttpApiLambdaName(options: {
   stage: 'dev' | 'prod';
   method: LambdaMethodType;
   functionIdentifier: LambdaFunctionName;
-};
-export function constructHttpApiLambdaName(options: LambdaNameOptions): string {
-  const method = options.method[0].toUpperCase() + options.method.slice(1);
+}): string {
+  const method = options.method[0].toUpperCase() + options.method.slice(1).toLowerCase();
   return `HttpApi${method}-${options.functionIdentifier}-${options.stage}`;
 }
