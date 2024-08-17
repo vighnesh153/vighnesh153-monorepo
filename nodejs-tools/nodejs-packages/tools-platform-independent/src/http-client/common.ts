@@ -5,6 +5,7 @@ export interface HttpQueryParameters {
 export const HttpHeaderKeys = {
   contentType: 'Content-Type',
   contentLength: 'Content-Length',
+  setCookie: 'Set-Cookie',
 } as const;
 
 export const HttpHeaderValues = {

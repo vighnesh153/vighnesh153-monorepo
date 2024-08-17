@@ -7,7 +7,14 @@ import { type CookieSerializeOptions } from 'cookie';
 
 import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import { type CompleteUserInfo } from '@vighnesh153/types';
-import { type Logger, type JsonHttpClient, milliseconds, not, slugify } from '@vighnesh153/tools-platform-independent';
+import {
+  type Logger,
+  type JsonHttpClient,
+  milliseconds,
+  not,
+  slugify,
+  LambdaResponsePayload,
+} from '@vighnesh153/tools-platform-independent';
 import { cookieKeys } from 'vighnesh153-cookies';
 
 import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';
@@ -30,13 +37,6 @@ import { CookieSerializer } from '../common/CookieSerializer';
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
 }
-
-type LambdaResponse = {
-  statusCode: number;
-  body?: string;
-  headers?: Record<string, string>;
-  cookies?: string[];
-};
 
 export async function controller({
   // environment variables
@@ -90,7 +90,7 @@ export async function controller({
   randomStringGenerator?: RandomStringGenerator;
   authTokenGenerator?: AuthTokenGenerator;
   cookieSerializer?: CookieSerializer;
-} = {}): Promise<LambdaResponse> {
+} = {}): Promise<LambdaResponsePayload> {
   if (
     not(uiAuthCompleteUrl) ||
     not(authRedirectUrl) ||
@@ -115,6 +115,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Some of the environment variables are missing and hence I am unable to process your request',
+      headers: {},
+      cookies: [],
     };
   }
 
@@ -124,6 +126,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,
       body: 'searchParams.code is empty',
+      headers: {},
+      cookies: [],
     };
   }
 
@@ -143,6 +147,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Failed to fetch token',
+      headers: {},
+      cookies: [],
     };
   }
   logger.log('Google auth token fetch is successful');
@@ -158,6 +164,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Failed to extract user info from token',
+      headers: {},
+      cookies: [],
     };
   }
   logger.log('Successfully extracted user info from token');
@@ -169,6 +177,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_NOT_ACCEPTABLE,
       body: 'Email address is not verified.',
+      headers: {},
+      cookies: [],
     };
   }
   logger.log(`User's email address is verified`);
@@ -183,6 +193,8 @@ export async function controller({
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       body: 'Failed to fetch existing user info from database',
+      headers: {},
+      cookies: [],
     };
   }
 
@@ -210,6 +222,8 @@ export async function controller({
       return {
         statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
         body: 'Failed to create a new user',
+        headers: {},
+        cookies: [],
       };
     }
   }
@@ -225,7 +239,7 @@ export async function controller({
     maxAge: milliseconds({ years: 1 }) / 1000,
   };
 
-  const response: LambdaResponse = {
+  const response: LambdaResponsePayload = {
     statusCode: http2.constants.HTTP_STATUS_TEMPORARY_REDIRECT,
     cookies: [
       cookieSerializer.serialize(cookieKeys.userInfo(environmentStage!), JSON.stringify(completeUserInfo), {
@@ -238,6 +252,7 @@ export async function controller({
         secure: true,
       }),
     ],
+    body: null,
     headers: {
       Location: uiAuthCompleteUrl!,
     },
