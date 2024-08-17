@@ -19,14 +19,16 @@ const client = new LambdaClient({
     region: DEFAULT_AWS_REGION,
 });
 
-const stage = Deno.env.get('STAGE') ?? 'dev';
+const STAGE = Deno.env.get('STAGE') ?? 'dev';
 
-// TODO: configure payload limit
-
-// TODO: add rate limiting using KV db
+const MAX_CONTENT_LENGTH = 10_000; // 20 KB
 
 function isJsonRequest(req: Request): boolean {
     return req.headers.get('content-type') === 'application/json';
+}
+
+function isContentLengthValid(headers: Record<string, string>): boolean {
+    return parseInt(headers['Content-Length']) <= MAX_CONTENT_LENGTH;
 }
 
 function convertHeaders(req: Request): Record<string, string> {
@@ -49,8 +51,11 @@ function convertUrlSearchParams(urlSearchParams: URLSearchParams): Record<string
     return params;
 }
 
-async function handler(req: Request): Promise<Response> {
-    if (!isValidStageType(stage)) {
+Deno.serve(async (req, _connInfo) => {
+    // TODO: add rate limiting using KV db
+    // Use `connInfo.remoteAddr.hostname` to rate limit
+
+    if (!isValidStageType(STAGE)) {
         console.error(`Stage is not configured in the project.`);
         return new Response(JSON.stringify({ error: 'Stage is not configured.' }), {
             status: 500,
@@ -64,10 +69,9 @@ async function handler(req: Request): Promise<Response> {
     const url = new URL(req.url);
     const headers = convertHeaders(req);
 
-    const functionName =
-        (Object.keys(LambdaFunctionNames) as LambdaFunctionName[]).find((functionName) =>
-            url.pathname === `/${functionName}`
-        ) ?? null;
+    const functionName = (Object.keys(LambdaFunctionNames) as LambdaFunctionName[]).find((functionName) =>
+        url.pathname === `/${functionName}`
+    ) ?? null;
 
     if (!isValidLambdaMethod(method)) {
         console.log(`Received request with unsupported http method:`, method, ` with headers:`, headers);
@@ -95,6 +99,19 @@ async function handler(req: Request): Promise<Response> {
         );
     }
 
+    if (!isContentLengthValid(headers)) {
+        console.log('Request payload too large for function:', functionName, ' with headers:', headers);
+        return new Response(
+            JSON.stringify({ error: 'Request payload too large', contentLength: headers['Content-Length'] }),
+            {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
+    }
+
     let body: unknown | null = null;
     if (isJsonRequest(req)) {
         body = await req.json();
@@ -113,7 +130,7 @@ async function handler(req: Request): Promise<Response> {
         FunctionName: constructHttpApiLambdaName({
             functionIdentifier: functionName,
             method,
-            stage,
+            stage: STAGE,
         }),
         InvocationType: InvocationType.RequestResponse,
         LogType: LogType.Tail,
@@ -141,6 +158,4 @@ async function handler(req: Request): Promise<Response> {
             },
         });
     }
-}
-
-export default { fetch: handler };
+});

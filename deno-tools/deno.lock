@@ -3,11 +3,19 @@
   "packages": {
     "specifiers": {
       "jsr:@std/bytes@^1.0.2-rc.3": "jsr:@std/bytes@1.0.2",
+      "jsr:@std/cli@^1.0.3": "jsr:@std/cli@1.0.3",
+      "jsr:@std/encoding@^1.0.1": "jsr:@std/encoding@1.0.1",
+      "jsr:@std/fmt@^1.0.0": "jsr:@std/fmt@1.0.0",
       "jsr:@std/fmt@^1.0.0-rc.1": "jsr:@std/fmt@1.0.0",
       "jsr:@std/fs@^1.0.0-rc.5": "jsr:@std/fs@1.0.1",
+      "jsr:@std/http": "jsr:@std/http@1.0.2",
       "jsr:@std/io": "jsr:@std/io@0.224.4",
       "jsr:@std/io@^0.224.3": "jsr:@std/io@0.224.4",
       "jsr:@std/log@^0.224.5": "jsr:@std/log@0.224.5",
+      "jsr:@std/media-types@^1.0.2": "jsr:@std/media-types@1.0.2",
+      "jsr:@std/net@^1.0.0": "jsr:@std/net@1.0.0",
+      "jsr:@std/path@^1.0.2": "jsr:@std/path@1.0.2",
+      "jsr:@std/streams@^1.0.1": "jsr:@std/streams@1.0.1",
       "npm:@aws-sdk/client-lambda@3": "npm:@aws-sdk/client-lambda@3.624.0_@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0_@aws-sdk+client-sso-oidc@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sso-oidc@3.624.0",
       "npm:@aws-sdk/client-lambda@3.624.0": "npm:@aws-sdk/client-lambda@3.624.0_@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0_@aws-sdk+client-sso-oidc@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sso-oidc@3.624.0",
       "npm:@aws-sdk/client-lambda@^3.624.0": "npm:@aws-sdk/client-lambda@3.624.0_@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0_@aws-sdk+client-sso-oidc@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sso-oidc@3.624.0",
@@ -24,11 +32,29 @@
       "@std/bytes@1.0.2": {
         "integrity": "fbdee322bbd8c599a6af186a1603b3355e59a5fb1baa139f8f4c3c9a1b3e3d57"
       },
+      "@std/cli@1.0.3": {
+        "integrity": "9a0488b5d2e58d29dce106a941eecec7181fae996bf0d2225563f1ca7e4b100c"
+      },
+      "@std/encoding@1.0.1": {
+        "integrity": "5955c6c542ebb4ce6587c3b548dc71e07a6c27614f1976d1d3887b1196cf4e65"
+      },
       "@std/fmt@1.0.0": {
         "integrity": "8a95c9fdbb61559418ccbc0f536080cf43341655e1444f9d375a66886ceaaa3d"
       },
       "@std/fs@1.0.1": {
         "integrity": "d6914ca2c21abe591f733b31dbe6331e446815e513e2451b3b9e472daddfefcb"
+      },
+      "@std/http@1.0.2": {
+        "integrity": "e28d612e2b5e0a40704e8c64d9a5d55cf8c6accf6d798cd1cfb43aad02d1e4fe",
+        "dependencies": [
+          "jsr:@std/cli@^1.0.3",
+          "jsr:@std/encoding@^1.0.1",
+          "jsr:@std/fmt@^1.0.0",
+          "jsr:@std/media-types@^1.0.2",
+          "jsr:@std/net@^1.0.0",
+          "jsr:@std/path@^1.0.2",
+          "jsr:@std/streams@^1.0.1"
+        ]
       },
       "@std/io@0.224.4": {
         "integrity": "bce1151765e4e70e376039fd72c71672b4d4aae363878a5ee3e58361b81197ec",
@@ -43,6 +69,18 @@
           "jsr:@std/fs@^1.0.0-rc.5",
           "jsr:@std/io@^0.224.3"
         ]
+      },
+      "@std/media-types@1.0.2": {
+        "integrity": "abb78dc8f7d88141cba8c4d60fc1e8b421e5c7b0d7c84f2f708bc666cad46784"
+      },
+      "@std/net@1.0.0": {
+        "integrity": "31de7a45f074edee8296d77fde85fef53fed9baa6f3122a38d796af08ecb3fc9"
+      },
+      "@std/path@1.0.2": {
+        "integrity": "a452174603f8c620bd278a380c596437a9eef50c891c64b85812f735245d9ec7"
+      },
+      "@std/streams@1.0.1": {
+        "integrity": "b07008b83fd7ae08965920d0fd700e07caf233bdd81e0ef1c8cca6c4140da364"
       }
     },
     "npm": {
