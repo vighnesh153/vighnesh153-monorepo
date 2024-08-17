@@ -1,8 +1,8 @@
 {
     "tasks": {
         "prepare": "./prepare.sh",
-        "deploy:dev": "deno task prepare && deployctl deploy --env=STAGE=dev --project=deno-api-proxy-dev",
-        "deploy:prod": "deno task prepare && deployctl deploy --env=STAGE=prod --project=deno-api-proxy-prod"
+        "deploy:dev": "deno task prepare && deployctl deploy --env=STAGE=dev --project=api-vighnesh153-dev",
+        "deploy:prod": "deno task prepare && deployctl deploy --env=STAGE=prod --project=api-vighnesh153-prod"
     },
     "deploy": {
         "include": [".", ".local"],

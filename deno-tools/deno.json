@@ -1,7 +1,7 @@
 {
     "workspace": {
         "members": [
-            "./deno-deploy-tools/deno-api-proxy"
+            "./deno-deploy-tools/api-vighnesh153"
         ]
     },
     "tasks": {
