@@ -457,11 +457,10 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "type": "module",
   "exports": {
-    "types": "./dist/src/index.d.ts",
-    "import": "./dist/main.js",
-    "require": "./dist/main.cjs"
+    "types": "./dist/main.d.ts",
+    "import": "./dist/main.js"
   },
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/main.d.ts",
   "author": {
     "name": "Vighnesh Raut",
     "email": "me@vighnesh153.dev",
@@ -469,10 +468,8 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "license": "MIT",
   "scripts": {
-    "build:watch:bundle": "tsup --watch",
-    "build:watch:types": "tsc --watch",
-    "build": "tsup && tsc",
-    "dev": "run-p build:watch:*",
+    "build": "rm -rf dist && tsup",
+    "dev": "tsup --watch",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },
@@ -484,7 +481,6 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
-    "npm-run-all": "^4.1.5",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
@@ -503,7 +499,11 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
 {
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["vite/client"]
   },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
@@ -548,8 +548,9 @@ export default defineConfig(() => ({
   splitting: false,
   clean: true,
   minify: true,
+  dts: true,
   treeshake: true,
-  format: "esm",
+  format: ["esm"],
   outExtension: () => ({ js: `.js` }),
 }));
 ```
