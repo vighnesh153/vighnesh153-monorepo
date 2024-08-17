@@ -5,11 +5,12 @@ import {
     DEFAULT_AWS_REGION,
     isValidLambdaMethod,
     isValidStageType,
-    LambdaFunctionName,
+    type LambdaFunctionName,
     LambdaFunctionNames,
-    LambdaRequestPayload,
-    LambdaResponsePayload,
-} from './.local/aws_config.ts';
+    type LambdaRequestPayload,
+    type LambdaResponsePayload,
+} from './.local/tools-platform-independent/aws_config.ts';
+import { HttpHeaderKeys, HttpHeaderValues } from './.local/tools-platform-independent/http_client_common.ts';
 
 const client = new LambdaClient({
     credentials: {
@@ -24,11 +25,11 @@ const STAGE = Deno.env.get('STAGE') ?? 'dev';
 const MAX_CONTENT_LENGTH = 10_000; // 20 KB
 
 function isJsonRequest(req: Request): boolean {
-    return req.headers.get('content-type') === 'application/json';
+    return req.headers.get(HttpHeaderKeys.contentType) === HttpHeaderValues.contentType.applicationJson;
 }
 
 function isContentLengthValid(headers: Record<string, string>): boolean {
-    return parseInt(headers['Content-Length']) <= MAX_CONTENT_LENGTH;
+    return parseInt(headers[HttpHeaderKeys.contentLength]) <= MAX_CONTENT_LENGTH;
 }
 
 function convertHeaders(req: Request): Record<string, string> {
@@ -60,7 +61,7 @@ Deno.serve(async (req, _connInfo) => {
         return new Response(JSON.stringify({ error: 'Stage is not configured.' }), {
             status: 500,
             headers: {
-                'Content-Type': 'application/json',
+                [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
             },
         });
     }
@@ -80,7 +81,7 @@ Deno.serve(async (req, _connInfo) => {
             {
                 status: 400,
                 headers: {
-                    'Content-Type': 'application/json',
+                    [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
                 },
             },
         );
@@ -93,7 +94,7 @@ Deno.serve(async (req, _connInfo) => {
             {
                 status: 400,
                 headers: {
-                    'Content-Type': 'application/json',
+                    [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
                 },
             },
         );
@@ -106,7 +107,7 @@ Deno.serve(async (req, _connInfo) => {
             {
                 status: 400,
                 headers: {
-                    'Content-Type': 'application/json',
+                    [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
                 },
             },
         );
@@ -118,7 +119,7 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     const payload: LambdaRequestPayload = {
-        method,
+        method: method,
         headers,
         body,
         filterParams: convertUrlSearchParams(url.searchParams),
@@ -154,7 +155,7 @@ Deno.serve(async (req, _connInfo) => {
         return new Response(JSON.stringify({ error: err?.message ?? 'Some error occurred' }), {
             status: 500,
             headers: {
-                'Content-Type': 'application/json',
+                [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
             },
         });
     }
