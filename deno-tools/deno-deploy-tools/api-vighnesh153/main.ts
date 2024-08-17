@@ -1,4 +1,4 @@
-import { InvocationRequest, InvocationType, InvokeCommand, LambdaClient, LogType } from '@aws-sdk/client-lambda';
+import { InvocationRequest, InvocationType, InvokeCommand, LambdaClient, LogType } from "@aws-sdk/client-lambda";
 
 import {
     constructHttpApiLambdaName,
@@ -9,18 +9,18 @@ import {
     LambdaFunctionNames,
     type LambdaRequestPayload,
     type LambdaResponsePayload,
-} from './.local/tools-platform-independent/aws_config.ts';
-import { HttpHeaderKeys, HttpHeaderValues } from './.local/tools-platform-independent/http_client_common.ts';
+} from "./.local/tools-platform-independent/aws_config.ts";
+import { HttpHeaderKeys, HttpHeaderValues } from "./.local/tools-platform-independent/http_client_common.ts";
 
 const client = new LambdaClient({
     credentials: {
-        accessKeyId: Deno.env.get('AWS_ACCESS_KEY_ID') ?? '',
-        secretAccessKey: Deno.env.get('AWS_SECRET_ACCESS_KEY') ?? '',
+        accessKeyId: Deno.env.get("AWS_ACCESS_KEY_ID") ?? "",
+        secretAccessKey: Deno.env.get("AWS_SECRET_ACCESS_KEY") ?? "",
     },
     region: DEFAULT_AWS_REGION,
 });
 
-const STAGE = Deno.env.get('STAGE') ?? 'dev';
+const STAGE = Deno.env.get("STAGE") ?? "dev";
 
 const MAX_CONTENT_LENGTH = 10_000; // 20 KB
 
@@ -58,7 +58,7 @@ Deno.serve(async (req, _connInfo) => {
 
     if (!isValidStageType(STAGE)) {
         console.error(`Stage is not configured in the project.`);
-        return new Response(JSON.stringify({ error: 'Stage is not configured.' }), {
+        return new Response(JSON.stringify({ error: "Stage is not configured." }), {
             status: 500,
             headers: {
                 [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
@@ -77,7 +77,7 @@ Deno.serve(async (req, _connInfo) => {
     if (!isValidLambdaMethod(method)) {
         console.log(`Received request with unsupported http method:`, method, ` with headers:`, headers);
         return new Response(
-            JSON.stringify({ error: 'Unsupported http method', method }),
+            JSON.stringify({ error: "Unsupported http method", method }),
             {
                 status: 400,
                 headers: {
@@ -88,9 +88,9 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     if (functionName === null) {
-        console.log('Received request for unrecognized function name:', functionName, ' with headers:', headers);
+        console.log("Received request for unrecognized function name:", functionName, " with headers:", headers);
         return new Response(
-            JSON.stringify({ error: 'No function found for the corresponding path', path: url.pathname }),
+            JSON.stringify({ error: "No function found for the corresponding path", path: url.pathname }),
             {
                 status: 400,
                 headers: {
@@ -101,9 +101,9 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     if (!isContentLengthValid(headers)) {
-        console.log('Request payload too large for function:', functionName, ' with headers:', headers);
+        console.log("Request payload too large for function:", functionName, " with headers:", headers);
         return new Response(
-            JSON.stringify({ error: 'Request payload too large', contentLength: headers['Content-Length'] }),
+            JSON.stringify({ error: "Request payload too large", contentLength: headers["Content-Length"] }),
             {
                 status: 400,
                 headers: {
@@ -150,9 +150,9 @@ Deno.serve(async (req, _connInfo) => {
     } catch (e: unknown) {
         const err = e as { message?: string };
         console.error(`Some error occurred while processing a request:`, err?.message, e);
-        console.log('method=', method, ' path=', req.url, ' headers=', headers, ' body=', body);
+        console.log("method=", method, " path=", req.url, " headers=", headers, " body=", body);
 
-        return new Response(JSON.stringify({ error: err?.message ?? 'Some error occurred' }), {
+        return new Response(JSON.stringify({ error: err?.message ?? "Some error occurred" }), {
             status: 500,
             headers: {
                 [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
