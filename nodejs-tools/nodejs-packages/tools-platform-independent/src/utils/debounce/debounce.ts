@@ -8,10 +8,11 @@ export function debounce<Args, T extends Array<Args>, U>(
   fn: (...args: T) => U,
   milliseconds = 1000
 ): (...args: T) => void {
-  // eslint-disable-next-line no-undef
-  let timeout: NodeJS.Timeout | null = null;
+  let timeout: unknown = null;
   return (...args: T): void => {
     if (timeout) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       clearTimeout(timeout);
       timeout = null;
     }
