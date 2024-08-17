@@ -13,14 +13,14 @@ const UI_HOSTS = {
 export interface Vighnesh153Routes {
   ui: {
     baseHost: string;
-    basePath: string;
+    baseOrigin: string;
 
     onAuthCompleteCallback: string;
   };
 
   api: {
     baseHost: string;
-    basePath: string;
+    baseOrigin: string;
 
     // auth
     initiateLogin: {
@@ -45,12 +45,12 @@ function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
   return {
     ui: {
       baseHost: uiHost,
-      basePath: uiOrigin,
+      baseOrigin: uiOrigin,
       onAuthCompleteCallback: `${uiOrigin}/auth/callback`,
     },
     api: {
       baseHost: apiHost,
-      basePath: apiOrigin,
+      baseOrigin: apiOrigin,
       initiateLogin: {
         path: `${apiOrigin}/${LambdaFunctionConfig.initiateGoogleLogin.name}`,
         identifier: LambdaFunctionConfig.initiateGoogleLogin.name,

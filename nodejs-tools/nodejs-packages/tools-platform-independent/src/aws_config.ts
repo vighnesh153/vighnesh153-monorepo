@@ -29,7 +29,7 @@ export type LambdaResponsePayload = {
   headers: LambdaRequestPayload['headers'] | null;
 };
 
-const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback', 'pikachu'] as const;
+const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback'] as const;
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
 
@@ -54,10 +54,6 @@ export const LambdaFunctionConfig = {
   },
   googleAuthCallback: {
     name: 'googleAuthCallback',
-    method: 'get',
-  },
-  pikachu: {
-    name: 'pikachu',
     method: 'get',
   },
 } satisfies { [key in LambdaFunctionName]: { name: key; method: LambdaMethodType } };
