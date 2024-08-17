@@ -1,8 +1,11 @@
 {
     "workspace": {
-        "members": ["./deno-deploy-tools/deno-api-proxy"]
+        "members": [
+            "./deno-deploy-tools/deno-api-proxy"
+        ]
     },
     "tasks": {
+        "deploy:playground": "deployctl deploy --project=vighnesh153-playground --entrypoint=playground.ts",
         "ok": "deno lint && deno fmt --check && deno test --allow-none"
     },
     "imports": {
@@ -10,7 +13,9 @@
     },
     "lint": {
         "rules": {
-            "tags": ["recommended"]
+            "tags": [
+                "recommended"
+            ]
         }
     },
     "fmt": {
