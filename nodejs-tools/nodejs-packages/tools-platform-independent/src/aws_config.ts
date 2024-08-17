@@ -63,7 +63,7 @@ export const LambdaFunctionConfig = {
 } satisfies { [key in LambdaFunctionName]: { name: key; method: LambdaMethodType } };
 
 export function constructHttpApiLambdaName(options: {
-  stage: 'dev' | 'prod';
+  stage: StageType;
   method: LambdaMethodType;
   functionIdentifier: LambdaFunctionName;
 }): string {
