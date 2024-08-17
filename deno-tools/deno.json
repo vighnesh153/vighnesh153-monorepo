@@ -19,12 +19,10 @@
         }
     },
     "fmt": {
-        "useTabs": false,
         "lineWidth": 120,
-        "indentWidth": 4,
-        "semiColons": true,
         "singleQuote": true,
-        "proseWrap": "always"
+        "indentWidth": 4,
+        "exclude": ["deno-deploy-tools/**/.local/*"]
     },
     "nodeModulesDir": true
 }
