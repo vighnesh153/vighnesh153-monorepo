@@ -20,9 +20,7 @@
     },
     "fmt": {
         "lineWidth": 120,
-        "singleQuote": true,
-        "indentWidth": 4,
-        "exclude": ["deno-deploy-tools/**/.local/*"]
+        "indentWidth": 4
     },
     "nodeModulesDir": true
 }

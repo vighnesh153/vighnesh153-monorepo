@@ -2,11 +2,11 @@ Deno.serve((_req, connInfo) => {
     console.log(connInfo.remoteAddr);
     return new Response(
         JSON.stringify({
-            message: 'Yippee!',
+            message: "Yippee!",
         }),
         {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
         },
     );
