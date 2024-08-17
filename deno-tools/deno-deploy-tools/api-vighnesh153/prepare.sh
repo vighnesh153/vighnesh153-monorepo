@@ -10,4 +10,6 @@ mkdir -p .local/tools-platform-independent
 cp ../../../nodejs-tools/nodejs-packages/tools-platform-independent/src/http-client/common.ts ./.local/tools-platform-independent/http_client_common.ts
 cp ../../../nodejs-tools/nodejs-packages/tools-platform-independent/src/aws_config.ts ./.local/tools-platform-independent/aws_config.ts
 
+deno fmt
+
 echo "Preparation complete ✅"

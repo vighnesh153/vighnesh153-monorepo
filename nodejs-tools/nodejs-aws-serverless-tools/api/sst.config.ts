@@ -1,5 +1,5 @@
 import { type SSTConfig } from 'sst';
-import { type StackContext, Api, Table, Config, Function } from 'sst/constructs';
+import { type StackContext, Table, Config, Function } from 'sst/constructs';
 
 import {
   constructRoutesForDev,
@@ -49,77 +49,51 @@ function ApiStack({ stack }: StackContext) {
     },
   });
 
-  new Function(stack, 'LambdaFunctionPikachu', {
-    bind: [],
-    functionName: `HttpApiGet-pikachu-${stage}`,
-    handler: `dist/pikachu.handler`,
-    logRetention: 'one_day',
+  new Function(stack, 'LambdaFunctionInitiateLogin', {
+    bind: [GOOGLE_CLIENT_ID],
+    functionName: constructHttpApiLambdaName({
+      stage,
+      functionIdentifier: stageConfig.api.initiateLogin.identifier,
+      method: 'get',
+    }),
+    handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
+    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
     environment: {
-      PIKACHU_ENV: 'pikachu-secret',
+      AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
     },
   });
 
-  // http api
-  const api = new Api(stack, 'HttpApi', {
-    customDomain: {
-      domainName: stageConfig.api.baseHost,
-      hostedZone: 'vighnesh153.dev',
+  new Function(stack, 'LambdaFunctionAuthCallback', {
+    bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
+    functionName: constructHttpApiLambdaName({
+      stage,
+      functionIdentifier: stageConfig.api.authCallback.identifier,
+      method: 'get',
+    }),
+    handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
+    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
+    environment: {
+      UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
+      AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
+      STAGE: stage,
     },
-    routes: {
-      [`GET /${stageConfig.api.initiateLogin.identifier}`]: {
-        function: {
-          bind: [GOOGLE_CLIENT_ID],
-          functionName: constructHttpApiLambdaName({
-            stage,
-            functionIdentifier: stageConfig.api.initiateLogin.identifier,
-            method: 'get',
-          }),
-          handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
-          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-          environment: {
-            AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
-          },
-        },
-      },
-      [`GET /${stageConfig.api.authCallback.identifier}`]: {
-        function: {
-          bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
-          functionName: constructHttpApiLambdaName({
-            stage,
-            functionIdentifier: stageConfig.api.authCallback.identifier,
-            method: 'get',
-          }),
-          handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
-          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-          environment: {
-            UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
-            AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
-            STAGE: stage,
-          },
-        },
-      },
-      [`GET /${stageConfig.api.initiateLogout.identifier}`]: {
-        function: {
-          functionName: constructHttpApiLambdaName({
-            stage,
-            functionIdentifier: stageConfig.api.initiateLogout.identifier,
-            method: 'get',
-          }),
-          handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
-          logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-          environment: {
-            UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
-            STAGE: stage,
-          },
-        },
-      },
+  });
+
+  new Function(stack, 'LambdaFunctionInitiateLogout', {
+    functionName: constructHttpApiLambdaName({
+      stage,
+      functionIdentifier: stageConfig.api.initiateLogout.identifier,
+      method: 'get',
+    }),
+    handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
+    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
+    environment: {
+      UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
+      STAGE: stage,
     },
   });
 
   stack.addOutputs({
-    ApiEndpoint: api.url,
-    CustomDomain: api.customDomainUrl,
-    Routes: api.routes.join(', '),
     UserInfoTableName: userInfoTable.tableName,
   });
 }
