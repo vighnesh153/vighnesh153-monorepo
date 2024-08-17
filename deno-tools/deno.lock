@@ -4417,7 +4417,7 @@
       "jsr:@std/assert@1"
     ],
     "members": {
-      "deno-deploy-tools/deno-api-proxy": {
+      "deno-deploy-tools/api-vighnesh153": {
         "dependencies": [
           "npm:@aws-sdk/client-lambda@3.624.0"
         ]
