@@ -27,6 +27,7 @@ export type LambdaResponsePayload = {
   statusCode: number;
   body: string | null;
   headers: LambdaRequestPayload['headers'] | null;
+  cookies: string[];
 };
 
 const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback'] as const;

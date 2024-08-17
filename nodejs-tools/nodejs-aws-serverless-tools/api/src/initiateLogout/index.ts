@@ -7,14 +7,7 @@ import { cookieKeys } from 'vighnesh153-cookies';
 
 import { CookieSerializer } from '../common/CookieSerializer';
 import { cookieSerializerFactory, loggerSingletonFactory } from './factories';
-import { type Logger } from '@vighnesh153/tools-platform-independent';
-
-type LambdaResponse = {
-  statusCode: number;
-  cookies?: string[];
-  body?: string;
-  headers?: Record<string, string>;
-};
+import { LambdaResponsePayload, type Logger } from '@vighnesh153/tools-platform-independent';
 
 export async function controller({
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
@@ -29,14 +22,14 @@ export async function controller({
 
   cookieSerializer?: CookieSerializer;
   logger?: Logger;
-} = {}): Promise<LambdaResponse> {
+} = {}): Promise<LambdaResponsePayload> {
   const commonCookieOptions: CookieSerializeOptions = {
     path: '/',
     domain: '.vighnesh153.dev',
     maxAge: 0,
   };
 
-  const response: LambdaResponse = {
+  const response: LambdaResponsePayload = {
     statusCode: http2.constants.HTTP_STATUS_TEMPORARY_REDIRECT,
     cookies: [
       cookieSerializer.serialize(cookieKeys.userInfo(environmentStage!), '', {
@@ -52,6 +45,7 @@ export async function controller({
     headers: {
       Location: uiAuthCompleteUrl!,
     },
+    body: null,
   };
 
   logger.log('User logout process completed. Sending response...');

@@ -1,6 +1,11 @@
 import { expect, test, beforeEach, vi } from 'vitest';
 
-import { FakeLogger, JsonHttpResponse, JsonHttpClient } from '@vighnesh153/tools-platform-independent';
+import {
+  FakeLogger,
+  JsonHttpResponse,
+  JsonHttpClient,
+  LambdaResponsePayload,
+} from '@vighnesh153/tools-platform-independent';
 import { CompleteUserInfo, GoogleOAuthUserInfo } from '@vighnesh153/types';
 
 import { controller } from './controller';
@@ -60,9 +65,11 @@ beforeEach(() => {
 });
 
 test('should return 5xx if any of the environment variables are not provided', async () => {
-  const environmentVariablesError = {
+  const environmentVariablesError: LambdaResponsePayload = {
     statusCode: 500,
     body: 'Some of the environment variables are missing and hence I am unable to process your request',
+    cookies: [],
+    headers: {},
   };
 
   async function validateErrorHandling(
@@ -128,6 +135,8 @@ test('should return 4xx if searchParams.code is not set', async () => {
   expect(result).toStrictEqual({
     body: 'searchParams.code is empty',
     statusCode: 400,
+    cookies: [],
+    headers: {},
   });
 });
 
@@ -152,6 +161,8 @@ test('should return 5xx if error occurs while fetching token', async () => {
   expect(result).toStrictEqual({
     body: 'Failed to fetch token',
     statusCode: 500,
+    cookies: [],
+    headers: {},
   });
 });
 
@@ -177,6 +188,8 @@ test('should return 5xx if error occurs while parsing auth token', async () => {
   expect(result).toStrictEqual({
     body: 'Failed to extract user info from token',
     statusCode: 500,
+    cookies: [],
+    headers: {},
   });
 });
 
@@ -206,6 +219,8 @@ test(`should return 4xx if user's email is not verified`, async () => {
   expect(result).toStrictEqual({
     body: 'Email address is not verified.',
     statusCode: 406,
+    cookies: [],
+    headers: {},
   });
 });
 
@@ -240,6 +255,8 @@ test('should return 5xx if error occurs while fetching existing user info', asyn
   expect(result).toStrictEqual({
     body: 'Failed to fetch existing user info from database',
     statusCode: 500,
+    cookies: [],
+    headers: {},
   });
 });
 
@@ -272,6 +289,7 @@ test('should use existing user info for login if user already exists', async () 
 
   expect(result).toStrictEqual({
     statusCode: 307,
+    body: null,
     cookies: ['serialized-cookie', 'serialized-cookie'],
     headers: {
       Location: UI_AUTH_COMPLETE_URL,
@@ -319,6 +337,8 @@ test(`when user doesn't exist, should return 5xx if create new user fails`, asyn
   expect(result).toStrictEqual({
     statusCode: 500,
     body: 'Failed to create a new user',
+    cookies: [],
+    headers: {},
   });
   expect(fakeUserInfoTable.createOneCalledTimes).toEqual(1);
 });
@@ -360,6 +380,7 @@ test(`should create new user if user doesn't exist and use that info for login`,
     headers: {
       Location: UI_AUTH_COMPLETE_URL,
     },
+    body: null,
   });
   expect(fakeUserInfoTable.createOneCalledTimes).toEqual(1);
 });

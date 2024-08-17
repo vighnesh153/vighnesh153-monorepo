@@ -29,7 +29,7 @@ function isJsonRequest(req: Request): boolean {
 }
 
 function isContentLengthValid(headers: Record<string, string>): boolean {
-    return parseInt(headers[HttpHeaderKeys.contentLength]) <= MAX_CONTENT_LENGTH;
+    return parseInt(headers[HttpHeaderKeys.contentLength] ?? "0") <= MAX_CONTENT_LENGTH;
 }
 
 function convertHeaders(req: Request): Record<string, string> {
@@ -88,7 +88,16 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     if (functionName === null) {
-        console.log("Received request for unrecognized function name:", functionName, " with headers:", headers);
+        console.log(
+            "Received request for unrecognized function name:",
+            functionName,
+            " with headers:",
+            headers,
+            " request.url:",
+            req.url,
+            " pathName:",
+            url.pathname,
+        );
         return new Response(
             JSON.stringify({ error: "No function found for the corresponding path", path: url.pathname }),
             {
@@ -143,9 +152,17 @@ Deno.serve(async (req, _connInfo) => {
 
         const payload: LambdaResponsePayload = JSON.parse(new TextDecoder().decode(lambdaResponse.Payload));
 
+        const headers = new Headers();
+        payload.cookies.forEach((cookie) => {
+            headers.append(HttpHeaderKeys.setCookie, cookie);
+        });
+        Object.keys(payload.headers ?? {}).forEach((header) => {
+            headers.append(header, payload.headers![header]);
+        });
+
         return new Response(payload.body, {
             status: payload.statusCode,
-            headers: payload.headers ?? {},
+            headers,
         });
     } catch (e: unknown) {
         const err = e as { message?: string };
