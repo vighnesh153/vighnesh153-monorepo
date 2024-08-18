@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+
+import assert from 'assert';
+
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/utils';
 
 export function readEscapeSequence(lexer: XmlLexer): string {
-  /* v8 ignore next 3 */
-  if (lexer.inputReader.currentCharacter != '\\') {
-    throw new Error(`You should not attempt to read an escaped sequence if it doesn't start with '\\'`);
-  }
+  assert.ok(
+    lexer.inputReader.currentCharacter === '\\',
+    `You should not attempt to read an escaped sequence if it doesn't start with '\\'`
+  );
 
   // move over the backslash
   lexer.inputReader.readNextCharacter();
@@ -48,10 +51,10 @@ export function readEscapeSequence(lexer: XmlLexer): string {
 }
 
 function parseUnicode(lexer: XmlLexer): string {
-  /* v8 ignore next 3 */
-  if (lexer.inputReader.currentCharacter != 'u') {
-    throw new Error(`You should not try to parse a unicode sequence that doesn't begin with 'u'`);
-  }
+  assert.ok(
+    lexer.inputReader.currentCharacter === 'u',
+    `You should not try to parse a unicode sequence that doesn't begin with 'u'`
+  );
 
   const unicodeCharacters: string[] = [];
 

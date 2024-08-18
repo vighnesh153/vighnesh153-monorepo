@@ -1,12 +1,14 @@
+import assert from 'assert';
+
 import { not, repeat } from '@vighnesh153/utils';
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 
 export function readComment(lexer: XmlLexer): string | null {
-  /* v8 ignore next 3 */
-  if (lexer.inputReader.currentCharacter !== '<' && lexer.inputReader.peekCharacter() !== '!') {
-    throw new Error(`Don't attempt to read a comment if string doesn't start with '<!'`);
-  }
+  assert.ok(
+    lexer.inputReader.currentCharacter === '<' && lexer.inputReader.peekCharacter() === '!',
+    `Don't attempt to read a comment if string doesn't start with '<!'`
+  );
 
   // Move past <!
   lexer.inputReader.readNextCharacter();
@@ -35,7 +37,7 @@ export function readComment(lexer: XmlLexer): string | null {
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const currCh = lexer.inputReader.currentCharacter;
+    const currCh = lexer.inputReader.currentCharacter as string;
 
     // unclosed comment
     if (currCh === EOF_CHARACTER) {
