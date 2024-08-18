@@ -38,7 +38,7 @@ test('should report error if illegal character found', () => {
     tokenType: TokenTypes.ILLEGAL,
   });
 
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: `Illegal character: &`,
       lineNumber: 3,
@@ -343,7 +343,7 @@ test('should report error if comment start is invalid', () => {
 
   // attempting to read next token (comment literal) should report an error
   nextToken(lexer);
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: `Unexpected character: '<'`,
       lineNumber: 1,
@@ -362,7 +362,7 @@ test('should report error if comment is unclosed', () => {
 
   // attempting to read next token (comment literal) should report an error
   nextToken(lexer);
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: `Unclosed comment literal`,
       lineNumber: 1,
@@ -402,7 +402,7 @@ test('should report error if unicode sequence is invalid', () => {
 
   // attempting to read next token (string literal) should report an error
   nextToken(lexer);
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: 'Invalid unicode character: x',
       lineNumber: 2,
@@ -419,7 +419,7 @@ test('should report error if escape sequence is invalid', () => {
 
   // attempting to read next token (string literal) should report an error
   nextToken(lexer);
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: 'Invalid escape character literal: x',
       lineNumber: 2,
@@ -436,7 +436,7 @@ test('should report error if escape sequence is unclosed', () => {
 
   // attempting to read next token (string literal) should report an error
   nextToken(lexer);
-  expect(lexer.errors).toMatchInlineSnapshot([
+  expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorMessage: 'Unclosed escape sequence',
       lineNumber: 2,
