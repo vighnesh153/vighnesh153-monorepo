@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
-import { HEXADECIMAL_DIGITS } from '@vighnesh153/utils';
+import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/utils';
 
 export function readEscapeSequence(lexer: XmlLexer): string {
+  /* v8 ignore next 3 */
   if (lexer.inputReader.currentCharacter != '\\') {
     throw new Error(`You should not attempt to read an escaped sequence if it doesn't start with '\\'`);
   }
@@ -47,6 +48,7 @@ export function readEscapeSequence(lexer: XmlLexer): string {
 }
 
 function parseUnicode(lexer: XmlLexer): string {
+  /* v8 ignore next 3 */
   if (lexer.inputReader.currentCharacter != 'u') {
     throw new Error(`You should not try to parse a unicode sequence that doesn't begin with 'u'`);
   }
@@ -54,22 +56,22 @@ function parseUnicode(lexer: XmlLexer): string {
   const unicodeCharacters: string[] = [];
 
   // unicode: \u0000 to \uFFFF
-  for (let i = 0; i <= 4; i++) {
-    const peek = lexer.inputReader.peekCharacter()?.toLowerCase() ?? '';
-    if (HEXADECIMAL_DIGITS.includes(peek.toLowerCase())) {
+  repeat(4, () => {
+    const peek = lexer.inputReader.peekCharacter()?.toLowerCase();
+    if (HEXADECIMAL_DIGITS.includes(`${peek}`.toLowerCase())) {
       lexer.inputReader.readNextCharacter();
-      unicodeCharacters.push(lexer.inputReader.currentCharacter);
+      unicodeCharacters.push(lexer.inputReader.currentCharacter!);
     } else {
       lexer.addError(
         new LexerError({
-          errorMessage: `Invalid unicode character: ${lexer.inputReader.currentCharacter}`,
+          errorMessage: `Invalid unicode character: ${peek}`,
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })
       );
       return ' ';
     }
-  }
+  });
 
   return String.fromCharCode(parseInt(unicodeCharacters.join(''), 16));
 }

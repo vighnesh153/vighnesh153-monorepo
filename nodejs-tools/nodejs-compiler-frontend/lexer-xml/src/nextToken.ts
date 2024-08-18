@@ -2,7 +2,7 @@
 import { Token, TokenType, TokenTypes } from './tokens';
 import { XmlLexer } from './Lexer';
 import { skipWhitespace } from './skipWhitespace';
-import { EOF_CHARACTER } from '@vighnesh153/lexer-core';
+import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { readStringLiteral } from './readStringLiteral';
 import { isAcceptableIdentifierStart, readIdentifier } from './readIdentifier';
 import { readComment } from './readComment';
@@ -64,7 +64,14 @@ export function nextToken(lexer: XmlLexer): Token {
         const identifier = readIdentifier(lexer);
         t = createToken(lexer, TokenTypes.IDENTIFIER, identifier, lineNumber, columnNumber);
       } else {
-        t = createToken(lexer, TokenTypes.ILLEGAL);
+        lexer.addError(
+          new LexerError({
+            errorMessage: `Illegal character: ${currCh}`,
+            lineNumber: lexer.inputReader.lineNumber,
+            columnNumber: lexer.inputReader.columnNumber,
+          })
+        );
+        t = createToken(lexer, TokenTypes.ILLEGAL, currCh);
       }
       break;
     }
