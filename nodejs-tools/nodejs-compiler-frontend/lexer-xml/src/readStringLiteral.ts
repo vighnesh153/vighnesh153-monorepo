@@ -5,6 +5,7 @@ import { readEscapeSequence } from './readEscapeSequence';
 const DOUBLE_QUOTE = '"';
 
 export function readStringLiteral(lexer: XmlLexer): string {
+  /* v8 ignore next 3 */
   if (lexer.inputReader.currentCharacter != DOUBLE_QUOTE) {
     throw new Error(`You should not attempt to read a string literal if it doesn't start with '"'`);
   }

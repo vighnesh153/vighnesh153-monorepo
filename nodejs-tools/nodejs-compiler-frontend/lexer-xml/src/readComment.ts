@@ -3,6 +3,7 @@ import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 
 export function readComment(lexer: XmlLexer): string | null {
+  /* v8 ignore next 3 */
   if (lexer.inputReader.currentCharacter !== '<' && lexer.inputReader.peekCharacter() !== '!') {
     throw new Error(`Don't attempt to read a comment if string doesn't start with '<!'`);
   }
@@ -50,8 +51,13 @@ export function readComment(lexer: XmlLexer): string | null {
 
     const peek = lexer.inputReader.peekCharacter();
     const peekNext = lexer.inputReader.peekCharacter(1);
+
     // end of comment
     if (currCh === '-' && peek === '-' && peekNext === '>') {
+      // Move past: "--" and land on ">"
+      lexer.inputReader.readNextCharacter();
+      lexer.inputReader.readNextCharacter();
+
       return commentLiteralBuilder.join('');
     }
 

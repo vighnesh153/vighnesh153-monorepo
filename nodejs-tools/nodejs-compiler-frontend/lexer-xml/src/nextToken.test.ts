@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
+import { LexerError, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 import { nextToken } from './nextToken';
 import { Token, TokenTypes } from './tokens';
@@ -20,6 +20,31 @@ test('should return EOF for empty string', () => {
     tokenLiteral: 'EOF',
     tokenType: TokenTypes.EOF,
   } satisfies Token);
+});
+
+test('should report error if illegal character found', () => {
+  const lexer = createLexer(`
+<?xml version="1.0" encoding="utf-8"?>
+& <manifest />
+    `);
+
+  // skip past: <?xml version="1.0" encoding="utf-8"?>
+  repeat(11, () => nextToken(lexer));
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 3,
+    columnNumber: 1,
+    tokenLiteral: '&',
+    tokenType: TokenTypes.ILLEGAL,
+  });
+
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: `Illegal character: &`,
+      lineNumber: 3,
+      columnNumber: 1,
+    }),
+  ]);
 });
 
 test('should parse naked xml tag', () => {
@@ -260,4 +285,178 @@ test('parse empty manifest', () => {
     tokenLiteral: '>',
     tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
   } satisfies Token);
+});
+
+test('parse comment', () => {
+  const lexer = createLexer(`
+<?xml version="1.0" encoding="utf-8"?>
+<manifest 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pokemon.pikachu">
+    <!-- This is a comment -->
+</manifest>
+    `);
+
+  // skip past opening tag of manifest
+  repeat(22, () => {
+    nextToken(lexer);
+  });
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 6,
+    columnNumber: 5,
+    tokenLiteral: ' This is a comment ',
+    tokenType: TokenTypes.COMMENT,
+  } satisfies Token);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 7,
+    columnNumber: 1,
+    tokenLiteral: '<',
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+  } satisfies Token);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 7,
+    columnNumber: 2,
+    tokenLiteral: '/',
+    tokenType: TokenTypes.FORWARD_SLASH,
+  } satisfies Token);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 7,
+    columnNumber: 3,
+    tokenLiteral: 'manifest',
+    tokenType: TokenTypes.IDENTIFIER,
+  } satisfies Token);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 7,
+    columnNumber: 11,
+    tokenLiteral: '>',
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+  } satisfies Token);
+});
+
+test('should report error if comment start is invalid', () => {
+  const lexer = createLexer(`<!<<`);
+
+  // attempting to read next token (comment literal) should report an error
+  nextToken(lexer);
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: `Unexpected character: '<'`,
+      lineNumber: 1,
+      columnNumber: 3,
+    }),
+    new LexerError({
+      errorMessage: `Unexpected character: '<'`,
+      lineNumber: 1,
+      columnNumber: 4,
+    }),
+  ]);
+});
+
+test('should report error if comment is unclosed', () => {
+  const lexer = createLexer(`<!--`);
+
+  // attempting to read next token (comment literal) should report an error
+  nextToken(lexer);
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: `Unclosed comment literal`,
+      lineNumber: 1,
+      columnNumber: 4,
+    }),
+  ]);
+});
+
+test('should read escape sequences', () => {
+  const lexer = createLexer(`
+<my-tag prop="\\n \\" \\u1234 \\t \\\\">
+</my-tag>
+    `);
+
+  repeat(4, () => nextToken(lexer));
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 2,
+    columnNumber: 14,
+    tokenLiteral: '\n " \u1234 \t \\',
+    tokenType: TokenTypes.STRING_LITERAL,
+  } satisfies Token);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 2,
+    columnNumber: 34,
+    tokenLiteral: '>',
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+  } satisfies Token);
+});
+
+test('should report error if unicode sequence is invalid', () => {
+  const lexer = createLexer(`
+<my-tag prop="\\n \\" \\u123x"`);
+
+  repeat(4, () => nextToken(lexer));
+
+  // attempting to read next token (string literal) should report an error
+  nextToken(lexer);
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: 'Invalid unicode character: x',
+      lineNumber: 2,
+      columnNumber: 25,
+    }),
+  ]);
+});
+
+test('should report error if escape sequence is invalid', () => {
+  const lexer = createLexer(`
+<my-tag prop="\\x"`);
+
+  repeat(4, () => nextToken(lexer));
+
+  // attempting to read next token (string literal) should report an error
+  nextToken(lexer);
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: 'Invalid escape character literal: x',
+      lineNumber: 2,
+      columnNumber: 16,
+    }),
+  ]);
+});
+
+test('should report error if escape sequence is unclosed', () => {
+  const lexer = createLexer(`
+<my-tag prop="\\n \\`);
+
+  repeat(4, () => nextToken(lexer));
+
+  // attempting to read next token (string literal) should report an error
+  nextToken(lexer);
+  expect(lexer.errors).toMatchInlineSnapshot([
+    new LexerError({
+      errorMessage: 'Unclosed escape sequence',
+      lineNumber: 2,
+      columnNumber: 18,
+    }),
+    new LexerError({
+      errorMessage: 'Unclosed string literal',
+      lineNumber: 2,
+      columnNumber: 18,
+    }),
+  ]);
+});
+
+test('should read naked identifier', () => {
+  const lexer = createLexer(`my-tag`);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'my-tag',
+    lineNumber: 1,
+    columnNumber: 1,
+  });
 });
