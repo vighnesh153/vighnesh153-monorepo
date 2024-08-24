@@ -1,7 +1,6 @@
-import http2 from 'node:http2';
+import * as http2 from 'node:http2';
 
-import { Config } from 'sst/node/config';
-import { Table } from 'sst/node/table';
+import { Resource } from 'sst';
 
 import { type CookieSerializeOptions } from 'cookie';
 
@@ -18,7 +17,6 @@ import {
 import { cookieKeys } from 'vighnesh153-cookies';
 
 import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';
-import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import {
   authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
@@ -27,6 +25,7 @@ import {
   randomStringGeneratorSingletonFactory,
   userInfoDecoderSingletonFactory,
   userInfoTableSingletonFactory,
+  userInfoTableMetadata,
 } from './factories';
 import { type UserInfoDecoder } from './UserInfoDecoder';
 import { type RandomStringGenerator } from './randomStringGenerator';
@@ -44,17 +43,17 @@ export async function controller({
   authRedirectUrl = process.env.AUTH_REDIRECT_URL,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientId = inProduction(() => Config.GOOGLE_CLIENT_ID),
+  googleClientId = inProduction(() => Resource.GoogleClientId.value),
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientSecret = inProduction(() => Config.GOOGLE_CLIENT_SECRET),
+  googleClientSecret = inProduction(() => Resource.GoogleClientSecret.value),
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  cookieSecret = inProduction(() => Config.COOKIE_SECRET),
+  cookieSecret = inProduction(() => Resource.CookieSecret.value),
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  userInfoTableName = inProduction(() => Table.UserInfo.tableName),
+  userInfoTableName = inProduction(() => Resource.UserInfoTable.name),
 
   // request info
   searchParameters = {},
@@ -86,7 +85,7 @@ export async function controller({
   tokenFetchRequestBuilder?: TokenFetchRequestBuilder;
   httpClient?: JsonHttpClient;
   userInfoDecoder?: UserInfoDecoder;
-  userInfoDynamoTable?: DynamoDBTable<typeof UserInfoTableMetadata>;
+  userInfoDynamoTable?: DynamoDBTable<typeof userInfoTableMetadata>;
   randomStringGenerator?: RandomStringGenerator;
   authTokenGenerator?: AuthTokenGenerator;
   cookieSerializer?: CookieSerializer;

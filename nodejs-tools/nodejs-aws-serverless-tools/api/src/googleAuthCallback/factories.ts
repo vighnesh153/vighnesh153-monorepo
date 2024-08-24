@@ -1,8 +1,11 @@
+import { Resource } from 'sst';
+
 import {
   DynamoDBTable,
   DynamoDBTableImpl,
   createDynamoDBDocumentClient,
   type IDynamoDBDocumentClient,
+  type TableMetadata,
 } from '@vighnesh153/aws-dynamo-db';
 import {
   createFactory,
@@ -14,7 +17,7 @@ import {
 } from '@vighnesh153/tools-platform-independent';
 
 import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
-import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
+import { userInfoFields } from './dynamoDBTableMetadata';
 import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
 import { AuthTokenGenerator, AuthTokenGeneratorImpl } from '../common/AuthTokenGenerator';
 import { CookieSerializer, CookieSerializerImpl } from '../common/CookieSerializer';
@@ -37,9 +40,14 @@ const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<IDynamoDBD
   return createDynamoDBDocumentClient();
 });
 
-export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof UserInfoTableMetadata>>(() => {
+export const userInfoTableMetadata = {
+  fields: userInfoFields,
+  tableName: Resource.UserInfoTable.name,
+} satisfies TableMetadata;
+
+export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof userInfoTableMetadata>>(() => {
   const dynamoDBdocumentClient = dynamoDBDocumentClientSingletonFactory();
-  return new DynamoDBTableImpl(dynamoDBdocumentClient, UserInfoTableMetadata);
+  return new DynamoDBTableImpl(dynamoDBdocumentClient, userInfoTableMetadata);
 });
 
 export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {

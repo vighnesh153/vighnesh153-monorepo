@@ -1,4 +1,4 @@
-import { Config } from 'sst/node/config';
+import { Resource } from 'sst';
 
 import { ConsoleLogger, type Logger } from '@vighnesh153/tools-platform-independent';
 import { authScopes, inProduction } from './constants';
@@ -7,7 +7,7 @@ export function constructAuthRedirectUrl({
   authRedirectUri = process.env.AUTH_REDIRECT_URL,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
-  googleClientId = inProduction(() => Config.GOOGLE_CLIENT_ID),
+  googleClientId = inProduction(() => Resource.GoogleClientId.value),
   logger = ConsoleLogger.getInstance(),
 }: {
   authRedirectUri?: string;
