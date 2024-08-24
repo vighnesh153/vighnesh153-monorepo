@@ -32,10 +32,10 @@
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "express": "^4.19.2",
-    "ts-essentials": "^10.0.1",
+    "ts-essentials": "^10.0.2",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
-    "vite-tsconfig-paths": "^4.3.2",
+    "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
   },
   "keywords": [],
