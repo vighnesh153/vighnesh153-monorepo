@@ -530,6 +530,7 @@ module.exports = {
 *.cjs
 *.d.ts
 dist
+sst.config.ts
 ```
 
 - vitest.config.ts
