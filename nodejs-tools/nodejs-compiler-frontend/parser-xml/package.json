@@ -20,22 +20,24 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && tsup",
-    "test:watch": "vitest",
-    "test": "vitest run --passWithNoTests"
+    "test:watch": "vitest --coverage",
+    "test": "vitest run --passWithNoTests --coverage"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
+    "@vighnesh153/lexer-xml": "*",
     "@vighnesh153/utils": "*"
   },
   "devDependencies": {
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
+    "@vitest/coverage-v8": "^2.0.5",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.5"
   },
   "keywords": [],
   "repository": {
