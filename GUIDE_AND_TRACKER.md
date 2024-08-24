@@ -480,10 +480,11 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   "devDependencies": {
     "@types/node": "*",
     "@vighnesh153/tsconfig": "*",
+    "@vitest/coverage-v8": "^2.0.5",
     "eslint-config-vighnesh153": "*",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5",
-    "vitest": "^1.6.0"
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   },
   "keywords": [],
   "repository": {
@@ -529,6 +530,26 @@ module.exports = {
 *.cjs
 *.d.ts
 dist
+```
+
+- vitest.config.ts
+
+```ts
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    coverage: {
+      provider: "v8",
+      thresholds: {
+        "100": true,
+      },
+      include: ["src/**"],
+      exclude: ["src/index.ts", "src/**/*.test.ts"],
+      reportOnFailure: true,
+    },
+  },
+});
 ```
 
 - README.md
