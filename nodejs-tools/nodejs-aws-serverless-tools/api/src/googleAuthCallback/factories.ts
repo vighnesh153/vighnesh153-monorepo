@@ -21,6 +21,7 @@ import { userInfoFields } from './dynamoDBTableMetadata';
 import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
 import { AuthTokenGenerator, AuthTokenGeneratorImpl } from '../common/AuthTokenGenerator';
 import { CookieSerializer, CookieSerializerImpl } from '../common/CookieSerializer';
+import { inProduction } from './utils';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
@@ -42,7 +43,7 @@ const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<IDynamoDBD
 
 export const userInfoTableMetadata = {
   fields: userInfoFields,
-  tableName: Resource.UserInfoTable.name,
+  tableName: inProduction(() => Resource.UserInfoTable.name),
 } satisfies TableMetadata;
 
 export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof userInfoTableMetadata>>(() => {
