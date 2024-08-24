@@ -13,17 +13,20 @@
   "scripts": {
     "build": "tsup",
     "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests",
     "deploy:dev": "npm run build && sst deploy --stage dev",
     "deploy:prod": "npm run build && sst deploy --stage prod",
     "remove:dev": "npm run build && sst remove --stage dev",
-    "remove:prod": "npm run build && sst remove --stage prod",
-    "test": "vitest run --passWithNoTests"
+    "remove:prod": "npm run build && sst remove --stage prod"
   },
   "files": [
     "dist"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.637.0",
+    "@aws-sdk/lib-dynamodb": "^3.637.0"
+  },
+  "devDependencies": {
     "@aws-sdk/types": "^3.609.0",
     "@types/aws-lambda": "^8.10.143",
     "@types/cookie": "^0.6.0",
@@ -34,7 +37,7 @@
     "@vighnesh153/types": "*",
     "cookie": "^0.6.0",
     "eslint-config-vighnesh153": "*",
-    "sst": "^2.43.4",
+    "sst": "^3.0.70",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "vighnesh153-cookies": "*",

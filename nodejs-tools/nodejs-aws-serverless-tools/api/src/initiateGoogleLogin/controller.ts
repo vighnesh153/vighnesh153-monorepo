@@ -1,4 +1,4 @@
-import http2 from 'node:http2';
+import * as http2 from 'node:http2';
 import { LambdaResponsePayload } from '@vighnesh153/tools-platform-independent';
 import { constructAuthRedirectUrl } from './constructAuthRedirectUrl';
 

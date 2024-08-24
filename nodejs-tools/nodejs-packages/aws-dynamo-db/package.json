@@ -23,13 +23,11 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@vighnesh153/tools-platform-independent": "*"
-  },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.637.0",
     "@aws-sdk/lib-dynamodb": "^3.637.0",
     "@types/node": "*",
+    "@vighnesh153/tools-platform-independent": "*",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.2.4",

@@ -1,19 +1,19 @@
-import { type SSTConfig } from 'sst';
-import { type StackContext, Table, Config, Function } from 'sst/constructs';
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="./.sst/platform/config.d.ts" />
 
 import {
   constructRoutesForDev,
   constructRoutesForProd,
   constructHttpApiLambdaName,
   DEFAULT_AWS_REGION,
+  isValidStageType,
+  type StageType,
 } from '@vighnesh153/tools-platform-independent';
 
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
 
-const stackName = 'Vighnesh153ApiStack';
-
-function validateStage(stage: string): stage is 'dev' | 'prod' {
-  if (!['dev', 'prod'].includes(`${stage}`)) {
+function validateStage(stage: string): stage is StageType {
+  if (!isValidStageType(stage)) {
     throw new Error(`Stage should either be "dev" or "prod", found "${stage}"`);
   }
   return true;
@@ -24,98 +24,95 @@ const STAGE_CONFIG = {
   prod: constructRoutesForProd(),
 };
 
-function ApiStack({ stack }: StackContext) {
-  const { stage } = stack;
-  if (!validateStage(stage)) {
-    return;
-  }
-
-  const stageConfig = STAGE_CONFIG[stage];
-
-  // secrets
-  const GOOGLE_CLIENT_ID = new Config.Secret(stack, 'GOOGLE_CLIENT_ID');
-  const GOOGLE_CLIENT_SECRET = new Config.Secret(stack, 'GOOGLE_CLIENT_SECRET');
-  const COOKIE_SECRET = new Config.Secret(stack, 'COOKIE_SECRET');
-
-  // user info table
-  const userInfoTable = new Table(stack, 'UserInfo', {
-    fields: userInfoFields,
-    primaryIndex: { partitionKey: 'email', sortKey: 'userId' },
-    cdk: {
-      table: {
-        tableName: `UserInfo-${stage}`,
-        deletionProtection: true,
-      },
-    },
-  });
-
-  new Function(stack, 'LambdaFunctionInitiateLogin', {
-    bind: [GOOGLE_CLIENT_ID],
-    functionName: constructHttpApiLambdaName({
-      stage,
-      functionIdentifier: stageConfig.api.initiateLogin.identifier,
-      method: 'get',
-    }),
-    handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
-    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-    environment: {
-      AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
-    },
-  });
-
-  new Function(stack, 'LambdaFunctionAuthCallback', {
-    bind: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
-    functionName: constructHttpApiLambdaName({
-      stage,
-      functionIdentifier: stageConfig.api.authCallback.identifier,
-      method: 'get',
-    }),
-    handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
-    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-    environment: {
-      UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
-      AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
-      STAGE: stage,
-    },
-  });
-
-  new Function(stack, 'LambdaFunctionInitiateLogout', {
-    functionName: constructHttpApiLambdaName({
-      stage,
-      functionIdentifier: stageConfig.api.initiateLogout.identifier,
-      method: 'get',
-    }),
-    handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
-    logRetention: stage === 'prod' ? 'two_weeks' : 'one_day',
-    environment: {
-      UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
-      STAGE: stage,
-    },
-  });
-
-  stack.addOutputs({
-    UserInfoTableName: userInfoTable.tableName,
-  });
-}
-
-const sstConfig: SSTConfig = {
-  config(input) {
+export default $config({
+  app(input) {
     const { stage } = input;
     if (!validateStage(stage ?? '')) {
       throw new Error('Invalid stage');
     }
     return {
       name: `Vighnesh153-Api-${stage}`,
-      region: DEFAULT_AWS_REGION,
+      removal: stage === 'prod' ? 'retain' : 'remove',
+      home: 'aws',
+      providers: {
+        aws: {
+          region: DEFAULT_AWS_REGION,
+        },
+      },
     };
   },
-  stacks(app) {
-    const { stage } = app;
-    validateStage(stage);
-    app.stack(ApiStack, {
-      stackName: `${stackName}-${stage}`,
+  async run() {
+    const { stage } = $app;
+    if (!validateStage(stage)) {
+      throw new Error('Invalid stage');
+    }
+
+    const stageConfig = STAGE_CONFIG[stage];
+
+    // secrets
+    const GOOGLE_CLIENT_ID = new sst.Secret('GoogleClientId');
+    const GOOGLE_CLIENT_SECRET = new sst.Secret('GoogleClientSecret');
+    const COOKIE_SECRET = new sst.Secret('CookieSecret');
+
+    // user info table
+    const userInfoTable = new sst.aws.Dynamo('UserInfoTable', {
+      fields: { email: userInfoFields.email, userId: userInfoFields.userId },
+      primaryIndex: { hashKey: 'email', rangeKey: 'userId' },
+      transform: {
+        table(args) {
+          args.name = `UserInfo-${stage}`;
+        },
+      },
+    });
+
+    new sst.aws.Function('LambdaFunctionInitiateLogin', {
+      link: [GOOGLE_CLIENT_ID],
+      name: constructHttpApiLambdaName({
+        stage,
+        functionIdentifier: stageConfig.api.initiateLogin.identifier,
+        method: 'get',
+      }),
+      handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
+      logging: {
+        retention: stage === 'prod' ? '2 weeks' : '1 day',
+      },
+      environment: {
+        AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
+      },
+    });
+
+    new sst.aws.Function('LambdaFunctionAuthCallback', {
+      link: [userInfoTable, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_SECRET],
+      name: constructHttpApiLambdaName({
+        stage,
+        functionIdentifier: stageConfig.api.authCallback.identifier,
+        method: 'get',
+      }),
+      handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
+      logging: {
+        retention: stage === 'prod' ? '2 weeks' : '1 day',
+      },
+      environment: {
+        UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
+        AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
+        STAGE: stage,
+      },
+    });
+
+    new sst.aws.Function('LambdaFunctionInitiateLogout', {
+      name: constructHttpApiLambdaName({
+        stage,
+        functionIdentifier: stageConfig.api.initiateLogout.identifier,
+        method: 'get',
+      }),
+      handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
+      logging: {
+        retention: stage === 'prod' ? '2 weeks' : '1 day',
+      },
+      environment: {
+        UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
+        STAGE: stage,
+      },
     });
   },
-};
-
-export default sstConfig;
+});

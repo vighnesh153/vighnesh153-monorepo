@@ -7,7 +7,7 @@ export default defineConfig(() => ({
     initiateLogout: './src/initiateLogout/index.ts',
   },
   splitting: false,
-  external: ['aws-sdk'],
+  external: ['@aws-sdk/client-dynamodb', '@aws-sdk/lib-dynamodb', '@types/aws-lambda', '@aws-sdk/types'],
   clean: true,
   minify: true,
   treeshake: true,

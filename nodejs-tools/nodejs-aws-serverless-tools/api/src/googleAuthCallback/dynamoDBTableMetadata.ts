@@ -9,6 +9,5 @@ export const userInfoFields = {
 } satisfies Record<string, keyof DynamoTypeMap>;
 
 export const UserInfoTableMetadata = {
-  tableName: process.env.SST_Table_tableName_UserInfo!,
   fields: userInfoFields,
-} satisfies TableMetadata;
+} satisfies Partial<TableMetadata>;
