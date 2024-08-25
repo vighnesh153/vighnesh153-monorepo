@@ -2,7 +2,11 @@
 
 import { Token } from '@vighnesh153/lexer-xml';
 
+export type AstNodeType = 'XML_PROGRAM' | 'XML_PROLOG_NODE' | 'XML_TAG_NODE' | 'XML_COMMENT_NODE';
+
 export interface XmlExpression {
+  readonly astNodeType: AstNodeType;
+
   toString(indentation: number): string;
 }
 
@@ -18,6 +22,8 @@ export class XmlElementProperty {
 }
 
 export class XmlProgram implements XmlExpression {
+  readonly astNodeType: AstNodeType = 'XML_PROGRAM';
+
   #statements: XmlExpression[] = [];
 
   get statements(): readonly XmlExpression[] {
@@ -35,6 +41,8 @@ export class XmlProgram implements XmlExpression {
 
 // <?xml version="1.0"?>
 export class XmlPrologNode implements XmlExpression {
+  readonly astNodeType: AstNodeType = 'XML_PROLOG_NODE';
+
   #properties: XmlElementProperty[] = [];
 
   get properties(): readonly XmlElementProperty[] {
@@ -59,6 +67,8 @@ export class XmlPrologNode implements XmlExpression {
 
 // <manifest />
 export class XmlTagNode implements XmlExpression {
+  readonly astNodeType: AstNodeType = 'XML_TAG_NODE';
+
   #tagIdentifier: Token;
 
   #properties: XmlElementProperty[] = [];
@@ -122,6 +132,8 @@ export class XmlTagNode implements XmlExpression {
 }
 
 export class XmlCommentNode implements XmlExpression {
+  readonly astNodeType: AstNodeType = 'XML_COMMENT_NODE';
+
   constructor(public readonly comment: Readonly<Token>) {}
 
   toString(indentation: number): string {
