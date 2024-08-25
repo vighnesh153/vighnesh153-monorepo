@@ -13,14 +13,14 @@ test('should format empty, self-closing xml tag node', () => {
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
-      sortProperties: true,
+      sortAttributes: true,
     })
   ).toMatchInlineSnapshot(`"<manifest />"`);
 });
 
-test('should format self-closing xml tag node with properties', () => {
+test('should format self-closing xml tag node with attributes', () => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleProperty = "some random value" deeply :  nested:property = "20" />`
+    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" />`
   );
 
   expect(parser.errors.length).toBe(0);
@@ -30,18 +30,18 @@ test('should format self-closing xml tag node with properties', () => {
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
-      sortProperties: true,
+      sortAttributes: true,
     })
   ).toMatchInlineSnapshot(`
     "<manifest
-        deeply:nested:property="20"
-        simpleProperty="some random value" />"
+        deeply:nested:attribute="20"
+        simpleAttribute="some random value" />"
   `);
 });
 
-test('should format non self-closing xml tag node with properties but no children', () => {
+test('should format non self-closing xml tag node with attributes but no children', () => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleProperty = "some random value" deeply :  nested:property = "20" >
+    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" >
   </ manifest>
     `
   );
@@ -53,12 +53,12 @@ test('should format non self-closing xml tag node with properties but no childre
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
-      sortProperties: true,
+      sortAttributes: true,
     })
   ).toMatchInlineSnapshot(`
     "<manifest
-        deeply:nested:property="20"
-        simpleProperty="some random value" />"
+        deeply:nested:attribute="20"
+        simpleAttribute="some random value" />"
   `);
 });
 
@@ -80,7 +80,7 @@ test('should format xml tag node with children', () => {
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
-      sortProperties: true,
+      sortAttributes: true,
     })
   ).toMatchInlineSnapshot(`
     "<manifest>
@@ -94,7 +94,7 @@ test('should format xml tag node with children', () => {
   `);
 });
 
-test('should format xml tag node without sorting if sortProperties is false', () => {
+test('should format xml tag node without sorting if sortAttribute is false', () => {
   const [parser, program] = parseProgram(
     `<manifest    >
      < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
@@ -112,7 +112,7 @@ test('should format xml tag node without sorting if sortProperties is false', ()
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
-      sortProperties: false,
+      sortAttributes: false,
     })
   ).toMatchInlineSnapshot(`
     "<manifest>

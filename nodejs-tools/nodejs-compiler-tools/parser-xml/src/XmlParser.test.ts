@@ -21,7 +21,7 @@ test('should parse empty xml input', () => {
   expect(program.statements).toStrictEqual([]);
 });
 
-test('should parse prolog tag without properties', () => {
+test('should parse prolog tag without attributes', () => {
   const [parser, program] = parseProgram('< ? xml ? >');
 
   expect(parser.errors).toStrictEqual([]);
@@ -29,7 +29,7 @@ test('should parse prolog tag without properties', () => {
   expect(program.toString(0)).toMatchInlineSnapshot(`"<?xml?>"`);
 });
 
-test('should parse prolog tag with properties', () => {
+test('should parse prolog tag with attributes', () => {
   const [parser, program] = parseProgram('< ? xml version  =  "1.0" encoding ="UTF-8" ? >');
 
   expect(parser.errors).toStrictEqual([]);
@@ -53,7 +53,7 @@ test('should parse empty tag', () => {
   expect(program.toString(0)).toMatchInlineSnapshot(`"<manifest />"`);
 });
 
-test('should parse tag with single simple property', () => {
+test('should parse tag with single simple attribute', () => {
   const [parser, program] = parseProgram('< manifest package="com.pokemon.pikachu" / >');
 
   expect(parser.errors).toStrictEqual([]);
@@ -61,19 +61,19 @@ test('should parse tag with single simple property', () => {
   expect(program.toString(0)).toMatchInlineSnapshot(`"<manifest package="com.pokemon.pikachu" />"`);
 });
 
-test('should parse tag with multiple simple properties', () => {
-  const [parser, program] = parseProgram('< manifest package= "com.pokemon.pikachu" prop2  =   "2.0" / >');
+test('should parse tag with multiple simple attributes', () => {
+  const [parser, program] = parseProgram('< manifest package= "com.pokemon.pikachu" attr2  =   "2.0" / >');
 
   expect(parser.errors).toStrictEqual([]);
   expect(program.statements.length).toBe(1);
   expect(program.toString(0)).toMatchInlineSnapshot(`
     "<manifest
         package="com.pokemon.pikachu"
-        prop2="2.0" />"
+        attr2="2.0" />"
   `);
 });
 
-test('should parse tag with colon separated properties', () => {
+test('should parse tag with colon separated attributes', () => {
   const [parser, program] = parseProgram(
     `<uses-feature      android :    name   =    
     
@@ -212,7 +212,7 @@ test('should return error if incorrect token position', () => {
   expect(program.statements.length).toBe(0);
 });
 
-test('should return error if EOF while reading property', () => {
+test('should return error if EOF while reading attribute', () => {
   const [parser, program] = parseProgram('< manifest fruit');
 
   expect(parser.errors.length).toBe(1);
@@ -230,7 +230,7 @@ test('should return error if EOF while reading property', () => {
   expect(program.statements.length).toBe(0);
 });
 
-test('should return error if identifier token after identifier token instead of colon while parsing property', () => {
+test('should return error if identifier token after identifier token instead of colon while parsing attribute', () => {
   const [parser, program] = parseProgram('< manifest fruit fruit=orange / >');
 
   expect(parser.errors.length).toBe(1);
@@ -248,7 +248,7 @@ test('should return error if identifier token after identifier token instead of 
   expect(program.statements.length).toBe(0);
 });
 
-test('should return error if equals token after colon token instead of identifier while parsing property', () => {
+test('should return error if equals token after colon token instead of identifier while parsing attribute', () => {
   const [parser, program] = parseProgram('< manifest fruit:=orange / >');
 
   expect(parser.errors.length).toBe(1);
@@ -266,7 +266,7 @@ test('should return error if equals token after colon token instead of identifie
   expect(program.statements.length).toBe(0);
 });
 
-test('should return error if identifier token after equals while parsing property', () => {
+test('should return error if identifier token after equals while parsing attribute', () => {
   const [parser, program] = parseProgram('< manifest fruit= fruit=orange / >');
 
   expect(parser.errors.length).toBe(1);
@@ -284,7 +284,7 @@ test('should return error if identifier token after equals while parsing propert
   expect(program.statements.length).toBe(0);
 });
 
-test('should return error if identifier token after equals while parsing property in xml prolog', () => {
+test('should return error if identifier token after equals while parsing attribute in xml prolog', () => {
   const [parser, program] = parseProgram('<? xml fruit= fruit=orange ?>');
 
   expect(parser.errors.length).toBe(1);

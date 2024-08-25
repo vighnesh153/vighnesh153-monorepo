@@ -4,15 +4,15 @@ import { formatXmlExpression } from './format_xml_expression';
 type FormatXmlProgramConfig = {
   readonly program: XmlProgram;
   readonly indentation: number;
-  readonly sortProperties: boolean;
+  readonly sortAttributes: boolean;
 };
 
-export function formatXmlProgram({ program, indentation, sortProperties }: FormatXmlProgramConfig): string {
+export function formatXmlProgram({ program, indentation, sortAttributes }: FormatXmlProgramConfig): string {
   const stringBuilder: string[] = [];
 
   for (const statement of program.statements) {
     stringBuilder.push(
-      formatXmlExpression({ expression: statement, indentation, indentationLevel: 0, sortProperties })
+      formatXmlExpression({ expression: statement, indentation, indentationLevel: 0, sortAttributes })
     );
   }
 
