@@ -22,7 +22,7 @@ export type FormatResponse =
       formattedXml: string;
     };
 
-export function format(rawXml: string, { indentation = 4 }: FormattingOptions): FormatResponse {
+export function format(rawXml: string, { indentation = 4, sortProperties = true }: FormattingOptions): FormatResponse {
   try {
     const input = new StringLexerInput(rawXml);
     const inputReader = new LexerInputReader(input);
@@ -50,7 +50,7 @@ export function format(rawXml: string, { indentation = 4 }: FormattingOptions): 
 
     return {
       type: 'success',
-      formattedXml: formatXmlProgram({ program, indentation }),
+      formattedXml: formatXmlProgram({ program, indentation, sortProperties }),
     };
   } catch (err: unknown) {
     return {

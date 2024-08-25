@@ -36,11 +36,11 @@ test('should format xml program', () => {
 
   expect(parser.errors.length).toBe(0);
   expect(program.statements.length).toBe(2);
-  expect(formatXmlProgram({ program, indentation: 4 })).toMatchInlineSnapshot(`
+  expect(formatXmlProgram({ program, indentation: 4, sortProperties: true })).toMatchInlineSnapshot(`
     "<?xml version="1.0" encoding="utf-8"?>
     <manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.pokemon.charizard">
+        package="com.pokemon.charizard"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <uses-feature
             android:name="android.hardware.touchscreen"
             android:required="false" />
@@ -50,9 +50,9 @@ test('should format xml program', () => {
             android:label="Pikachu"
             android:supportsRtl="true">
             <activity
-                android:name=".MainActivity"
                 android:exported="true"
-                android:launchMode="singleTask">
+                android:launchMode="singleTask"
+                android:name=".MainActivity">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
                     <category android:name="android.intent.category.LAUNCHER" />
