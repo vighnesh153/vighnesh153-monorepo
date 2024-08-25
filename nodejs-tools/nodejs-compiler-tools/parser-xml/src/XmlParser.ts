@@ -2,7 +2,7 @@ import assert from 'assert';
 import { not } from '@vighnesh153/utils';
 import { nextToken, Token, XmlLexer, TokenType, TokenTypes } from '@vighnesh153/lexer-xml';
 import { ParserError } from './ParserError';
-import { XmlCommentNode, XmlElementProperty, XmlExpression, XmlProgram, XmlPrologNode, XmlTagNode } from './ast';
+import { XmlCommentNode, XmlElementAttribute, XmlExpression, XmlProgram, XmlPrologNode, XmlTagNode } from './ast';
 
 export class XmlParser {
   readonly #errors: Array<ParserError> = [];
@@ -139,11 +139,11 @@ export class XmlParser {
         return xmlPrologNode;
       }
 
-      const property = this.parseProperty();
-      if (property === null) {
+      const attribute = this.parseAttribute();
+      if (attribute === null) {
         return null;
       }
-      xmlPrologNode.addProperty(property);
+      xmlPrologNode.addAttribute(attribute);
       this.nextToken();
     }
   }
@@ -181,11 +181,11 @@ export class XmlParser {
         break;
       }
 
-      const property = this.parseProperty();
-      if (property === null) {
+      const attribute = this.parseAttribute();
+      if (attribute === null) {
         return null;
       }
-      xmlTagNode.addProperty(property);
+      xmlTagNode.addAttribute(attribute);
       this.nextToken();
     }
 
@@ -245,10 +245,10 @@ export class XmlParser {
     return xmlTagNode;
   }
 
-  private parseProperty(): XmlElementProperty | null {
+  private parseAttribute(): XmlElementAttribute | null {
     assert.ok(
       this.isCurrentToken(TokenTypes.IDENTIFIER),
-      `Shouldn't call parseProperty when current token is not an identifier`
+      `Shouldn't call parseAttribute when current token is not an identifier`
     );
 
     const keys = [this.#currentToken];
@@ -283,7 +283,7 @@ export class XmlParser {
       return null;
     }
 
-    return new XmlElementProperty(keys, this.#currentToken);
+    return new XmlElementAttribute(keys, this.#currentToken);
   }
 
   private parseXmlCommentNode(): XmlCommentNode {

@@ -1,6 +1,6 @@
 import { XmlPrologNode } from '@vighnesh153/parser-xml';
 import { buildIndentationSpace } from './build_indentation_space';
-import { formatXmlNodeProperty } from './format_xml_node_property';
+import { formatXmlElementAttribute } from './format_xml_element_attribute';
 
 type FormatXmlPrologNodeOptions = {
   xmlPrologNode: XmlPrologNode;
@@ -17,8 +17,8 @@ export function formatXmlPrologNode({
 
   localStringBuilder.push(buildIndentationSpace({ indentationLevel, indentation }) + `<?xml`);
 
-  for (const property of xmlPrologNode.properties) {
-    localStringBuilder.push(formatXmlNodeProperty(property));
+  for (const attribute of xmlPrologNode.attributes) {
+    localStringBuilder.push(formatXmlElementAttribute(attribute));
   }
 
   return localStringBuilder.join(' ') + `?>`;

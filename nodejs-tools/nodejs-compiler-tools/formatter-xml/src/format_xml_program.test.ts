@@ -36,7 +36,7 @@ test('should format xml program', () => {
 
   expect(parser.errors.length).toBe(0);
   expect(program.statements.length).toBe(2);
-  expect(formatXmlProgram({ program, indentation: 4, sortProperties: true })).toMatchInlineSnapshot(`
+  expect(formatXmlProgram({ program, indentation: 4, sortAttributes: true })).toMatchInlineSnapshot(`
     "<?xml version="1.0" encoding="utf-8"?>
     <manifest
         package="com.pokemon.charizard"

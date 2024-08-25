@@ -10,14 +10,14 @@ export interface XmlExpression {
   toString(indentation: number): string;
 }
 
-export class XmlElementProperty {
+export class XmlElementAttribute {
   constructor(
-    public readonly colonSeparatedKeys: readonly Token[],
+    public readonly namespaces: readonly Token[],
     public readonly value: Token
   ) {}
 
   toString(): string {
-    return `${this.colonSeparatedKeys.map((key) => key.tokenLiteral).join(':')}="${this.value.tokenLiteral}"`;
+    return `${this.namespaces.map((namespace) => namespace.tokenLiteral).join(':')}="${this.value.tokenLiteral}"`;
   }
 }
 
@@ -43,22 +43,22 @@ export class XmlProgram implements XmlExpression {
 export class XmlPrologNode implements XmlExpression {
   readonly astNodeType: AstNodeType = 'XML_PROLOG_NODE';
 
-  #properties: XmlElementProperty[] = [];
+  #attributes: XmlElementAttribute[] = [];
 
-  get properties(): readonly XmlElementProperty[] {
-    return [...this.#properties];
+  get attributes(): readonly XmlElementAttribute[] {
+    return [...this.#attributes];
   }
 
-  addProperty(property: XmlElementProperty): void {
-    this.#properties.push(property);
+  addAttribute(attribute: XmlElementAttribute): void {
+    this.#attributes.push(attribute);
   }
 
   toString(indentation: number = 0): string {
     const stringBuilder: string[] = [];
 
     stringBuilder.push(`${buildIndentationSpace(indentation)}<?xml`);
-    for (const property of this.properties) {
-      stringBuilder.push(property.toString());
+    for (const attribute of this.attributes) {
+      stringBuilder.push(attribute.toString());
     }
 
     return stringBuilder.join(' ') + `?>`;
@@ -71,15 +71,15 @@ export class XmlTagNode implements XmlExpression {
 
   #tagIdentifier: Token;
 
-  #properties: XmlElementProperty[] = [];
+  #attributes: XmlElementAttribute[] = [];
   #children: XmlExpression[] = [];
 
   get tagIdentifier(): Token {
     return this.#tagIdentifier;
   }
 
-  get properties(): readonly XmlElementProperty[] {
-    return [...this.#properties];
+  get attributes(): readonly XmlElementAttribute[] {
+    return [...this.#attributes];
   }
 
   get children(): readonly XmlExpression[] {
@@ -90,8 +90,8 @@ export class XmlTagNode implements XmlExpression {
     this.#tagIdentifier = tagIdentifier;
   }
 
-  addProperty(property: XmlElementProperty): void {
-    this.#properties.push(property);
+  addAttribute(attribute: XmlElementAttribute): void {
+    this.#attributes.push(attribute);
   }
 
   addChild(statement: XmlExpression): void {
@@ -99,17 +99,17 @@ export class XmlTagNode implements XmlExpression {
   }
 
   toString(indentation: number = 0): string {
-    const { tagIdentifier, properties, children } = this;
+    const { tagIdentifier, attributes, children } = this;
 
     const stringBuilder: string[] = [];
 
     stringBuilder.push(`${buildIndentationSpace(indentation)}<${tagIdentifier.tokenLiteral}`);
-    if (properties.length === 1) {
-      const serializedProps = properties.map((property) => property.toString()).join(' ');
-      stringBuilder[stringBuilder.length - 1] += ' ' + serializedProps;
-    } else if (properties.length > 1) {
-      properties.forEach((property) => {
-        stringBuilder.push(`${buildIndentationSpace(indentation + 1)}${property.toString()}`);
+    if (attributes.length === 1) {
+      const serializedAttrs = attributes.map((attribute) => attribute.toString()).join(' ');
+      stringBuilder[stringBuilder.length - 1] += ' ' + serializedAttrs;
+    } else if (attributes.length > 1) {
+      attributes.forEach((attribute) => {
+        stringBuilder.push(`${buildIndentationSpace(indentation + 1)}${attribute.toString()}`);
       });
     }
 

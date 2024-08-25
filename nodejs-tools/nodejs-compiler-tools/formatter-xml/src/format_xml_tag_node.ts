@@ -1,43 +1,43 @@
 import { XmlTagNode } from '@vighnesh153/parser-xml';
 import { buildIndentationSpace } from './build_indentation_space';
-import { formatXmlNodeProperty } from './format_xml_node_property';
+import { formatXmlElementAttribute } from './format_xml_element_attribute';
 import { formatXmlExpression } from './format_xml_expression';
 
 type FormatXmlTagNodeConfig = {
   xmlTagNode: XmlTagNode;
   indentationLevel: number;
   indentation: number;
-  sortProperties: boolean;
+  sortAttributes: boolean;
 };
 
 export function formatXmlTagNode({
   xmlTagNode,
   indentationLevel,
   indentation,
-  sortProperties,
+  sortAttributes,
 }: FormatXmlTagNodeConfig): string {
-  const { tagIdentifier, properties, children } = xmlTagNode;
+  const { tagIdentifier, attributes, children } = xmlTagNode;
 
   const stringBuilder: string[] = [];
 
   // push: <tag-name
   stringBuilder.push(`${buildIndentationSpace({ indentationLevel, indentation })}<${tagIdentifier.tokenLiteral}`);
 
-  // push properties
-  if (properties.length === 1) {
-    stringBuilder[stringBuilder.length - 1] += ' ' + formatXmlNodeProperty(properties[0]);
-  } else if (properties.length > 1) {
-    properties
-      .map((property) => formatXmlNodeProperty(property))
-      .toSorted((property1, property2) => {
-        if (sortProperties) {
-          return property1.localeCompare(property2);
+  // push attributes
+  if (attributes.length === 1) {
+    stringBuilder[stringBuilder.length - 1] += ' ' + formatXmlElementAttribute(attributes[0]);
+  } else if (attributes.length > 1) {
+    attributes
+      .map((attribute) => formatXmlElementAttribute(attribute))
+      .toSorted((attr1, attr2) => {
+        if (sortAttributes) {
+          return attr1.localeCompare(attr2);
         }
         return 0;
       })
-      .forEach((formattedProperty) => {
+      .forEach((formattedAttribute) => {
         stringBuilder.push(
-          `${buildIndentationSpace({ indentation, indentationLevel: indentationLevel + 1 })}${formattedProperty}`
+          `${buildIndentationSpace({ indentation, indentationLevel: indentationLevel + 1 })}${formattedAttribute}`
         );
       });
   }
@@ -52,7 +52,7 @@ export function formatXmlTagNode({
     // puh children
     for (const child of children) {
       stringBuilder.push(
-        formatXmlExpression({ expression: child, indentation, indentationLevel: indentationLevel + 1, sortProperties })
+        formatXmlExpression({ expression: child, indentation, indentationLevel: indentationLevel + 1, sortAttributes })
       );
     }
 
