@@ -30,7 +30,9 @@ export function readEscapeSequence(lexer: XmlLexer): string {
     case EOF_CHARACTER: {
       lexer.addError(
         new LexerError({
-          errorMessage: 'Unclosed escape sequence',
+          errorCategory: {
+            type: 'UNCLOSED_ESCAPE_SEQUENCE',
+          },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })
@@ -40,7 +42,10 @@ export function readEscapeSequence(lexer: XmlLexer): string {
     default: {
       lexer.addError(
         new LexerError({
-          errorMessage: `Invalid escape character literal: ${lexer.inputReader.currentCharacter}`,
+          errorCategory: {
+            type: 'INVALID_ESCAPE_CHARACTER_LITERAL',
+            ch: lexer.inputReader.currentCharacter,
+          },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })
@@ -67,7 +72,10 @@ function parseUnicode(lexer: XmlLexer): string {
     } else {
       lexer.addError(
         new LexerError({
-          errorMessage: `Invalid unicode character: ${peek}`,
+          errorCategory: {
+            type: 'INVALID_UNICODE_CHARACTER_LITERAL',
+            ch: peek!,
+          },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })

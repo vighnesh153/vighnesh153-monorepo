@@ -20,7 +20,10 @@ export function readComment(lexer: XmlLexer): string | null {
     if (lexer.inputReader.currentCharacter !== '-') {
       lexer.addError(
         new LexerError({
-          errorMessage: `Unexpected character: '${lexer.inputReader.currentCharacter}'`,
+          errorCategory: {
+            type: 'UNEXPECTED_CHARACTER',
+            ch: lexer.inputReader.currentCharacter!,
+          },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })
@@ -43,7 +46,9 @@ export function readComment(lexer: XmlLexer): string | null {
     if (currCh === EOF_CHARACTER) {
       lexer.addError(
         new LexerError({
-          errorMessage: `Unclosed comment literal`,
+          errorCategory: {
+            type: 'UNCLOSED_COMMENT_LITERAL',
+          },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
         })

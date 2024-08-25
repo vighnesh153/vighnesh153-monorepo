@@ -7,7 +7,8 @@ export default defineConfig(() => ({
   splitting: false,
   clean: true,
   minify: true,
+  dts: true,
   treeshake: true,
-  format: 'esm',
+  format: ['esm'],
   outExtension: () => ({ js: `.js` }),
 }));
