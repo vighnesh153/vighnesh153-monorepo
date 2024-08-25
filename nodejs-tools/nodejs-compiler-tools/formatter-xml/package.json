@@ -1,0 +1,46 @@
+{
+  "name": "@vighnesh153/formatter-xml",
+  "version": "1.0.0",
+  "description": "A formatter for xml",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": {
+    "types": "./dist/main.d.ts",
+    "import": "./dist/main.js"
+  },
+  "types": "./dist/main.d.ts",
+  "author": {
+    "name": "Vighnesh Raut",
+    "email": "me@vighnesh153.dev",
+    "url": "https://vighnesh153.dev"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist && tsup",
+    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vighnesh153/utils": "*"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "@vighnesh153/tsconfig": "*",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint-config-vighnesh153": "*",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vighnesh153/vighnesh153-monorepo.git"
+  }
+}
