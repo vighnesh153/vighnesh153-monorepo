@@ -13,6 +13,7 @@ test('should format xml prolog node', () => {
       expression: program.statements[0] as XmlPrologNode,
       indentation: 4,
       indentationLevel: 0,
+      sortProperties: true,
     })
   ).toMatchInlineSnapshot(`"<?xml encoding="utf-8" version="2.0"?>"`);
 });
@@ -31,11 +32,12 @@ test('should format xml tag node', () => {
       expression: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
+      sortProperties: true,
     })
   ).toMatchInlineSnapshot(`
     "<manifest
-        simpleProperty="some random value"
-        deeply:nested:property="20" />"
+        deeply:nested:property="20"
+        simpleProperty="some random value" />"
   `);
 });
 
@@ -51,6 +53,7 @@ test('should format comment node', () => {
       expression: program.statements[0] as XmlCommentNode,
       indentation: 4,
       indentationLevel: 0,
+      sortProperties: true,
     })
   ).toMatchInlineSnapshot(
     `"<!-- <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" /> -->"`

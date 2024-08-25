@@ -7,9 +7,15 @@ type FormatXmlExpressionProps = {
   readonly expression: Readonly<XmlExpression>;
   readonly indentation: number;
   readonly indentationLevel: number;
+  readonly sortProperties: boolean;
 };
 
-export function formatXmlExpression({ expression, indentation, indentationLevel }: FormatXmlExpressionProps): string {
+export function formatXmlExpression({
+  expression,
+  indentation,
+  indentationLevel,
+  sortProperties,
+}: FormatXmlExpressionProps): string {
   if (expression instanceof XmlPrologNode) {
     return formatXmlPrologNode({
       xmlPrologNode: expression,
@@ -22,6 +28,7 @@ export function formatXmlExpression({ expression, indentation, indentationLevel 
       xmlTagNode: expression,
       indentationLevel,
       indentation,
+      sortProperties,
     });
   }
   if (expression instanceof XmlCommentNode) {
