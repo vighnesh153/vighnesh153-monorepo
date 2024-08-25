@@ -2,6 +2,7 @@ import { XmlTagNode } from '@vighnesh153/parser-xml';
 import { buildIndentationSpace } from './build_indentation_space';
 import { formatXmlElementAttribute } from './format_xml_element_attribute';
 import { formatXmlExpression } from './format_xml_expression';
+import { sortAttributes } from './sort_attributes';
 
 type FormatXmlTagNodeConfig = {
   xmlTagNode: XmlTagNode;
@@ -14,7 +15,7 @@ export function formatXmlTagNode({
   xmlTagNode,
   indentationLevel,
   indentation,
-  sortAttributes,
+  sortAttributes: shouldSortAttributes,
 }: FormatXmlTagNodeConfig): string {
   const { tagIdentifier, attributes, children } = xmlTagNode;
 
@@ -27,14 +28,8 @@ export function formatXmlTagNode({
   if (attributes.length === 1) {
     stringBuilder[stringBuilder.length - 1] += ' ' + formatXmlElementAttribute(attributes[0]);
   } else if (attributes.length > 1) {
-    attributes
+    (shouldSortAttributes ? sortAttributes(attributes) : attributes)
       .map((attribute) => formatXmlElementAttribute(attribute))
-      .toSorted((attr1, attr2) => {
-        if (sortAttributes) {
-          return attr1.localeCompare(attr2);
-        }
-        return 0;
-      })
       .forEach((formattedAttribute) => {
         stringBuilder.push(
           `${buildIndentationSpace({ indentation, indentationLevel: indentationLevel + 1 })}${formattedAttribute}`
@@ -52,7 +47,12 @@ export function formatXmlTagNode({
     // puh children
     for (const child of children) {
       stringBuilder.push(
-        formatXmlExpression({ expression: child, indentation, indentationLevel: indentationLevel + 1, sortAttributes })
+        formatXmlExpression({
+          expression: child,
+          indentation,
+          indentationLevel: indentationLevel + 1,
+          sortAttributes: shouldSortAttributes,
+        })
       );
     }
 

@@ -36,8 +36,8 @@ test('should format xml tag node', () => {
     })
   ).toMatchInlineSnapshot(`
     "<manifest
-        deeply:nested:property="20"
-        simpleProperty="some random value" />"
+        simpleProperty="some random value"
+        deeply:nested:property="20" />"
   `);
 });
 
