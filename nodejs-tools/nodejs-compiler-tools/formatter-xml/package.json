@@ -31,8 +31,10 @@
   },
   "devDependencies": {
     "@types/node": "*",
+    "@vighnesh153/lexer-core": "*",
+    "@vighnesh153/lexer-xml": "*",
+    "@vighnesh153/parser-xml": "*",
     "@vighnesh153/tsconfig": "*",
-    "@vitest/coverage-v8": "^2.0.5",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
