@@ -9,5 +9,5 @@
     "types": ["vite/client", "@testing-library/jest-dom"]
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.astro"],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": ["dist", "build", "node_modules", "sst.config.ts"]
 }
