@@ -10,6 +10,6 @@ export default getViteConfig({
   test: {
     /* for example, use global to avoid globals imports (describe, test, expect): */
     // globals: true,
-    exclude: ['e2e'],
+    exclude: ['e2e', '.sst', '.astro', '.turbo', 'playwright-report'],
   },
 });

@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro check && astro build",
-    "lint": "eslint --max-warnings=0 . && astro check",
+    "lint:eslint": "eslint --max-warnings=0 .",
+    "lint:astro": "astro check",
+    "lint": "run-s lint:*",
     "install-test-deps": "npx playwright install --with-deps",
     "test:playwright:interactive": "npx playwright test --ui",
     "test:playwright": "npx playwright test",
