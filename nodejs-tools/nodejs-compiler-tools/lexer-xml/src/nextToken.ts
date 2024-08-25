@@ -66,7 +66,10 @@ export function nextToken(lexer: XmlLexer): Token {
       } else {
         lexer.addError(
           new LexerError({
-            errorMessage: `Illegal character: ${currCh}`,
+            errorCategory: {
+              type: 'ILLEGAL_CHARACTER',
+              ch: currCh,
+            },
             lineNumber: lexer.inputReader.lineNumber,
             columnNumber: lexer.inputReader.columnNumber,
           })

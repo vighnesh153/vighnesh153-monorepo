@@ -1,12 +1,39 @@
+export type LexerErrorCategory =
+  | {
+      type: 'ILLEGAL_CHARACTER';
+      ch: string;
+    }
+  | {
+      type: 'UNEXPECTED_CHARACTER';
+      ch: string;
+    }
+  | {
+      type: 'INVALID_ESCAPE_CHARACTER_LITERAL';
+      ch: string;
+    }
+  | {
+      type: 'INVALID_UNICODE_CHARACTER_LITERAL';
+      ch: string;
+    }
+  | {
+      type: 'UNCLOSED_COMMENT_LITERAL';
+    }
+  | {
+      type: 'UNCLOSED_ESCAPE_SEQUENCE';
+    }
+  | {
+      type: 'UNCLOSED_STRING_LITERAL';
+    };
+
 export type LexerErrorProps = {
-  readonly errorMessage: string;
+  readonly errorCategory: Readonly<LexerErrorCategory>;
   readonly lineNumber: number;
   readonly columnNumber: number;
 };
 
 export class LexerError {
-  get errorMessage(): string {
-    return this.props.errorMessage;
+  get errorCategory(): Readonly<LexerErrorCategory> {
+    return this.props.errorCategory;
   }
   get lineNumber(): number {
     return this.props.lineNumber;

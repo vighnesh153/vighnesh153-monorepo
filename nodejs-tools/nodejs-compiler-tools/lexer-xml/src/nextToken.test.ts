@@ -40,7 +40,10 @@ test('should report error if illegal character found', () => {
 
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: `Illegal character: &`,
+      errorCategory: {
+        type: 'ILLEGAL_CHARACTER',
+        ch: '&',
+      },
       lineNumber: 3,
       columnNumber: 1,
     }),
@@ -345,12 +348,18 @@ test('should report error if comment start is invalid', () => {
   nextToken(lexer);
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: `Unexpected character: '<'`,
+      errorCategory: {
+        type: 'UNEXPECTED_CHARACTER',
+        ch: '<',
+      },
       lineNumber: 1,
       columnNumber: 3,
     }),
     new LexerError({
-      errorMessage: `Unexpected character: '<'`,
+      errorCategory: {
+        type: 'UNEXPECTED_CHARACTER',
+        ch: '<',
+      },
       lineNumber: 1,
       columnNumber: 4,
     }),
@@ -364,7 +373,9 @@ test('should report error if comment is unclosed', () => {
   nextToken(lexer);
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: `Unclosed comment literal`,
+      errorCategory: {
+        type: 'UNCLOSED_COMMENT_LITERAL',
+      },
       lineNumber: 1,
       columnNumber: 4,
     }),
@@ -404,7 +415,10 @@ test('should report error if unicode sequence is invalid', () => {
   nextToken(lexer);
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: 'Invalid unicode character: x',
+      errorCategory: {
+        type: 'INVALID_UNICODE_CHARACTER_LITERAL',
+        ch: 'x',
+      },
       lineNumber: 2,
       columnNumber: 25,
     }),
@@ -421,7 +435,10 @@ test('should report error if escape sequence is invalid', () => {
   nextToken(lexer);
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: 'Invalid escape character literal: x',
+      errorCategory: {
+        type: 'INVALID_ESCAPE_CHARACTER_LITERAL',
+        ch: 'x',
+      },
       lineNumber: 2,
       columnNumber: 16,
     }),
@@ -438,12 +455,16 @@ test('should report error if escape sequence is unclosed', () => {
   nextToken(lexer);
   expect(lexer.errors).toStrictEqual([
     new LexerError({
-      errorMessage: 'Unclosed escape sequence',
+      errorCategory: {
+        type: 'UNCLOSED_ESCAPE_SEQUENCE',
+      },
       lineNumber: 2,
       columnNumber: 18,
     }),
     new LexerError({
-      errorMessage: 'Unclosed string literal',
+      errorCategory: {
+        type: 'UNCLOSED_STRING_LITERAL',
+      },
       lineNumber: 2,
       columnNumber: 18,
     }),

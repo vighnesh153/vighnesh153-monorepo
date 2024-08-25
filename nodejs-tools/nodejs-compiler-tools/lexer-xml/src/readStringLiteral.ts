@@ -31,7 +31,9 @@ export function readStringLiteral(lexer: XmlLexer): string {
   if (currCh === EOF_CHARACTER) {
     lexer.addError(
       new LexerError({
-        errorMessage: 'Unclosed string literal',
+        errorCategory: {
+          type: 'UNCLOSED_STRING_LITERAL',
+        },
         lineNumber: lexer.inputReader.lineNumber,
         columnNumber: lexer.inputReader.columnNumber,
       })
