@@ -7,7 +7,6 @@ on:
     paths:
       - "deno-tools/**"
   pull_request:
-    branches: ["main"]
     paths:
       - "deno-tools/**"
 
