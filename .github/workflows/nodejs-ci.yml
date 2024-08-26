@@ -16,6 +16,7 @@ on:
 
 jobs:
   nodejs-ci:
+    # Change to ubuntu-latest once the latest version points to 24 or above
     runs-on: ubuntu-24.04
 
     defaults:
