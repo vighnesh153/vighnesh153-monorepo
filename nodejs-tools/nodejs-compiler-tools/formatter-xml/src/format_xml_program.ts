@@ -16,5 +16,9 @@ export function formatXmlProgram({ program, indentation, sortAttributes }: Forma
     );
   }
 
-  return stringBuilder.join('\n');
+  return (
+    stringBuilder.join('\n') +
+    // empty line at the end
+    '\n'
+  );
 }

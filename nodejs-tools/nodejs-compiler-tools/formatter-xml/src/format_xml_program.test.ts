@@ -89,6 +89,7 @@ types    comma-separated   =  "true"    >
         <name>Pikachu</name>
         <types comma-separated="true">electric, god</types>
         <desc>Best pokemon ever!!!</desc>
-    </pokemon>"
+    </pokemon>
+    "
   `);
 });
