@@ -19,6 +19,7 @@ export const TokenTypes = {
   IDENTIFIER: new TokenType('IDENTIFIER'),
   STRING_LITERAL: new TokenType('STRING_LITERAL'),
   COMMENT: new TokenType('COMMENT'),
+  TEXT_NODE: new TokenType('TEXT_NODE'),
 
   COLON: new TokenType(':'),
   EQUALS: new TokenType('='),

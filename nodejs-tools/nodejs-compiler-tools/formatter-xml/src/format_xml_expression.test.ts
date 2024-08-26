@@ -59,3 +59,18 @@ test('should format comment node', () => {
     `"<!-- <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" /> -->"`
   );
 });
+
+test('should format text node', () => {
+  const [parser, program] = parseProgram(`< pokemon  >  Pikachu    < /  pokemon >`);
+
+  expect(parser.errors.length).toBe(0);
+  expect(program.statements.length).toBe(1);
+  expect(
+    formatXmlExpression({
+      expression: (program.statements[0] as XmlTagNode).children[0],
+      indentation: 4,
+      indentationLevel: 0,
+      sortAttributes: true,
+    })
+  ).toMatchInlineSnapshot(`"Pikachu"`);
+});

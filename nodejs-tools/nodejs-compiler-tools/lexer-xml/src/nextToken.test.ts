@@ -22,34 +22,6 @@ test('should return EOF for empty string', () => {
   } satisfies Token);
 });
 
-test('should report error if illegal character found', () => {
-  const lexer = createLexer(`
-<?xml version="1.0" encoding="utf-8"?>
-& <manifest />
-    `);
-
-  // skip past: <?xml version="1.0" encoding="utf-8"?>
-  repeat(11, () => nextToken(lexer));
-
-  expect(nextToken(lexer)).toStrictEqual({
-    lineNumber: 3,
-    columnNumber: 1,
-    tokenLiteral: '&',
-    tokenType: TokenTypes.ILLEGAL,
-  });
-
-  expect(lexer.errors).toStrictEqual([
-    new LexerError({
-      errorCategory: {
-        type: 'ILLEGAL_CHARACTER',
-        ch: '&',
-      },
-      lineNumber: 3,
-      columnNumber: 1,
-    }),
-  ]);
-});
-
 test('should parse naked xml tag', () => {
   const lexer = createLexer('<?xml?>');
 
@@ -480,4 +452,241 @@ test('should read naked identifier', () => {
     lineNumber: 1,
     columnNumber: 1,
   });
+});
+
+test('should read text nodes', () => {
+  const lexer = createLexer(`
+    <pokemon>
+      <name>Pikachu</name>
+      <types>electric, god</types>
+      <desc>
+        Best pokemon ever!!!
+      </desc>
+    </pokemon>
+    `);
+
+  // <pokemon>
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 2,
+    columnNumber: 5,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'pokemon',
+    lineNumber: 2,
+    columnNumber: 6,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 2,
+    columnNumber: 13,
+  });
+
+  // <name>Pikachu</name>
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 3,
+    columnNumber: 7,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'name',
+    lineNumber: 3,
+    columnNumber: 8,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 3,
+    columnNumber: 12,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.TEXT_NODE,
+    tokenLiteral: 'Pikachu',
+    lineNumber: 3,
+    columnNumber: 13,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 3,
+    columnNumber: 20,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenLiteral: '/',
+    lineNumber: 3,
+    columnNumber: 21,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'name',
+    lineNumber: 3,
+    columnNumber: 22,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 3,
+    columnNumber: 26,
+  });
+
+  // <types>electric, god</types>
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 4,
+    columnNumber: 7,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'types',
+    lineNumber: 4,
+    columnNumber: 8,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 4,
+    columnNumber: 13,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.TEXT_NODE,
+    tokenLiteral: 'electric, god',
+    lineNumber: 4,
+    columnNumber: 14,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 4,
+    columnNumber: 27,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenLiteral: '/',
+    lineNumber: 4,
+    columnNumber: 28,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'types',
+    lineNumber: 4,
+    columnNumber: 29,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 4,
+    columnNumber: 34,
+  });
+
+  // <desc>
+  //    Best pokemon ever!!!
+  // </desc>
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 5,
+    columnNumber: 7,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'desc',
+    lineNumber: 5,
+    columnNumber: 8,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 5,
+    columnNumber: 12,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.TEXT_NODE,
+    tokenLiteral: 'Best pokemon ever!!!\n      ',
+    lineNumber: 6,
+    columnNumber: 9,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 7,
+    columnNumber: 7,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenLiteral: '/',
+    lineNumber: 7,
+    columnNumber: 8,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'desc',
+    lineNumber: 7,
+    columnNumber: 9,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 7,
+    columnNumber: 13,
+  });
+
+  // </pokemon>
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 8,
+    columnNumber: 5,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenLiteral: '/',
+    lineNumber: 8,
+    columnNumber: 6,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'pokemon',
+    lineNumber: 8,
+    columnNumber: 7,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenLiteral: '>',
+    lineNumber: 8,
+    columnNumber: 14,
+  });
+});
+
+test('should report error if illegal character found', () => {
+  const lexer = createLexer(`
+<?xml !?>
+    `);
+
+  // skip past: <?xml
+  repeat(3, () => nextToken(lexer));
+
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 2,
+    columnNumber: 7,
+    tokenLiteral: '!',
+    tokenType: TokenTypes.ILLEGAL,
+  });
+
+  expect(lexer.errors).toStrictEqual([
+    new LexerError({
+      errorCategory: {
+        type: 'ILLEGAL_CHARACTER',
+        ch: '!',
+      },
+      lineNumber: 2,
+      columnNumber: 7,
+    }),
+  ]);
 });

@@ -6,6 +6,7 @@ import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { readStringLiteral } from './readStringLiteral';
 import { isAcceptableIdentifierStart, readIdentifier } from './readIdentifier';
 import { readComment } from './readComment';
+import { readTextNode } from './readTextNode';
 
 export function nextToken(lexer: XmlLexer): Token {
   let t: Token;
@@ -59,7 +60,11 @@ export function nextToken(lexer: XmlLexer): Token {
       break;
     }
     default: {
-      if (isAcceptableIdentifierStart(currCh)) {
+      if (lexer.currentToken?.tokenType === TokenTypes.RIGHT_ANGLE_BRACKET) {
+        const { lineNumber, columnNumber } = lexer.inputReader;
+        const textNode = readTextNode(lexer);
+        t = createToken(lexer, TokenTypes.TEXT_NODE, textNode, lineNumber, columnNumber);
+      } else if (isAcceptableIdentifierStart(currCh)) {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const identifier = readIdentifier(lexer);
         t = createToken(lexer, TokenTypes.IDENTIFIER, identifier, lineNumber, columnNumber);
@@ -82,6 +87,7 @@ export function nextToken(lexer: XmlLexer): Token {
 
   lexer.inputReader.readNextCharacter();
 
+  lexer.currentToken = t;
   return t;
 }
 

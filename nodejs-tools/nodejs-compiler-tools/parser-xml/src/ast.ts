@@ -2,7 +2,7 @@
 
 import { Token } from '@vighnesh153/lexer-xml';
 
-export type AstNodeType = 'XML_PROGRAM' | 'XML_PROLOG_NODE' | 'XML_TAG_NODE' | 'XML_COMMENT_NODE';
+export type AstNodeType = 'XML_PROGRAM' | 'XML_PROLOG_NODE' | 'XML_TAG_NODE' | 'XML_COMMENT_NODE' | 'XML_TEXT_NODE';
 
 export interface XmlExpression {
   readonly astNodeType: AstNodeType;
@@ -119,6 +119,11 @@ export class XmlTagNode implements XmlExpression {
       stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + '>';
     }
 
+    // if only a single text node child
+    if (children.length === 1 && children[0].astNodeType === 'XML_TEXT_NODE') {
+      return stringBuilder.join('\n') + children[0].toString(0) + `</${tagIdentifier.tokenLiteral}>`;
+    }
+
     for (const child of children) {
       stringBuilder.push(child.toString(indentation + 1));
     }
@@ -145,4 +150,14 @@ function buildIndentationSpace(indentation: number): string {
   return Array.from({ length: indentation * 4 })
     .map(() => ' ')
     .join('');
+}
+
+export class XmlTextNode implements XmlExpression {
+  readonly astNodeType: AstNodeType = 'XML_TEXT_NODE';
+
+  constructor(public readonly text: Readonly<Token>) {}
+
+  toString(indentation: number): string {
+    return `${buildIndentationSpace(indentation)}${this.text.tokenLiteral.trim()}`;
+  }
 }

@@ -2,7 +2,15 @@ import assert from 'assert';
 import { not } from '@vighnesh153/utils';
 import { nextToken, Token, XmlLexer, TokenType, TokenTypes } from '@vighnesh153/lexer-xml';
 import { ParserError } from './ParserError';
-import { XmlCommentNode, XmlElementAttribute, XmlExpression, XmlProgram, XmlPrologNode, XmlTagNode } from './ast';
+import {
+  XmlCommentNode,
+  XmlElementAttribute,
+  XmlExpression,
+  XmlProgram,
+  XmlPrologNode,
+  XmlTagNode,
+  XmlTextNode,
+} from './ast';
 
 export class XmlParser {
   readonly #errors: Array<ParserError> = [];
@@ -78,6 +86,9 @@ export class XmlParser {
     }
     if (this.isCurrentToken(TokenTypes.COMMENT)) {
       return this.parseXmlCommentNode();
+    }
+    if (this.isCurrentToken(TokenTypes.TEXT_NODE)) {
+      return this.parseXmlTextNode();
     }
     this.addError(
       new ParserError({
@@ -293,5 +304,14 @@ export class XmlParser {
     );
 
     return new XmlCommentNode(this.#currentToken);
+  }
+
+  private parseXmlTextNode(): XmlTextNode {
+    assert.ok(
+      this.isCurrentToken(TokenTypes.TEXT_NODE),
+      `Shouldn't call parseXmlTextNode when current token is not a text token`
+    );
+
+    return new XmlTextNode(this.#currentToken);
   }
 }

@@ -1,8 +1,9 @@
-import { XmlTagNode } from '@vighnesh153/parser-xml';
+import { XmlTagNode, XmlTextNode } from '@vighnesh153/parser-xml';
 import { buildIndentationSpace } from './build_indentation_space';
 import { formatXmlElementAttribute } from './format_xml_element_attribute';
 import { formatXmlExpression } from './format_xml_expression';
 import { sortAttributes } from './sort_attributes';
+import { formatTextNode } from './format_text_node';
 
 type FormatXmlTagNodeConfig = {
   xmlTagNode: XmlTagNode;
@@ -44,7 +45,16 @@ export function formatXmlTagNode({
     // push tag opening's end marker
     stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + '>';
 
-    // puh children
+    // if only a text node as child, format it as
+    if (children.length === 1 && children[0].astNodeType === 'XML_TEXT_NODE') {
+      return (
+        stringBuilder.join('\n') +
+        formatTextNode({ textNode: children[0] as XmlTextNode, indentation, indentationLevel: 0 }) +
+        `</${tagIdentifier.tokenLiteral}>`
+      );
+    }
+
+    // push children
     for (const child of children) {
       stringBuilder.push(
         formatXmlExpression({
