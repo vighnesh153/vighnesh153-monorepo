@@ -96,6 +96,43 @@ test('should parse tag with colon separated attributes', () => {
   `);
 });
 
+test('should parse tag with text nodes and properties', () => {
+  const [parser, program] = parseProgram(`
+    <    pokemon >
+      <name
+    >
+      Pikachu<
+    /
+    
+    name
+>
+      <
+types    comma-separated   =  "true"    >    
+      electric, god<  /
+      types>
+      <
+      desc
+      >
+        
+  Best pokemon ever!!!
+      
+                      </
+                  desc    ><
+                      /pokemon
+                      >
+    `);
+
+  expect(parser.errors).toStrictEqual([]);
+  expect(program.statements.length).toBe(1);
+  expect(program.toString(0)).toMatchInlineSnapshot(`
+    "<pokemon>
+        <name>Pikachu</name>
+        <types comma-separated="true">electric, god</types>
+        <desc>Best pokemon ever!!!</desc>
+    </pokemon>"
+  `);
+});
+
 test('should parse tag with children', () => {
   const [parser, program] = parseProgram(
     `

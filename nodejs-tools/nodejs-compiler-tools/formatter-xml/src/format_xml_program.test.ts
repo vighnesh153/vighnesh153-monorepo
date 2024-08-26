@@ -32,10 +32,35 @@ test('should format xml program', () => {
             </activity>
       </application>
     </manifest>
+
+
+
+    <    pokemon >
+      <name
+    >
+      Pikachu<
+    /
+    
+    name
+>
+      <
+types    comma-separated   =  "true"    >    
+      electric, god<  /
+      types>
+      <
+      desc
+      >
+        
+  Best pokemon ever!!!
+      
+                      </
+                  desc    ><
+                      /pokemon
+                      >
     `);
 
   expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(2);
+  expect(program.statements.length).toBe(3);
   expect(formatXmlProgram({ program, indentation: 4, sortAttributes: true })).toMatchInlineSnapshot(`
     "<?xml version="1.0" encoding="utf-8"?>
     <manifest
@@ -59,6 +84,11 @@ test('should format xml program', () => {
                 </intent-filter>
             </activity>
         </application>
-    </manifest>"
+    </manifest>
+    <pokemon>
+        <name>Pikachu</name>
+        <types comma-separated="true">electric, god</types>
+        <desc>Best pokemon ever!!!</desc>
+    </pokemon>"
   `);
 });

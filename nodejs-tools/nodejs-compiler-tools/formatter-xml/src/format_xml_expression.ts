@@ -1,7 +1,8 @@
-import { XmlCommentNode, XmlExpression, XmlPrologNode, XmlTagNode } from '@vighnesh153/parser-xml';
+import { XmlCommentNode, XmlExpression, XmlPrologNode, XmlTagNode, XmlTextNode } from '@vighnesh153/parser-xml';
 import { formatXmlPrologNode } from './format_xml_prolog_node';
 import { formatXmlTagNode } from './format_xml_tag_node';
 import { formatCommentNode } from './format_comment_node';
+import { formatTextNode } from './format_text_node';
 
 type FormatXmlExpressionProps = {
   readonly expression: Readonly<XmlExpression>;
@@ -34,6 +35,13 @@ export function formatXmlExpression({
   if (expression instanceof XmlCommentNode) {
     return formatCommentNode({
       commentNode: expression,
+      indentationLevel,
+      indentation,
+    });
+  }
+  if (expression instanceof XmlTextNode) {
+    return formatTextNode({
+      textNode: expression,
       indentationLevel,
       indentation,
     });
