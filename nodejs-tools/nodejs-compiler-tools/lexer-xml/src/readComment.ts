@@ -21,7 +21,7 @@ export function readComment(lexer: XmlLexer): string | null {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'UNEXPECTED_CHARACTER',
+            type: 'UNEXPECTED_COMMENT_CHARACTER',
             ch: lexer.inputReader.currentCharacter!,
           },
           lineNumber: lexer.inputReader.lineNumber,
