@@ -4,7 +4,7 @@ export type LexerErrorCategory =
       ch: string;
     }
   | {
-      type: 'UNEXPECTED_CHARACTER';
+      type: 'UNEXPECTED_COMMENT_CHARACTER';
       ch: string;
     }
   | {

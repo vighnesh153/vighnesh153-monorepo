@@ -321,7 +321,7 @@ test('should report error if comment start is invalid', () => {
   expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorCategory: {
-        type: 'UNEXPECTED_CHARACTER',
+        type: 'UNEXPECTED_COMMENT_CHARACTER',
         ch: '<',
       },
       lineNumber: 1,
@@ -329,7 +329,7 @@ test('should report error if comment start is invalid', () => {
     }),
     new LexerError({
       errorCategory: {
-        type: 'UNEXPECTED_CHARACTER',
+        type: 'UNEXPECTED_COMMENT_CHARACTER',
         ch: '<',
       },
       lineNumber: 1,
