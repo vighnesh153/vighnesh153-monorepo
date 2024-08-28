@@ -2,7 +2,7 @@
 
 import assert from 'assert';
 
-import { ALPHABET, DIGITS } from '@vighnesh153/utils';
+import { ALPHABET, DIGITS } from '@vighnesh153/tools-platform-independent';
 import { XmlLexer } from './Lexer';
 
 export function readIdentifier(lexer: XmlLexer): string {

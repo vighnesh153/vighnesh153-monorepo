@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { not, repeat } from '@vighnesh153/utils';
+import { not, repeat } from '@vighnesh153/tools-platform-independent';
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 

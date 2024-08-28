@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import { XmlElementAttribute } from '@vighnesh153/parser-xml';
 
 export function sortAttributes(attributes: readonly XmlElementAttribute[]): XmlElementAttribute[] {

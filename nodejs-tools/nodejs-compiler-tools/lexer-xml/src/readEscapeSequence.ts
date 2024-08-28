@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
-import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/utils';
+import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/tools-platform-independent';
 
 export function readEscapeSequence(lexer: XmlLexer): string {
   assert.ok(

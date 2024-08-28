@@ -475,7 +475,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "files": ["dist"],
   "dependencies": {
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
     "@types/node": "*",

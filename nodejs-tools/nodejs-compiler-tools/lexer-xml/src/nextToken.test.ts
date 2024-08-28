@@ -1,9 +1,9 @@
 import { test, expect } from 'vitest';
+import { repeat } from '@vighnesh153/tools-platform-independent';
 import { LexerError, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 import { nextToken } from './nextToken';
 import { Token, TokenTypes } from './tokens';
-import { repeat } from '@vighnesh153/utils';
 
 function createLexer(input: string): XmlLexer {
   const lexerInput = new StringLexerInput(input);

@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "@vighnesh153/lexer-xml": "*",
-    "@vighnesh153/utils": "*"
+    "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
     "@types/node": "*",
