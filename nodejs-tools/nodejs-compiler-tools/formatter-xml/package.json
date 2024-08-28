@@ -20,21 +20,20 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && tsup",
+    "build:google3": "rm -rf dist && tsup --target es2015 --format iife --globalName pika_xml_formatter --outDir google3",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@vighnesh153/utils": "*"
-  },
   "devDependencies": {
     "@types/node": "*",
     "@vighnesh153/lexer-core": "*",
     "@vighnesh153/lexer-xml": "*",
     "@vighnesh153/parser-xml": "*",
     "@vighnesh153/tsconfig": "*",
+    "@vighnesh153/utils": "*",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
