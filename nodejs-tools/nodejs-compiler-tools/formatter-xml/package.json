@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && tsup",
-    "build:google3": "rm -rf dist && tsup --target es2015 --format iife --globalName pika_xml_formatter --outDir google3",
+    "build:google3": "tsup --target es2015 --format iife --globalName pika_xml_formatter --outDir google3/generated --no-dts",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests"
   },
