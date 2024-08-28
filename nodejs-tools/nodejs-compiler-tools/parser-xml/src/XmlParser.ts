@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { not } from '@vighnesh153/utils';
+import { not } from '@vighnesh153/tools-platform-independent';
 import { nextToken, Token, XmlLexer, TokenType, TokenTypes } from '@vighnesh153/lexer-xml';
 import { ParserError } from './ParserError';
 import {
