@@ -6,7 +6,7 @@ export default defineConfig(() => ({
   },
   splitting: false,
   clean: true,
-  minify: true,
+  minify: false,
   dts: true,
   treeshake: true,
   format: ['esm'],

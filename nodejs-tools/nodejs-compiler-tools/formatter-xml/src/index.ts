@@ -43,11 +43,6 @@ export function format(rawXml: string, { indentation = 4, sortAttributes = true 
       };
     }
 
-    const [statement] = program.statements;
-    if (statement.astNodeType === 'XML_COMMENT_NODE') {
-      statement;
-    }
-
     return {
       type: 'success',
       formattedXml: formatXmlProgram({ program, indentation, sortAttributes }),

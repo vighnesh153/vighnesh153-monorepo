@@ -6,6 +6,9 @@
       "env": [],
       "outputs": ["dist/**", ".next/**"]
     },
+    "build:google3": {
+      "dependsOn": ["^build"]
+    },
     "test": {
       "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
       "outputs": [],
