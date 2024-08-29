@@ -1,9 +1,9 @@
-var pika_xml_formatter = (function (exports, assert2) {
+var pika_xml_formatter = (function (exports, assert) {
   'use strict';
 
   function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 
-  var assert2__default = /*#__PURE__*/_interopDefault(assert2);
+  var assert__default = /*#__PURE__*/_interopDefault(assert);
 
   var __defProp = Object.defineProperty;
   var __defProps = Object.defineProperties;
@@ -15,18 +15,18 @@ var pika_xml_formatter = (function (exports, assert2) {
     throw TypeError(msg);
   };
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b2) => {
-    for (var prop in b2 || (b2 = {}))
-      if (__hasOwnProp.call(b2, prop))
-        __defNormalProp(a, prop, b2[prop]);
+  var __spreadValues = (a, b) => {
+    for (var prop in b || (b = {}))
+      if (__hasOwnProp.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b2)) {
-        if (__propIsEnum.call(b2, prop))
-          __defNormalProp(a, prop, b2[prop]);
+      for (var prop of __getOwnPropSymbols(b)) {
+        if (__propIsEnum.call(b, prop))
+          __defNormalProp(a, prop, b[prop]);
       }
     return a;
   };
-  var __spreadProps = (a, b2) => __defProps(a, __getOwnPropDescs(b2));
+  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
   var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
@@ -41,18 +41,28 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
   });
 
-  // ../../node_modules/@vighnesh153/utils/dist/main.js
-  function u(t) {
-    return !t;
+  // ../../nodejs-packages/tools-platform-independent/dist/main.js
+  function not(value) {
+    return !value;
   }
-  var b = "0123456789";
-  var De = `${b}abcdefABCDEF`;
-  var k = "abcdefghijklmnopqrstuvwxyz";
-  var $ = k.toUpperCase();
-  var W = k + $;
-  function R(t, e) {
-    for (let r = 0; r < t; r++) e(r + 1);
+  var DIGITS = "0123456789";
+  var HEXADECIMAL_DIGITS = `${DIGITS}abcdefABCDEF`;
+  var LOWERCASE_ALPHABET = `abcdefghijklmnopqrstuvwxyz`;
+  var UPPERCASE_ALPHABET = LOWERCASE_ALPHABET.toUpperCase();
+  var ALPHABET = LOWERCASE_ALPHABET + UPPERCASE_ALPHABET;
+  function repeat(times, callback) {
+    for (let i = 0; i < times; i++) {
+      callback(i + 1);
+    }
   }
+  var LambdaFunctionNameList = ["initiateGoogleLogin", "initiateLogout", "googleAuthCallback"];
+  LambdaFunctionNameList.reduce(
+    (acc, curr) => {
+      acc[curr] = curr;
+      return acc;
+    },
+    {}
+  );
 
   // ../lexer-core/dist/main.js
   var LexerError = class _LexerError {
@@ -127,7 +137,7 @@ var pika_xml_formatter = (function (exports, assert2) {
       __privateSet(this, _peekIndex, Math.min(1 + __privateGet(this, _peekIndex), this.lexerInput.getSize()));
     }
     peekCharacter(futureOffset = 0) {
-      if (futureOffset < 0 || u(Number.isInteger(futureOffset))) {
+      if (futureOffset < 0 || not(Number.isInteger(futureOffset))) {
         throw new Error(`Expected future offset to be a non-negative integer, found '${futureOffset}'`);
       }
       const peekIndex = __privateGet(this, _peekIndex) + futureOffset;
@@ -190,7 +200,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
   }
   function readEscapeSequence(lexer) {
-    assert2__default.default.ok(
+    assert__default.default.ok(
       lexer.inputReader.currentCharacter === "\\",
       `You should not attempt to read an escaped sequence if it doesn't start with '\\'`
     );
@@ -238,15 +248,15 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
   }
   function parseUnicode(lexer) {
-    assert2__default.default.ok(
+    assert__default.default.ok(
       lexer.inputReader.currentCharacter === "u",
       `You should not try to parse a unicode sequence that doesn't begin with 'u'`
     );
     const unicodeCharacters = [];
-    R(4, () => {
+    repeat(4, () => {
       var _a7;
       const peek = (_a7 = lexer.inputReader.peekCharacter()) == null ? void 0 : _a7.toLowerCase();
-      if (De.includes(`${peek}`.toLowerCase())) {
+      if (HEXADECIMAL_DIGITS.includes(`${peek}`.toLowerCase())) {
         lexer.inputReader.readNextCharacter();
         unicodeCharacters.push(lexer.inputReader.currentCharacter);
       } else {
@@ -267,7 +277,7 @@ var pika_xml_formatter = (function (exports, assert2) {
   }
   var DOUBLE_QUOTE = '"';
   function readStringLiteral(lexer) {
-    assert2__default.default.ok(
+    assert__default.default.ok(
       lexer.inputReader.currentCharacter === DOUBLE_QUOTE,
       `You should not attempt to read a string literal if it doesn't start with '"'`
     );
@@ -297,7 +307,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     return stringLiteralBuilder.join("");
   }
   function readIdentifier(lexer) {
-    assert2__default.default.ok(
+    assert__default.default.ok(
       isAcceptableIdentifierCharacter(lexer.inputReader.currentCharacter),
       `You should not attempt to read an identifier which doesn't start with '_' or a letter`
     );
@@ -312,23 +322,23 @@ var pika_xml_formatter = (function (exports, assert2) {
     return identifierBuilder.join("");
   }
   function isAcceptableIdentifierStart(char) {
-    return W.includes(char) || char === "_";
+    return ALPHABET.includes(char) || char === "_";
   }
   function isAcceptableIdentifierCharacter(char) {
     if (char === null) {
       return false;
     }
-    return isAcceptableIdentifierStart(char) || b.includes(char) || char === "-";
+    return isAcceptableIdentifierStart(char) || DIGITS.includes(char) || char === "-";
   }
   function readComment(lexer) {
-    assert2__default.default.ok(
+    assert__default.default.ok(
       lexer.inputReader.currentCharacter === "<" && lexer.inputReader.peekCharacter() === "!",
       `Don't attempt to read a comment if string doesn't start with '<!'`
     );
     lexer.inputReader.readNextCharacter();
     lexer.inputReader.readNextCharacter();
     let isValidCommentStart = true;
-    R(2, () => {
+    repeat(2, () => {
       if (lexer.inputReader.currentCharacter !== "-") {
         lexer.addError(
           new LexerError({
@@ -344,7 +354,7 @@ var pika_xml_formatter = (function (exports, assert2) {
       }
       lexer.inputReader.readNextCharacter();
     });
-    if (u(isValidCommentStart)) {
+    if (not(isValidCommentStart)) {
       return null;
     }
     const commentLiteralBuilder = [];
@@ -629,7 +639,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
     parseProgram() {
       const program = new XmlProgram();
-      while (u(this.isCurrentToken(TokenTypes.EOF))) {
+      while (not(this.isCurrentToken(TokenTypes.EOF))) {
         const statement = this.parseStatement();
         if (statement === null) {
           break;
@@ -691,19 +701,19 @@ var pika_xml_formatter = (function (exports, assert2) {
       return null;
     }
     parseXmlPrologNode() {
-      assert2__default.default.ok(
+      assert__default.default.ok(
         this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
         `Shouldn't call parseXmlPrologNode when current token is not '<'`
       );
       this.nextToken();
-      assert2__default.default.ok(
+      assert__default.default.ok(
         this.isCurrentToken(TokenTypes.QUESTION_MARK),
         `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
       );
-      if (u(this.expectPeek(TokenTypes.IDENTIFIER))) {
+      if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
         return null;
       }
-      if (u(__privateGet(this, _currentToken).tokenLiteral === "xml")) {
+      if (not(__privateGet(this, _currentToken).tokenLiteral === "xml")) {
         this.addError(
           new ParserError({
             errorType: "UNEXPECTED_PROLOG_TAG",
@@ -725,7 +735,7 @@ var pika_xml_formatter = (function (exports, assert2) {
           return null;
         }
         if (this.isCurrentToken(TokenTypes.QUESTION_MARK)) {
-          if (u(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+          if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
             return null;
           }
           return xmlPrologNode;
@@ -739,7 +749,7 @@ var pika_xml_formatter = (function (exports, assert2) {
       }
     }
     parseXmlTagNode() {
-      assert2__default.default.ok(
+      assert__default.default.ok(
         this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
         `Shouldn't call parseXmlTagNode when current token is not '<'`
       );
@@ -770,7 +780,7 @@ var pika_xml_formatter = (function (exports, assert2) {
         this.nextToken();
       }
       if (this.isCurrentToken(TokenTypes.FORWARD_SLASH)) {
-        if (u(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+        if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
           return null;
         }
         return xmlTagNode;
@@ -797,7 +807,7 @@ var pika_xml_formatter = (function (exports, assert2) {
         this.nextToken();
       }
       this.nextToken();
-      if (u(this.expectPeek(TokenTypes.IDENTIFIER))) {
+      if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
         return null;
       }
       if (__privateGet(this, _currentToken).tokenLiteral !== xmlTagNode.tagIdentifier.tokenLiteral) {
@@ -813,10 +823,15 @@ var pika_xml_formatter = (function (exports, assert2) {
       return xmlTagNode;
     }
     parseAttribute() {
-      assert2__default.default.ok(
-        this.isCurrentToken(TokenTypes.IDENTIFIER),
-        `Shouldn't call parseAttribute when current token is not an identifier`
-      );
+      if (not(this.isCurrentToken(TokenTypes.IDENTIFIER))) {
+        this.addError(
+          new ParserError({
+            culpritToken: __privateGet(this, _currentToken),
+            errorType: "UNEXPECTED_TOKEN"
+          })
+        );
+        return null;
+      }
       const keys = [__privateGet(this, _currentToken)];
       while (true) {
         if (this.isPeekToken(TokenTypes.EOF)) {
@@ -831,29 +846,29 @@ var pika_xml_formatter = (function (exports, assert2) {
         if (this.isPeekToken(TokenTypes.EQUALS)) {
           break;
         }
-        if (u(this.expectPeek(TokenTypes.COLON))) {
+        if (not(this.expectPeek(TokenTypes.COLON))) {
           return null;
         }
-        if (u(this.expectPeek(TokenTypes.IDENTIFIER))) {
+        if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
           return null;
         }
         keys.push(__privateGet(this, _currentToken));
       }
       this.nextToken();
-      if (u(this.expectPeek(TokenTypes.STRING_LITERAL))) {
+      if (not(this.expectPeek(TokenTypes.STRING_LITERAL))) {
         return null;
       }
       return new XmlElementAttribute(keys, __privateGet(this, _currentToken));
     }
     parseXmlCommentNode() {
-      assert2__default.default.ok(
+      assert__default.default.ok(
         this.isCurrentToken(TokenTypes.COMMENT),
         `Shouldn't call parseXmlCommentNode when current token is not a comment token`
       );
       return new XmlCommentNode(__privateGet(this, _currentToken));
     }
     parseXmlTextNode() {
-      assert2__default.default.ok(
+      assert__default.default.ok(
         this.isCurrentToken(TokenTypes.TEXT_NODE),
         `Shouldn't call parseXmlTextNode when current token is not a text token`
       );
@@ -895,7 +910,7 @@ var pika_xml_formatter = (function (exports, assert2) {
         return;
       }
       sortedAttributes.push(...naiveSort(intermediateAttrs));
-      clonedAttributes = clonedAttributes.filter((attr) => u(intermediateAttrs.includes(attr)));
+      clonedAttributes = clonedAttributes.filter((attr) => not(intermediateAttrs.includes(attr)));
     };
     const xmlnsAndroidAttr = clonedAttributes.find(
       (attr) => attr.namespaces.length === 2 && attr.namespaces[0].tokenLiteral === "xmlns" && attr.namespaces[1].tokenLiteral === "android"
@@ -1093,4 +1108,4 @@ var pika_xml_formatter = (function (exports, assert2) {
 
   return exports;
 
-})({}, assert2);
+})({}, assert);
