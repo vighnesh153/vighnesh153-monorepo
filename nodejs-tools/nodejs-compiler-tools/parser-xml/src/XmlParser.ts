@@ -257,12 +257,17 @@ export class XmlParser {
   }
 
   private parseAttribute(): XmlElementAttribute | null {
-    assert.ok(
-      this.isCurrentToken(TokenTypes.IDENTIFIER),
-      `Shouldn't call parseAttribute when current token is not an identifier`
-    );
+    if (not(this.isCurrentToken(TokenTypes.IDENTIFIER))) {
+      this.addError(
+        new ParserError({
+          culpritToken: this.#currentToken,
+          errorType: 'UNEXPECTED_TOKEN',
+        })
+      );
+      return null;
+    }
 
-    const keys = [this.#currentToken];
+    const keys: Readonly<Token>[] = [this.#currentToken];
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
