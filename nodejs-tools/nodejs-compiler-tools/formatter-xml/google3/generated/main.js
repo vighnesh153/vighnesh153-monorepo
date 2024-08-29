@@ -819,7 +819,9 @@ var pika_xml_formatter = (function (exports, assert) {
         );
         return null;
       }
-      this.nextToken();
+      if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+        return null;
+      }
       return xmlTagNode;
     }
     parseAttribute() {

@@ -61,24 +61,6 @@ test('should parse tag with single simple attribute', () => {
   expect(program.toString(0)).toMatchInlineSnapshot(`"<manifest package="com.pokemon.pikachu" />"`);
 });
 
-test('should return errors if equals without identifier', () => {
-  const [parser, program] = parseProgram('< manifest ="com.pokemon.pikachu" / >');
-
-  expect(parser.errors.length).toBe(1);
-  expect(parser.errors[0].serialized()).toStrictEqual({
-    culpritToken: {
-      columnNumber: 12,
-      lineNumber: 1,
-      tokenLiteral: '=',
-      tokenType: {
-        value: '=',
-      },
-    },
-    errorType: 'UNEXPECTED_TOKEN',
-  });
-  expect(program.statements.length).toBe(0);
-});
-
 test('should parse tag with multiple simple attributes', () => {
   const [parser, program] = parseProgram('< manifest package= "com.pokemon.pikachu" attr2  =   "2.0" / >');
 
@@ -533,6 +515,42 @@ test(`should return error if start and close tag don't match`, () => {
       },
     },
     errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test('should return errors if equals without identifier', () => {
+  const [parser, program] = parseProgram('< manifest ="com.pokemon.pikachu" / >');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 12,
+      lineNumber: 1,
+      tokenLiteral: '=',
+      tokenType: {
+        value: '=',
+      },
+    },
+    errorType: 'UNEXPECTED_TOKEN',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test('should return errors if "<" instead of ">" in closing tag literal', () => {
+  const [parser, program] = parseProgram('< tag > </ tag <');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 16,
+      lineNumber: 1,
+      tokenLiteral: '<',
+      tokenType: {
+        value: '<',
+      },
+    },
+    errorType: 'UNEXPECTED_TOKEN',
   });
   expect(program.statements.length).toBe(0);
 });
