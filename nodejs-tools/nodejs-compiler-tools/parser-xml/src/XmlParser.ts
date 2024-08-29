@@ -251,7 +251,9 @@ export class XmlParser {
       return null;
     }
 
-    this.nextToken();
+    if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+      return null;
+    }
 
     return xmlTagNode;
   }
