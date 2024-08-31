@@ -1,38 +1,40 @@
 package dev.vighnesh153.xml.formatter.lexer
 
 import kotlin.Error
-import kotlin.test.Test
-import kotlin.test.expect
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LexerInputReaderTest {
     @Test
     fun readsEmptyString_withoutErrors() {
         val reader = LexerInputReader("")
 
-        expect(reader.currChar) { null }
+        assertEquals(null, reader.currChar)
     }
 
     @Test
     fun readsStringWithSingleChar_withoutErrors() {
         val reader = LexerInputReader("p")
 
-        expect(reader.currChar) { 'p' }
+        assertEquals('p', reader.currChar)
     }
 
     @Test
     fun updatesCurrChar_whenReadNextCharIsCalled() {
         val reader = LexerInputReader("pika")
 
-        expect(reader.currChar) { 'p' }
+        assertEquals('p', reader.currChar)
         reader.readNextChar()
-        expect(reader.currChar) { 'i' }
+        assertEquals('i', reader.currChar)
         reader.readNextChar()
-        expect(reader.currChar) { 'k' }
+        assertEquals('k', reader.currChar)
         reader.readNextChar()
-        expect(reader.currChar) { 'a' }
+        assertEquals('a', reader.currChar)
         repeat(10) {
             reader.readNextChar()
-            expect(reader.currChar) { null }
+            assertNull(reader.currChar)
         }
     }
 
@@ -40,14 +42,14 @@ class LexerInputReaderTest {
     fun updatesPeekChar_whenReadNextCharIsCalled() {
         val reader = LexerInputReader("pika")
 
-        expect(reader.peekChar()) { 'i' }
+        assertEquals('i', reader.peekChar())
         reader.readNextChar()
-        expect(reader.peekChar()) { 'k' }
+        assertEquals('k', reader.peekChar())
         reader.readNextChar()
-        expect(reader.peekChar()) { 'a' }
+        assertEquals('a', reader.peekChar())
         repeat(10) {
             reader.readNextChar()
-            expect(reader.peekChar()) { null }
+            assertNull(reader.peekChar())
         }
     }
 
@@ -55,24 +57,18 @@ class LexerInputReaderTest {
     fun peekChar_throwsError_whenFutureOffsetIsNegative() {
         val reader = LexerInputReader("pika")
 
-        try {
-            reader.peekChar(-1)
-            throw Error("reader.peekChar(-1) should have thrown error because futureOffset is negative")
-        } catch (e: Error) {
-            expect(e.message) {
-                "Expected future offset to be non-negative, found '-1'"
-            }
-        }
+        val ex = assertThrows<Error> { reader.peekChar(-1) }
+        assertEquals("Expected future offset to be non-negative, found '-1'", ex.message)
     }
 
     @Test
     fun peekChar_returnsCorrectChar_whenFutureOffsetIsProvided() {
         val reader = LexerInputReader("pika")
 
-        expect(reader.peekChar(1)) { 'k' }
-        expect(reader.peekChar(2)) { 'a' }
-        expect(reader.peekChar(3)) { null }
-        expect(reader.peekChar(4)) { null }
+        assertEquals('k', reader.peekChar(1))
+        assertEquals('a', reader.peekChar(2))
+        assertNull(reader.peekChar(3))
+        assertNull(reader.peekChar(4))
     }
 
     @Test
@@ -89,26 +85,26 @@ pikachu
         reader.readNextChar()
 
         // line 2
-        expect(reader.lineNumber) { 2 }
-        expect(reader.columnNumber) { 1 }
+        assertEquals(2, reader.lineNumber)
+        assertEquals(1, reader.columnNumber)
         reader.readNextChar()
-        expect(reader.lineNumber) { 2 }
-        expect(reader.columnNumber) { 2 }
+        assertEquals(2, reader.lineNumber)
+        assertEquals(2, reader.columnNumber)
 
         reader.readNextChar()
 
         // line 3
         repeat(7) {
             reader.readNextChar()
-            expect(reader.lineNumber) { 3 }
-            expect(reader.columnNumber) { it + 1 }
+            assertEquals(3, reader.lineNumber)
+            assertEquals(it + 1, reader.columnNumber)
         }
 
         reader.readNextChar()
         reader.readNextChar()
 
         // line 4
-        expect(reader.lineNumber) { 4 }
-        expect(reader.columnNumber) { 1 }
+        assertEquals(4, reader.lineNumber)
+        assertEquals(1, reader.columnNumber)
     }
 }
