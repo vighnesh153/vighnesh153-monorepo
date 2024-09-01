@@ -6,25 +6,26 @@ sealed interface LexerError {
 }
 
 data class IllegalCharacterLexerError(
-    val ch: Char,
+    val ch: Char?,
     override val lineNumber: Int,
     override val columnNumber: Int,
 ) : LexerError
 
 data class UnexpectedCharacterLexerError(
-    val ch: Char,
+    val expectedCh: Char?,
+    val actualCh: Char?,
     override val lineNumber: Int,
     override val columnNumber: Int,
 ) : LexerError
 
 data class InvalidEscapeCharacterLexerError(
+    val ch: Char?,
     override val lineNumber: Int,
     override val columnNumber: Int,
-    val ch: Char,
 ) : LexerError
 
 data class InvalidUnicodeCharacterLexerError(
-    val ch: Char,
+    val ch: Char?,
     override val lineNumber: Int,
     override val columnNumber: Int,
 ) : LexerError
