@@ -17,6 +17,8 @@ export function readComment(lexer: XmlLexer): string | null {
   // Move past "--"
   let isValidCommentStart = true;
   repeat(2, () => {
+    if (not(isValidCommentStart)) return;
+
     if (lexer.inputReader.currentCharacter !== '-') {
       lexer.addError(
         new LexerError({
@@ -29,6 +31,7 @@ export function readComment(lexer: XmlLexer): string | null {
         })
       );
       isValidCommentStart = false;
+      return;
     }
     lexer.inputReader.readNextCharacter();
   });
