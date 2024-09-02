@@ -231,17 +231,25 @@ test('should parse tag with children', () => {
   `);
 });
 
-test('should return error if incorrect token position', () => {
+test('should render naked text node', () => {
   const [parser, program] = parseProgram('manifest');
+
+  expect(parser.errors.length).toBe(0);
+  expect(program.statements.length).toBe(1);
+  expect(program.toString(0)).toMatchInlineSnapshot(`"manifest"`);
+});
+
+test('should return error if incorrect token position', () => {
+  const [parser, program] = parseProgram('?');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
     culpritToken: {
       columnNumber: 1,
       lineNumber: 1,
-      tokenLiteral: 'manifest',
+      tokenLiteral: '?',
       tokenType: {
-        value: 'IDENTIFIER',
+        value: '?',
       },
     },
     errorType: 'UNEXPECTED_TOKEN',
