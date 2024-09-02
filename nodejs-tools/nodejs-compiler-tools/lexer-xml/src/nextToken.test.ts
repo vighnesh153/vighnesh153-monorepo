@@ -316,8 +316,12 @@ test('parse comment', () => {
 test('should report error if comment start is invalid', () => {
   const lexer = createLexer(`<!<<`);
 
-  // attempting to read next token (comment literal) should report an error
-  nextToken(lexer);
+  expect(nextToken(lexer)).toStrictEqual({
+    lineNumber: 1,
+    columnNumber: 3,
+    tokenLiteral: '<',
+    tokenType: TokenTypes.ILLEGAL,
+  });
   expect(lexer.errors).toStrictEqual([
     new LexerError({
       errorCategory: {
@@ -326,14 +330,6 @@ test('should report error if comment start is invalid', () => {
       },
       lineNumber: 1,
       columnNumber: 3,
-    }),
-    new LexerError({
-      errorCategory: {
-        type: 'UNEXPECTED_COMMENT_CHARACTER',
-        ch: '<',
-      },
-      lineNumber: 1,
-      columnNumber: 4,
     }),
   ]);
 });
@@ -443,11 +439,28 @@ test('should report error if escape sequence is unclosed', () => {
   ]);
 });
 
-test('should read naked identifier', () => {
+test('should read tag name', () => {
+  const lexer = createLexer(`<my-tag`);
+
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenLiteral: '<',
+    lineNumber: 1,
+    columnNumber: 1,
+  });
+  expect(nextToken(lexer)).toStrictEqual({
+    tokenType: TokenTypes.IDENTIFIER,
+    tokenLiteral: 'my-tag',
+    lineNumber: 1,
+    columnNumber: 2,
+  });
+});
+
+test('should read naked text node', () => {
   const lexer = createLexer(`my-tag`);
 
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: TokenTypes.TEXT_NODE,
     tokenLiteral: 'my-tag',
     lineNumber: 1,
     columnNumber: 1,

@@ -30,7 +30,7 @@ export function nextToken(lexer: XmlLexer): Token {
         if (commentLiteral !== null) {
           t = createToken(lexer, TokenTypes.COMMENT, commentLiteral, lineNumber, columnNumber);
         } else {
-          t = createToken(lexer, TokenTypes.ILLEGAL);
+          t = createToken(lexer, TokenTypes.ILLEGAL, `${lexer.inputReader.currentCharacter}`);
         }
       } else {
         t = createToken(lexer, TokenTypes.LEFT_ANGLE_BRACKET);
@@ -60,7 +60,7 @@ export function nextToken(lexer: XmlLexer): Token {
       break;
     }
     default: {
-      if (lexer.currentToken?.tokenType === TokenTypes.RIGHT_ANGLE_BRACKET) {
+      if (lexer.currentToken == null || lexer.currentToken.tokenType === TokenTypes.RIGHT_ANGLE_BRACKET) {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const textNode = readTextNode(lexer);
         t = createToken(lexer, TokenTypes.TEXT_NODE, textNode, lineNumber, columnNumber);
