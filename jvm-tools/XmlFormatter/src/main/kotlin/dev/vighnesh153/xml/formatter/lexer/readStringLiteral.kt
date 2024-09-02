@@ -11,7 +11,7 @@ internal fun XmlLexer.readStringLiteral(): String {
     val stringLiteralBuilder = StringBuilder()
     while (inputReader.currChar.isNotEOF() && inputReader.currChar != DOUBLE_QUOTE) {
         if (inputReader.currChar == BACKSLASH_CHARACTER) {
-            stringLiteralBuilder.append(readEscapeSequence())
+            readEscapeSequence()?.let { stringLiteralBuilder.append(it) }
         } else {
             stringLiteralBuilder.append(inputReader.currChar)
         }
