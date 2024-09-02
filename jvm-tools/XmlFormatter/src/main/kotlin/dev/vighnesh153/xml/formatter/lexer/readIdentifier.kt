@@ -19,6 +19,8 @@ internal fun XmlLexer.readIdentifier(): String {
     return identifierBuilder.toString()
 }
 
-private fun Char?.isAcceptableIdentifierStart(): Boolean = this?.isJavaIdentifierStart() == true
+internal fun Char?.isAcceptableIdentifierStart(): Boolean =
+    this?.isJavaIdentifierStart() == true
 
-private fun Char?.isAcceptableIdentifierPart(): Boolean = this?.isJavaIdentifierPart() == true
+private fun Char?.isAcceptableIdentifierPart(): Boolean =
+    this?.isJavaIdentifierPart() == true || this == '-'

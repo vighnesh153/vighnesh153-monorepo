@@ -5,7 +5,7 @@ class XmlLexer(internal val inputReader: LexerInputReader) {
     val errors: List<LexerError>
         get() = mutableErrors.toList()
 
-    internal val currentToken: Token? = null
+    internal var currentToken: Token? = null
 
     fun addError(error: LexerError): Unit {
         mutableErrors.add(error)
