@@ -11,7 +11,7 @@ on:
       - "jvm-tools/**"
 
 jobs:
-  deno-ci:
+  jvm-ci:
     runs-on: ubuntu-latest
 
     defaults:
