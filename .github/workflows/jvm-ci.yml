@@ -26,7 +26,7 @@ jobs:
           distribution: "adopt-openj9"
           java-version: "21"
 
-      - run: for dir in */; do
-          cd $dir;
+      - run: export PIKA_PATH="$(pwd)"; for dir in */; do
+          cd $PIKA_PATH/$dir;
           ./gradlew test;
           done
