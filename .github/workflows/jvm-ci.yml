@@ -1,0 +1,27 @@
+name: jvm-ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "jvm-tools/**"
+  pull_request:
+    paths:
+      - "jvm-tools/**"
+
+jobs:
+  deno-ci:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./jvm-tools
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: for dir in */; do
+          cd $dir;
+          ./gradlew test;
+          done
