@@ -1,5 +1,4 @@
-import assert from 'assert';
-
+import { assert } from '@vighnesh153/tools-platform-independent';
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 import { readEscapeSequence } from './readEscapeSequence';
@@ -7,7 +6,7 @@ import { readEscapeSequence } from './readEscapeSequence';
 const DOUBLE_QUOTE = '"';
 
 export function readStringLiteral(lexer: XmlLexer): string {
-  assert.ok(
+  assert(
     lexer.inputReader.currentCharacter === DOUBLE_QUOTE,
     `You should not attempt to read a string literal if it doesn't start with '"'`
   );
