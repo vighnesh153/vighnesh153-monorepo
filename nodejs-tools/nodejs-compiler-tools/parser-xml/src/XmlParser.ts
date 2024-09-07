@@ -1,5 +1,4 @@
-import assert from 'assert';
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not, assert } from '@vighnesh153/tools-platform-independent';
 import { nextToken, Token, XmlLexer, TokenType, TokenTypes } from '@vighnesh153/lexer-xml';
 import { ParserError } from './ParserError';
 import {
@@ -107,7 +106,7 @@ export class XmlParser {
   }
 
   private parseXmlPrologNode(): XmlPrologNode | null {
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
       `Shouldn't call parseXmlPrologNode when current token is not '<'`
     );
@@ -115,7 +114,7 @@ export class XmlParser {
     // move past "<"
     this.nextToken();
 
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.QUESTION_MARK),
       `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
     );
@@ -167,14 +166,14 @@ export class XmlParser {
   }
 
   private parseXmlTagNode(): XmlTagNode | null {
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
       `Shouldn't call parseXmlTagNode when current token is not '<'`
     );
 
     this.nextToken();
 
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.IDENTIFIER),
       `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
     );
@@ -347,7 +346,7 @@ export class XmlParser {
   }
 
   private parseXmlCommentNode(): XmlCommentNode {
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.COMMENT),
       `Shouldn't call parseXmlCommentNode when current token is not a comment token`
     );
@@ -356,7 +355,7 @@ export class XmlParser {
   }
 
   private parseXmlTextNode(): XmlTextNode {
-    assert.ok(
+    assert(
       this.isCurrentToken(TokenTypes.TEXT_NODE),
       `Shouldn't call parseXmlTextNode when current token is not a text token`
     );

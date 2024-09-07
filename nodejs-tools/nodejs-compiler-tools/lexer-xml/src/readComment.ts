@@ -1,11 +1,9 @@
-import assert from 'assert';
-
-import { not, repeat } from '@vighnesh153/tools-platform-independent';
+import { not, repeat, assert } from '@vighnesh153/tools-platform-independent';
 import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
 import { XmlLexer } from './Lexer';
 
 export function readComment(lexer: XmlLexer): string | null {
-  assert.ok(
+  assert(
     lexer.inputReader.currentCharacter === '<' && lexer.inputReader.peekCharacter() === '!',
     `Don't attempt to read a comment if string doesn't start with '<!'`
   );

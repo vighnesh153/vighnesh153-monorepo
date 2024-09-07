@@ -1,9 +1,5 @@
-var pika_xml_formatter = (function (exports, assert2) {
+var pika_xml_formatter = (function (exports) {
   'use strict';
-
-  function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
-
-  var assert2__default = /*#__PURE__*/_interopDefault(assert2);
 
   var __defProp = Object.defineProperty;
   var __defProps = Object.defineProperties;
@@ -44,6 +40,11 @@ var pika_xml_formatter = (function (exports, assert2) {
   // ../../nodejs-packages/tools-platform-independent/dist/main.js
   function not(value) {
     return !value;
+  }
+  function assert(condition, message = "Assertion failed") {
+    if (not(condition)) {
+      throw new Error(message);
+    }
   }
   var DIGITS = "0123456789";
   var HEXADECIMAL_DIGITS = `${DIGITS}abcdefABCDEF`;
@@ -147,6 +148,8 @@ var pika_xml_formatter = (function (exports, assert2) {
       return this.lexerInput.getCharacterAt(peekIndex);
     }
   }, _currentIndex = new WeakMap(), _peekIndex = new WeakMap(), _previousCharacter = new WeakMap(), _currentCharacter = new WeakMap(), _lineNumber = new WeakMap(), _columnNumber = new WeakMap(), _a);
+
+  // ../lexer-xml/dist/main.js
   var _errors, _a2;
   var XmlLexer = (_a2 = class {
     constructor(inputReader) {
@@ -200,7 +203,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
   }
   function readEscapeSequence(lexer) {
-    assert2__default.default.ok(
+    assert(
       lexer.inputReader.currentCharacter === "\\",
       `You should not attempt to read an escaped sequence if it doesn't start with '\\'`
     );
@@ -248,7 +251,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     }
   }
   function parseUnicode(lexer) {
-    assert2__default.default.ok(
+    assert(
       lexer.inputReader.currentCharacter === "u",
       `You should not try to parse a unicode sequence that doesn't begin with 'u'`
     );
@@ -277,7 +280,7 @@ var pika_xml_formatter = (function (exports, assert2) {
   }
   var DOUBLE_QUOTE = '"';
   function readStringLiteral(lexer) {
-    assert2__default.default.ok(
+    assert(
       lexer.inputReader.currentCharacter === DOUBLE_QUOTE,
       `You should not attempt to read a string literal if it doesn't start with '"'`
     );
@@ -307,7 +310,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     return stringLiteralBuilder.join("");
   }
   function readIdentifier(lexer) {
-    assert2__default.default.ok(
+    assert(
       isAcceptableIdentifierCharacter(lexer.inputReader.currentCharacter),
       `You should not attempt to read an identifier which doesn't start with '_' or a letter`
     );
@@ -331,7 +334,7 @@ var pika_xml_formatter = (function (exports, assert2) {
     return isAcceptableIdentifierStart(char) || DIGITS.includes(char) || char === "-";
   }
   function readComment(lexer) {
-    assert2__default.default.ok(
+    assert(
       lexer.inputReader.currentCharacter === "<" && lexer.inputReader.peekCharacter() === "!",
       `Don't attempt to read a comment if string doesn't start with '<!'`
     );
@@ -485,6 +488,8 @@ var pika_xml_formatter = (function (exports, assert2) {
       columnNumber
     };
   }
+
+  // ../parser-xml/dist/main.js
   var ParserError = class _ParserError {
     constructor(props) {
       this.props = props;
@@ -712,12 +717,12 @@ var pika_xml_formatter = (function (exports, assert2) {
       return null;
     }
     parseXmlPrologNode() {
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
         `Shouldn't call parseXmlPrologNode when current token is not '<'`
       );
       this.nextToken();
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.QUESTION_MARK),
         `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
       );
@@ -760,12 +765,12 @@ var pika_xml_formatter = (function (exports, assert2) {
       }
     }
     parseXmlTagNode() {
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
         `Shouldn't call parseXmlTagNode when current token is not '<'`
       );
       this.nextToken();
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.IDENTIFIER),
         `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
       );
@@ -903,14 +908,14 @@ var pika_xml_formatter = (function (exports, assert2) {
       return new XmlElementAttribute(keys, __privateGet(this, _currentToken));
     }
     parseXmlCommentNode() {
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.COMMENT),
         `Shouldn't call parseXmlCommentNode when current token is not a comment token`
       );
       return new XmlCommentNode(__privateGet(this, _currentToken));
     }
     parseXmlTextNode() {
-      assert2__default.default.ok(
+      assert(
         this.isCurrentToken(TokenTypes.TEXT_NODE),
         `Shouldn't call parseXmlTextNode when current token is not a text token`
       );
@@ -1151,4 +1156,4 @@ var pika_xml_formatter = (function (exports, assert2) {
 
   return exports;
 
-})({}, assert2);
+})({});
