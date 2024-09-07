@@ -231,6 +231,16 @@ test('should parse tag with children', () => {
   `);
 });
 
+test('should be able to read tags with namespaces', () => {
+  const [parser, program] = parseProgram(
+    '< namespace1 : namespace2 : namespace3 > </ namespace1 : namespace2 : namespace3>'
+  );
+
+  expect(parser.errors.length).toBe(0);
+  expect(program.statements.length).toBe(1);
+  expect(program.toString(0)).toMatchInlineSnapshot(`"<namespace1:namespace2:namespace3 />"`);
+});
+
 test('should render naked text node', () => {
   const [parser, program] = parseProgram('manifest');
 
@@ -556,6 +566,78 @@ test('should return errors if "<" instead of ">" in closing tag literal', () => 
       tokenLiteral: '<',
       tokenType: {
         value: '<',
+      },
+    },
+    errorType: 'UNEXPECTED_TOKEN',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test('should return errors if nameless tag', () => {
+  const [parser, program] = parseProgram('< >');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 3,
+      lineNumber: 1,
+      tokenLiteral: '>',
+      tokenType: {
+        value: '>',
+      },
+    },
+    errorType: 'UNEXPECTED_TOKEN',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test('should return error when unexpected token after ":" in tag name', () => {
+  const [parser, program] = parseProgram('< ns1 : ns2 :  /> ');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 16,
+      lineNumber: 1,
+      tokenLiteral: '/',
+      tokenType: {
+        value: '/',
+      },
+    },
+    errorType: 'UNEXPECTED_TOKEN',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test(`should return error if start and end tag names don't match`, () => {
+  const [parser, program] = parseProgram('< ns1 : ns2  > </ ns3 :  ns4> ');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 19,
+      lineNumber: 1,
+      tokenLiteral: 'ns3:ns4',
+      tokenType: {
+        value: 'IDENTIFIER',
+      },
+    },
+    errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
+  });
+  expect(program.statements.length).toBe(0);
+});
+
+test('should return error when unexpected token after ":" in in closing tag name', () => {
+  const [parser, program] = parseProgram('< ns1 : ns2  > </ ns1 : ns2: >');
+
+  expect(parser.errors.length).toBe(1);
+  expect(parser.errors[0].serialized()).toStrictEqual({
+    culpritToken: {
+      columnNumber: 30,
+      lineNumber: 1,
+      tokenLiteral: '>',
+      tokenType: {
+        value: '>',
       },
     },
     errorType: 'UNEXPECTED_TOKEN',

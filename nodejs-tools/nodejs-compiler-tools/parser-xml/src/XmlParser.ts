@@ -83,6 +83,13 @@ export class XmlParser {
       if (this.isPeekToken(TokenTypes.IDENTIFIER)) {
         return this.parseXmlTagNode();
       }
+      this.addError(
+        new ParserError({
+          errorType: 'UNEXPECTED_TOKEN',
+          culpritToken: this.#peekToken,
+        })
+      );
+      return null;
     }
     if (this.isCurrentToken(TokenTypes.COMMENT)) {
       return this.parseXmlCommentNode();
@@ -117,7 +124,7 @@ export class XmlParser {
       return null;
     }
 
-    if (not(this.#currentToken.tokenLiteral === 'xml')) {
+    if (this.#currentToken.tokenLiteral !== 'xml') {
       this.addError(
         new ParserError({
           errorType: 'UNEXPECTED_PROLOG_TAG',
@@ -165,12 +172,24 @@ export class XmlParser {
       `Shouldn't call parseXmlTagNode when current token is not '<'`
     );
 
-    // move past "<"
     this.nextToken();
 
-    const xmlTagNode = new XmlTagNode(this.#currentToken);
+    assert.ok(
+      this.isCurrentToken(TokenTypes.IDENTIFIER),
+      `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
+    );
 
+    const xmlTagNode = new XmlTagNode();
+    xmlTagNode.addNamespace(this.#currentToken);
     this.nextToken();
+
+    while (this.isCurrentToken(TokenTypes.COLON)) {
+      if (!this.expectPeek(TokenTypes.IDENTIFIER)) {
+        return null;
+      }
+      xmlTagNode.addNamespace(this.#currentToken);
+      this.nextToken();
+    }
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -241,17 +260,40 @@ export class XmlParser {
       return null;
     }
 
-    if (this.#currentToken.tokenLiteral !== xmlTagNode.tagIdentifier.tokenLiteral) {
+    const closingTag = [this.#currentToken];
+    this.nextToken();
+
+    while (this.isCurrentToken(TokenTypes.COLON)) {
+      if (!this.expectPeek(TokenTypes.IDENTIFIER)) {
+        return null;
+      }
+      closingTag.push(this.#currentToken);
+      this.nextToken();
+    }
+
+    if (
+      closingTag.map((part) => part.tokenLiteral).join(':') !==
+      xmlTagNode.namespaces.map((part) => part.tokenLiteral).join(':')
+    ) {
       this.addError(
         new ParserError({
-          culpritToken: this.#currentToken,
+          culpritToken: {
+            ...closingTag[0],
+            tokenLiteral: closingTag.map((part) => part.tokenLiteral).join(':'),
+          },
           errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
         })
       );
       return null;
     }
 
-    if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+    if (not(this.isCurrentToken(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+      this.addError(
+        new ParserError({
+          culpritToken: this.#currentToken,
+          errorType: 'UNEXPECTED_TOKEN',
+        })
+      );
       return null;
     }
 

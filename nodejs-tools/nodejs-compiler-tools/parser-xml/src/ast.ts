@@ -69,13 +69,12 @@ export class XmlPrologNode implements XmlExpression {
 export class XmlTagNode implements XmlExpression {
   readonly astNodeType: AstNodeType = 'XML_TAG_NODE';
 
-  #tagIdentifier: Token;
-
+  #namespaces: Token[] = [];
   #attributes: XmlElementAttribute[] = [];
   #children: XmlExpression[] = [];
 
-  get tagIdentifier(): Token {
-    return this.#tagIdentifier;
+  get namespaces(): readonly Token[] {
+    return [...this.#namespaces];
   }
 
   get attributes(): readonly XmlElementAttribute[] {
@@ -86,8 +85,8 @@ export class XmlTagNode implements XmlExpression {
     return [...this.#children];
   }
 
-  constructor(tagIdentifier: Token) {
-    this.#tagIdentifier = tagIdentifier;
+  addNamespace(ns: Token): void {
+    this.#namespaces.push(ns);
   }
 
   addAttribute(attribute: XmlElementAttribute): void {
@@ -99,11 +98,12 @@ export class XmlTagNode implements XmlExpression {
   }
 
   toString(indentation: number = 0): string {
-    const { tagIdentifier, attributes, children } = this;
+    const { namespaces, attributes, children } = this;
+    const tag = namespaces.map((ns) => ns.tokenLiteral).join(':');
 
     const stringBuilder: string[] = [];
 
-    stringBuilder.push(`${buildIndentationSpace(indentation)}<${tagIdentifier.tokenLiteral}`);
+    stringBuilder.push(`${buildIndentationSpace(indentation)}<${tag}`);
     if (attributes.length === 1) {
       const serializedAttrs = attributes.map((attribute) => attribute.toString()).join(' ');
       stringBuilder[stringBuilder.length - 1] += ' ' + serializedAttrs;
@@ -121,7 +121,7 @@ export class XmlTagNode implements XmlExpression {
 
     // if only a single text node child
     if (children.length === 1 && children[0].astNodeType === 'XML_TEXT_NODE') {
-      return stringBuilder.join('\n') + children[0].toString(0) + `</${tagIdentifier.tokenLiteral}>`;
+      return stringBuilder.join('\n') + children[0].toString(0) + `</${tag}>`;
     }
 
     for (const child of children) {
@@ -129,7 +129,7 @@ export class XmlTagNode implements XmlExpression {
     }
 
     if (children.length > 0) {
-      stringBuilder.push(`${buildIndentationSpace(indentation)}</${tagIdentifier.tokenLiteral}>`);
+      stringBuilder.push(`${buildIndentationSpace(indentation)}</${tag}>`);
     }
 
     return stringBuilder.join('\n');

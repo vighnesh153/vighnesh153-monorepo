@@ -18,12 +18,14 @@ export function formatXmlTagNode({
   indentation,
   sortAttributes: shouldSortAttributes,
 }: FormatXmlTagNodeConfig): string {
-  const { tagIdentifier, attributes, children } = xmlTagNode;
+  const { namespaces, attributes, children } = xmlTagNode;
+
+  const tagName = namespaces.map((ns) => ns.tokenLiteral).join(':');
 
   const stringBuilder: string[] = [];
 
   // push: <tag-name
-  stringBuilder.push(`${buildIndentationSpace({ indentationLevel, indentation })}<${tagIdentifier.tokenLiteral}`);
+  stringBuilder.push(`${buildIndentationSpace({ indentationLevel, indentation })}<${tagName}`);
 
   // push attributes
   if (attributes.length === 1) {
@@ -50,7 +52,7 @@ export function formatXmlTagNode({
       return (
         stringBuilder.join('\n') +
         formatTextNode({ textNode: children[0] as XmlTextNode, indentation, indentationLevel: 0 }) +
-        `</${tagIdentifier.tokenLiteral}>`
+        `</${tagName}>`
       );
     }
 
@@ -67,7 +69,7 @@ export function formatXmlTagNode({
     }
 
     // push closing tag
-    stringBuilder.push(`${buildIndentationSpace({ indentationLevel, indentation })}</${tagIdentifier.tokenLiteral}>`);
+    stringBuilder.push(`${buildIndentationSpace({ indentationLevel, indentation })}</${tagName}>`);
   }
 
   return stringBuilder.join('\n');
