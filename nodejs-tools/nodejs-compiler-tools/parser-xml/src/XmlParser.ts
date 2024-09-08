@@ -225,6 +225,11 @@ export class XmlParser {
       return xmlTagNode;
     }
 
+    assert(
+      this.isCurrentToken(TokenTypes.RIGHT_ANGLE_BRACKET),
+      `Expected ">" found ${this.#currentToken.tokenLiteral}`
+    );
+
     // move past ">"
     this.nextToken();
 
@@ -253,32 +258,34 @@ export class XmlParser {
       this.nextToken();
     }
 
+    assert(this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET), `Expected "<" found ${this.#currentToken.tokenLiteral}`);
+
+    // Move past "<"
     this.nextToken();
 
     if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
       return null;
     }
 
-    const closingTag = [this.#currentToken];
+    const closingTagNamespaces = [this.#currentToken];
     this.nextToken();
 
     while (this.isCurrentToken(TokenTypes.COLON)) {
       if (!this.expectPeek(TokenTypes.IDENTIFIER)) {
         return null;
       }
-      closingTag.push(this.#currentToken);
+      closingTagNamespaces.push(this.#currentToken);
       this.nextToken();
     }
 
-    if (
-      closingTag.map((part) => part.tokenLiteral).join(':') !==
-      xmlTagNode.namespaces.map((part) => part.tokenLiteral).join(':')
-    ) {
+    const openingTagName = xmlTagNode.namespaces.map((part) => part.tokenLiteral).join(':');
+    const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral).join(':');
+    if (openingTagName !== closingTagName) {
       this.addError(
         new ParserError({
           culpritToken: {
-            ...closingTag[0],
-            tokenLiteral: closingTag.map((part) => part.tokenLiteral).join(':'),
+            ...closingTagNamespaces[0],
+            tokenLiteral: closingTagName,
           },
           errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
         })
@@ -310,7 +317,7 @@ export class XmlParser {
       return null;
     }
 
-    const keys: Readonly<Token>[] = [this.#currentToken];
+    const namespaces: Readonly<Token>[] = [this.#currentToken];
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -326,14 +333,17 @@ export class XmlParser {
       if (this.isPeekToken(TokenTypes.EQUALS)) {
         break;
       }
+
       if (not(this.expectPeek(TokenTypes.COLON))) {
         return null;
       }
       if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
         return null;
       }
-      keys.push(this.#currentToken);
+      namespaces.push(this.#currentToken);
     }
+
+    assert(this.isPeekToken(TokenTypes.EQUALS), `Expected "=" found ${this.#peekToken.tokenLiteral}`);
 
     // we know next token is equals. move to that.
     this.nextToken();
@@ -342,7 +352,7 @@ export class XmlParser {
       return null;
     }
 
-    return new XmlElementAttribute(keys, this.#currentToken);
+    return new XmlElementAttribute(namespaces, this.#currentToken);
   }
 
   private parseXmlCommentNode(): XmlCommentNode {
