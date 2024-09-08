@@ -96,41 +96,22 @@ test('should parse tag with colon separated attributes', () => {
   `);
 });
 
-test('should parse tag with text nodes and properties', () => {
-  const [parser, program] = parseProgram(`
-    <    pokemon >
-      <name
-    >
-      Pikachu<
-    /
-    
-    name
->
-      <
-types    comma-separated   =  "true"    >    
-      electric, god<  /
-      types>
-      <
-      desc
-      >
-        
-  Best pokemon ever!!!
-      
-                      </
-                  desc    ><
-                      /pokemon
-                      >
-    `);
+test('should be able to read tags with namespaces', () => {
+  const [parser, program] = parseProgram(
+    '< namespace1 : namespace2 : namespace3 > </ namespace1 : namespace2 : namespace3>'
+  );
 
-  expect(parser.errors).toStrictEqual([]);
+  expect(parser.errors.length).toBe(0);
   expect(program.statements.length).toBe(1);
-  expect(program.toString(0)).toMatchInlineSnapshot(`
-    "<pokemon>
-        <name>Pikachu</name>
-        <types comma-separated="true">electric, god</types>
-        <desc>Best pokemon ever!!!</desc>
-    </pokemon>"
-  `);
+  expect(program.toString(0)).toMatchInlineSnapshot(`"<namespace1:namespace2:namespace3 />"`);
+});
+
+test('should parse naked text node', () => {
+  const [parser, program] = parseProgram('pikachu');
+
+  expect(parser.errors.length).toBe(0);
+  expect(program.statements.length).toBe(1);
+  expect(program.toString(0)).toMatchInlineSnapshot(`"pikachu"`);
 });
 
 test('should parse tag with children', () => {
@@ -231,22 +212,41 @@ test('should parse tag with children', () => {
   `);
 });
 
-test('should be able to read tags with namespaces', () => {
-  const [parser, program] = parseProgram(
-    '< namespace1 : namespace2 : namespace3 > </ namespace1 : namespace2 : namespace3>'
-  );
+test('should parse tag with text node children and attributes', () => {
+  const [parser, program] = parseProgram(`
+    <    pokemon >
+      <name
+    >
+      Pikachu<
+    /
+    
+    name
+>
+      <
+types    comma-separated   =  "true"    >    
+      electric, god<  /
+      types>
+      <
+      desc
+      >
+        
+  Best pokemon ever!!!
+      
+                      </
+                  desc    ><
+                      /pokemon
+                      >
+    `);
 
-  expect(parser.errors.length).toBe(0);
+  expect(parser.errors).toStrictEqual([]);
   expect(program.statements.length).toBe(1);
-  expect(program.toString(0)).toMatchInlineSnapshot(`"<namespace1:namespace2:namespace3 />"`);
-});
-
-test('should render naked text node', () => {
-  const [parser, program] = parseProgram('manifest');
-
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(program.toString(0)).toMatchInlineSnapshot(`"manifest"`);
+  expect(program.toString(0)).toMatchInlineSnapshot(`
+    "<pokemon>
+        <name>Pikachu</name>
+        <types comma-separated="true">electric, god</types>
+        <desc>Best pokemon ever!!!</desc>
+    </pokemon>"
+  `);
 });
 
 test('should return error if incorrect token position', () => {
@@ -286,12 +286,12 @@ test('should return error if EOF while reading attribute', () => {
 });
 
 test('should return error if identifier token after identifier token instead of colon while parsing attribute', () => {
-  const [parser, program] = parseProgram('< manifest fruit fruit=orange / >');
+  const [parser, program] = parseProgram('< manifest pokemon fruit="orange" / >');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
     culpritToken: {
-      columnNumber: 18,
+      columnNumber: 20,
       lineNumber: 1,
       tokenLiteral: 'fruit',
       tokenType: {
@@ -304,7 +304,7 @@ test('should return error if identifier token after identifier token instead of 
 });
 
 test('should return error if equals token after colon token instead of identifier while parsing attribute', () => {
-  const [parser, program] = parseProgram('< manifest fruit:=orange / >');
+  const [parser, program] = parseProgram('< manifest fruit:="orange" / >');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
@@ -322,14 +322,14 @@ test('should return error if equals token after colon token instead of identifie
 });
 
 test('should return error if identifier token after equals while parsing attribute', () => {
-  const [parser, program] = parseProgram('< manifest fruit= fruit=orange / >');
+  const [parser, program] = parseProgram('< manifest fruit= orange / >');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
     culpritToken: {
       columnNumber: 19,
       lineNumber: 1,
-      tokenLiteral: 'fruit',
+      tokenLiteral: 'orange',
       tokenType: {
         value: 'IDENTIFIER',
       },
@@ -340,14 +340,14 @@ test('should return error if identifier token after equals while parsing attribu
 });
 
 test('should return error if identifier token after equals while parsing attribute in xml prolog', () => {
-  const [parser, program] = parseProgram('<? xml fruit= fruit=orange ?>');
+  const [parser, program] = parseProgram('<? xml fruit= orange ?>');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
     culpritToken: {
       columnNumber: 15,
       lineNumber: 1,
-      tokenLiteral: 'fruit',
+      tokenLiteral: 'orange',
       tokenType: {
         value: 'IDENTIFIER',
       },
@@ -484,7 +484,7 @@ test('should return error if EOF while parsing children of xml tag', () => {
 });
 
 test('should return error if error while parsing children of xml tag', () => {
-  const [parser, program] = parseProgram('< manifest > <child-tag /<');
+  const [parser, program] = parseProgram('< manifest > <child-tag /< </manifest>');
 
   expect(parser.errors.length).toBe(1);
   expect(parser.errors[0].serialized()).toStrictEqual({
