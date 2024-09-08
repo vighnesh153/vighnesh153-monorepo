@@ -47,7 +47,7 @@ export function formatXmlTagNode({
     // push tag opening's end marker
     stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + '>';
 
-    // if only a text node as child, format it as
+    // if only a text node as child, format it on same line
     if (children.length === 1 && children[0].astNodeType === 'XML_TEXT_NODE') {
       return (
         stringBuilder.join('\n') +
