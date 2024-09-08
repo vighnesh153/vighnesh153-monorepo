@@ -24,7 +24,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = true
+                shouldSortAttributes = true
             )
         )
     }
@@ -48,7 +48,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = true
+                shouldSortAttributes = true
             )
         )
     }
@@ -73,7 +73,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = true
+                shouldSortAttributes = true
             )
         )
     }
@@ -107,7 +107,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = true
+                shouldSortAttributes = true
             )
         )
     }
@@ -182,7 +182,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = true
+                shouldSortAttributes = true
             )
         )
     }
@@ -216,7 +216,7 @@ class FormatXmlTagNodeTest {
             (program.statements.first() as XmlTagNode).format(
                 indentationLevel = 0,
                 indentation = 4,
-                sortAttributes = false
+                shouldSortAttributes = false
             )
         )
     }

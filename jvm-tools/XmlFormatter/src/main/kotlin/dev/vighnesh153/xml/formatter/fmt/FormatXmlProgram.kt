@@ -6,7 +6,8 @@ internal fun XmlProgram.format(
     indentation: Int,
     sortAttributes: Boolean,
 ): String = statements.joinToString("\n") {
-    it.format(
+    formatXmlExpression(
+        expr = it,
         indentationLevel = 0,
         indentation = indentation,
         sortAttributes = sortAttributes

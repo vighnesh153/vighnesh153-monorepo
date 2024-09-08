@@ -6,31 +6,32 @@ import dev.vighnesh153.xml.formatter.ast.XmlPrologNode
 import dev.vighnesh153.xml.formatter.ast.XmlTagNode
 import dev.vighnesh153.xml.formatter.ast.XmlTextNode
 
-internal fun XmlExpression.format(
+internal fun formatXmlExpression(
+    expr: XmlExpression,
     indentationLevel: Int,
     indentation: Int,
     sortAttributes: Boolean,
-): String = when (this) {
-    is XmlPrologNode -> this.format(
+): String = when (expr) {
+    is XmlPrologNode -> expr.format(
         indentationLevel = indentationLevel,
         indentation = indentation
     )
 
-    is XmlTagNode -> this.format(
+    is XmlTagNode -> expr.format(
         indentationLevel = indentationLevel,
         indentation = indentation,
         shouldSortAttributes = sortAttributes
     )
 
-    is XmlCommentNode -> this.format(
+    is XmlCommentNode -> expr.format(
         indentationLevel = indentationLevel,
         indentation = indentation
     )
 
-    is XmlTextNode -> this.format(
+    is XmlTextNode -> expr.format(
         indentationLevel = indentationLevel,
         indentation = indentation
     )
 
-    else -> throw Error("Unexpected xml expression '${toString(0)}'")
+    else -> throw Error("Unexpected xml expression '${expr.toString(0)}'")
 }

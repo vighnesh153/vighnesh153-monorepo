@@ -57,7 +57,8 @@ internal fun XmlTagNode.format(
         // push children
         stringBuilder.addAll(
             children.map {
-                it.format(
+                formatXmlExpression(
+                    expr = it,
                     indentationLevel = indentationLevel + 1,
                     indentation = indentation,
                     sortAttributes = shouldSortAttributes
