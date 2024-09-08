@@ -28,18 +28,18 @@ class XmlTagNode(
         mutableChildren.add(child)
     }
 
-    override fun toString(indentation: Int): String {
+    override fun toString(indentationLevel: Int): String {
         val builder = mutableListOf<String>()
 
         val tag = mutableNamespaces.joinToString(":") { it.tokenLiteral }
 
-        builder.add("${buildIndentation(indentation)}<$tag")
+        builder.add("${buildIndentation(indentationLevel = indentationLevel)}<$tag")
         if (mutableAttributes.size == 1) {
             val serializedAttrs = mutableAttributes.joinToString(" ") { it.toString() }
             builder[builder.lastIndex] += " $serializedAttrs"
         } else if (mutableAttributes.size > 1) {
             for (attr in mutableAttributes) {
-                builder.add("${buildIndentation(indentation + 1)}$attr")
+                builder.add("${buildIndentation(indentationLevel = indentationLevel + 1)}$attr")
             }
         }
 
@@ -56,11 +56,11 @@ class XmlTagNode(
         }
 
         for (child in mutableChildren) {
-            builder.add(child.toString(indentation + 1))
+            builder.add(child.toString(indentationLevel = indentationLevel + 1))
         }
 
         if (mutableChildren.isNotEmpty()) {
-            builder.add("${buildIndentation(indentation)}</$tag>")
+            builder.add("${buildIndentation(indentationLevel = indentationLevel)}</$tag>")
         }
 
         return builder.joinToString("\n")

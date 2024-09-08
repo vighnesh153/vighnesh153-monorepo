@@ -9,9 +9,9 @@ class XmlPrologNode : XmlExpression {
         mutableAttributes.add(attr)
     }
 
-    override fun toString(indentation: Int): String {
+    override fun toString(indentationLevel: Int): String {
         val builder = StringBuilder()
-        builder.append(buildIndentation(indentation))
+        builder.append(buildIndentation(indentationLevel = indentationLevel))
         builder.append("<?xml")
         for (attr in mutableAttributes) {
             builder.append(" ")

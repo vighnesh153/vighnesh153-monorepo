@@ -9,6 +9,6 @@ class XmlProgram : XmlExpression {
         mutableStatements.add(stmt)
     }
 
-    override fun toString(indentation: Int): String =
-        mutableStatements.joinToString("\n") { it.toString(indentation) }
+    override fun toString(indentationLevel: Int): String =
+        mutableStatements.joinToString("\n") { it.toString(indentationLevel) }
 }
