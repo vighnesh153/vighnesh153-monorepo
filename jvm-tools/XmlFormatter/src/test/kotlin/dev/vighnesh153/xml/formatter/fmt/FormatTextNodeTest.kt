@@ -1,5 +1,6 @@
 package dev.vighnesh153.xml.formatter.fmt
 
+import dev.vighnesh153.xml.formatter.ast.XmlTagNode
 import dev.vighnesh153.xml.formatter.ast.XmlTextNode
 import dev.vighnesh153.xml.formatter.lexer.LexerInputReader
 import dev.vighnesh153.xml.formatter.lexer.XmlLexer
@@ -20,7 +21,7 @@ class FormatTextNodeTest {
         assertEquals(1, program.statements.size)
         assertEquals(
             "Pikachu",
-            (program.statements.first() as XmlTextNode).format(
+            ((program.statements.first() as XmlTagNode).children.first() as XmlTextNode).format(
                 indentationLevel = 0,
                 indentation = 4,
             )
@@ -33,7 +34,7 @@ class FormatTextNodeTest {
         assertEquals(1, program.statements.size)
         assertEquals(
             "        Pikachu",
-            (program.statements.first() as XmlTextNode).format(
+            ((program.statements.first() as XmlTagNode).children.first() as XmlTextNode).format(
                 indentationLevel = 2,
                 indentation = 4,
             )
@@ -46,7 +47,7 @@ class FormatTextNodeTest {
         assertEquals(1, program.statements.size)
         assertEquals(
             "      Pikachu",
-            (program.statements.first() as XmlTextNode).format(
+            ((program.statements.first() as XmlTagNode).children.first() as XmlTextNode).format(
                 indentationLevel = 2,
                 indentation = 3,
             )

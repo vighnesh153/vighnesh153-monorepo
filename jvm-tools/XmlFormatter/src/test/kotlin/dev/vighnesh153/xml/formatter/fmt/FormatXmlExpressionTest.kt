@@ -21,7 +21,8 @@ class FormatXmlExpressionTest {
         assertEquals(1, program.statements.size)
         assertEquals(
             """<?xml encoding="utf-8" version="2.0"?>""",
-            program.statements.first().format(
+            formatXmlExpression(
+                expr = program.statements.first(),
                 indentationLevel = 0,
                 indentation = 4,
                 sortAttributes = true
@@ -46,7 +47,8 @@ class FormatXmlExpressionTest {
                     simpleProperty="some random value"
                     deeply:nested:property="20" />
             """.trimIndent(),
-            program.statements.first().format(
+            formatXmlExpression(
+                expr = program.statements.first(),
                 indentationLevel = 0,
                 indentation = 4,
                 sortAttributes = true
@@ -76,7 +78,8 @@ class FormatXmlExpressionTest {
             """
                 <!-- <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" /> -->
             """.trimIndent(),
-            program.statements.first().format(
+            formatXmlExpression(
+                expr = program.statements.first(),
                 indentationLevel = 0,
                 indentation = 4,
                 sortAttributes = true
@@ -92,7 +95,8 @@ class FormatXmlExpressionTest {
         assertEquals(1, program.statements.size)
         assertEquals(
             "Pikachu",
-            (program.statements.first() as XmlTagNode).children.first().format(
+            formatXmlExpression(
+                expr = (program.statements.first() as XmlTagNode).children.first(),
                 indentationLevel = 0,
                 indentation = 4,
                 sortAttributes = true
