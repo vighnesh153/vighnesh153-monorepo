@@ -1,0 +1,64 @@
+---
+layout: '@/layouts/BlogLayout.astro'
+
+# title: 'My First Blog Post'
+# creationDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
+tags: ['astro', 'blogging', 'learning in public']
+live: false
+---
+
+## Heading 2
+
+Enim irure pariatur mollit aliqua eu veniam cillum occaecat eu incididunt. Id ut elit consequat consectetur qui ad ea
+aliquip adipisicing veniam est. Consequat magna esse irure aute ullamco ex ut eu pariatur sint.
+
+- point 1
+- point 2
+- point 3
+  1. nested point 1
+  2. nested point 2
+     - nested point 1
+     - nested point 2
+  3. nested point 3
+- bullet point 4
+
+---
+
+bla
+
+<br/>
+
+bla
+
+<hr />
+
+1. nested point 1
+2. nested point 2
+   - nested point 1
+   - nested point 2
+     1. nested point 1
+     2. nested point 2
+3. nested point 3
+
+### Heading 3
+
+Enim irure pariatur mollit aliqua eu veniam cillum occaecat eu incididunt. Id ut elit consequat consectetur qui ad ea
+aliquip adipisicing veniam est. Consequat magna esse irure aute ullamco ex ut eu pariatur sint.
+
+#### Heading 4
+
+Enim irure pariatur mollit aliqua eu veniam cillum occaecat eu incididunt. Id ut elit consequat consectetur qui ad ea
+aliquip adipisicing veniam est. Consequat magna esse irure aute ullamco ex ut eu pariatur sint.
+
+##### Heading 5
+
+Enim irure pariatur mollit aliqua eu veniam cillum occaecat eu incididunt. Id ut elit consequat consectetur qui ad ea
+aliquip adipisicing veniam est. Consequat magna esse irure aute ullamco ex ut eu pariatur sint.
+
+###### Heading 6
+
+Ex cupidatat cupidatat laboris ad dolore quis. Nostrud nulla sint aute ullamco minim elit id dolor laborum ullamco
+officia ut incididunt. Voluptate laborum nisi Lorem ullamco est ullamco incididunt fugiat aliquip ea dolore nisi quis.
+Reprehenderit consequat officia quis nulla. In qui incididunt aliquip nostrud veniam. Tempor eu laborum anim duis
+voluptate fugiat velit ea ipsum nulla magna.

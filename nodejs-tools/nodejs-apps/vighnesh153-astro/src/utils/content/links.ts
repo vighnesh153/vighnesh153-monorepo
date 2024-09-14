@@ -27,7 +27,7 @@ export const hashTags = {
 
 export const externalLinks = {
   githubRepo: monorepo('/nodejs-tools/nodejs-apps/vighnesh153-astro-svelte'),
-  blog: 'https://blog.vighnesh153.com',
+  blog: '/blog',
   resume: 'https://bit.ly/vighnesh153-resume',
   projects: {
     spl: {
