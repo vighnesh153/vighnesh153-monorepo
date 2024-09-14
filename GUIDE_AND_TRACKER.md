@@ -26,7 +26,11 @@ Visit
 
 #### Tasks
 
-- Remove API GW and proxy lambdas from Deno
+- Blog setup
+- Create a Code viewer with tabs
+- Create Kotlin AST
+- Kotlin Syntax highlighting
+- Differ between 2 string content
 - Popover testing triangle bump
 - Add a list of Chrome and Vscode extensions to projects on vighnesh153.dev
 - Look at removing Config usage from lambda

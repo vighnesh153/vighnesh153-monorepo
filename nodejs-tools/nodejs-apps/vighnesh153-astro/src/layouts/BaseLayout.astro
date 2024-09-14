@@ -1,5 +1,5 @@
 ---
-import '../styles/base.scss';
+import '@/styles/base.scss';
 
 export interface Props {
   title: string;
@@ -9,7 +9,7 @@ export interface Props {
 const { title, description } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>{title}</title>

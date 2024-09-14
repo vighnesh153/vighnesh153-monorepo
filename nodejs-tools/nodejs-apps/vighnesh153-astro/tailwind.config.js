@@ -13,7 +13,7 @@ export default {
       backgroundLight: 'rgb(var(--color-bg-light))',
       backgroundBlend: 'rgb(var(--color-bg-blend))',
 
-      text2: 'rgba(var(--color-text) / 70%)',
+      text2: 'rgba(var(--color-text) / 80%)',
       text3: 'rgba(var(--color-text) / 60%)',
       text4: 'rgba(var(--color-text) / 30%)',
     },

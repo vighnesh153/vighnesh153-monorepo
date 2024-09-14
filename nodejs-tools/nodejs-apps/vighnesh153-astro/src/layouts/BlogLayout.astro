@@ -1,0 +1,48 @@
+---
+import '@/styles/blog.scss';
+import ContentLayout from './ContentLayout.astro';
+
+import { classes } from '@/utils';
+
+interface Props {
+  frontmatter: {
+    title: string | undefined;
+    description: string | undefined;
+    creationDate: string | undefined;
+    tags: string[] | undefined;
+    live: boolean | undefined;
+
+    // path to blog post
+    url: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+
+const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString('en-us', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<ContentLayout>
+  <div
+    class={classes(`
+    mx-auto mt-32 
+    max-w-prose
+
+    blog-content
+  `)}
+  >
+    {/* Heading */}
+    <h1>
+      {frontmatter.title ?? 'Heading 1'}
+    </h1>
+
+    {/* Creation date */}
+    <p class="text-base text-text2 mb-12 italic">{date}</p>
+
+    <slot />
+  </div>
+</ContentLayout>
