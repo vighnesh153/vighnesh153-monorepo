@@ -1,4 +1,6 @@
 export * from './CheckIcon';
+export * from './ChevronDown';
+export * from './ChevronUp';
 export * from './CloseIcon';
 export * from './CopyIcon';
 export * from './FileIcon';
