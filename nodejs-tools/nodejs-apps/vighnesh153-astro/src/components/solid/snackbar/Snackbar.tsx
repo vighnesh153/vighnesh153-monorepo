@@ -1,36 +1,19 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { createSignal, onCleanup, onMount, type JSX } from 'solid-js';
+import { createSignal, onMount, type JSX, Show } from 'solid-js';
 
-import { not } from '@vighnesh153/tools-platform-independent';
-
+import type { SnackbarProps } from '@/stores/snackbar';
 import { classes } from '@/utils';
-import { InfoIcon, CheckIcon, WarnIcon } from '@/icons/solid';
-import type { SnackbarProps } from './SnackbarUtils';
+import { InfoIcon, CheckIcon, WarnIcon, CloseIcon } from '@/icons/solid';
 
 export function Snackbar(props: SnackbarProps): JSX.Element {
   const config = mapping[props.type];
-
-  const [timerPercent, setTimerPercent] = createSignal(100);
+  const [width, setWidth] = createSignal('100%');
 
   onMount(() => {
-    if (not(props.autoDismissible)) {
-      return;
-    }
-
-    const start = Date.now();
-
-    const interval = setInterval(() => {
-      const elapsedTime = Date.now() - start;
-
-      if (elapsedTime > 0) {
-        setTimerPercent(100 * (1 - elapsedTime / props.autoDismissTimeMillis!));
-      }
-      if (elapsedTime > props.autoDismissTimeMillis!) {
-        clearInterval(interval);
-      }
-    }, 60);
-
-    onCleanup(() => clearInterval(interval));
+    // animating the progress bar
+    setTimeout(() => {
+      setWidth('0%');
+    }, 1);
   });
 
   return (
@@ -57,9 +40,23 @@ export function Snackbar(props: SnackbarProps): JSX.Element {
         `)}
       >
         <div class="mt-1">{config.icon()}</div>
-        <p>{props.message}</p>
+        <p class="flex-grow">{props.message}</p>
+        <Show when={props.manualDismissible}>
+          <button onClick={() => props.dismiss()}>
+            <CloseIcon class="mt-1 w-4 h-4" />
+          </button>
+        </Show>
       </div>
-      <div class="h-2" style={{ 'background-color': config.timerProgressColor, width: `${timerPercent()}%` }} />
+      <Show when={props.autoDismissible}>
+        <div
+          class="h-2"
+          style={{
+            'background-color': config.timerProgressColor,
+            width: width(),
+            transition: `width ${props.autoDismissTimeMillis}ms linear`,
+          }}
+        />
+      </Show>
     </div>
   );
 }

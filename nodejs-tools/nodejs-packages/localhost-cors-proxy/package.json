@@ -29,8 +29,8 @@
   "dependencies": {
     "commander": "^12.1.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "http-proxy-middleware": "^3.0.0",
+    "express": "^4.21.0",
+    "http-proxy-middleware": "^3.0.2",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
@@ -41,6 +41,6 @@
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   }
 }

@@ -1,5 +1,6 @@
 ---
 import '@/styles/base.scss';
+import { SnackbarHost } from '@/components/solid';
 
 export interface Props {
   title: string;
@@ -34,6 +35,7 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
+    <SnackbarHost client:load />
     <slot />
   </body>
 </html>
