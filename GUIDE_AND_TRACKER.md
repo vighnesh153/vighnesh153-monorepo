@@ -26,10 +26,11 @@ Visit
 
 #### Tasks
 
-- Create a Code viewer with tabs
+- Create a Code viewer
 - Create Kotlin AST
 - Kotlin Syntax highlighting
 - Differ between 2 string content
+- Diff viewer
 - Popover testing triangle bump
 - Add a list of Chrome and Vscode extensions to projects on vighnesh153.dev
 - Look at removing Config usage from lambda
