@@ -34,10 +34,9 @@ export function CodeViewer({
 
   const toggleShowFullCode = () => setShowFullCode((old) => not(old));
 
-  // TODO: convert code to html with syntax highlighting
   return (
     <div
-      class="rounded-xl overflow-clip bg-secondary border border-text4"
+      class="rounded-xl bg-secondary border border-text4"
       style={{
         'font-family': 'Courier, Menlo, Consolas',
       }}
@@ -52,12 +51,12 @@ export function CodeViewer({
 
       {/* Code body */}
       <div
-        class="p-4 w-full whitespace-pre flex bg-[#16181d] overflow-auto"
+        class="relative py-4 w-full whitespace-pre flex items-stretch bg-[#16181d] overflow-auto"
         style={{
           'max-height': not(viewEntireCode) && not(showFullCode()) ? `${maxCodeBodyHeight}px` : 'unset',
         }}
       >
-        <div>
+        <div class="sticky h-full ps-4 pe-2 left-0 bg-[inherit]">
           {Array.from({ length: lineCount })
             .map((_, index) => `${index + 1}`.padStart(3, ' '))
             .join('\n')}
@@ -65,6 +64,7 @@ export function CodeViewer({
         <div
           class={classes(`
             ps-6
+            pe-4
             
             flex-grow
             items-stretch

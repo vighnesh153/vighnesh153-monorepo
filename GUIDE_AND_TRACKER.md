@@ -26,7 +26,6 @@ Visit
 
 #### Tasks
 
-- Code viewer line numbers sticky
 - Create Kotlin AST
 - Kotlin Syntax highlighting
 - Differ between 2 string content
