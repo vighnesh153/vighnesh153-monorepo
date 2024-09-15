@@ -1,12 +1,41 @@
 ---
+import { type BlogFrontmatter } from '@/utils';
+
 import ContentLayout from '@/layouts/ContentLayout.astro';
 
-const description = 'Bla';
+const posts = await Astro.glob('./*/*.mdx');
+const frontmatters = posts
+  .map((it) => ({ ...(it.frontmatter as BlogFrontmatter), url: it.url }))
+  .filter((it) => it.live)
+  .sort((a, b) => (new Date(a.creationDate ?? Date.now()) > new Date(b.creationDate ?? Date.now()) ? -1 : 1));
 ---
 
-<ContentLayout title="Vighnesh Raut - Blog" description={description}>
-  <div class="mt-96"></div>
-  <ul>
-    <li><a href="/blog/playground">Post 1</a></li>
+<ContentLayout title="Vighnesh Raut - Blog" description="A personal blog by Vighnesh Raut">
+  <ul class="max-w-prose mt-40 mx-auto">
+    {
+      frontmatters.length == 0 && (
+        <li>
+          <p class="italic">No blogs published yet...</p>
+        </li>
+      )
+    }
+    {
+      frontmatters.map((frontmatter) => {
+        const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString('en-us', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        return (
+          <a href={frontmatter.url} class="block hover:scale-[1.005] transition-transform">
+            <li class="mb-16">
+              <h2 class="text-text font-bold text-3xl italic">{frontmatter.title ?? 'Blog Title'}</h2>
+              <p class="text-base text-text3 italic">{date}</p>
+              <p class="mt-1 text-text2">{frontmatter.description ?? ''}</p>
+            </li>
+          </a>
+        );
+      })
+    }
   </ul>
 </ContentLayout>

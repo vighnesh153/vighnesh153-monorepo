@@ -26,7 +26,6 @@ Visit
 
 #### Tasks
 
-- Blog setup
 - Create a Code viewer with tabs
 - Create Kotlin AST
 - Kotlin Syntax highlighting
