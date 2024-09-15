@@ -2,16 +2,10 @@
 import '@/styles/blog.scss';
 import ContentLayout from './ContentLayout.astro';
 
-import { classes } from '@/utils';
+import { classes, type BlogFrontmatter } from '@/utils';
 
 interface Props {
-  frontmatter: {
-    title: string | undefined;
-    description: string | undefined;
-    creationDate: string | undefined;
-    tags: string[] | undefined;
-    live: boolean | undefined;
-
+  frontmatter: BlogFrontmatter & {
     // path to blog post
     url: string;
   };
@@ -27,7 +21,7 @@ const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString
 ---
 
 <ContentLayout>
-  <div
+  <article
     class={classes(`
     mx-auto mt-32 
     max-w-prose
@@ -44,5 +38,5 @@ const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString
     <p class="text-base text-text2 mb-12 italic">{date}</p>
 
     <slot />
-  </div>
+  </article>
 </ContentLayout>
