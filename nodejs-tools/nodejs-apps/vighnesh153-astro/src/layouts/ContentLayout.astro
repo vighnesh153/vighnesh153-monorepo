@@ -7,7 +7,6 @@ import EmailAddressAside from '@/components/EmailAddressAside.astro';
 import Footer from '@/components/Footer.astro';
 
 import { hashTags, type NavItem } from '@/utils';
-import { SnackbarHost, SnackbarProvider } from '@/components/solid';
 
 interface Props {
   title?: string;
@@ -34,17 +33,14 @@ const { title = defaultTitle, description = defaultDescription, navItems, showFo
   <main id={hashTags.main} class="px-8 pb-8">
     {/* pt-[0.05px] prevents collapsing margins in child components */}
     <div class="mx-auto max-w-[1400px] px-4 pt-[0.05px] sm:px-20">
-      <SnackbarProvider client:only="solid-js">
-        <SnackbarHost client:only="solid-js" />
-        <slot />
-      </SnackbarProvider>
+      <slot />
     </div>
-    {
-      showFooter ? (
-        <Footer>
-          <slot name="custom-source-code" slot="custom-source-code" />
-        </Footer>
-      ) : null
-    }
   </main>
+  {
+    showFooter ? (
+      <Footer>
+        <slot name="custom-source-code" slot="custom-source-code" />
+      </Footer>
+    ) : null
+  }
 </BaseLayout>

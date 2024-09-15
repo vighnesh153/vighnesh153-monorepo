@@ -1,7 +1,7 @@
 import { type JSX, onMount } from 'solid-js';
 import { classes } from '@/utils';
 import { CopyIcon } from '@/icons/solid';
-import { useSnackbar } from '../snackbar';
+import { createSnackbar } from '@/stores/snackbar';
 
 export type HtmlCodeViewerProps = {
   code: string;
@@ -10,17 +10,18 @@ export type HtmlCodeViewerProps = {
 };
 
 export function CodeViewer({ code, fileName }: HtmlCodeViewerProps): JSX.Element {
-  const { createSnackbar } = useSnackbar();
-
   // const lineCount = code.split('\n').length;
   const lineCount = 200;
 
-  onMount(() => {
-    createSnackbar({ type: 'success', message: 'Copied to Clipboard!', autoDismissTimeMillis: 5 ** 5 });
-    createSnackbar({ type: 'info', message: 'Copied to Clipboard!', autoDismissTimeMillis: 5 ** 5 });
-    createSnackbar({ type: 'error', message: 'Copied to Clipboard!', autoDismissTimeMillis: 5 ** 5 });
-    createSnackbar({ type: 'warn', message: 'Copied to Clipboard!', autoDismissTimeMillis: 5 ** 5 });
-  });
+  const onCopyClick = async () => {
+    try {
+      navigator.clipboard.writeText(code);
+      createSnackbar({ type: 'success', message: 'Copied to Clipboard!', manualDismissible: true });
+    } catch (e) {
+      console.error(e);
+      createSnackbar({ type: 'error', message: 'Error occurred while copying to clip board.' });
+    }
+  };
 
   // TODO: convert code to html with syntax highlighting
   return (
@@ -32,7 +33,7 @@ export function CodeViewer({ code, fileName }: HtmlCodeViewerProps): JSX.Element
     >
       <div class="w-full px-4 py-2 flex justify-between items-center border-b border-b-text4">
         <p>{fileName}</p>
-        <button class="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg">
+        <button class="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg" onClick={onCopyClick}>
           <CopyIcon class="fill-text w-4" /> Copy
         </button>
       </div>
