@@ -1,7 +1,7 @@
 {
-  "name": "@vighnesh153/lexer-core",
+  "name": "@vighnesh153/lexer-kotlin",
   "version": "1.0.0",
-  "description": "Lexer for xml",
+  "description": "Lexer for kotlin",
   "private": true,
   "publishConfig": {
     "access": "public"
