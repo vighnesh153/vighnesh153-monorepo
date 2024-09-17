@@ -1,0 +1,92 @@
+---
+layout: '@/layouts/BlogLayout.astro'
+
+title: I hate the "Don't reinvent the wheel" advice
+creationDate: 2024-09-16
+description: I hate it when people tell me to not do something that has already been done before...
+tags: ['philosophy', 'software engineering']
+live: true
+---
+
+import reinventTheWheelImage from './wheel.webp';
+
+We have all heard it before: "<span class="text-accent">_Don't reinvent the wheel_</span>". It is meant to be a
+practical advice, urging us to use existing solutions instead of wasting time creating something that already exists.
+But honestly, I almost always hate this saying.
+
+## Reasons
+
+### Reason 1: It Stifles Innovation
+
+Imagine if Elon Musk (_founder of companies like [Tesla] & [SpaceX]_) had listened to those who said "don't reinvent the
+wheek". Cars and rockets already existed, after all. But, by challenging conventional wisdom and pushing the boundaries
+of what was possible, he revolutionized entire industries. _[Tesla]_ reimagined the automobile as a sustainable,
+high-performance machine, while _[SpaceX]_ is disrupting space exploration with reusable rockets and ambitious plans for
+interplanetary travel. If he had simply accepted the status quo, these groundbreaking advancements might never have
+happened.
+
+### Reason 2: It Assumes One Size Fits All
+
+Consider the world of databases. While relational databases like _[MySQL]_ and _[PostgreSQL]_ have been the go-to
+solution for decades, they aren't always the perfect fit for every application.
+
+For example, if you are building a social media platform that needs to handle massive amounts of **unstructured** data
+with fast read and write speeds, a _[NoSQL]_ database might be a more suitable choice. If your application requires
+complex graph relationships like recommendation engine or a social network analysis tool, a graph database like
+_[Neo4j]_ migth be the ideal solution.
+
+Sticking with traditional relational databases in these scenarios, simply because "that's how it's always been done",
+could lead to performance bottlenecks and/or scalability issues.
+
+### Reason 3: It Discourages Learning
+
+The process of "reinventing the wheel" can be incredible valuable. By figuring things out for ourselves, we gain a
+deeper understanding of how things work, develop problem-solving skills, and potentially even discover improved methods.
+
+I was always fascinated by how compilers parse code strings and build an AST out of them. The process always felt
+magical. In college, I had one compiler course. Most of the professors just told us to use _[Lex]_ to generate
+tokenizers and _[Yacc]_ to generate parsers. When I asked them how they worked internally, I used to get responses like,
+"It is a solved problem. You don't need to worry about it." At that time, I just ignored this curiosity bug of mine, but
+in the past few years, I have been very curious about this again, and I started exploring how I could build a lexer and
+a parser tool from scratch. Today, I can build a lexer and a parser for any modern programming language in a week
+without sweating. It may not be the most performant, but it gets the job done. The concept of lexing and parsing is no
+longer magical to me, and this makes me super happy.
+
+I have more respect for the _[Lex]_ and _[Yacc]_ tools now that I understand how they abstract away all the complexity
+and handling of edge cases behind lexing and parsing of a program.
+
+### Reason 4: It Can Be Demotivating
+
+Imagine pouring your heart and soul into a project, only to be told you are "reinventing the wheel". It dismisses your
+effort and creativity, even if your solution is unique or better in some way.
+
+## Conclusion
+
+Of course, there are times when using existing solutions is the most efficient approach. But let's not discourage the
+spirit of exploration and innovation that drives progress. Sometimes, "reinventing the wheel" can lead to amazing
+discoveries and advancements.
+
+<img
+  src={reinventTheWheelImage.src}
+  style={{
+    width: '100%',
+    backgroundImage: `url("data:image/webp;base64,UklGRmABAABXRUJQVlA4IFQBAADQDACdASpsAB8AP83c4mk/ti2oK3zLi/A5iWUADqhM1HzZs69epv3EzkgFVW5+30+zh7qrtVEocPsRschOTcfcRT1C9LE++8Yn2OxWQZ3ZS50rg6+b6xcVkZN8Lzj1CRbhSVr81wyqu+cGHmnkWgAA/ucC+YoSC/VbObbFbghJbLC7o88T2Tf9f4+xq0Jo+AaYa79McuVg+StaDUaT2rW22Fw6lRniIEHgTOe5hDZ08eE+RnUnJ02wVfSXWqjx/DxLpGlMPhvvFAkMKfd0CbthZvZrA3ajSymFaqkdQXvrcIVDKSYfOuQr1rrZ/Y8yau/ks4fYhxqRbuqIWAYRcn4HWLhybYTq/+dye6oFobvveU0wggrJJwcB+B5CG0fQQOVk2aR5pII5rT0fRtiuWC/quAj6g24c19l/yMpfoHaRW6uy9MWbXS/vJOwYrE5jP0LdEKAA")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
+    aspectRatio: '3.498',
+  }}
+/>
+
+<br />
+
+Always remember the above image. The first ever invented wheel was made up of stone or wood. We don't use them in our
+modern day vehicles because we "reinvented" a better wheel.
+
+[Tesla]: https://www.tesla.com
+[SpaceX]: https://www.spacex.com
+[MySQL]: https://www.mysql.com
+[PostgreSQL]: https://www.postgresql.org
+[NoSQL]: https://en.wikipedia.org/wiki/NoSQL
+[Neo4j]: https://neo4j.com/
+[Lex]: https://en.wikipedia.org/wiki/Lex_(software)
+[Yacc]: https://en.wikipedia.org/wiki/Yacc
