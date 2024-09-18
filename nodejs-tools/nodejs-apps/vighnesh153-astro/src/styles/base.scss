@@ -134,4 +134,81 @@
   .progress-bar::-moz-progress-bar {
     @apply bg-accent;
   }
+
+  .blog-content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply my-6;
+
+      @apply text-text;
+      @apply font-bold;
+    }
+
+    h1 {
+      @apply text-5xl;
+    }
+
+    h2 {
+      @apply text-4xl;
+    }
+
+    h3 {
+      @apply text-3xl;
+    }
+
+    h4 {
+      @apply text-2xl;
+    }
+
+    h5 {
+      @apply text-xl;
+    }
+
+    h6 {
+      @apply text-base;
+    }
+
+    p {
+      @apply pb-4;
+      @apply text-text2;
+    }
+
+    a {
+      @apply regular-link;
+    }
+
+    // direct children only
+    & > ul,
+    & > ol {
+      @apply ms-4;
+      @apply mb-8;
+    }
+
+    // indirect children only. First level lists should have no padding
+    & > * ul,
+    & > * ol {
+      @apply ms-10;
+    }
+
+    ul > li {
+      @apply list-disc;
+    }
+
+    ol > li {
+      @apply list-decimal;
+    }
+
+    li {
+      @apply py-0.5;
+    }
+
+    hr {
+      @apply my-4;
+      @apply border-text4;
+    }
+  }
 }

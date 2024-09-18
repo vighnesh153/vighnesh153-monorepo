@@ -75,5 +75,7 @@ export default {
     'before:text-primary',
     // progress bar
     'progress-bar',
+    // blog content class
+    'blog-content',
   ],
 };
