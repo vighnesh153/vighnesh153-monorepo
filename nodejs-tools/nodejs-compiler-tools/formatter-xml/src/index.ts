@@ -1,8 +1,8 @@
-import { LexerError, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
-import { XmlLexer } from '@vighnesh153/lexer-xml';
+import { Lexer, LexerError, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
 import { ParserError, XmlParser } from '@vighnesh153/parser-xml';
 import { FormattingOptions } from './formatting_options';
 import { formatXmlProgram } from './format_xml_program';
+import { XmlTokenType } from '@vighnesh153/lexer-xml';
 
 export type FormatResponse =
   | {
@@ -26,7 +26,7 @@ export function format(rawXml: string, { indentation = 4, sortAttributes = true 
   try {
     const input = new StringLexerInput(rawXml);
     const inputReader = new LexerInputReader(input);
-    const lexer = new XmlLexer(inputReader);
+    const lexer = new Lexer<XmlTokenType>(inputReader);
     const parser = new XmlParser(lexer);
     const program = parser.parseProgram();
 

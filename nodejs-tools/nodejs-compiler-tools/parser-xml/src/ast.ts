@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { Token } from '@vighnesh153/lexer-xml';
+import { Token } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from '@vighnesh153/lexer-xml';
 
 export type AstNodeType = 'XML_PROGRAM' | 'XML_PROLOG_NODE' | 'XML_TAG_NODE' | 'XML_COMMENT_NODE' | 'XML_TEXT_NODE';
 
@@ -12,8 +13,8 @@ export interface XmlExpression {
 
 export class XmlElementAttribute {
   constructor(
-    public readonly namespaces: readonly Token[],
-    public readonly value: Token
+    public readonly namespaces: readonly Token<XmlTokenType>[],
+    public readonly value: Token<XmlTokenType>
   ) {}
 
   toString(): string {
@@ -69,11 +70,11 @@ export class XmlPrologNode implements XmlExpression {
 export class XmlTagNode implements XmlExpression {
   readonly astNodeType: AstNodeType = 'XML_TAG_NODE';
 
-  #namespaces: Token[] = [];
+  #namespaces: Token<XmlTokenType>[] = [];
   #attributes: XmlElementAttribute[] = [];
   #children: XmlExpression[] = [];
 
-  get namespaces(): readonly Token[] {
+  get namespaces(): readonly Token<XmlTokenType>[] {
     return [...this.#namespaces];
   }
 
@@ -85,7 +86,7 @@ export class XmlTagNode implements XmlExpression {
     return [...this.#children];
   }
 
-  addNamespace(ns: Token): void {
+  addNamespace(ns: Token<XmlTokenType>): void {
     this.#namespaces.push(ns);
   }
 
@@ -139,7 +140,7 @@ export class XmlTagNode implements XmlExpression {
 export class XmlCommentNode implements XmlExpression {
   readonly astNodeType: AstNodeType = 'XML_COMMENT_NODE';
 
-  constructor(public readonly comment: Readonly<Token>) {}
+  constructor(public readonly comment: Readonly<Token<XmlTokenType>>) {}
 
   toString(indentation: number): string {
     return `${buildIndentationSpace(indentation)}<!-- ${this.comment.tokenLiteral.trim()} -->`;
@@ -155,7 +156,7 @@ function buildIndentationSpace(indentation: number): string {
 export class XmlTextNode implements XmlExpression {
   readonly astNodeType: AstNodeType = 'XML_TEXT_NODE';
 
-  constructor(public readonly text: Readonly<Token>) {}
+  constructor(public readonly text: Readonly<Token<XmlTokenType>>) {}
 
   toString(indentation: number): string {
     return `${buildIndentationSpace(indentation)}${this.text.tokenLiteral.trim()}`;

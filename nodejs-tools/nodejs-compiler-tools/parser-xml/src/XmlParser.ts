@@ -1,5 +1,5 @@
 import { not, assert } from '@vighnesh153/tools-platform-independent';
-import { nextToken, Token, XmlLexer, TokenType, TokenTypes } from '@vighnesh153/lexer-xml';
+import { nextToken, XmlTokenType } from '@vighnesh153/lexer-xml';
 import { ParserError } from './ParserError';
 import {
   XmlCommentNode,
@@ -10,18 +10,19 @@ import {
   XmlTagNode,
   XmlTextNode,
 } from './ast';
+import { Lexer, Token } from '@vighnesh153/lexer-core';
 
 export class XmlParser {
   readonly #errors: Array<ParserError> = [];
 
-  #currentToken!: Readonly<Token>;
-  #peekToken!: Readonly<Token>;
+  #currentToken!: Readonly<Token<XmlTokenType>>;
+  #peekToken!: Readonly<Token<XmlTokenType>>;
 
   get errors(): Readonly<Array<ParserError>> {
     return this.#errors.map((error) => error.copy());
   }
 
-  constructor(readonly lexer: XmlLexer) {
+  constructor(readonly lexer: Lexer<XmlTokenType>) {
     this.nextToken();
     this.nextToken();
   }
@@ -29,7 +30,7 @@ export class XmlParser {
   parseProgram(): XmlProgram {
     const program = new XmlProgram();
 
-    while (not(this.isCurrentToken(TokenTypes.EOF))) {
+    while (not(this.isCurrentToken(XmlTokenType.Eof))) {
       const statement = this.parseStatement();
       if (statement === null) {
         break;
@@ -45,15 +46,15 @@ export class XmlParser {
     this.#errors.push(error);
   }
 
-  isCurrentToken(tokenType: TokenType): boolean {
+  isCurrentToken(tokenType: XmlTokenType): boolean {
     return this.#currentToken.tokenType === tokenType;
   }
 
-  isPeekToken(tokenType: TokenType): boolean {
+  isPeekToken(tokenType: XmlTokenType): boolean {
     return this.#peekToken.tokenType === tokenType;
   }
 
-  expectPeek(tokenType: TokenType): boolean {
+  expectPeek(tokenType: XmlTokenType): boolean {
     if (this.isPeekToken(tokenType)) {
       this.nextToken();
       return true;
@@ -75,11 +76,11 @@ export class XmlParser {
   }
 
   private parseStatement(): XmlExpression | null {
-    if (this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET)) {
-      if (this.isPeekToken(TokenTypes.QUESTION_MARK)) {
+    if (this.isCurrentToken(XmlTokenType.LeftAngleBracket)) {
+      if (this.isPeekToken(XmlTokenType.QuestionMark)) {
         return this.parseXmlPrologNode();
       }
-      if (this.isPeekToken(TokenTypes.IDENTIFIER)) {
+      if (this.isPeekToken(XmlTokenType.Identifier)) {
         return this.parseXmlTagNode();
       }
       this.addError(
@@ -90,10 +91,10 @@ export class XmlParser {
       );
       return null;
     }
-    if (this.isCurrentToken(TokenTypes.COMMENT)) {
+    if (this.isCurrentToken(XmlTokenType.CommentLiteral)) {
       return this.parseXmlCommentNode();
     }
-    if (this.isCurrentToken(TokenTypes.TEXT_NODE)) {
+    if (this.isCurrentToken(XmlTokenType.TextNode)) {
       return this.parseXmlTextNode();
     }
     this.addError(
@@ -107,7 +108,7 @@ export class XmlParser {
 
   private parseXmlPrologNode(): XmlPrologNode | null {
     assert(
-      this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
+      this.isCurrentToken(XmlTokenType.LeftAngleBracket),
       `Shouldn't call parseXmlPrologNode when current token is not '<'`
     );
 
@@ -115,11 +116,11 @@ export class XmlParser {
     this.nextToken();
 
     assert(
-      this.isCurrentToken(TokenTypes.QUESTION_MARK),
+      this.isCurrentToken(XmlTokenType.QuestionMark),
       `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
     );
 
-    if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
+    if (not(this.expectPeek(XmlTokenType.Identifier))) {
       return null;
     }
 
@@ -139,7 +140,7 @@ export class XmlParser {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.isCurrentToken(TokenTypes.EOF)) {
+      if (this.isCurrentToken(XmlTokenType.Eof)) {
         this.addError(
           new ParserError({
             culpritToken: this.#currentToken,
@@ -149,8 +150,8 @@ export class XmlParser {
         return null;
       }
 
-      if (this.isCurrentToken(TokenTypes.QUESTION_MARK)) {
-        if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+      if (this.isCurrentToken(XmlTokenType.QuestionMark)) {
+        if (not(this.expectPeek(XmlTokenType.RightAngleBracket))) {
           return null;
         }
         return xmlPrologNode;
@@ -167,14 +168,14 @@ export class XmlParser {
 
   private parseXmlTagNode(): XmlTagNode | null {
     assert(
-      this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET),
+      this.isCurrentToken(XmlTokenType.LeftAngleBracket),
       `Shouldn't call parseXmlTagNode when current token is not '<'`
     );
 
     this.nextToken();
 
     assert(
-      this.isCurrentToken(TokenTypes.IDENTIFIER),
+      this.isCurrentToken(XmlTokenType.Identifier),
       `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
     );
 
@@ -182,8 +183,8 @@ export class XmlParser {
     xmlTagNode.addNamespace(this.#currentToken);
     this.nextToken();
 
-    while (this.isCurrentToken(TokenTypes.COLON)) {
-      if (!this.expectPeek(TokenTypes.IDENTIFIER)) {
+    while (this.isCurrentToken(XmlTokenType.Colon)) {
+      if (!this.expectPeek(XmlTokenType.Identifier)) {
         return null;
       }
       xmlTagNode.addNamespace(this.#currentToken);
@@ -192,7 +193,7 @@ export class XmlParser {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.isCurrentToken(TokenTypes.EOF)) {
+      if (this.isCurrentToken(XmlTokenType.Eof)) {
         this.addError(
           new ParserError({
             culpritToken: this.#currentToken,
@@ -202,11 +203,11 @@ export class XmlParser {
         return null;
       }
 
-      if (this.isCurrentToken(TokenTypes.FORWARD_SLASH)) {
+      if (this.isCurrentToken(XmlTokenType.ForwardSlash)) {
         break;
       }
 
-      if (this.isCurrentToken(TokenTypes.RIGHT_ANGLE_BRACKET)) {
+      if (this.isCurrentToken(XmlTokenType.RightAngleBracket)) {
         break;
       }
 
@@ -218,15 +219,15 @@ export class XmlParser {
       this.nextToken();
     }
 
-    if (this.isCurrentToken(TokenTypes.FORWARD_SLASH)) {
-      if (not(this.expectPeek(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+    if (this.isCurrentToken(XmlTokenType.ForwardSlash)) {
+      if (not(this.expectPeek(XmlTokenType.RightAngleBracket))) {
         return null;
       }
       return xmlTagNode;
     }
 
     assert(
-      this.isCurrentToken(TokenTypes.RIGHT_ANGLE_BRACKET),
+      this.isCurrentToken(XmlTokenType.RightAngleBracket),
       `Expected ">" found ${this.#currentToken.tokenLiteral}`
     );
 
@@ -236,7 +237,7 @@ export class XmlParser {
     // parse children
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.isPeekToken(TokenTypes.EOF)) {
+      if (this.isPeekToken(XmlTokenType.Eof)) {
         this.addError(
           new ParserError({
             culpritToken: this.#peekToken,
@@ -246,7 +247,7 @@ export class XmlParser {
         return null;
       }
 
-      if (this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET) && this.isPeekToken(TokenTypes.FORWARD_SLASH)) {
+      if (this.isCurrentToken(XmlTokenType.LeftAngleBracket) && this.isPeekToken(XmlTokenType.ForwardSlash)) {
         break;
       }
 
@@ -258,20 +259,20 @@ export class XmlParser {
       this.nextToken();
     }
 
-    assert(this.isCurrentToken(TokenTypes.LEFT_ANGLE_BRACKET), `Expected "<" found ${this.#currentToken.tokenLiteral}`);
+    assert(this.isCurrentToken(XmlTokenType.LeftAngleBracket), `Expected "<" found ${this.#currentToken.tokenLiteral}`);
 
     // Move past "<"
     this.nextToken();
 
-    if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
+    if (not(this.expectPeek(XmlTokenType.Identifier))) {
       return null;
     }
 
     const closingTagNamespaces = [this.#currentToken];
     this.nextToken();
 
-    while (this.isCurrentToken(TokenTypes.COLON)) {
-      if (!this.expectPeek(TokenTypes.IDENTIFIER)) {
+    while (this.isCurrentToken(XmlTokenType.Colon)) {
+      if (!this.expectPeek(XmlTokenType.Identifier)) {
         return null;
       }
       closingTagNamespaces.push(this.#currentToken);
@@ -293,7 +294,7 @@ export class XmlParser {
       return null;
     }
 
-    if (not(this.isCurrentToken(TokenTypes.RIGHT_ANGLE_BRACKET))) {
+    if (not(this.isCurrentToken(XmlTokenType.RightAngleBracket))) {
       this.addError(
         new ParserError({
           culpritToken: this.#currentToken,
@@ -307,7 +308,7 @@ export class XmlParser {
   }
 
   private parseAttribute(): XmlElementAttribute | null {
-    if (not(this.isCurrentToken(TokenTypes.IDENTIFIER))) {
+    if (not(this.isCurrentToken(XmlTokenType.Identifier))) {
       this.addError(
         new ParserError({
           culpritToken: this.#currentToken,
@@ -317,11 +318,11 @@ export class XmlParser {
       return null;
     }
 
-    const namespaces: Readonly<Token>[] = [this.#currentToken];
+    const namespaces: Readonly<Token<XmlTokenType>>[] = [this.#currentToken];
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.isPeekToken(TokenTypes.EOF)) {
+      if (this.isPeekToken(XmlTokenType.Eof)) {
         this.addError(
           new ParserError({
             culpritToken: this.#peekToken,
@@ -330,25 +331,25 @@ export class XmlParser {
         );
         return null;
       }
-      if (this.isPeekToken(TokenTypes.EQUALS)) {
+      if (this.isPeekToken(XmlTokenType.Equals)) {
         break;
       }
 
-      if (not(this.expectPeek(TokenTypes.COLON))) {
+      if (not(this.expectPeek(XmlTokenType.Colon))) {
         return null;
       }
-      if (not(this.expectPeek(TokenTypes.IDENTIFIER))) {
+      if (not(this.expectPeek(XmlTokenType.Identifier))) {
         return null;
       }
       namespaces.push(this.#currentToken);
     }
 
-    assert(this.isPeekToken(TokenTypes.EQUALS), `Expected "=" found ${this.#peekToken.tokenLiteral}`);
+    assert(this.isPeekToken(XmlTokenType.Equals), `Expected "=" found ${this.#peekToken.tokenLiteral}`);
 
     // we know next token is equals. move to that.
     this.nextToken();
 
-    if (not(this.expectPeek(TokenTypes.STRING_LITERAL))) {
+    if (not(this.expectPeek(XmlTokenType.StringLiteral))) {
       return null;
     }
 
@@ -357,7 +358,7 @@ export class XmlParser {
 
   private parseXmlCommentNode(): XmlCommentNode {
     assert(
-      this.isCurrentToken(TokenTypes.COMMENT),
+      this.isCurrentToken(XmlTokenType.CommentLiteral),
       `Shouldn't call parseXmlCommentNode when current token is not a comment token`
     );
 
@@ -366,7 +367,7 @@ export class XmlParser {
 
   private parseXmlTextNode(): XmlTextNode {
     assert(
-      this.isCurrentToken(TokenTypes.TEXT_NODE),
+      this.isCurrentToken(XmlTokenType.TextNode),
       `Shouldn't call parseXmlTextNode when current token is not a text token`
     );
 

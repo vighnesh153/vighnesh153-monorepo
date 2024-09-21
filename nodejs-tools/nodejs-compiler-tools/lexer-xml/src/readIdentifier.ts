@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { ALPHABET, DIGITS, assert } from '@vighnesh153/tools-platform-independent';
-import { XmlLexer } from './Lexer';
+import { Lexer } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from './tokens';
 
-export function readIdentifier(lexer: XmlLexer): string {
+export function readIdentifier(lexer: Lexer<XmlTokenType>): string {
   assert(
     isAcceptableIdentifierCharacter(lexer.inputReader.currentCharacter),
     `You should not attempt to read an identifier which doesn't start with '_' or a letter`

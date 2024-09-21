@@ -1,9 +1,9 @@
-import { EOF_CHARACTER } from '@vighnesh153/lexer-core';
-import { XmlLexer } from './Lexer';
+import { EOF_CHARACTER, Lexer } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from './tokens';
 
 const LEFT_ANGLE_BRACKET = '<';
 
-export function readTextNode(lexer: XmlLexer): string {
+export function readTextNode(lexer: Lexer<XmlTokenType>): string {
   const textNodeBuilder: string[] = [];
 
   let currCh = lexer.inputReader.currentCharacter;
