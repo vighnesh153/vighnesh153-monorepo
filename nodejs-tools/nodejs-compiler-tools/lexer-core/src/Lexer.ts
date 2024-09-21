@@ -1,10 +1,11 @@
-import { LexerError, LexerInputReader } from '@vighnesh153/lexer-core';
+import { LexerError } from './LexerError';
+import { LexerInputReader } from './LexerInputReader';
 import { Token } from './tokens';
 
-export class XmlLexer {
+export class Lexer<TokenType> {
   readonly #errors: Array<LexerError> = [];
 
-  currentToken: Token | null = null;
+  currentToken: Token<TokenType> | null = null;
 
   get errors(): Readonly<Array<LexerError>> {
     return this.#errors.map((error) => error.copy());

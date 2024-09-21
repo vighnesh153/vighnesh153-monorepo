@@ -1,14 +1,13 @@
 import { test, expect } from 'vitest';
 import { repeat } from '@vighnesh153/tools-platform-independent';
-import { LexerError, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
-import { XmlLexer } from './Lexer';
+import { Lexer, LexerError, LexerInputReader, StringLexerInput, Token } from '@vighnesh153/lexer-core';
 import { nextToken } from './nextToken';
-import { Token, TokenTypes } from './tokens';
+import { XmlTokenType } from './tokens';
 
-function createLexer(input: string): XmlLexer {
+function createLexer(input: string): Lexer<XmlTokenType> {
   const lexerInput = new StringLexerInput(input);
   const reader = new LexerInputReader(lexerInput);
-  return new XmlLexer(reader);
+  return new Lexer(reader);
 }
 
 test('should return EOF for empty string', () => {
@@ -17,9 +16,9 @@ test('should return EOF for empty string', () => {
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 0,
-    tokenLiteral: 'EOF',
-    tokenType: TokenTypes.EOF,
-  } satisfies Token);
+    tokenLiteral: 'Eof',
+    tokenType: XmlTokenType.Eof,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('should parse naked xml tag', () => {
@@ -29,36 +28,36 @@ test('should parse naked xml tag', () => {
     lineNumber: 1,
     columnNumber: 1,
     tokenLiteral: '<',
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.LeftAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 2,
     tokenLiteral: '?',
-    tokenType: TokenTypes.QUESTION_MARK,
-  } satisfies Token);
+    tokenType: XmlTokenType.QuestionMark,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 3,
     tokenLiteral: 'xml',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 6,
     tokenLiteral: '?',
-    tokenType: TokenTypes.QUESTION_MARK,
-  } satisfies Token);
+    tokenType: XmlTokenType.QuestionMark,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 7,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('should parse xml tag', () => {
@@ -68,78 +67,78 @@ test('should parse xml tag', () => {
     lineNumber: 1,
     columnNumber: 1,
     tokenLiteral: '<',
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.LeftAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 2,
     tokenLiteral: '?',
-    tokenType: TokenTypes.QUESTION_MARK,
-  } satisfies Token);
+    tokenType: XmlTokenType.QuestionMark,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 3,
     tokenLiteral: 'xml',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 7,
     tokenLiteral: 'version',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 14,
     tokenLiteral: '=',
-    tokenType: TokenTypes.EQUALS,
-  } satisfies Token);
+    tokenType: XmlTokenType.Equals,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 15,
     tokenLiteral: '1.0',
-    tokenType: TokenTypes.STRING_LITERAL,
-  } satisfies Token);
+    tokenType: XmlTokenType.StringLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 21,
     tokenLiteral: 'encoding',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 29,
     tokenLiteral: '=',
-    tokenType: TokenTypes.EQUALS,
-  } satisfies Token);
+    tokenType: XmlTokenType.Equals,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 30,
     tokenLiteral: 'utf-8',
-    tokenType: TokenTypes.STRING_LITERAL,
-  } satisfies Token);
+    tokenType: XmlTokenType.StringLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 37,
     tokenLiteral: '?',
-    tokenType: TokenTypes.QUESTION_MARK,
-  } satisfies Token);
+    tokenType: XmlTokenType.QuestionMark,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 1,
     columnNumber: 38,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('parse empty manifest', () => {
@@ -160,106 +159,106 @@ test('parse empty manifest', () => {
     lineNumber: 3,
     columnNumber: 1,
     tokenLiteral: '<',
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.LeftAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 3,
     columnNumber: 2,
     tokenLiteral: 'manifest',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 4,
     columnNumber: 5,
     tokenLiteral: 'xmlns',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 4,
     columnNumber: 10,
     tokenLiteral: ':',
-    tokenType: TokenTypes.COLON,
-  } satisfies Token);
+    tokenType: XmlTokenType.Colon,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 4,
     columnNumber: 11,
     tokenLiteral: 'android',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 4,
     columnNumber: 18,
     tokenLiteral: '=',
-    tokenType: TokenTypes.EQUALS,
-  } satisfies Token);
+    tokenType: XmlTokenType.Equals,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 4,
     columnNumber: 19,
     tokenLiteral: 'http://schemas.android.com/apk/res/android',
-    tokenType: TokenTypes.STRING_LITERAL,
-  } satisfies Token);
+    tokenType: XmlTokenType.StringLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 5,
     columnNumber: 5,
     tokenLiteral: 'package',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 5,
     columnNumber: 12,
     tokenLiteral: '=',
-    tokenType: TokenTypes.EQUALS,
-  } satisfies Token);
+    tokenType: XmlTokenType.Equals,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 5,
     columnNumber: 13,
     tokenLiteral: 'com.pokemon.pikachu',
-    tokenType: TokenTypes.STRING_LITERAL,
-  } satisfies Token);
+    tokenType: XmlTokenType.StringLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 5,
     columnNumber: 34,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 6,
     columnNumber: 1,
     tokenLiteral: '<',
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.LeftAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 6,
     columnNumber: 2,
     tokenLiteral: '/',
-    tokenType: TokenTypes.FORWARD_SLASH,
-  } satisfies Token);
+    tokenType: XmlTokenType.ForwardSlash,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 6,
     columnNumber: 3,
     tokenLiteral: 'manifest',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 6,
     columnNumber: 11,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('parse comment', () => {
@@ -281,36 +280,36 @@ test('parse comment', () => {
     lineNumber: 6,
     columnNumber: 5,
     tokenLiteral: ' This is a comment ',
-    tokenType: TokenTypes.COMMENT,
-  } satisfies Token);
+    tokenType: XmlTokenType.CommentLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 7,
     columnNumber: 1,
     tokenLiteral: '<',
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.LeftAngleBracket,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 7,
     columnNumber: 2,
     tokenLiteral: '/',
-    tokenType: TokenTypes.FORWARD_SLASH,
-  } satisfies Token);
+    tokenType: XmlTokenType.ForwardSlash,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 7,
     columnNumber: 3,
     tokenLiteral: 'manifest',
-    tokenType: TokenTypes.IDENTIFIER,
-  } satisfies Token);
+    tokenType: XmlTokenType.Identifier,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 7,
     columnNumber: 11,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('should report error if comment start is invalid', () => {
@@ -320,7 +319,7 @@ test('should report error if comment start is invalid', () => {
     lineNumber: 1,
     columnNumber: 3,
     tokenLiteral: '<',
-    tokenType: TokenTypes.ILLEGAL,
+    tokenType: XmlTokenType.Illegal,
   });
   expect(lexer.errors).toStrictEqual([
     new LexerError({
@@ -362,15 +361,15 @@ test('should read escape sequences', () => {
     lineNumber: 2,
     columnNumber: 14,
     tokenLiteral: '\n " \u1234 \t \\',
-    tokenType: TokenTypes.STRING_LITERAL,
-  } satisfies Token);
+    tokenType: XmlTokenType.StringLiteral,
+  } satisfies Token<XmlTokenType>);
 
   expect(nextToken(lexer)).toStrictEqual({
     lineNumber: 2,
     columnNumber: 34,
     tokenLiteral: '>',
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
-  } satisfies Token);
+    tokenType: XmlTokenType.RightAngleBracket,
+  } satisfies Token<XmlTokenType>);
 });
 
 test('should report error if unicode sequence is invalid', () => {
@@ -443,13 +442,13 @@ test('should read tag name', () => {
   const lexer = createLexer(`<my-tag`);
 
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 1,
     columnNumber: 1,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'my-tag',
     lineNumber: 1,
     columnNumber: 2,
@@ -460,7 +459,7 @@ test('should read naked text node', () => {
   const lexer = createLexer(`my-tag`);
 
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.TEXT_NODE,
+    tokenType: XmlTokenType.TextNode,
     tokenLiteral: 'my-tag',
     lineNumber: 1,
     columnNumber: 1,
@@ -480,19 +479,19 @@ test('should read text nodes', () => {
 
   // <pokemon>
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 2,
     columnNumber: 5,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'pokemon',
     lineNumber: 2,
     columnNumber: 6,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 2,
     columnNumber: 13,
@@ -500,49 +499,49 @@ test('should read text nodes', () => {
 
   // <name>Pikachu</name>
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 3,
     columnNumber: 7,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'name',
     lineNumber: 3,
     columnNumber: 8,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 3,
     columnNumber: 12,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.TEXT_NODE,
+    tokenType: XmlTokenType.TextNode,
     tokenLiteral: 'Pikachu',
     lineNumber: 3,
     columnNumber: 13,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 3,
     columnNumber: 20,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenType: XmlTokenType.ForwardSlash,
     tokenLiteral: '/',
     lineNumber: 3,
     columnNumber: 21,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'name',
     lineNumber: 3,
     columnNumber: 22,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 3,
     columnNumber: 26,
@@ -550,49 +549,49 @@ test('should read text nodes', () => {
 
   // <types>electric, god</types>
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 4,
     columnNumber: 7,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'types',
     lineNumber: 4,
     columnNumber: 8,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 4,
     columnNumber: 13,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.TEXT_NODE,
+    tokenType: XmlTokenType.TextNode,
     tokenLiteral: 'electric, god',
     lineNumber: 4,
     columnNumber: 14,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 4,
     columnNumber: 27,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenType: XmlTokenType.ForwardSlash,
     tokenLiteral: '/',
     lineNumber: 4,
     columnNumber: 28,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'types',
     lineNumber: 4,
     columnNumber: 29,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 4,
     columnNumber: 34,
@@ -602,49 +601,49 @@ test('should read text nodes', () => {
   //    Best pokemon ever!!!
   // </desc>
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 5,
     columnNumber: 7,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'desc',
     lineNumber: 5,
     columnNumber: 8,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 5,
     columnNumber: 12,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.TEXT_NODE,
+    tokenType: XmlTokenType.TextNode,
     tokenLiteral: 'Best pokemon ever!!!\n      ',
     lineNumber: 6,
     columnNumber: 9,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 7,
     columnNumber: 7,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenType: XmlTokenType.ForwardSlash,
     tokenLiteral: '/',
     lineNumber: 7,
     columnNumber: 8,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'desc',
     lineNumber: 7,
     columnNumber: 9,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 7,
     columnNumber: 13,
@@ -652,25 +651,25 @@ test('should read text nodes', () => {
 
   // </pokemon>
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.LEFT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.LeftAngleBracket,
     tokenLiteral: '<',
     lineNumber: 8,
     columnNumber: 5,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.FORWARD_SLASH,
+    tokenType: XmlTokenType.ForwardSlash,
     tokenLiteral: '/',
     lineNumber: 8,
     columnNumber: 6,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.IDENTIFIER,
+    tokenType: XmlTokenType.Identifier,
     tokenLiteral: 'pokemon',
     lineNumber: 8,
     columnNumber: 7,
   });
   expect(nextToken(lexer)).toStrictEqual({
-    tokenType: TokenTypes.RIGHT_ANGLE_BRACKET,
+    tokenType: XmlTokenType.RightAngleBracket,
     tokenLiteral: '>',
     lineNumber: 8,
     columnNumber: 14,
@@ -689,7 +688,7 @@ test('should report error if illegal character found', () => {
     lineNumber: 2,
     columnNumber: 7,
     tokenLiteral: '!',
-    tokenType: TokenTypes.ILLEGAL,
+    tokenType: XmlTokenType.Illegal,
   });
 
   expect(lexer.errors).toStrictEqual([

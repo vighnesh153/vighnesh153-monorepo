@@ -1,8 +1,8 @@
 import { not, repeat, assert } from '@vighnesh153/tools-platform-independent';
-import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
-import { XmlLexer } from './Lexer';
+import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from './tokens';
 
-export function readComment(lexer: XmlLexer): string | null {
+export function readComment(lexer: Lexer<XmlTokenType>): string | null {
   assert(
     lexer.inputReader.currentCharacter === '<' && lexer.inputReader.peekCharacter() === '!',
     `Don't attempt to read a comment if string doesn't start with '<!'`

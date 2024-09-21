@@ -1,4 +1,5 @@
-import { SerializedToken, Token, cloneToken, serializeToken } from '@vighnesh153/lexer-xml';
+import { cloneToken, Token } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from '@vighnesh153/lexer-xml';
 
 export type ParserErrorType =
   | 'UNEXPECTED_TOKEN'
@@ -8,19 +9,19 @@ export type ParserErrorType =
 
 export type ParserErrorProps = {
   readonly errorType: ParserErrorType;
-  readonly culpritToken: Token;
+  readonly culpritToken: Token<XmlTokenType>;
 };
 
 export type SerializedParserError = {
   errorType: ParserErrorType;
-  culpritToken: SerializedToken;
+  culpritToken: Token<XmlTokenType>;
 };
 
 export class ParserError {
   get errorType(): ParserErrorType {
     return this.props.errorType;
   }
-  get culpritToken(): Token {
+  get culpritToken(): Token<XmlTokenType> {
     return cloneToken(this.props.culpritToken);
   }
 
@@ -33,7 +34,7 @@ export class ParserError {
   serialized(): SerializedParserError {
     return {
       errorType: this.errorType,
-      culpritToken: serializeToken(this.culpritToken),
+      culpritToken: this.culpritToken,
     };
   }
 }

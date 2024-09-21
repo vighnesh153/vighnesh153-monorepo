@@ -1,26 +1,25 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Token, TokenType, TokenTypes } from './tokens';
-import { XmlLexer } from './Lexer';
 import { skipWhitespace } from './skipWhitespace';
-import { EOF_CHARACTER, LexerError } from '@vighnesh153/lexer-core';
+import { EOF_CHARACTER, Lexer, LexerError, Token } from '@vighnesh153/lexer-core';
 import { readStringLiteral } from './readStringLiteral';
 import { isAcceptableIdentifierStart, readIdentifier } from './readIdentifier';
 import { readComment } from './readComment';
 import { readTextNode } from './readTextNode';
+import { XmlTokenType } from './tokens';
 
-export function nextToken(lexer: XmlLexer): Token {
-  let t: Token;
+export function nextToken(lexer: Lexer<XmlTokenType>): Token<XmlTokenType> {
+  let t: Token<XmlTokenType>;
 
   skipWhitespace(lexer);
 
   const currCh = lexer.inputReader.currentCharacter;
   switch (currCh) {
     case ':': {
-      t = createToken(lexer, TokenTypes.COLON);
+      t = createToken(lexer, XmlTokenType.Colon);
       break;
     }
     case '=': {
-      t = createToken(lexer, TokenTypes.EQUALS);
+      t = createToken(lexer, XmlTokenType.Equals);
       break;
     }
     case '<': {
@@ -28,46 +27,46 @@ export function nextToken(lexer: XmlLexer): Token {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const commentLiteral = readComment(lexer);
         if (commentLiteral !== null) {
-          t = createToken(lexer, TokenTypes.COMMENT, commentLiteral, lineNumber, columnNumber);
+          t = createToken(lexer, XmlTokenType.CommentLiteral, commentLiteral, lineNumber, columnNumber);
         } else {
-          t = createToken(lexer, TokenTypes.ILLEGAL, `${lexer.inputReader.currentCharacter}`);
+          t = createToken(lexer, XmlTokenType.Illegal, `${lexer.inputReader.currentCharacter}`);
         }
       } else {
-        t = createToken(lexer, TokenTypes.LEFT_ANGLE_BRACKET);
+        t = createToken(lexer, XmlTokenType.LeftAngleBracket);
       }
       break;
     }
     case '>': {
-      t = createToken(lexer, TokenTypes.RIGHT_ANGLE_BRACKET);
+      t = createToken(lexer, XmlTokenType.RightAngleBracket);
       break;
     }
     case '/': {
-      t = createToken(lexer, TokenTypes.FORWARD_SLASH);
+      t = createToken(lexer, XmlTokenType.ForwardSlash);
       break;
     }
     case '?': {
-      t = createToken(lexer, TokenTypes.QUESTION_MARK);
+      t = createToken(lexer, XmlTokenType.QuestionMark);
       break;
     }
     case '"': {
       const { lineNumber, columnNumber } = lexer.inputReader;
       const s = readStringLiteral(lexer);
-      t = createToken(lexer, TokenTypes.STRING_LITERAL, s, lineNumber, columnNumber);
+      t = createToken(lexer, XmlTokenType.StringLiteral, s, lineNumber, columnNumber);
       break;
     }
     case EOF_CHARACTER: {
-      t = createToken(lexer, TokenTypes.EOF);
+      t = createToken(lexer, XmlTokenType.Eof);
       break;
     }
     default: {
-      if (lexer.currentToken == null || lexer.currentToken.tokenType === TokenTypes.RIGHT_ANGLE_BRACKET) {
+      if (lexer.currentToken == null || lexer.currentToken.tokenType === XmlTokenType.RightAngleBracket) {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const textNode = readTextNode(lexer);
-        t = createToken(lexer, TokenTypes.TEXT_NODE, textNode, lineNumber, columnNumber);
+        t = createToken(lexer, XmlTokenType.TextNode, textNode, lineNumber, columnNumber);
       } else if (isAcceptableIdentifierStart(currCh)) {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const identifier = readIdentifier(lexer);
-        t = createToken(lexer, TokenTypes.IDENTIFIER, identifier, lineNumber, columnNumber);
+        t = createToken(lexer, XmlTokenType.Identifier, identifier, lineNumber, columnNumber);
       } else {
         lexer.addError(
           new LexerError({
@@ -79,7 +78,7 @@ export function nextToken(lexer: XmlLexer): Token {
             columnNumber: lexer.inputReader.columnNumber,
           })
         );
-        t = createToken(lexer, TokenTypes.ILLEGAL, currCh);
+        t = createToken(lexer, XmlTokenType.Illegal, currCh);
       }
       break;
     }
@@ -92,12 +91,12 @@ export function nextToken(lexer: XmlLexer): Token {
 }
 
 function createToken(
-  lexer: XmlLexer,
-  tokenType: TokenType,
+  lexer: Lexer<XmlTokenType>,
+  tokenType: XmlTokenType,
   tokenLiteral: string = tokenType.value,
   lineNumber: number = lexer.inputReader.lineNumber,
   columnNumber: number = lexer.inputReader.columnNumber
-): Token {
+): Token<XmlTokenType> {
   return {
     tokenType: tokenType,
     tokenLiteral: tokenLiteral,

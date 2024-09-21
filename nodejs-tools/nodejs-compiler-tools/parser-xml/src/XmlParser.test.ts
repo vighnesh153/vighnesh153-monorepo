@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
 import { test, expect } from 'vitest';
-import { LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
-import { XmlLexer } from '@vighnesh153/lexer-xml';
+import { Lexer, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
+import { XmlTokenType } from '@vighnesh153/lexer-xml';
 import { XmlParser } from './XmlParser';
 import { XmlProgram } from './ast';
 
 function parseProgram(input: string): [XmlParser, XmlProgram] {
   const stringInput = new StringLexerInput(input);
   const inputReader = new LexerInputReader(stringInput);
-  const lexer = new XmlLexer(inputReader);
+  const lexer = new Lexer<XmlTokenType>(inputReader);
   const parser = new XmlParser(lexer);
 
   return [parser, parser.parseProgram()];
@@ -258,9 +258,7 @@ test('should return error if incorrect token position', () => {
       columnNumber: 1,
       lineNumber: 1,
       tokenLiteral: '?',
-      tokenType: {
-        value: '?',
-      },
+      tokenType: XmlTokenType.QuestionMark,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -275,10 +273,8 @@ test('should return error if EOF while reading attribute', () => {
     culpritToken: {
       columnNumber: 16,
       lineNumber: 1,
-      tokenLiteral: 'EOF',
-      tokenType: {
-        value: 'EOF',
-      },
+      tokenLiteral: 'Eof',
+      tokenType: XmlTokenType.Eof,
     },
     errorType: 'UNEXPECTED_EOF',
   });
@@ -294,9 +290,7 @@ test('should return error if identifier token after identifier token instead of 
       columnNumber: 20,
       lineNumber: 1,
       tokenLiteral: 'fruit',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -312,9 +306,7 @@ test('should return error if equals token after colon token instead of identifie
       columnNumber: 18,
       lineNumber: 1,
       tokenLiteral: '=',
-      tokenType: {
-        value: '=',
-      },
+      tokenType: XmlTokenType.Equals,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -330,9 +322,7 @@ test('should return error if identifier token after equals while parsing attribu
       columnNumber: 19,
       lineNumber: 1,
       tokenLiteral: 'orange',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -348,9 +338,7 @@ test('should return error if identifier token after equals while parsing attribu
       columnNumber: 15,
       lineNumber: 1,
       tokenLiteral: 'orange',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -365,10 +353,8 @@ test('should return error if EOF while parsing xml prolog', () => {
     culpritToken: {
       columnNumber: 8,
       lineNumber: 1,
-      tokenLiteral: 'EOF',
-      tokenType: {
-        value: 'EOF',
-      },
+      tokenLiteral: 'Eof',
+      tokenType: XmlTokenType.Eof,
     },
     errorType: 'UNEXPECTED_EOF',
   });
@@ -383,10 +369,8 @@ test('should return error if EOF while parsing xml tag', () => {
     culpritToken: {
       columnNumber: 12,
       lineNumber: 1,
-      tokenLiteral: 'EOF',
-      tokenType: {
-        value: 'EOF',
-      },
+      tokenLiteral: 'Eof',
+      tokenType: XmlTokenType.Eof,
     },
     errorType: 'UNEXPECTED_EOF',
   });
@@ -402,9 +386,7 @@ test('should return error if incorrect token after closing question mark in xml 
       columnNumber: 11,
       lineNumber: 1,
       tokenLiteral: '<',
-      tokenType: {
-        value: '<',
-      },
+      tokenType: XmlTokenType.LeftAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -420,9 +402,7 @@ test('should return error while parsing xml prolog if incorrect token after <?',
       columnNumber: 4,
       lineNumber: 1,
       tokenLiteral: '?',
-      tokenType: {
-        value: '?',
-      },
+      tokenType: XmlTokenType.QuestionMark,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -438,9 +418,7 @@ test('should return error while parsing xml prolog if tag is not xml', () => {
       columnNumber: 4,
       lineNumber: 1,
       tokenLiteral: 'manifest',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_PROLOG_TAG',
   });
@@ -456,9 +434,7 @@ test('should return error if incorrect token while parsing self closing xml tag'
       columnNumber: 15,
       lineNumber: 1,
       tokenLiteral: '<',
-      tokenType: {
-        value: '<',
-      },
+      tokenType: XmlTokenType.LeftAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -473,10 +449,8 @@ test('should return error if EOF while parsing children of xml tag', () => {
     culpritToken: {
       columnNumber: 12,
       lineNumber: 1,
-      tokenLiteral: 'EOF',
-      tokenType: {
-        value: 'EOF',
-      },
+      tokenLiteral: 'Eof',
+      tokenType: XmlTokenType.Eof,
     },
     errorType: 'UNEXPECTED_EOF',
   });
@@ -492,9 +466,7 @@ test('should return error if error while parsing children of xml tag', () => {
       columnNumber: 26,
       lineNumber: 1,
       tokenLiteral: '<',
-      tokenType: {
-        value: '<',
-      },
+      tokenType: XmlTokenType.LeftAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -510,9 +482,7 @@ test('should return error if incorrect token at end of tag', () => {
       columnNumber: 17,
       lineNumber: 1,
       tokenLiteral: '?',
-      tokenType: {
-        value: '?',
-      },
+      tokenType: XmlTokenType.QuestionMark,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -528,9 +498,7 @@ test(`should return error if start and close tag don't match`, () => {
       columnNumber: 17,
       lineNumber: 1,
       tokenLiteral: 'pokemon',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
   });
@@ -546,9 +514,7 @@ test('should return errors if equals without identifier', () => {
       columnNumber: 12,
       lineNumber: 1,
       tokenLiteral: '=',
-      tokenType: {
-        value: '=',
-      },
+      tokenType: XmlTokenType.Equals,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -564,9 +530,7 @@ test('should return errors if "<" instead of ">" in closing tag literal', () => 
       columnNumber: 16,
       lineNumber: 1,
       tokenLiteral: '<',
-      tokenType: {
-        value: '<',
-      },
+      tokenType: XmlTokenType.LeftAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -582,9 +546,7 @@ test('should return errors if nameless tag', () => {
       columnNumber: 3,
       lineNumber: 1,
       tokenLiteral: '>',
-      tokenType: {
-        value: '>',
-      },
+      tokenType: XmlTokenType.RightAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -600,9 +562,7 @@ test('should return error when unexpected token after ":" in tag name', () => {
       columnNumber: 16,
       lineNumber: 1,
       tokenLiteral: '/',
-      tokenType: {
-        value: '/',
-      },
+      tokenType: XmlTokenType.ForwardSlash,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
@@ -618,9 +578,7 @@ test(`should return error if start and end tag names don't match`, () => {
       columnNumber: 19,
       lineNumber: 1,
       tokenLiteral: 'ns3:ns4',
-      tokenType: {
-        value: 'IDENTIFIER',
-      },
+      tokenType: XmlTokenType.Identifier,
     },
     errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
   });
@@ -636,9 +594,7 @@ test('should return error when unexpected token after ":" in in closing tag name
       columnNumber: 30,
       lineNumber: 1,
       tokenLiteral: '>',
-      tokenType: {
-        value: '>',
-      },
+      tokenType: XmlTokenType.RightAngleBracket,
     },
     errorType: 'UNEXPECTED_TOKEN',
   });
