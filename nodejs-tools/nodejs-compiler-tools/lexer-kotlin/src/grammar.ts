@@ -10,7 +10,7 @@ class StateMachineNode {
     return this.tokenType !== null;
   }
 
-  constructor(readonly currCh: string) {}
+  constructor(readonly currState: string) {}
 
   isVisitable(state: string): boolean {
     return this.nextStates.has(state) || this.fallbackNode !== null;
@@ -23,8 +23,8 @@ class StateMachineNode {
     return this.nextStates.get(state)! || this.fallbackNode!;
   }
 
-  createVisitableState(state: string, node: StateMachineNode): void {
-    this.nextStates.set(state, node);
+  createVisitableState(node: StateMachineNode): void {
+    this.nextStates.set(node.currState, node);
   }
 }
 
@@ -35,7 +35,7 @@ function constructOperatorsGrammar(root: StateMachineNode) {
     for (let i = 0; i < literal.length; i++) {
       const state = literal[i];
       if (not(intermediateNode.isVisitable(state))) {
-        intermediateNode.createVisitableState(state, new StateMachineNode(state));
+        intermediateNode.createVisitableState(new StateMachineNode(state));
       }
       intermediateNode = intermediateNode.getVisitableState(state);
     }
@@ -61,7 +61,7 @@ function constructIdentifierGrammar(root: StateMachineNode) {
     for (let j = 0; j < allCharacters.length; j++) {
       const state = allCharacters[j];
       const nextState = charToNode.get(state)!;
-      currState.createVisitableState(state, nextState);
+      currState.createVisitableState(nextState);
     }
   }
 
@@ -69,46 +69,76 @@ function constructIdentifierGrammar(root: StateMachineNode) {
   for (let i = 0; i < startCharacters.length; i++) {
     const state = startCharacters[i];
     const node = charToNode.get(state)!;
-    root.createVisitableState(state, node);
+    root.createVisitableState(node);
   }
 }
 
 function constructCommentsGrammar(root: StateMachineNode) {
   let node = root;
   if (not(root.isVisitable('/'))) {
-    node.createVisitableState('/', new StateMachineNode('/'));
+    node.createVisitableState(new StateMachineNode('/'));
   }
   node = node.getVisitableState('/');
 
   // single line
   if (not(root.isVisitable('/'))) {
-    node.createVisitableState('/', new StateMachineNode('/'));
+    node.createVisitableState(new StateMachineNode('/'));
   }
   node = node.getVisitableState('/');
   node.tokenType = KotlinTokenType.SingleLineComment;
   node.fallbackNode = node;
   const newLineNode = new StateMachineNode('\n');
   newLineNode.tokenType = KotlinTokenType.SingleLineComment;
-  node.createVisitableState('\n', newLineNode);
+  node.createVisitableState(newLineNode);
 
   // multi line
   node = root.getVisitableState('/');
   if (not(root.isVisitable('*'))) {
-    node.createVisitableState('*', new StateMachineNode('*'));
+    node.createVisitableState(new StateMachineNode('*'));
   }
   const startStarNode = node.getVisitableState('*');
   const endStarNode = new StateMachineNode('*');
   endStarNode.fallbackNode = startStarNode;
-  startStarNode.createVisitableState('*', endStarNode);
+  startStarNode.createVisitableState(endStarNode);
   const endForwardSlashNode = new StateMachineNode('/');
   endForwardSlashNode.tokenType = KotlinTokenType.MultiLineComment;
-  endStarNode.createVisitableState('/', endForwardSlashNode);
+  endStarNode.createVisitableState(endForwardSlashNode);
+}
+
+function constructIntegerOrLongGrammar(root: StateMachineNode) {
+  const longNode = new StateMachineNode('L');
+  longNode.tokenType = KotlinTokenType.LongLiteral;
+
+  const underscoreNode = new StateMachineNode('_');
+  underscoreNode.createVisitableState(underscoreNode);
+
+  const digitToNode = Array.from(DIGITS).reduce((acc, digit) => {
+    const node = new StateMachineNode(digit);
+    acc.set(digit, node);
+    node.tokenType = KotlinTokenType.IntegerOrLongLiteral;
+    return acc;
+  }, new Map<string, StateMachineNode>());
+
+  for (let i = 0; i < DIGITS.length; i++) {
+    const digit = DIGITS[i];
+    const node = digitToNode.get(digit)!;
+    root.createVisitableState(node);
+    node.createVisitableState(longNode);
+    node.createVisitableState(underscoreNode);
+    underscoreNode.createVisitableState(node);
+
+    for (let j = 0; j < DIGITS.length; j++) {
+      const childNode = digitToNode.get(DIGITS[j])!;
+      node.createVisitableState(childNode);
+    }
+  }
 }
 
 function constructStateMachine(root: StateMachineNode = new StateMachineNode('')): StateMachineNode {
   constructOperatorsGrammar(root);
   constructIdentifierGrammar(root);
   constructCommentsGrammar(root);
+  constructIntegerOrLongGrammar(root);
 
   return root;
 }
