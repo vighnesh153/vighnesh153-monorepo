@@ -27,6 +27,7 @@
     "dist"
   ],
   "dependencies": {
+    "@vighnesh153/lexer-core": "*",
     "@vighnesh153/tools-platform-independent": "*"
   },
   "devDependencies": {
