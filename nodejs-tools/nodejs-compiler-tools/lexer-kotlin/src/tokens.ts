@@ -9,9 +9,9 @@ export class KotlinTokenType {
   static Identifier = new KotlinTokenType('Identifier');
   static SingleLineComment = new KotlinTokenType('SingleLineComment');
   static MultiLineComment = new KotlinTokenType('MultiLineComment');
-  static IntegerLiteral = new KotlinTokenType('IntegerLiteral');
-  static FloatLiteral = new KotlinTokenType('FloatLiteral');
+  static IntegerOrLongLiteral = new KotlinTokenType('IntegerOrLongLiteral');
   static LongLiteral = new KotlinTokenType('LongLiteral');
+  static FloatLiteral = new KotlinTokenType('FloatLiteral');
   static DoubleLiteral = new KotlinTokenType('DoubleLiteral');
   static StringLiteral = new KotlinTokenType('StringLiteral');
   static CharacterLiteral = new KotlinTokenType('CharacterLiteral');
