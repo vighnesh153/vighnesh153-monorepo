@@ -2,6 +2,7 @@ import { ALPHABET, DIGITS, not } from '@vighnesh153/tools-platform-independent';
 import { KotlinTokenType, operatorTokens } from './tokens';
 
 class StateMachineNode {
+  fallbackNode: StateMachineNode | null = null;
   tokenType: KotlinTokenType | null = null;
   private nextStates = new Map<string, StateMachineNode>();
 
@@ -12,14 +13,14 @@ class StateMachineNode {
   constructor(readonly currCh: string) {}
 
   isVisitable(state: string): boolean {
-    return this.nextStates.has(state);
+    return this.nextStates.has(state) || this.fallbackNode !== null;
   }
 
   getVisitableState(state: string): StateMachineNode {
     if (not(this.isVisitable(state))) {
       throw new Error(`getVisitableState called with '${state}' that is not possible to visit`);
     }
-    return this.nextStates.get(state)!;
+    return this.nextStates.get(state)! || this.fallbackNode!;
   }
 
   createVisitableState(state: string, node: StateMachineNode): void {
@@ -72,9 +73,42 @@ function constructIdentifierGrammar(root: StateMachineNode) {
   }
 }
 
+function constructCommentsGrammar(root: StateMachineNode) {
+  let node = root;
+  if (not(root.isVisitable('/'))) {
+    node.createVisitableState('/', new StateMachineNode('/'));
+  }
+  node = node.getVisitableState('/');
+
+  // single line
+  if (not(root.isVisitable('/'))) {
+    node.createVisitableState('/', new StateMachineNode('/'));
+  }
+  node = node.getVisitableState('/');
+  node.tokenType = KotlinTokenType.SingleLineComment;
+  node.fallbackNode = node;
+  const newLineNode = new StateMachineNode('\n');
+  newLineNode.tokenType = KotlinTokenType.SingleLineComment;
+  node.createVisitableState('\n', newLineNode);
+
+  // multi line
+  node = root.getVisitableState('/');
+  if (not(root.isVisitable('*'))) {
+    node.createVisitableState('*', new StateMachineNode('*'));
+  }
+  const startStarNode = node.getVisitableState('*');
+  const endStarNode = new StateMachineNode('*');
+  endStarNode.fallbackNode = startStarNode;
+  startStarNode.createVisitableState('*', endStarNode);
+  const endForwardSlashNode = new StateMachineNode('/');
+  endForwardSlashNode.tokenType = KotlinTokenType.MultiLineComment;
+  endStarNode.createVisitableState('/', endForwardSlashNode);
+}
+
 function constructStateMachine(root: StateMachineNode = new StateMachineNode('')): StateMachineNode {
   constructOperatorsGrammar(root);
   constructIdentifierGrammar(root);
+  constructCommentsGrammar(root);
 
   return root;
 }
