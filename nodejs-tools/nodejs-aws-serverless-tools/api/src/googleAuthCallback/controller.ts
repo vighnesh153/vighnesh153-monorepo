@@ -5,7 +5,6 @@ import { Resource } from 'sst';
 import { type CookieSerializeOptions } from 'cookie';
 
 import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { type CompleteUserInfo } from '@vighnesh153/types';
 import {
   type Logger,
   type JsonHttpClient,
@@ -13,6 +12,7 @@ import {
   not,
   slugify,
   LambdaResponsePayload,
+  type CompleteUserInfo,
 } from '@vighnesh153/tools-platform-independent';
 import { cookieKeys } from 'vighnesh153-cookies';
 

@@ -30,7 +30,7 @@ export type LambdaResponsePayload = {
   cookies: string[];
 };
 
-const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback'] as const;
+const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback', 'getUser'] as const;
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
 
@@ -48,16 +48,24 @@ export const LambdaFunctionConfig = {
   initiateGoogleLogin: {
     name: 'initiateGoogleLogin',
     method: 'get',
+    authRequired: false,
   },
   initiateLogout: {
     name: 'initiateLogout',
     method: 'get',
+    authRequired: false,
   },
   googleAuthCallback: {
     name: 'googleAuthCallback',
     method: 'get',
+    authRequired: false,
   },
-} satisfies { [key in LambdaFunctionName]: { name: key; method: LambdaMethodType } };
+  getUser: {
+    name: 'getUser',
+    method: 'get',
+    authRequired: false,
+  },
+} satisfies { [key in LambdaFunctionName]: { name: key; method: LambdaMethodType; authRequired: boolean } };
 
 export function constructHttpApiLambdaName(options: {
   stage: StageType;

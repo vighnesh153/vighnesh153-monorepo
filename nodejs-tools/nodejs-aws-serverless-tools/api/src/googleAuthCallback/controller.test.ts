@@ -5,8 +5,9 @@ import {
   JsonHttpResponse,
   JsonHttpClient,
   LambdaResponsePayload,
+  type CompleteUserInfo,
+  type GoogleOAuthUserInfo,
 } from '@vighnesh153/tools-platform-independent';
-import { CompleteUserInfo, GoogleOAuthUserInfo } from '@vighnesh153/types';
 
 import { controller } from './controller';
 import { FakeUserInfoDecoder } from './UserInfoDecoder';
