@@ -1,3 +1,4 @@
+export * as fileUploader from './file-uploader';
 export * from './http-client';
 export * from './logger';
 export * from './utils';
