@@ -1,5 +1,7 @@
 import { createEffect, createSignal, onCleanup, type JSX } from 'solid-js';
 
+import { fileUploader } from '@vighnesh153/tools-platform-independent';
+
 import { UploadInputBox } from './UploadInputBox';
 import { FilesUploadTracker } from './FilesUploadTracker';
 
@@ -9,19 +11,17 @@ export type UploadManagerProps = {
 
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
 export function UploadManager(props: UploadManagerProps): JSX.Element {
-  const [draggingOver, setDraggingOver] = createSignal<boolean>(false);
-  const [filesToUpload, setFilesToUpload] = createSignal<File[]>([
-    // {
-    //   name: 'Pikachu.png',
-    // },
-    // { name: 'Infernape.mp4' },
-    // {
-    //   name: 'Greninja.pdf',
-    // },
-  ]);
+  const fileUploadManager = new fileUploader.FileUploadManager();
+  const [dragCounter, setDragCounter] = createSignal<number>(0);
+  const [fileStates, setFileStates] = createSignal<fileUploader.FileUploadState[]>([]);
 
+  // subscribe to file states
   createEffect(() => {
-    console.log(filesToUpload(), props);
+    const { unsubscribe } = fileUploadManager.subscribe((newFileStates) => {
+      setFileStates(newFileStates);
+    });
+
+    onCleanup(() => unsubscribe());
   });
 
   // Handle clipboard event
@@ -33,7 +33,7 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
 
       const files = items.map((item) => item.getAsFile()).filter((file) => file !== null);
       if (files.length > 0) {
-        setFilesToUpload((o) => [...files, ...o]);
+        fileUploadManager.upload(files);
       }
     }
     document.addEventListener('paste', clipboardEventHandler);
@@ -46,12 +46,14 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
   createEffect(() => {
     function handleDragEnter(e: DragEvent) {
       e.preventDefault();
-      setDraggingOver(true);
+      // Why drag counter instead of just boolean? Because javascript and web is stupid.
+      // ref: https://stackoverflow.com/a/21002544/8822610
+      setDragCounter(dragCounter() + 1);
     }
 
     function handleDragLeave(e: DragEvent) {
       e.preventDefault();
-      setDraggingOver(false);
+      setDragCounter(dragCounter() - 1);
     }
 
     function handleDragOverEvent(e: DragEvent) {
@@ -60,10 +62,10 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
 
     function handleDropEvent(e: DragEvent) {
       e.preventDefault();
-      setDraggingOver(false);
+      setDragCounter(0);
       const files = Array.from(e.dataTransfer?.files ?? []);
       if (files.length > 0) {
-        setFilesToUpload((o) => [...files, ...o]);
+        fileUploadManager.upload(files);
       }
     }
 
@@ -81,11 +83,13 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
 
   return (
     <div>
-      <UploadInputBox
-        draggingOver={draggingOver()}
-        onFilesChange={(newFiles) => setFilesToUpload((o) => [...newFiles, ...o])}
-      />
-      <FilesUploadTracker files={filesToUpload()} class="mt-4" />
+      <div class="relative overflow-hidden">
+        <UploadInputBox
+          draggingOver={dragCounter() > 0}
+          onFilesChange={(newFiles) => fileUploadManager.upload(newFiles)}
+        />
+      </div>
+      <FilesUploadTracker fileStates={fileStates()} class="mt-4" />
     </div>
   );
 }

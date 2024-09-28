@@ -37,12 +37,12 @@ export class FileUploadManager {
   async upload(files: File[]) {
     // update status to queued
     this.fileUploadStates.publish([
-      ...this.states,
       ...files.map<FileUploadState>((file) => ({
         type: 'queued',
         file: file,
         fileId: this.deps.fileIdGenerator.generateFileId(file),
       })),
+      ...this.states,
     ]);
 
     await this.performUpload();

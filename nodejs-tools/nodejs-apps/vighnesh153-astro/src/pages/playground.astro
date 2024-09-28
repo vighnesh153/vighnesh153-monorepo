@@ -1,6 +1,6 @@
 ---
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import { CodeViewer } from '@/components/solid';
+import { CodeViewer, UploadManager } from '@/components/solid';
 import { classes } from '@/utils';
 ---
 
@@ -13,7 +13,8 @@ import { classes } from '@/utils';
     mt-[200px]
   `)}
   >
-    <CodeViewer
+    <UploadManager client:load />
+    <!-- <CodeViewer
       client:only="solid-js"
       lang="kotlin"
       fileName="App.kt"
@@ -62,7 +63,7 @@ fun formatXml(
 } catch (e: Exception) {
     UnknownErrorResponse(e)
 }`}
-    />
+    /> -->
   </div>
 </ContentLayout>
 

@@ -25,6 +25,7 @@ export default {
         width: 'width',
       },
       animation: {
+        'spin-slow': 'spin 3s linear infinite',
         'reverse-spin': 'reverse-spin 1s linear infinite',
       },
       keyframes: {
