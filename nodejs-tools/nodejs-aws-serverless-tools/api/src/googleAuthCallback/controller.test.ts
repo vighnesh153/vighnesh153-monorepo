@@ -16,7 +16,10 @@ import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
 import { FakeCookieSerializer } from '../common/CookieSerializer';
 
 let fakeUserInfoDecoder: FakeUserInfoDecoder;
-let fakeUserInfoTable: FakeDynamoDBTable<typeof UserInfoTableMetadata>;
+let fakeUserInfoTable: FakeDynamoDBTable<{
+  fields: (typeof UserInfoTableMetadata)['fields'];
+  tableName: 'fake-user-info';
+}>;
 let fakeCookieSerializer: FakeCookieSerializer;
 
 const UI_AUTH_COMPLETE_URL = 'https://dev-vighnesh153.dev/auth/callback';
