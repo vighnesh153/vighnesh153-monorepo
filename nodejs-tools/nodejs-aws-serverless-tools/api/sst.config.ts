@@ -11,6 +11,7 @@ import {
 } from '@vighnesh153/tools-platform-independent';
 
 import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
+import { FunctionArgs } from './.sst/platform/src/components/aws';
 
 function validateStage(stage: string): stage is StageType {
   if (!isValidStageType(stage)) {
@@ -65,6 +66,24 @@ export default $config({
       },
     });
 
+    const logging: FunctionArgs['logging'] = {
+      retention: stage === 'prod' ? '2 weeks' : '1 day',
+    };
+
+    new sst.aws.Function('LambdaFunctionGetUser', {
+      link: [userInfoTable, COOKIE_SECRET],
+      name: constructHttpApiLambdaName({
+        stage,
+        functionIdentifier: stageConfig.api.getUser.identifier,
+        method: 'get',
+      }),
+      handler: `dist/${stageConfig.api.getUser.identifier}.handler`,
+      logging,
+      environment: {
+        STAGE: stage,
+      },
+    });
+
     new sst.aws.Function('LambdaFunctionInitiateLogin', {
       link: [GOOGLE_CLIENT_ID],
       name: constructHttpApiLambdaName({
@@ -73,9 +92,7 @@ export default $config({
         method: 'get',
       }),
       handler: `dist/${stageConfig.api.initiateLogin.identifier}.handler`,
-      logging: {
-        retention: stage === 'prod' ? '2 weeks' : '1 day',
-      },
+      logging,
       environment: {
         AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
       },
@@ -89,9 +106,7 @@ export default $config({
         method: 'get',
       }),
       handler: `dist/${stageConfig.api.authCallback.identifier}.handler`,
-      logging: {
-        retention: stage === 'prod' ? '2 weeks' : '1 day',
-      },
+      logging,
       environment: {
         UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
         AUTH_REDIRECT_URL: stageConfig.api.authCallback.path,
@@ -106,9 +121,7 @@ export default $config({
         method: 'get',
       }),
       handler: `dist/${stageConfig.api.initiateLogout.identifier}.handler`,
-      logging: {
-        retention: stage === 'prod' ? '2 weeks' : '1 day',
-      },
+      logging,
       environment: {
         UI_AUTH_COMPLETE_URL: stageConfig.ui.onAuthCompleteCallback,
         STAGE: stage,

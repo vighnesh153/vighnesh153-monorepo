@@ -45,13 +45,8 @@ export const LambdaFunctionNames = LambdaFunctionNameList.reduce(
 );
 
 export const LambdaFunctionConfig = {
-  initiateGoogleLogin: {
-    name: 'initiateGoogleLogin',
-    method: 'get',
-    authRequired: false,
-  },
-  initiateLogout: {
-    name: 'initiateLogout',
+  getUser: {
+    name: 'getUser',
     method: 'get',
     authRequired: false,
   },
@@ -60,8 +55,13 @@ export const LambdaFunctionConfig = {
     method: 'get',
     authRequired: false,
   },
-  getUser: {
-    name: 'getUser',
+  initiateGoogleLogin: {
+    name: 'initiateGoogleLogin',
+    method: 'get',
+    authRequired: false,
+  },
+  initiateLogout: {
+    name: 'initiateLogout',
     method: 'get',
     authRequired: false,
   },
