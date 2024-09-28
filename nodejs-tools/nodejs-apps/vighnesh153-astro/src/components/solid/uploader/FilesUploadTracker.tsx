@@ -2,15 +2,16 @@ import { For, type JSX, Show } from 'solid-js';
 
 import { classes } from '@/utils';
 import { FileUploadTracker } from './FileUploadTracker';
+import { fileUploader } from '@vighnesh153/tools-platform-independent';
 
 export type FilesUploadTrackerProps = {
-  files: File[];
+  fileStates: fileUploader.FileUploadState[];
   class?: string;
 };
 
 export function FilesUploadTracker(props: FilesUploadTrackerProps): JSX.Element {
   return (
-    <Show when={props.files.length > 0}>
+    <Show when={props.fileStates.length > 0}>
       <div class={props.class}>
         <p class="text-text text-lg">Uploading files</p>
         <ul
@@ -25,13 +26,9 @@ export function FilesUploadTracker(props: FilesUploadTrackerProps): JSX.Element 
             `
           )}
         >
-          <For each={props.files}>
-            {(file, index) => (
-              <FileUploadTracker
-                file={file}
-                classList={{ 'border-t': index() !== 0 }}
-                uploadStatus={{ type: 'initializing' }}
-              />
+          <For each={props.fileStates}>
+            {(fileState, index) => (
+              <FileUploadTracker fileState={fileState} classList={{ 'border-t': index() !== 0 }} />
             )}
           </For>
         </ul>
