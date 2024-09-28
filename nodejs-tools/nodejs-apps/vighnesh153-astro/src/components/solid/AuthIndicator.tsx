@@ -1,6 +1,6 @@
 import { createEffect, createSignal, Show } from 'solid-js';
 
-import type { CompleteUserInfo } from '@vighnesh153/types';
+import { type CompleteUserInfo } from '@vighnesh153/tools-platform-independent';
 
 import { browserCookieReaderFactory, classes, computeInitialsFromName, initiateLogout } from '@/utils';
 import { GoogleSignInButton } from './buttons';
