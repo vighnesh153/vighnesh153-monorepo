@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as http2 from 'node:http2';
 
 import { Resource } from 'sst';
@@ -51,5 +52,26 @@ export async function controller({
     };
   }
 
+  const { userId } = filterParams;
+
+  if (not(userId) || userId.trim().length == 0) {
+    // logger.log(`User id = '${userId}' cannot be blank`);
+    // return {
+    //   statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,
+    //   body: `User id is blank`,
+    //   headers: {},
+    //   cookies: [],
+    // };
+    return getLoggedInUser();
+  }
+
+  return getPublicUserInfo({ userId });
+}
+
+function getLoggedInUser(): LambdaResponsePayload {
+  return {};
+}
+
+function getPublicUserInfo({ userId }: { userId: string }): LambdaResponsePayload {
   return {};
 }
