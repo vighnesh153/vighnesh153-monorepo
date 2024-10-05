@@ -1,5 +1,6 @@
 export * from './buttons';
 export * from './code_viewer';
+export * from './note';
 export * from './popover';
 export * from './snackbar';
 export * from './uploader';
