@@ -173,8 +173,11 @@
     }
 
     p {
-      @apply pb-4;
       @apply text-text2;
+
+      &:not(:last-child) {
+        @apply pb-4;
+      }
     }
 
     a {
@@ -200,10 +203,27 @@
 
     ol > li {
       @apply list-decimal;
+      @apply list-none;
+      @apply relative;
+      counter-increment: decimal-list;
+
+      &::before {
+        @apply content-[counter(decimal-list)_'.'];
+        @apply absolute;
+
+        @apply pr-1.5;
+        @apply w-10;
+        @apply -left-10;
+
+        @apply text-accent;
+        @apply text-right;
+        @apply font-bold;
+      }
     }
 
     li {
       @apply py-0.5;
+      @apply text-text2;
     }
 
     hr {

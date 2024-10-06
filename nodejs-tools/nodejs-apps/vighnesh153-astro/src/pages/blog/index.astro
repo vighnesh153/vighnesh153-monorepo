@@ -6,7 +6,7 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
 const posts = await Astro.glob('./*/*.mdx');
 const frontmatters = posts
   .map((it) => ({ ...(it.frontmatter as BlogFrontmatter), url: it.url }))
-  .filter((it) => it.live)
+  .filter((it) => import.meta.env.DEV || it.live)
   .sort((a, b) => (new Date(a.creationDate ?? Date.now()) > new Date(b.creationDate ?? Date.now()) ? -1 : 1));
 ---
 

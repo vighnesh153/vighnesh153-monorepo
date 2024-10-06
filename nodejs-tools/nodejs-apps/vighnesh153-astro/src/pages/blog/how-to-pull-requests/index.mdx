@@ -1,0 +1,121 @@
+---
+layout: '@/layouts/BlogLayout.astro'
+
+title: How to create good pull requests?
+creationDate: 2024-09-29
+description:
+  Turns out creating a pull request requires a lot more effort than just commiting your changes and uploading to a VCS.
+tags: ['software engineering', 'best practices']
+live: false
+---
+
+import { Note } from '@/components/solid';
+
+export function ListItemTitle({ children, message }) {
+  return <span class="text-accent font-bold italic">{children ?? message}</span>;
+}
+
+It's common for developers to work on a feature for an extended period and then submit a pull request (PR) with a large
+number of code changes. However, this can make it challenging for reviewers to effectively review the code, leading to
+delays in merging the PR.
+
+While some developers try to address this by separating their changes on a per-file basis, this approach can present
+challenges, as it may not always be feasible or ideal to ensure complete and thoroughly tested code for each individual
+file before merging and it also makes it hard for the reviewer to understand the code changes you are making for this
+feature. This can sometimes lead to incomplete or broken code being integrated, and I've observed comments like:
+
+- _"I will add unit tests later"_
+- _"It is not possible to test this piece of code at this point"_
+
+When a pull request isn't readily testable, it often indicates that the design approach could benefit from further
+refinement. Instead of focusing on the reviewer's request to break down the changes, it's valuable to take a moment to
+reflect on the design decisions and consider how they might be impacting testability. This collaborative approach can
+lead to more robust and maintainable code in the long run.
+
+In this post, I'd like to share my approach to creating pull requests, along with the reasoning behind each decision. I
+hope this provides some helpful insights into my workflow.
+
+## Size of pull requests
+
+As a reviewer, I have limited time to dedicate to each pull request. A large pull request can be daunting and may lead
+to delays as it gets put aside for a less busy time. However, a smaller pull request, such as one with around 20 lines
+of code, is much more manageable and can often be reviewed quickly. Keeping pull requests concise and focused can
+greatly improve the review process for everyone involved.
+
+Some reasons why creating small pull requests is important:
+
+- <ListItemTitle>Reviewed more quickly and throughly</ListItemTitle>: As a reviewer, I don't have hours to review your
+  code. I will probably look at the pull request, and if it is too big, just close the tab or keep procastinating it to
+  a later point in time. However, if you send me a small PR, say 20 lines of code, I will be more than happy to review
+  it instantly. Also, if a PR is too big, then some reviewers might just give an LGTM without even reviewing it which
+  will worsen the code health.
+- <ListItemTitle>Small, self-contained PRs allow you to work in parallel</ListItemTitle>
+- <ListItemTitle>Less likely to cause merge conflicts</ListItemTitle>
+- <ListItemTitle>Low chances of introducing bugs</ListItemTitle>
+- <ListItemTitle>Easier to design well</ListItemTitle>: It's simpler to polish the design and code health of a small
+  change than it is to refine all the details of a large change.
+
+<Note client:load>
+  Experienced authors who prioritize writing small PRs are generally capable of breaking down _**any complex
+  functionality**_ into a series of small and manageable PRs.
+</Note>
+
+<br />
+
+While there is no golden size of a PR, but usually, a PR should be **one self-contained change** and it means that:
+
+- the PR just addresses a single thing.
+- the PR includes all the relevant test code and should test for all branches within the code
+- the build shouldn't break after mergeing the PR
+
+<Note client:load title="Tip" type="success">
+  I generally like to keep my PRs under 250 lines of code. Your team can determine a reasonable number that works best
+  for you.
+</Note>
+
+<br />
+
+## Exceptions
+
+Some cases when creating big PRs is unavoidable and ok:
+
+- Large Refactor
+- Code deletion / cleanup
+
+## Creating small PRs
+
+I'd like to share my approach to creating smaller pull requests and explore whether a similar workflow might be
+beneficial for your work.
+
+1. <ListItemTitle>Create a Low Level Design (LLD) for this feature</ListItemTitle>- The classes/interfaces you plan to
+   create or modify - The functions/methods you will add or update - The signatures of these functions/methods - Any
+   other relevant implementation details
+1. <ListItemTitle>Get the LLD reviewed by your colleagues.</ListItemTitle> This can be done either by:
+
+   - Writing a doc about the LLD
+   - Your first PR that only creates the class, interface, and function definitions but not their implementation
+
+1. <ListItemTitle>Create a PR with LLD</ListItemTitle>: Create the first PR that only contains the class, interface and
+   function definations but not their implementation, if not done already in the previous step
+1. <ListItemTitle>Implement each class, interface and function in a different PR</ListItemTitle>: Now that you have
+   identified all classes, interfaces and functions, implementing each of them in a different PR will be easy and you
+   should also be able to test the public signature of it.
+
+During the implementation phase, it's not uncommon to realize that adjustments to a public API are necessary, such as
+adding, removing, or modifying function arguments or return types.
+
+In this situation, a best practice is to:
+
+1. Pause work on your current pull request.
+1. Create a new branch dedicated to the API changes. This keeps your changes organized and isolated.
+1. Thoroughly do all API modifications in this dedicated branch.
+1. Get the API changes reviewed and merged.
+1. Communicate these changes clearly to all developers working on the affected classes. It's helpful to provide context
+   for the changes and explain how they might impact their work. Suggest they rebase their branches onto the updated API
+   branch to ensure everyone is working with the latest version.
+
+## Conclusion
+
+This approach of creating small PRs has been very effective for me, and I believe it could be beneficial for you too. It
+does require discipline and some practice, but once you've integrated it into your workflow, you'll likely find it
+preferable to other methods.
