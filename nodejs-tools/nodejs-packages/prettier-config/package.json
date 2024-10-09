@@ -36,6 +36,6 @@
   ],
   "dependencies": {
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-svelte": "^3.2.6"
+    "prettier-plugin-svelte": "^3.2.7"
   }
 }
