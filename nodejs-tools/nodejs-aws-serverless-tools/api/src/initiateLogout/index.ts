@@ -1,13 +1,13 @@
 import * as http2 from 'node:http2';
 
 import { type Handler } from 'aws-lambda';
-import type { CookieSerializeOptions } from 'cookie';
+import type { SerializeOptions } from 'cookie';
 
 import { cookieKeys } from 'vighnesh153-cookies';
+import { LambdaResponsePayload, type Logger } from '@vighnesh153/tools-platform-independent';
 
 import { CookieSerializer } from '../common/CookieSerializer';
-import { cookieSerializerFactory, loggerSingletonFactory } from './factories';
-import { LambdaResponsePayload, type Logger } from '@vighnesh153/tools-platform-independent';
+import { cookieSerializerFactory, loggerSingletonFactory } from '../common/factories';
 
 export async function controller({
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
@@ -23,7 +23,7 @@ export async function controller({
   cookieSerializer?: CookieSerializer;
   logger?: Logger;
 } = {}): Promise<LambdaResponsePayload> {
-  const commonCookieOptions: CookieSerializeOptions = {
+  const commonCookieOptions: SerializeOptions = {
     path: '/',
     domain: '.vighnesh153.dev',
     maxAge: 0,

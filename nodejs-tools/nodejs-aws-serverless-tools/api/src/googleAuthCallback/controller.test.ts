@@ -8,11 +8,11 @@ import {
   type CompleteUserInfo,
   type GoogleOAuthUserInfo,
 } from '@vighnesh153/tools-platform-independent';
+import { FakeDynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 
 import { controller } from './controller';
-import { FakeUserInfoDecoder } from './UserInfoDecoder';
-import { FakeDynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { UserInfoTableMetadata } from './dynamoDBTableMetadata';
+import { FakeUserInfoDecoder } from '../common/UserInfoDecoder';
+import { UserInfoTableMetadata } from '../common/dynamoDBTableMetadata';
 import { FakeCookieSerializer } from '../common/CookieSerializer';
 
 let fakeUserInfoDecoder: FakeUserInfoDecoder;

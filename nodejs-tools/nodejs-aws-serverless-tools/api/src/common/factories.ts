@@ -16,12 +16,12 @@ import {
   JsonHttpClientImpl,
 } from '@vighnesh153/tools-platform-independent';
 
-import { UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 import { userInfoFields } from './dynamoDBTableMetadata';
 import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
-import { AuthTokenGenerator, AuthTokenGeneratorImpl } from '../common/AuthTokenGenerator';
-import { CookieSerializer, CookieSerializerImpl } from '../common/CookieSerializer';
+import { AuthTokenGenerator, AuthTokenGeneratorImpl } from './AuthTokenGenerator';
+import { CookieSerializer, CookieSerializerImpl } from './CookieSerializer';
 import { inProduction } from './utils';
+import { type UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
@@ -31,10 +31,6 @@ export const httpClientSingletonFactory = createSingletonFactory<JsonHttpClient>
   return new JsonHttpClientImpl({
     baseUrl: '',
   });
-});
-
-export const userInfoDecoderSingletonFactory = createSingletonFactory<UserInfoDecoder>(() => {
-  return new UserInfoDecoderImpl(loggerSingletonFactory());
 });
 
 const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<IDynamoDBDocumentClient>(() => {
@@ -49,6 +45,10 @@ export const userInfoTableMetadata = {
 export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof userInfoTableMetadata>>(() => {
   const dynamoDBdocumentClient = dynamoDBDocumentClientSingletonFactory();
   return new DynamoDBTableImpl(dynamoDBdocumentClient, userInfoTableMetadata);
+});
+
+export const userInfoDecoderSingletonFactory = createSingletonFactory<UserInfoDecoder>(() => {
+  return new UserInfoDecoderImpl(loggerSingletonFactory());
 });
 
 export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {

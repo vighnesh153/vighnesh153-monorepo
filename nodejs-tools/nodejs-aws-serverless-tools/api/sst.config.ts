@@ -10,7 +10,7 @@ import {
   type StageType,
 } from '@vighnesh153/tools-platform-independent';
 
-import { userInfoFields } from './src/googleAuthCallback/dynamoDBTableMetadata';
+import { userInfoFields } from './src/common/dynamoDBTableMetadata';
 import { FunctionArgs } from './.sst/platform/src/components/aws';
 
 function validateStage(stage: string): stage is StageType {
