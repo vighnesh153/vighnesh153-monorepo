@@ -2,7 +2,7 @@ import * as http2 from 'node:http2';
 
 import { Resource } from 'sst';
 
-import { type CookieSerializeOptions } from 'cookie';
+import { type SerializeOptions } from 'cookie';
 
 import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 import {
@@ -26,11 +26,11 @@ import {
   userInfoDecoderSingletonFactory,
   userInfoTableSingletonFactory,
   userInfoTableMetadata,
-} from './factories';
-import { type UserInfoDecoder } from './UserInfoDecoder';
-import { type RandomStringGenerator } from './randomStringGenerator';
+} from '../common/factories';
+import { type UserInfoDecoder } from '../common/UserInfoDecoder';
+import { type RandomStringGenerator } from '../common/randomStringGenerator';
 import { type AuthTokenGenerator } from '../common/AuthTokenGenerator';
-import { inProduction } from './utils';
+import { inProduction } from '../common/utils';
 import { CookieSerializer } from '../common/CookieSerializer';
 
 function mask(s?: string | null): string {
@@ -232,7 +232,7 @@ export async function controller({
     cookieSecret,
   });
 
-  const commonCookieOptions: CookieSerializeOptions = {
+  const commonCookieOptions: SerializeOptions = {
     path: '/',
     domain: '.vighnesh153.dev',
     maxAge: milliseconds({ years: 1 }) / 1000,

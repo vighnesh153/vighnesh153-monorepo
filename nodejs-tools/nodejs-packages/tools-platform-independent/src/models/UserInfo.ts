@@ -15,3 +15,11 @@ export interface PublicUserInfo {
 export interface CompleteUserInfo extends PublicUserInfo {
   email: string;
 }
+
+export function convertToPublicUserInfo(completeUserInfo: CompleteUserInfo): PublicUserInfo {
+  const publicUserInfo = { ...completeUserInfo };
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  delete publicUserInfo['email'];
+  return publicUserInfo;
+}

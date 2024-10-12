@@ -1,3 +1,5 @@
+import { CompleteUserInfo } from './models';
+
 export const DEFAULT_AWS_REGION = 'ap-south-1'; // Mumbai
 
 const StageTypes = ['dev', 'prod'] as const;
@@ -21,6 +23,10 @@ export type LambdaRequestPayload<T = unknown> = {
   headers: Record<string, string>;
   body: T;
   filterParams: Record<string, string>;
+  /**
+   * Current logged in user
+   */
+  user: CompleteUserInfo | null;
 };
 
 export type LambdaResponsePayload = {
