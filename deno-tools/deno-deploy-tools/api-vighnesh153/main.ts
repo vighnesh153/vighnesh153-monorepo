@@ -5,10 +5,13 @@ import {
     DEFAULT_AWS_REGION,
     isValidLambdaMethod,
     isValidStageType,
+    LambdaFunctionConfig,
     type LambdaFunctionName,
     LambdaFunctionNames,
+    type LambdaMethodType,
     type LambdaRequestPayload,
     type LambdaResponsePayload,
+    type StageType,
 } from "./.local/tools-platform-independent/aws_config.ts";
 import { HttpHeaderKeys, HttpHeaderValues } from "./.local/tools-platform-independent/http_client_common.ts";
 
@@ -69,6 +72,8 @@ Deno.serve(async (req, _connInfo) => {
     const method = req.method;
     const url = new URL(req.url);
     const headers = convertHeaders(req);
+
+    console.log("Incoming request: method=", method, " path=", req.url, " headers=", headers);
 
     const functionName = (Object.keys(LambdaFunctionNames) as LambdaFunctionName[]).find((functionName) =>
         url.pathname === `/${functionName}`
@@ -135,13 +140,77 @@ Deno.serve(async (req, _connInfo) => {
         user: null,
     };
 
+    if (LambdaFunctionConfig[functionName].authRequired) {
+        const userInfoResponse = await invokeLambdaFunction({
+            functionName: "getUser",
+            method: "get",
+            stage: STAGE,
+            payload: "",
+        });
+
+        if (userInfoResponse.status != 200 || userInfoResponse.data == null) {
+            console.log("Error occurred while fetching authenticated user:", userInfoResponse);
+            return new Response(
+                JSON.stringify({
+                    message: `Some error occurred while fetching authenticated user.`,
+                }),
+                {
+                    headers: userInfoResponse.headers,
+                    status: userInfoResponse.status,
+                },
+            );
+        }
+        try {
+            payload.user = JSON.parse(userInfoResponse.data);
+            if (!payload.user?.userId?.trim()) {
+                console.log(`Authenticated user id is blank:`, userInfoResponse.data);
+                throw new Error(`User id is blank`);
+            }
+        } catch (e) {
+            console.error("Error occurred while parsing logged in user info:", e);
+            return new Response(
+                JSON.stringify({
+                    message: "Failed to parse logged in user info",
+                }),
+                {
+                    headers: {
+                        [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
+                    },
+                    status: 500,
+                },
+            );
+        }
+    }
+
+    // invoke the actual function
+    const lambdaResponse = await invokeLambdaFunction({
+        functionName,
+        method,
+        stage: STAGE,
+        payload,
+    });
+
+    return new Response(lambdaResponse.data, {
+        headers: lambdaResponse.headers,
+        status: lambdaResponse.status,
+    });
+});
+
+async function invokeLambdaFunction<TReq>(
+    { functionName, stage, payload, method }: {
+        functionName: LambdaFunctionName;
+        stage: StageType;
+        payload: TReq;
+        method: LambdaMethodType;
+    },
+): Promise<{ headers: Headers; status: number; data: string | null }> {
     const encodedBody = new TextEncoder().encode(JSON.stringify(payload));
 
     const input: InvocationRequest = {
         FunctionName: constructHttpApiLambdaName({
             functionIdentifier: functionName,
             method,
-            stage: STAGE,
+            stage,
         }),
         InvocationType: InvocationType.RequestResponse,
         LogType: LogType.Tail,
@@ -151,30 +220,32 @@ Deno.serve(async (req, _connInfo) => {
     try {
         const lambdaResponse = await client.send(new InvokeCommand(input));
 
-        const payload: LambdaResponsePayload = JSON.parse(new TextDecoder().decode(lambdaResponse.Payload));
+        const responsePayload: LambdaResponsePayload = JSON.parse(new TextDecoder().decode(lambdaResponse.Payload));
 
         const headers = new Headers();
-        payload.cookies.forEach((cookie) => {
+        responsePayload.cookies.forEach((cookie) => {
             headers.append(HttpHeaderKeys.setCookie, cookie);
         });
-        Object.keys(payload.headers ?? {}).forEach((header) => {
-            headers.append(header, payload.headers![header]);
+        Object.keys(responsePayload.headers ?? {}).forEach((header) => {
+            headers.append(header, responsePayload.headers![header]);
         });
 
-        return new Response(payload.body, {
-            status: payload.statusCode,
+        return {
             headers,
-        });
+            status: responsePayload.statusCode,
+            data: responsePayload.body,
+        };
     } catch (e: unknown) {
         const err = e as { message?: string };
         console.error(`Some error occurred while processing a request:`, err?.message, e);
-        console.log("method=", method, " path=", req.url, " headers=", headers, " body=", body);
 
-        return new Response(JSON.stringify({ error: err?.message ?? "Some error occurred" }), {
+        const headers = new Headers();
+        headers.append(HttpHeaderKeys.contentType, HttpHeaderValues.contentType.applicationJson);
+
+        return {
             status: 500,
-            headers: {
-                [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
-            },
-        });
+            headers,
+            data: JSON.stringify({ error: err?.message ?? "Some error occurred" }),
+        };
     }
-});
+}
