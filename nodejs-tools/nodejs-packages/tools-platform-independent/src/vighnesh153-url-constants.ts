@@ -39,6 +39,10 @@ export interface Vighnesh153Routes {
       path: string;
       identifier: LambdaFunctionName;
     };
+    playground: {
+      path: string;
+      identifier: LambdaFunctionName;
+    };
   };
 }
 
@@ -64,6 +68,7 @@ function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
       getUser: buildApiRouteConfig('getUser'),
       initiateLogin: buildApiRouteConfig('initiateGoogleLogin'),
       initiateLogout: buildApiRouteConfig('initiateLogout'),
+      playground: buildApiRouteConfig('playground'),
     },
   };
 }
