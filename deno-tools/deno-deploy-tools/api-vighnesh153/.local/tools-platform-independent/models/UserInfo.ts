@@ -19,7 +19,7 @@ export interface CompleteUserInfo extends PublicUserInfo {
 export function convertToPublicUserInfo(completeUserInfo: CompleteUserInfo): PublicUserInfo {
     const publicUserInfo = { ...completeUserInfo };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-ignore: typescript is stupid
     delete publicUserInfo["email"];
     return publicUserInfo;
 }
