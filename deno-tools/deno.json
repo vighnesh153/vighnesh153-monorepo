@@ -6,7 +6,7 @@
     },
     "tasks": {
         "deploy:playground": "deployctl deploy --project=vighnesh153-playground --entrypoint=playground.ts",
-        "ok": "deno lint && deno fmt --check && deno test --allow-none"
+        "ok": "deno lint && deno fmt --check && deno test --permit-no-files"
     },
     "imports": {
         "@std/assert": "jsr:@std/assert@1"
