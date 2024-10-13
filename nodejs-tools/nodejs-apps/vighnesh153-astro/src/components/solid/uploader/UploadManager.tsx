@@ -10,6 +10,7 @@ export type UploadManagerProps = {
 };
 
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function UploadManager(props: UploadManagerProps): JSX.Element {
   const fileUploadManager = new fileUploader.FileUploadManager();
   const [dragCounter, setDragCounter] = createSignal<number>(0);
