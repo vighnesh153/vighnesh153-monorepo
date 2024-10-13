@@ -59,6 +59,11 @@ export default $config({
     const userInfoTable = new sst.aws.Dynamo('UserInfoTable', {
       fields: { email: userInfoFields.email, userId: userInfoFields.userId },
       primaryIndex: { hashKey: 'email', rangeKey: 'userId' },
+      // globalIndexes: {
+      //   UserIdIndex: {
+      //     hashKey: 'userId',
+      //   },
+      // },
       transform: {
         table(args) {
           args.name = `UserInfo-${stage}`;

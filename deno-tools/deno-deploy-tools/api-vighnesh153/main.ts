@@ -132,6 +132,7 @@ Deno.serve(async (req, _connInfo) => {
         headers,
         body,
         filterParams: convertUrlSearchParams(url.searchParams),
+        user: null,
     };
 
     const encodedBody = new TextEncoder().encode(JSON.stringify(payload));

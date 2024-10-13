@@ -5,24 +5,28 @@ import { Resource } from 'sst';
 
 import {
   CompleteUserInfo,
-  convertToPublicUserInfo,
+  HttpHeaderKeys,
+  HttpHeaderValues,
   LambdaRequestPayload,
   LambdaResponsePayload,
   Logger,
   not,
   type PublicUserInfo,
 } from '@vighnesh153/tools-platform-independent';
-// import { cookieKeys } from 'vighnesh153-cookies';
 import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 
 import { CookieSerializer } from '../common/CookieSerializer';
 import { inProduction } from '../common/utils';
 import {
+  authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
   loggerSingletonFactory,
   userInfoTableMetadata,
   userInfoTableSingletonFactory,
 } from '../common/factories';
+import { getCompleteUserInfo, getPublicUserInfo } from './fetch_user_info';
+import { AuthTokenGenerator } from '../common/AuthTokenGenerator';
+import { getUserIdFromCookies } from './get_user_id_from_cookies';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';
@@ -43,6 +47,7 @@ export async function controller({
   logger = loggerSingletonFactory(),
   cookieSerializer = cookieSerializerFactory(),
   userInfoDynamoTable = userInfoTableSingletonFactory(),
+  authTokenGenerator = authTokenGeneratorSingletonFactory(),
 }: {
   // environment variables
   cookieSecret?: string;
@@ -56,6 +61,7 @@ export async function controller({
   logger?: Logger;
   cookieSerializer?: CookieSerializer;
   userInfoDynamoTable?: DynamoDBTable<typeof userInfoTableMetadata>;
+  authTokenGenerator?: AuthTokenGenerator;
 } = {}): Promise<LambdaResponsePayload> {
   if (not(cookieSecret) || not(['dev', 'prod'].includes(environmentStage!))) {
     logger.log(
@@ -80,6 +86,7 @@ export async function controller({
       logger,
       cookieSerializer,
       headers,
+      authTokenGenerator,
     });
     if (loggedInUserId == null) {
       return {
@@ -100,72 +107,7 @@ export async function controller({
     cookies: [],
     statusCode: 200,
     headers: {
-      'Content-Type': 'application/json',
+      [HttpHeaderKeys.contentType]: HttpHeaderValues.contentType.applicationJson,
     },
   };
-}
-
-async function getUserIdFromCookies({
-  // cookieSecret,
-  // environmentStage,
-  headers,
-  logger,
-  // cookieSerializer,
-}: {
-  cookieSecret: string;
-  environmentStage: 'dev' | 'prod';
-
-  headers: LambdaRequestPayload['headers'];
-
-  logger: Logger;
-  cookieSerializer: CookieSerializer;
-}): Promise<string | null> {
-  // TODO: fetch user id from headers
-  logger.log(`Pikachu Headers: ${headers}`);
-  return null;
-}
-
-async function getPublicUserInfo({
-  userInfoDynamoTable,
-  logger,
-}: {
-  userId: string;
-  userInfoDynamoTable: DynamoDBTable<typeof userInfoTableMetadata>;
-  logger: Logger;
-}): Promise<PublicUserInfo | null> {
-  const userId = '';
-
-  const completeUserInfo = await getCompleteUserInfo({
-    userId,
-    userInfoDynamoTable,
-    logger,
-  });
-
-  if (completeUserInfo == null) {
-    logger.log(`Failed to get logged in user info`);
-    return null;
-  }
-  return convertToPublicUserInfo(completeUserInfo);
-}
-
-async function getCompleteUserInfo({
-  userId,
-  userInfoDynamoTable,
-  logger,
-}: {
-  userId: string;
-  userInfoDynamoTable: DynamoDBTable<typeof userInfoTableMetadata>;
-  logger: Logger;
-}): Promise<CompleteUserInfo | null> {
-  const res = await userInfoDynamoTable.queryOne({
-    filterBy: {
-      userId: { value: userId },
-    },
-  });
-  if (res.error != null) {
-    logger.log(`Some error occurred when fetching complete user info. ${res.error.message}`, res.error.errorObject);
-    return null;
-  }
-  logger.log(`Successfully fetched user info: ${res.data}`);
-  return res.data;
 }
