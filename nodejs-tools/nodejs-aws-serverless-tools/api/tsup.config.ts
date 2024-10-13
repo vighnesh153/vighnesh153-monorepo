@@ -6,6 +6,7 @@ export default defineConfig(() => ({
     initiateGoogleLogin: './src/initiateGoogleLogin/index.ts',
     initiateLogout: './src/initiateLogout/index.ts',
     getUser: './src/getUser/index.ts',
+    playground: './src/playground/index.ts',
   },
   splitting: false,
   external: ['@aws-sdk/client-dynamodb', '@aws-sdk/lib-dynamodb', '@types/aws-lambda', '@aws-sdk/types'],

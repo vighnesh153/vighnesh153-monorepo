@@ -132,5 +132,15 @@ export default $config({
         STAGE: stage,
       },
     });
+
+    new sst.aws.Function('LambdaFunctionPlayground', {
+      name: constructHttpApiLambdaName({
+        stage,
+        functionIdentifier: stageConfig.api.playground.identifier,
+        method: 'get',
+      }),
+      handler: `dist/${stageConfig.api.playground.identifier}.handler`,
+      logging,
+    });
   },
 });

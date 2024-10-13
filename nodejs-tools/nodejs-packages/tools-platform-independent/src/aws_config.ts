@@ -36,7 +36,13 @@ export type LambdaResponsePayload = {
   cookies: string[];
 };
 
-const LambdaFunctionNameList = ['initiateGoogleLogin', 'initiateLogout', 'googleAuthCallback', 'getUser'] as const;
+const LambdaFunctionNameList = [
+  'initiateGoogleLogin',
+  'initiateLogout',
+  'googleAuthCallback',
+  'getUser',
+  'playground',
+] as const;
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
 
@@ -68,6 +74,11 @@ export const LambdaFunctionConfig = {
   },
   initiateLogout: {
     name: 'initiateLogout',
+    method: 'get',
+    authRequired: false,
+  },
+  playground: {
+    name: 'playground',
     method: 'get',
     authRequired: false,
   },

@@ -133,7 +133,7 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     const payload: LambdaRequestPayload = {
-        method: method,
+        method,
         headers,
         body,
         filterParams: convertUrlSearchParams(url.searchParams),
@@ -145,7 +145,7 @@ Deno.serve(async (req, _connInfo) => {
             functionName: "getUser",
             method: "get",
             stage: STAGE,
-            payload: "",
+            payload: { headers },
         });
 
         if (userInfoResponse.status != 200 || userInfoResponse.data == null) {
