@@ -1,6 +1,6 @@
-import { PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { PutCommand, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
 import { DynamoTypeMap, TableMetadata } from './TableMetadata';
-import { DynamoDBTable, OptionalQueryOne, OptionalCreateOne } from './DynamoDBTable';
+import { DynamoDBTable, OptionalGetOne, OptionalCreateOne } from './DynamoDBTable';
 import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
 
 export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable<T> {
@@ -16,7 +16,48 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
         filterExpression?: (key: string) => string;
       };
     };
-  }): Promise<OptionalQueryOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
+  }): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
+    return this.fetchOne(params, 'query');
+  }
+
+  async scanOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
+    filterBy: {
+      [key in TFilterBy]: {
+        value: DynamoTypeMap[T['fields'][key]];
+        filterExpression?: (key: string) => string;
+      };
+    };
+  }): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
+    return this.fetchOne(params, 'scan');
+  }
+
+  async createOne<TField extends keyof T['fields']>(params: {
+    data: { [key in TField]: DynamoTypeMap[T['fields'][key]] };
+  }): Promise<OptionalCreateOne> {
+    try {
+      await this.client.send(new PutCommand({ TableName: this.tableMetadata.tableName, Item: params.data }));
+      return { error: null };
+    } catch (e) {
+      return {
+        error: {
+          message: 'CREATION_FAILED',
+          errorObject: e,
+        },
+      };
+    }
+  }
+
+  private async fetchOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(
+    params: {
+      filterBy: {
+        [key in TFilterBy]: {
+          value: DynamoTypeMap[T['fields'][key]];
+          filterExpression?: (key: string) => string;
+        };
+      };
+    },
+    type: 'scan' | 'query'
+  ): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
     const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
     const expressionAttributeValues = keys
       // Expected attribute values format:
@@ -37,20 +78,32 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
         },
         {} as Record<string, unknown>
       );
-    const keyConditionExpression = (keys as string[])
+    const conditionExpression = (keys as string[])
       .map((key) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const { filterExpression = equalityFilterExpression } = params.filterBy[key as TFilterBy];
         return filterExpression(key);
       })
       .join(' and ');
-    const queryCommand = new QueryCommand({
-      TableName: this.tableMetadata.tableName,
-      KeyConditionExpression: keyConditionExpression,
-      ExpressionAttributeValues: expressionAttributeValues,
-    });
+    const command = (() => {
+      if (type == 'query') {
+        return new QueryCommand({
+          TableName: this.tableMetadata.tableName,
+          KeyConditionExpression: conditionExpression,
+          ExpressionAttributeValues: expressionAttributeValues,
+        });
+      }
+      if (type == 'scan') {
+        return new ScanCommand({
+          TableName: this.tableMetadata.tableName,
+          FilterExpression: conditionExpression,
+          ExpressionAttributeValues: expressionAttributeValues,
+        });
+      }
+      throw new Error(`Invalid fetch type. Should be either scan or query, found: '${type}'`);
+    })();
     try {
-      const result = await this.client.send(queryCommand);
+      const result = await this.client.send(command);
       const item = result.Items?.[0] ?? null;
       if (item != null) {
         return {
@@ -71,22 +124,6 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
         data: null,
         error: {
           message: 'ERROR_WHILE_FETCHING',
-          errorObject: e,
-        },
-      };
-    }
-  }
-
-  async createOne<TField extends keyof T['fields']>(params: {
-    data: { [key in TField]: DynamoTypeMap[T['fields'][key]] };
-  }): Promise<OptionalCreateOne> {
-    try {
-      await this.client.send(new PutCommand({ TableName: this.tableMetadata.tableName, Item: params.data }));
-      return { error: null };
-    } catch (e) {
-      return {
-        error: {
-          message: 'CREATION_FAILED',
           errorObject: e,
         },
       };
