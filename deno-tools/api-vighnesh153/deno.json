@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "prepare": "./prepare.sh",
+    "deploy:dev": "deployctl deploy --env=STAGE=dev --project=api-vighnesh153-dev",
+    "deploy:prod": "deployctl deploy --env=STAGE=prod --project=api-vighnesh153-prod"
+  },
+  "deploy": {
+    "include": [".", ".local"],
+    "entrypoint": "main.ts",
+    "prod": true
+  },
+  "imports": {
+    "@aws-sdk/client-lambda": "npm:@aws-sdk/client-lambda@3.624.0",
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}
