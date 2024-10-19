@@ -12,7 +12,7 @@ export function memoize<T extends Array<unknown>, U>(
   fn: (...args: T) => U,
   serializeArgs = (...args: T): string | number | boolean =>
     JSON.stringify(args),
-) {
+): (...args: T) => U {
   // Cache to hold all the values
   const memo = new Map<string | number | boolean, U>();
 

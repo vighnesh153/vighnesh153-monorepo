@@ -10,7 +10,7 @@ import type {
 import { JsonHttpResponse } from "./json_http_response.ts";
 import type { HttpQueryParameters } from "../common.ts";
 
-export const JSON_HTTP_CLIENT_TIMEOUT = milliseconds({ seconds: 10 });
+export const JSON_HTTP_CLIENT_TIMEOUT: number = milliseconds({ seconds: 10 });
 
 export interface JsonHttpClientImplProps {
   baseUrl: string;
@@ -179,7 +179,7 @@ export class JsonHttpClientImpl implements JsonHttpClient {
           type: "error",
           statusCode,
           errorMessage: textResponse,
-          error: null,
+          error: e,
         });
       }
     }
@@ -192,11 +192,11 @@ export class JsonHttpClientImpl implements JsonHttpClient {
     });
   }
 
-  private async constructPromiseRejectionResponse<T>(
+  private constructPromiseRejectionResponse<T>(
     error: unknown,
     signal: AbortSignal,
-  ): Promise<JsonHttpResponse<T>> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): JsonHttpResponse<T> {
+    // deno-lint-ignore no-explicit-any
     const errorMessage = (error as any)?.message;
 
     if (signal.aborted) {

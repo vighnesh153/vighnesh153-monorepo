@@ -1,22 +1,6 @@
 import { not } from "./not.ts";
 
 /**
- * Comparison result between 2 elements. Returned result's meaning: <br>
- * -1: first element is greater <br>
- * 0: both elements are same <br>
- * 1: second element is greater <br>
- */
-export type ArrayComparison = -1 | 0 | 1;
-
-function defaultCompareFn<T>(el1: T, el2: T): ArrayComparison {
-  if (el1 < el2) return -1;
-  if (el1 > el2) return 1;
-  return 0;
-}
-
-[].sort();
-
-/**
  * Checks if both arrays are same
  *
  * @param array1 - first array
@@ -27,7 +11,7 @@ function defaultCompareFn<T>(el1: T, el2: T): ArrayComparison {
 export function areArraysEqual<T>(
   array1: Array<T>,
   array2: Array<T>,
-  compareFn = defaultCompareFn<T>,
+  compareFn: ArrayComparator<T> = defaultCompareFn<T>,
 ): boolean {
   if (array1.length !== array2.length) {
     return false;
@@ -57,7 +41,7 @@ export function areArraysEqual<T>(
 export function isArrayLessThan<T>(
   array1: Array<T>,
   array2: Array<T>,
-  compareFn = defaultCompareFn<T>,
+  compareFn: ArrayComparator<T> = defaultCompareFn<T>,
 ): boolean {
   const length1 = array1.length;
   const length2 = array2.length;
@@ -96,7 +80,7 @@ export function isArrayLessThan<T>(
 export function isArrayLessThanOrEqualTo<T>(
   array1: Array<T>,
   array2: Array<T>,
-  compareFn = defaultCompareFn<T>,
+  compareFn: ArrayComparator<T> = defaultCompareFn<T>,
 ): boolean {
   return isArrayLessThan(array1, array2, compareFn) ||
     areArraysEqual(array1, array2, compareFn);
@@ -113,7 +97,7 @@ export function isArrayLessThanOrEqualTo<T>(
 export function isArrayGreaterThan<T>(
   array1: Array<T>,
   array2: Array<T>,
-  compareFn = defaultCompareFn<T>,
+  compareFn: ArrayComparator<T> = defaultCompareFn<T>,
 ): boolean {
   return not(isArrayLessThanOrEqualTo(array1, array2, compareFn));
 }
@@ -129,7 +113,28 @@ export function isArrayGreaterThan<T>(
 export function isArrayGreaterThanOrEqualTo<T>(
   array1: Array<T>,
   array2: Array<T>,
-  compareFn = defaultCompareFn<T>,
+  compareFn: ArrayComparator<T> = defaultCompareFn<T>,
 ): boolean {
   return not(isArrayLessThan(array1, array2, compareFn));
 }
+
+/**
+ * Comparison result between 2 elements. Returned result's meaning: <br>
+ * -1: first element is greater <br>
+ * 0: both elements are same <br>
+ * 1: second element is greater <br>
+ */
+export type ArrayComparisonResult = -1 | 0 | 1;
+
+/**
+ * Compares 2 items in an array
+ */
+export type ArrayComparator<T> = (e1: T, e2: T) => ArrayComparisonResult;
+
+function defaultCompareFn<T>(el1: T, el2: T): ArrayComparisonResult {
+  if (el1 < el2) return -1;
+  if (el1 > el2) return 1;
+  return 0;
+}
+
+[].sort();

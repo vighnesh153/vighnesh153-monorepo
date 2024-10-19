@@ -2,7 +2,10 @@ export interface BinarySearchComparator<T> {
   (entry1: T, entry2: T): -1 | 0 | 1;
 }
 
-export function defaultBinarySearchComparator<T>(entry1: T, entry2: T) {
+export function defaultBinarySearchComparator<T>(
+  entry1: T,
+  entry2: T,
+): -1 | 0 | 1 {
   if (entry1 < entry2) return -1;
   if (entry1 === entry2) return 0;
   return 1;
