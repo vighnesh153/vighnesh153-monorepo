@@ -4,6 +4,7 @@
   "exports": "./src/mod.ts",
   "imports": {
     "@/": "./src/",
+    "@ngneat/falso": "npm:@ngneat/falso@^7.2.0",
     "@std/assert": "jsr:@std/assert",
     "@std/testing": "jsr:@std/testing"
   }
