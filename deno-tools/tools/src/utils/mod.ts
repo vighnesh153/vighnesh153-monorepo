@@ -7,6 +7,7 @@ export * from "./binary_search_rightmost.ts";
 export * from "./constants.ts";
 export * from "./debounce.ts";
 export * from "./factorial.ts";
+export * from "./fakes.ts";
 export * from "./gcd.ts";
 export * from "./heap.ts";
 export * from "./is_even.ts";
