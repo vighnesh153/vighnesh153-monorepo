@@ -1,4 +1,4 @@
-import { assertEquals, assertStrictEquals, assertThrows } from "@std/assert";
+import { assertEquals, assertThrows } from "@std/assert";
 import { range } from "./range.ts";
 
 Deno.test("range should throw error if step is 0", () => {
@@ -45,11 +45,11 @@ Deno.test("range should return a generator of numbers from 1 to 3", () => {
 Deno.test("range should support steps of 2", () => {
   const r = range(1, 10, 2);
 
-  assertStrictEquals(Array.from(r), [1, 3, 5, 7, 9]);
+  assertEquals(Array.from(r), [1, 3, 5, 7, 9]);
 });
 
 Deno.test("range should support negative steps", () => {
   const r = range(3, 1, -1);
 
-  assertStrictEquals(Array.from(r), [3, 2, 1]);
+  assertEquals(Array.from(r), [3, 2, 1]);
 });
