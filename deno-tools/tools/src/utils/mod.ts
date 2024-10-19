@@ -1,3 +1,5 @@
+export * from "./random_word/mod.ts";
+
 export * from "./array_comparison.ts";
 export * from "./binary_search.ts";
 export * from "./binary_search_leftmost.ts";
