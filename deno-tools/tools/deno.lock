@@ -1,14 +1,15 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@kitsonk/xhr@0.5": "0.5.0",
     "jsr:@std/assert@*": "1.0.6",
     "jsr:@std/assert@^1.0.6": "1.0.6",
-    "jsr:@std/async@^1.0.5": "1.0.6",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.4": "1.0.4",
     "jsr:@std/internal@^1.0.4": "1.0.4",
+    "jsr:@std/media-types@1": "1.0.3",
     "jsr:@std/path@^1.0.6": "1.0.6",
-    "jsr:@std/testing@*": "1.0.3",
+    "jsr:@std/testing@^1.0.3": "1.0.3",
     "npm:@ngneat/falso@*": "7.2.0",
     "npm:@ngneat/falso@^7.2.0": "7.2.0",
     "npm:@types/express@*": "4.17.15",
@@ -21,14 +22,17 @@
     "npm:http@*": "0.0.1-security"
   },
   "jsr": {
+    "@kitsonk/xhr@0.5.0": {
+      "integrity": "1bc27fb039125e2ee046aa50209199e1746ae03a17bf910b7a182e2cee893a96",
+      "dependencies": [
+        "jsr:@std/media-types"
+      ]
+    },
     "@std/assert@1.0.6": {
       "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
       "dependencies": [
         "jsr:@std/internal"
       ]
-    },
-    "@std/async@1.0.6": {
-      "integrity": "6d262156dd35c4a72ee1a2f8679be40264f370cfb92e2e13d4eca2ae05e16f34"
     },
     "@std/data-structures@1.0.4": {
       "integrity": "fa0e20c11eb9ba673417450915c750a0001405a784e2a4e0c3725031681684a0"
@@ -42,6 +46,9 @@
     "@std/internal@1.0.4": {
       "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
     },
+    "@std/media-types@1.0.3": {
+      "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
+    },
     "@std/path@1.0.6": {
       "integrity": "ab2c55f902b380cf28e0eec501b4906e4c1960d13f00e11cfbcd21de15f18fed"
     },
@@ -49,7 +56,6 @@
       "integrity": "f98c2bee53860a5916727d7e7d3abe920dd6f9edace022e2d059f00d05c2cf42",
       "dependencies": [
         "jsr:@std/assert@^1.0.6",
-        "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
@@ -798,8 +804,9 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@*",
-      "jsr:@std/testing@*",
+      "jsr:@kitsonk/xhr@0.5",
+      "jsr:@std/assert@^1.0.6",
+      "jsr:@std/testing@^1.0.3",
       "npm:@ngneat/falso@^7.2.0"
     ]
   }

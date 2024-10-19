@@ -1,13 +1,16 @@
-import { assert } from "../utils/assert";
-import { Notification } from "../utils/notification";
+import { assert } from "@std/assert";
+import { Notification } from "@/utils/mod.ts";
 
-import { FileIdGenerator, FileIdGeneratorImpl } from "./file_id_generator.ts";
-import { FileUploader, FileUploaderImpl } from "./file_uploader.ts";
 import {
-  FileUploadMetadataFetcher,
+  type FileIdGenerator,
+  FileIdGeneratorImpl,
+} from "./file_id_generator.ts";
+import { type FileUploader, FileUploaderImpl } from "./file_uploader.ts";
+import {
+  type FileUploadMetadataFetcher,
   FileUploadMetadataFetcherImpl,
 } from "./file_upload_metadata_fetcher.ts";
-import { FileUploadState } from "./types.ts";
+import type { FileUploadState } from "./types.ts";
 
 export type FileUploaderDependencies = {
   fileIdGenerator: FileIdGenerator;
@@ -20,11 +23,12 @@ export class FileUploadManager {
     notifyOnSubscribe: true,
   });
 
+  // @ts-ignore: stupid deno complains that fileUploadStates is used before initialization
   readonly subscribe = this.fileUploadStates.subscribe;
 
   private readonly deps: FileUploaderDependencies;
   private get states(): FileUploadState[] {
-    return this.fileUploadStates.getLatestPublishedData() ?? [];
+    return this.fileUploadStates.getData() ?? [];
   }
 
   constructor(deps: Partial<FileUploaderDependencies> = {}) {

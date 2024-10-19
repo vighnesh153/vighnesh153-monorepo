@@ -1,5 +1,5 @@
-import type {} from "jsr:@kitsonk/xhr/globals";
-import "jsr:@kitsonk/xhr";
+import type {} from "@kitsonk/xhr/globals";
+import "@kitsonk/xhr";
 
 export type FileUploaderResponse = { type: "success" } | {
   type: "error";
@@ -22,14 +22,17 @@ export class FileUploaderImpl implements FileUploader {
   ): Promise<FileUploaderResponse> {
     try {
       await new Promise((resolve, reject) => {
+        // @ts-ignore: Deno doesn't identify the XMLHttpRequest type
         const xhr = new XMLHttpRequest();
         xhr.open("PUT", uploadUrl);
         xhr.setRequestHeader("Content-Type", file.type);
 
+        // @ts-ignore: Deno doesn't identify the XMLHttpRequest type
         xhr.upload.onprogress = (e) => {
           uploadProgress(e.loaded ?? 0);
         };
 
+        // @ts-ignore: Deno doesn't identify the XMLHttpRequest type
         xhr.onerror = (e) => {
           reject(
             new Error(

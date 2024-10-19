@@ -27,7 +27,7 @@ const mergePrimeFactors = (
  *
  * @param numbers - List of numbers to find the lcm of
  */
-export function lcm(...numbers: number[]) {
+export function lcm(...numbers: number[]): number {
   // Validate each number to be a non-negative integer
   numbers.forEach((n) => {
     if (n < 0 || not(Number.isInteger(n))) {
