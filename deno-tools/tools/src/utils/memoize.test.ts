@@ -1,5 +1,5 @@
 import { assertSpyCalls, stub } from "@std/testing/mock";
-import { assertEquals, assertStrictEquals } from "@std/assert";
+import { assertEquals } from "@std/assert";
 import { memoize } from "./memoize.ts";
 
 Deno.test("memoize should not invoke function twice", () => {
@@ -33,9 +33,9 @@ Deno.test("memoize should also memoize functions with complex object and custom 
   const buildMap = () => new Map([[1, 1], [2, 4], [3, 9]]);
 
   // Should return same result for same argument
-  assertStrictEquals(memoizedFunc(buildMap()), [1, 4, 9]);
-  assertStrictEquals(memoizedFunc(buildMap()), [1, 4, 9]);
-  assertStrictEquals(memoizedFunc(buildMap()), [1, 4, 9]);
+  assertEquals(memoizedFunc(buildMap()), [1, 4, 9]);
+  assertEquals(memoizedFunc(buildMap()), [1, 4, 9]);
+  assertEquals(memoizedFunc(buildMap()), [1, 4, 9]);
 
   // Should have only invoked "func" once
   assertSpyCalls(mockedFunc, 1);
@@ -43,8 +43,8 @@ Deno.test("memoize should also memoize functions with complex object and custom 
   const buildMap2 = () => new Map([[1, 1], [2, 4], [3, 9], [4, 16]]);
 
   // Argument has changed and hence, it should invoke it again.
-  assertStrictEquals(memoizedFunc(buildMap2()), [1, 4, 9, 16]);
-  assertStrictEquals(memoizedFunc(buildMap2()), [1, 4, 9, 16]);
+  assertEquals(memoizedFunc(buildMap2()), [1, 4, 9, 16]);
+  assertEquals(memoizedFunc(buildMap2()), [1, 4, 9, 16]);
 
   assertSpyCalls(mockedFunc, 2);
 });

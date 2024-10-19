@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "exports": "./src/mod.ts",
   "imports": {
+    "@/": "./src/",
     "@std/assert": "jsr:@std/assert",
     "@std/testing": "jsr:@std/testing"
   }

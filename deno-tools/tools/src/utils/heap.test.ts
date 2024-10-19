@@ -1,9 +1,4 @@
-import {
-  assertEquals,
-  assertFalse,
-  assertStrictEquals,
-  assertThrows,
-} from "@std/assert";
+import { assertEquals, assertFalse, assertThrows } from "@std/assert";
 import { Heap } from "./heap.ts";
 
 Deno.test("heap.size should return the correct size of the heap", () => {
@@ -38,21 +33,21 @@ Deno.test("heap.toSortedArray should allow to convert the heap of numbers to a s
   const heap = new Heap(array);
   const sortedNumbers = heap.toSortedArray();
 
-  assertStrictEquals(sortedNumbers, array.sort((a, b) => a - b));
+  assertEquals(sortedNumbers, array.sort((a, b) => a - b));
 });
 
 Deno.test("heap.toSortedArray should allow to convert the heap of string to a sorted array of characters", () => {
   const heap = new Heap("qwerty");
   const sortedCharacters = heap.toSortedArray();
 
-  assertStrictEquals(sortedCharacters, ["e", "q", "r", "t", "w", "y"]);
+  assertEquals(sortedCharacters, ["e", "q", "r", "t", "w", "y"]);
 });
 
 Deno.test("heap.push should allow to push an element to the heap", () => {
   const heap = new Heap([4, 3, 5, 7, 1]);
   heap.push(6);
 
-  assertStrictEquals(heap.toSortedArray(), [1, 3, 4, 5, 6, 7]);
+  assertEquals(heap.toSortedArray(), [1, 3, 4, 5, 6, 7]);
 });
 
 Deno.test("heap.peek should allow to peek at top element", () => {
@@ -67,7 +62,7 @@ Deno.test("heap.toSortedArray should not modify the heap when peeking", () => {
   // should not modify array
   heap.peek();
 
-  assertStrictEquals(heap.toSortedArray(), [1, 3, 4, 5, 7]);
+  assertEquals(heap.toSortedArray(), [1, 3, 4, 5, 7]);
 });
 
 Deno.test("heap.toSortedArray should use the custom comparatorFn if passed", () => {
@@ -79,5 +74,5 @@ Deno.test("heap.toSortedArray should use the custom comparatorFn if passed", () 
   const sortedHeapArray = heap.toSortedArray();
 
   // It should be sorted in descending order
-  assertStrictEquals(sortedHeapArray, sortedArray);
+  assertEquals(sortedHeapArray, sortedArray);
 });

@@ -1,4 +1,4 @@
-import { not } from "../utils/not";
+import { not } from "@/utils/mod.ts";
 
 export type JsonHttpResponseSuccessValue<T> = {
   type: "success";

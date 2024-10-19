@@ -1,14 +1,14 @@
-import { milliseconds } from "@/utils";
-import {
+import { milliseconds } from "@/utils/mod.ts";
+import type {
   JsonHttpClient,
   JsonHttpGetRequest,
   JsonHttpPostRequest,
   JsonHttpRequest,
   JsonHttpRequestExecutor,
   JsonHttpResponseMiddleware,
-} from "./JsonHttpClient";
-import { JsonHttpResponse } from "./JsonHttpResponse";
-import { HttpQueryParameters } from "../common";
+} from "./json_http_client.ts";
+import { JsonHttpResponse } from "./json_http_response.ts";
+import type { HttpQueryParameters } from "../common.ts";
 
 export const JSON_HTTP_CLIENT_TIMEOUT = milliseconds({ seconds: 10 });
 

@@ -1,9 +1,9 @@
-import { assertStrictEquals } from "@std/assert";
+import { assertEquals } from "@std/assert";
 import { primeFactorize } from "./prime_factorize.ts";
 
 Deno.test("primeFactorize tests", () => {
-  assertStrictEquals(primeFactorize(-10), {});
-  assertStrictEquals(primeFactorize(1), {});
-  assertStrictEquals(primeFactorize(7), { 7: 1 });
-  assertStrictEquals(primeFactorize(100), { 2: 2, 5: 2 });
+  assertEquals(primeFactorize(-10), {});
+  assertEquals(primeFactorize(1), {});
+  assertEquals(primeFactorize(7), { 7: 1 });
+  assertEquals(primeFactorize(100), { 2: 2, 5: 2 });
 });
