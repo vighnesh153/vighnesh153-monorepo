@@ -1,7 +1,7 @@
-export * from './Lexer';
-export * from './LexerError';
-export * from './LexerInput';
-export * from './LexerInputReader';
+export * from './Lexer.ts';
+export * from './LexerError.ts';
+export * from './LexerInput.ts';
+export * from './LexerInputReader.ts';
 
-export * from './tokens';
-export * from './utils';
+export * from './tokens.ts';
+export * from './utils.ts';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { not } from '@vighnesh153/tools-platform-independent';
+  import { not } from '@vighnesh153/tools';
   import { type EventMode, type IColor, BrushThickness } from '@vighnesh153/drawing-app';
 
   import CloseIcon from '@/icons/CloseIcon.svelte';
@@ -14,7 +14,7 @@
   import ColorButton from './ColorButton.svelte';
   import BrushThicknessButton from './BrushThicknessButton.svelte';
   import ActionButton from './ActionButton.svelte';
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
 
   export let selectedColor: IColor;
   export let selectedEventMode: EventMode;

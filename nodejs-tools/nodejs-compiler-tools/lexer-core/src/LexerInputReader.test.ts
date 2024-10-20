@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
-import { LexerInputReader } from './LexerInputReader';
-import { StringLexerInput } from './LexerInput';
-import { EOF_CHARACTER } from './utils';
+import { LexerInputReader } from './LexerInputReader.ts';
+import { StringLexerInput } from './LexerInput.ts';
+import { EOF_CHARACTER } from './utils.ts';
 
 test('should read empty string without errors', () => {
   const input = new StringLexerInput('');

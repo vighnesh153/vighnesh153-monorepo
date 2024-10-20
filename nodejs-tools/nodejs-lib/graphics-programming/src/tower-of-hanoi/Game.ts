@@ -1,11 +1,11 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { StackConfig } from './Stack';
-import { Disc, DiscConfig } from './Disc';
-import { StacksManager } from './StacksManager';
-import { not, range } from '@vighnesh153/tools-platform-independent';
-import { towerOfHanoi } from './algorithm';
-import { animateDiscMovement } from './animateDiscMovement';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
+import { not, range } from '@vighnesh153/tools';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { StackConfig } from './Stack.ts';
+import { Disc, DiscConfig } from './Disc.ts';
+import { StacksManager } from './StacksManager.ts';
+import { towerOfHanoi } from './algorithm.ts';
+import { animateDiscMovement } from './animateDiscMovement.ts';
 
 export interface TowerOfHanoiGameOptions {
   stackConfig?: StackConfig;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 import {
   fetchLatestContentOfGistFile,
   fetchLatestGistCommitId,
@@ -7,9 +7,9 @@ import {
   getCorsConfig,
   setCache,
   withAuthConfig,
-} from './utils';
-import { constants } from './constants';
-import { CORSConfig, IGithubGistMetadata } from './types';
+} from './utils/index.ts';
+import { constants } from './constants.ts';
+import { CORSConfig, IGithubGistMetadata } from './types/index.ts';
 
 export interface GistFileProps {
   gistMetadata: IGithubGistMetadata;

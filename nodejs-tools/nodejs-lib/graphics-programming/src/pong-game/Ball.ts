@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Point } from './Point';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Point } from './Point.ts';
 
 interface Velocity {
   dx: number;

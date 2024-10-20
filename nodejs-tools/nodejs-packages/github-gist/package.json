@@ -60,6 +60,6 @@
     "vitest": "^2.1.2"
   },
   "dependencies": {
-    "@vighnesh153/tools-platform-independent": "*"
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0"
   }
 }

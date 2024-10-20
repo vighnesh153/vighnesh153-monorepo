@@ -1,6 +1,6 @@
 import esbuild from 'esbuild-wasm';
 import axios from 'axios';
-import { fileCache } from './file-cache';
+import { fileCache } from './file-cache/index.ts';
 
 export const fetchPlugin = (inputCode: string) => {
   return {

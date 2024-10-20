@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { randomUuid } from '@vighnesh153/fake-data';
-import { getCorsConfig, getEnableRequestCaching, isGistPublic } from '../githubGistOptionsUtils';
+import { randomUuid } from '@vighnesh153/tools';
+import { getCorsConfig, getEnableRequestCaching, isGistPublic } from '../githubGistOptionsUtils.ts';
 
 const getBaseConfig = () =>
   ({

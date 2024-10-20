@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { withAuthConfig } from './withAuthConfig';
-import { buildGistFileFetchRequestConfigForCommit } from './buildGistFileFetchRequestConfigForCommit';
-import { CORSConfig } from '../types';
+import { withAuthConfig } from './withAuthConfig.ts';
+import { buildGistFileFetchRequestConfigForCommit } from './buildGistFileFetchRequestConfigForCommit.ts';
+import { CORSConfig } from '../types/index.ts';
 
 export interface FetchLatestContentOfGistFileProps {
   personalAccessToken: string;

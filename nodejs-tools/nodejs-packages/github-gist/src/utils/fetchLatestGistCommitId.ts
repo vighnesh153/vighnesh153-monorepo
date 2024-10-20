@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { constants } from '../constants';
-import { withAuthConfig } from './withAuthConfig';
-import { CORSConfig } from '../types';
-import { withCorsConfig } from './withCorsConfig';
+import { constants } from '../constants.ts';
+import { withAuthConfig } from './withAuthConfig.ts';
+import { CORSConfig } from '../types/index.ts';
+import { withCorsConfig } from './withCorsConfig.ts';
 
 const createRandomParam = () => Math.random().toString(16).split('.')[1];
 

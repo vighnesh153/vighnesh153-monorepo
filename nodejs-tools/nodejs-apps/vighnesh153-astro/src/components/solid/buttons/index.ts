@@ -1,1 +1,1 @@
-export * from './GoogleSignInButton';
+export * from './GoogleSignInButton.tsx';

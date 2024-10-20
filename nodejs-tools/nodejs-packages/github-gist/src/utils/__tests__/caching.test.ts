@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, expect } from 'vitest';
 
-import { randomUuid } from '@vighnesh153/fake-data';
-import { getCache, resetCache, setCache } from '../caching';
+import { randomUuid } from '@vighnesh153/tools';
+import { getCache, resetCache, setCache } from '../caching.ts';
 
 describe('Helpers > "caching" tests', () => {
   const key = randomUuid();

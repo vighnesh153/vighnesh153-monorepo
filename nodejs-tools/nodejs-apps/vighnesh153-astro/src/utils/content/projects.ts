@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'astro/types';
 import GithubIcon from '@/icons/GithubIcon.astro';
 import EyeIcon from '@/icons/EyeIcon.astro';
-import { externalLinks, internalLinks } from './links';
+import { externalLinks, internalLinks } from './links.ts';
 
 interface ProjectLink {
   Icon: (props: HTMLAttributes<'svg'>) => unknown;

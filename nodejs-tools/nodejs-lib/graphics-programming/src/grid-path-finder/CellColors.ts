@@ -1,5 +1,5 @@
 import { type Properties } from 'csstype';
-import { GridPathFinderGame } from './Game';
+import { GridPathFinderGame } from './Game.ts';
 
 const gridPathFinderCellColors = {
   emptyCell: 'white',

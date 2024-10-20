@@ -1,11 +1,14 @@
+// @ts-nocheck
+
 import { For, type JSX, Show } from 'solid-js';
 
-import { classes } from '@/utils';
-import { FileUploadTracker } from './FileUploadTracker';
-import { fileUploader } from '@vighnesh153/tools-platform-independent';
+import { type FileUploadState } from '@vighnesh153/tools/file_upload';
+
+import { classes } from '@/utils/index.ts';
+import { FileUploadTracker } from './FileUploadTracker.tsx';
 
 export type FilesUploadTrackerProps = {
-  fileStates: fileUploader.FileUploadState[];
+  fileStates: FileUploadState[];
   class?: string;
 };
 

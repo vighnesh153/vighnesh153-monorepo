@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '@/components/Button.svelte';
-  import { isPrime, not } from '@vighnesh153/tools-platform-independent';
+  import { isPrime, not } from '@vighnesh153/tools';
 
   let n: number = 0;
   let result = '';

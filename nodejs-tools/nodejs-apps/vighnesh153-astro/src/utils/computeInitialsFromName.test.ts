@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { computeInitialsFromName } from './computeInitialsFromName';
+import { computeInitialsFromName } from './computeInitialsFromName.ts';
 
 test('empty name', () => {
   expect(computeInitialsFromName('')).toBe('');

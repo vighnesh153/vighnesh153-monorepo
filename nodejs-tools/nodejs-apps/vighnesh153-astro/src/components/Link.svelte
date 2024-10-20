@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
   import type { HTMLAnchorAttributes } from 'svelte/elements';
 
   interface $$Props extends HTMLAnchorAttributes {

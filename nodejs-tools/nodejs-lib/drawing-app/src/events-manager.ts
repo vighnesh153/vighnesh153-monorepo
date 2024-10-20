@@ -1,6 +1,6 @@
-import { Queue, Stack, not } from '@vighnesh153/tools-platform-independent';
-import { buildClearScreenEvent, type AppEvent } from './events';
-import { Color } from './colors';
+import { Queue, Stack, not } from '@vighnesh153/tools';
+import { buildClearScreenEvent, type AppEvent } from './events.ts';
+import { Color } from './colors.ts';
 
 export type EventsManager = {
   undoEventsStack: Stack<AppEvent>;

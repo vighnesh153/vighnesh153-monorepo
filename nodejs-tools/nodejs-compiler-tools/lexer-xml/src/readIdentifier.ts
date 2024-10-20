@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { ALPHABET, DIGITS, assert } from '@vighnesh153/tools-platform-independent';
+import { ALPHABET, DIGITS } from '@vighnesh153/tools';
+import { assert } from '@std/assert';
 import { Lexer } from '@vighnesh153/lexer-core';
-import { XmlTokenType } from './tokens';
+import { XmlTokenType } from './tokens.ts';
 
 export function readIdentifier(lexer: Lexer<XmlTokenType>): string {
   assert(

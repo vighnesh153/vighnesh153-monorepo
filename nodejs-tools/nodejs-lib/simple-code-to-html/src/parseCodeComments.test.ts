@@ -1,4 +1,4 @@
-import { parseCodeComments, ParseCodeCommentsOptions } from './parseCodeComments';
+import { parseCodeComments, ParseCodeCommentsOptions } from './parseCodeComments.ts';
 
 const javascriptOptions: ParseCodeCommentsOptions = {
   escapeCharacters: ['\\'],

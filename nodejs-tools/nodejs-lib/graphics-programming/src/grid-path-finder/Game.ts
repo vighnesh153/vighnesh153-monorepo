@@ -1,9 +1,9 @@
-import { Queue, not } from '@vighnesh153/tools-platform-independent';
+import { Queue, not } from '@vighnesh153/tools';
 
-import { BfsCell } from './Cell';
-import { CellsGrid } from './CellsGrid';
-import { fillGridWithStartAndEnd, fillGridWithWalls } from './factories';
-import { CellPosition } from './CellPosition';
+import { BfsCell } from './Cell.ts';
+import { CellsGrid } from './CellsGrid.ts';
+import { fillGridWithStartAndEnd, fillGridWithWalls } from './factories.ts';
+import { CellPosition } from './CellPosition.ts';
 
 export class GridPathFinderGame {
   #grid: CellsGrid;

@@ -1,4 +1,4 @@
-import { JsonHttpPostRequest } from '@vighnesh153/tools-platform-independent';
+import { JsonHttpPostRequest } from '@vighnesh153/tools';
 
 type TokenFetchRequestBuilderProps = {
   authCallbackCode: string;

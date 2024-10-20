@@ -1,2 +1,2 @@
-export * from './UploadInputBox';
-export * from './UploadManager';
+export * from './UploadInputBox.tsx';
+export * from './UploadManager.tsx';

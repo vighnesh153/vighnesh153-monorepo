@@ -46,7 +46,7 @@
     "@types/react-dom": "^18.3.0",
     "@vighnesh153/fake-data": "*",
     "@vighnesh153/react-hooks": "^0.4.7",
-    "@vighnesh153/tools-platform-independent": "*",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0",
     "@vighnesh153/tsconfig": "*",
     "@vitejs/plugin-react": "^4.3.2",
     "eslint-config-vighnesh153": "*",

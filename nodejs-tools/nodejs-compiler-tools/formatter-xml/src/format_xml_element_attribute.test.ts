@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { Token } from '@vighnesh153/lexer-core';
 import { XmlTokenType } from '@vighnesh153/lexer-xml';
-import { formatXmlElementAttribute } from './format_xml_element_attribute';
+import { formatXmlElementAttribute } from './format_xml_element_attribute.ts';
 
 function createToken(tokenLiteral: string, tokenType: XmlTokenType): Token<XmlTokenType> {
   return {

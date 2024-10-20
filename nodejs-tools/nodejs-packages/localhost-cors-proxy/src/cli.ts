@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { startServer } from './server';
+import { startServer } from './server.ts';
 import packageInfo from '../package.json';
 
 const program = new Command();

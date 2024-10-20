@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 import { createEffect, createSignal, onCleanup, type JSX } from 'solid-js';
 
-import { fileUploader } from '@vighnesh153/tools-platform-independent';
+import { FileUploadManager, type FileUploadState } from '@vighnesh153/tools/file_upload';
 
-import { UploadInputBox } from './UploadInputBox';
-import { FilesUploadTracker } from './FilesUploadTracker';
+import { UploadInputBox } from './UploadInputBox.tsx';
+import { FilesUploadTracker } from './FilesUploadTracker.tsx';
 
 export type UploadManagerProps = {
   // TODO: add some props here
@@ -12,9 +14,9 @@ export type UploadManagerProps = {
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function UploadManager(props: UploadManagerProps): JSX.Element {
-  const fileUploadManager = new fileUploader.FileUploadManager();
+  const fileUploadManager = new FileUploadManager();
   const [dragCounter, setDragCounter] = createSignal<number>(0);
-  const [fileStates, setFileStates] = createSignal<fileUploader.FileUploadState[]>([]);
+  const [fileStates, setFileStates] = createSignal<FileUploadState[]>([]);
 
   // subscribe to file states
   createEffect(() => {

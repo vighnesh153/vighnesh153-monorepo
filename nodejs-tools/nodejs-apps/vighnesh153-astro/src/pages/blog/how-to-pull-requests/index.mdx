@@ -9,7 +9,7 @@ tags: ['software engineering', 'best practices']
 live: false
 ---
 
-import { Note } from '@/components/solid';
+import { Note } from '@/components/solid/index.ts';
 
 export function ListItemTitle({ children, message }) {
   return <span class="text-accent font-bold italic">{children ?? message}</span>;

@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { XmlCommentNode, XmlPrologNode, XmlTagNode } from '@vighnesh153/parser-xml';
-import { formatXmlExpression } from './format_xml_expression';
-import { parseProgram } from './test_utils';
+import { formatXmlExpression } from './format_xml_expression.ts';
+import { parseProgram } from './test_utils.ts';
 
 test('should format xml prolog node', () => {
   const [parser, program] = parseProgram(`<? xml  encoding =   "utf-8"  version =  "2.0"   ?>`);

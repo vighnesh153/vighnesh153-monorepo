@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SortingAlgorithm } from './SortingAlgorithm';
+import { SortingAlgorithm } from './SortingAlgorithm.ts';
 
 export class BubbleSortSortingAlgorithm extends SortingAlgorithm {
   *sort() {

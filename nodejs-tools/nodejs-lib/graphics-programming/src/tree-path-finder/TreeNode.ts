@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Position } from './Position';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Position } from './Position.ts';
 
 interface TreeNodeOptions {
   defaultColor?: string;

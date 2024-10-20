@@ -2,23 +2,23 @@
 import { type JSX, children, splitProps, onCleanup, Show, createEffect, createSignal, mergeProps } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 
-import { classes } from '@/utils';
+import { classes } from '@/utils/index.ts';
 import styles from './popover.module.scss';
 
-import { clickOutside } from '../clickOutside';
+import { clickOutside } from '../clickOutside.ts';
 import type {
   PopoverLayoutDirection,
   PopoverPlacement,
   PopoverProps,
   ControlledPopoverProps,
   PopoverToggle,
-} from './externalTypes';
+} from './externalTypes.ts';
 import {
   computeFlexClassesForPopoverContentRootBasedOnPlacement,
   updatePopoverPlacementBasedOnPlacement,
-} from './popover-placement';
+} from './popover-placement.ts';
 
 declare module 'solid-js' {
   // eslint-disable-next-line @typescript-eslint/no-namespace

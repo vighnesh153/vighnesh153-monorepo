@@ -1,5 +1,5 @@
-import { repeat } from '@vighnesh153/tools-platform-independent';
-import { Brick } from './Brick';
+import { repeat } from '@vighnesh153/tools';
+import { Brick } from './Brick.ts';
 
 type BrickCreator = (row: number, column: number) => Brick;
 

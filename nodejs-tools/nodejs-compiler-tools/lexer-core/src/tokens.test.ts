@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { cloneToken, Token } from './tokens';
+import { cloneToken, Token } from './tokens.ts';
 
 test('should clone token', () => {
   const token: Token<'dummy_token_type'> = {

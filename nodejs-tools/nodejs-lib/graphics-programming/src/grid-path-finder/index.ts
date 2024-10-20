@@ -1,3 +1,3 @@
-export * from './CellColors';
-export * from './Game';
-export * from './GameManager';
+export * from './CellColors.ts';
+export * from './Game.ts';
+export * from './GameManager.ts';

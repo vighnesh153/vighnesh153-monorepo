@@ -1,6 +1,6 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { LexerInput } from './LexerInput';
-import { EOF_CHARACTER } from './utils';
+import { not } from '@vighnesh153/tools';
+import { LexerInput } from './LexerInput.ts';
+import { EOF_CHARACTER } from './utils.ts';
 
 export class LexerInputReader {
   #currentIndex = -1;

@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 import { ROOT_HTML_FILE_PATH } from '../constants';
 import { getDirectoryInformation, getDirName, isDirectoryPath, isPathValid } from './utils';
 

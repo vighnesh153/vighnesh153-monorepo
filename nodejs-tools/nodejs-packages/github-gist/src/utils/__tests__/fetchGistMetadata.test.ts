@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import axios from 'axios';
-import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
-import { fetchGistMetadata } from '../fetchGistMetadata';
-import { IGithubGistMetadata } from '../../types';
+import { randomEmail, randomUuid } from '@vighnesh153/tools';
+import { fetchGistMetadata } from '../fetchGistMetadata.ts';
+import { IGithubGistMetadata } from '../../types/index.ts';
 
 vi.mock('axios');
 

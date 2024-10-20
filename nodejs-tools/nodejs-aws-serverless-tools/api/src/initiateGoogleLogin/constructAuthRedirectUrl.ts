@@ -1,7 +1,7 @@
 import { Resource } from 'sst';
 
-import { ConsoleLogger, type Logger } from '@vighnesh153/tools-platform-independent';
-import { authScopes, inProduction } from '../common/utils';
+import { ConsoleLogger, type Logger } from '@vighnesh153/tools';
+import { authScopes, inProduction } from '../common/utils.ts';
 
 export function constructAuthRedirectUrl({
   authRedirectUri = process.env.AUTH_REDIRECT_URL,

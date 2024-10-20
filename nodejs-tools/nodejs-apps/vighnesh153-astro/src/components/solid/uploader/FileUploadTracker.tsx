@@ -1,12 +1,14 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { type JSX, Switch, Match } from 'solid-js';
-import { assert, type fileUploader } from '@vighnesh153/tools-platform-independent';
+import { assert } from '@std/assert';
+import { type FileUploadState } from '@vighnesh153/tools/file_upload';
 
-import { classes } from '@/utils';
-import { FileIcon } from '@/icons/solid';
+import { classes } from '@/utils/index.ts';
+import { FileIcon } from '@/icons/solid/index.ts';
 
 export type FileUploadTrackerProps = {
-  fileState: fileUploader.FileUploadState;
+  fileState: FileUploadState;
   classList?: Record<string, boolean | undefined>;
 };
 
@@ -42,7 +44,7 @@ export function FileUploadTracker(props: FileUploadTrackerProps): JSX.Element {
   );
 }
 
-function UploadProgress({ fileState }: { fileState: fileUploader.FileUploadState }) {
+function UploadProgress({ fileState }: { fileState: FileUploadState }) {
   assert(fileState.type === 'in-progress');
   return (
     <progress
@@ -54,7 +56,7 @@ function UploadProgress({ fileState }: { fileState: fileUploader.FileUploadState
   );
 }
 
-function UploadError({ fileState }: { fileState: fileUploader.FileUploadState }) {
+function UploadError({ fileState }: { fileState: FileUploadState }) {
   assert(fileState.type === 'error');
   return fileState.error.message;
 }

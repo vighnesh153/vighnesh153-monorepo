@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import type { JSX } from 'solid-js';
 
-import { classes } from '@/utils';
-import { InfoIcon, CheckIcon, WarnIcon } from '@/icons/solid';
+import { classes } from '@/utils/index.ts';
+import { InfoIcon, CheckIcon, WarnIcon } from '@/icons/solid/index.ts';
 
 export type NoteType = 'info' | 'warn' | 'success' | 'error';
 

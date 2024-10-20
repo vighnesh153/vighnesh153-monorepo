@@ -1,4 +1,4 @@
-import { dpr } from './dpr';
+import { dpr } from './dpr.ts';
 
 export interface CanvasWrapper {
   readonly width: number;

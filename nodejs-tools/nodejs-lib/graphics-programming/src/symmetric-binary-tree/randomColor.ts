@@ -1,7 +1,7 @@
-import { shuffle } from '@vighnesh153/tools-platform-independent';
+import { shuffleIterable } from '@vighnesh153/tools';
 
 const colors = ['red', 'green', 'black', 'blue', 'yellow', 'orange', 'purple'];
 
 export function randomColor(): string {
-  return shuffle(colors)[0];
+  return shuffleIterable(colors)[0];
 }

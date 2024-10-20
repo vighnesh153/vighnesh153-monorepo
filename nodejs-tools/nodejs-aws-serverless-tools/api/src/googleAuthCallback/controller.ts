@@ -10,13 +10,12 @@ import {
   type JsonHttpClient,
   milliseconds,
   not,
-  slugify,
-  LambdaResponsePayload,
   type CompleteUserInfo,
-} from '@vighnesh153/tools-platform-independent';
-import { cookieKeys } from 'vighnesh153-cookies';
+} from '@vighnesh153/tools';
+import {type LambdaResponsePayload, cookieKeys} from '@vighnesh153/tools/vighnesh153';
+import { slugify } from '@std/text/unstable-slugify'
 
-import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest';
+import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest.ts';
 import {
   authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
@@ -26,12 +25,12 @@ import {
   userInfoDecoderSingletonFactory,
   userInfoTableSingletonFactory,
   userInfoTableMetadata,
-} from '../common/factories';
-import { type UserInfoDecoder } from '../common/UserInfoDecoder';
-import { type RandomStringGenerator } from '../common/randomStringGenerator';
-import { type AuthTokenGenerator } from '../common/AuthTokenGenerator';
-import { inProduction } from '../common/utils';
-import { CookieSerializer } from '../common/CookieSerializer';
+} from '../common/factories.ts';
+import { type UserInfoDecoder } from '../common/UserInfoDecoder.ts';
+import { type RandomStringGenerator } from '../common/randomStringGenerator.ts';
+import { type AuthTokenGenerator } from '../common/AuthTokenGenerator.ts';
+import { inProduction } from '../common/utils.ts';
+import { CookieSerializer } from '../common/CookieSerializer.ts';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';

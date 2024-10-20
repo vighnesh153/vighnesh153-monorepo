@@ -1,7 +1,7 @@
-import { LambdaRequestPayload, Logger } from '@vighnesh153/tools-platform-independent';
-import { cookieKeys } from 'vighnesh153-cookies';
-import { CookieSerializer } from '../common/CookieSerializer';
-import { AuthTokenGenerator } from '../common/AuthTokenGenerator';
+import { Logger } from '@vighnesh153/tools';
+import { LambdaRequestPayload, cookieKeys } from '@vighnesh153/tools/vighnesh153';
+import { CookieSerializer } from '../common/CookieSerializer.ts';
+import { AuthTokenGenerator } from '../common/AuthTokenGenerator.ts';
 
 export async function getUserIdFromCookies({
   cookieSecret,

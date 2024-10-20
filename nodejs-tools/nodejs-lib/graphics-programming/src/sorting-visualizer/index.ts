@@ -1,14 +1,14 @@
-import { SortingAlgorithm } from './SortingAlgorithm';
+import { SortingAlgorithm } from './SortingAlgorithm.ts';
 
 import {
   BubbleSortSortingAlgorithm,
   MergeSortSortingAlgorithm,
   SelectionSortSortingAlgorithm,
   InsertionSortSortingAlgorithm,
-} from './SortingAlgorithmImpls';
+} from './SortingAlgorithmImpls.ts';
 
-export { SortingVisualizerGame } from './Game';
-export { SortingAlgorithm } from './SortingAlgorithm';
+export { SortingVisualizerGame } from './Game.ts';
+export { SortingAlgorithm } from './SortingAlgorithm.ts';
 
 export const sortingAlgorithms = [
   { displayName: 'Bubble sort', algorithmFactory: () => new BubbleSortSortingAlgorithm() },

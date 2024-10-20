@@ -1,8 +1,8 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { ScoreTracker } from './score-tracker';
-import { Pad } from './Pad';
-import { Ball } from './Ball';
-import { ComputerPadController } from './ComputerPadController';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { ScoreTracker } from './score-tracker.ts';
+import { Pad } from './Pad.ts';
+import { Ball } from './Ball.ts';
+import { ComputerPadController } from './ComputerPadController.ts';
 
 interface ArenaOptions {
   contentColor?: string;

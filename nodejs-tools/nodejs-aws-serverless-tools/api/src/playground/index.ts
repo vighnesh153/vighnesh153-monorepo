@@ -1,6 +1,7 @@
 import * as http2 from 'node:http2';
 import { type Handler } from 'aws-lambda';
-import { HttpHeaderKeys, HttpHeaderValues, LambdaRequestPayload } from '@vighnesh153/tools-platform-independent';
+import { HttpHeaderKeys, HttpHeaderValues } from '@vighnesh153/tools';
+import { type LambdaRequestPayload } from '@vighnesh153/tools/vighnesh153';
 
 export const handler: Handler<LambdaRequestPayload> = async (request) => {
   console.log('Playground request:', request);

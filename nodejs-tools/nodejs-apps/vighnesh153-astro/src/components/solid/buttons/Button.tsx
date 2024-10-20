@@ -1,6 +1,6 @@
 import { children, mergeProps, splitProps, type JSX, type ParentProps } from 'solid-js';
 
-import { classes } from '@/utils';
+import { classes } from '@/utils/index.ts';
 
 export type ButtonProps = ParentProps<{
   variant?: 'primary' | 'secondary';

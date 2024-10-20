@@ -1,4 +1,4 @@
-import { DynamoTypeMap, TableMetadata } from './TableMetadata';
+import { DynamoTypeMap, TableMetadata } from './TableMetadata.ts';
 
 export type OptionalGetOne<T> =
   | { data: T; error: null }

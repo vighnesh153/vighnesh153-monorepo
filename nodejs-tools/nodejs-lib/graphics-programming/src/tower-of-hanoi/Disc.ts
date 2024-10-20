@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Position, fixedPosition } from './Position';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Position, fixedPosition } from './Position.ts';
 
 export interface DiscConfig {
   center: Position;

@@ -1,9 +1,9 @@
-import { CommonTypes } from './commonTypes';
-import { reservedWords as defaultReservedWords } from './constants';
-import { ParseCodeCommentsOptions, parseCodeComments } from './parseCodeComments';
-import { ParseCodeOperatorsOptions, parseCodeOperators } from './parseCodeOperators';
-import { ParseCodeReservedWordsOptions, parseCodeReservedWords } from './parseCodeReservedWords';
-import { ParseCodeStringsOptions, parseCodeStrings } from './parseCodeStrings';
+import { CommonTypes } from './commonTypes.ts';
+import { reservedWords as defaultReservedWords } from './constants.ts';
+import { ParseCodeCommentsOptions, parseCodeComments } from './parseCodeComments.ts';
+import { ParseCodeOperatorsOptions, parseCodeOperators } from './parseCodeOperators.ts';
+import { ParseCodeReservedWordsOptions, parseCodeReservedWords } from './parseCodeReservedWords.ts';
+import { ParseCodeStringsOptions, parseCodeStrings } from './parseCodeStrings.ts';
 
 export interface SimpleCodeToHtmlOptions
   extends Partial<CommonTypes>,

@@ -1,5 +1,5 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { GridPathFinderGame } from './Game';
+import { not } from '@vighnesh153/tools';
+import { GridPathFinderGame } from './Game.ts';
 
 export class GridPathFinderGameManager {
   #game: GridPathFinderGame;

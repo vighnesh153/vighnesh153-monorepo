@@ -1,6 +1,6 @@
 <script lang="ts">
   import { simpleCodeToHtml, type SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
 
   export let simpleCodeToHtmlOptions: SimpleCodeToHtmlOptions = {};
   export let inputCode: string;

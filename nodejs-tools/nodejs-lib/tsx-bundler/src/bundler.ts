@@ -1,7 +1,7 @@
 import esbuild from 'esbuild-wasm';
-import { unpkgPathPlugin } from './unpkgPathPlugin';
-import { fetchPlugin } from './fetchPlugin';
-import { esbuildWasmVersion } from './esbuildWasmVersion';
+import { unpkgPathPlugin } from './unpkgPathPlugin.ts';
+import { fetchPlugin } from './fetchPlugin.ts';
+import { esbuildWasmVersion } from './esbuildWasmVersion.ts';
 
 // need to do it this way else Vite will replace process.env.NODE_ENV with values
 const nodeEnv = [`process`, 'env', ['NODE', 'ENV'].join('_')].join('.');

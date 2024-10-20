@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { TreeNode } from './TreeNode';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { TreeNode } from './TreeNode.ts';
 
 interface ConfigOptions {
   color?: string;

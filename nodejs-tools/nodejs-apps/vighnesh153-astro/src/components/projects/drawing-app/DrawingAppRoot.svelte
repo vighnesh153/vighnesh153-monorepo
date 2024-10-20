@@ -21,7 +21,7 @@
     processAppEvent,
   } from '@vighnesh153/drawing-app';
 
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
   import {
     brushThicknessStore,
     colorStore,
@@ -30,7 +30,7 @@
     isUndoAvailableStore,
     eventsManagerStore,
     pendingQueueStore,
-  } from '@/store/projects/drawing-app';
+  } from '@/store/projects/drawing-app/index.ts';
 
   import Toolbar from './Toolbar.svelte';
 

@@ -1,6 +1,6 @@
 import { XmlPrologNode } from '@vighnesh153/parser-xml';
-import { buildIndentationSpace } from './build_indentation_space';
-import { formatXmlElementAttribute } from './format_xml_element_attribute';
+import { buildIndentationSpace } from './build_indentation_space.ts';
+import { formatXmlElementAttribute } from './format_xml_element_attribute.ts';
 
 type FormatXmlPrologNodeOptions = {
   xmlPrologNode: XmlPrologNode;

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import axios from 'axios';
-import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
-import { fetchLatestContentOfGistFile } from '../fetchLatestContentOfGistFile';
+import { randomEmail, randomUuid } from '@vighnesh153/tools';
+import { fetchLatestContentOfGistFile } from '../fetchLatestContentOfGistFile.ts';
 
 vi.mock('axios');
 

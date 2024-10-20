@@ -1,7 +1,7 @@
-import { assert } from '@vighnesh153/tools-platform-independent';
+import { assert } from '@std/assert';
 import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
-import { readEscapeSequence } from './readEscapeSequence';
-import { XmlTokenType } from './tokens';
+import { readEscapeSequence } from './readEscapeSequence.ts';
+import { XmlTokenType } from './tokens.ts';
 
 const DOUBLE_QUOTE = '"';
 

@@ -1,7 +1,7 @@
 import { describe, it, vi, expect } from 'vitest';
 import axios from 'axios';
-import { randomUuid } from '@vighnesh153/fake-data';
-import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId';
+import { randomUuid } from '@vighnesh153/tools';
+import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId.ts';
 
 vi.mock('axios');
 

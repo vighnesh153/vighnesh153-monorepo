@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { ScoreTracker } from './ScoreTracker';
-import { Screen } from './Screen';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { ScoreTracker } from './ScoreTracker.ts';
+import { Screen } from './Screen.ts';
 
 interface InfoScreenOptions {
   scoreTracker: ScoreTracker;

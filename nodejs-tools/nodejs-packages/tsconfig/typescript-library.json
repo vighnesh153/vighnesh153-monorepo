@@ -3,9 +3,10 @@
   "display": "Typescript Library",
   "extends": "./base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "declarationMap": false,
     "emitDeclarationOnly": true,
-    "module": "ESNext",
+    "module": "NodeNext",
     "outDir": "dist",
     "removeComments": false,
     "target": "ESNext"

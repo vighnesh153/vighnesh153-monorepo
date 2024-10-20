@@ -1,12 +1,12 @@
 import { createEffect, createSignal, Show } from 'solid-js';
 
-import { type CompleteUserInfo } from '@vighnesh153/tools-platform-independent';
+import { type CompleteUserInfo } from '@vighnesh153/tools';
 
-import { browserCookieReaderFactory, classes, computeInitialsFromName, initiateLogout } from '@/utils';
-import { GoogleSignInButton } from './buttons';
-import { Avatar } from './Avatar';
-import { Menu } from './Menu';
-import type { ListItemProps } from './ListItem';
+import { browserCookieReaderFactory, classes, computeInitialsFromName, initiateLogout } from '@/utils/index.ts';
+import { GoogleSignInButton } from './buttons/index.ts';
+import { Avatar } from './Avatar.tsx';
+import { Menu } from './Menu.tsx';
+import type { ListItemProps } from './ListItem.tsx';
 
 export type AuthIndicatorProps = {
   userInfo: CompleteUserInfo;

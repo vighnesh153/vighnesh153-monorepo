@@ -1,6 +1,6 @@
 <script lang="ts">
   import { SplExamples } from '@vighnesh153/spl';
-  import { externalLinks, internalLinks } from '@/utils';
+  import { externalLinks, internalLinks } from '@/utils/index.ts';
   import Link from '@/components/Link.svelte';
 </script>
 

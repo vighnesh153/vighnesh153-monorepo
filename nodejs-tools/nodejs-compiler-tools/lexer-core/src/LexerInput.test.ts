@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'vitest';
-import { StringLexerInput } from './LexerInput';
-import { EOF_CHARACTER } from './utils';
+import { StringLexerInput } from './LexerInput.ts';
+import { EOF_CHARACTER } from './utils.ts';
 
 describe('StringLexerInput tests', () => {
   test('should return size of input correctly', () => {

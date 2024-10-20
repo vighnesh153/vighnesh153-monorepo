@@ -1,9 +1,9 @@
-import { randomInteger } from '@vighnesh153/tools-platform-independent';
-import { Position } from './Position';
+import { randomIntegerBetween } from '@std/random';
+import { Position } from './Position.ts';
 
 export function generateRandomPosition(boundX: number, boundY: number): Position {
   return {
-    x: randomInteger(0, boundX),
-    y: randomInteger(0, boundY),
+    x: randomIntegerBetween(0, boundX),
+    y: randomIntegerBetween(0, boundY),
   };
 }

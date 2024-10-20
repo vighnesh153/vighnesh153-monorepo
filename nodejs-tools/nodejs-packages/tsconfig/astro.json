@@ -3,6 +3,7 @@
   "display": "Astro",
   "extends": "./base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

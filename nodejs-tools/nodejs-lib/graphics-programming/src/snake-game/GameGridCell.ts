@@ -1,4 +1,4 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
 
 type CellType = 'empty' | 'snake' | 'food';
 

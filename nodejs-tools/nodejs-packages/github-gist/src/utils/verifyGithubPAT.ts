@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { not } from '@vighnesh153/tools-platform-independent';
-import { constants } from '../constants';
+import { not } from '@vighnesh153/tools';
+import { constants } from '../constants.ts';
 
 async function isTokenValid(token: string): Promise<boolean> {
   const rateLimitEndpoint = constants.urls.github.rateLimit;

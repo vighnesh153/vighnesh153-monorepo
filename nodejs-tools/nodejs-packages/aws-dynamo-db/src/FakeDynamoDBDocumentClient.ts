@@ -1,6 +1,6 @@
 import type { ServiceInputTypes, ServiceOutputTypes } from '@aws-sdk/lib-dynamodb';
-import { Queue } from '@vighnesh153/tools-platform-independent';
-import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
+import { Queue } from '@vighnesh153/tools';
+import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient.ts';
 
 import type { Command, MetadataBearer, HttpHandlerOptions } from '@smithy/types';
 import type { SmithyResolvedConfiguration } from '@smithy/smithy-client';

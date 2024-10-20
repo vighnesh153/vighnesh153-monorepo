@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { XmlTagNode, XmlTextNode } from '@vighnesh153/parser-xml';
-import { formatTextNode } from './format_text_node';
-import { parseProgram } from './test_utils';
+import { formatTextNode } from './format_text_node.ts';
+import { parseProgram } from './test_utils.ts';
 
 test('should format text node with 0 indentation level', () => {
   const [parser, program] = parseProgram(`< pokemon  >  Pikachu    < /  pokemon >`);

@@ -1,6 +1,6 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { UploadIcon } from '@/icons/solid';
-import { classes } from '@/utils';
+import { not } from '@vighnesh153/tools';
+import { UploadIcon } from '@/icons/solid/index.ts';
+import { classes } from '@/utils/index.ts';
 
 export type UploadInputBoxProps = {
   onFilesChange: (files: File[]) => void;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { euclidianDistance } from './euclidian-distance';
-import { Point } from './point';
+import { euclidianDistance } from './euclidian-distance.ts';
+import { Point } from './point.ts';
 
 interface TwoMidpoints {
   midPoint1: Point;

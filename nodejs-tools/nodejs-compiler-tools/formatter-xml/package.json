@@ -32,7 +32,7 @@
     "@vighnesh153/lexer-core": "*",
     "@vighnesh153/lexer-xml": "*",
     "@vighnesh153/parser-xml": "*",
-    "@vighnesh153/tools-platform-independent": "*",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0",
     "@vighnesh153/tsconfig": "*",
     "eslint-config-vighnesh153": "*",
     "tsup": "^8.3.0",

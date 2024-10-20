@@ -4,9 +4,9 @@ import {
   convertToPublicUserInfo,
   Logger,
   PublicUserInfo,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
 import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { userInfoTableMetadata } from '../common/factories';
+import { userInfoTableMetadata } from '../common/factories.ts';
 
 export async function getPublicUserInfo({
   userId,

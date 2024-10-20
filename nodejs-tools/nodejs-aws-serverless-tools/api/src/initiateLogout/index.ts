@@ -3,11 +3,11 @@ import * as http2 from 'node:http2';
 import { type Handler } from 'aws-lambda';
 import type { SerializeOptions } from 'cookie';
 
-import { cookieKeys } from 'vighnesh153-cookies';
-import { LambdaResponsePayload, type Logger } from '@vighnesh153/tools-platform-independent';
+import { type Logger } from '@vighnesh153/tools';
+import { type LambdaResponsePayload, cookieKeys } from '@vighnesh153/tools/vighnesh153';
 
-import { CookieSerializer } from '../common/CookieSerializer';
-import { cookieSerializerFactory, loggerSingletonFactory } from '../common/factories';
+import { CookieSerializer } from '../common/CookieSerializer.ts';
+import { cookieSerializerFactory, loggerSingletonFactory } from '../common/factories.ts';
 
 export async function controller({
   environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,

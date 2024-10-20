@@ -1,1 +1,1 @@
-export { BrickBreakerGame } from './Game';
+export { BrickBreakerGame } from './Game.ts';

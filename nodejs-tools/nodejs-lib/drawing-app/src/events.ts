@@ -1,6 +1,6 @@
-import { BrushThickness } from './AppConfig';
-import { type IColor } from './colors';
-import { createId } from './createId';
+import { BrushThickness } from './AppConfig.ts';
+import { type IColor } from './colors.ts';
+import { createId } from './createId.ts';
 
 export type Point = {
   x: number;

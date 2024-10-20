@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
-import { FakeLogger } from '@vighnesh153/tools-platform-independent';
-import { constructAuthRedirectUrl } from './constructAuthRedirectUrl';
+import { FakeLogger } from '@vighnesh153/tools';
+import { constructAuthRedirectUrl } from './constructAuthRedirectUrl.ts';
 
 test('should return null if authRedirectUri is empty', () => {
   expect(

@@ -1,9 +1,9 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { FoodController } from './FoodController';
-import { Snake } from './Snake';
-import { GameGrid } from './GameGrid';
-import { Direction } from './Direction';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { FoodController } from './FoodController.ts';
+import { Snake } from './Snake.ts';
+import { GameGrid } from './GameGrid.ts';
+import { Direction } from './Direction.ts';
 
 interface GameOptions {
   readonly cols?: number;

@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { randomInteger } from '@vighnesh153/tools-platform-independent';
+import { randomIntegerBetween } from '@std/random'
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
 
 interface TwoWayPipeOptions {
   verticalPadding: number;
@@ -76,6 +76,6 @@ export class TwoWayPipe {
 
   private getRandomTopPipeHeight(): number {
     const maxAvailableHeight = this.canvasWrapper.height - this.verticalPadding * 2;
-    return randomInteger(this.minimumPipeHeight, maxAvailableHeight - this.minimumPipeHeight - this.spaceBetweenPipes);
+    return randomIntegerBetween(this.minimumPipeHeight, maxAvailableHeight - this.minimumPipeHeight - this.spaceBetweenPipes);
   }
 }

@@ -1,4 +1,4 @@
-import { SierpinskisTriangleGame } from './Game';
+import { SierpinskisTriangleGame } from './Game.ts';
 
 export class SierpinskisTriangleGameManager {
   readonly #game: SierpinskisTriangleGame;

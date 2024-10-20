@@ -1,7 +1,7 @@
 import { For } from 'solid-js';
 
-import { ListItem, type ListItemProps } from './ListItem';
-import { Popover, type PopoverPlacement, type PopoverProps } from './popover';
+import { ListItem, type ListItemProps } from './ListItem.tsx';
+import { Popover, type PopoverPlacement, type PopoverProps } from './popover/index.ts';
 
 export type MenuProps = {
   items: ListItemProps[];

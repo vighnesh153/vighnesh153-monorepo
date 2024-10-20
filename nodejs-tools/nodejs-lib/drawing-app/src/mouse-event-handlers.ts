@@ -1,6 +1,6 @@
-import { Point, buildCommitEvent, buildDrawLineEvent, buildFloodFillEvent } from './events';
-import { publishEvents, type EventsManager } from './events-manager';
-import { AppConfig } from './AppConfig';
+import { Point, buildCommitEvent, buildDrawLineEvent, buildFloodFillEvent } from './events.ts';
+import { publishEvents, type EventsManager } from './events-manager.ts';
+import { AppConfig } from './AppConfig.ts';
 
 export type MouseHandlerStore = {
   state: 'idle' | 'pressed' | 'drag';

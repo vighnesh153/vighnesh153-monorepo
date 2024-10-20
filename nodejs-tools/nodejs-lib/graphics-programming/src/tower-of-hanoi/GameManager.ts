@@ -1,4 +1,4 @@
-import { TowerOfHanoiGame } from './Game';
+import { TowerOfHanoiGame } from './Game.ts';
 
 export class TowerOfHanoiGameManager {
   #game: TowerOfHanoiGame;

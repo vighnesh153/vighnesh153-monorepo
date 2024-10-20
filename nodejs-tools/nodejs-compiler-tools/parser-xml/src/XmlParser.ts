@@ -1,6 +1,7 @@
-import { not, assert } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
+import { assert } from '@std/assert';
 import { nextToken, XmlTokenType } from '@vighnesh153/lexer-xml';
-import { ParserError } from './ParserError';
+import { ParserError } from './ParserError.ts';
 import {
   XmlCommentNode,
   XmlElementAttribute,
@@ -9,7 +10,7 @@ import {
   XmlPrologNode,
   XmlTagNode,
   XmlTextNode,
-} from './ast';
+} from './ast.ts';
 import { Lexer, Token } from '@vighnesh153/lexer-core';
 
 export class XmlParser {

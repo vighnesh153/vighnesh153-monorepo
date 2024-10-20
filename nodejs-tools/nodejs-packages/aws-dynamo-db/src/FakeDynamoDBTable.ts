@@ -1,5 +1,5 @@
-import { DynamoDBTable, OptionalCreateOne, OptionalGetOne } from './DynamoDBTable';
-import { DynamoTypeMap, TableMetadata } from './TableMetadata';
+import { DynamoDBTable, OptionalCreateOne, OptionalGetOne } from './DynamoDBTable.ts';
+import { DynamoTypeMap, TableMetadata } from './TableMetadata.ts';
 
 export class FakeDynamoDBTable<T extends TableMetadata> implements DynamoDBTable<T> {
   scanOneResult: OptionalGetOne<{ [key in keyof T['fields']]: DynamoTypeMap[T['fields'][key]] }> =

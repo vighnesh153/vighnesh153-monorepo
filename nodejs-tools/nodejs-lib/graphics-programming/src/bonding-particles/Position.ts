@@ -1,4 +1,4 @@
-import { randomInteger } from '@vighnesh153/tools-platform-independent';
+import { randomIntegerBetween } from '@std/random';
 
 export interface Position {
   x: number;
@@ -7,7 +7,7 @@ export interface Position {
 
 export function createPosition(widthLimit: number, heightLimit: number): Position {
   return {
-    x: randomInteger(0, widthLimit),
-    y: randomInteger(0, heightLimit),
+    x: randomIntegerBetween(0, widthLimit),
+    y: randomIntegerBetween(0, heightLimit),
   };
 }

@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { controller } from './controller';
+import { controller } from './controller.ts';
 
 test('should return 500 if auth redirect url is empty', () => {
   expect(controller(() => null)).toStrictEqual({

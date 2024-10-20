@@ -1,7 +1,7 @@
 import { PutCommand, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
-import { DynamoTypeMap, TableMetadata } from './TableMetadata';
-import { DynamoDBTable, OptionalGetOne, OptionalCreateOne } from './DynamoDBTable';
-import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient';
+import { DynamoTypeMap, TableMetadata } from './TableMetadata.ts';
+import { DynamoDBTable, OptionalGetOne, OptionalCreateOne } from './DynamoDBTable.ts';
+import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient.ts';
 
 export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable<T> {
   constructor(

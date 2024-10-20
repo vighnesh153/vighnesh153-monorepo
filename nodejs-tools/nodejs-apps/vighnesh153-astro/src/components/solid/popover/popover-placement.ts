@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import type { PopoverLayoutDirection, PopoverPlacement } from './externalTypes';
+import type { PopoverLayoutDirection, PopoverPlacement } from './externalTypes.ts';
 
 export function updatePopoverPlacementBasedOnPlacement(
   placement: PopoverPlacement,

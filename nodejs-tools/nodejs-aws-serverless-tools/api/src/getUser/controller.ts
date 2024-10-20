@@ -7,26 +7,25 @@ import {
   CompleteUserInfo,
   HttpHeaderKeys,
   HttpHeaderValues,
-  LambdaRequestPayload,
-  LambdaResponsePayload,
   Logger,
   not,
   type PublicUserInfo,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
+import {LambdaRequestPayload,LambdaResponsePayload} from '@vighnesh153/tools/vighnesh153';
 import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 
-import { CookieSerializer } from '../common/CookieSerializer';
-import { inProduction } from '../common/utils';
+import { CookieSerializer } from '../common/CookieSerializer.ts';
+import { inProduction } from '../common/utils.ts';
 import {
   authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
   loggerSingletonFactory,
   userInfoTableMetadata,
   userInfoTableSingletonFactory,
-} from '../common/factories';
-import { getCompleteUserInfo, getPublicUserInfo } from './fetch_user_info';
-import { AuthTokenGenerator } from '../common/AuthTokenGenerator';
-import { getUserIdFromCookies } from './get_user_id_from_cookies';
+} from '../common/factories.ts';
+import { getCompleteUserInfo, getPublicUserInfo } from './fetch_user_info.ts';
+import { AuthTokenGenerator } from '../common/AuthTokenGenerator.ts';
+import { getUserIdFromCookies } from './get_user_id_from_cookies.ts';
 
 function mask(s?: string | null): string {
   return (s || '').slice(0, 3) + '...';

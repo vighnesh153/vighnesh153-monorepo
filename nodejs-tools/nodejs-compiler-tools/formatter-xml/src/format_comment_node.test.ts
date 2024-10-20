@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { XmlCommentNode } from '@vighnesh153/parser-xml';
-import { formatCommentNode } from './format_comment_node';
-import { parseProgram } from './test_utils';
+import { formatCommentNode } from './format_comment_node.ts';
+import { parseProgram } from './test_utils.ts';
 
 test('should format comment node with 0 indentation level', () => {
   const [parser, program] = parseProgram(
