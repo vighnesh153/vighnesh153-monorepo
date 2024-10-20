@@ -40,7 +40,6 @@ export class LoopWhileExpressionIsTrueParser extends BlockParser {
       const result = lineUnderTest.value.match(regex);
 
       if (result) {
-        // eslint-disable-next-line prefer-destructuring
         const expression = result[1];
         this.lineOfCodes.pop();
         return new LoopWhileExpressionIsTrue(

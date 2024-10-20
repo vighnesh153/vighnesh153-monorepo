@@ -71,7 +71,6 @@ export const bundle = async (inputCode: string): Promise<BundleResult> => {
       status: "success",
       outputCode: buildResult.outputFiles[0].text,
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.log(error);
     return {

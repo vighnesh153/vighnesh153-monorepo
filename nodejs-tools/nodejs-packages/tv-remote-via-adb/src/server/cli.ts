@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 
 import { execSync } from "node:child_process";
 import path from "node:path";
@@ -37,7 +36,6 @@ app.get("/api/devices", (req: ExpressRequest, res: ExpressResponse) => {
 });
 
 app.post("/api/execute", (req: ExpressRequest, res: ExpressResponse) => {
-  // eslint-disable-next-line prefer-destructuring
   const device = req.query.device;
   const partialCommand = req.query.command;
 

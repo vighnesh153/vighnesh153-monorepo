@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { euclidianDistance } from "./euclidian-distance.ts";
 import { Point } from "./point.ts";
 

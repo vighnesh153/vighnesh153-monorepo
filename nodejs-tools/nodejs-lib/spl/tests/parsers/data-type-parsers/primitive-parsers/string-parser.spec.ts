@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { DatatypeParser } from "@/parsers/data-type-parsers/datatype-parser";
 import { StringParser } from "@/parsers/data-type-parsers/primitive-parsers/string-parser";
 

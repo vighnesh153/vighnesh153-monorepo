@@ -18,7 +18,6 @@ describe("check the functionality of function definition block parser.", () => {
     addLineOfCode(
       "define function func with arguments [] which returns nothing:",
     );
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
     linesOfCode.reverse();
 

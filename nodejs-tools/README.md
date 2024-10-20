@@ -9,8 +9,6 @@ running on nodejs.
 
 ### Published
 
-- [eslint-config-vighnesh153](https://www.npmjs.com/package/eslint-config-vighnesh153):
-  ESLint configuration that suits my preferences
 - [@vighnesh153/fake-data](https://www.npmjs.com/package/@vighnesh153/fake-data):
   A wrapper over bunch of fake data generation libraries
 - [@vighnesh153/ftp-server](https://www.npmjs.com/package/@vighnesh153/ftp-server):
@@ -19,8 +17,6 @@ running on nodejs.
   A promise based wrapper over GitHub Gist REST API
 - [@vighnesh153/localhost-cors-proxy](https://www.npmjs.com/package/@vighnesh153/localhost-cors-proxy):
   A simple proxy server for unlocking CORS disabled urls on localhost
-- [@vighnesh153/prettier-config](https://www.npmjs.com/package/@vighnesh153/prettier-config):
-  My preferred prettier configuration
 - [@vighnesh153/tsconfig](https://www.npmjs.com/package/@vighnesh153/tsconfig):
   Typescript configuration that I like
 - [@vighnesh153/-version](https://www.npmjs.com/package/@vighnesh153/version-tracker):

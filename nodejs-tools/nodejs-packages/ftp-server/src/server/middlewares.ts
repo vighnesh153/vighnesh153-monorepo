@@ -44,9 +44,7 @@ export function handleZip(servingPath: string) {
     const zipArchive = archiver("zip");
 
     zipArchive.on("end", () => {
-      /* eslint-disable no-console */
       console.log(chalk.green(`${zipArchive.pointer()} total bytes`));
-      /* eslint-enable no-console */
     });
 
     zipArchive.on("error", (error) => {
@@ -63,9 +61,7 @@ export function handleZip(servingPath: string) {
     zipArchive.directory(userRequestedPath, folderName);
 
     zipArchive.finalize().then(() => {
-      /* eslint-disable no-console */
       console.log(chalk.yellow("/zip: Configuration complete"));
-      /* eslint-enable no-console */
     });
   };
 }

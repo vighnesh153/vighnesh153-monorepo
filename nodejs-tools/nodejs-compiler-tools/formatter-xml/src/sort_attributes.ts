@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { not } from "@vighnesh153/tools";
 import { XmlElementAttribute } from "@vighnesh153/parser-xml";
 

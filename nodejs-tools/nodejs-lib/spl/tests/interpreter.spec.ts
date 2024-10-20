@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { Interpreter } from "@/interpreter";
 import { LineOfCode } from "@/models/LineOfCode";
 import { Scope } from "@/models/Scope";

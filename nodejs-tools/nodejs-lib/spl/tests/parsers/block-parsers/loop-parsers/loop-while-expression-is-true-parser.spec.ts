@@ -1,7 +1,6 @@
 import { LineOfCode } from "@/models/LineOfCode";
 import { Scope } from "@/models/Scope";
 import { OutputBuffer } from "@/models/OutputBuffer";
-// prettier-ignore
 import {
   LoopWhileExpressionIsTrueParser,
 } from "@/parsers/block-parsers/loop-parsers/loop-while-expression-is-true-parser";

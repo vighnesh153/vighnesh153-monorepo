@@ -1,5 +1,4 @@
 // @ts-nocheck
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { type JSX, Match, Switch } from "solid-js";
 import { assert } from "@std/assert";
 import { type FileUploadState } from "@vighnesh153/tools/file_upload";

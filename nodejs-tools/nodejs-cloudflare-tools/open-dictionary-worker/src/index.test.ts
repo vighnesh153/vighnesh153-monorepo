@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import worker from ".";
+import worker from "./index.ts";
 
 describe("Worker", () => {
   it("should return correct message if word is not provided", async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-ignore: legacy
     const resp = await worker.fetch({
       url: `https://open-dictionary.vighnesh153.workers.dev`,
     });
@@ -18,8 +17,7 @@ describe("Worker", () => {
   });
 
   it("should return correct message if word is invalid english word", async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-ignore: legacy
     const resp = await worker.fetch({
       url: `https://open-dictionary.vighnesh153.workers.dev?word=vighnesh`,
     });
@@ -34,8 +32,7 @@ describe("Worker", () => {
   });
 
   it("should return correct definition if word is correct english word", async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-ignore: legacy
     const resp = await worker.fetch({
       url: `https://open-dictionary.vighnesh153.workers.dev?word=ok`,
     });

@@ -41,7 +41,6 @@ export function readComment(lexer: Lexer<XmlTokenType>): string | null {
 
   const commentLiteralBuilder: string[] = [];
 
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     const currCh = lexer.inputReader.currentCharacter as string;
 

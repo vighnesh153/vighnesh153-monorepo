@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { skipWhitespace } from "./skipWhitespace.ts";
 import {
   EOF_CHARACTER,

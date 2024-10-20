@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scope } from "@/models/Scope";
 import { LineOfCode } from "@/models/LineOfCode";
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
@@ -10,7 +9,6 @@ import {
 } from "@/blocks/variable-blocks/variable-block";
 
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -67,7 +65,6 @@ export class VariableModificationParser extends BlockParser {
       /^([_a-zA-Z][_a-zA-Z0-9]*)\[(.+)]$/,
     );
     if (regexMatchResult) {
-      // eslint-disable-next-line prefer-destructuring
       const arrayName = regexMatchResult[1];
       if (arrayName === "") {
         throw new Error(
@@ -75,7 +72,6 @@ export class VariableModificationParser extends BlockParser {
             this.lineOfCodes[this.lineOfCodes.length - 1].number,
         );
       }
-      // eslint-disable-next-line prefer-destructuring
       const indexOfArrayAsString = regexMatchResult[2];
       let index: unknown;
       try {
@@ -168,9 +164,7 @@ export class VariableModificationParser extends BlockParser {
         VariableModificationParser.regex,
       );
       if (result) {
-        // eslint-disable-next-line prefer-destructuring
         const variableName = result[1];
-        // eslint-disable-next-line prefer-destructuring
         const value = result[2];
 
         if (/\[.*]$/.test(variableName)) {

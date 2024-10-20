@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import { BlockParser } from "src/parsers/block-parsers/block-parser";
 import { LineOfCode } from "src/models/LineOfCode";
 import { Scope } from "src/models/Scope";
 import { Block } from "src/blocks/Block";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -58,7 +58,6 @@ export class LoopForXTimesParser extends BlockParser {
     );
 
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const countString = result[1];
       const evaluator = new ArithmeticExpressionEvaluator(this.scope);
 
@@ -81,9 +80,7 @@ export class LoopForXTimesParser extends BlockParser {
     );
 
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const countString = result[1];
-      // eslint-disable-next-line prefer-destructuring
       const variableName = result[2];
       const evaluator = new ArithmeticExpressionEvaluator(this.scope);
 

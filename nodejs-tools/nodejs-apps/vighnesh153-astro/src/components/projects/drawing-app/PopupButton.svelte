@@ -9,10 +9,7 @@
   let popupState: PopupState = 'closed';
 
   function togglePopup(state?: PopupState) {
-    // prettier-ignore
-    popupState = state !== undefined 
-      ? state 
-      : (popupState === 'open' ? 'closed' : 'open');
+    popupState = state !== undefined ? state : popupState === 'open' ? 'closed' : 'open';
   }
 </script>
 

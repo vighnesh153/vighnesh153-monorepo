@@ -42,12 +42,10 @@ export function serverIsListeningHandler(
 ): () => void {
   const { directoryPath, port } = options;
   return () => {
-    /* eslint-disable no-console */
     console.log(`Directory: ${path.resolve(directoryPath)}`);
     console.log(`Server is listening on port ${port}`);
     console.log(`On this machine: http://localhost:${port}/`);
     console.log(`On local network: http://${ip.address()}:${port}/`);
-    /* eslint-enable no-console */
   };
 }
 
@@ -57,13 +55,11 @@ export function serverFailedToStartHandler(
   const { port } = options;
   return (e: unknown) => {
     if ((e as { code: string }).code === "EADDRINUSE") {
-      /* eslint-disable no-console */
       console.log();
       console.log(e);
       console.log();
       console.log(chalk.red(`Port ${port} already in use!`));
       console.log("Please try with a different port. eg. --port=4200");
-      /* eslint-enable no-console */
       process.exit(1);
       return;
     }

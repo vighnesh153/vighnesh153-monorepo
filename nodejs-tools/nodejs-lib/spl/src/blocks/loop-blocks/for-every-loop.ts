@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { Block } from "@/blocks/Block";
 import { Scope } from "@/models/Scope";
@@ -70,8 +69,7 @@ export class ForEveryLoop extends Block {
       try {
         new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
       } catch (e: unknown) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-ignore: legacy
         const message = e?.message ?? "";
         if (message === "break") {
           break;

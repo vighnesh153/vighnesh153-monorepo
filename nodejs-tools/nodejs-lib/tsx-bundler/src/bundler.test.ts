@@ -52,7 +52,6 @@ test(
     const output = dom.window.document.querySelector("#root")?.innerHTML;
 
     expect(output).toMatchInlineSnapshot(
-      // eslint-disable-next-line max-len
       '"<div><h1>Pikachu supremacy ✌️ ϞϞ(๑⚈ ․̫ ⚈๑)∩ ⚡️⚡️</h1><p>Is 42 Prime: <strong>false</strong></p><p>Is 43 Prime: <strong>true</strong></p><h2>Users</h2><p>User count: 10</p></div>"',
     );
   },

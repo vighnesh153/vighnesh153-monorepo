@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { reverseString } from "@/helpers/reverse-string";
 import { parseInitialNumberOrIdentifier } from "@/helpers/parse-initial-number-or-identifier";
 import { Scope } from "@/models/Scope";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";

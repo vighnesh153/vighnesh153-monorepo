@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { Block } from "@/blocks/Block";
@@ -8,7 +7,6 @@ import { OutputBuffer } from "@/models/OutputBuffer";
 
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 import { ArrayExpressionEvaluator } from "@/expression-evaluators/array-expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";

@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
 import { Scope } from "@/models/Scope";
 import { LineOfCode } from "@/models/LineOfCode";
@@ -7,7 +6,6 @@ import {
   VariableBlockType,
 } from "@/blocks/variable-blocks/variable-block";
 import { ArrayVariableBlock } from "@/blocks/variable-blocks/array-variable-block";
-// prettier-ignore
 import {
   VariableModificationParser,
 } from "@/parsers/block-parsers/variable-statements-parser/variable-modification-parser";

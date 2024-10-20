@@ -10,7 +10,6 @@ import {
 import { ArrayVariableBlock } from "@/blocks/variable-blocks/array-variable-block";
 
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -75,11 +74,8 @@ export class VariableDeclarationParser extends BlockParser {
       VariableDeclarationParser.primitiveRegex,
     );
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const datatype = result[1];
-      // eslint-disable-next-line prefer-destructuring
       const variableName = result[2];
-      // eslint-disable-next-line prefer-destructuring
       const value = result[3];
 
       if (["number", "string", "boolean"].includes(datatype) === false) {
@@ -123,11 +119,8 @@ export class VariableDeclarationParser extends BlockParser {
       VariableDeclarationParser.arrayRegex,
     );
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const arrayType = result[1];
-      // eslint-disable-next-line prefer-destructuring
       const variableName = result[2];
-      // eslint-disable-next-line prefer-destructuring
       const value = result[3];
 
       if (["number", "string", "boolean"].includes(arrayType) === false) {

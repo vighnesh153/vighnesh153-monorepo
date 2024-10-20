@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { reverseString } from "@/helpers/reverse-string";
 import { Scope } from "@/models/Scope";
 import { parseInitialBooleanOrIdentifier } from "@/helpers/parse-initial-boolean-or-identifier";

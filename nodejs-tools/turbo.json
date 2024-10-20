@@ -14,10 +14,6 @@
       "outputs": [],
       "dependsOn": ["^build", "^test"]
     },
-    "lint": {
-      "outputs": [],
-      "dependsOn": ["^build"]
-    },
     "dev": {
       "dependsOn": ["^dev"],
       "cache": false,

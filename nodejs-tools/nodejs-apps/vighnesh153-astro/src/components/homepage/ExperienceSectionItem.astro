@@ -1,6 +1,6 @@
 ---
-import { classes } from '@/utils/index.ts';
-import Link from '../Link.svelte';
+import { classes } from "@/utils/index.ts";
+import Link from "../Link.svelte";
 
 interface Props {
   companyName: string;
@@ -9,7 +9,8 @@ interface Props {
   companyPositions: Array<{ title: string; duration: string }>;
 }
 
-const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props;
+const { companyName, companyUrl, totalDuration, companyPositions } =
+  Astro.props;
 ---
 
 <style></style>
@@ -20,20 +21,25 @@ const { companyName, companyUrl, totalDuration, companyPositions } = Astro.props
   </h3>
   {
     companyPositions.length > 1 ? (
-      <p class={classes(`text-text3 text-base font-light`)}>Full time · {totalDuration}</p>
+      <p class={classes(`text-text3 text-base font-light`)}>
+        Full time · {totalDuration}
+      </p>
     ) : null
   }
   <ul>
     {
       companyPositions.map((companyPosition) => (
         <li class={classes(`mb-4 flex flex-col items-start`)}>
-          <p class={classes(`text-base md:text-2xl`)}>{companyPosition.title}</p>
-          {/* prettier-ignore */}
-          <p class={classes(`
+          <p class={classes(`text-base md:text-2xl`)}>
+            {companyPosition.title}
+          </p>
+          <p
+            class={classes(`
               font-light
               text-text3
               text-sm sm:text-sm md:text-base
-            `)}>
+            `)}
+          >
             {companyPosition.duration}
           </p>
         </li>

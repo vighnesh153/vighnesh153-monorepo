@@ -43,7 +43,6 @@ export class FakeDynamoDBDocumentClient<
     >,
     options?: HandlerOptions,
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.sendCalledWithArgs = [command as any, options];
     if (this.sendError != null) {
       throw this.sendError;

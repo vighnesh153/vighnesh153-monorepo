@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
 import { DisplayStatementsParser } from "@/parsers/block-parsers/display-statements-parser";
 import { Scope } from "@/models/Scope";

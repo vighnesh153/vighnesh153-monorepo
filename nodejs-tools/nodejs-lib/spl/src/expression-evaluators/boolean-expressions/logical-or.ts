@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 import { Scope } from "@/models/Scope";
 import { booleanComparisionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-comparision-evaluator";

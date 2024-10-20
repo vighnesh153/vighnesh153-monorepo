@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
 import { Scope } from "@/models/Scope";
 import { LineOfCode } from "@/models/LineOfCode";
@@ -36,7 +38,6 @@ export class FunctionExecutionParser extends BlockParser {
             lineUnderTest.value.replace("execute", "result of"),
           );
         } catch (e) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           if (
             e.message !== "Function returns nothing according to definition."

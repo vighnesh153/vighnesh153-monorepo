@@ -1,19 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scope } from "@/models/Scope";
 import { LineOfCode } from "@/models/LineOfCode";
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
-// prettier-ignore
 import {
   VariableDeclarationParser,
 } from "@/parsers/block-parsers/variable-statements-parser/variable-declaration-parser";
-// prettier-ignore
 import {
   VariableModificationParser,
 } from "@/parsers/block-parsers/variable-statements-parser/variable-modification-parser";
 import { DisplayStatementsParser } from "@/parsers/block-parsers/display-statements-parser";
 import { ConditionalBlockParser } from "@/parsers/block-parsers/conditional-block-parser";
 import { LoopForXTimesParser } from "@/parsers/block-parsers/loop-parsers/loop-for-x-times-parser";
-// prettier-ignore
 import {
   LoopWhileExpressionIsTrueParser,
 } from "@/parsers/block-parsers/loop-parsers/loop-while-expression-is-true-parser";

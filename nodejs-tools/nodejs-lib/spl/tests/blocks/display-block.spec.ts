@@ -54,7 +54,6 @@ describe("check functionality of display block.", () => {
     "should add strings to the output " +
       "buffer if strings are passed as values array.",
     () => {
-      // eslint-disable-next-line quotes
       const values: string[] = ["'Hi. '", "'I am '", "'Vighnesh.'"];
       const displayBlock: Block = new DisplayBlock(values, new Scope());
       displayBlock.execute();
@@ -64,7 +63,6 @@ describe("check functionality of display block.", () => {
   );
 
   test("should add mixed datatype values to the output buffer.", () => {
-    // eslint-disable-next-line quotes
     const values: string[] = ["'Hi. '", "42", "true"];
     const displayBlock: Block = new DisplayBlock(values, new Scope());
     displayBlock.execute();
@@ -141,7 +139,6 @@ describe("check functionality of display block.", () => {
       );
       variableBlock.execute();
 
-      // eslint-disable-next-line quotes
       const values: string[] = ["'Hi. '", "42", "true", "iAmAVariable"];
       const displayBlock: Block = new DisplayBlock(values, scope);
       displayBlock.execute();

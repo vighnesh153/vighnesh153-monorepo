@@ -108,7 +108,7 @@
     @apply after:duration-200;
     @apply after:ease-in;
 
-    @apply [&:is(:hover, :focus-visible)]:after:w-full;
+    @apply [&:is(:hover,:focus-visible)]:after:w-full;
   }
 
   .primary-btn-link {

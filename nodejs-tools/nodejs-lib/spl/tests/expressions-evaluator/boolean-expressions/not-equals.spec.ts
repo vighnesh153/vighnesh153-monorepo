@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scope } from "@/models/Scope";
 import { NotEquals } from "@/expression-evaluators/boolean-expressions/not-equals";
 import {

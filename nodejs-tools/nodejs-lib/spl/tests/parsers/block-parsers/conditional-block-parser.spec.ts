@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { ConditionalBlockParser } from "@/parsers/block-parsers/conditional-block-parser";
 import { Scope } from "@/models/Scope";
 import { LineOfCode } from "@/models/LineOfCode";

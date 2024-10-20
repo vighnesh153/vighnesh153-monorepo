@@ -46,17 +46,13 @@ export async function controller({
   // environment variables
   uiAuthCompleteUrl = process.env.UI_AUTH_COMPLETE_URL,
   authRedirectUrl = process.env.AUTH_REDIRECT_URL,
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   googleClientId = inProduction(() => Resource.GoogleClientId.value),
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   googleClientSecret = inProduction(() => Resource.GoogleClientSecret.value),
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   cookieSecret = inProduction(() => Resource.CookieSecret.value),
   environmentStage = process.env.STAGE as "dev" | "prod" | undefined,
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   userInfoTableName = inProduction(() => Resource.UserInfoTable.name),
 

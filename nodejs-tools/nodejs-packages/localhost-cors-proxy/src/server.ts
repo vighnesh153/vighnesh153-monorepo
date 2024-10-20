@@ -14,7 +14,6 @@ export function startServer(props: { targetUrl: string; port: number }) {
   );
 
   app.listen(props.port, () => {
-    // eslint-disable-next-line no-console
     console.log(
       `Proxy started for "${props.targetUrl}" at "http://localhost:${props.port}"`,
     );

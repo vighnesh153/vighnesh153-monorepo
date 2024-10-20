@@ -19,7 +19,6 @@ describe("check if the function block can execute statements.", () => {
   };
 
   test("should execute the child lines of code.", () => {
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
 
     block.execute();
@@ -52,14 +51,11 @@ describe("check if the function block can use values of arguments.", () => {
   };
 
   test("should execute the child lines of code.", () => {
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
     addLineOfCode("    for every num in numbers:");
-    // eslint-disable-next-line quotes
     addLineOfCode("        display name, ', ', num");
     linesOfCode.reverse();
 
-    // eslint-disable-next-line quotes
     block.argv = ["'vighnesh153'", "[1 ,22 , 30 + 3, 50 - 6, 11 * 5 ]"];
     block.execute();
 
@@ -75,16 +71,13 @@ describe("check if the function block can use values of arguments.", () => {
   });
 
   test("should stop code execution if returned.", () => {
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
     addLineOfCode("    for every num in numbers:");
-    // eslint-disable-next-line quotes
     addLineOfCode("        display name, ', ', num");
     addLineOfCode("        if num > 70, then do:");
     addLineOfCode("            return");
     linesOfCode.reverse();
 
-    // eslint-disable-next-line quotes
     block.argv = [
       "'vighnesh153'",
       "[1 ,22 , 30 + 3, 50 - 6, 11 * 5, 66, 77, 88, 99 ]",
@@ -128,16 +121,13 @@ describe("check if the function block can return correct result.", () => {
   };
 
   test("should stop code execution if returned.", () => {
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
     addLineOfCode("    for every num in numbers:");
-    // eslint-disable-next-line quotes
     addLineOfCode("        display name, ', ', num");
     addLineOfCode("        if num > 70, then do:");
     addLineOfCode("            return num + 101");
     linesOfCode.reverse();
 
-    // eslint-disable-next-line quotes
     block.argv = [
       "'vighnesh153'",
       "[1 ,22 , 30 + 3, 50 - 6, 11 * 5, 66, 77, 88, 99 ]",

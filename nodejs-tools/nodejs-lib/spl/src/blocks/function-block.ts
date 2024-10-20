@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Block } from "@/blocks/Block";
 import { LineOfCode } from "@/models/LineOfCode";
 import { Scope } from "@/models/Scope";
@@ -6,11 +5,9 @@ import { existingKeywords } from "@/helpers/existing-keywords";
 import { isValidIdentifier } from "@/helpers/is-valid-identifier";
 import { Variable } from "@/models/Variable";
 import { Interpreter } from "@/interpreter";
-// prettier-ignore
 import {
   VariableDeclarationParser,
 } from "@/parsers/block-parsers/variable-statements-parser/variable-declaration-parser";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -145,7 +142,7 @@ export class FunctionBlock extends Block {
     try {
       new Interpreter(this.chileLinesOfCode.slice(), newScope).interpret();
     } catch (e) {
-      // @ts-ignore
+      // @ts-ignore: legacy
       if (e.message !== "return") {
         throw e;
       }
@@ -179,7 +176,6 @@ export class FunctionBlock extends Block {
             ) {
               throw new Error("Invalid data returned.");
             }
-            // eslint-disable-next-line prefer-destructuring
             this.result.arrayType = components[2];
           }
         }

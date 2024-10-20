@@ -63,9 +63,7 @@ export class ForEveryLoopParser extends BlockParser {
     );
 
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const elementName = result[1];
-      // eslint-disable-next-line prefer-destructuring
       const arrayExpression = result[2];
       const evaluator = new ArrayExpressionEvaluator(this.scope);
 
@@ -106,11 +104,8 @@ export class ForEveryLoopParser extends BlockParser {
     const result = lineUnderTest.value.match(ForEveryLoopParser.withIndexRegex);
 
     if (result) {
-      // eslint-disable-next-line prefer-destructuring
       const elementName = result[1];
-      // eslint-disable-next-line prefer-destructuring
       const arrayExpression = result[2];
-      // eslint-disable-next-line prefer-destructuring
       const indexName = result[3];
 
       const evaluator = new ArrayExpressionEvaluator(this.scope);

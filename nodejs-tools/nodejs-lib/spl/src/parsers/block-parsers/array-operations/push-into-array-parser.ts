@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
 import { LineOfCode } from "@/models/LineOfCode";
 import { Scope } from "@/models/Scope";
 import { Block } from "@/blocks/Block";
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";

@@ -1,5 +1,4 @@
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
-// prettier-ignore
 import {
   VariableDeclarationParser,
 } from "@/parsers/block-parsers/variable-statements-parser/variable-declaration-parser";
@@ -63,7 +62,6 @@ describe("should return correct block.", () => {
   });
 
   test("should return correct primitive block.", () => {
-    // eslint-disable-next-line quotes
     linesOfCode[0].value = "let string s be 'Hello World!'";
 
     const block = blockParser.parse() as VariableBlock;

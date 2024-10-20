@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { type JSX, splitProps } from "solid-js";
 
 export type ChevronDownIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;

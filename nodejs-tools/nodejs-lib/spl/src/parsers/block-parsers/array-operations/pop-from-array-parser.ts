@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { BlockParser } from "@/parsers/block-parsers/block-parser";
 import { LineOfCode } from "@/models/LineOfCode";
 import { Scope } from "@/models/Scope";

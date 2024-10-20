@@ -27,7 +27,6 @@ describe("check the tryEvaluate functionality of string expression evaluator.", 
   });
 
   test("should return true if correct string is passed", () => {
-    // eslint-disable-next-line quotes
     const input = "  'Hello'  ";
     const result = stringExpressionEvaluator.tryEvaluate(input);
 
@@ -78,7 +77,6 @@ describe("check the evaluate functionality of string expression evaluator.", () 
   });
 
   test("should return the string passed in the input.", () => {
-    // eslint-disable-next-line quotes
     const input = " '  i am   a random string ' ";
     const result = stringExpressionEvaluator.evaluate(input);
 
