@@ -50,17 +50,24 @@ const LambdaFunctionNameList = [
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
 
-export const LambdaFunctionNames = LambdaFunctionNameList.reduce(
-  (acc, curr) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: some
-    acc[curr] = curr;
-    return acc;
-  },
-  {} as { [key in LambdaFunctionName]: key },
-);
+export const LambdaFunctionNames: { [key in LambdaFunctionName]: key } =
+  LambdaFunctionNameList.reduce(
+    (acc, curr) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore: some
+      acc[curr] = curr;
+      return acc;
+    },
+    {} as { [key in LambdaFunctionName]: key },
+  );
 
-export const LambdaFunctionConfig = {
+export const LambdaFunctionConfig: {
+  [key in LambdaFunctionName]: {
+    name: key;
+    method: LambdaMethodType;
+    authRequired: boolean;
+  };
+} = {
   getUser: {
     name: "getUser",
     method: "get",
@@ -86,12 +93,6 @@ export const LambdaFunctionConfig = {
     method: "get",
     authRequired: false,
   },
-} satisfies {
-  [key in LambdaFunctionName]: {
-    name: key;
-    method: LambdaMethodType;
-    authRequired: boolean;
-  };
 };
 
 export function constructHttpApiLambdaName(options: {
