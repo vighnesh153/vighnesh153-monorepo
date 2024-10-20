@@ -1,7 +1,11 @@
 {
   "name": "@vighnesh153/tools",
-  "version": "0.1.0",
-  "exports": "./src/mod.ts",
+  "version": "0.1.2",
+  "exports": {
+    ".": "./src/mod.ts",
+    "./file_upload": "./src/file_upload/mod.ts",
+    "./vighnesh153": "./src/vighnesh153/mod.ts"
+  },
   "license": "MIT",
   "imports": {
     "@/": "./src/",
