@@ -1,8 +1,8 @@
 import { test, expect } from 'vitest';
-import { repeat } from '@vighnesh153/tools-platform-independent';
+import { repeat } from '@vighnesh153/tools';
 import { Lexer, LexerError, LexerInputReader, StringLexerInput, Token } from '@vighnesh153/lexer-core';
-import { nextToken } from './nextToken';
-import { XmlTokenType } from './tokens';
+import { nextToken } from './nextToken.ts';
+import { XmlTokenType } from './tokens.ts';
 
 function createLexer(input: string): Lexer<XmlTokenType> {
   const lexerInput = new StringLexerInput(input);

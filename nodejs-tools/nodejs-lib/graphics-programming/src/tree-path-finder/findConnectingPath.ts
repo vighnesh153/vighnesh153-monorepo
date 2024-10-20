@@ -1,4 +1,4 @@
-import { TreeNode } from './TreeNode';
+import { TreeNode } from './TreeNode.ts';
 
 // least common ancestor
 function findLCA(path1: TreeNode[], path2: TreeNode[]): TreeNode {

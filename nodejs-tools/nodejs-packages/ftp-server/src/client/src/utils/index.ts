@@ -1,4 +1,4 @@
-import { not, trimEnd } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 import { Vighnesh153File } from '../../../types';
 
 export const isDirectory = (fileType: Vighnesh153File['type']) => fileType === 'directory';
@@ -30,4 +30,10 @@ export function directoryZipAndDownloadPath(directoryPath: string): string {
   return `/zip?path=${directoryPath}`;
 }
 
-export const windowPathname = trimEnd(window.location.pathname, '/');
+export const windowPathname = (() => {
+  let p = window.location.pathname
+  while (p.at(-1) === "/") {
+    p = p.slice(0, p.length - 1)
+  }
+  return p
+})();

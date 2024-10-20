@@ -1,7 +1,7 @@
 <script lang="ts">
   import { gamesProjects } from '@vighnesh153/graphics-programming';
 
-  import { classes, internalLinks } from '@/utils';
+  import { classes, internalLinks } from '@/utils/index.ts';
   import CanvasProjectCard from '@/components/CanvasProjectCard.svelte';
 </script>
 

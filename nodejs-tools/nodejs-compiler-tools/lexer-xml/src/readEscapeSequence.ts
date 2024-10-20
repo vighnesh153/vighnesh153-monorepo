@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { HEXADECIMAL_DIGITS, repeat, assert } from '@vighnesh153/tools-platform-independent';
+import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/tools';
+import { assert } from '@std/assert';
 import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
-import { XmlTokenType } from './tokens';
+import { XmlTokenType } from './tokens.ts';
 
 export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
   assert(

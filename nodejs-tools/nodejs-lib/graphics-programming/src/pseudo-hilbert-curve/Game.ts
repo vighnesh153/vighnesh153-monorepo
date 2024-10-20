@@ -1,9 +1,9 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { generateCurve } from './generateCurve';
-import { Point } from './point';
-import { Line } from './line';
-import { not } from '@vighnesh153/tools-platform-independent';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
+import { not } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { generateCurve } from './generateCurve.ts';
+import { Point } from './point.ts';
+import { Line } from './line.ts';
 
 interface GameConfig {
   bgColor?: string;

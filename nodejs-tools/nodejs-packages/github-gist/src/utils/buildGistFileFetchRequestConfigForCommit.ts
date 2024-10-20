@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import { CORSConfig } from '../types';
-import { withCorsConfig } from './withCorsConfig';
+import { CORSConfig } from '../types/index.ts';
+import { withCorsConfig } from './withCorsConfig.ts';
 
 export interface BuildLatestGistFileFetchUrlProps {
   commitId: string;

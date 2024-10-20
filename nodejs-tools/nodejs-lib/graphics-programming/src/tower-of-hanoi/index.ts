@@ -1,2 +1,2 @@
-export * from './Game';
-export * from './GameManager';
+export * from './Game.ts';
+export * from './GameManager.ts';

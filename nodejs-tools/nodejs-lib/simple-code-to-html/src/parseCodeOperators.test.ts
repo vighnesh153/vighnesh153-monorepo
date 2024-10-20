@@ -1,4 +1,4 @@
-import { parseCodeOperators } from './parseCodeOperators';
+import { parseCodeOperators } from './parseCodeOperators.ts';
 
 const javascriptOperators = {
   operators: '~!@#$%^&*()-_=+{[}]|\\:;<,>.?/',

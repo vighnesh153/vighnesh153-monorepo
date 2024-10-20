@@ -1,4 +1,4 @@
-import { IGithubGistMetadata } from '../types';
+import { IGithubGistMetadata } from '../types/index.ts';
 
 export function removeFileContentFromGistMetadata(gistMetadata: IGithubGistMetadata): IGithubGistMetadata {
   return {

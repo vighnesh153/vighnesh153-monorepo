@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { skipWhitespace } from './skipWhitespace';
+import { skipWhitespace } from './skipWhitespace.ts';
 import { EOF_CHARACTER, Lexer, LexerError, Token } from '@vighnesh153/lexer-core';
-import { readStringLiteral } from './readStringLiteral';
-import { isAcceptableIdentifierStart, readIdentifier } from './readIdentifier';
-import { readComment } from './readComment';
-import { readTextNode } from './readTextNode';
-import { XmlTokenType } from './tokens';
+import { readStringLiteral } from './readStringLiteral.ts';
+import { isAcceptableIdentifierStart, readIdentifier } from './readIdentifier.ts';
+import { readComment } from './readComment.ts';
+import { readTextNode } from './readTextNode.ts';
+import { XmlTokenType } from './tokens.ts';
 
 export function nextToken(lexer: Lexer<XmlTokenType>): Token<XmlTokenType> {
   let t: Token<XmlTokenType>;

@@ -3,7 +3,7 @@ import path from 'path';
 import ip from 'ip';
 import chalk from 'chalk';
 import { fileURLToPath } from 'url';
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 import { Vighnesh153File } from '../types';
 
 /**

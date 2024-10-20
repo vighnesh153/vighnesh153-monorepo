@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { LexerError } from './LexerError';
+import { LexerError } from './LexerError.ts';
 
 test('should create the error object', () => {
   const error = new LexerError({

@@ -1,4 +1,4 @@
-import { CanvasWrapper } from './CanvasWrapper';
+import { CanvasWrapper } from './CanvasWrapper.ts';
 
 export class CanvasWrapperImpl implements CanvasWrapper {
   private readonly canvas: HTMLCanvasElement;

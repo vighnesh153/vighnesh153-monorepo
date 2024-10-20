@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { BarnsleysFernGenerator } from './BarnsleysFernGenerator';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { BarnsleysFernGenerator } from './BarnsleysFernGenerator.ts';
 
 interface GameOptions {
   bgColor?: string;

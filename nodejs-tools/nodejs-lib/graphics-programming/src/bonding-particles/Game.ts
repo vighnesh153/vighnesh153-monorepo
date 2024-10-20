@@ -1,8 +1,8 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Particle } from './Particle';
-import { Position, createPosition } from './Position';
-import { Bond } from './Bond';
-import { euclidianDistance } from './euclidian-distance';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Particle } from './Particle.ts';
+import { Position, createPosition } from './Position.ts';
+import { Bond } from './Bond.ts';
+import { euclidianDistance } from './euclidian-distance.ts';
 
 interface GameOptions {
   mouseDeflectionDistance?: number;

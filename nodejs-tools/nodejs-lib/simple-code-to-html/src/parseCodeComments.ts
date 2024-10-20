@@ -1,5 +1,5 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { CommonTypes } from './commonTypes';
+import { not } from '@vighnesh153/tools';
+import { CommonTypes } from './commonTypes.ts';
 
 export interface ParseCodeCommentsOptions extends Pick<CommonTypes, 'escapeCharacters'> {
   singleLineCommentIdentifiers: string[];

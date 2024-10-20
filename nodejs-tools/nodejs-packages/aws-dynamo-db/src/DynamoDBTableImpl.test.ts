@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { type ServiceOutputTypes, QueryCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
-import { FakeDynamoDBDocumentClient } from './FakeDynamoDBDocumentClient';
-import { DynamoDBTableImpl } from './DynamoDBTableImpl';
-import { TableMetadata } from './TableMetadata';
+import { FakeDynamoDBDocumentClient } from './FakeDynamoDBDocumentClient.ts';
+import { DynamoDBTableImpl } from './DynamoDBTableImpl.ts';
+import { TableMetadata } from './TableMetadata.ts';
 
 const tableName = 'Pokemon' as const;
 const tableMetadata = {

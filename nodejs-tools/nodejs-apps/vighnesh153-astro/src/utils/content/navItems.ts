@@ -1,4 +1,4 @@
-import { internalLinks, externalLinks } from './links';
+import { internalLinks, externalLinks } from './links.ts';
 
 export interface NavItem {
   text: string;

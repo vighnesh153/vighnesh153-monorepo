@@ -1,9 +1,9 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Screen } from './Screen';
-import { ScoreTracker } from './ScoreTracker';
-import { Queue } from '@vighnesh153/tools-platform-independent';
-import { TwoWayPipe } from './TwoWayPipe';
-import { Block } from './Block';
+import { Queue } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Screen } from './Screen.ts';
+import { ScoreTracker } from './ScoreTracker.ts';
+import { TwoWayPipe } from './TwoWayPipe.ts';
+import { Block } from './Block.ts';
 
 interface GameplayScreenOptions {
   readonly verticalPadding: number;

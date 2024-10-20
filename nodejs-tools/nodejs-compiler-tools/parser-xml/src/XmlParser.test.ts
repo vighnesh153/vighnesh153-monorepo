@@ -2,8 +2,8 @@
 import { test, expect } from 'vitest';
 import { Lexer, LexerInputReader, StringLexerInput } from '@vighnesh153/lexer-core';
 import { XmlTokenType } from '@vighnesh153/lexer-xml';
-import { XmlParser } from './XmlParser';
-import { XmlProgram } from './ast';
+import { XmlParser } from './XmlParser.ts';
+import { XmlProgram } from './ast.ts';
 
 function parseProgram(input: string): [XmlParser, XmlProgram] {
   const stringInput = new StringLexerInput(input);

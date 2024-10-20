@@ -2,7 +2,8 @@
 
 ### Quick links
 
-- Cloudflare workers: https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
+- Cloudflare workers:
+  https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
 
 ### Check updates
 
@@ -12,7 +13,8 @@ cd apps/vighnesh153.com
 ncu -u
 ```
 
-Checkout [more options here](https://github.com/raineorshine/npm-check-updates#options)
+Checkout
+[more options here](https://github.com/raineorshine/npm-check-updates#options)
 
 ### Publishing packages
 
@@ -45,12 +47,13 @@ Visit
   - https://docs.astro.build/en/tutorial/0-introduction/
 - https://go.dev/wiki/SQLDrivers
 - mp3 to mp4
-- Check if trap focus mentioned in the below link could be useful for side bar on vighnesh153.dev:
-  https://learn.svelte.dev/tutorial/actions
+- Check if trap focus mentioned in the below link could be useful for side bar
+  on vighnesh153.dev: https://learn.svelte.dev/tutorial/actions
 - privacy policy in the repo
 - Tooltip
   - tippy: https://atomiks.github.io/tippyjs/
-  - usage in svelte: https://learn.svelte.dev/tutorial/adding-parameters-to-actions
+  - usage in svelte:
+    https://learn.svelte.dev/tutorial/adding-parameters-to-actions
 - Audio player: https://learn.svelte.dev/tutorial/media-elements
 - https://youtube.com/shorts/GOSezO0CHss?si=-056zvtt3KRLp_CI
 - terminal emulator
@@ -59,7 +62,8 @@ Visit
 - mermaid js like clone but in code instead of a DSL
 - visualize windmill problem: https://www.youtube.com/watch?v=M64HUIJFTZM
 - Kotlin:
-  - Asynchronous Programming With Kotlin Coroutines: https://kotlinlang.org/docs/coroutines-guide.html
+  - Asynchronous Programming With Kotlin Coroutines:
+    https://kotlinlang.org/docs/coroutines-guide.html
   - Kotlin Web Development with Ktor: https://ktor.io/learn/
   - (Java baggage) Reactive Spring Boot With Coroutines and Virtual Threads
   - https://medium.com/androiddevelopers/cancellation-in-coroutines-aa6b90163629
@@ -131,7 +135,8 @@ Visit
 - Brainf\*ck interpreter
   - https://github.com/vighnesh153/brainf.ck-interpreter
 - Groups/Permissions
-  - When completely banning user, remember to remove their session from users to log them out
+  - When completely banning user, remember to remove their session from users to
+    log them out
 - Svelte Query: https://sveltequery.vercel.app/overview
 - https://github.com/vighnesh153/my-favourite
 - Interview stuff
@@ -147,7 +152,8 @@ Visit
   - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
 - Codepen clone for my personal HTML projects (no api just local code files)
 - https://stylelint.io/user-guide/get-started
-- Javascript Intl: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
+- Javascript Intl:
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
 - email template builder
   - Create welcome email template
 - Awesome mouse move effect: http://alexandercoggin.com/
@@ -187,7 +193,8 @@ Visit
 - Clone: https://github.com/mysticatea/npm-run-all/
 - AWS sandbox
 - vighnesh153.com/memes
-  - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when sharing url
+  - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when
+    sharing url
   - Meme credit to
     - users
     - other portals
@@ -207,7 +214,7 @@ Visit
 
 ```js
 fetch(
-  "https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw"
+  "https://corsanywhere.herokuapp.com/https://en.wiktionary.org/w/index.php?title=overflow&action=raw",
 )
   .then((res) => res.text())
   .then(console.log);
@@ -241,7 +248,8 @@ fetch(
 - Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
   - NPM package: https://www.npmjs.com/package/@docsearch/react
 - Fix `import-sorting` in eslint
-- Explore and integrate Cockroach DB (Serverless SQL): https://www.cockroachlabs.com/
+- Explore and integrate Cockroach DB (Serverless SQL):
+  https://www.cockroachlabs.com/
 - Checkout sentry for detailed error analysis
   - https://sentry.io/welcome/
   - https://github.com/getsentry/sentry-javascript
@@ -258,87 +266,133 @@ fetch(
   - [@squoosh/lib](https://www.npmjs.com/package/@squoosh/lib)
   - [@squoosh/cli](https://www.npmjs.com/package/@squoosh/cli)
 - Javascript hacks and creative coding: https://aem1k.com/
-- Kevin Powell : Animating Glowing Border : https://www.youtube.com/watch?v=fcnDBP3k3BE
-- Kevin Powell : 3D Tilting Card effect with mouse tracking: https://www.youtube.com/watch?v=Z-3tPXf9a7M
-- The super tiny compiler: https://github.com/jamiebuilds/the-super-tiny-compiler
-- Jack Herrington: Vite and Module Federation Makes Micro frontends easy: https://www.youtube.com/watch?v=t-nchkL9yIg
+- Kevin Powell : Animating Glowing Border :
+  https://www.youtube.com/watch?v=fcnDBP3k3BE
+- Kevin Powell : 3D Tilting Card effect with mouse tracking:
+  https://www.youtube.com/watch?v=Z-3tPXf9a7M
+- The super tiny compiler:
+  https://github.com/jamiebuilds/the-super-tiny-compiler
+- Jack Herrington: Vite and Module Federation Makes Micro frontends easy:
+  https://www.youtube.com/watch?v=t-nchkL9yIg
 - Frontend masters algorithms: https://frontendmasters.com/courses/algorithms/
-- Kevin Powell : How to create a responsive HTML table: https://www.youtube.com/watch?v=czZ1PvNW5hk
-- Kevin Powell : Creating a CSS only directionally aware button: https://www.youtube.com/watch?v=e3w9liPXSi4
-- Kevin Powell : You probably want position sticky instead of fixed: https://www.youtube.com/watch?v=8MaCTDkoVd8
-- Kevin Powell : Create accessible tabs: https://www.youtube.com/watch?v=fI9VM5zzpu8
-- Kevin Powell : The unknown fundamentals of CSS: Offset parents and Stacking Context explained: https://www.youtube.com/watch?v=GS6b9p6edfk
-- Kevin Powell : CSS only particle animations: https://www.youtube.com/watch?v=9dEIg2xOphE
+- Kevin Powell : How to create a responsive HTML table:
+  https://www.youtube.com/watch?v=czZ1PvNW5hk
+- Kevin Powell : Creating a CSS only directionally aware button:
+  https://www.youtube.com/watch?v=e3w9liPXSi4
+- Kevin Powell : You probably want position sticky instead of fixed:
+  https://www.youtube.com/watch?v=8MaCTDkoVd8
+- Kevin Powell : Create accessible tabs:
+  https://www.youtube.com/watch?v=fI9VM5zzpu8
+- Kevin Powell : The unknown fundamentals of CSS: Offset parents and Stacking
+  Context explained: https://www.youtube.com/watch?v=GS6b9p6edfk
+- Kevin Powell : CSS only particle animations:
+  https://www.youtube.com/watch?v=9dEIg2xOphE
 - https://http.cat/404
 - Lighthouse: https://developer.chrome.com/docs/lighthouse/overview/
-- Unlighthouse: scans every page in website: https://unlighthouse.dev/guide/getting-started/how-it-works
-- Dr. Trefor Bazett: The fastest multiplication algorithm: https://www.youtube.com/watch?v=frT1UPiJUO0
-- Introducing WebGPU: Unlocking modern GPU access for Javascript: https://www.youtube.com/watch?v=m6T-Mq1BPXg
+- Unlighthouse: scans every page in website:
+  https://unlighthouse.dev/guide/getting-started/how-it-works
+- Dr. Trefor Bazett: The fastest multiplication algorithm:
+  https://www.youtube.com/watch?v=frT1UPiJUO0
+- Introducing WebGPU: Unlocking modern GPU access for Javascript:
+  https://www.youtube.com/watch?v=m6T-Mq1BPXg
 - https://compilerbook.com/
 - Rant about frontend frameworks: https://hackmd.io/@roguegpu/r1RKQMdt3
-- Inside look at modern web browser: https://developer.chrome.com/blog/inside-browser-part1/
+- Inside look at modern web browser:
+  https://developer.chrome.com/blog/inside-browser-part1/
 - Khan academy math: https://www.khanacademy.org/math
 
 * Brilliant premium: https://brilliant.org/subscribe/
 
 - Interesting blogs: https://irian.to/blogs/
-- Stephen Grider: Microservices with Node JS and React: https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=LEADERSALE24A
-- Stephen Grider: NestJS: The Complete Developer's Guide: https://www.udemy.com/course/nestjs-the-complete-developers-guide/?couponCode=LEADERSALE24A
-- Stephen Grider: The complete React Native + Hooks course: https://www.udemy.com/course/the-complete-react-native-and-redux-course/
-- Stephen Grider: React Native : Advanced Concepts: https://www.udemy.com/course/react-native-advanced/
-- Stephen Grider: Electron for Desktop Apps: The Complete Developer's Guide: https://www.udemy.com/course/electron-react-tutorial/?couponCode=LEADERSALE24A
-- Data Oriented design Resources: https://github.com/dbartolini/data-oriented-design
-- Entity Component System: An introductory Guide: https://www.simplilearn.com/entity-component-system-introductory-guide-article
-- Kevin Powell: Create an infinite horizontal scroll animation: https://www.youtube.com/watch?v=iLmBy-HKIAw
-- Kevin Powell: Using CSS custom properties like this is a waste: https://www.youtube.com/watch?v=_2LwjfYc1x8
-- Kevin Powell: CSS Position deepdive: https://www.youtube.com/watch?v=fF_NVrd1s14
-- Philipp Lackner: How to build an animated splash screen on Android: https://www.youtube.com/watch?v=eFZmMSm1G1c
-- 3Blue1Brown: But what are hamming codes? The origin of error correction: https://www.youtube.com/watch?v=X8jsijhllIA
-- Philipp Lackner: Performance Optimization with @Stable and @Immutable in Jetpack Compose: https://www.youtube.com/watch?v=_FtKhWvHiTg
-- 3Blue1Brown: Why do prime numbers make these spirals? | Dirichlet’s theorem and pi approximations: https://www.youtube.com/watch?v=EK32jo7i5LQ
-- Java concurrency and multi threading: https://www.youtube.com/playlist?list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4
+- Stephen Grider: Microservices with Node JS and React:
+  https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=LEADERSALE24A
+- Stephen Grider: NestJS: The Complete Developer's Guide:
+  https://www.udemy.com/course/nestjs-the-complete-developers-guide/?couponCode=LEADERSALE24A
+- Stephen Grider: The complete React Native + Hooks course:
+  https://www.udemy.com/course/the-complete-react-native-and-redux-course/
+- Stephen Grider: React Native : Advanced Concepts:
+  https://www.udemy.com/course/react-native-advanced/
+- Stephen Grider: Electron for Desktop Apps: The Complete Developer's Guide:
+  https://www.udemy.com/course/electron-react-tutorial/?couponCode=LEADERSALE24A
+- Data Oriented design Resources:
+  https://github.com/dbartolini/data-oriented-design
+- Entity Component System: An introductory Guide:
+  https://www.simplilearn.com/entity-component-system-introductory-guide-article
+- Kevin Powell: Create an infinite horizontal scroll animation:
+  https://www.youtube.com/watch?v=iLmBy-HKIAw
+- Kevin Powell: Using CSS custom properties like this is a waste:
+  https://www.youtube.com/watch?v=_2LwjfYc1x8
+- Kevin Powell: CSS Position deepdive:
+  https://www.youtube.com/watch?v=fF_NVrd1s14
+- Philipp Lackner: How to build an animated splash screen on Android:
+  https://www.youtube.com/watch?v=eFZmMSm1G1c
+- 3Blue1Brown: But what are hamming codes? The origin of error correction:
+  https://www.youtube.com/watch?v=X8jsijhllIA
+- Philipp Lackner: Performance Optimization with @Stable and @Immutable in
+  Jetpack Compose: https://www.youtube.com/watch?v=_FtKhWvHiTg
+- 3Blue1Brown: Why do prime numbers make these spirals? | Dirichlet’s theorem
+  and pi approximations: https://www.youtube.com/watch?v=EK32jo7i5LQ
+- Java concurrency and multi threading:
+  https://www.youtube.com/playlist?list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4
 - https://www.procosplay.com/
-- Challenging projects every programmer should try: https://austinhenley.com/blog/challengingprojects.html
+- Challenging projects every programmer should try:
+  https://austinhenley.com/blog/challengingprojects.html
   - Text editor
   - 2D game - Space Invaders
   - Compiler - Tiny BASIC
   - Mini operating system
   - Spreadsheet (hard!)
   - Video game console emulator (hard!)
-- Philipp Lackner : Is it okay to use runBlocking?: https://www.youtube.com/watch?v=PXnVry_emns
-- Philipp Lackner: The Ultimate guide to kotlin flows: https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC
+- Philipp Lackner : Is it okay to use runBlocking?:
+  https://www.youtube.com/watch?v=PXnVry_emns
+- Philipp Lackner: The Ultimate guide to kotlin flows:
+  https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC
 - Amazing UX designs: https://www.behance.net/jarredfourie/projects
 - Cute fox cute vectors: https://www.freepik.com/vectors/cute-fox%27%3ECute
 - Android clean architecture
-- Philipp Lackner: This is how you create custom shapes in jetpack compose: https://www.youtube.com/watch?v=LEuxvDVA9pA
-- Deep dive in to Jetpack Compose Layouts: https://www.youtube.com/watch?v=zMKMwh9gZuI
-- Kevin powell: Create a cool bubble zoom effect with CSS: https://www.youtube.com/watch?v=2f4JAsTFRLA
-- Jetpack compose tutorials: https://github.com/SmartToolFactory/Jetpack-Compose-Tutorials
-- Canva: We put half a million files in one git repository, here's what we learnt: https://www.canva.dev/blog/engineering/we-put-half-a-million-files-in-one-git-repository-heres-what-we-learned/
+- Philipp Lackner: This is how you create custom shapes in jetpack compose:
+  https://www.youtube.com/watch?v=LEuxvDVA9pA
+- Deep dive in to Jetpack Compose Layouts:
+  https://www.youtube.com/watch?v=zMKMwh9gZuI
+- Kevin powell: Create a cool bubble zoom effect with CSS:
+  https://www.youtube.com/watch?v=2f4JAsTFRLA
+- Jetpack compose tutorials:
+  https://github.com/SmartToolFactory/Jetpack-Compose-Tutorials
+- Canva: We put half a million files in one git repository, here's what we
+  learnt:
+  https://www.canva.dev/blog/engineering/we-put-half-a-million-files-in-one-git-repository-heres-what-we-learned/
 - Game programming patterns: https://gameprogrammingpatterns.com/contents.html
 - Thorsten ball: writing a compiler in Golang
 - Intuit Mailchimp: https://mailchimp.com/
 - automata theory
-- Theory of Computation A.pdf: https://drive.google.com/file/d/1MVx9ytN5EvPx6r2Shhh8M3mRbJ2Fiv2x/view?usp=sharing
+- Theory of Computation A.pdf:
+  https://drive.google.com/file/d/1MVx9ytN5EvPx6r2Shhh8M3mRbJ2Fiv2x/view?usp=sharing
 - BNF grammar for EcmaScript: https://tomcopeland.blogs.com/EcmaScript.html
-- Dreams of code: I have been using Redis wrong this whole time: https://www.youtube.com/watch?v=WQ61RL1GpEE
+- Dreams of code: I have been using Redis wrong this whole time:
+  https://www.youtube.com/watch?v=WQ61RL1GpEE
 - Android app architecture: https://developer.android.com/topic/architecture
   - Samples: https://github.com/android/architecture-samples
-- Implementing a language server, how hard can it be: https://medium.com/ballerina-techblog/implementing-a-language-server-how-hard-can-it-be-part-1-introduction-c915d2437076
+- Implementing a language server, how hard can it be:
+  https://medium.com/ballerina-techblog/implementing-a-language-server-how-hard-can-it-be-part-1-introduction-c915d2437076
 - https://nix.dev/
 - https://cpu.land/
-- Kevin Powell: Make position absolute work with you, not against you: https://www.youtube.com/watch?v=ZrZ-ZzacGXs
+- Kevin Powell: Make position absolute work with you, not against you:
+  https://www.youtube.com/watch?v=ZrZ-ZzacGXs
 - Mark rober engineering: https://studio.com/mark-rober-engineering/login
-- Android Interface Definition Language (AIDL): https://developer.android.com/develop/background-work/services/aidl
-- Structure and interpretation of computer programs: https://drive.google.com/file/d/1tBu3gMhWEsptTAdLbWN-wmQDgAsw5Jzs/view?usp=drive_link
+- Android Interface Definition Language (AIDL):
+  https://developer.android.com/develop/background-work/services/aidl
+- Structure and interpretation of computer programs:
+  https://drive.google.com/file/d/1tBu3gMhWEsptTAdLbWN-wmQDgAsw5Jzs/view?usp=drive_link
 
 #### Embed GitHub files/commits/gists into html
 
-- API: https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
+- API:
+  https://api.github.com/repos/yusanshi/emgithub/commits/7879e517c6b1d6f7b539a7770aba9feb46ff4672
 - Fetch commit information and store in Dynammo db
 - API rate limiting for storing commit information
   - https://docs.github.com/en/developers/apps/building-github-apps/rate-limits-for-github-apps
-- Getting commit info: https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit
+- Getting commit info:
+  https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit
 - Prism diff highlighter: https://prismjs.com/plugins/diff-highlight/
 - Diff 2 html CLI: https://github.com/rtfpessoa/diff2html-cli
 
@@ -350,11 +404,14 @@ This service/lambda will allow me to send email to any users
 
 - Should include a SQS queue where I will push new messages.
   - Message will include `to`, `from`, `subject`, `cc`, `bcc`, `message` fields.
-  - Probably store the above fields in a NoSQL DB table and only add the `messageId` to the above message?
+  - Probably store the above fields in a NoSQL DB table and only add the
+    `messageId` to the above message?
 - An internal API endpoint to add messages to the email queue
-- A lambda will be connected to the SQS which will send an email based on the message from the queue
-  - Perform validation to check if the `from` field matches my domain `.*@vighnesh153\.com`. Most of the time, the
-    `from` field will be `no-reply@vighnesh153.com`
+- A lambda will be connected to the SQS which will send an email based on the
+  message from the queue
+  - Perform validation to check if the `from` field matches my domain
+    `.*@vighnesh153\.com`. Most of the time, the `from` field will be
+    `no-reply@vighnesh153.com`
 
 #### ReactJS at scale
 
@@ -394,27 +451,35 @@ This will allow me to send push notifications to users
 ##### Features
 
 - Should include a SQS queue where I will push new messages
-  - Message will include `icon`, `messageTitle`, `messageBody`, `platforms`, etc. fields
-    - Platforms include Mobile Push notification, Desktop push notification, etc.
-  - Probably store the above fields in a NoSQL DB table and only add the `messageId` to the above message?
+  - Message will include `icon`, `messageTitle`, `messageBody`, `platforms`,
+    etc. fields
+    - Platforms include Mobile Push notification, Desktop push notification,
+      etc.
+  - Probably store the above fields in a NoSQL DB table and only add the
+    `messageId` to the above message?
 - An internal API endpoint to add messages to the email queue
 - A lambda will be connected to the above SQS which will send the notification
 
 #### Email bans (Priority: P0)
 
-- Ban spammers for `X` number of days (the next ban will be twice the previous one)
-- 5 bans will lead to permanent ban (will need to reach out to me with proper explanation for getting un-banned)
+- Ban spammers for `X` number of days (the next ban will be twice the previous
+  one)
+- 5 bans will lead to permanent ban (will need to reach out to me with proper
+  explanation for getting un-banned)
 
 #### Role based access control on vighnesh153.com (Priority: P0)
 
-Roles have limitations. There will always be a case where we wouldn't want to give 1 permission to a person, but we want
-to give that permission to some other person. So, this leads to creating an extra role. And again in the future, this
-issue will occur again which will lead to creation of `N` number of roles which is basically what `groups` are meant
-for. So, instead of relying on roles, I will be creating `groups` and grant permissions to groups
+Roles have limitations. There will always be a case where we wouldn't want to
+give 1 permission to a person, but we want to give that permission to some other
+person. So, this leads to creating an extra role. And again in the future, this
+issue will occur again which will lead to creation of `N` number of roles which
+is basically what `groups` are meant for. So, instead of relying on roles, I
+will be creating `groups` and grant permissions to groups
 
 - 3 major groups
   - Root (only me)
-  - PeopleILike (includes people I love and want to give CRUD permissions to the majority of the projects)
+  - PeopleILike (includes people I love and want to give CRUD permissions to the
+    majority of the projects)
   - Everyone (will mostly have read permissions for `almost` everything)
 - Access: Access to a resource will be granted based on following criteria
   - To a group
@@ -422,8 +487,9 @@ for. So, instead of relying on roles, I will be creating `groups` and grant perm
 
 #### Dating ❤️ Compatibility Test 🧪 (Priority: P1)
 
-Tired of breaking up 💔 with your partner over silly reasons 😮‍💨? Try out the dating compatibility test to see if you and
-your partner 👫 are compatible, before emotionally investing into your relationship 💍.
+Tired of breaking up 💔 with your partner over silly reasons 😮‍💨? Try out the
+dating compatibility test to see if you and your partner 👫 are compatible,
+before emotionally investing into your relationship 💍.
 
 ##### Features
 
@@ -443,7 +509,8 @@ TODO
 
 #### URL shortener/links (Priority: P1)
 
-Why? There are 1000s of url shorteners out there. Well, none of them are made by me 😌
+Why? There are 1000s of url shorteners out there. Well, none of them are made by
+me 😌
 
 ### Todos for a new project
 
@@ -478,7 +545,7 @@ Why? There are 1000s of url shorteners out there. Well, none of them are made by
   },
   "files": ["dist"],
   "dependencies": {
-    "@vighnesh153/tools-platform-independent": "*"
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0"
   },
   "devDependencies": {
     "@types/node": "*",

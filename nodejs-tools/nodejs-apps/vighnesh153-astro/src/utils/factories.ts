@@ -1,12 +1,12 @@
-import { CookieStoreWrapperImpl, type CookieStoreWrapper } from '@vighnesh153/cookie-store';
+import { CookieStoreWrapperImpl, type CookieStoreWrapper } from '@vighnesh153/tools-browser';
 import {
   createSingletonFactory,
   type JsonHttpClient,
   JsonHttpClientImpl,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
 
-import { type BrowserCookieReader, BrowserCookieReaderImpl } from './BrowserCookieReader';
-import { stage } from './stage';
+import { type BrowserCookieReader, BrowserCookieReaderImpl } from './BrowserCookieReader.ts';
+import { stage } from './stage.ts';
 
 export const cookieStoreWrapperFactory = createSingletonFactory<CookieStoreWrapper>(() => {
   return new CookieStoreWrapperImpl();

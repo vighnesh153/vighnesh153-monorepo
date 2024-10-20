@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import axios from 'axios';
-import { verifyGithubPAT } from '../verifyGithubPAT';
+import { verifyGithubPAT } from '../verifyGithubPAT.ts';
 
 vi.mock('axios');
 

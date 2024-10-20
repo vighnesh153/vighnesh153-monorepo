@@ -1,4 +1,4 @@
-import { IColor } from './colors';
+import { IColor } from './colors.ts';
 
 export type EventMode = 'draw' | 'fill';
 

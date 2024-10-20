@@ -1,5 +1,5 @@
 import { XmlProgram } from '@vighnesh153/parser-xml';
-import { formatXmlExpression } from './format_xml_expression';
+import { formatXmlExpression } from './format_xml_expression.ts';
 
 type FormatXmlProgramConfig = {
   readonly program: XmlProgram;

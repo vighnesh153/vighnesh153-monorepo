@@ -1,10 +1,10 @@
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 import axios from 'axios';
-import { withAuthConfig } from './utils';
-import { constants } from './constants';
-import { GistFile } from './GithubGistFile';
-import { CORSConfig } from './types';
-import { withCorsConfig } from './utils/withCorsConfig';
+import { withAuthConfig } from './utils/index.ts';
+import { constants } from './constants.ts';
+import { GistFile } from './GithubGistFile.ts';
+import { CORSConfig } from './types/index.ts';
+import { withCorsConfig } from './utils/withCorsConfig.ts';
 
 function constructPayload(gistFiles: GistFile[]): Record<string, { content: string }> {
   const payload: Record<string, { content: string }> = {};

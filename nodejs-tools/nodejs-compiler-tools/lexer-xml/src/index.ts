@@ -1,2 +1,2 @@
-export { nextToken } from './nextToken';
-export { XmlTokenType } from './tokens';
+export { nextToken } from './nextToken.ts';
+export { XmlTokenType } from './tokens.ts';

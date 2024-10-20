@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { sleep } from '@vighnesh153/tools-platform-independent';
+  import { sleep } from '@vighnesh153/tools';
   import { TreePathFinderGame, CanvasWrapperImpl, type CanvasWrapper } from '@vighnesh153/graphics-programming';
 
   import Button from '@/components/Button.svelte';

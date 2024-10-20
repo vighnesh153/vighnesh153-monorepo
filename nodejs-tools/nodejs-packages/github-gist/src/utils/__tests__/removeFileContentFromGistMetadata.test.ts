@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { randomEmail, randomUuid } from '@vighnesh153/fake-data';
-import { removeFileContentFromGistMetadata } from '../removeFileContentFromGistMetadata';
-import { IGithubGistMetadata } from '../../types';
+import { randomEmail, randomUuid } from '@vighnesh153/tools';
+import { removeFileContentFromGistMetadata } from '../removeFileContentFromGistMetadata.ts';
+import { IGithubGistMetadata } from '../../types/index.ts';
 
 describe('Helpers > "removeFileContentFromGistMetadata" tests', () => {
   it('should remove the file content', () => {

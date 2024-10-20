@@ -1,10 +1,10 @@
-import { Queue } from '@vighnesh153/tools-platform-independent';
-import { PositionDelta } from './PositionDelta';
-import { GameGrid } from './GameGrid';
-import { GameGridCell } from './GameGridCell';
-import { generateRandomPosition } from './generateRandomPosition';
-import { FoodController } from './FoodController';
-import { Direction } from './Direction';
+import { Queue } from '@vighnesh153/tools';
+import { PositionDelta } from './PositionDelta.ts';
+import { GameGrid } from './GameGrid.ts';
+import { GameGridCell } from './GameGridCell.ts';
+import { generateRandomPosition } from './generateRandomPosition.ts';
+import { FoodController } from './FoodController.ts';
+import { Direction } from './Direction.ts';
 
 const blockChange: Record<Direction, PositionDelta> = {
   right: { dx: 1, dy: 0 },

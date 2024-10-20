@@ -2,6 +2,9 @@
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "target": "ESNext",
     "types": ["vitest/globals"],
     "outDir": "dist",
     "paths": {

@@ -1,9 +1,9 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { ScoreTracker } from './ScoreTracker';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { InfoScreen } from './InfoScreen';
-import { Screen } from './Screen';
-import { GameplayScreen } from './GameplayScreen';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { ScoreTracker } from './ScoreTracker.ts';
+import { InfoScreen } from './InfoScreen.ts';
+import { Screen } from './Screen.ts';
+import { GameplayScreen } from './GameplayScreen.ts';
 
 interface FlappyBlockGameOptions {
   readonly bgColor?: string;

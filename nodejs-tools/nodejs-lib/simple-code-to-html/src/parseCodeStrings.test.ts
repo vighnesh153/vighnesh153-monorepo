@@ -1,4 +1,4 @@
-import { parseCodeStrings } from './parseCodeStrings';
+import { parseCodeStrings } from './parseCodeStrings.ts';
 
 const javascriptOptions = {
   escapeCharacters: ['\\'],

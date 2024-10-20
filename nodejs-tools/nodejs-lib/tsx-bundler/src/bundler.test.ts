@@ -1,10 +1,10 @@
 // @vitest-environment node
 
 import { JSDOM } from 'jsdom';
-import { sleep } from '@vighnesh153/tools-platform-independent';
+import { sleep } from '@vighnesh153/tools';
 
-import { bundle } from './bundler';
-import { starterCode } from './constants';
+import { bundle } from './bundler.ts';
+import { starterCode } from './constants.ts';
 
 const buildHtmlCode = (bundledCode: string) => `
 <!DOCTYPE html>

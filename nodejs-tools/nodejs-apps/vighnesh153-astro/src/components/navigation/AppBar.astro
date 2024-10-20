@@ -3,8 +3,8 @@ import RvLogoIcon from '@/icons/RvLogoIcon.astro';
 import HamburgerIcon from '@/icons/HamburgerIcon.astro';
 import CloseIcon from '@/icons/CloseIcon.svelte';
 
-import { AuthIndicator } from '@/components/solid';
-import { classes, hashTags, type NavItem } from '@/utils';
+import { AuthIndicator } from '@/components/solid/index.ts';
+import { classes, hashTags, type NavItem } from '@/utils/index.ts';
 
 import NavigationItems from './NavigationItems.astro';
 
@@ -97,7 +97,7 @@ const { navItems } = Astro.props;
 </header>
 
 <script>
-  import { debounce } from '@vighnesh153/tools-platform-independent';
+  import { debounce } from '@vighnesh153/tools';
 
   const checkbox = document.querySelector('#side-navigation-open');
   const header = document.querySelector('#header');

@@ -1,2 +1,2 @@
-export * from './GithubGist';
-export * from './GithubGistFile';
+export * from './GithubGist.ts';
+export * from './GithubGistFile.ts';

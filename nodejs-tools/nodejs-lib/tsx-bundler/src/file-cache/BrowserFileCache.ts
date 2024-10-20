@@ -1,5 +1,5 @@
 import localForage from 'localforage';
-import { IFileCache } from './IFileCache';
+import { IFileCache } from './IFileCache.ts';
 
 export class BrowserFileCache implements IFileCache {
   private fileCache = localForage.createInstance({

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '@/components/Button.svelte';
-  import { Queue, isPrime } from '@vighnesh153/tools-platform-independent';
+  import { Queue, isPrime } from '@vighnesh153/tools';
 
   let minN: number = 0;
   let maxN: number = 0;

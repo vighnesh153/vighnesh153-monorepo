@@ -1,5 +1,5 @@
-import { classes } from '@/utils';
 import type { JSX } from 'solid-js';
+import { classes } from '@/utils/index.ts';
 
 export type ListItemProps = {
   text: string;

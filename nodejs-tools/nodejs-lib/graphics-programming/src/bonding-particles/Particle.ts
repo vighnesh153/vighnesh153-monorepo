@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Position } from './Position';
-import { Velocity, createVelocity } from './velocity';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Position } from './Position.ts';
+import { Velocity, createVelocity } from './velocity.ts';
 
 interface ParticleConfig {
   radius: number;

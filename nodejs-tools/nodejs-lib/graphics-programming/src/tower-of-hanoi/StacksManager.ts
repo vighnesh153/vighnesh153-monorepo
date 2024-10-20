@@ -1,7 +1,7 @@
-import { range } from '@vighnesh153/tools-platform-independent';
+import { range } from '@vighnesh153/tools';
 
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Stack, type StackConfig } from './Stack';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Stack, type StackConfig } from './Stack.ts';
 
 export class StacksManager {
   readonly #canvasWrapper: CanvasWrapper;

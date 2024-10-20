@@ -1,4 +1,4 @@
-import { ALPHABET, DIGITS, not } from '@vighnesh153/tools-platform-independent';
+import { ALPHABET, DIGITS, not } from '@vighnesh153/tools';
 import { KotlinTokenType, operatorTokens } from './tokens';
 
 class StateMachineNode {

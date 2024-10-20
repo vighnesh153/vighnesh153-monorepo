@@ -3,7 +3,7 @@
   import { SplInterpreter, SPLReservedKeywords, SplExamples } from '@vighnesh153/spl';
   import type { SimpleCodeToHtmlOptions } from '@vighnesh153/simple-code-to-html';
 
-  import { classes, internalLinks, searchParams } from '@/utils';
+  import { classes, internalLinks, searchParams } from '@/utils/index.ts';
   import Link from '@/components/Link.svelte';
   import CodeConsole from '@/components/projects/spl/CodeConsole.svelte';
   import SimpleCodeEditor from '@/components/projects/SimpleCodeEditor.svelte';

@@ -1,11 +1,11 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { Paddle } from './Paddle';
-import { Ball } from './Ball';
-import { ScoreTracker } from './ScoreTracker';
-import { Brick } from './Brick';
-import { createBricksGrid } from './createBricksGrid';
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { Paddle } from './Paddle.ts';
+import { Ball } from './Ball.ts';
+import { ScoreTracker } from './ScoreTracker.ts';
+import { Brick } from './Brick.ts';
+import { createBricksGrid } from './createBricksGrid.ts';
 
 interface BrickBreakerGameOptions {
   readonly bgColor?: string;

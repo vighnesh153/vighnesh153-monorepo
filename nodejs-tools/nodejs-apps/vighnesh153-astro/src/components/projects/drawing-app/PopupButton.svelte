@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
 
   export let buttonClasses: string = '';
   export let buttonStyles: string = '';

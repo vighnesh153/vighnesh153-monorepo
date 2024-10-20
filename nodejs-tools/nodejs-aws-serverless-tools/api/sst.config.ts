@@ -8,7 +8,7 @@ import {
   DEFAULT_AWS_REGION,
   isValidStageType,
   type StageType,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
 
 import { userInfoFields } from './src/common/dynamoDBTableMetadata';
 import { FunctionArgs } from './.sst/platform/src/components/aws';

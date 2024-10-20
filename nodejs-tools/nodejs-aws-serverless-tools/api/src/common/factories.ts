@@ -14,14 +14,14 @@ import {
   Logger,
   JsonHttpClient,
   JsonHttpClientImpl,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
 
-import { userInfoFields } from './dynamoDBTableMetadata';
-import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator';
-import { AuthTokenGenerator, AuthTokenGeneratorImpl } from './AuthTokenGenerator';
-import { CookieSerializer, CookieSerializerImpl } from './CookieSerializer';
-import { inProduction } from './utils';
-import { type UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder';
+import { userInfoFields } from './dynamoDBTableMetadata.ts';
+import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator.ts';
+import { AuthTokenGenerator, AuthTokenGeneratorImpl } from './AuthTokenGenerator.ts';
+import { CookieSerializer, CookieSerializerImpl } from './CookieSerializer.ts';
+import { inProduction } from './utils.ts';
+import { type UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder.ts';
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();

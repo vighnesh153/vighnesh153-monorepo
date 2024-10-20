@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
 
   const dispatch = createEventDispatcher<{ 'run-program': null }>();
 

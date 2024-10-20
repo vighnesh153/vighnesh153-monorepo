@@ -10,7 +10,7 @@
     "inlineSources": false,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,

@@ -1,4 +1,4 @@
-import { CellPosition } from './CellPosition';
+import { CellPosition } from './CellPosition.ts';
 
 export type CellType = 'empty' | 'start' | 'end' | 'wall';
 

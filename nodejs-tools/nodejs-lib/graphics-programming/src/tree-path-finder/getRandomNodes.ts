@@ -1,5 +1,5 @@
-import { Queue, not, shuffle } from '@vighnesh153/tools-platform-independent';
-import { TreeNode } from './TreeNode';
+import { Queue, not, shuffleIterable } from '@vighnesh153/tools';
+import { TreeNode } from './TreeNode.ts';
 
 export function getRandomNodes(rootNode: TreeNode, count = 1): TreeNode[] {
   const allNodes: TreeNode[] = [];
@@ -9,5 +9,5 @@ export function getRandomNodes(rootNode: TreeNode, count = 1): TreeNode[] {
     allNodes.push(treeNode);
     queue.pushRight(...treeNode.children);
   }
-  return shuffle(allNodes).slice(0, count);
+  return shuffleIterable(allNodes).slice(0, count);
 }

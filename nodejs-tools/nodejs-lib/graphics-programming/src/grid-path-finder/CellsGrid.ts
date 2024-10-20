@@ -1,5 +1,5 @@
-import { BfsCell } from './Cell';
-import { CellPosition } from './CellPosition';
+import { BfsCell } from './Cell.ts';
+import { CellPosition } from './CellPosition.ts';
 
 function createCellsBoard(rows: number, cols: number): BfsCell[][] {
   return Array.from({ length: rows }, () => Array.from({ length: cols }));

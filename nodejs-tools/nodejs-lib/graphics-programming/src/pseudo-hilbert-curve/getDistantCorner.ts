@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { euclidianDistance } from './euclidian-distance';
-import { Point } from './point';
+import { euclidianDistance } from './euclidian-distance.ts';
+import { Point } from './point.ts';
 
 // repel -> as in repel like a magnet
 export function getDistantCorner(point: Point, repelPoint1: Point, repelPoint2: Point): Point {

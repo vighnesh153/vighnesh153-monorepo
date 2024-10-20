@@ -3,8 +3,8 @@
 import { test, expect, beforeEach, assert, vi, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@solidjs/testing-library';
 import { userEvent } from '@testing-library/user-event';
-import { Popover } from './Popover';
-import type { PopoverPlacement, PopoverToggle } from './externalTypes';
+import { Popover } from './Popover.tsx';
+import type { PopoverPlacement, PopoverToggle } from './externalTypes.ts';
 
 function constructBoundingClientRect(rect: Partial<DOMRect>): DOMRect {
   return {

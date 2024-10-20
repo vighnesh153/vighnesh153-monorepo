@@ -1,4 +1,4 @@
-import { routes } from './content/urls';
+import { routes } from './content/urls.ts';
 
 export const onAuthSuccessRedirectPathKey = 'on_auth_success_redirect_path';
 

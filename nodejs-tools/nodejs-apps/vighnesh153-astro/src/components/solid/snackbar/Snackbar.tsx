@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { createSignal, onMount, type JSX, Show } from 'solid-js';
 
-import type { SnackbarProps } from '@/stores/snackbar';
-import { classes } from '@/utils';
-import { InfoIcon, CheckIcon, WarnIcon, CloseIcon } from '@/icons/solid';
+import type { SnackbarProps } from '@/stores/snackbar.ts';
+import { classes } from '@/utils/index.ts';
+import { InfoIcon, CheckIcon, WarnIcon, CloseIcon } from '@/icons/solid/index.ts';
 
 export function Snackbar(props: SnackbarProps): JSX.Element {
   const config = mapping[props.type];

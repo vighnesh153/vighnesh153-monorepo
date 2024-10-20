@@ -1,4 +1,4 @@
-import { Point } from './Point';
+import { Point } from './Point.ts';
 
 export function euclideanDistance(p1: Point, p2: Point): number {
   const dx = p1.x - p2.x;

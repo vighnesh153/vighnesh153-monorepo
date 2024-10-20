@@ -1,8 +1,8 @@
-import { not } from '@vighnesh153/tools-platform-independent';
+import { not } from '@vighnesh153/tools';
 
-import { CellPosition } from './CellPosition';
-import { CellsGrid } from './CellsGrid';
-import { BfsCell } from './Cell';
+import { CellPosition } from './CellPosition.ts';
+import { CellsGrid } from './CellsGrid.ts';
+import { BfsCell } from './Cell.ts';
 
 function getRandomEmptyCell(grid: CellsGrid): BfsCell | null {
   const emptyCells = grid.mapEachCell((cell) => cell).filter((cell) => cell.isEmpty);

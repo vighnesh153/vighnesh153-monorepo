@@ -1,4 +1,4 @@
-import { CORSConfig, IGithubGistProps } from '../types';
+import { CORSConfig, IGithubGistProps } from '../types/index.ts';
 
 export function isGistPublic(options: IGithubGistProps): boolean {
   return options.isPublic ?? false;

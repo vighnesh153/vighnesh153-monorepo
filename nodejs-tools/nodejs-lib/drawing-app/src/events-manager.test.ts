@@ -1,7 +1,7 @@
-import { Queue } from '@vighnesh153/tools-platform-independent';
-import { Color } from './colors';
-import { buildClearScreenEvent, buildCommitEvent } from './events';
-import { buildEventsManager, isRedoAvailable, isUndoAvailable, publishEvents, redo, undo } from './events-manager';
+import { Queue } from '@vighnesh153/tools';
+import { Color } from './colors.ts';
+import { buildClearScreenEvent, buildCommitEvent } from './events.ts';
+import { buildEventsManager, isRedoAvailable, isUndoAvailable, publishEvents, redo, undo } from './events-manager.ts';
 
 describe('events manager tests', () => {
   it('should publish the events', () => {

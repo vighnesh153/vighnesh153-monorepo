@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { randomColor } from './randomColor';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { randomColor } from './randomColor.ts';
 
 interface Options {
   /**

@@ -1,5 +1,5 @@
-import { repeat } from '@vighnesh153/tools-platform-independent';
-import { GameGridCell } from './GameGridCell';
+import { repeat } from '@vighnesh153/tools';
+import { GameGridCell } from './GameGridCell.ts';
 
 type CellInitializer = (row: number, col: number) => GameGridCell;
 

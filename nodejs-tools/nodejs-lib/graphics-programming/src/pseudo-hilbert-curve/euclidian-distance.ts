@@ -1,4 +1,4 @@
-import { range } from '@vighnesh153/tools-platform-independent';
+import { range } from '@vighnesh153/tools';
 
 export function euclidianDistance(point1: number[], point2: number[]): number {
   if (point1.length !== point2.length) {

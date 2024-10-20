@@ -1,7 +1,7 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { ScoreTracker } from './score-tracker';
-import { Arena } from './Arena';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { ScoreTracker } from './score-tracker.ts';
+import { Arena } from './Arena.ts';
 
 interface GameOptions {
   bgColor?: string;

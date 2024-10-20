@@ -24,7 +24,8 @@
   ],
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.667.0",
-    "@aws-sdk/lib-dynamodb": "^3.667.0"
+    "@aws-sdk/lib-dynamodb": "^3.667.0",
+    "@std/text": "npm:@jsr/std__text@^1.0.7"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.667.0",
@@ -32,14 +33,13 @@
     "@types/cookie": "^0.6.0",
     "@types/node": "*",
     "@vighnesh153/aws-dynamo-db": "*",
-    "@vighnesh153/tools-platform-independent": "*",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0",
     "@vighnesh153/tsconfig": "*",
     "cookie": "^1.0.0",
     "eslint-config-vighnesh153": "*",
     "sst": "^3.1.72",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3",
-    "vighnesh153-cookies": "*",
     "vitest": "^2.1.2"
   },
   "keywords": [],

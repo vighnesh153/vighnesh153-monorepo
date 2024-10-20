@@ -5,10 +5,10 @@ import {
   isGistPublic,
   removeFileContentFromGistMetadata,
   verifyGithubPAT,
-} from './utils';
-import { IGithubGistMetadata, IGithubGistProps } from './types';
-import { GistFile } from './GithubGistFile';
-import { saveGithubGist } from './saveGithubGist';
+} from './utils/index.ts';
+import { IGithubGistMetadata, IGithubGistProps } from './types/index.ts';
+import { GistFile } from './GithubGistFile.ts';
+import { saveGithubGist } from './saveGithubGist.ts';
 
 function gistNotInitializedError() {
   return new Error(`Gist is not initialized. Initialize the gist by invoking the "initialize()" method first`);

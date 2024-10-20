@@ -1,7 +1,7 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { Disc } from './Disc';
-import { Position } from './Position';
-import { Stack } from './Stack';
+import { not } from '@vighnesh153/tools';
+import { Disc } from './Disc.ts';
+import { Position } from './Position.ts';
+import { Stack } from './Stack.ts';
 
 function withinThreshold(diff: number, threshold: number): boolean {
   return Math.abs(diff) <= threshold;

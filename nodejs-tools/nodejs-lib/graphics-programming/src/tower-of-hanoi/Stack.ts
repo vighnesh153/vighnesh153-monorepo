@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { Position } from './Position';
-import { Disc } from './Disc';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { Position } from './Position.ts';
+import { Disc } from './Disc.ts';
 
 export interface StackConfig {
   color: string;

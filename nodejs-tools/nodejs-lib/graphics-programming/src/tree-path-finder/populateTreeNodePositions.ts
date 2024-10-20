@@ -1,6 +1,6 @@
-import { Queue, not } from '@vighnesh153/tools-platform-independent';
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { TreeNode } from './TreeNode';
+import { Queue, not } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { TreeNode } from './TreeNode.ts';
 
 export function populateTreeNodePositions(rootNode: TreeNode, depth: number, canvasWrapper: CanvasWrapper) {
   const nodes = new Queue({ node: rootNode, level: 1 });

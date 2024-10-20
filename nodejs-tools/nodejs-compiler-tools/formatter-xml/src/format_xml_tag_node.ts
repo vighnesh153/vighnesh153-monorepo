@@ -1,9 +1,9 @@
 import { XmlTagNode, XmlTextNode } from '@vighnesh153/parser-xml';
-import { buildIndentationSpace } from './build_indentation_space';
-import { formatXmlElementAttribute } from './format_xml_element_attribute';
-import { formatXmlExpression } from './format_xml_expression';
-import { sortAttributes } from './sort_attributes';
-import { formatTextNode } from './format_text_node';
+import { buildIndentationSpace } from './build_indentation_space.ts';
+import { formatXmlElementAttribute } from './format_xml_element_attribute.ts';
+import { formatXmlExpression } from './format_xml_expression.ts';
+import { sortAttributes } from './sort_attributes.ts';
+import { formatTextNode } from './format_text_node.ts';
 
 type FormatXmlTagNodeConfig = {
   xmlTagNode: XmlTagNode;

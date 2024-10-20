@@ -1,5 +1,5 @@
-import { reservedWords } from './constants';
-import { parseCodeReservedWords } from './parseCodeReservedWords';
+import { reservedWords } from './constants.ts';
+import { parseCodeReservedWords } from './parseCodeReservedWords.ts';
 
 const javascriptReservedWords = {
   reservedWords,

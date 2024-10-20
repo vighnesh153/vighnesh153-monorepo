@@ -1,6 +1,6 @@
-import { GameGrid } from './GameGrid';
-import { shuffle } from '@vighnesh153/tools-platform-independent';
-import { GameGridCell } from './GameGridCell';
+import { shuffleIterable } from '@vighnesh153/tools';
+import { GameGrid } from './GameGrid.ts';
+import { GameGridCell } from './GameGridCell.ts';
 
 interface FoodControllerConfig {
   readonly gameGrid: GameGrid;
@@ -28,7 +28,7 @@ export class FoodController {
       alert('Game over....');
     }
 
-    const [food] = shuffle(emptyCells);
+    const [food] = shuffleIterable(emptyCells);
     food.updateType('food');
     return food;
   }

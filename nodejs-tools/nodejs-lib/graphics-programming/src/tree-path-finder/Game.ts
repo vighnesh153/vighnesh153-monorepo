@@ -1,15 +1,15 @@
-import { Queue, not } from '@vighnesh153/tools-platform-independent';
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { TreeNode } from './TreeNode';
-import { populateTreeNodePositions } from './populateTreeNodePositions';
-import { createTreeStructure } from './createTreeStructure';
-import { TreeNodeEdge } from './Edge';
-import { createTreeNodeEdges } from './createTreeNodeEdges';
-import { getRandomNodes } from './getRandomNodes';
-import { searchBothNodes } from './searchBothNodes';
-import { findPathFromRoot } from './findPathFromRoot';
-import { findConnectingPath } from './findConnectingPath';
+import { Queue, not } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { TreeNode } from './TreeNode.ts';
+import { populateTreeNodePositions } from './populateTreeNodePositions.ts';
+import { createTreeStructure } from './createTreeStructure.ts';
+import { TreeNodeEdge } from './Edge.ts';
+import { createTreeNodeEdges } from './createTreeNodeEdges.ts';
+import { getRandomNodes } from './getRandomNodes.ts';
+import { searchBothNodes } from './searchBothNodes.ts';
+import { findPathFromRoot } from './findPathFromRoot.ts';
+import { findConnectingPath } from './findConnectingPath.ts';
 
 interface GameOptions {
   bgColor?: string;

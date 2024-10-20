@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { TreeNodeEdge } from './Edge';
-import { TreeNode } from './TreeNode';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { TreeNodeEdge } from './Edge.ts';
+import { TreeNode } from './TreeNode.ts';
 
 export function createTreeNodeEdges(
   canvasWrapper: CanvasWrapper,

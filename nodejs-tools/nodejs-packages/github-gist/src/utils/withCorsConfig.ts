@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import { CORSConfig } from '../types';
-import { constants } from '../constants';
+import { CORSConfig } from '../types/index.ts';
+import { constants } from '../constants.ts';
 
 export interface WithCorsConfigOptions {
   url: string;

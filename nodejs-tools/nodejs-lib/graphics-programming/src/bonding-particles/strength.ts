@@ -1,5 +1,5 @@
-import { Position } from './Position';
-import { euclidianDistance } from './euclidian-distance';
+import { Position } from './Position.ts';
+import { euclidianDistance } from './euclidian-distance.ts';
 
 export type Strength = 'NIL' | 'XS' | 'S' | 'M' | 'L' | 'XL';
 

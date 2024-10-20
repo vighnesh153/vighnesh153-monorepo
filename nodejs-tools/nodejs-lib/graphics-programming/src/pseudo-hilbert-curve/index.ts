@@ -1,1 +1,1 @@
-export { PseudoHilbertCurveGame } from './Game';
+export { PseudoHilbertCurveGame } from './Game.ts';

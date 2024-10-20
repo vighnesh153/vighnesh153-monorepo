@@ -1,7 +1,7 @@
 import { For, type JSX } from 'solid-js';
 import { useStore } from '@nanostores/solid';
-import { snackbarList } from '@/stores/snackbar';
-import { Snackbar } from './Snackbar';
+import { snackbarList } from '@/stores/snackbar.ts';
+import { Snackbar } from './Snackbar.tsx';
 
 export function SnackbarHost(): JSX.Element {
   const $snackbarList = useStore(snackbarList);

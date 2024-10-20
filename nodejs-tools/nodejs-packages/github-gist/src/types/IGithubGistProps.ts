@@ -1,4 +1,4 @@
-import { CORSConfig } from './CORSConfig';
+import { CORSConfig } from './CORSConfig.ts';
 
 export interface IGithubGistProps {
   /**

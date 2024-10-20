@@ -1,5 +1,5 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
-import { enableMobileScreen } from './helper';
+import { enableMobileScreen } from './helper.ts';
 
 const closeNavigationMenuTitle = 'close navigation menu';
 

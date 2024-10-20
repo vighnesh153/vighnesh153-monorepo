@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { classes } from '@/utils';
+  import { classes } from '@/utils/index.ts';
 
   export let title: string;
   export let link: string;

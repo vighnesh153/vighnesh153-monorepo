@@ -1,5 +1,5 @@
-import { randomInteger } from '@vighnesh153/tools-platform-independent';
-import { CanvasWrapper } from '@/canvas-wrapper';
+import { randomIntegerBetween } from '@std/random';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
 
 interface StarColor {
   r: number;
@@ -26,7 +26,7 @@ export class Star {
   readonly #canvasWrapper: CanvasWrapper;
 
   readonly #color: StarColor;
-  readonly #radius = randomInteger(2, 5);
+  readonly #radius = randomIntegerBetween(2, 5);
   readonly #position: Position;
   readonly #velocity: Velocity;
 
@@ -44,13 +44,13 @@ export class Star {
     };
 
     this.#position = {
-      x: this.coerceX(randomInteger(1, 100000)),
-      y: this.coerceY(randomInteger(1, 100000)),
+      x: this.coerceX(randomIntegerBetween(1, 100000)),
+      y: this.coerceY(randomIntegerBetween(1, 100000)),
     };
 
     this.#velocity = {
-      dx: randomInteger(-1, 1) * velocityMultiplier,
-      dy: randomInteger(-1, 1) * velocityMultiplier,
+      dx: randomIntegerBetween(-1, 1) * velocityMultiplier,
+      dy: randomIntegerBetween(-1, 1) * velocityMultiplier,
     };
 
     this.#opacity = 1;

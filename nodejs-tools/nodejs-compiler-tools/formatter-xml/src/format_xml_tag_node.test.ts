@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { XmlTagNode } from '@vighnesh153/parser-xml';
-import { formatXmlTagNode } from './format_xml_tag_node';
-import { parseProgram } from './test_utils';
+import { formatXmlTagNode } from './format_xml_tag_node.ts';
+import { parseProgram } from './test_utils.ts';
 
 test('should format empty, self-closing xml tag node', () => {
   const [parser, program] = parseProgram(`<manifest />`);

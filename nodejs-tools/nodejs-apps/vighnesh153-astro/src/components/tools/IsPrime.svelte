@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '@/components/Button.svelte';
-  import { isPrime, primeFactorize, type PrimeFactorsCount } from '@vighnesh153/tools-platform-independent';
+  import { isPrime, primeFactorize, type PrimeFactorsCount } from '@vighnesh153/tools';
 
   let n: number = 0;
 

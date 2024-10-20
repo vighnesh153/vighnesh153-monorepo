@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
-import { parseProgram } from './test_utils';
-import { formatXmlProgram } from './format_xml_program';
+import { parseProgram } from './test_utils.ts';
+import { formatXmlProgram } from './format_xml_program.ts';
 
 test('should format xml program', () => {
   const [parser, program] = parseProgram(`

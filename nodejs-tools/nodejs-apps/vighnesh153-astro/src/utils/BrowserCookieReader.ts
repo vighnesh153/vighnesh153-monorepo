@@ -1,9 +1,10 @@
-import type { CookieStoreWrapper } from '@vighnesh153/cookie-store';
-import { cookieKeys } from 'vighnesh153-cookies';
+import type { CookieStoreWrapper } from '@vighnesh153/tools-browser';
+import { type CompleteUserInfo } from '@vighnesh153/tools';
+import { type StageType } from '@vighnesh153/tools/vighnesh153';
+import { cookieKeys } from '@vighnesh153/tools/vighnesh153';
 
-import { type StageType, type CompleteUserInfo } from '@vighnesh153/tools-platform-independent';
-import { stage as actualStage } from '@/utils';
-import { cookieStoreWrapperFactory } from './factories';
+import { stage as actualStage } from './stage.ts';
+import { cookieStoreWrapperFactory } from './factories.ts';
 
 export interface BrowserCookieReader {
   readUserInfo: () => Promise<CompleteUserInfo | null>;

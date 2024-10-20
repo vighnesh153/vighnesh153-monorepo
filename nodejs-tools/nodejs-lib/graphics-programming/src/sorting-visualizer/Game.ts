@@ -1,8 +1,8 @@
-import { not } from '@vighnesh153/tools-platform-independent';
-import { CanvasWrapper } from '@/canvas-wrapper';
-import { getCanvasBgColor } from '@/getCanvasBgColor';
-import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray';
-import { SortingAlgorithm } from './SortingAlgorithm';
+import { not } from '@vighnesh153/tools';
+import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
+import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray.ts';
+import { SortingAlgorithm } from './SortingAlgorithm.ts';
 
 interface GameOptions {
   gap?: number;

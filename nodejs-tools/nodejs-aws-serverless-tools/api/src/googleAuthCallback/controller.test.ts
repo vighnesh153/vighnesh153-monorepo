@@ -4,16 +4,16 @@ import {
   FakeLogger,
   JsonHttpResponse,
   JsonHttpClient,
-  LambdaResponsePayload,
   type CompleteUserInfo,
   type GoogleOAuthUserInfo,
-} from '@vighnesh153/tools-platform-independent';
+} from '@vighnesh153/tools';
+import {type LambdaResponsePayload} from '@vighnesh153/tools/vighnesh153';
 import { FakeDynamoDBTable } from '@vighnesh153/aws-dynamo-db';
 
-import { controller } from './controller';
-import { FakeUserInfoDecoder } from '../common/UserInfoDecoder';
-import { UserInfoTableMetadata } from '../common/dynamoDBTableMetadata';
-import { FakeCookieSerializer } from '../common/CookieSerializer';
+import { controller } from './controller.ts';
+import { FakeUserInfoDecoder } from '../common/UserInfoDecoder.ts';
+import { UserInfoTableMetadata } from '../common/dynamoDBTableMetadata.ts';
+import { FakeCookieSerializer } from '../common/CookieSerializer.ts';
 
 let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<{

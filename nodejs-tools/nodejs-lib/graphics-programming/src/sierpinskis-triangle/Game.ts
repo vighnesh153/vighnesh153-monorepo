@@ -1,5 +1,6 @@
-import { randomInteger, repeat } from '@vighnesh153/tools-platform-independent';
-import { CanvasWrapper } from '../canvas-wrapper';
+import { randomIntegerBetween } from '@std/random';
+import { repeat } from '@vighnesh153/tools';
+import { CanvasWrapper } from '../canvas-wrapper.ts';
 
 export interface SierpinskisTriangleGamePoint {
   x: number;
@@ -92,7 +93,7 @@ export class SierpinskisTriangleGame {
 
   private update() {
     const points = this.initialPoints;
-    const randomIndex = randomInteger(0, points.length - 1);
+    const randomIndex = randomIntegerBetween(0, points.length - 1);
 
     const randomPoint = points[randomIndex];
 

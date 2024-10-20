@@ -1,6 +1,6 @@
 import * as http2 from 'node:http2';
-import { LambdaResponsePayload } from '@vighnesh153/tools-platform-independent';
-import { constructAuthRedirectUrl } from './constructAuthRedirectUrl';
+import { LambdaResponsePayload } from '@vighnesh153/tools/vighnesh153';
+import { constructAuthRedirectUrl } from './constructAuthRedirectUrl.ts';
 
 export function controller(
   authRedirectUrlConstructor: () => string | null = constructAuthRedirectUrl

@@ -1,1 +1,1 @@
-export * from './CodeViewer';
+export * from './CodeViewer.tsx';

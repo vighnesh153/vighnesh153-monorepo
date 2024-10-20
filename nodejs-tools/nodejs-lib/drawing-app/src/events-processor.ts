@@ -1,7 +1,7 @@
-import { not, Queue } from '@vighnesh153/tools-platform-independent';
+import { not, Queue } from '@vighnesh153/tools';
 
-import type { DrawPointEvent, AppEvent, DrawLineEvent, ClearScreenEvent, FloodFillEvent } from './events';
-import { CanvasWrapper } from './CanvasWrapper';
+import type { DrawPointEvent, AppEvent, DrawLineEvent, ClearScreenEvent, FloodFillEvent } from './events.ts';
+import { CanvasWrapper } from './CanvasWrapper.ts';
 
 const PACKED_POINT_MODULO = 10000;
 const PACKED_COLOR_MODULO = 1000;

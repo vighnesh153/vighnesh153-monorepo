@@ -27,8 +27,9 @@
     "dist"
   ],
   "dependencies": {
+    "@std/assert": "npm:@jsr/std__assert@^1.0.6",
     "@vighnesh153/lexer-xml": "*",
-    "@vighnesh153/tools-platform-independent": "*"
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0"
   },
   "devDependencies": {
     "@types/node": "*",

@@ -1,4 +1,4 @@
-import { simpleCodeToHtml } from '.';
+import { simpleCodeToHtml } from './index.ts';
 
 test('integration', () => {
   const html = simpleCodeToHtml(`

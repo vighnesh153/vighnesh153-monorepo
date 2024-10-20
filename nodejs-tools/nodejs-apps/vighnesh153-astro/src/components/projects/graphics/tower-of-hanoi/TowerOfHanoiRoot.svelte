@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { range, not } from '@vighnesh153/tools-platform-independent';
+  import { range, not } from '@vighnesh153/tools';
   import { TowerOfHanoiGame, TowerOfHanoiGameManager, CanvasWrapperImpl } from '@vighnesh153/graphics-programming';
 
   import Button from '@/components/Button.svelte';
