@@ -1,4 +1,4 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface BlockConfig {
   readonly coordinate: Coordinate;
@@ -39,7 +39,7 @@ export class Block {
   constructor(canvasWrapper: CanvasWrapper, options: BlockConfig) {
     this.canvasWrapper = canvasWrapper;
 
-    this.color = options.color ?? 'red';
+    this.color = options.color ?? "red";
     this.width = options.width ?? 20;
     this.height = options.width ?? 20;
     this.velocity = options.velocity ?? 0;

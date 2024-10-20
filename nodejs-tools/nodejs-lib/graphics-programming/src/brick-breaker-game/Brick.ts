@@ -1,5 +1,5 @@
-import { not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { not } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface BrickOptions {
   readonly row: number;
@@ -30,14 +30,14 @@ export class Brick {
 
   constructor(
     private readonly canvasWrapper: CanvasWrapper,
-    options: BrickOptions
+    options: BrickOptions,
   ) {
     this.row = options.row;
     this.column = options.column;
 
     this.width = options.width;
     this.height = options.height ?? 20;
-    this.color = options.color ?? 'blue';
+    this.color = options.color ?? "blue";
     this.endPadding = options.endPadding ?? 1;
     this.visible = options.visible ?? true;
   }
@@ -47,8 +47,15 @@ export class Brick {
       return;
     }
 
-    const { canvasWrapper, row, column, width, height, color, endPadding } = this;
-    canvasWrapper.drawFilledRect(column * width, row * height, width - endPadding, height - endPadding, color);
+    const { canvasWrapper, row, column, width, height, color, endPadding } =
+      this;
+    canvasWrapper.drawFilledRect(
+      column * width,
+      row * height,
+      width - endPadding,
+      height - endPadding,
+      color,
+    );
   }
 
   destroy(): void {

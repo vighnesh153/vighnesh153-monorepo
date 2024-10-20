@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { BarnsleysFernGenerator } from './BarnsleysFernGenerator.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { BarnsleysFernGenerator } from "./BarnsleysFernGenerator.ts";
 
 interface GameOptions {
   bgColor?: string;
@@ -21,7 +21,7 @@ export class BarnsleysFern {
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
     this.#bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
-    this.#dotColor = options.dotColor ?? 'green';
+    this.#dotColor = options.dotColor ?? "green";
     this.#speed = options.speed ?? 50;
 
     this.#barnsleysFernGenerator = new BarnsleysFernGenerator();
@@ -54,7 +54,8 @@ export class BarnsleysFern {
     const { x, y } = this.#barnsleysFernGenerator;
 
     // transform and scale
-    const plotX = (this.#canvasWrapper.width * x) / 6 + this.#canvasWrapper.width / 2;
+    const plotX = (this.#canvasWrapper.width * x) / 6 +
+      this.#canvasWrapper.width / 2;
     const plotY = (this.#canvasWrapper.height - 20) * (1 - y / 10) + 10;
 
     this.#canvasWrapper.drawFilledCircle(plotX, plotY, 1, this.#dotColor);
@@ -68,6 +69,12 @@ export class BarnsleysFern {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 }

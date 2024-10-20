@@ -1,8 +1,8 @@
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { NumberParser } from '@/parsers/data-type-parsers/primitive-parsers/number-parser';
-import { bugReporter } from '@/language-bug-handling';
-import { ArrayIndexEvaluator } from '@/expression-evaluators/array-index-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { NumberParser } from "@/parsers/data-type-parsers/primitive-parsers/number-parser";
+import { bugReporter } from "@/language-bug-handling";
+import { ArrayIndexEvaluator } from "@/expression-evaluators/array-index-evaluator";
 
 export class NumberEvaluator extends ExpressionEvaluator {
   private static numberParser = NumberParser.instance;
@@ -10,7 +10,7 @@ export class NumberEvaluator extends ExpressionEvaluator {
 
   constructor(public scope: Scope) {
     super();
-    this.arrayIndexEvaluator = new ArrayIndexEvaluator(scope, 'number');
+    this.arrayIndexEvaluator = new ArrayIndexEvaluator(scope, "number");
   }
 
   tryEvaluate(text: string): boolean {
@@ -18,7 +18,10 @@ export class NumberEvaluator extends ExpressionEvaluator {
     if (NumberEvaluator.numberParser.tryParse(trimmed)) {
       return true;
     }
-    if (this.scope.hasVariable(trimmed) && this.scope.getVariable(trimmed).type === 'number') {
+    if (
+      this.scope.hasVariable(trimmed) &&
+      this.scope.getVariable(trimmed).type === "number"
+    ) {
       return true;
     }
     return this.arrayIndexEvaluator.tryEvaluate(text.trim());
@@ -35,7 +38,7 @@ export class NumberEvaluator extends ExpressionEvaluator {
       }
       return this.arrayIndexEvaluator.evaluate(trimmed);
     } else {
-      bugReporter.report('EVALUATING_INVALID_NUMBER');
+      bugReporter.report("EVALUATING_INVALID_NUMBER");
     }
   }
 }

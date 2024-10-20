@@ -1,15 +1,15 @@
-import * as http2 from 'node:http2';
-import { LambdaResponsePayload } from '@vighnesh153/tools/vighnesh153';
-import { constructAuthRedirectUrl } from './constructAuthRedirectUrl.ts';
+import * as http2 from "node:http2";
+import { LambdaResponsePayload } from "@vighnesh153/tools/vighnesh153";
+import { constructAuthRedirectUrl } from "./constructAuthRedirectUrl.ts";
 
 export function controller(
-  authRedirectUrlConstructor: () => string | null = constructAuthRedirectUrl
+  authRedirectUrlConstructor: () => string | null = constructAuthRedirectUrl,
 ): LambdaResponsePayload {
   const authRedirectUrl = authRedirectUrlConstructor();
   if (authRedirectUrl === null) {
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-      body: 'Auth redirect url is empty',
+      body: "Auth redirect url is empty",
       cookies: [],
       headers: {},
     };

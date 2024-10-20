@@ -1,5 +1,5 @@
-import { randomIntegerBetween } from '@std/random';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { randomIntegerBetween } from "@std/random";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface StarColor {
   r: number;
@@ -63,7 +63,12 @@ export class Star {
     const { x, y } = this.#position;
     const { r, g, b } = this.#color;
 
-    this.#canvasWrapper.drawFilledCircle(x, y, radius, `rgba(${r}, ${g}, ${b}, ${opacity})`);
+    this.#canvasWrapper.drawFilledCircle(
+      x,
+      y,
+      radius,
+      `rgba(${r}, ${g}, ${b}, ${opacity})`,
+    );
   }
 
   update() {

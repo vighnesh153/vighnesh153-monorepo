@@ -2,7 +2,8 @@
 
 A drawing app made with ❤️ by Vighnesh Raut.
 
-You can [visit here](https://vighnesh153.dev/projects/drawing-app) to see the live application.
+You can [visit here](https://vighnesh153.dev/projects/drawing-app) to see the
+live application.
 
 ### Features
 

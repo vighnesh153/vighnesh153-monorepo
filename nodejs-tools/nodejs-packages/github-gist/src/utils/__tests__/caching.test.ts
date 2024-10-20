@@ -1,7 +1,7 @@
-import { describe, it, beforeEach, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from "vitest";
 
-import { randomUuid } from '@vighnesh153/tools';
-import { getCache, resetCache, setCache } from '../caching.ts';
+import { randomUuid } from "@vighnesh153/tools";
+import { getCache, resetCache, setCache } from "../caching.ts";
 
 describe('Helpers > "caching" tests', () => {
   const key = randomUuid();
@@ -11,24 +11,24 @@ describe('Helpers > "caching" tests', () => {
     resetCache();
   });
 
-  it('should return null if querying for the first time', () => {
+  it("should return null if querying for the first time", () => {
     expect(getCache(key)).toBeNull();
   });
 
-  it('should return the cached value if present', () => {
+  it("should return the cached value if present", () => {
     expect(getCache(key)).toBeNull();
     setCache(key, value);
     expect(getCache(key)).toBe(value);
   });
 
-  it('should allow to reset the cache', () => {
+  it("should allow to reset the cache", () => {
     setCache(key, value);
     expect(getCache(key)).toBe(value);
     resetCache([key]);
     expect(getCache(key)).toBeNull();
   });
 
-  it('should allow to delete only specific keys', () => {
+  it("should allow to delete only specific keys", () => {
     const key1 = randomUuid();
     const key2 = randomUuid();
     const key3 = randomUuid();

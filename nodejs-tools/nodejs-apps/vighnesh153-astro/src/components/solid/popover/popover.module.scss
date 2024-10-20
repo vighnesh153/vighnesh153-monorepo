@@ -2,7 +2,7 @@
   --_triangle-size: var(--triangle-size, 10px);
   --_triangle-color: var(--triangle-color, currentColor);
 
-  content: '';
+  content: "";
 
   border: var(--_triangle-size) solid transparent;
 }

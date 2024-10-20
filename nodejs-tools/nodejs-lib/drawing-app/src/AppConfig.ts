@@ -1,6 +1,6 @@
-import { IColor } from './colors.ts';
+import { IColor } from "./colors.ts";
 
-export type EventMode = 'draw' | 'fill';
+export type EventMode = "draw" | "fill";
 
 export enum BrushThickness {
   xs = 5,
@@ -12,11 +12,11 @@ export enum BrushThickness {
 
 export type AppConfig =
   | {
-      mode: 'draw';
-      brushThickness: BrushThickness;
-      color: IColor;
-    }
+    mode: "draw";
+    brushThickness: BrushThickness;
+    color: IColor;
+  }
   | {
-      mode: 'fill';
-      color: IColor;
-    };
+    mode: "fill";
+    color: IColor;
+  };

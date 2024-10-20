@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Particle } from './Particle.ts';
-import { Strength, calculateStrength } from './strength.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Particle } from "./Particle.ts";
+import { calculateStrength, Strength } from "./strength.ts";
 
 const StrengthToBondColorOpacity: Record<Strength, number> = {
   NIL: 0,

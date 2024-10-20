@@ -1,19 +1,20 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
-import { ArrayExpressionEvaluator } from '@/expression-evaluators/array-expression-evaluator';
-import { ArrayVariableBlock } from '@/blocks/variable-blocks/array-variable-block';
-import { VariableBlockType } from '@/blocks/variable-blocks/variable-block';
-import { ForEveryLoop } from '@/blocks/loop-blocks/for-every-loop';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
+import { ArrayExpressionEvaluator } from "@/expression-evaluators/array-expression-evaluator";
+import { ArrayVariableBlock } from "@/blocks/variable-blocks/array-variable-block";
+import { VariableBlockType } from "@/blocks/variable-blocks/variable-block";
+import { ForEveryLoop } from "@/blocks/loop-blocks/for-every-loop";
 
 export class ForEveryLoopParser extends BlockParser {
   private static withoutIndexRegex = /^for\s* every (.*) in (.*):\s*$/;
-  private static withIndexRegex = /^for every (.*) in (.*) with (.*) as\s* index\s*:\s*$/;
+  private static withIndexRegex =
+    /^for every (.*) in (.*) with (.*) as\s* index\s*:\s*$/;
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
   }
@@ -57,7 +58,9 @@ export class ForEveryLoopParser extends BlockParser {
 
   private parseForEachLoop(): Block {
     const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
-    const result = lineUnderTest.value.match(ForEveryLoopParser.withoutIndexRegex);
+    const result = lineUnderTest.value.match(
+      ForEveryLoopParser.withoutIndexRegex,
+    );
 
     if (result) {
       // eslint-disable-next-line prefer-destructuring
@@ -77,20 +80,25 @@ export class ForEveryLoopParser extends BlockParser {
       const arrayBlock = new ArrayVariableBlock(
         VariableBlockType.declare,
         nameOfArray,
-        'array',
+        "array",
         array,
         false,
         newScope,
-        evaluator.getType(JSON.stringify(array))
+        evaluator.getType(JSON.stringify(array)),
       );
       arrayBlock.execute();
 
       this.lineOfCodes.pop();
 
-      return new ForEveryLoop(elementName, newScope, this.getIndentedBlock(), nameOfArray);
+      return new ForEveryLoop(
+        elementName,
+        newScope,
+        this.getIndentedBlock(),
+        nameOfArray,
+      );
     }
 
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 
   private parseEnumeratorLoop(): Block {
@@ -118,20 +126,26 @@ export class ForEveryLoopParser extends BlockParser {
       const arrayBlock = new ArrayVariableBlock(
         VariableBlockType.declare,
         nameOfArray,
-        'array',
+        "array",
         array,
         false,
         newScope,
-        evaluator.getType(JSON.stringify(array))
+        evaluator.getType(JSON.stringify(array)),
       );
       arrayBlock.execute();
 
       this.lineOfCodes.pop();
 
-      return new ForEveryLoop(elementName, newScope, this.getIndentedBlock(), nameOfArray, indexName);
+      return new ForEveryLoop(
+        elementName,
+        newScope,
+        this.getIndentedBlock(),
+        nameOfArray,
+        indexName,
+      );
     }
 
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 
   parse(): Block {
@@ -141,6 +155,6 @@ export class ForEveryLoopParser extends BlockParser {
     if (this.isForEachLoop()) {
       return this.parseForEachLoop();
     }
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 }

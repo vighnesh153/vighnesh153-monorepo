@@ -7,44 +7,44 @@ function nodejsLib(localPath: string): string {
 }
 
 export const searchParams = {
-  exampleId: 'example-id',
+  exampleId: "example-id",
 };
 
 export const hashTags = {
-  main: 'main',
-  header: 'header',
-  footer: 'footer',
+  main: "main",
+  header: "header",
+  footer: "footer",
   homePage: {
-    aboutMe: 'about-me',
-    experience: 'experience',
-    projects: 'projects',
-    contactMe: 'contact-me',
+    aboutMe: "about-me",
+    experience: "experience",
+    projects: "projects",
+    contactMe: "contact-me",
   },
   projects: {
-    projectsMain: 'projects',
+    projectsMain: "projects",
   },
 };
 
 export const externalLinks = {
-  githubRepo: monorepo('/nodejs-tools/nodejs-apps/vighnesh153-astro-svelte'),
-  blog: '/blog',
-  resume: 'https://bit.ly/vighnesh153-resume',
+  githubRepo: monorepo("/nodejs-tools/nodejs-apps/vighnesh153-astro-svelte"),
+  blog: "/blog",
+  resume: "https://bit.ly/vighnesh153-resume",
   projects: {
     spl: {
-      sourceCode: nodejsLib('/spl'),
-      learnSyntax: nodejsLib('/spl/README.md'),
+      sourceCode: nodejsLib("/spl"),
+      learnSyntax: nodejsLib("/spl/README.md"),
     },
     tsxBundler: {
-      sourceCode: nodejsLib('/tsx-bundler'),
+      sourceCode: nodejsLib("/tsx-bundler"),
     },
     drawingApp: {
-      sourceCode: nodejsLib('/drawing-app'),
+      sourceCode: nodejsLib("/drawing-app"),
     },
     graphicsProjects: {
-      sourceCode: nodejsLib('/graphics-programming'),
+      sourceCode: nodejsLib("/graphics-programming"),
     },
     games: {
-      sourceCode: nodejsLib('/graphics-programming'),
+      sourceCode: nodejsLib("/graphics-programming"),
     },
   },
 };
@@ -52,7 +52,7 @@ export const externalLinks = {
 export const internalLinks = {
   main: `#${hashTags.main}`,
   homePage: {
-    root: '/',
+    root: "/",
     aboutMe: `/#${hashTags.homePage.aboutMe}`,
     experience: `/#${hashTags.homePage.experience}`,
     projects: `/#${hashTags.homePage.projects}`,
@@ -60,28 +60,32 @@ export const internalLinks = {
     footer: `/#${hashTags.footer}`,
   },
   projects: {
-    root: '/projects',
+    root: "/projects",
     projectsMain: `/projects#${hashTags.projects.projectsMain}`,
     spl: {
-      mainMenu: '/projects/spl',
+      mainMenu: "/projects/spl",
       editor: (exampleId?: string) =>
-        exampleId ? `/projects/spl-editor?${searchParams.exampleId}=${exampleId}` : '/projects/spl-editor',
+        exampleId
+          ? `/projects/spl-editor?${searchParams.exampleId}=${exampleId}`
+          : "/projects/spl-editor",
     },
-    tsxPlayground: '/projects/tsx-playground',
-    drawingApp: '/projects/drawing-app',
+    tsxPlayground: "/projects/tsx-playground",
+    drawingApp: "/projects/drawing-app",
     graphicsProjects: {
-      root: '/projects/graphics',
-      buildProjectLinkFromId: (projectId: string) => `/projects/graphics/${projectId}`,
+      root: "/projects/graphics",
+      buildProjectLinkFromId: (projectId: string) =>
+        `/projects/graphics/${projectId}`,
     },
     games: {
-      root: '/projects/games',
-      buildProjectLinkFromId: (projectId: string) => `/projects/games/${projectId}`,
+      root: "/projects/games",
+      buildProjectLinkFromId: (projectId: string) =>
+        `/projects/games/${projectId}`,
     },
   },
   tools: {
-    root: '/tools',
+    root: "/tools",
     calculators: {
-      root: '/tools/calculators',
+      root: "/tools/calculators",
     },
   },
 };

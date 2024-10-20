@@ -1,4 +1,4 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface PaddleOptions {
   readonly width?: number;
@@ -19,11 +19,11 @@ export class Paddle {
 
   constructor(
     private readonly canvasWrapper: CanvasWrapper,
-    options: PaddleOptions
+    options: PaddleOptions,
   ) {
     this.width = options.width ?? canvasWrapper.width / 5;
     this.height = options.height ?? 3;
-    this.color = options.color ?? 'black';
+    this.color = options.color ?? "black";
 
     this.x = options.initialX ?? (canvasWrapper.width - this.width) / 2;
     this.y = options.y;

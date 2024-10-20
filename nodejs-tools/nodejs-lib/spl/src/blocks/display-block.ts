@@ -1,19 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { Block } from '@/blocks/Block';
-import { Scope } from '@/models/Scope';
+import { Block } from "@/blocks/Block";
+import { Scope } from "@/models/Scope";
 
-import { OutputBuffer } from '@/models/OutputBuffer';
+import { OutputBuffer } from "@/models/OutputBuffer";
 
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { ArrayExpressionEvaluator } from '@/expression-evaluators/array-expression-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { ArrayExpressionEvaluator } from "@/expression-evaluators/array-expression-evaluator";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from '@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
-import { StringExpressionEvaluator } from '@/expression-evaluators/string-expression-evaluator';
-import { BooleanExpressionEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-expression-evaluator';
+} from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
+import { StringExpressionEvaluator } from "@/expression-evaluators/string-expression-evaluator";
+import { BooleanExpressionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
 
 export class DisplayBlock extends Block {
   scope: Scope;
@@ -22,14 +22,16 @@ export class DisplayBlock extends Block {
 
   constructor(
     private values: string[],
-    parentScope: Scope
+    parentScope: Scope,
   ) {
     super();
     this.scope = parentScope;
 
     this.expressionEvaluators.push(new ArrayExpressionEvaluator(this.scope));
     this.expressionEvaluators.push(new BooleanExpressionEvaluator(this.scope));
-    this.expressionEvaluators.push(new ArithmeticExpressionEvaluator(this.scope));
+    this.expressionEvaluators.push(
+      new ArithmeticExpressionEvaluator(this.scope),
+    );
     this.expressionEvaluators.push(new StringExpressionEvaluator(this.scope));
   }
 
@@ -51,11 +53,11 @@ export class DisplayBlock extends Block {
           const variable = this.scope.getVariable(value);
           outputBuffer.push(variable.value.toString());
         } else {
-          throw new Error('Cannot resolve symbol: ' + value);
+          throw new Error("Cannot resolve symbol: " + value);
         }
       }
     }
 
-    outputBuffer.push('\n');
+    outputBuffer.push("\n");
   }
 }

@@ -1,8 +1,8 @@
-import { not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { buildInitialLineHeightPercentsArray } from './buildInitialLineHeightPercentsArray.ts';
-import { SortingAlgorithm } from './SortingAlgorithm.ts';
+import { not } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { buildInitialLineHeightPercentsArray } from "./buildInitialLineHeightPercentsArray.ts";
+import { SortingAlgorithm } from "./SortingAlgorithm.ts";
 
 interface GameOptions {
   gap?: number;
@@ -32,8 +32,8 @@ export class SortingVisualizerGame {
 
     this.#gap = options.gap ?? 20;
     this.#lineWidth = options.lineWidth ?? 2;
-    this.#lineColor = options.lineColor ?? 'black';
-    this.#modifiedIndexLineColor = options.modifiedIndexLineColor ?? 'red';
+    this.#lineColor = options.lineColor ?? "black";
+    this.#modifiedIndexLineColor = options.modifiedIndexLineColor ?? "red";
 
     const linesCount = options.linesCount ?? 200;
     this.#lineHeightPercents = buildInitialLineHeightPercentsArray(linesCount);
@@ -62,7 +62,13 @@ export class SortingVisualizerGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 
   private drawLines(modifiedIndices: number[]): void {
@@ -81,7 +87,9 @@ export class SortingVisualizerGame {
       const bottomY = canvasHeight - gap;
       const topY = bottomY - (availableHeight * lineHeightPercent) / 100;
 
-      const lineColor = modifiedIndices.includes(index) ? modifiedIndexLineColor : defaultLineColor;
+      const lineColor = modifiedIndices.includes(index)
+        ? modifiedIndexLineColor
+        : defaultLineColor;
 
       this.#canvasWrapper.drawLine(x, bottomY, x, topY, lineWidth, lineColor);
     });

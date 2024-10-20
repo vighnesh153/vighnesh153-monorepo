@@ -2,7 +2,8 @@
 
 ## Prerequisites
 
-- You need [adb](https://developer.android.com/tools/adb) installed on your machine
+- You need [adb](https://developer.android.com/tools/adb) installed on your
+  machine
 
 * You must be connected to your TV device using `adb`
 

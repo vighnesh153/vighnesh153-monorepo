@@ -1,8 +1,8 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { ScoreTracker } from './score-tracker.ts';
-import { Pad } from './Pad.ts';
-import { Ball } from './Ball.ts';
-import { ComputerPadController } from './ComputerPadController.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { ScoreTracker } from "./score-tracker.ts";
+import { Pad } from "./Pad.ts";
+import { Ball } from "./Ball.ts";
+import { ComputerPadController } from "./ComputerPadController.ts";
 
 interface ArenaOptions {
   contentColor?: string;
@@ -28,14 +28,17 @@ export class Arena {
 
   constructor(canvasWrapper: CanvasWrapper, options: ArenaOptions) {
     this.#canvasWrapper = canvasWrapper;
-    this.#contentColor = options.contentColor ?? 'black';
-    this.#dangerBorderColor = options.dangerBorderColor ?? 'red';
+    this.#contentColor = options.contentColor ?? "black";
+    this.#dangerBorderColor = options.dangerBorderColor ?? "red";
     this.#gutter = options.gutter ?? 20;
     this.#borderThickness = options.borderThickness ?? 2;
     this.#scoreTracker = options.scoreTracker;
 
     const padWidth = 5;
-    this.#playerPad = new Pad(canvasWrapper, { color: this.#contentColor, width: padWidth });
+    this.#playerPad = new Pad(canvasWrapper, {
+      color: this.#contentColor,
+      width: padWidth,
+    });
     this.#computerPad = new Pad(canvasWrapper, {
       width: padWidth,
       boundStart: { x: canvasWrapper.width - this.#gutter - padWidth },
@@ -43,7 +46,10 @@ export class Arena {
       color: this.#contentColor,
     });
 
-    this.#ball = new Ball(canvasWrapper, { color: this.#contentColor, arenaGutter: this.#gutter });
+    this.#ball = new Ball(canvasWrapper, {
+      color: this.#contentColor,
+      arenaGutter: this.#gutter,
+    });
 
     this.#computerPadController = new ComputerPadController({
       ball: this.#ball,
@@ -79,10 +85,31 @@ export class Arena {
     const h = this.#canvasWrapper.height;
     const thickness = this.#borderThickness;
     const color = this.#contentColor;
-    this.#canvasWrapper.drawOutlinedRect(p, p, w - p * 2, h - p * 2, thickness, color);
+    this.#canvasWrapper.drawOutlinedRect(
+      p,
+      p,
+      w - p * 2,
+      h - p * 2,
+      thickness,
+      color,
+    );
 
-    this.#canvasWrapper.drawLine(p, p, p, h - p, thickness, this.#dangerBorderColor);
-    this.#canvasWrapper.drawLine(w - p, p, w - p, h - p, thickness, this.#dangerBorderColor);
+    this.#canvasWrapper.drawLine(
+      p,
+      p,
+      p,
+      h - p,
+      thickness,
+      this.#dangerBorderColor,
+    );
+    this.#canvasWrapper.drawLine(
+      w - p,
+      p,
+      w - p,
+      h - p,
+      thickness,
+      this.#dangerBorderColor,
+    );
   }
 
   private writeScore() {
@@ -98,10 +125,11 @@ export class Arena {
     cw.writeText(text1, this.#gutter, posY, this.#contentColor, fontSize);
     cw.writeText(
       text2,
-      this.#canvasWrapper.width - this.#gutter - text2.length * textLengthMultiplier,
+      this.#canvasWrapper.width - this.#gutter -
+        text2.length * textLengthMultiplier,
       posY,
       this.#contentColor,
-      fontSize
+      fontSize,
     );
     // cw.writeText(
     //   text3,
@@ -114,9 +142,9 @@ export class Arena {
 
   private updateBall() {
     this.#ball.update((collisionDirection) => {
-      if (collisionDirection === 'left') {
+      if (collisionDirection === "left") {
         this.#scoreTracker.computerScores();
-      } else if (collisionDirection === 'right') {
+      } else if (collisionDirection === "right") {
         this.#scoreTracker.playerScores();
       }
     });
@@ -129,9 +157,10 @@ export class Arena {
 
     // collision with player's pad
     {
-      const xInRangePlayerPad = ball.position.x <= playerPad.position.x + playerPad.width;
-      const yInRangePlayerPad =
-        ball.position.y >= playerPad.position.y && ball.position.y <= playerPad.position.y + playerPad.height;
+      const xInRangePlayerPad =
+        ball.position.x <= playerPad.position.x + playerPad.width;
+      const yInRangePlayerPad = ball.position.y >= playerPad.position.y &&
+        ball.position.y <= playerPad.position.y + playerPad.height;
 
       if (xInRangePlayerPad && yInRangePlayerPad) {
         ball.updateVelocityModifier(-1, 1);
@@ -140,9 +169,10 @@ export class Arena {
 
     // collision with computer's pad
     {
-      const xInRangePlayerPad = ball.position.x + ball.width >= computerPad.position.x;
-      const yInRangePlayerPad =
-        ball.position.y >= computerPad.position.y && ball.position.y <= computerPad.position.y + computerPad.height;
+      const xInRangePlayerPad =
+        ball.position.x + ball.width >= computerPad.position.x;
+      const yInRangePlayerPad = ball.position.y >= computerPad.position.y &&
+        ball.position.y <= computerPad.position.y + computerPad.height;
 
       if (xInRangePlayerPad && yInRangePlayerPad) {
         ball.updateVelocityModifier(-1, 1);

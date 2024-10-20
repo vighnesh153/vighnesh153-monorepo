@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
-import { ArrayParser } from '@/parsers/data-type-parsers/non-primitive-parsers/array-parser';
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
+import { ArrayParser } from "@/parsers/data-type-parsers/non-primitive-parsers/array-parser";
 
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from '@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
-import { BooleanExpressionEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-expression-evaluator';
-import { StringExpressionEvaluator } from '@/expression-evaluators/string-expression-evaluator';
-import { csvSplit } from '@/helpers/csv-split';
-import { FunctionExpressionEvaluator } from '@/expression-evaluators/function-expression-evaluator';
+} from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
+import { BooleanExpressionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
+import { StringExpressionEvaluator } from "@/expression-evaluators/string-expression-evaluator";
+import { csvSplit } from "@/helpers/csv-split";
+import { FunctionExpressionEvaluator } from "@/expression-evaluators/function-expression-evaluator";
 
 export class ArrayExpressionEvaluator extends ExpressionEvaluator {
   private static arrayParser = ArrayParser.instance;
@@ -22,9 +22,9 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
   private readonly functionExpressionEvaluator: FunctionExpressionEvaluator;
 
   private types: { [key: number]: string } = {
-    0: 'number',
-    1: 'boolean',
-    2: 'string',
+    0: "number",
+    1: "boolean",
+    2: "string",
   };
 
   constructor(public scope: Scope) {
@@ -32,29 +32,33 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
 
     // Order important. If want to change order,
     // change the this.types property as well.
-    this.expressionEvaluators.push(new ArithmeticExpressionEvaluator(this.scope));
+    this.expressionEvaluators.push(
+      new ArithmeticExpressionEvaluator(this.scope),
+    );
     this.expressionEvaluators.push(new BooleanExpressionEvaluator(this.scope));
     this.expressionEvaluators.push(new StringExpressionEvaluator(this.scope));
 
-    this.functionExpressionEvaluator = new FunctionExpressionEvaluator(this.scope);
+    this.functionExpressionEvaluator = new FunctionExpressionEvaluator(
+      this.scope,
+    );
   }
 
   getType(text: string): string {
     if (this.tryEvaluate(text) === false) {
-      throw new Error('Invalid array type.');
+      throw new Error("Invalid array type.");
     }
     const array = this.evaluate(text);
     if (array?.length === 0) {
-      return 'any';
+      return "any";
     }
     if (array?.[0]?.toString() === array?.[0]) {
-      return 'string';
+      return "string";
     }
     // @ts-ignore
     if (JSON.parse(array?.[0]) === true || JSON.parse(array?.[0]) === false) {
-      return 'boolean';
+      return "boolean";
     }
-    return 'number';
+    return "number";
   }
 
   private tryParseExpressionBasedArray(text: string): boolean {
@@ -64,7 +68,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
       return true;
     }
 
-    if (trimmed.startsWith('[') === false || trimmed.endsWith(']') === false) {
+    if (trimmed.startsWith("[") === false || trimmed.endsWith("]") === false) {
       return false;
     }
 
@@ -73,7 +77,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
 
     const arrayElements = csvSplit(innerContent);
 
-    let type: string = 'any';
+    let type: string = "any";
     let isArrayValid = true;
     arrayElements.forEach((element) => {
       if (isArrayValid === false) return;
@@ -83,7 +87,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
         if (isArrayValid === false) return;
 
         if (evaluator.tryEvaluate(element) && parsedByAny === false) {
-          if (type === 'any') {
+          if (type === "any") {
             type = this.types[index];
           } else if (type !== this.types[index]) {
             isArrayValid = false;
@@ -130,7 +134,8 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
     if (this.tryParseExpressionBasedArray(trimmed)) {
       return true;
     }
-    return this.scope.hasVariable(trimmed) && this.scope.getVariable(trimmed).type === 'array';
+    return this.scope.hasVariable(trimmed) &&
+      this.scope.getVariable(trimmed).type === "array";
   }
 
   evaluate(text: string): unknown[] | undefined {
@@ -143,7 +148,7 @@ export class ArrayExpressionEvaluator extends ExpressionEvaluator {
       }
       return this.scope.getVariable(text.trim()).value;
     } else {
-      bugReporter.report('EVALUATING_INVALID_STRING');
+      bugReporter.report("EVALUATING_INVALID_STRING");
     }
   }
 }

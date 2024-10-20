@@ -1,5 +1,5 @@
-import { ALPHABET, DIGITS, not } from '@vighnesh153/tools';
-import { KotlinTokenType, operatorTokens } from './tokens';
+import { ALPHABET, DIGITS, not } from "@vighnesh153/tools";
+import { KotlinTokenType, operatorTokens } from "./tokens";
 
 class StateMachineNode {
   fallbackNode: StateMachineNode | null = null;
@@ -18,7 +18,9 @@ class StateMachineNode {
 
   getVisitableState(state: string): StateMachineNode {
     if (not(this.isVisitable(state))) {
-      throw new Error(`getVisitableState called with '${state}' that is not possible to visit`);
+      throw new Error(
+        `getVisitableState called with '${state}' that is not possible to visit`,
+      );
     }
     return this.nextStates.get(state)! || this.fallbackNode!;
   }
@@ -44,7 +46,7 @@ function constructOperatorsGrammar(root: StateMachineNode) {
 }
 
 function constructIdentifierGrammar(root: StateMachineNode) {
-  const startCharacters = ALPHABET + '_';
+  const startCharacters = ALPHABET + "_";
   const allCharacters = startCharacters + DIGITS;
 
   const charToNode = Array.from(allCharacters).reduce((acc, ch) => {
@@ -75,41 +77,41 @@ function constructIdentifierGrammar(root: StateMachineNode) {
 
 function constructCommentsGrammar(root: StateMachineNode) {
   let node = root;
-  if (not(root.isVisitable('/'))) {
-    node.createVisitableState(new StateMachineNode('/'));
+  if (not(root.isVisitable("/"))) {
+    node.createVisitableState(new StateMachineNode("/"));
   }
-  node = node.getVisitableState('/');
+  node = node.getVisitableState("/");
 
   // single line
-  if (not(root.isVisitable('/'))) {
-    node.createVisitableState(new StateMachineNode('/'));
+  if (not(root.isVisitable("/"))) {
+    node.createVisitableState(new StateMachineNode("/"));
   }
-  node = node.getVisitableState('/');
+  node = node.getVisitableState("/");
   node.tokenType = KotlinTokenType.SingleLineComment;
   node.fallbackNode = node;
-  const newLineNode = new StateMachineNode('\n');
+  const newLineNode = new StateMachineNode("\n");
   newLineNode.tokenType = KotlinTokenType.SingleLineComment;
   node.createVisitableState(newLineNode);
 
   // multi line
-  node = root.getVisitableState('/');
-  if (not(root.isVisitable('*'))) {
-    node.createVisitableState(new StateMachineNode('*'));
+  node = root.getVisitableState("/");
+  if (not(root.isVisitable("*"))) {
+    node.createVisitableState(new StateMachineNode("*"));
   }
-  const startStarNode = node.getVisitableState('*');
-  const endStarNode = new StateMachineNode('*');
+  const startStarNode = node.getVisitableState("*");
+  const endStarNode = new StateMachineNode("*");
   endStarNode.fallbackNode = startStarNode;
   startStarNode.createVisitableState(endStarNode);
-  const endForwardSlashNode = new StateMachineNode('/');
+  const endForwardSlashNode = new StateMachineNode("/");
   endForwardSlashNode.tokenType = KotlinTokenType.MultiLineComment;
   endStarNode.createVisitableState(endForwardSlashNode);
 }
 
 function constructIntegerOrLongGrammar(root: StateMachineNode) {
-  const longNode = new StateMachineNode('L');
+  const longNode = new StateMachineNode("L");
   longNode.tokenType = KotlinTokenType.LongLiteral;
 
-  const underscoreNode = new StateMachineNode('_');
+  const underscoreNode = new StateMachineNode("_");
   underscoreNode.createVisitableState(underscoreNode);
 
   const digitToNode = Array.from(DIGITS).reduce((acc, digit) => {
@@ -134,7 +136,9 @@ function constructIntegerOrLongGrammar(root: StateMachineNode) {
   }
 }
 
-function constructStateMachine(root: StateMachineNode = new StateMachineNode('')): StateMachineNode {
+function constructStateMachine(
+  root: StateMachineNode = new StateMachineNode(""),
+): StateMachineNode {
   constructOperatorsGrammar(root);
   constructIdentifierGrammar(root);
   constructCommentsGrammar(root);

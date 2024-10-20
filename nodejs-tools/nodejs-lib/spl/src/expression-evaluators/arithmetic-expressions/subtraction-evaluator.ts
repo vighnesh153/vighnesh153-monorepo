@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
-import { reverseString } from 'src/helpers/reverse-string';
-import { parseInitialNumberOrIdentifier } from 'src/helpers/parse-initial-number-or-identifier';
-import { NumberEvaluator } from 'src/expression-evaluators/arithmetic-expressions/number-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
+import { reverseString } from "src/helpers/reverse-string";
+import { parseInitialNumberOrIdentifier } from "src/helpers/parse-initial-number-or-identifier";
+import { NumberEvaluator } from "src/expression-evaluators/arithmetic-expressions/number-evaluator";
 
 export class SubtractionEvaluator extends ExpressionEvaluator {
-  private static identifier: string = '-';
+  private static identifier: string = "-";
 
   constructor(public scope: Scope) {
     super();
@@ -17,10 +17,13 @@ export class SubtractionEvaluator extends ExpressionEvaluator {
 
   private static getNextAndPrevIdentifiers(
     unProcessedLhs: string,
-    unProcessedRhs: string
+    unProcessedRhs: string,
   ): { lhs: string; rhs: string } {
     const reversedLhs = reverseString(unProcessedLhs);
-    const extractedIdentifierOrNumber = parseInitialNumberOrIdentifier(reversedLhs, true);
+    const extractedIdentifierOrNumber = parseInitialNumberOrIdentifier(
+      reversedLhs,
+      true,
+    );
 
     return {
       lhs: reverseString(extractedIdentifierOrNumber),
@@ -33,14 +36,22 @@ export class SubtractionEvaluator extends ExpressionEvaluator {
     const numberEvaluator = new NumberEvaluator(this.scope);
 
     for (let i = 0; i < individualComponents.length - 1; i++) {
-      const mergedLhs = individualComponents.slice(0, i + 1).join(SubtractionEvaluator.identifier);
+      const mergedLhs = individualComponents.slice(0, i + 1).join(
+        SubtractionEvaluator.identifier,
+      );
       const mergedRhs = individualComponents
         .slice(i + 1, individualComponents.length)
         .join(SubtractionEvaluator.identifier);
 
-      const { lhs, rhs } = SubtractionEvaluator.getNextAndPrevIdentifiers(mergedLhs, mergedRhs);
+      const { lhs, rhs } = SubtractionEvaluator.getNextAndPrevIdentifiers(
+        mergedLhs,
+        mergedRhs,
+      );
 
-      if (numberEvaluator.tryEvaluate(lhs) === false || numberEvaluator.tryEvaluate(rhs) === false) {
+      if (
+        numberEvaluator.tryEvaluate(lhs) === false ||
+        numberEvaluator.tryEvaluate(rhs) === false
+      ) {
         continue;
       }
 
@@ -65,7 +76,10 @@ export class SubtractionEvaluator extends ExpressionEvaluator {
       const unProcessedLhs = text.slice(0, splitIndex);
       const unProcessedRhs = text.slice(splitIndex + 1);
 
-      const { lhs, rhs } = SubtractionEvaluator.getNextAndPrevIdentifiers(unProcessedLhs, unProcessedRhs);
+      const { lhs, rhs } = SubtractionEvaluator.getNextAndPrevIdentifiers(
+        unProcessedLhs,
+        unProcessedRhs,
+      );
 
       const numberEvaluator = new NumberEvaluator(this.scope);
       const result = {
@@ -75,9 +89,12 @@ export class SubtractionEvaluator extends ExpressionEvaluator {
       };
 
       // @ts-ignore
-      return text.replace(result.originalExpression, `${result.prev - result.next}`);
+      return text.replace(
+        result.originalExpression,
+        `${result.prev - result.next}`,
+      );
     } else {
-      bugReporter.report('INVALID_SUBTRACTION_OPERATION');
+      bugReporter.report("INVALID_SUBTRACTION_OPERATION");
     }
   }
 }

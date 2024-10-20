@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { booleanComparisionEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-comparision-evaluator';
-import { bugReporter } from '@/language-bug-handling';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { booleanComparisionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-comparision-evaluator";
+import { bugReporter } from "@/language-bug-handling";
 
 export class LogicalOr extends ExpressionEvaluator {
-  identifier = 'or';
+  identifier = "or";
 
   constructor(public scope: Scope) {
     super();
@@ -18,9 +18,14 @@ export class LogicalOr extends ExpressionEvaluator {
   evaluate(text: string): unknown {
     if (this.tryEvaluate(text)) {
       // @ts-ignore
-      return booleanComparisionEvaluator(text, this.identifier, this.scope, (lhs, rhs) => lhs || rhs);
+      return booleanComparisionEvaluator(
+        text,
+        this.identifier,
+        this.scope,
+        (lhs, rhs) => lhs || rhs,
+      );
     } else {
-      bugReporter.report('INVALID_LOGICAL_OR_COMPARISION');
+      bugReporter.report("INVALID_LOGICAL_OR_COMPARISION");
     }
   }
 }

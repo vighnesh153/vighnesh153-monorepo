@@ -1,15 +1,15 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
-import { LoopWhileExpressionIsTrue } from '@/blocks/loop-blocks/loop-while-expression-is-true';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
+import { LoopWhileExpressionIsTrue } from "@/blocks/loop-blocks/loop-while-expression-is-true";
 
 export class LoopWhileExpressionIsTrueParser extends BlockParser {
   private static regex = /^loop\s* while (.*):\s*$/;
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
   }
@@ -43,9 +43,13 @@ export class LoopWhileExpressionIsTrueParser extends BlockParser {
         // eslint-disable-next-line prefer-destructuring
         const expression = result[1];
         this.lineOfCodes.pop();
-        return new LoopWhileExpressionIsTrue(expression, this.scope, this.getIndentedBlock());
+        return new LoopWhileExpressionIsTrue(
+          expression,
+          this.scope,
+          this.getIndentedBlock(),
+        );
       }
     }
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 }

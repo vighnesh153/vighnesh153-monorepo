@@ -1,6 +1,6 @@
-import { not } from '@vighnesh153/tools';
-import { LexerInput } from './LexerInput.ts';
-import { EOF_CHARACTER } from './utils.ts';
+import { not } from "@vighnesh153/tools";
+import { LexerInput } from "./LexerInput.ts";
+import { EOF_CHARACTER } from "./utils.ts";
 
 export class LexerInputReader {
   #currentIndex = -1;
@@ -40,7 +40,7 @@ export class LexerInputReader {
       this.#currentCharacter = this.lexerInput.getCharacterAt(this.#peekIndex);
       this.#columnNumber++;
     }
-    if (this.#previousCharacter === '\n') {
+    if (this.#previousCharacter === "\n") {
       this.#lineNumber++;
       this.#columnNumber = 1;
     }
@@ -50,7 +50,9 @@ export class LexerInputReader {
 
   peekCharacter(futureOffset: number = 0): string | EOF_CHARACTER {
     if (futureOffset < 0 || not(Number.isInteger(futureOffset))) {
-      throw new Error(`Expected future offset to be a non-negative integer, found '${futureOffset}'`);
+      throw new Error(
+        `Expected future offset to be a non-negative integer, found '${futureOffset}'`,
+      );
     }
     const peekIndex = this.#peekIndex + futureOffset;
     if (peekIndex >= this.lexerInput.getSize()) {

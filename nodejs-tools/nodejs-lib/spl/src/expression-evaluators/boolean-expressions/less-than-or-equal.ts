@@ -1,12 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { numericComparisionEvaluator } from '@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator';
-import { bugReporter } from '@/language-bug-handling';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { numericComparisionEvaluator } from "@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator";
+import { bugReporter } from "@/language-bug-handling";
 
 export class LessThanOrEqual extends ExpressionEvaluator {
-  private identifier: string = '<=';
+  private identifier: string = "<=";
 
   constructor(public scope: Scope) {
     super();
@@ -18,9 +18,14 @@ export class LessThanOrEqual extends ExpressionEvaluator {
 
   evaluate(text: string): unknown {
     if (this.tryEvaluate(text)) {
-      return numericComparisionEvaluator(text, this.identifier, this.scope, (lhs, rhs) => lhs <= rhs);
+      return numericComparisionEvaluator(
+        text,
+        this.identifier,
+        this.scope,
+        (lhs, rhs) => lhs <= rhs,
+      );
     } else {
-      bugReporter.report('INVALID_LESS_THAN_OR_EQUAL_COMPARISION');
+      bugReporter.report("INVALID_LESS_THAN_OR_EQUAL_COMPARISION");
     }
   }
 }

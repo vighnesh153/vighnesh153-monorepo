@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { Box, ListItem } from '@mui/material';
+import { ReactElement } from "react";
+import { Box, ListItem } from "@mui/material";
 
 export interface ListItemWrapperProps {
   leading: ReactElement;
@@ -7,11 +7,23 @@ export interface ListItemWrapperProps {
   trailing: ReactElement;
 }
 
-export function ListItemWrapper({ leading, middle, trailing }: ListItemWrapperProps): ReactElement {
+export function ListItemWrapper(
+  { leading, middle, trailing }: ListItemWrapperProps,
+): ReactElement {
   return (
     <ListItem divider>
       {leading}
-      <Box sx={{ ml: 2, flexGrow: 1, overflow: 'hidden', whiteSpace: 'nowrap', pr: 10 }}>{middle}</Box>
+      <Box
+        sx={{
+          ml: 2,
+          flexGrow: 1,
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          pr: 10,
+        }}
+      >
+        {middle}
+      </Box>
       {trailing}
     </ListItem>
   );

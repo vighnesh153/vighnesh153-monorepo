@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from '@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
-import { StringExpressionEvaluator } from 'src/expression-evaluators/string-expression-evaluator';
-import { BooleanExpressionEvaluator } from 'src/expression-evaluators/boolean-expressions/boolean-expression-evaluator';
+} from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
+import { StringExpressionEvaluator } from "src/expression-evaluators/string-expression-evaluator";
+import { BooleanExpressionEvaluator } from "src/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
 
 export class PushIntoArrayParser extends BlockParser {
   private static regex = /^push (.*) into (.*)$/;
@@ -17,7 +17,7 @@ export class PushIntoArrayParser extends BlockParser {
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
 
@@ -47,7 +47,7 @@ export class PushIntoArrayParser extends BlockParser {
       }
 
       const variable = this.scope.getVariable(arrayName);
-      if (variable.type !== 'array') {
+      if (variable.type !== "array") {
         throw new Error(`'${arrayName}' is not an array.`);
       }
 
@@ -73,6 +73,6 @@ export class PushIntoArrayParser extends BlockParser {
       })(this.scope);
     }
 
-    throw new Error('Invalid statement.');
+    throw new Error("Invalid statement.");
   }
 }

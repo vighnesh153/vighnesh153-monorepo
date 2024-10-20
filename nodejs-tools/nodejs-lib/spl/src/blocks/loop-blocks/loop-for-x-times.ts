@@ -1,21 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Block } from '@/blocks/Block';
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Interpreter } from '@/interpreter';
-import { VariableBlock, VariableBlockType } from '@/blocks/variable-blocks/variable-block';
+import { Block } from "@/blocks/Block";
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Interpreter } from "@/interpreter";
+import {
+  VariableBlock,
+  VariableBlockType,
+} from "@/blocks/variable-blocks/variable-block";
 
 export class LoopForXTimes extends Block {
   scope: Scope;
 
   protected hasCounterVariable = false;
-  protected counterVariableName = 'DUMMY';
+  protected counterVariableName = "DUMMY";
 
   constructor(
     private numberOfTimes: number,
     parentScope: Scope,
     private childLinesOfCode: LineOfCode[],
-    counterVariableName?: string
+    counterVariableName?: string,
   ) {
     super();
     this.scope = new Scope(parentScope);
@@ -30,10 +33,10 @@ export class LoopForXTimes extends Block {
     const variableBlock = new VariableBlock(
       VariableBlockType.declare,
       this.counterVariableName,
-      'number',
+      "number",
       n,
       true,
-      scope
+      scope,
     );
     variableBlock.execute();
   }
@@ -48,11 +51,11 @@ export class LoopForXTimes extends Block {
         new Interpreter(this.childLinesOfCode.slice(), newScope).interpret();
       } catch (e) {
         // @ts-ignore
-        if (e.message === 'break') {
+        if (e.message === "break") {
           break;
         }
         // @ts-ignore
-        if (e.message === 'continue') {
+        if (e.message === "continue") {
           continue;
         }
         throw e;

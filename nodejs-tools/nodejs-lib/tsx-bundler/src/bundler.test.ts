@@ -1,10 +1,10 @@
 // @vitest-environment node
 
-import { JSDOM } from 'jsdom';
-import { sleep } from '@vighnesh153/tools';
+import { JSDOM } from "jsdom";
+import { sleep } from "@vighnesh153/tools";
 
-import { bundle } from './bundler.ts';
-import { starterCode } from './constants.ts';
+import { bundle } from "./bundler.ts";
+import { starterCode } from "./constants.ts";
 
 const buildHtmlCode = (bundledCode: string) => `
 <!DOCTYPE html>
@@ -34,27 +34,29 @@ const buildHtmlCode = (bundledCode: string) => `
 `;
 
 test(
-  'should bundle the code',
+  "should bundle the code",
   async () => {
     const result = await bundle(starterCode);
 
-    assert(result.status === 'success');
-    expect(result.status).toBe('success');
+    assert(result.status === "success");
+    expect(result.status).toBe("success");
 
     const bundledCode = result.outputCode;
 
-    const dom = new JSDOM(buildHtmlCode(bundledCode), { runScripts: 'dangerously' });
+    const dom = new JSDOM(buildHtmlCode(bundledCode), {
+      runScripts: "dangerously",
+    });
 
     await sleep(4000);
 
-    const output = dom.window.document.querySelector('#root')?.innerHTML;
+    const output = dom.window.document.querySelector("#root")?.innerHTML;
 
     expect(output).toMatchInlineSnapshot(
       // eslint-disable-next-line max-len
-      '"<div><h1>Pikachu supremacy ✌️ ϞϞ(๑⚈ ․̫ ⚈๑)∩ ⚡️⚡️</h1><p>Is 42 Prime: <strong>false</strong></p><p>Is 43 Prime: <strong>true</strong></p><h2>Users</h2><p>User count: 10</p></div>"'
+      '"<div><h1>Pikachu supremacy ✌️ ϞϞ(๑⚈ ․̫ ⚈๑)∩ ⚡️⚡️</h1><p>Is 42 Prime: <strong>false</strong></p><p>Is 43 Prime: <strong>true</strong></p><h2>Users</h2><p>User count: 10</p></div>"',
     );
   },
   {
     timeout: 60_000,
-  }
+  },
 );

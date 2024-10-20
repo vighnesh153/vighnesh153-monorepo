@@ -1,15 +1,15 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Block } from '@/blocks/Block';
-import { FunctionExpressionEvaluator } from '@/expression-evaluators/function-expression-evaluator';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Block } from "@/blocks/Block";
+import { FunctionExpressionEvaluator } from "@/expression-evaluators/function-expression-evaluator";
 
 export class FunctionExecutionParser extends BlockParser {
   private static regex = /^execute (.*)\((.*)\)\s*$/;
 
   constructor(
     public scope: Scope,
-    public lineOfCodes: LineOfCode[]
+    public lineOfCodes: LineOfCode[],
   ) {
     super();
   }
@@ -32,11 +32,15 @@ export class FunctionExecutionParser extends BlockParser {
       execute(): void {
         try {
           lineOfCodes.pop();
-          evaluator.evaluate(lineUnderTest.value.replace('execute', 'result of'));
+          evaluator.evaluate(
+            lineUnderTest.value.replace("execute", "result of"),
+          );
         } catch (e) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          if (e.message !== 'Function returns nothing according to definition.') {
+          if (
+            e.message !== "Function returns nothing according to definition."
+          ) {
             throw e;
           }
         }

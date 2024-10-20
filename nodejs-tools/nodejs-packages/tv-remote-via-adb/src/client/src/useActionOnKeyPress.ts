@@ -1,7 +1,7 @@
-import { UseKeyPressKey, useKeyPress } from '@vighnesh153/react-hooks';
-import { webKeyToAndroidKey } from './webKeyToAndroidKey';
-import { useDevices } from './useDevices';
-import { useHistory } from './useHistory';
+import { useKeyPress, UseKeyPressKey } from "@vighnesh153/react-hooks";
+import { webKeyToAndroidKey } from "./webKeyToAndroidKey";
+import { useDevices } from "./useDevices";
+import { useHistory } from "./useHistory";
 
 export function useActionOnKeyPress() {
   const { selectedDevice } = useDevices();
@@ -10,10 +10,14 @@ export function useActionOnKeyPress() {
   const executeInputKeyEvent = async (key: string) => {
     if (!selectedDevice) return;
 
-    const url = `/api/execute?device=${encodeURIComponent(selectedDevice)}&command=${encodeURIComponent(
-      `shell input keyevent ${key}`
-    )}`;
-    await fetch(url, { method: 'POST' });
+    const url = `/api/execute?device=${
+      encodeURIComponent(selectedDevice)
+    }&command=${
+      encodeURIComponent(
+        `shell input keyevent ${key}`,
+      )
+    }`;
+    await fetch(url, { method: "POST" });
     fetchHistory();
   };
 
@@ -26,26 +30,34 @@ export function useActionOnKeyPress() {
     },
   });
   const onUpClick = () => {
-    executeInputKeyEvent('DPAD_UP');
+    executeInputKeyEvent("DPAD_UP");
   };
   const onDownClick = () => {
-    executeInputKeyEvent('DPAD_DOWN');
+    executeInputKeyEvent("DPAD_DOWN");
   };
   const onLeftClick = () => {
-    executeInputKeyEvent('DPAD_LEFT');
+    executeInputKeyEvent("DPAD_LEFT");
   };
   const onRightClick = () => {
-    executeInputKeyEvent('DPAD_RIGHT');
+    executeInputKeyEvent("DPAD_RIGHT");
   };
   const onCenterClick = () => {
-    executeInputKeyEvent('DPAD_CENTER');
+    executeInputKeyEvent("DPAD_CENTER");
   };
   const onBackClick = () => {
-    executeInputKeyEvent('BACK');
+    executeInputKeyEvent("BACK");
   };
   const onHomeClick = () => {
-    executeInputKeyEvent('HOME');
+    executeInputKeyEvent("HOME");
   };
 
-  return { onUpClick, onDownClick, onLeftClick, onRightClick, onCenterClick, onBackClick, onHomeClick };
+  return {
+    onUpClick,
+    onDownClick,
+    onLeftClick,
+    onRightClick,
+    onCenterClick,
+    onBackClick,
+    onHomeClick,
+  };
 }

@@ -24,13 +24,19 @@ class CsvInfo {
   }
 
   closeParentheses(): void {
-    if (this.areQuotesOpen === false && this.countOpenParenthesis > 0) this.countOpenParenthesis -= 1;
+    if (this.areQuotesOpen === false && this.countOpenParenthesis > 0) {
+      this.countOpenParenthesis -= 1;
+    }
   }
   closeSquareBrackets(): void {
-    if (this.areQuotesOpen === false && this.countOpenSquareBrackets > 0) this.countOpenSquareBrackets -= 1;
+    if (this.areQuotesOpen === false && this.countOpenSquareBrackets > 0) {
+      this.countOpenSquareBrackets -= 1;
+    }
   }
   closeCurlyBraces(): void {
-    if (this.areQuotesOpen === false && this.countOpenCurlyBraces) this.countOpenCurlyBraces -= 1;
+    if (this.areQuotesOpen === false && this.countOpenCurlyBraces) {
+      this.countOpenCurlyBraces -= 1;
+    }
   }
 
   processQuotes(): void {
@@ -47,28 +53,28 @@ export const csvSplit = (text: string): string[] => {
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
     switch (ch) {
-      case '(':
+      case "(":
         csvInfo.openParentheses();
         break;
-      case '{':
+      case "{":
         csvInfo.openCurlyBraces();
         break;
-      case '[':
+      case "[":
         csvInfo.openSquareBrackets();
         break;
       case `'`:
         csvInfo.processQuotes();
         break;
-      case ')':
+      case ")":
         csvInfo.closeParentheses();
         break;
-      case '}':
+      case "}":
         csvInfo.closeCurlyBraces();
         break;
-      case ']':
+      case "]":
         csvInfo.closeSquareBrackets();
         break;
-      case ',':
+      case ",":
         if (csvInfo.canSplitHere()) safeIndices.push(i);
         break;
     }

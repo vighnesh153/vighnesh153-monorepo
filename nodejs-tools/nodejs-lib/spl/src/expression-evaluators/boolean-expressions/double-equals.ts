@@ -1,13 +1,13 @@
-import { Scope } from '@/models/Scope';
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { bugReporter } from '@/language-bug-handling';
+import { Scope } from "@/models/Scope";
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { bugReporter } from "@/language-bug-handling";
 // prettier-ignore
-import { 
+import {
   numericComparisionEvaluator,
-} from '@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator';
+} from "@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator";
 
 export class DoubleEquals extends ExpressionEvaluator {
-  private identifier: string = '==';
+  private identifier: string = "==";
 
   constructor(public scope: Scope) {
     super();
@@ -19,9 +19,14 @@ export class DoubleEquals extends ExpressionEvaluator {
 
   evaluate(text: string): unknown {
     if (this.tryEvaluate(text)) {
-      return numericComparisionEvaluator(text, this.identifier, this.scope, (lhs, rhs) => lhs === rhs);
+      return numericComparisionEvaluator(
+        text,
+        this.identifier,
+        this.scope,
+        (lhs, rhs) => lhs === rhs,
+      );
     } else {
-      bugReporter.report('INVALID_DOUBLE_EQUALITY_COMPARISION');
+      bugReporter.report("INVALID_DOUBLE_EQUALITY_COMPARISION");
     }
   }
 }

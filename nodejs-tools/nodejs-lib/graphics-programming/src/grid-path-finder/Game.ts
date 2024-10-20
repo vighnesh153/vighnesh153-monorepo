@@ -1,20 +1,20 @@
-import { Queue, not } from '@vighnesh153/tools';
+import { not, Queue } from "@vighnesh153/tools";
 
-import { BfsCell } from './Cell.ts';
-import { CellsGrid } from './CellsGrid.ts';
-import { fillGridWithStartAndEnd, fillGridWithWalls } from './factories.ts';
-import { CellPosition } from './CellPosition.ts';
+import { BfsCell } from "./Cell.ts";
+import { CellsGrid } from "./CellsGrid.ts";
+import { fillGridWithStartAndEnd, fillGridWithWalls } from "./factories.ts";
+import { CellPosition } from "./CellPosition.ts";
 
 export class GridPathFinderGame {
   #grid: CellsGrid;
-  #state: 'running' | 'stopped' = 'stopped';
+  #state: "running" | "stopped" = "stopped";
   #visitedCellIds: Set<string> = new Set();
   #currentCellPointer: BfsCell | null = null;
   #cellParents: Map<string, BfsCell> = new Map();
   #solutionPathCellIds: Set<string> = new Set();
 
   get isRunning() {
-    return this.#state === 'running';
+    return this.#state === "running";
   }
 
   static createNewWithDefaults(rows: number, cols: number): GridPathFinderGame {
@@ -29,7 +29,7 @@ export class GridPathFinderGame {
   }
 
   stop() {
-    this.#state = 'stopped';
+    this.#state = "stopped";
   }
 
   isCellVisited(cell: BfsCell): boolean {
@@ -49,7 +49,7 @@ export class GridPathFinderGame {
   }
 
   *solve() {
-    this.#state = 'running';
+    this.#state = "running";
 
     const startCell = this.#grid.findCell((cell) => cell.isStart);
     if (!startCell) {
@@ -57,7 +57,7 @@ export class GridPathFinderGame {
     }
 
     const frames = this.bfs(startCell);
-    while (not(frames.next().done) && this.#state === 'running') {
+    while (not(frames.next().done) && this.#state === "running") {
       yield;
     }
   }
@@ -87,7 +87,9 @@ export class GridPathFinderGame {
       yield;
 
       const neighbourCells = this.#grid.getNeighbourCells(cell);
-      neighbourCells.forEach((neighbour) => this.updateParentIfOrphan(neighbour, cell));
+      neighbourCells.forEach((neighbour) =>
+        this.updateParentIfOrphan(neighbour, cell)
+      );
       queue.pushRight(...neighbourCells);
     }
 

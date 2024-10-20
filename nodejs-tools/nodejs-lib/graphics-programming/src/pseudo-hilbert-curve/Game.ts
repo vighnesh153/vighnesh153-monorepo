@@ -1,9 +1,9 @@
-import { not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { generateCurve } from './generateCurve.ts';
-import { Point } from './point.ts';
-import { Line } from './line.ts';
+import { not } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { generateCurve } from "./generateCurve.ts";
+import { Point } from "./point.ts";
+import { Line } from "./line.ts";
 
 interface GameConfig {
   bgColor?: string;
@@ -23,7 +23,7 @@ export class PseudoHilbertCurveGame {
     this.#canvasWrapper = canvasWrapper;
     this.#bgColor = config.bgColor ?? getCanvasBgColor(canvasWrapper);
     this.#lineWidth = config.lineWidth ?? 3;
-    this.#lineColor = config.lineColor ?? 'black';
+    this.#lineColor = config.lineColor ?? "black";
   }
 
   *start(level: number) {
@@ -61,7 +61,13 @@ export class PseudoHilbertCurveGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 
   private drawLine(line: Line): void {
@@ -71,7 +77,7 @@ export class PseudoHilbertCurveGame {
       line.point2.x,
       line.point2.y,
       this.#lineWidth,
-      this.#lineColor
+      this.#lineColor,
     );
   }
 }

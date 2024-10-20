@@ -1,11 +1,11 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { TreeNode } from './TreeNode.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { TreeNode } from "./TreeNode.ts";
 
 export function createTreeStructure(
   canvasWrapper: CanvasWrapper,
   parentNode: TreeNode | null,
   level: number,
-  maxLevel: number
+  maxLevel: number,
 ): TreeNode | null {
   if (level > maxLevel) {
     return null;

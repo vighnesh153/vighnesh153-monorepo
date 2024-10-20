@@ -1,18 +1,18 @@
-import { Scope } from '@/models/Scope';
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
+import { Scope } from "@/models/Scope";
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 
-import { bugReporter } from '@/language-bug-handling';
+import { bugReporter } from "@/language-bug-handling";
 
-import { ParenthesisEvaluator } from '@/expression-evaluators/parenthesis-evaluator';
-import { DivisionEvaluator } from '@/expression-evaluators/arithmetic-expressions/division-evaluator';
-import { MultiplicationEvaluator } from '@/expression-evaluators/arithmetic-expressions/multiplication-evaluator';
-import { ModuloEvaluator } from '@/expression-evaluators/arithmetic-expressions/modulo-evaluator';
-import { AdditionEvaluator } from '@/expression-evaluators/arithmetic-expressions/addition-evaluator';
-import { SubtractionEvaluator } from '@/expression-evaluators/arithmetic-expressions/subtraction-evaluator';
-import { NumberEvaluator } from '@/expression-evaluators/arithmetic-expressions/number-evaluator';
-import { NumberParser } from '@/parsers/data-type-parsers/primitive-parsers/number-parser';
-import { FunctionExpressionEvaluator } from '@/expression-evaluators/function-expression-evaluator';
-import { LengthOfArrayEvaluator } from '@/expression-evaluators/arithmetic-expressions/length-of-array-evaluator';
+import { ParenthesisEvaluator } from "@/expression-evaluators/parenthesis-evaluator";
+import { DivisionEvaluator } from "@/expression-evaluators/arithmetic-expressions/division-evaluator";
+import { MultiplicationEvaluator } from "@/expression-evaluators/arithmetic-expressions/multiplication-evaluator";
+import { ModuloEvaluator } from "@/expression-evaluators/arithmetic-expressions/modulo-evaluator";
+import { AdditionEvaluator } from "@/expression-evaluators/arithmetic-expressions/addition-evaluator";
+import { SubtractionEvaluator } from "@/expression-evaluators/arithmetic-expressions/subtraction-evaluator";
+import { NumberEvaluator } from "@/expression-evaluators/arithmetic-expressions/number-evaluator";
+import { NumberParser } from "@/parsers/data-type-parsers/primitive-parsers/number-parser";
+import { FunctionExpressionEvaluator } from "@/expression-evaluators/function-expression-evaluator";
+import { LengthOfArrayEvaluator } from "@/expression-evaluators/arithmetic-expressions/length-of-array-evaluator";
 
 export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
   readonly expressionEvaluators: ExpressionEvaluator[];
@@ -26,7 +26,9 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
 
     this.expressionEvaluators.push(new LengthOfArrayEvaluator(this.scope));
 
-    this.expressionEvaluators.push(new ParenthesisEvaluator(this.scope, 'arithmetic'));
+    this.expressionEvaluators.push(
+      new ParenthesisEvaluator(this.scope, "arithmetic"),
+    );
 
     this.expressionEvaluators.push(new DivisionEvaluator(this.scope));
     this.expressionEvaluators.push(new MultiplicationEvaluator(this.scope));
@@ -61,7 +63,7 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
         for (const evaluator of this.expressionEvaluators) {
           if (evaluator.tryEvaluate(text)) {
             try {
-              text = '' + evaluator.evaluate(text);
+              text = "" + evaluator.evaluate(text);
               parsedByAny = true;
               break;
             } catch {
@@ -70,13 +72,13 @@ export class ArithmeticExpressionEvaluator extends ExpressionEvaluator {
           }
         }
         if (!parsedByAny) {
-          throw new Error('Invalid arithmetic expression');
+          throw new Error("Invalid arithmetic expression");
         }
       }
 
       return numberParser.parse(text);
     } else {
-      bugReporter.report('INVALID_ARITHMETIC_EXPRESSION_EVALUATION');
+      bugReporter.report("INVALID_ARITHMETIC_EXPRESSION_EVALUATION");
     }
   }
 }

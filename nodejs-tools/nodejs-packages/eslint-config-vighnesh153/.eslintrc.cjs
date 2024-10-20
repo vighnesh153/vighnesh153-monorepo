@@ -1,12 +1,12 @@
 module.exports = {
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ["eslint:recommended", "prettier"],
   env: {
     browser: true,
     amd: true,
-    node: true
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2015,
-    sourceType: 'module',
+    sourceType: "module",
   },
 };

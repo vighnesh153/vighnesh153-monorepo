@@ -1,5 +1,5 @@
-import { Ball } from './Ball.ts';
-import { Pad } from './Pad.ts';
+import { Ball } from "./Ball.ts";
+import { Pad } from "./Pad.ts";
 
 interface ComputerPadControllerConfig {
   computerPad: Pad;

@@ -1,26 +1,27 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
-import { csvSplit } from '@/helpers/csv-split';
-import { FunctionBlock } from '@/blocks/function-block';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
+import { csvSplit } from "@/helpers/csv-split";
+import { FunctionBlock } from "@/blocks/function-block";
 
 export class FunctionDefinitionBlockParser extends BlockParser {
-  private static regex = /^define\s* function\s* (.+) with\s* arguments\s* \[(.*)]\s* which\s* returns (.*):\s*$/;
+  private static regex =
+    /^define\s* function\s* (.+) with\s* arguments\s* \[(.*)]\s* which\s* returns (.*):\s*$/;
 
   private static acceptedReturnTypes: string[] = [
-    'nothing',
-    'number',
-    'string',
-    'boolean',
-    'array of boolean',
-    'array of string',
-    'array of number',
+    "nothing",
+    "number",
+    "string",
+    "boolean",
+    "array of boolean",
+    "array of string",
+    "array of number",
   ];
 
   constructor(
     public scope: Scope,
-    public lineOfCodes: LineOfCode[]
+    public lineOfCodes: LineOfCode[],
   ) {
     super();
   }
@@ -47,7 +48,9 @@ export class FunctionDefinitionBlockParser extends BlockParser {
 
   parse(): Block {
     const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
-    const result = lineUnderTest.value.match(FunctionDefinitionBlockParser.regex);
+    const result = lineUnderTest.value.match(
+      FunctionDefinitionBlockParser.regex,
+    );
 
     if (result) {
       const funcName = result[1].trim();
@@ -55,12 +58,16 @@ export class FunctionDefinitionBlockParser extends BlockParser {
       const returnType = result[3].trim();
 
       let args: string[] = [];
-      if (argsString !== '') {
+      if (argsString !== "") {
         args = csvSplit(argsString);
       }
 
-      if (FunctionDefinitionBlockParser.acceptedReturnTypes.includes(returnType) === false) {
-        throw new Error('Invalid return type.');
+      if (
+        FunctionDefinitionBlockParser.acceptedReturnTypes.includes(
+          returnType,
+        ) === false
+      ) {
+        throw new Error("Invalid return type.");
       }
 
       this.lineOfCodes.pop();
@@ -69,14 +76,14 @@ export class FunctionDefinitionBlockParser extends BlockParser {
         args,
         this.getIndentedBlock(),
         this.scope,
-        returnType !== 'nothing',
-        returnType
+        returnType !== "nothing",
+        returnType,
       );
 
       return new (class extends Block {
         constructor(
           public scope: Scope,
-          public lineOfCodes: LineOfCode[]
+          public lineOfCodes: LineOfCode[],
         ) {
           super();
         }
@@ -87,6 +94,6 @@ export class FunctionDefinitionBlockParser extends BlockParser {
       })(this.scope, this.lineOfCodes);
     }
 
-    throw new Error('Invalid statement.');
+    throw new Error("Invalid statement.");
   }
 }

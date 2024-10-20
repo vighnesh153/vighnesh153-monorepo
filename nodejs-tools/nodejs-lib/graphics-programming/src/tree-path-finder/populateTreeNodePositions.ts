@@ -1,8 +1,12 @@
-import { Queue, not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { TreeNode } from './TreeNode.ts';
+import { not, Queue } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { TreeNode } from "./TreeNode.ts";
 
-export function populateTreeNodePositions(rootNode: TreeNode, depth: number, canvasWrapper: CanvasWrapper) {
+export function populateTreeNodePositions(
+  rootNode: TreeNode,
+  depth: number,
+  canvasWrapper: CanvasWrapper,
+) {
   const nodes = new Queue({ node: rootNode, level: 1 });
   const nodesPerLevel = new Map<number, TreeNode[]>();
   while (not(nodes.isEmpty)) {

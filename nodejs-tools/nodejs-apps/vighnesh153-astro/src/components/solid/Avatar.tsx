@@ -1,6 +1,6 @@
-import { type JSX } from 'solid-js';
+import { type JSX } from "solid-js";
 
-import { classes } from '@/utils/index.ts';
+import { classes } from "@/utils/index.ts";
 
 export type AvatarProps = {
   imageLink: string;

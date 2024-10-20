@@ -1,7 +1,7 @@
-import { Variable } from '@/models/Variable';
+import { Variable } from "@/models/Variable";
 
-import { bugReporter } from '@/language-bug-handling';
-import { FunctionBlock } from '@/blocks/function-block';
+import { bugReporter } from "@/language-bug-handling";
+import { FunctionBlock } from "@/blocks/function-block";
 
 export class Scope {
   variables: { [key: string]: Variable } = {};
@@ -32,7 +32,9 @@ export class Scope {
     if (this.functions.hasOwnProperty(functionName)) {
       return true;
     }
-    return this.parentScope === null ? false : (this.parentScope as Scope).hasFunction(functionName);
+    return this.parentScope === null
+      ? false
+      : (this.parentScope as Scope).hasFunction(functionName);
   }
 
   getFunction(functionName: string): FunctionBlock {
@@ -42,12 +44,12 @@ export class Scope {
     } else if (this.parentScope !== null) {
       return (this.parentScope as Scope).getFunction(functionName);
     } else {
-      bugReporter.report('ACCESS_UNDEFINED_SYMBOL');
+      bugReporter.report("ACCESS_UNDEFINED_SYMBOL");
 
       // Unreachable return statement, anyway. Added just to make
       // Typescript happy because, it doesn't know that
       // the above line will throw error.
-      throw new Error('Unreachable block');
+      throw new Error("Unreachable block");
     }
   }
 
@@ -56,7 +58,9 @@ export class Scope {
     if (this.variables.hasOwnProperty(variableName)) {
       return true;
     }
-    return this.parentScope === null ? false : (this.parentScope as Scope).hasVariable(variableName);
+    return this.parentScope === null
+      ? false
+      : (this.parentScope as Scope).hasVariable(variableName);
   }
 
   getVariable(variableName: string): Variable {
@@ -66,12 +70,12 @@ export class Scope {
     } else if (this.parentScope !== null) {
       return (this.parentScope as Scope).getVariable(variableName);
     } else {
-      bugReporter.report('ACCESS_UNDEFINED_SYMBOL');
+      bugReporter.report("ACCESS_UNDEFINED_SYMBOL");
 
       // Unreachable return statement, anyway. Added just to make
       // Typescript happy because, it doesn't know that
       // the above line will throw error.
-      return { type: '', value: 42 };
+      return { type: "", value: 42 };
     }
   }
 }

@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { euclidianDistance } from './euclidian-distance.ts';
-import { Point } from './point.ts';
+import { euclidianDistance } from "./euclidian-distance.ts";
+import { Point } from "./point.ts";
 
 interface TwoMidpoints {
   midPoint1: Point;
   midPoint2: Point;
 }
 
-export function generateTwoMidPoints(startPoint: Point, endPoint: Point): TwoMidpoints {
+export function generateTwoMidPoints(
+  startPoint: Point,
+  endPoint: Point,
+): TwoMidpoints {
   const isXDifferent = !isCloseEnough(startPoint.x, endPoint.x);
 
-  const dist = euclidianDistance([startPoint.x, startPoint.y], [endPoint.x, endPoint.y]) / 3;
+  const dist =
+    euclidianDistance([startPoint.x, startPoint.y], [endPoint.x, endPoint.y]) /
+    3;
 
   const start = isXDifferent ? startPoint.x : startPoint.y;
   const end = isXDifferent ? endPoint.x : endPoint.y;
@@ -31,6 +36,10 @@ export function generateTwoMidPoints(startPoint: Point, endPoint: Point): TwoMid
   };
 }
 
-function isCloseEnough(value1: number, value2: number, threshold = 0.01): boolean {
+function isCloseEnough(
+  value1: number,
+  value2: number,
+  threshold = 0.01,
+): boolean {
   return Math.abs(value1 - value2) <= threshold;
 }

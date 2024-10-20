@@ -1,4 +1,4 @@
-import { Point } from './point.ts';
+import { Point } from "./point.ts";
 
 export class Line {
   readonly point1: Point;

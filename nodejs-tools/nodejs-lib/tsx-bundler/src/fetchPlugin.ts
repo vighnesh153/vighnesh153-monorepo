@@ -1,22 +1,24 @@
-import esbuild from 'esbuild-wasm';
-import axios from 'axios';
-import { fileCache } from './file-cache/index.ts';
+import esbuild from "esbuild-wasm";
+import axios from "axios";
+import { fileCache } from "./file-cache/index.ts";
 
 export const fetchPlugin = (inputCode: string) => {
   return {
-    name: 'fetch-plugin',
+    name: "fetch-plugin",
     setup: (build: esbuild.PluginBuild) => {
       // Main entry file provided to "esbuild.build" command
       build.onLoad({ filter: /^index\.tsx$/ }, () => {
         return {
-          loader: 'tsx',
+          loader: "tsx",
           contents: inputCode,
         };
       });
 
       // For all files, if we have the cached response, return it
       build.onLoad({ filter: /.*/ }, async (args) => {
-        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
+        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
+          args.path,
+        );
 
         if (cachedResult) {
           return cachedResult;
@@ -31,7 +33,8 @@ export const fetchPlugin = (inputCode: string) => {
       // head of the html file
       build.onLoad({ filter: /\.css$/ }, async (args) => {
         const { data, request } = await axios.get(args.path);
-        const escaped = (data as string).replace(/\n/g, '').replace(/"/g, '\\"').replace(/'/g, `\\'`);
+        const escaped = (data as string).replace(/\n/g, "").replace(/"/g, '\\"')
+          .replace(/'/g, `\\'`);
         const contents = `
           const style = document.createElement('style');
           style.innerText = '${escaped}';
@@ -39,9 +42,11 @@ export const fetchPlugin = (inputCode: string) => {
         `;
 
         const result: esbuild.OnLoadResult = {
-          loader: 'jsx',
+          loader: "jsx",
           contents,
-          resolveDir: new URL('./', request.responseURL ?? request.res?.responseUrl).pathname,
+          resolveDir:
+            new URL("./", request.responseURL ?? request.res?.responseUrl)
+              .pathname,
         };
         await fileCache.setItem(args.path, result);
 
@@ -53,9 +58,11 @@ export const fetchPlugin = (inputCode: string) => {
         const { data, request } = await axios.get(args.path);
 
         const result: esbuild.OnLoadResult = {
-          loader: 'jsx',
+          loader: "jsx",
           contents: data,
-          resolveDir: new URL('./', request.responseURL ?? request.res?.responseUrl).pathname,
+          resolveDir:
+            new URL("./", request.responseURL ?? request.res?.responseUrl)
+              .pathname,
         };
         await fileCache.setItem(args.path, result);
 

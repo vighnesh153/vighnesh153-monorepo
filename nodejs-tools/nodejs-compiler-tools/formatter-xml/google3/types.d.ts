@@ -1,4 +1,4 @@
-declare module 'pika_xml_formatter' {
+declare module "pika_xml_formatter" {
   class TokenType {
     readonly value: string;
     constructor(value: string);
@@ -13,30 +13,30 @@ declare module 'pika_xml_formatter' {
 
   type LexerErrorCategory =
     | {
-        type: 'ILLEGAL_CHARACTER';
-        ch: string;
-      }
+      type: "ILLEGAL_CHARACTER";
+      ch: string;
+    }
     | {
-        type: 'UNEXPECTED_COMMENT_CHARACTER';
-        ch: string;
-      }
+      type: "UNEXPECTED_COMMENT_CHARACTER";
+      ch: string;
+    }
     | {
-        type: 'INVALID_ESCAPE_CHARACTER_LITERAL';
-        ch: string;
-      }
+      type: "INVALID_ESCAPE_CHARACTER_LITERAL";
+      ch: string;
+    }
     | {
-        type: 'INVALID_UNICODE_CHARACTER_LITERAL';
-        ch: string;
-      }
+      type: "INVALID_UNICODE_CHARACTER_LITERAL";
+      ch: string;
+    }
     | {
-        type: 'UNCLOSED_COMMENT_LITERAL';
-      }
+      type: "UNCLOSED_COMMENT_LITERAL";
+    }
     | {
-        type: 'UNCLOSED_ESCAPE_SEQUENCE';
-      }
+      type: "UNCLOSED_ESCAPE_SEQUENCE";
+    }
     | {
-        type: 'UNCLOSED_STRING_LITERAL';
-      };
+      type: "UNCLOSED_STRING_LITERAL";
+    };
   type LexerErrorProps = {
     readonly errorCategory: Readonly<LexerErrorCategory>;
     readonly lineNumber: number;
@@ -52,10 +52,10 @@ declare module 'pika_xml_formatter' {
   }
 
   type ParserErrorType =
-    | 'UNEXPECTED_TOKEN'
-    | 'UNEXPECTED_PROLOG_TAG'
-    | 'UNEXPECTED_CLOSING_TAG_LITERAL'
-    | 'UNEXPECTED_EOF';
+    | "UNEXPECTED_TOKEN"
+    | "UNEXPECTED_PROLOG_TAG"
+    | "UNEXPECTED_CLOSING_TAG_LITERAL"
+    | "UNEXPECTED_EOF";
   type ParserErrorProps = {
     readonly errorType: ParserErrorType;
     readonly culpritToken: Token;
@@ -72,22 +72,25 @@ declare module 'pika_xml_formatter' {
 
   type FormatResponse =
     | {
-        type: 'lexer-error';
-        lexerErrors: readonly LexerError[];
-      }
+      type: "lexer-error";
+      lexerErrors: readonly LexerError[];
+    }
     | {
-        type: 'parser-error';
-        parserErrors: readonly ParserError[];
-      }
+      type: "parser-error";
+      parserErrors: readonly ParserError[];
+    }
     | {
-        type: 'unknown-error';
-        err: unknown;
-      }
+      type: "unknown-error";
+      err: unknown;
+    }
     | {
-        type: 'success';
-        formattedXml: string;
-      };
-  function format(rawXml: string, { indentation, sortAttributes }: FormattingOptions): FormatResponse;
+      type: "success";
+      formattedXml: string;
+    };
+  function format(
+    rawXml: string,
+    { indentation, sortAttributes }: FormattingOptions,
+  ): FormatResponse;
 
-  export { type FormatResponse, format };
+  export { format, type FormatResponse };
 }

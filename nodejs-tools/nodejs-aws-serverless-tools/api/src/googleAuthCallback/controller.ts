@@ -1,21 +1,27 @@
-import * as http2 from 'node:http2';
+import * as http2 from "node:http2";
 
-import { Resource } from 'sst';
+import { Resource } from "sst";
 
-import { type SerializeOptions } from 'cookie';
+import { type SerializeOptions } from "cookie";
 
-import { type DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
+import { type DynamoDBTable } from "@vighnesh153/aws-dynamo-db";
 import {
-  type Logger,
+  type CompleteUserInfo,
   type JsonHttpClient,
+  type Logger,
   milliseconds,
   not,
-  type CompleteUserInfo,
-} from '@vighnesh153/tools';
-import {type LambdaResponsePayload, cookieKeys} from '@vighnesh153/tools/vighnesh153';
-import { slugify } from '@std/text/unstable-slugify'
+} from "@vighnesh153/tools";
+import {
+  cookieKeys,
+  type LambdaResponsePayload,
+} from "@vighnesh153/tools/vighnesh153";
+import { slugify } from "@std/text/unstable-slugify";
 
-import { TokenFetchRequestBuilderImpl, type TokenFetchRequestBuilder } from './buildTokenFetchRequest.ts';
+import {
+  type TokenFetchRequestBuilder,
+  TokenFetchRequestBuilderImpl,
+} from "./buildTokenFetchRequest.ts";
 import {
   authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
@@ -23,17 +29,17 @@ import {
   loggerSingletonFactory,
   randomStringGeneratorSingletonFactory,
   userInfoDecoderSingletonFactory,
-  userInfoTableSingletonFactory,
   userInfoTableMetadata,
-} from '../common/factories.ts';
-import { type UserInfoDecoder } from '../common/UserInfoDecoder.ts';
-import { type RandomStringGenerator } from '../common/randomStringGenerator.ts';
-import { type AuthTokenGenerator } from '../common/AuthTokenGenerator.ts';
-import { inProduction } from '../common/utils.ts';
-import { CookieSerializer } from '../common/CookieSerializer.ts';
+  userInfoTableSingletonFactory,
+} from "../common/factories.ts";
+import { type UserInfoDecoder } from "../common/UserInfoDecoder.ts";
+import { type RandomStringGenerator } from "../common/randomStringGenerator.ts";
+import { type AuthTokenGenerator } from "../common/AuthTokenGenerator.ts";
+import { inProduction } from "../common/utils.ts";
+import { CookieSerializer } from "../common/CookieSerializer.ts";
 
 function mask(s?: string | null): string {
-  return (s || '').slice(0, 3) + '...';
+  return (s || "").slice(0, 3) + "...";
 }
 
 export async function controller({
@@ -49,7 +55,7 @@ export async function controller({
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   cookieSecret = inProduction(() => Resource.CookieSecret.value),
-  environmentStage = process.env.STAGE as 'dev' | 'prod' | undefined,
+  environmentStage = process.env.STAGE as "dev" | "prod" | undefined,
   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   userInfoTableName = inProduction(() => Resource.UserInfoTable.name),
@@ -73,7 +79,7 @@ export async function controller({
   googleClientId?: string;
   googleClientSecret?: string;
   cookieSecret?: string;
-  environmentStage?: 'dev' | 'prod';
+  environmentStage?: "dev" | "prod";
   userInfoTableName?: string;
 
   // request info
@@ -95,7 +101,7 @@ export async function controller({
     not(googleClientId) ||
     not(googleClientSecret) ||
     not(cookieSecret) ||
-    not(['dev', 'prod'].includes(environmentStage!)) ||
+    not(["dev", "prod"].includes(environmentStage!)) ||
     not(userInfoTableName)
   ) {
     logger.log(
@@ -108,11 +114,12 @@ export async function controller({
           `cookieSecret='${mask(cookieSecret)}'`,
           `environmentStage='${environmentStage}'`,
           `userInfoTableName='${userInfoTableName}'`,
-        ].join(', ')
+        ].join(", "),
     );
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-      body: 'Some of the environment variables are missing and hence I am unable to process your request',
+      body:
+        "Some of the environment variables are missing and hence I am unable to process your request",
       headers: {},
       cookies: [],
     };
@@ -120,10 +127,10 @@ export async function controller({
 
   const authCallbackCode = searchParameters.code;
   if (not(authCallbackCode)) {
-    logger.log('searchParams.code is empty');
+    logger.log("searchParams.code is empty");
     return {
       statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,
-      body: 'searchParams.code is empty',
+      body: "searchParams.code is empty",
       headers: {},
       cookies: [],
     };
@@ -136,37 +143,41 @@ export async function controller({
     redirectUri: authRedirectUrl!,
   });
 
-  const tokenFetcher = httpClient.post<unknown, { id_token: string }>(tokenFetchRequest);
-  logger.log('Fetching google auth...');
+  const tokenFetcher = httpClient.post<unknown, { id_token: string }>(
+    tokenFetchRequest,
+  );
+  logger.log("Fetching google auth...");
   const tokenResponse = await tokenFetcher.execute();
   if (tokenResponse.isError()) {
-    logger.log('Some error occurred while fetching google auth token');
+    logger.log("Some error occurred while fetching google auth token");
     logger.log(tokenResponse.getErrorResponse());
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-      body: 'Failed to fetch token',
+      body: "Failed to fetch token",
       headers: {},
       cookies: [],
     };
   }
-  logger.log('Google auth token fetch is successful');
+  logger.log("Google auth token fetch is successful");
 
   const tokenData = tokenResponse.getSuccessResponse();
 
   // extract user info from token
-  logger.log('Extracting user info from token');
-  const decodedUserInfo = userInfoDecoder.decodeFromGoogleOAuthJwt(tokenData.data.id_token);
+  logger.log("Extracting user info from token");
+  const decodedUserInfo = userInfoDecoder.decodeFromGoogleOAuthJwt(
+    tokenData.data.id_token,
+  );
   if (decodedUserInfo === null) {
-    logger.log('Failed to extract user info from token');
+    logger.log("Failed to extract user info from token");
     logger.log(`token=${tokenData.data.id_token}`);
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-      body: 'Failed to extract user info from token',
+      body: "Failed to extract user info from token",
       headers: {},
       cookies: [],
     };
   }
-  logger.log('Successfully extracted user info from token');
+  logger.log("Successfully extracted user info from token");
 
   // user's email is not verified. deny signing in
   if (not(decodedUserInfo.email_verified)) {
@@ -174,7 +185,7 @@ export async function controller({
     logger.log(decodedUserInfo);
     return {
       statusCode: http2.constants.HTTP_STATUS_NOT_ACCEPTABLE,
-      body: 'Email address is not verified.',
+      body: "Email address is not verified.",
       headers: {},
       cookies: [],
     };
@@ -184,13 +195,16 @@ export async function controller({
   const userInfoFromTable = await userInfoDynamoTable.queryOne({
     filterBy: { email: { value: decodedUserInfo.email } },
   });
-  logger.log('Fetching existing user info from DynamoDB.');
-  if (userInfoFromTable.error !== null && userInfoFromTable.error.message !== 'OBJECT_NOT_FOUND') {
-    logger.log('Failed to fetch existing user info from DB.');
+  logger.log("Fetching existing user info from DynamoDB.");
+  if (
+    userInfoFromTable.error !== null &&
+    userInfoFromTable.error.message !== "OBJECT_NOT_FOUND"
+  ) {
+    logger.log("Failed to fetch existing user info from DB.");
     logger.log(userInfoFromTable.error);
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-      body: 'Failed to fetch existing user info from database',
+      body: "Failed to fetch existing user info from database",
       headers: {},
       cookies: [],
     };
@@ -198,28 +212,34 @@ export async function controller({
 
   let completeUserInfo: CompleteUserInfo;
   if (userInfoFromTable.error === null) {
-    logger.log('User already exists. Using existing user information for login');
+    logger.log(
+      "User already exists. Using existing user information for login",
+    );
     logger.log(userInfoFromTable.data);
     completeUserInfo = userInfoFromTable.data;
   } else {
     completeUserInfo = {
-      userId: `${slugify(decodedUserInfo.name)}-${randomStringGenerator.generate(10)}`.toLowerCase(),
+      userId: `${slugify(decodedUserInfo.name)}-${
+        randomStringGenerator.generate(10)
+      }`.toLowerCase(),
       name: decodedUserInfo.name,
       email: decodedUserInfo.email,
       profilePictureUrl: decodedUserInfo.picture,
       createdAtMillis: Date.now(),
     } as CompleteUserInfo;
 
-    logger.log('User does not exist. Creating a new user');
+    logger.log("User does not exist. Creating a new user");
     logger.log(completeUserInfo);
 
-    const userCreationResult = await userInfoDynamoTable.createOne({ data: completeUserInfo });
+    const userCreationResult = await userInfoDynamoTable.createOne({
+      data: completeUserInfo,
+    });
     if (userCreationResult.error !== null) {
-      logger.log('Failed to create a new user');
+      logger.log("Failed to create a new user");
       logger.log(userCreationResult.error);
       return {
         statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
-        body: 'Failed to create a new user',
+        body: "Failed to create a new user",
         headers: {},
         cookies: [],
       };
@@ -232,30 +252,38 @@ export async function controller({
   });
 
   const commonCookieOptions: SerializeOptions = {
-    path: '/',
-    domain: '.vighnesh153.dev',
+    path: "/",
+    domain: ".vighnesh153.dev",
     maxAge: milliseconds({ years: 1 }) / 1000,
   };
 
   const response: LambdaResponsePayload = {
     statusCode: http2.constants.HTTP_STATUS_TEMPORARY_REDIRECT,
     cookies: [
-      cookieSerializer.serialize(cookieKeys.userInfo(environmentStage!), JSON.stringify(completeUserInfo), {
-        ...commonCookieOptions,
-      }),
-      cookieSerializer.serialize(cookieKeys.authToken(environmentStage!), authToken, {
-        ...commonCookieOptions,
+      cookieSerializer.serialize(
+        cookieKeys.userInfo(environmentStage!),
+        JSON.stringify(completeUserInfo),
+        {
+          ...commonCookieOptions,
+        },
+      ),
+      cookieSerializer.serialize(
+        cookieKeys.authToken(environmentStage!),
+        authToken,
+        {
+          ...commonCookieOptions,
 
-        httpOnly: true,
-        secure: true,
-      }),
+          httpOnly: true,
+          secure: true,
+        },
+      ),
     ],
     body: null,
     headers: {
       Location: uiAuthCompleteUrl!,
     },
   };
-  logger.log('User login process completed. Sending response...');
+  logger.log("User login process completed. Sending response...");
   logger.log(response);
 
   return response;

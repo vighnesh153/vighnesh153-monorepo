@@ -1,7 +1,7 @@
-import { range } from '@vighnesh153/tools';
+import { range } from "@vighnesh153/tools";
 
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Stack, type StackConfig } from './Stack.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Stack, type StackConfig } from "./Stack.ts";
 
 export class StacksManager {
   readonly #canvasWrapper: CanvasWrapper;
@@ -15,7 +15,11 @@ export class StacksManager {
     return this.#baseWidth;
   }
 
-  constructor(canvasWrapper: CanvasWrapper, rodCount: number, rodConfig: Partial<StackConfig>) {
+  constructor(
+    canvasWrapper: CanvasWrapper,
+    rodCount: number,
+    rodConfig: Partial<StackConfig>,
+  ) {
     this.#canvasWrapper = canvasWrapper;
     this.#stackCount = rodCount;
 
@@ -28,8 +32,8 @@ export class StacksManager {
 
   getStack(stackIndex: number): Stack {
     if (stackIndex >= this.#stacks.length) {
-      console.error('Stack not found. Index out of bounds');
-      throw new Error('Stack not found. Index out of bounds');
+      console.error("Stack not found. Index out of bounds");
+      throw new Error("Stack not found. Index out of bounds");
     }
     return this.#stacks[stackIndex];
   }
@@ -41,12 +45,12 @@ export class StacksManager {
 
     this.#baseWidth = cw / (stackCount + 1);
     const stackHeight = rodConfig?.height ?? ch / 2;
-    const color = rodConfig?.color ?? 'black';
+    const color = rodConfig?.color ?? "black";
     const thickness = rodConfig?.thickness ?? ch * 0.02;
     const baseY = Math.floor((this.#canvasWrapper.height * 4) / 5);
 
     const baseXPositionsOffset = Array.from(range(0, stackCount - 1)).map(
-      (index) => 100 * (1 / (stackCount * 2) + index / stackCount)
+      (index) => 100 * (1 / (stackCount * 2) + index / stackCount),
     );
 
     baseXPositionsOffset.forEach((offset) => {
@@ -60,7 +64,7 @@ export class StacksManager {
             x: Math.floor((cw * offset) / 100),
             y: baseY,
           },
-        })
+        }),
       );
     });
   }

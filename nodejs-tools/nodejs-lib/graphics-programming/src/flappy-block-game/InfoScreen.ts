@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { ScoreTracker } from './ScoreTracker.ts';
-import { Screen } from './Screen.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { ScoreTracker } from "./ScoreTracker.ts";
+import { Screen } from "./Screen.ts";
 
 interface InfoScreenOptions {
   scoreTracker: ScoreTracker;
@@ -12,7 +12,7 @@ interface InfoScreenOptions {
 }
 
 export class InfoScreen implements Screen {
-  readonly type = 'info';
+  readonly type = "info";
   readonly canvasWrapper: CanvasWrapper;
 
   readonly changeScreen: () => void;
@@ -29,10 +29,10 @@ export class InfoScreen implements Screen {
     this.changeScreen = options.changeScreen;
 
     this.scoreTracker = options.scoreTracker;
-    this.scoreColor = options.scoreColor ?? 'green';
+    this.scoreColor = options.scoreColor ?? "green";
     this.scoreFontSize = options.scoreFontSize ?? 15;
 
-    this.color = options.color ?? 'black';
+    this.color = options.color ?? "black";
   }
 
   draw(): void {
@@ -49,7 +49,13 @@ export class InfoScreen implements Screen {
 
     const scoreText = `Your score: ${this.scoreTracker.score}`;
 
-    cw.writeText(scoreText, w / 2 - (scoreText.length * fontSize) / 4, h / 2 - fontSize / 2, color, fontSize);
+    cw.writeText(
+      scoreText,
+      w / 2 - (scoreText.length * fontSize) / 4,
+      h / 2 - fontSize / 2,
+      color,
+      fontSize,
+    );
   }
 
   private drawInfo(): void {
@@ -61,7 +67,13 @@ export class InfoScreen implements Screen {
 
     const infoText = `Hit 'Enter' to start the game and 'SPACEBAR' to jump`;
 
-    cw.writeText(infoText, w / 2 - (infoText.length * fontSize) / 5, h / 2 + 40, color, fontSize);
+    cw.writeText(
+      infoText,
+      w / 2 - (infoText.length * fontSize) / 5,
+      h / 2 + 40,
+      color,
+      fontSize,
+    );
   }
 
   update(): void {

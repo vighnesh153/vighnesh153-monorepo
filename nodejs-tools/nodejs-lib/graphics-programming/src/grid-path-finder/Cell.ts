@@ -1,25 +1,25 @@
-import { CellPosition } from './CellPosition.ts';
+import { CellPosition } from "./CellPosition.ts";
 
-export type CellType = 'empty' | 'start' | 'end' | 'wall';
+export type CellType = "empty" | "start" | "end" | "wall";
 
 export class BfsCell {
   #id: string = Math.random().toString(16).slice(2);
-  #type: CellType = 'empty';
+  #type: CellType = "empty";
 
   get id() {
     return this.#id;
   }
   get isEmpty() {
-    return this.#type === 'empty';
+    return this.#type === "empty";
   }
   get isStart() {
-    return this.#type === 'start';
+    return this.#type === "start";
   }
   get isEnd() {
-    return this.#type === 'end';
+    return this.#type === "end";
   }
   get isWall() {
-    return this.#type === 'wall';
+    return this.#type === "wall";
   }
   set type(cellType: CellType) {
     this.#type = cellType;

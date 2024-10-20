@@ -1,9 +1,9 @@
-import { describe, it, vi, expect } from 'vitest';
-import axios from 'axios';
-import { randomUuid } from '@vighnesh153/tools';
-import { fetchLatestGistCommitId } from '../fetchLatestGistCommitId.ts';
+import { describe, expect, it, vi } from "vitest";
+import axios from "axios";
+import { randomUuid } from "@vighnesh153/tools";
+import { fetchLatestGistCommitId } from "../fetchLatestGistCommitId.ts";
 
-vi.mock('axios');
+vi.mock("axios");
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,14 +12,13 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
 }
 
 describe('Helpers > "fetchLatestGistCommitId" tests', () => {
-  const getConfig = () =>
-    ({
-      gistId: randomUuid(),
-      corsConfig: { type: 'default' },
-      personalAccessToken: randomUuid(),
-    } as const);
+  const getConfig = () => ({
+    gistId: randomUuid(),
+    corsConfig: { type: "default" },
+    personalAccessToken: randomUuid(),
+  } as const);
 
-  it('should fetch the latest commit id', async () => {
+  it("should fetch the latest commit id", async () => {
     const expectedLatestCommitId = randomUuid();
 
     mockAxiosImplementation(() =>

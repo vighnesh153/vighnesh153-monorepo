@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SortingAlgorithm } from './SortingAlgorithm.ts';
+import { SortingAlgorithm } from "./SortingAlgorithm.ts";
 
 export class BubbleSortSortingAlgorithm extends SortingAlgorithm {
   *sort() {
@@ -49,7 +49,10 @@ export class MergeSortSortingAlgorithm extends SortingAlgorithm {
     yield* this.mergeSort(0, this.array.length - 1);
   }
 
-  private *mergeSort(startIndex: number, endIndex: number): Iterable<undefined> {
+  private *mergeSort(
+    startIndex: number,
+    endIndex: number,
+  ): Iterable<undefined> {
     if (startIndex === endIndex) {
       return;
     }
@@ -65,7 +68,11 @@ export class MergeSortSortingAlgorithm extends SortingAlgorithm {
     yield* this.merge(leftSortedArray, rightSortedArray, startIndex);
   }
 
-  private *merge(array1: number[], array2: number[], startIndex: number): Iterable<undefined> {
+  private *merge(
+    array1: number[],
+    array2: number[],
+    startIndex: number,
+  ): Iterable<undefined> {
     let resultIndex = startIndex;
     const { array } = this;
     let index1 = 0;
@@ -88,8 +95,15 @@ export class MergeSortSortingAlgorithm extends SortingAlgorithm {
       }
 
       // for animation
-      this.overwriteArray(resultIndex, array1.slice(index1), array2.slice(index2));
-      this.modifiedIndices = [startIndex + index1, startIndex + array1.length + index2];
+      this.overwriteArray(
+        resultIndex,
+        array1.slice(index1),
+        array2.slice(index2),
+      );
+      this.modifiedIndices = [
+        startIndex + index1,
+        startIndex + array1.length + index2,
+      ];
       yield;
     }
 

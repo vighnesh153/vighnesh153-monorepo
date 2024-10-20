@@ -1,6 +1,9 @@
-import { ReactElement } from 'react';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { ReactElement } from "react";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
 export const theme = createTheme();
 

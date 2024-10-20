@@ -1,9 +1,9 @@
-import { Queue } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Screen } from './Screen.ts';
-import { ScoreTracker } from './ScoreTracker.ts';
-import { TwoWayPipe } from './TwoWayPipe.ts';
-import { Block } from './Block.ts';
+import { Queue } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Screen } from "./Screen.ts";
+import { ScoreTracker } from "./ScoreTracker.ts";
+import { TwoWayPipe } from "./TwoWayPipe.ts";
+import { Block } from "./Block.ts";
 
 interface GameplayScreenOptions {
   readonly verticalPadding: number;
@@ -16,7 +16,7 @@ interface GameplayScreenOptions {
 }
 
 export class GameplayScreen implements Screen {
-  readonly type = 'gameplay';
+  readonly type = "gameplay";
   readonly canvasWrapper: CanvasWrapper;
 
   readonly verticalPadding: number;
@@ -37,7 +37,7 @@ export class GameplayScreen implements Screen {
     this.scoreTracker = options.scoreTracker;
     this.changeScreen = options.changeScreen;
 
-    this.scoreColor = options.scoreColor ?? 'black';
+    this.scoreColor = options.scoreColor ?? "black";
     this.scoreFontSize = options.scoreFontSize ?? 15;
 
     this.distanceBetweenTwoPipes = options.distanceBetweenTwoPipes ?? 100;
@@ -72,7 +72,10 @@ export class GameplayScreen implements Screen {
 
   private addNewPipe(): void {
     const lastPipe = this.pipes.peekRight();
-    if (lastPipe.getX() + lastPipe.initialHorizontalOffset < this.canvasWrapper.width) {
+    if (
+      lastPipe.getX() + lastPipe.initialHorizontalOffset <
+        this.canvasWrapper.width
+    ) {
       this.pipes.pushRight(this.createNewTwoWayPipe());
     }
   }
@@ -116,7 +119,8 @@ export class GameplayScreen implements Screen {
   }
 
   private checkCollisions(): void {
-    const collides = this.collidesWithSky() || this.collidesWithGround() || this.collidesWithPipes();
+    const collides = this.collidesWithSky() || this.collidesWithGround() ||
+      this.collidesWithPipes();
     if (collides) {
       this.changeScreen();
     }
@@ -127,7 +131,8 @@ export class GameplayScreen implements Screen {
   }
 
   private collidesWithGround(): boolean {
-    return this.block.y + this.block.height > this.canvasWrapper.height - this.verticalPadding;
+    return this.block.y + this.block.height >
+      this.canvasWrapper.height - this.verticalPadding;
   }
 
   private collidesWithPipes(): boolean {

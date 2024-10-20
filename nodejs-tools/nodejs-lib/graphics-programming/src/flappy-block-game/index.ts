@@ -1,1 +1,1 @@
-export { FlappyBlockGame } from './Game.ts';
+export { FlappyBlockGame } from "./Game.ts";

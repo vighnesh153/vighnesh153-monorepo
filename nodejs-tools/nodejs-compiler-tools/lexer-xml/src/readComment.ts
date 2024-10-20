@@ -1,12 +1,13 @@
-import { not, repeat } from '@vighnesh153/tools';
-import { assert } from '@std/assert';
-import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
-import { XmlTokenType } from './tokens.ts';
+import { not, repeat } from "@vighnesh153/tools";
+import { assert } from "@std/assert";
+import { EOF_CHARACTER, Lexer, LexerError } from "@vighnesh153/lexer-core";
+import { XmlTokenType } from "./tokens.ts";
 
 export function readComment(lexer: Lexer<XmlTokenType>): string | null {
   assert(
-    lexer.inputReader.currentCharacter === '<' && lexer.inputReader.peekCharacter() === '!',
-    `Don't attempt to read a comment if string doesn't start with '<!'`
+    lexer.inputReader.currentCharacter === "<" &&
+      lexer.inputReader.peekCharacter() === "!",
+    `Don't attempt to read a comment if string doesn't start with '<!'`,
   );
 
   // Move past <!
@@ -18,16 +19,16 @@ export function readComment(lexer: Lexer<XmlTokenType>): string | null {
   repeat(2, () => {
     if (not(isValidCommentStart)) return;
 
-    if (lexer.inputReader.currentCharacter !== '-') {
+    if (lexer.inputReader.currentCharacter !== "-") {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'UNEXPECTED_COMMENT_CHARACTER',
+            type: "UNEXPECTED_COMMENT_CHARACTER",
             ch: lexer.inputReader.currentCharacter!,
           },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
-        })
+        }),
       );
       isValidCommentStart = false;
       return;
@@ -49,11 +50,11 @@ export function readComment(lexer: Lexer<XmlTokenType>): string | null {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'UNCLOSED_COMMENT_LITERAL',
+            type: "UNCLOSED_COMMENT_LITERAL",
           },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
-        })
+        }),
       );
       return null;
     }
@@ -62,12 +63,12 @@ export function readComment(lexer: Lexer<XmlTokenType>): string | null {
     const peekNext = lexer.inputReader.peekCharacter(1);
 
     // end of comment
-    if (currCh === '-' && peek === '-' && peekNext === '>') {
+    if (currCh === "-" && peek === "-" && peekNext === ">") {
       // Move past: "--" and land on ">"
       lexer.inputReader.readNextCharacter();
       lexer.inputReader.readNextCharacter();
 
-      return commentLiteralBuilder.join('');
+      return commentLiteralBuilder.join("");
     }
 
     commentLiteralBuilder.push(currCh);

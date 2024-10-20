@@ -4,9 +4,9 @@ import {
   convertToPublicUserInfo,
   Logger,
   PublicUserInfo,
-} from '@vighnesh153/tools';
-import { DynamoDBTable } from '@vighnesh153/aws-dynamo-db';
-import { userInfoTableMetadata } from '../common/factories.ts';
+} from "@vighnesh153/tools";
+import { DynamoDBTable } from "@vighnesh153/aws-dynamo-db";
+import { userInfoTableMetadata } from "../common/factories.ts";
 
 export async function getPublicUserInfo({
   userId,
@@ -45,7 +45,10 @@ export async function getCompleteUserInfo({
     },
   });
   if (res.error != null) {
-    logger.log(`Some error occurred when fetching complete user info. ${res.error.message}`, res.error.errorObject);
+    logger.log(
+      `Some error occurred when fetching complete user info. ${res.error.message}`,
+      res.error.errorObject,
+    );
     return null;
   }
   logger.log(`Successfully fetched user info: ${res.data}`);

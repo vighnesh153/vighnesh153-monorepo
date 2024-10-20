@@ -1,29 +1,32 @@
-import { parseCodeComments, ParseCodeCommentsOptions } from './parseCodeComments.ts';
+import {
+  parseCodeComments,
+  ParseCodeCommentsOptions,
+} from "./parseCodeComments.ts";
 
 const javascriptOptions: ParseCodeCommentsOptions = {
-  escapeCharacters: ['\\'],
-  singleLineCommentIdentifiers: ['//'],
-  multiLineCommentIdentifierPairs: new Map([['/*', '*/']]),
+  escapeCharacters: ["\\"],
+  singleLineCommentIdentifiers: ["//"],
+  multiLineCommentIdentifierPairs: new Map([["/*", "*/"]]),
 };
 
-test('no comments should return the code', () => {
-  expect(parseCodeComments('const a = 123;', javascriptOptions)).toStrictEqual([
+test("no comments should return the code", () => {
+  expect(parseCodeComments("const a = 123;", javascriptOptions)).toStrictEqual([
     {
       isComment: false,
-      value: 'const a = 123;',
+      value: "const a = 123;",
     },
   ]);
 });
 
-describe('single-line comments', () => {
-  test('multiple single-line comments', () => {
+describe("single-line comments", () => {
+  test("multiple single-line comments", () => {
     expect(
       parseCodeComments(
         `
 // okay
 const b = 1234;`,
-        javascriptOptions
-      )
+        javascriptOptions,
+      ),
     ).toStrictEqual([
       {
         isComment: false,
@@ -40,14 +43,14 @@ const b = 1234;`,
     ]);
   });
 
-  test('comment on same line as code', () => {
+  test("comment on same line as code", () => {
     expect(
       parseCodeComments(
         `
 // okay
 const b = 1234; // pikachu`,
-        javascriptOptions
-      )
+        javascriptOptions,
+      ),
     ).toStrictEqual([
       {
         isComment: false,
@@ -69,9 +72,11 @@ const b = 1234; // pikachu`,
   });
 });
 
-describe('multi-line comments', () => {
-  test('on same line', () => {
-    expect(parseCodeComments(`const b = 1234; /* pikachu */ `, javascriptOptions)).toStrictEqual([
+describe("multi-line comments", () => {
+  test("on same line", () => {
+    expect(
+      parseCodeComments(`const b = 1234; /* pikachu */ `, javascriptOptions),
+    ).toStrictEqual([
       {
         isComment: false,
         value: `const b = 1234; `,
@@ -87,7 +92,7 @@ describe('multi-line comments', () => {
     ]);
   });
 
-  test('multiple lines', () => {
+  test("multiple lines", () => {
     expect(
       parseCodeComments(
         `const b = 1234; /* 
@@ -95,8 +100,8 @@ pikachu
 */ 
 const a = 'lol';
 `,
-        javascriptOptions
-      )
+        javascriptOptions,
+      ),
     ).toStrictEqual([
       {
         isComment: false,

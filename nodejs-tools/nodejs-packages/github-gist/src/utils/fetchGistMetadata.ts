@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { CORSConfig, IGithubGistMetadata } from '../types/index.ts';
-import { withAuthConfig } from './withAuthConfig.ts';
-import { constants } from '../constants.ts';
-import { withCorsConfig } from './withCorsConfig.ts';
+import axios from "axios";
+import { CORSConfig, IGithubGistMetadata } from "../types/index.ts";
+import { withAuthConfig } from "./withAuthConfig.ts";
+import { constants } from "../constants.ts";
+import { withCorsConfig } from "./withCorsConfig.ts";
 
-const createRandomParam = () => Math.random().toString(16).split('.')[1];
+const createRandomParam = () => Math.random().toString(16).split(".")[1];
 
 export interface FetchGistMetadataUsingGistIdProps {
   personalAccessToken: string;
@@ -12,7 +12,9 @@ export interface FetchGistMetadataUsingGistIdProps {
   corsConfig: CORSConfig;
 }
 
-export async function fetchGistMetadata(props: FetchGistMetadataUsingGistIdProps): Promise<IGithubGistMetadata> {
+export async function fetchGistMetadata(
+  props: FetchGistMetadataUsingGistIdProps,
+): Promise<IGithubGistMetadata> {
   const { personalAccessToken, gistId, corsConfig } = props;
   const url = `${constants.urls.github.gists}/${gistId}`;
 
@@ -22,10 +24,10 @@ export async function fetchGistMetadata(props: FetchGistMetadataUsingGistIdProps
     withAuthConfig({
       personalAccessToken,
       baseConfig: {
-        method: 'get',
+        method: "get",
         ...axiosRequestConfig,
         headers: {
-          'X-GitHub-Api-Version': '2022-11-28',
+          "X-GitHub-Api-Version": "2022-11-28",
           ...axiosRequestConfig.headers,
         },
         params: {
@@ -34,7 +36,7 @@ export async function fetchGistMetadata(props: FetchGistMetadataUsingGistIdProps
           ...axiosRequestConfig.params,
         },
       },
-    })
+    }),
   );
 
   return gistsMetadata;

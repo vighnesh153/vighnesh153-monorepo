@@ -15,7 +15,11 @@ export class ScoreTracker {
     return this.#scoreToWin;
   }
 
-  constructor(initialPlayerScore = 0, initialComputerScore = 0, scoreToWin = 5) {
+  constructor(
+    initialPlayerScore = 0,
+    initialComputerScore = 0,
+    scoreToWin = 5,
+  ) {
     this.#playerScore = initialPlayerScore;
     this.#computerScore = initialComputerScore;
     this.#scoreToWin = scoreToWin;

@@ -1,11 +1,14 @@
 // @ts-nocheck
 
-import { createEffect, createSignal, onCleanup, type JSX } from 'solid-js';
+import { createEffect, createSignal, type JSX, onCleanup } from "solid-js";
 
-import { FileUploadManager, type FileUploadState } from '@vighnesh153/tools/file_upload';
+import {
+  FileUploadManager,
+  type FileUploadState,
+} from "@vighnesh153/tools/file_upload";
 
-import { UploadInputBox } from './UploadInputBox.tsx';
-import { FilesUploadTracker } from './FilesUploadTracker.tsx';
+import { UploadInputBox } from "./UploadInputBox.tsx";
+import { FilesUploadTracker } from "./FilesUploadTracker.tsx";
 
 export type UploadManagerProps = {
   // TODO: add some props here
@@ -34,14 +37,16 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
     function clipboardEventHandler(e: ClipboardEvent) {
       const items = Array.from(e.clipboardData?.items ?? []);
 
-      const files = items.map((item) => item.getAsFile()).filter((file) => file !== null);
+      const files = items.map((item) => item.getAsFile()).filter((file) =>
+        file !== null
+      );
       if (files.length > 0) {
         fileUploadManager.upload(files);
       }
     }
-    document.addEventListener('paste', clipboardEventHandler);
+    document.addEventListener("paste", clipboardEventHandler);
     onCleanup(() => {
-      document.removeEventListener('paste', clipboardEventHandler);
+      document.removeEventListener("paste", clipboardEventHandler);
     });
   });
 
@@ -72,15 +77,15 @@ export function UploadManager(props: UploadManagerProps): JSX.Element {
       }
     }
 
-    window.addEventListener('dragover', handleDragOverEvent);
-    window.addEventListener('drop', handleDropEvent);
-    window.addEventListener('dragenter', handleDragEnter);
-    window.addEventListener('dragleave', handleDragLeave);
+    window.addEventListener("dragover", handleDragOverEvent);
+    window.addEventListener("drop", handleDropEvent);
+    window.addEventListener("dragenter", handleDragEnter);
+    window.addEventListener("dragleave", handleDragLeave);
     onCleanup(() => {
-      window.removeEventListener('dragover', handleDragOverEvent);
-      window.removeEventListener('drop', handleDropEvent);
-      window.removeEventListener('dragenter', handleDragEnter);
-      window.removeEventListener('dragleave', handleDragLeave);
+      window.removeEventListener("dragover", handleDragOverEvent);
+      window.removeEventListener("drop", handleDropEvent);
+      window.removeEventListener("dragenter", handleDragEnter);
+      window.removeEventListener("dragleave", handleDragLeave);
     });
   });
 

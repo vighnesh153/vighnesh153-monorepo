@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Point } from './Point.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Point } from "./Point.ts";
 
 interface Velocity {
   dx: number;
@@ -18,7 +18,7 @@ interface BallOptions {
   arenaGutter: number;
 }
 
-type CollisionDirection = 'left' | 'right';
+type CollisionDirection = "left" | "right";
 
 export class Ball {
   readonly #canvasWrapper: CanvasWrapper;
@@ -48,7 +48,7 @@ export class Ball {
 
   constructor(canvasWrapper: CanvasWrapper, options: BallOptions) {
     this.#canvasWrapper = canvasWrapper;
-    this.#color = options.color ?? 'black';
+    this.#color = options.color ?? "black";
     this.#width = options.width ?? 10;
     this.#height = options.height ?? 10;
     this.#arenaGutter = options.arenaGutter;
@@ -89,19 +89,27 @@ export class Ball {
     if (this.#position.x < this.#arenaGutter) {
       this.#position.x = this.#arenaGutter;
       this.#velocityModifier.horizontal *= -1;
-      onCollision('left');
+      onCollision("left");
     }
     if (this.#position.y < this.#arenaGutter) {
       this.#position.y = this.#arenaGutter;
       this.#velocityModifier.vertical *= -1;
     }
-    if (this.#position.x + this.#width > this.#canvasWrapper.width - this.#arenaGutter) {
-      this.#position.x = this.#canvasWrapper.width - this.#arenaGutter - this.#width;
+    if (
+      this.#position.x + this.#width >
+        this.#canvasWrapper.width - this.#arenaGutter
+    ) {
+      this.#position.x = this.#canvasWrapper.width - this.#arenaGutter -
+        this.#width;
       this.#velocityModifier.horizontal *= -1;
-      onCollision('right');
+      onCollision("right");
     }
-    if (this.#position.y + this.#height > this.#canvasWrapper.height - this.#arenaGutter) {
-      this.#position.y = this.#canvasWrapper.height - this.#arenaGutter - this.#height;
+    if (
+      this.#position.y + this.#height >
+        this.#canvasWrapper.height - this.#arenaGutter
+    ) {
+      this.#position.y = this.#canvasWrapper.height - this.#arenaGutter -
+        this.#height;
       this.#velocityModifier.vertical *= -1;
     }
   }

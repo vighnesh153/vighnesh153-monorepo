@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Point } from './Point.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Point } from "./Point.ts";
 
 interface PadOptions {
   color?: string;
@@ -36,7 +36,7 @@ export class Pad {
 
   constructor(canvasWrapper: CanvasWrapper, options: PadOptions) {
     this.#canvasWrapper = canvasWrapper;
-    this.#color = options.color ?? 'black';
+    this.#color = options.color ?? "black";
     this.#width = options.width ?? 10;
     this.#height = options.height ?? canvasWrapper.height / 4;
     this.#arenaGutter = options.arenaGutter ?? 20;

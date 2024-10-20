@@ -1,4 +1,4 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface BallOptions {
   readonly size?: number;
@@ -25,11 +25,11 @@ export class Ball {
 
   constructor(
     private readonly canvasWrapper: CanvasWrapper,
-    options: BallOptions
+    options: BallOptions,
   ) {
     this.coordinate = options.coordinate;
     this.size = options.size ?? 5;
-    this.color = options.color ?? 'black';
+    this.color = options.color ?? "black";
     this.velocity = options.velocity ?? {
       dx: 5,
       dy: -5,

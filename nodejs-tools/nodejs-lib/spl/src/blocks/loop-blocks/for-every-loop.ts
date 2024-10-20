@@ -1,11 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Block } from '@/blocks/Block';
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Interpreter } from '@/interpreter';
-import { VariableBlock, VariableBlockType } from '@/blocks/variable-blocks/variable-block';
-import { Variable } from 'src/models/Variable';
+import { Block } from "@/blocks/Block";
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Interpreter } from "@/interpreter";
+import {
+  VariableBlock,
+  VariableBlockType,
+} from "@/blocks/variable-blocks/variable-block";
+import { Variable } from "src/models/Variable";
 
 export class ForEveryLoop extends Block {
   scope: Scope;
@@ -16,7 +19,7 @@ export class ForEveryLoop extends Block {
     parentScope: Scope,
     private childLinesOfCode: LineOfCode[],
     arrayName: string,
-    private indexName?: string
+    private indexName?: string,
   ) {
     super();
     this.scope = new Scope(parentScope);
@@ -26,7 +29,7 @@ export class ForEveryLoop extends Block {
     }
 
     this.array = this.scope.getVariable(arrayName);
-    if (this.array.type !== 'array') {
+    if (this.array.type !== "array") {
       throw new Error(`'${arrayName}' variable is not an iterable`);
     }
   }
@@ -38,14 +41,21 @@ export class ForEveryLoop extends Block {
       this.array.arrayType as string,
       value,
       true,
-      scope
+      scope,
     );
     variableBlock.execute();
   }
 
   private setIndexVariableTo(n: number, scope: Scope): void {
     if (this.indexName) {
-      const variableBlock = new VariableBlock(VariableBlockType.declare, this.indexName, 'number', n, true, scope);
+      const variableBlock = new VariableBlock(
+        VariableBlockType.declare,
+        this.indexName,
+        "number",
+        n,
+        true,
+        scope,
+      );
       variableBlock.execute();
     }
   }
@@ -62,11 +72,11 @@ export class ForEveryLoop extends Block {
       } catch (e: unknown) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const message = e?.message ?? '';
-        if (message === 'break') {
+        const message = e?.message ?? "";
+        if (message === "break") {
           break;
         }
-        if (message === 'continue') {
+        if (message === "continue") {
           continue;
         }
         throw e;

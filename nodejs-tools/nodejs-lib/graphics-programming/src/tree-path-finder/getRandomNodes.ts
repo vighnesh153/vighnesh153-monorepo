@@ -1,5 +1,5 @@
-import { Queue, not, shuffleIterable } from '@vighnesh153/tools';
-import { TreeNode } from './TreeNode.ts';
+import { not, Queue, shuffleIterable } from "@vighnesh153/tools";
+import { TreeNode } from "./TreeNode.ts";
 
 export function getRandomNodes(rootNode: TreeNode, count = 1): TreeNode[] {
   const allNodes: TreeNode[] = [];

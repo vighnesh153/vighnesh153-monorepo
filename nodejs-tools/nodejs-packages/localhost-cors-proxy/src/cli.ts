@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
-import { startServer } from './server.ts';
-import packageInfo from '../package.json';
+import { Command } from "commander";
+import { startServer } from "./server.ts";
+import packageInfo from "../package.json";
 
 const program = new Command();
 
@@ -10,8 +10,8 @@ program
   .name(packageInfo.name)
   .description(packageInfo.description)
   .version(packageInfo.version)
-  .option('-t, --target-url <target-url>', 'url to be CORS enabled')
-  .option('-p, --port <port>', 'port number for the proxy server', '8080')
+  .option("-t, --target-url <target-url>", "url to be CORS enabled")
+  .option("-p, --port <port>", "port number for the proxy server", "8080")
   .parse();
 
 interface Options {

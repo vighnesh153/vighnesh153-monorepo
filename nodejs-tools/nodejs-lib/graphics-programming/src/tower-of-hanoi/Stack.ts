@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Position } from './Position.ts';
-import { Disc } from './Disc.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Position } from "./Position.ts";
+import { Disc } from "./Disc.ts";
 
 export interface StackConfig {
   color: string;
@@ -38,7 +38,7 @@ export class Stack {
     this.drawDiscs();
   }
 
-  addDisc(disc: Omit<Disc, 'center'>) {
+  addDisc(disc: Omit<Disc, "center">) {
     const discProcessed = disc as Disc;
     const pos = this.getPositionForNewDisc();
     discProcessed.center = {
@@ -75,7 +75,13 @@ export class Stack {
     const topLeftX = x - baseWidth / 2;
     const topLeftY = y;
 
-    this.#canvasWrapper.drawFilledRect(topLeftX, topLeftY, baseWidth, thickness, color);
+    this.#canvasWrapper.drawFilledRect(
+      topLeftX,
+      topLeftY,
+      baseWidth,
+      thickness,
+      color,
+    );
   }
 
   private drawRod() {
@@ -85,7 +91,13 @@ export class Stack {
     const topLeftX = x - thickness / 2;
     const topLeftY = this.topY;
 
-    this.#canvasWrapper.drawFilledRect(topLeftX, topLeftY, thickness, height, color);
+    this.#canvasWrapper.drawFilledRect(
+      topLeftX,
+      topLeftY,
+      thickness,
+      height,
+      color,
+    );
   }
 
   private drawDiscs() {

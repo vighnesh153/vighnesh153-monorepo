@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
 
 export class PopFromArrayParser extends BlockParser {
   private static regex = /^pop\s* from (.*)$/;
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
   }
@@ -32,7 +32,7 @@ export class PopFromArrayParser extends BlockParser {
       }
 
       const variable = this.scope.getVariable(arrayName);
-      if (variable.type !== 'array') {
+      if (variable.type !== "array") {
         throw new Error(`'${arrayName}' is not an array.`);
       }
 
@@ -52,6 +52,6 @@ export class PopFromArrayParser extends BlockParser {
       })(this.scope);
     }
 
-    throw new Error('Invalid statement.');
+    throw new Error("Invalid statement.");
   }
 }

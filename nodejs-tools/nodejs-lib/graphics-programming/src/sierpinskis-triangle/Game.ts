@@ -1,6 +1,6 @@
-import { randomIntegerBetween } from '@std/random';
-import { repeat } from '@vighnesh153/tools';
-import { CanvasWrapper } from '../canvas-wrapper.ts';
+import { randomIntegerBetween } from "@std/random";
+import { repeat } from "@vighnesh153/tools";
+import { CanvasWrapper } from "../canvas-wrapper.ts";
 
 export interface SierpinskisTriangleGamePoint {
   x: number;
@@ -39,12 +39,15 @@ export class SierpinskisTriangleGame {
     return [this.#initialPoint1, this.#initialPoint2, this.#initialPoint3];
   }
 
-  constructor(canvasWrapper: CanvasWrapper, options: SierpinskisTriangleGameOptions = {}) {
+  constructor(
+    canvasWrapper: CanvasWrapper,
+    options: SierpinskisTriangleGameOptions = {},
+  ) {
     this.#canvasWrapper = canvasWrapper;
 
     this.#pointRadius = options?.pointRadius ?? 1;
-    this.#initialPointColor = options?.initialPointColor ?? 'red';
-    this.#regularPointColor = options?.regularPointColor ?? 'green';
+    this.#initialPointColor = options?.initialPointColor ?? "red";
+    this.#regularPointColor = options?.regularPointColor ?? "green";
     this.#speed = options?.speed ?? 1;
 
     const top = 1 / 10;
@@ -108,7 +111,12 @@ export class SierpinskisTriangleGame {
   }
 
   private drawPoint(point: SierpinskisTriangleGamePoint, color: string) {
-    this.#canvasWrapper.drawFilledCircle(point.x, point.y, this.#pointRadius, color);
+    this.#canvasWrapper.drawFilledCircle(
+      point.x,
+      point.y,
+      this.#pointRadius,
+      color,
+    );
   }
 
   private drawInitialPoints() {

@@ -1,8 +1,8 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Scope } from '@/models/Scope';
-import { Block } from '@/blocks/Block';
-import { ConditionBlock } from '@/blocks/condition-block';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Scope } from "@/models/Scope";
+import { Block } from "@/blocks/Block";
+import { ConditionBlock } from "@/blocks/condition-block";
 
 export class ConditionalBlockParser extends BlockParser {
   private static ifRegex = /^if (.+),\s*then\s* do\s*:\s*$/;
@@ -11,7 +11,7 @@ export class ConditionalBlockParser extends BlockParser {
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
   }
@@ -35,7 +35,10 @@ export class ConditionalBlockParser extends BlockParser {
     return block.reverse();
   }
 
-  private getBlocksAndConditions(): { blocks: LineOfCode[][]; conditions: string[] } {
+  private getBlocksAndConditions(): {
+    blocks: LineOfCode[][];
+    conditions: string[];
+  } {
     const { ifRegex, elseIfRegex, elseRegex } = ConditionalBlockParser;
     let ifBlockConsumed = false;
 
@@ -63,7 +66,7 @@ export class ConditionalBlockParser extends BlockParser {
         }
       } else if (ifBlockConsumed && elseRegex.test(lineUnderTest.value)) {
         this.lineOfCodes.pop();
-        conditions.push('true');
+        conditions.push("true");
         blocks.push(this.getIndentedBlock());
         break;
       } else {
@@ -73,7 +76,7 @@ export class ConditionalBlockParser extends BlockParser {
       const countOfLinesAfterParsing = this.lineOfCodes.length;
 
       if (countOfLinesBeforeParsing === countOfLinesAfterParsing) {
-        throw new Error('Error in statement at line: ' + lineUnderTest.number);
+        throw new Error("Error in statement at line: " + lineUnderTest.number);
       }
     }
 

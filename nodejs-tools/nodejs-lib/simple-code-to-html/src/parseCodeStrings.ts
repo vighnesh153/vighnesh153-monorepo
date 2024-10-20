@@ -1,7 +1,8 @@
-import { not } from '@vighnesh153/tools';
-import { CommonTypes } from './commonTypes.ts';
+import { not } from "@vighnesh153/tools";
+import { CommonTypes } from "./commonTypes.ts";
 
-export interface ParseCodeStringsOptions extends Pick<CommonTypes, 'escapeCharacters'> {
+export interface ParseCodeStringsOptions
+  extends Pick<CommonTypes, "escapeCharacters"> {
   acceptableStringChars: string[];
 }
 
@@ -10,7 +11,10 @@ type ParseCodeStringsResult = Array<{
   value: string;
 }>;
 
-export function parseCodeStrings(code: string, options: ParseCodeStringsOptions): ParseCodeStringsResult {
+export function parseCodeStrings(
+  code: string,
+  options: ParseCodeStringsOptions,
+): ParseCodeStringsResult {
   const { acceptableStringChars, escapeCharacters } = options;
 
   const stringIndices: { start: number; end: number }[] = [];
@@ -18,7 +22,7 @@ export function parseCodeStrings(code: string, options: ParseCodeStringsOptions)
   let codeStringStartIndex: number | null = null;
 
   for (let currIndex = 0; currIndex < code.length; currIndex++) {
-    const prevCh = currIndex > 0 ? code[currIndex - 1] : '';
+    const prevCh = currIndex > 0 ? code[currIndex - 1] : "";
     const ch = code[currIndex];
 
     const isAcceptableBeginStringChar = acceptableStringChars.includes(ch);

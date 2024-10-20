@@ -1,16 +1,16 @@
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
-import { BooleanExpressionEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-expression-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
+import { BooleanExpressionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from '@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
+} from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 
 export class ParenthesisEvaluator extends ExpressionEvaluator {
   constructor(
     public readonly scope: Scope,
-    public readonly type: 'arithmetic' | 'boolean'
+    public readonly type: "arithmetic" | "boolean",
   ) {
     super();
   }
@@ -19,10 +19,10 @@ export class ParenthesisEvaluator extends ExpressionEvaluator {
     let foundOpeningParenthesis = false;
     let countStartingUnmatched = 0;
     for (let i = 0; i < text.length; i++) {
-      if (text[i] === '(') {
+      if (text[i] === "(") {
         countStartingUnmatched++;
         foundOpeningParenthesis = true;
-      } else if (text[i] === ')') {
+      } else if (text[i] === ")") {
         if (countStartingUnmatched === 0) {
           // Parenthesis group is invalid
           return -1;
@@ -39,26 +39,28 @@ export class ParenthesisEvaluator extends ExpressionEvaluator {
   }
 
   tryEvaluate(text: string): boolean {
-    const indexOfOpeningParenthesis = text.indexOf('(');
-    const indexOfClosingParenthesis = ParenthesisEvaluator.indexOfClosingParenthesis(text);
+    const indexOfOpeningParenthesis = text.indexOf("(");
+    const indexOfClosingParenthesis = ParenthesisEvaluator
+      .indexOfClosingParenthesis(text);
 
-    return indexOfOpeningParenthesis >= 0 && indexOfOpeningParenthesis < indexOfClosingParenthesis;
+    return indexOfOpeningParenthesis >= 0 &&
+      indexOfOpeningParenthesis < indexOfClosingParenthesis;
   }
 
   evaluate(text: string): unknown {
     if (this.tryEvaluate(text)) {
-      const indexOfOpeningParenthesis = text.indexOf('(');
-      const indexOfClosingParenthesis = ParenthesisEvaluator.indexOfClosingParenthesis(text);
+      const indexOfOpeningParenthesis = text.indexOf("(");
+      const indexOfClosingParenthesis = ParenthesisEvaluator
+        .indexOfClosingParenthesis(text);
 
       const insideExpression = text.substr(
         indexOfOpeningParenthesis + 1,
-        indexOfClosingParenthesis - indexOfOpeningParenthesis - 1
+        indexOfClosingParenthesis - indexOfOpeningParenthesis - 1,
       );
 
-      const evaluators =
-        this.type === 'boolean'
-          ? new BooleanExpressionEvaluator(this.scope)
-          : new ArithmeticExpressionEvaluator(this.scope);
+      const evaluators = this.type === "boolean"
+        ? new BooleanExpressionEvaluator(this.scope)
+        : new ArithmeticExpressionEvaluator(this.scope);
 
       for (const evaluator of evaluators.expressionEvaluators) {
         if (evaluator.tryEvaluate(insideExpression)) {
@@ -69,7 +71,9 @@ export class ParenthesisEvaluator extends ExpressionEvaluator {
 
       throw new Error(`Invalid ${this.type} expression`);
     } else {
-      bugReporter.report(`EVALUATE_CALLED_ON_INVALID_${this.type.toUpperCase}_PARENTHESIS_BLOCK`);
+      bugReporter.report(
+        `EVALUATE_CALLED_ON_INVALID_${this.type.toUpperCase}_PARENTHESIS_BLOCK`,
+      );
     }
   }
 }

@@ -108,7 +108,7 @@
     @apply after:duration-200;
     @apply after:ease-in;
 
-    @apply [&:is(:hover,:focus-visible)]:after:w-full;
+    @apply [&:is(:hover, :focus-visible)]:after:w-full;
   }
 
   .primary-btn-link {
@@ -208,7 +208,7 @@
       counter-increment: decimal-list;
 
       &::before {
-        @apply content-[counter(decimal-list)_'.'];
+        @apply content-[counter(decimal-list)_"."];
         @apply absolute;
 
         @apply pr-1.5;

@@ -1,4 +1,4 @@
-import { onCleanup, type Accessor } from 'solid-js';
+import { type Accessor, onCleanup } from "solid-js";
 
 type ClickOutsideAccessorProps = {
   ignoreElements: HTMLElement[];
@@ -9,18 +9,23 @@ type ClickOutsideAccessorProps = {
   clickOutsideCallback: () => void;
 };
 
-export function clickOutside(element: HTMLElement, accessor: Accessor<ClickOutsideAccessorProps>) {
+export function clickOutside(
+  element: HTMLElement,
+  accessor: Accessor<ClickOutsideAccessorProps>,
+) {
   const onClick = ({ target }: MouseEvent) => {
     const { ignoreElements, clickOutsideCallback } = accessor();
     if (
       element.contains(target as Node) ||
-      ignoreElements.some((ignoreElement) => ignoreElement.contains(target as Node))
+      ignoreElements.some((ignoreElement) =>
+        ignoreElement.contains(target as Node)
+      )
     ) {
       return;
     }
     clickOutsideCallback();
   };
 
-  document.body.addEventListener('click', onClick);
-  onCleanup(() => document.body.removeEventListener('click', onClick));
+  document.body.addEventListener("click", onClick);
+  onCleanup(() => document.body.removeEventListener("click", onClick));
 }

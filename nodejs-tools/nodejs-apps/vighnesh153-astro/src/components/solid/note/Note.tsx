@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import type { JSX } from 'solid-js';
+import type { JSX } from "solid-js";
 
-import { classes } from '@/utils/index.ts';
-import { InfoIcon, CheckIcon, WarnIcon } from '@/icons/solid/index.ts';
+import { classes } from "@/utils/index.ts";
+import { CheckIcon, InfoIcon, WarnIcon } from "@/icons/solid/index.ts";
 
-export type NoteType = 'info' | 'warn' | 'success' | 'error';
+export type NoteType = "info" | "warn" | "success" | "error";
 
 export type NoteProps = {
   type: NoteType;
@@ -12,7 +12,9 @@ export type NoteProps = {
   title?: string;
 };
 
-export function Note({ type = 'info', children, title = mappings[type].defaultTitle }: NoteProps) {
+export function Note(
+  { type = "info", children, title = mappings[type].defaultTitle }: NoteProps,
+) {
   const mapping = mappings[type];
   return (
     <div>
@@ -27,10 +29,10 @@ export function Note({ type = 'info', children, title = mappings[type].defaultTi
 
           text-sm
         `,
-          mapping.titleClasses
+          mapping.titleClasses,
         )}
         style={{
-          'background-color': mapping.majorColor,
+          "background-color": mapping.majorColor,
         }}
       >
         {mapping.icon()} {title}
@@ -48,8 +50,8 @@ export function Note({ type = 'info', children, title = mappings[type].defaultTi
         before:content-[]
       `)}
         style={{
-          'border-color': mapping.majorColor,
-          'background-color': mapping.bgColor,
+          "border-color": mapping.majorColor,
+          "background-color": mapping.bgColor,
         }}
       >
         {children}
@@ -61,31 +63,31 @@ export function Note({ type = 'info', children, title = mappings[type].defaultTi
 const mappings = {
   success: {
     icon: () => <CheckIcon class="w-4 h-4" />,
-    majorColor: '#388e3c',
-    bgColor: '#87d58a30',
-    defaultTitle: 'Success',
-    titleClasses: 'text-secondary fill-secondary',
+    majorColor: "#388e3c",
+    bgColor: "#87d58a30",
+    defaultTitle: "Success",
+    titleClasses: "text-secondary fill-secondary",
   },
   info: {
     icon: () => <InfoIcon class="w-4 h-4" />,
-    majorColor: '#0288d1',
-    bgColor: '#7fd7ff30',
-    defaultTitle: 'Note',
-    titleClasses: 'text-secondary fill-secondary',
+    majorColor: "#0288d1",
+    bgColor: "#7fd7ff30",
+    defaultTitle: "Note",
+    titleClasses: "text-secondary fill-secondary",
   },
   warn: {
     icon: () => <WarnIcon class="w-4 h-4" />,
-    majorColor: '#f57c00',
-    bgColor: '#ffd89f30',
-    defaultTitle: 'Warn',
-    titleClasses: 'text-secondary fill-secondary',
+    majorColor: "#f57c00",
+    bgColor: "#ffd89f30",
+    defaultTitle: "Warn",
+    titleClasses: "text-secondary fill-secondary",
   },
   error: {
     icon: () => <InfoIcon class="w-4 h-4" />,
-    majorColor: '#d32f2f',
-    bgColor: '#ffbbbb30',
-    defaultTitle: 'Error',
-    titleClasses: 'text-text fill-text',
+    majorColor: "#d32f2f",
+    bgColor: "#ffbbbb30",
+    defaultTitle: "Error",
+    titleClasses: "text-text fill-text",
   },
 } satisfies Record<
   NoteType,

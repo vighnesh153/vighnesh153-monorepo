@@ -1,4 +1,4 @@
-import { dpr } from './dpr.ts';
+import { dpr } from "./dpr.ts";
 
 export interface CanvasWrapper {
   readonly width: number;
@@ -11,13 +11,50 @@ export interface CanvasWrapper {
 
   reset(): void;
   getBoundingClientRect(fresh?: boolean): DOMRect;
-  getImageData(x: number, y: number, w: number, h: number, settings?: ImageDataSettings): ImageData;
+  getImageData(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    settings?: ImageDataSettings,
+  ): ImageData;
   putImageData(imageData: ImageData, dx: number, dy: number): void;
-  drawFilledRect(x: number, y: number, width: number, height: number, color: string): void;
-  drawOutlinedRect(x: number, y: number, width: number, height: number, thickness: number, color: string): void;
-  drawLine(x1: number, y1: number, x2: number, y2: number, lineWidth: number, color: string): void;
-  drawFilledCircle(centerX: number, centerY: number, radius: number, color: string): void;
-  writeText(text: string, x: number, y: number, color: string, fontSize: number): void;
+  drawFilledRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: string,
+  ): void;
+  drawOutlinedRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    thickness: number,
+    color: string,
+  ): void;
+  drawLine(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    lineWidth: number,
+    color: string,
+  ): void;
+  drawFilledCircle(
+    centerX: number,
+    centerY: number,
+    radius: number,
+    color: string,
+  ): void;
+  writeText(
+    text: string,
+    x: number,
+    y: number,
+    color: string,
+    fontSize: number,
+  ): void;
   translate(x: number, y: number): void;
   rotate(angle: number): void;
   scale(x: number, y: number): void;
@@ -59,7 +96,7 @@ export class CanvasWrapperImpl implements CanvasWrapper {
   }
 
   constructor(canvas: HTMLCanvasElement) {
-    const canvasContext = canvas.getContext('2d', {
+    const canvasContext = canvas.getContext("2d", {
       willReadFrequently: true,
       desynchronized: true,
     });
@@ -96,7 +133,13 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     return this.#boundingClientRect;
   }
 
-  getImageData(x: number, y: number, w: number, h: number, settings?: ImageDataSettings): ImageData {
+  getImageData(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    settings?: ImageDataSettings,
+  ): ImageData {
     return this.#canvasContext.getImageData(x, y, w, h, settings);
   }
 
@@ -104,22 +147,42 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.#canvasContext.putImageData(imageData, dx, dy);
   }
 
-  drawFilledRect(x: number, y: number, width: number, height: number, color: string): void {
+  drawFilledRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: string,
+  ): void {
     this.#canvasContext.fillStyle = color;
     this.#canvasContext.fillRect(x, y, width, height);
   }
 
-  drawOutlinedRect(x: number, y: number, width: number, height: number, thickness: number, color: string): void {
+  drawOutlinedRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    thickness: number,
+    color: string,
+  ): void {
     this.#canvasContext.strokeStyle = color;
     this.#canvasContext.lineWidth = thickness;
     this.#canvasContext.strokeRect(x, y, width, height);
   }
 
-  drawLine(x1: number, y1: number, x2: number, y2: number, lineWidth: number, color: string): void {
+  drawLine(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    lineWidth: number,
+    color: string,
+  ): void {
     this.#canvasContext.save();
     this.#canvasContext.beginPath();
     this.#canvasContext.lineWidth = lineWidth;
-    this.#canvasContext.lineCap = 'round';
+    this.#canvasContext.lineCap = "round";
     this.#canvasContext.strokeStyle = color;
     this.#canvasContext.moveTo(x1, y1);
     this.#canvasContext.lineTo(x2, y2);
@@ -127,18 +190,29 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.#canvasContext.restore();
   }
 
-  drawFilledCircle(centerX: number, centerY: number, radius: number, color: string): void {
+  drawFilledCircle(
+    centerX: number,
+    centerY: number,
+    radius: number,
+    color: string,
+  ): void {
     this.#canvasContext.beginPath();
     this.#canvasContext.fillStyle = color;
     this.#canvasContext.arc(centerX, centerY, radius, 0, 2 * Math.PI, true);
     this.#canvasContext.fill();
   }
 
-  writeText(text: string, x: number, y: number, color: string, fontSize: number) {
+  writeText(
+    text: string,
+    x: number,
+    y: number,
+    color: string,
+    fontSize: number,
+  ) {
     this.#canvasContext.fillStyle = color;
     // set the font
     {
-      const span = document.createElement('span');
+      const span = document.createElement("span");
       span.style.font = this.#canvasContext.font;
       span.style.fontSize = `${fontSize}px`;
       this.#canvasContext.font = span.style.font;

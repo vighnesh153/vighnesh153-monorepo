@@ -1,6 +1,6 @@
-import { BrushThickness } from './AppConfig.ts';
-import { type IColor } from './colors.ts';
-import { createId } from './createId.ts';
+import { BrushThickness } from "./AppConfig.ts";
+import { type IColor } from "./colors.ts";
+import { createId } from "./createId.ts";
 
 export type Point = {
   x: number;
@@ -12,29 +12,33 @@ type EventCommon = {
 };
 
 export type DrawPointEvent = EventCommon & {
-  type: 'point';
+  type: "point";
   point: Point;
   color: IColor;
   brushThickness: BrushThickness;
 };
 
-export function buildDrawPointEvent(config: Omit<DrawPointEvent, 'type' | 'eventId'>): DrawPointEvent {
+export function buildDrawPointEvent(
+  config: Omit<DrawPointEvent, "type" | "eventId">,
+): DrawPointEvent {
   return {
-    type: 'point',
+    type: "point",
     eventId: createId(),
     ...config,
   };
 }
 
 export type FloodFillEvent = EventCommon & {
-  type: 'fill';
+  type: "fill";
   startPoint: Point; // where the flood fill should begin from
   color: IColor;
 };
 
-export function buildFloodFillEvent(config: Omit<FloodFillEvent, 'type' | 'eventId'>): FloodFillEvent {
+export function buildFloodFillEvent(
+  config: Omit<FloodFillEvent, "type" | "eventId">,
+): FloodFillEvent {
   return {
-    type: 'fill',
+    type: "fill",
     eventId: createId(),
     ...config,
   };
@@ -42,29 +46,33 @@ export function buildFloodFillEvent(config: Omit<FloodFillEvent, 'type' | 'event
 
 // Draws the line between 2 points
 export type DrawLineEvent = EventCommon & {
-  type: 'line';
+  type: "line";
   startPoint: Point;
   endPoint: Point;
   color: IColor;
   brushThickness: BrushThickness;
 };
 
-export function buildDrawLineEvent(config: Omit<DrawLineEvent, 'type' | 'eventId'>): DrawLineEvent {
+export function buildDrawLineEvent(
+  config: Omit<DrawLineEvent, "type" | "eventId">,
+): DrawLineEvent {
   return {
-    type: 'line',
+    type: "line",
     eventId: createId(),
     ...config,
   };
 }
 
 export type ClearScreenEvent = EventCommon & {
-  type: 'clear';
+  type: "clear";
   color: IColor;
 };
 
-export function buildClearScreenEvent(config: Omit<ClearScreenEvent, 'type' | 'eventId'>): ClearScreenEvent {
+export function buildClearScreenEvent(
+  config: Omit<ClearScreenEvent, "type" | "eventId">,
+): ClearScreenEvent {
   return {
-    type: 'clear',
+    type: "clear",
     eventId: createId(),
     ...config,
   };
@@ -72,14 +80,19 @@ export function buildClearScreenEvent(config: Omit<ClearScreenEvent, 'type' | 'e
 
 // No-op event. This event will be used in the undo-redo stack
 export type CommitEvent = EventCommon & {
-  type: 'commit';
+  type: "commit";
 };
 
 export function buildCommitEvent(): CommitEvent {
   return {
-    type: 'commit',
+    type: "commit",
     eventId: createId(),
   };
 }
 
-export type AppEvent = DrawPointEvent | FloodFillEvent | DrawLineEvent | ClearScreenEvent | CommitEvent;
+export type AppEvent =
+  | DrawPointEvent
+  | FloodFillEvent
+  | DrawLineEvent
+  | ClearScreenEvent
+  | CommitEvent;

@@ -1,12 +1,14 @@
-import { not } from '@vighnesh153/tools';
-import axios from 'axios';
-import { withAuthConfig } from './utils/index.ts';
-import { constants } from './constants.ts';
-import { GistFile } from './GithubGistFile.ts';
-import { CORSConfig } from './types/index.ts';
-import { withCorsConfig } from './utils/withCorsConfig.ts';
+import { not } from "@vighnesh153/tools";
+import axios from "axios";
+import { withAuthConfig } from "./utils/index.ts";
+import { constants } from "./constants.ts";
+import { GistFile } from "./GithubGistFile.ts";
+import { CORSConfig } from "./types/index.ts";
+import { withCorsConfig } from "./utils/withCorsConfig.ts";
 
-function constructPayload(gistFiles: GistFile[]): Record<string, { content: string }> {
+function constructPayload(
+  gistFiles: GistFile[],
+): Record<string, { content: string }> {
   const payload: Record<string, { content: string }> = {};
   gistFiles.forEach((gistFile) => {
     if (not(gistFile.hasUnSyncedUpdates)) return;
@@ -25,8 +27,11 @@ export interface SaveGithubGistOptions {
   corsConfig: CORSConfig;
 }
 
-export async function saveGithubGist(options: SaveGithubGistOptions): Promise<void> {
-  const { gistFiles, isGistPublic, personalAccessToken, gistId, corsConfig } = options;
+export async function saveGithubGist(
+  options: SaveGithubGistOptions,
+): Promise<void> {
+  const { gistFiles, isGistPublic, personalAccessToken, gistId, corsConfig } =
+    options;
   const url = `${constants.urls.github.gists}/${gistId}`;
 
   const payload = constructPayload(gistFiles);
@@ -39,10 +44,10 @@ export async function saveGithubGist(options: SaveGithubGistOptions): Promise<vo
     withAuthConfig({
       personalAccessToken,
       baseConfig: {
-        method: 'patch',
+        method: "patch",
         ...axiosRequestConfig,
         headers: {
-          'X-GitHub-Api-Version': '2022-11-28',
+          "X-GitHub-Api-Version": "2022-11-28",
           ...axiosRequestConfig.headers,
         },
         data: {
@@ -51,6 +56,6 @@ export async function saveGithubGist(options: SaveGithubGistOptions): Promise<vo
           ...axiosRequestConfig.data,
         },
       },
-    })
+    }),
   );
 }

@@ -1,5 +1,5 @@
 var pika_xml_formatter = (function (exports) {
-  'use strict';
+  "use strict";
 
   var __defProp = Object.defineProperty;
   var __defProps = Object.defineProperties;
@@ -10,31 +10,62 @@ var pika_xml_formatter = (function (exports) {
   var __typeError = (msg) => {
     throw TypeError(msg);
   };
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __defNormalProp = (obj, key, value) =>
+    key in obj
+      ? __defProp(obj, key, {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value,
+      })
+      : obj[key] = value;
   var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
+    for (var prop in b || (b = {})) {
+      if (__hasOwnProp.call(b, prop)) {
         __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
       }
+    }
+    if (__getOwnPropSymbols) {
+      for (var prop of __getOwnPropSymbols(b)) {
+        if (__propIsEnum.call(b, prop)) {
+          __defNormalProp(a, prop, b[prop]);
+        }
+      }
+    }
     return a;
   };
   var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
-  var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
-  var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
-  var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), member.set(obj, value), value);
+  var __publicField = (obj, key, value) =>
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  var __accessCheck = (obj, member, msg) =>
+    member.has(obj) || __typeError("Cannot " + msg);
+  var __privateGet = (
+    obj,
+    member,
+    getter,
+  ) => (__accessCheck(obj, member, "read from private field"),
+    getter ? getter.call(obj) : member.get(obj));
+  var __privateAdd = (obj, member, value) =>
+    member.has(obj)
+      ? __typeError("Cannot add the same private member more than once")
+      : member instanceof WeakSet
+      ? member.add(obj)
+      : member.set(obj, value);
+  var __privateSet = (
+    obj,
+    member,
+    value,
+    setter,
+  ) => (__accessCheck(obj, member, "write to private field"),
+    member.set(obj, value),
+    value);
   var __privateWrapper = (obj, member, setter, getter) => ({
     set _(value) {
       __privateSet(obj, member, value);
     },
     get _() {
       return __privateGet(obj, member, getter);
-    }
+    },
   });
 
   // ../../nodejs-packages/tools-platform-independent/dist/main.js
@@ -56,13 +87,17 @@ var pika_xml_formatter = (function (exports) {
       callback(i + 1);
     }
   }
-  var LambdaFunctionNameList = ["initiateGoogleLogin", "initiateLogout", "googleAuthCallback"];
+  var LambdaFunctionNameList = [
+    "initiateGoogleLogin",
+    "initiateLogout",
+    "googleAuthCallback",
+  ];
   LambdaFunctionNameList.reduce(
     (acc, curr) => {
       acc[curr] = curr;
       return acc;
     },
-    {}
+    {},
   );
 
   // ../lexer-core/dist/main.js
@@ -79,7 +114,9 @@ var pika_xml_formatter = (function (exports) {
     addError(error) {
       __privateGet(this, _errors).push(error);
     }
-  }, _errors = new WeakMap(), _a);
+  },
+    _errors = new WeakMap(),
+    _a);
   var LexerError = class _LexerError {
     constructor(props) {
       this.props = props;
@@ -94,7 +131,9 @@ var pika_xml_formatter = (function (exports) {
       return this.props.columnNumber;
     }
     copy(overrides = {}) {
-      return new _LexerError(__spreadValues(__spreadValues({}, this.props), overrides));
+      return new _LexerError(
+        __spreadValues(__spreadValues({}, this.props), overrides),
+      );
     }
   };
   var EOF_CHARACTER = null;
@@ -112,7 +151,13 @@ var pika_xml_formatter = (function (exports) {
       return this.input[position];
     }
   };
-  var _currentIndex, _peekIndex, _previousCharacter, _currentCharacter, _lineNumber, _columnNumber, _a2;
+  var _currentIndex,
+    _peekIndex,
+    _previousCharacter,
+    _currentCharacter,
+    _lineNumber,
+    _columnNumber,
+    _a2;
   var LexerInputReader = (_a2 = class {
     constructor(lexerInput) {
       __privateAdd(this, _currentIndex, -1);
@@ -128,7 +173,10 @@ var pika_xml_formatter = (function (exports) {
       return __privateGet(this, _currentCharacter);
     }
     get currentIndex() {
-      return Math.min(__privateGet(this, _currentIndex), this.lexerInput.getSize());
+      return Math.min(
+        __privateGet(this, _currentIndex),
+        this.lexerInput.getSize(),
+      );
     }
     get lineNumber() {
       return __privateGet(this, _lineNumber);
@@ -137,11 +185,19 @@ var pika_xml_formatter = (function (exports) {
       return __privateGet(this, _columnNumber);
     }
     readNextCharacter() {
-      __privateSet(this, _previousCharacter, __privateGet(this, _currentCharacter));
+      __privateSet(
+        this,
+        _previousCharacter,
+        __privateGet(this, _currentCharacter),
+      );
       if (__privateGet(this, _peekIndex) >= this.lexerInput.getSize()) {
         __privateSet(this, _currentCharacter, EOF_CHARACTER);
       } else {
-        __privateSet(this, _currentCharacter, this.lexerInput.getCharacterAt(__privateGet(this, _peekIndex)));
+        __privateSet(
+          this,
+          _currentCharacter,
+          this.lexerInput.getCharacterAt(__privateGet(this, _peekIndex)),
+        );
         __privateWrapper(this, _columnNumber)._++;
       }
       if (__privateGet(this, _previousCharacter) === "\n") {
@@ -149,11 +205,17 @@ var pika_xml_formatter = (function (exports) {
         __privateSet(this, _columnNumber, 1);
       }
       __privateSet(this, _currentIndex, __privateGet(this, _peekIndex));
-      __privateSet(this, _peekIndex, Math.min(1 + __privateGet(this, _peekIndex), this.lexerInput.getSize()));
+      __privateSet(
+        this,
+        _peekIndex,
+        Math.min(1 + __privateGet(this, _peekIndex), this.lexerInput.getSize()),
+      );
     }
     peekCharacter(futureOffset = 0) {
       if (futureOffset < 0 || not(Number.isInteger(futureOffset))) {
-        throw new Error(`Expected future offset to be a non-negative integer, found '${futureOffset}'`);
+        throw new Error(
+          `Expected future offset to be a non-negative integer, found '${futureOffset}'`,
+        );
       }
       const peekIndex = __privateGet(this, _peekIndex) + futureOffset;
       if (peekIndex >= this.lexerInput.getSize()) {
@@ -161,7 +223,14 @@ var pika_xml_formatter = (function (exports) {
       }
       return this.lexerInput.getCharacterAt(peekIndex);
     }
-  }, _currentIndex = new WeakMap(), _peekIndex = new WeakMap(), _previousCharacter = new WeakMap(), _currentCharacter = new WeakMap(), _lineNumber = new WeakMap(), _columnNumber = new WeakMap(), _a2);
+  },
+    _currentIndex = new WeakMap(),
+    _peekIndex = new WeakMap(),
+    _previousCharacter = new WeakMap(),
+    _currentCharacter = new WeakMap(),
+    _lineNumber = new WeakMap(),
+    _columnNumber = new WeakMap(),
+    _a2);
 
   // ../lexer-xml/dist/main.js
   var WHITE_SPACE_CHARACTERS = [" ", "	", "\n", "\r"];
@@ -175,7 +244,7 @@ var pika_xml_formatter = (function (exports) {
   function readEscapeSequence(lexer) {
     assert(
       lexer.inputReader.currentCharacter === "\\",
-      `You should not attempt to read an escaped sequence if it doesn't start with '\\'`
+      `You should not attempt to read an escaped sequence if it doesn't start with '\\'`,
     );
     lexer.inputReader.readNextCharacter();
     const currCh = lexer.inputReader.currentCharacter;
@@ -195,11 +264,11 @@ var pika_xml_formatter = (function (exports) {
         lexer.addError(
           new LexerError({
             errorCategory: {
-              type: "UNCLOSED_ESCAPE_SEQUENCE"
+              type: "UNCLOSED_ESCAPE_SEQUENCE",
             },
             lineNumber: lexer.inputReader.lineNumber,
-            columnNumber: lexer.inputReader.columnNumber
-          })
+            columnNumber: lexer.inputReader.columnNumber,
+          }),
         );
         return `
 `;
@@ -209,11 +278,11 @@ var pika_xml_formatter = (function (exports) {
           new LexerError({
             errorCategory: {
               type: "INVALID_ESCAPE_CHARACTER_LITERAL",
-              ch: lexer.inputReader.currentCharacter
+              ch: lexer.inputReader.currentCharacter,
             },
             lineNumber: lexer.inputReader.lineNumber,
-            columnNumber: lexer.inputReader.columnNumber
-          })
+            columnNumber: lexer.inputReader.columnNumber,
+          }),
         );
         return `
 `;
@@ -223,12 +292,14 @@ var pika_xml_formatter = (function (exports) {
   function parseUnicode(lexer) {
     assert(
       lexer.inputReader.currentCharacter === "u",
-      `You should not try to parse a unicode sequence that doesn't begin with 'u'`
+      `You should not try to parse a unicode sequence that doesn't begin with 'u'`,
     );
     const unicodeCharacters = [];
     repeat(4, () => {
       var _a8;
-      const peek = (_a8 = lexer.inputReader.peekCharacter()) == null ? void 0 : _a8.toLowerCase();
+      const peek = (_a8 = lexer.inputReader.peekCharacter()) == null
+        ? void 0
+        : _a8.toLowerCase();
       if (HEXADECIMAL_DIGITS.includes(`${peek}`.toLowerCase())) {
         lexer.inputReader.readNextCharacter();
         unicodeCharacters.push(lexer.inputReader.currentCharacter);
@@ -237,11 +308,11 @@ var pika_xml_formatter = (function (exports) {
           new LexerError({
             errorCategory: {
               type: "INVALID_UNICODE_CHARACTER_LITERAL",
-              ch: peek
+              ch: peek,
             },
             lineNumber: lexer.inputReader.lineNumber,
-            columnNumber: lexer.inputReader.columnNumber
-          })
+            columnNumber: lexer.inputReader.columnNumber,
+          }),
         );
         return " ";
       }
@@ -252,7 +323,7 @@ var pika_xml_formatter = (function (exports) {
   function readStringLiteral(lexer) {
     assert(
       lexer.inputReader.currentCharacter === DOUBLE_QUOTE,
-      `You should not attempt to read a string literal if it doesn't start with '"'`
+      `You should not attempt to read a string literal if it doesn't start with '"'`,
     );
     lexer.inputReader.readNextCharacter();
     const stringLiteralBuilder = [];
@@ -270,11 +341,11 @@ var pika_xml_formatter = (function (exports) {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: "UNCLOSED_STRING_LITERAL"
+            type: "UNCLOSED_STRING_LITERAL",
           },
           lineNumber: lexer.inputReader.lineNumber,
-          columnNumber: lexer.inputReader.columnNumber
-        })
+          columnNumber: lexer.inputReader.columnNumber,
+        }),
       );
     }
     return stringLiteralBuilder.join("");
@@ -282,7 +353,7 @@ var pika_xml_formatter = (function (exports) {
   function readIdentifier(lexer) {
     assert(
       isAcceptableIdentifierCharacter(lexer.inputReader.currentCharacter),
-      `You should not attempt to read an identifier which doesn't start with '_' or a letter`
+      `You should not attempt to read an identifier which doesn't start with '_' or a letter`,
     );
     const identifierBuilder = [];
     while (isAcceptableIdentifierCharacter(lexer.inputReader.peekCharacter())) {
@@ -301,12 +372,14 @@ var pika_xml_formatter = (function (exports) {
     if (char === null) {
       return false;
     }
-    return isAcceptableIdentifierStart(char) || DIGITS.includes(char) || char === "-";
+    return isAcceptableIdentifierStart(char) || DIGITS.includes(char) ||
+      char === "-";
   }
   function readComment(lexer) {
     assert(
-      lexer.inputReader.currentCharacter === "<" && lexer.inputReader.peekCharacter() === "!",
-      `Don't attempt to read a comment if string doesn't start with '<!'`
+      lexer.inputReader.currentCharacter === "<" &&
+        lexer.inputReader.peekCharacter() === "!",
+      `Don't attempt to read a comment if string doesn't start with '<!'`,
     );
     lexer.inputReader.readNextCharacter();
     lexer.inputReader.readNextCharacter();
@@ -318,11 +391,11 @@ var pika_xml_formatter = (function (exports) {
           new LexerError({
             errorCategory: {
               type: "UNEXPECTED_COMMENT_CHARACTER",
-              ch: lexer.inputReader.currentCharacter
+              ch: lexer.inputReader.currentCharacter,
             },
             lineNumber: lexer.inputReader.lineNumber,
-            columnNumber: lexer.inputReader.columnNumber
-          })
+            columnNumber: lexer.inputReader.columnNumber,
+          }),
         );
         isValidCommentStart = false;
         return;
@@ -339,11 +412,11 @@ var pika_xml_formatter = (function (exports) {
         lexer.addError(
           new LexerError({
             errorCategory: {
-              type: "UNCLOSED_COMMENT_LITERAL"
+              type: "UNCLOSED_COMMENT_LITERAL",
             },
             lineNumber: lexer.inputReader.lineNumber,
-            columnNumber: lexer.inputReader.columnNumber
-          })
+            columnNumber: lexer.inputReader.columnNumber,
+          }),
         );
         return null;
       }
@@ -362,7 +435,10 @@ var pika_xml_formatter = (function (exports) {
   function readTextNode(lexer) {
     const textNodeBuilder = [];
     let currCh = lexer.inputReader.currentCharacter;
-    while (lexer.inputReader.peekCharacter() !== LEFT_ANGLE_BRACKET && currCh !== EOF_CHARACTER) {
+    while (
+      lexer.inputReader.peekCharacter() !== LEFT_ANGLE_BRACKET &&
+      currCh !== EOF_CHARACTER
+    ) {
       textNodeBuilder.push(currCh);
       lexer.inputReader.readNextCharacter();
       currCh = lexer.inputReader.currentCharacter;
@@ -377,7 +453,20 @@ var pika_xml_formatter = (function (exports) {
     constructor(value) {
       this.value = value;
     }
-  }, __publicField(_a3, "Illegal", new _a3("Illegal")), __publicField(_a3, "Eof", new _a3("Eof")), __publicField(_a3, "Identifier", new _a3("Identifier")), __publicField(_a3, "StringLiteral", new _a3("StringLiteral")), __publicField(_a3, "CommentLiteral", new _a3("CommentLiteral")), __publicField(_a3, "TextNode", new _a3("TextNode")), __publicField(_a3, "Colon", new _a3(":")), __publicField(_a3, "Equals", new _a3("=")), __publicField(_a3, "LeftAngleBracket", new _a3("<")), __publicField(_a3, "RightAngleBracket", new _a3(">")), __publicField(_a3, "ForwardSlash", new _a3("/")), __publicField(_a3, "QuestionMark", new _a3("?")), _a3);
+  },
+    __publicField(_a3, "Illegal", new _a3("Illegal")),
+    __publicField(_a3, "Eof", new _a3("Eof")),
+    __publicField(_a3, "Identifier", new _a3("Identifier")),
+    __publicField(_a3, "StringLiteral", new _a3("StringLiteral")),
+    __publicField(_a3, "CommentLiteral", new _a3("CommentLiteral")),
+    __publicField(_a3, "TextNode", new _a3("TextNode")),
+    __publicField(_a3, "Colon", new _a3(":")),
+    __publicField(_a3, "Equals", new _a3("=")),
+    __publicField(_a3, "LeftAngleBracket", new _a3("<")),
+    __publicField(_a3, "RightAngleBracket", new _a3(">")),
+    __publicField(_a3, "ForwardSlash", new _a3("/")),
+    __publicField(_a3, "QuestionMark", new _a3("?")),
+    _a3);
   function nextToken(lexer) {
     let t;
     skipWhitespace(lexer);
@@ -396,9 +485,19 @@ var pika_xml_formatter = (function (exports) {
           const { lineNumber, columnNumber } = lexer.inputReader;
           const commentLiteral = readComment(lexer);
           if (commentLiteral !== null) {
-            t = createToken(lexer, XmlTokenType.CommentLiteral, commentLiteral, lineNumber, columnNumber);
+            t = createToken(
+              lexer,
+              XmlTokenType.CommentLiteral,
+              commentLiteral,
+              lineNumber,
+              columnNumber,
+            );
           } else {
-            t = createToken(lexer, XmlTokenType.Illegal, `${lexer.inputReader.currentCharacter}`);
+            t = createToken(
+              lexer,
+              XmlTokenType.Illegal,
+              `${lexer.inputReader.currentCharacter}`,
+            );
           }
         } else {
           t = createToken(lexer, XmlTokenType.LeftAngleBracket);
@@ -420,7 +519,13 @@ var pika_xml_formatter = (function (exports) {
       case '"': {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const s = readStringLiteral(lexer);
-        t = createToken(lexer, XmlTokenType.StringLiteral, s, lineNumber, columnNumber);
+        t = createToken(
+          lexer,
+          XmlTokenType.StringLiteral,
+          s,
+          lineNumber,
+          columnNumber,
+        );
         break;
       }
       case EOF_CHARACTER: {
@@ -428,24 +533,39 @@ var pika_xml_formatter = (function (exports) {
         break;
       }
       default: {
-        if (lexer.currentToken == null || lexer.currentToken.tokenType === XmlTokenType.RightAngleBracket) {
+        if (
+          lexer.currentToken == null ||
+          lexer.currentToken.tokenType === XmlTokenType.RightAngleBracket
+        ) {
           const { lineNumber, columnNumber } = lexer.inputReader;
           const textNode = readTextNode(lexer);
-          t = createToken(lexer, XmlTokenType.TextNode, textNode, lineNumber, columnNumber);
+          t = createToken(
+            lexer,
+            XmlTokenType.TextNode,
+            textNode,
+            lineNumber,
+            columnNumber,
+          );
         } else if (isAcceptableIdentifierStart(currCh)) {
           const { lineNumber, columnNumber } = lexer.inputReader;
           const identifier = readIdentifier(lexer);
-          t = createToken(lexer, XmlTokenType.Identifier, identifier, lineNumber, columnNumber);
+          t = createToken(
+            lexer,
+            XmlTokenType.Identifier,
+            identifier,
+            lineNumber,
+            columnNumber,
+          );
         } else {
           lexer.addError(
             new LexerError({
               errorCategory: {
                 type: "ILLEGAL_CHARACTER",
-                ch: currCh
+                ch: currCh,
               },
               lineNumber: lexer.inputReader.lineNumber,
-              columnNumber: lexer.inputReader.columnNumber
-            })
+              columnNumber: lexer.inputReader.columnNumber,
+            }),
           );
           t = createToken(lexer, XmlTokenType.Illegal, currCh);
         }
@@ -456,12 +576,18 @@ var pika_xml_formatter = (function (exports) {
     lexer.currentToken = t;
     return t;
   }
-  function createToken(lexer, tokenType, tokenLiteral = tokenType.value, lineNumber = lexer.inputReader.lineNumber, columnNumber = lexer.inputReader.columnNumber) {
+  function createToken(
+    lexer,
+    tokenType,
+    tokenLiteral = tokenType.value,
+    lineNumber = lexer.inputReader.lineNumber,
+    columnNumber = lexer.inputReader.columnNumber,
+  ) {
     return {
       tokenType,
       tokenLiteral,
       lineNumber,
-      columnNumber
+      columnNumber,
     };
   }
 
@@ -480,12 +606,14 @@ var pika_xml_formatter = (function (exports) {
       return cloneToken(this.props.culpritToken);
     }
     copy(overrides = {}) {
-      return new _ParserError(__spreadValues(__spreadValues({}, this.props), overrides));
+      return new _ParserError(
+        __spreadValues(__spreadValues({}, this.props), overrides),
+      );
     }
     serialized() {
       return {
         errorType: this.errorType,
-        culpritToken: this.culpritToken
+        culpritToken: this.culpritToken,
       };
     }
   };
@@ -495,7 +623,9 @@ var pika_xml_formatter = (function (exports) {
       this.value = value;
     }
     toString() {
-      return `${this.namespaces.map((namespace) => namespace.tokenLiteral).join(":")}="${this.value.tokenLiteral}"`;
+      return `${
+        this.namespaces.map((namespace) => namespace.tokenLiteral).join(":")
+      }="${this.value.tokenLiteral}"`;
     }
   };
   var _statements, _a4;
@@ -511,9 +641,13 @@ var pika_xml_formatter = (function (exports) {
       __privateGet(this, _statements).push(statement);
     }
     toString(indentation) {
-      return __privateGet(this, _statements).map((statement) => statement.toString(indentation)).join("\n");
+      return __privateGet(this, _statements).map((statement) =>
+        statement.toString(indentation)
+      ).join("\n");
     }
-  }, _statements = new WeakMap(), _a4);
+  },
+    _statements = new WeakMap(),
+    _a4);
   var _attributes, _a5;
   var XmlPrologNode = (_a5 = class {
     constructor() {
@@ -534,7 +668,9 @@ var pika_xml_formatter = (function (exports) {
       }
       return stringBuilder.join(" ") + `?>`;
     }
-  }, _attributes = new WeakMap(), _a5);
+  },
+    _attributes = new WeakMap(),
+    _a5);
   var _namespaces, _attributes2, _children, _a6;
   var XmlTagNode = (_a6 = class {
     constructor() {
@@ -567,11 +703,15 @@ var pika_xml_formatter = (function (exports) {
       const stringBuilder = [];
       stringBuilder.push(`${buildIndentationSpace(indentation)}<${tag}`);
       if (attributes.length === 1) {
-        const serializedAttrs = attributes.map((attribute) => attribute.toString()).join(" ");
+        const serializedAttrs = attributes.map((attribute) =>
+          attribute.toString()
+        ).join(" ");
         stringBuilder[stringBuilder.length - 1] += " " + serializedAttrs;
       } else if (attributes.length > 1) {
         attributes.forEach((attribute) => {
-          stringBuilder.push(`${buildIndentationSpace(indentation + 1)}${attribute.toString()}`);
+          stringBuilder.push(
+            `${buildIndentationSpace(indentation + 1)}${attribute.toString()}`,
+          );
         });
       }
       if (children.length === 0) {
@@ -579,7 +719,9 @@ var pika_xml_formatter = (function (exports) {
       } else {
         stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + ">";
       }
-      if (children.length === 1 && children[0].astNodeType === "XML_TEXT_NODE") {
+      if (
+        children.length === 1 && children[0].astNodeType === "XML_TEXT_NODE"
+      ) {
         return stringBuilder.join("\n") + children[0].toString(0) + `</${tag}>`;
       }
       for (const child of children) {
@@ -590,14 +732,20 @@ var pika_xml_formatter = (function (exports) {
       }
       return stringBuilder.join("\n");
     }
-  }, _namespaces = new WeakMap(), _attributes2 = new WeakMap(), _children = new WeakMap(), _a6);
+  },
+    _namespaces = new WeakMap(),
+    _attributes2 = new WeakMap(),
+    _children = new WeakMap(),
+    _a6);
   var XmlCommentNode = class {
     constructor(comment) {
       __publicField(this, "astNodeType", "XML_COMMENT_NODE");
       this.comment = comment;
     }
     toString(indentation) {
-      return `${buildIndentationSpace(indentation)}<!-- ${this.comment.tokenLiteral.trim()} -->`;
+      return `${
+        buildIndentationSpace(indentation)
+      }<!-- ${this.comment.tokenLiteral.trim()} -->`;
     }
   };
   function buildIndentationSpace(indentation) {
@@ -609,7 +757,9 @@ var pika_xml_formatter = (function (exports) {
       this.text = text;
     }
     toString(indentation) {
-      return `${buildIndentationSpace(indentation)}${this.text.tokenLiteral.trim()}`;
+      return `${
+        buildIndentationSpace(indentation)
+      }${this.text.tokenLiteral.trim()}`;
     }
   };
   var _errors2, _currentToken, _peekToken, _a7;
@@ -654,8 +804,8 @@ var pika_xml_formatter = (function (exports) {
       this.addError(
         new ParserError({
           errorType: "UNEXPECTED_TOKEN",
-          culpritToken: __privateGet(this, _peekToken)
-        })
+          culpritToken: __privateGet(this, _peekToken),
+        }),
       );
       return false;
     }
@@ -676,8 +826,8 @@ var pika_xml_formatter = (function (exports) {
         this.addError(
           new ParserError({
             errorType: "UNEXPECTED_TOKEN",
-            culpritToken: __privateGet(this, _peekToken)
-          })
+            culpritToken: __privateGet(this, _peekToken),
+          }),
         );
         return null;
       }
@@ -690,20 +840,20 @@ var pika_xml_formatter = (function (exports) {
       this.addError(
         new ParserError({
           errorType: "UNEXPECTED_TOKEN",
-          culpritToken: __privateGet(this, _currentToken)
-        })
+          culpritToken: __privateGet(this, _currentToken),
+        }),
       );
       return null;
     }
     parseXmlPrologNode() {
       assert(
         this.isCurrentToken(XmlTokenType.LeftAngleBracket),
-        `Shouldn't call parseXmlPrologNode when current token is not '<'`
+        `Shouldn't call parseXmlPrologNode when current token is not '<'`,
       );
       this.nextToken();
       assert(
         this.isCurrentToken(XmlTokenType.QuestionMark),
-        `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
+        `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`,
       );
       if (not(this.expectPeek(XmlTokenType.Identifier))) {
         return null;
@@ -712,8 +862,8 @@ var pika_xml_formatter = (function (exports) {
         this.addError(
           new ParserError({
             errorType: "UNEXPECTED_PROLOG_TAG",
-            culpritToken: __privateGet(this, _currentToken)
-          })
+            culpritToken: __privateGet(this, _currentToken),
+          }),
         );
         return null;
       }
@@ -724,8 +874,8 @@ var pika_xml_formatter = (function (exports) {
           this.addError(
             new ParserError({
               culpritToken: __privateGet(this, _currentToken),
-              errorType: "UNEXPECTED_EOF"
-            })
+              errorType: "UNEXPECTED_EOF",
+            }),
           );
           return null;
         }
@@ -746,12 +896,12 @@ var pika_xml_formatter = (function (exports) {
     parseXmlTagNode() {
       assert(
         this.isCurrentToken(XmlTokenType.LeftAngleBracket),
-        `Shouldn't call parseXmlTagNode when current token is not '<'`
+        `Shouldn't call parseXmlTagNode when current token is not '<'`,
       );
       this.nextToken();
       assert(
         this.isCurrentToken(XmlTokenType.Identifier),
-        `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
+        `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`,
       );
       const xmlTagNode = new XmlTagNode();
       xmlTagNode.addNamespace(__privateGet(this, _currentToken));
@@ -768,8 +918,8 @@ var pika_xml_formatter = (function (exports) {
           this.addError(
             new ParserError({
               culpritToken: __privateGet(this, _currentToken),
-              errorType: "UNEXPECTED_EOF"
-            })
+              errorType: "UNEXPECTED_EOF",
+            }),
           );
           return null;
         }
@@ -794,7 +944,7 @@ var pika_xml_formatter = (function (exports) {
       }
       assert(
         this.isCurrentToken(XmlTokenType.RightAngleBracket),
-        `Expected ">" found ${__privateGet(this, _currentToken).tokenLiteral}`
+        `Expected ">" found ${__privateGet(this, _currentToken).tokenLiteral}`,
       );
       this.nextToken();
       while (true) {
@@ -802,12 +952,15 @@ var pika_xml_formatter = (function (exports) {
           this.addError(
             new ParserError({
               culpritToken: __privateGet(this, _peekToken),
-              errorType: "UNEXPECTED_EOF"
-            })
+              errorType: "UNEXPECTED_EOF",
+            }),
           );
           return null;
         }
-        if (this.isCurrentToken(XmlTokenType.LeftAngleBracket) && this.isPeekToken(XmlTokenType.ForwardSlash)) {
+        if (
+          this.isCurrentToken(XmlTokenType.LeftAngleBracket) &&
+          this.isPeekToken(XmlTokenType.ForwardSlash)
+        ) {
           break;
         }
         const statement = this.parseStatement();
@@ -817,7 +970,10 @@ var pika_xml_formatter = (function (exports) {
         xmlTagNode.addChild(statement);
         this.nextToken();
       }
-      assert(this.isCurrentToken(XmlTokenType.LeftAngleBracket), `Expected "<" found ${__privateGet(this, _currentToken).tokenLiteral}`);
+      assert(
+        this.isCurrentToken(XmlTokenType.LeftAngleBracket),
+        `Expected "<" found ${__privateGet(this, _currentToken).tokenLiteral}`,
+      );
       this.nextToken();
       if (not(this.expectPeek(XmlTokenType.Identifier))) {
         return null;
@@ -831,16 +987,22 @@ var pika_xml_formatter = (function (exports) {
         closingTagNamespaces.push(__privateGet(this, _currentToken));
         this.nextToken();
       }
-      const openingTagName = xmlTagNode.namespaces.map((part) => part.tokenLiteral).join(":");
-      const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral).join(":");
+      const openingTagName = xmlTagNode.namespaces.map((part) =>
+        part.tokenLiteral
+      ).join(":");
+      const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral)
+        .join(":");
       if (openingTagName !== closingTagName) {
         this.addError(
           new ParserError({
-            culpritToken: __spreadProps(__spreadValues({}, closingTagNamespaces[0]), {
-              tokenLiteral: closingTagName
-            }),
-            errorType: "UNEXPECTED_CLOSING_TAG_LITERAL"
-          })
+            culpritToken: __spreadProps(
+              __spreadValues({}, closingTagNamespaces[0]),
+              {
+                tokenLiteral: closingTagName,
+              },
+            ),
+            errorType: "UNEXPECTED_CLOSING_TAG_LITERAL",
+          }),
         );
         return null;
       }
@@ -848,8 +1010,8 @@ var pika_xml_formatter = (function (exports) {
         this.addError(
           new ParserError({
             culpritToken: __privateGet(this, _currentToken),
-            errorType: "UNEXPECTED_TOKEN"
-          })
+            errorType: "UNEXPECTED_TOKEN",
+          }),
         );
         return null;
       }
@@ -860,8 +1022,8 @@ var pika_xml_formatter = (function (exports) {
         this.addError(
           new ParserError({
             culpritToken: __privateGet(this, _currentToken),
-            errorType: "UNEXPECTED_TOKEN"
-          })
+            errorType: "UNEXPECTED_TOKEN",
+          }),
         );
         return null;
       }
@@ -871,8 +1033,8 @@ var pika_xml_formatter = (function (exports) {
           this.addError(
             new ParserError({
               culpritToken: __privateGet(this, _peekToken),
-              errorType: "UNEXPECTED_EOF"
-            })
+              errorType: "UNEXPECTED_EOF",
+            }),
           );
           return null;
         }
@@ -887,37 +1049,50 @@ var pika_xml_formatter = (function (exports) {
         }
         namespaces.push(__privateGet(this, _currentToken));
       }
-      assert(this.isPeekToken(XmlTokenType.Equals), `Expected "=" found ${__privateGet(this, _peekToken).tokenLiteral}`);
+      assert(
+        this.isPeekToken(XmlTokenType.Equals),
+        `Expected "=" found ${__privateGet(this, _peekToken).tokenLiteral}`,
+      );
       this.nextToken();
       if (not(this.expectPeek(XmlTokenType.StringLiteral))) {
         return null;
       }
-      return new XmlElementAttribute(namespaces, __privateGet(this, _currentToken));
+      return new XmlElementAttribute(
+        namespaces,
+        __privateGet(this, _currentToken),
+      );
     }
     parseXmlCommentNode() {
       assert(
         this.isCurrentToken(XmlTokenType.CommentLiteral),
-        `Shouldn't call parseXmlCommentNode when current token is not a comment token`
+        `Shouldn't call parseXmlCommentNode when current token is not a comment token`,
       );
       return new XmlCommentNode(__privateGet(this, _currentToken));
     }
     parseXmlTextNode() {
       assert(
         this.isCurrentToken(XmlTokenType.TextNode),
-        `Shouldn't call parseXmlTextNode when current token is not a text token`
+        `Shouldn't call parseXmlTextNode when current token is not a text token`,
       );
       return new XmlTextNode(__privateGet(this, _currentToken));
     }
-  }, _errors2 = new WeakMap(), _currentToken = new WeakMap(), _peekToken = new WeakMap(), _a7);
+  },
+    _errors2 = new WeakMap(),
+    _currentToken = new WeakMap(),
+    _peekToken = new WeakMap(),
+    _a7);
 
   // src/build_indentation_space.ts
   function buildIndentationSpace2({ indentationLevel, indentation }) {
-    return Array.from({ length: indentationLevel * indentation }).map(() => " ").join("");
+    return Array.from({ length: indentationLevel * indentation }).map(() => " ")
+      .join("");
   }
 
   // src/format_xml_element_attribute.ts
   function formatXmlElementAttribute({ namespaces, value }) {
-    const combinedNamespace = namespaces.map((namespace) => namespace.tokenLiteral).join(":");
+    const combinedNamespace = namespaces.map((namespace) =>
+      namespace.tokenLiteral
+    ).join(":");
     return `${combinedNamespace}="${value.tokenLiteral}"`;
   }
 
@@ -925,10 +1100,12 @@ var pika_xml_formatter = (function (exports) {
   function formatXmlPrologNode({
     xmlPrologNode,
     indentationLevel,
-    indentation
+    indentation,
   }) {
     const localStringBuilder = [];
-    localStringBuilder.push(buildIndentationSpace2({ indentationLevel, indentation }) + `<?xml`);
+    localStringBuilder.push(
+      buildIndentationSpace2({ indentationLevel, indentation }) + `<?xml`,
+    );
     for (const attribute of xmlPrologNode.attributes) {
       localStringBuilder.push(formatXmlElementAttribute(attribute));
     }
@@ -944,67 +1121,105 @@ var pika_xml_formatter = (function (exports) {
         return;
       }
       sortedAttributes.push(...naiveSort(intermediateAttrs));
-      clonedAttributes = clonedAttributes.filter((attr) => not(intermediateAttrs.includes(attr)));
+      clonedAttributes = clonedAttributes.filter((attr) =>
+        not(intermediateAttrs.includes(attr))
+      );
     };
     const xmlnsAndroidAttr = clonedAttributes.find(
-      (attr) => attr.namespaces.length === 2 && attr.namespaces[0].tokenLiteral === "xmlns" && attr.namespaces[1].tokenLiteral === "android"
+      (attr) =>
+        attr.namespaces.length === 2 &&
+        attr.namespaces[0].tokenLiteral === "xmlns" &&
+        attr.namespaces[1].tokenLiteral === "android",
     );
     if (xmlnsAndroidAttr) {
       moveAttributesToResult([xmlnsAndroidAttr]);
     }
     moveAttributesToResult(
-      clonedAttributes.filter((attr) => attr.namespaces.length > 0 && attr.namespaces[0].tokenLiteral === "xmlns")
+      clonedAttributes.filter((attr) =>
+        attr.namespaces.length > 0 &&
+        attr.namespaces[0].tokenLiteral === "xmlns"
+      ),
     );
     moveAttributesToResult(
       clonedAttributes.filter(
-        (attr) => attr.namespaces.length === 2 && attr.namespaces[0].tokenLiteral === "android" && attr.namespaces[1].tokenLiteral === "id"
-      )
-    );
-    moveAttributesToResult(
-      clonedAttributes.filter(
-        (attr) => {
-          var _a8;
-          return attr.namespaces.length > 0 && attr.namespaces[0].tokenLiteral === "android" && ((_a8 = attr.namespaces.at(-1)) == null ? void 0 : _a8.tokenLiteral) === "id";
-        }
-      )
-    );
-    moveAttributesToResult(
-      clonedAttributes.filter(
-        (attr) => attr.namespaces.length === 2 && attr.namespaces[0].tokenLiteral === "android" && attr.namespaces[1].tokenLiteral === "name"
-      )
+        (attr) =>
+          attr.namespaces.length === 2 &&
+          attr.namespaces[0].tokenLiteral === "android" &&
+          attr.namespaces[1].tokenLiteral === "id",
+      ),
     );
     moveAttributesToResult(
       clonedAttributes.filter(
         (attr) => {
           var _a8;
-          return attr.namespaces.length > 0 && attr.namespaces[0].tokenLiteral === "android" && ((_a8 = attr.namespaces.at(-1)) == null ? void 0 : _a8.tokenLiteral) === "name";
-        }
-      )
+          return attr.namespaces.length > 0 &&
+            attr.namespaces[0].tokenLiteral === "android" &&
+            ((_a8 = attr.namespaces.at(-1)) == null
+                ? void 0
+                : _a8.tokenLiteral) === "id";
+        },
+      ),
     );
     moveAttributesToResult(
-      clonedAttributes.filter((attr) => attr.namespaces.length === 1 && attr.namespaces[0].tokenLiteral === "name")
+      clonedAttributes.filter(
+        (attr) =>
+          attr.namespaces.length === 2 &&
+          attr.namespaces[0].tokenLiteral === "android" &&
+          attr.namespaces[1].tokenLiteral === "name",
+      ),
     );
     moveAttributesToResult(
-      clonedAttributes.filter((attr) => attr.namespaces.length === 1 && attr.namespaces[0].tokenLiteral === "style")
+      clonedAttributes.filter(
+        (attr) => {
+          var _a8;
+          return attr.namespaces.length > 0 &&
+            attr.namespaces[0].tokenLiteral === "android" &&
+            ((_a8 = attr.namespaces.at(-1)) == null
+                ? void 0
+                : _a8.tokenLiteral) === "name";
+        },
+      ),
     );
-    moveAttributesToResult(clonedAttributes.filter((attr) => attr.namespaces.length === 1));
     moveAttributesToResult(
-      clonedAttributes.filter((attr) => attr.namespaces.length > 1 && attr.namespaces[0].tokenLiteral === "android")
+      clonedAttributes.filter((attr) =>
+        attr.namespaces.length === 1 &&
+        attr.namespaces[0].tokenLiteral === "name"
+      ),
+    );
+    moveAttributesToResult(
+      clonedAttributes.filter((attr) =>
+        attr.namespaces.length === 1 &&
+        attr.namespaces[0].tokenLiteral === "style"
+      ),
+    );
+    moveAttributesToResult(
+      clonedAttributes.filter((attr) => attr.namespaces.length === 1),
+    );
+    moveAttributesToResult(
+      clonedAttributes.filter((attr) =>
+        attr.namespaces.length > 1 &&
+        attr.namespaces[0].tokenLiteral === "android"
+      ),
     );
     moveAttributesToResult(clonedAttributes);
     return sortedAttributes;
   }
   function naiveSort(attributes) {
     return attributes.toSorted((attr1, attr2) => {
-      const combinedKey1 = attr1.namespaces.map((ns) => ns.tokenLiteral).join(":");
-      const combinedKey2 = attr2.namespaces.map((ns) => ns.tokenLiteral).join(":");
+      const combinedKey1 = attr1.namespaces.map((ns) => ns.tokenLiteral).join(
+        ":",
+      );
+      const combinedKey2 = attr2.namespaces.map((ns) => ns.tokenLiteral).join(
+        ":",
+      );
       return combinedKey1.localeCompare(combinedKey2);
     });
   }
 
   // src/format_text_node.ts
   function formatTextNode({ textNode, indentationLevel, indentation }) {
-    return buildIndentationSpace2({ indentationLevel, indentation }) + textNode.text.tokenLiteral.trim();
+    return buildIndentationSpace2({ indentationLevel, indentation }) +
+      textNode.text.tokenLiteral.trim();
   }
 
   // src/format_xml_tag_node.ts
@@ -1012,27 +1227,46 @@ var pika_xml_formatter = (function (exports) {
     xmlTagNode,
     indentationLevel,
     indentation,
-    sortAttributes: shouldSortAttributes
+    sortAttributes: shouldSortAttributes,
   }) {
     const { namespaces, attributes, children } = xmlTagNode;
     const tagName = namespaces.map((ns) => ns.tokenLiteral).join(":");
     const stringBuilder = [];
-    stringBuilder.push(`${buildIndentationSpace2({ indentationLevel, indentation })}<${tagName}`);
+    stringBuilder.push(
+      `${buildIndentationSpace2({ indentationLevel, indentation })}<${tagName}`,
+    );
     if (attributes.length === 1) {
-      stringBuilder[stringBuilder.length - 1] += " " + formatXmlElementAttribute(attributes[0]);
+      stringBuilder[stringBuilder.length - 1] += " " +
+        formatXmlElementAttribute(attributes[0]);
     } else if (attributes.length > 1) {
-      (shouldSortAttributes ? sortAttributes(attributes) : attributes).map((attribute) => formatXmlElementAttribute(attribute)).forEach((formattedAttribute) => {
-        stringBuilder.push(
-          `${buildIndentationSpace2({ indentation, indentationLevel: indentationLevel + 1 })}${formattedAttribute}`
-        );
-      });
+      (shouldSortAttributes ? sortAttributes(attributes) : attributes).map((
+        attribute,
+      ) => formatXmlElementAttribute(attribute)).forEach(
+        (formattedAttribute) => {
+          stringBuilder.push(
+            `${
+              buildIndentationSpace2({
+                indentation,
+                indentationLevel: indentationLevel + 1,
+              })
+            }${formattedAttribute}`,
+          );
+        },
+      );
     }
     if (children.length === 0) {
       stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + " />";
     } else {
       stringBuilder[stringBuilder.length - 1] = stringBuilder.at(-1) + ">";
-      if (children.length === 1 && children[0].astNodeType === "XML_TEXT_NODE") {
-        return stringBuilder.join("\n") + formatTextNode({ textNode: children[0], indentation, indentationLevel: 0 }) + `</${tagName}>`;
+      if (
+        children.length === 1 && children[0].astNodeType === "XML_TEXT_NODE"
+      ) {
+        return stringBuilder.join("\n") +
+          formatTextNode({
+            textNode: children[0],
+            indentation,
+            indentationLevel: 0,
+          }) + `</${tagName}>`;
       }
       for (const child of children) {
         stringBuilder.push(
@@ -1040,18 +1274,23 @@ var pika_xml_formatter = (function (exports) {
             expression: child,
             indentation,
             indentationLevel: indentationLevel + 1,
-            sortAttributes: shouldSortAttributes
-          })
+            sortAttributes: shouldSortAttributes,
+          }),
         );
       }
-      stringBuilder.push(`${buildIndentationSpace2({ indentationLevel, indentation })}</${tagName}>`);
+      stringBuilder.push(
+        `${
+          buildIndentationSpace2({ indentationLevel, indentation })
+        }</${tagName}>`,
+      );
     }
     return stringBuilder.join("\n");
   }
 
   // src/format_comment_node.ts
   function formatCommentNode({ commentNode, indentationLevel, indentation }) {
-    return buildIndentationSpace2({ indentationLevel, indentation }) + `<!-- ${commentNode.comment.tokenLiteral.trim()} -->`;
+    return buildIndentationSpace2({ indentationLevel, indentation }) +
+      `<!-- ${commentNode.comment.tokenLiteral.trim()} -->`;
   }
 
   // src/format_xml_expression.ts
@@ -1059,13 +1298,13 @@ var pika_xml_formatter = (function (exports) {
     expression,
     indentation,
     indentationLevel,
-    sortAttributes: sortAttributes2
+    sortAttributes: sortAttributes2,
   }) {
     if (expression instanceof XmlPrologNode) {
       return formatXmlPrologNode({
         xmlPrologNode: expression,
         indentationLevel,
-        indentation
+        indentation,
       });
     }
     if (expression instanceof XmlTagNode) {
@@ -1073,42 +1312,52 @@ var pika_xml_formatter = (function (exports) {
         xmlTagNode: expression,
         indentationLevel,
         indentation,
-        sortAttributes: sortAttributes2
+        sortAttributes: sortAttributes2,
       });
     }
     if (expression instanceof XmlCommentNode) {
       return formatCommentNode({
         commentNode: expression,
         indentationLevel,
-        indentation
+        indentation,
       });
     }
     if (expression instanceof XmlTextNode) {
       return formatTextNode({
         textNode: expression,
         indentationLevel,
-        indentation
+        indentation,
       });
     }
     throw new Error(`Unexpected xml expression: ${expression.toString(0)}`, {
-      cause: expression
+      cause: expression,
     });
   }
 
   // src/format_xml_program.ts
-  function formatXmlProgram({ program, indentation, sortAttributes: sortAttributes2 }) {
+  function formatXmlProgram(
+    { program, indentation, sortAttributes: sortAttributes2 },
+  ) {
     const stringBuilder = [];
     for (const statement of program.statements) {
       stringBuilder.push(
-        formatXmlExpression({ expression: statement, indentation, indentationLevel: 0, sortAttributes: sortAttributes2 })
+        formatXmlExpression({
+          expression: statement,
+          indentation,
+          indentationLevel: 0,
+          sortAttributes: sortAttributes2,
+        }),
       );
     }
     return stringBuilder.join("\n") + // empty line at the end
-    "\n";
+      "\n";
   }
 
   // src/index.ts
-  function format(rawXml, { indentation = 4, sortAttributes: sortAttributes2 = true }) {
+  function format(
+    rawXml,
+    { indentation = 4, sortAttributes: sortAttributes2 = true },
+  ) {
     try {
       const input = new StringLexerInput(rawXml);
       const inputReader = new LexerInputReader(input);
@@ -1118,23 +1367,27 @@ var pika_xml_formatter = (function (exports) {
       if (lexer.errors.length > 0) {
         return {
           type: "lexer-error",
-          lexerErrors: lexer.errors
+          lexerErrors: lexer.errors,
         };
       }
       if (parser.errors.length > 0) {
         return {
           type: "parser-error",
-          parserErrors: parser.errors
+          parserErrors: parser.errors,
         };
       }
       return {
         type: "success",
-        formattedXml: formatXmlProgram({ program, indentation, sortAttributes: sortAttributes2 })
+        formattedXml: formatXmlProgram({
+          program,
+          indentation,
+          sortAttributes: sortAttributes2,
+        }),
       };
     } catch (err) {
       return {
         type: "unknown-error",
-        err
+        err,
       };
     }
   }
@@ -1142,5 +1395,4 @@ var pika_xml_formatter = (function (exports) {
   exports.format = format;
 
   return exports;
-
 })({});

@@ -1,7 +1,7 @@
-import { preProcess } from '@/pre-processing/pre-processor';
-import { LineOfCode } from '@/models/LineOfCode';
+import { preProcess } from "@/pre-processing/pre-processor";
+import { LineOfCode } from "@/models/LineOfCode";
 
-describe('integration tests for pre-processor.', () => {
+describe("integration tests for pre-processor.", () => {
   let code: string;
   let linesOfCode: LineOfCode[];
 
@@ -15,17 +15,17 @@ describe('integration tests for pre-processor.', () => {
     linesOfCode = preProcess(code);
   });
 
-  test('should have only source lines of code', () => {
+  test("should have only source lines of code", () => {
     expect(linesOfCode.length).toStrictEqual(2);
   });
 
-  test('should preserve line numbers of source code', () => {
+  test("should preserve line numbers of source code", () => {
     expect(linesOfCode[0].number).toStrictEqual(3);
     expect(linesOfCode[1].number).toStrictEqual(5);
   });
 
-  test('should pre-process source lines of code', () => {
-    expect(linesOfCode[0].value).toStrictEqual('            code line 1');
-    expect(linesOfCode[1].value).toStrictEqual('                 code line 2');
+  test("should pre-process source lines of code", () => {
+    expect(linesOfCode[0].value).toStrictEqual("            code line 1");
+    expect(linesOfCode[1].value).toStrictEqual("                 code line 2");
   });
 });

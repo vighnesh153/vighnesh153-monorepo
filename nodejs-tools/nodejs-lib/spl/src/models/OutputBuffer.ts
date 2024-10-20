@@ -15,7 +15,7 @@ export class OutputBuffer {
   }
 
   getAndFlush(): string {
-    const content = this.buffer.join('');
+    const content = this.buffer.join("");
     this.flush();
     return content;
   }

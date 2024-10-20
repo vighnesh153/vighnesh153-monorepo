@@ -6,8 +6,8 @@ interface SPLExample {
 
 export const examples: SPLExample[] = [
   {
-    id: 'is-prime',
-    name: 'Is Prime?',
+    id: "is-prime",
+    name: "Is Prime?",
     code: `
 define function isPrime with arguments [ number n ] which returns boolean:
     if n <= 3, then do:
@@ -35,8 +35,8 @@ loop while num <= 50:
 `,
   },
   {
-    id: 'factorial',
-    name: 'Factorial',
+    id: "factorial",
+    name: "Factorial",
     code: `
 define function factorial with arguments [ number n ] which returns number:
     if n == 0 or n == 1, then do:
@@ -54,8 +54,8 @@ loop while num <=10:
 `,
   },
   {
-    id: 'fibonacci-number',
-    name: 'Fibonacci number',
+    id: "fibonacci-number",
+    name: "Fibonacci number",
     code: `
 define function fibonacci with arguments [number n] which returns number:
     if n == 0, then do:
@@ -85,8 +85,8 @@ for every fibNum in fibNums:
 `,
   },
   {
-    id: 'sort',
-    name: 'Sort',
+    id: "sort",
+    name: "Sort",
     code: `
 define function bubbleSort with arguments [ array of number arr ] which returns array of number:
     let number i be 0
@@ -108,8 +108,8 @@ display sortedArray
   `,
   },
   {
-    id: 'nested-loops',
-    name: 'Nested Loops',
+    id: "nested-loops",
+    name: "Nested Loops",
     code: `
 loop for 5 times with i as counter:
     loop for 6 times with j as counter:
@@ -118,8 +118,8 @@ loop for 5 times with i as counter:
   `,
   },
   {
-    id: 'fizzbuzz',
-    name: 'FizzBuzz',
+    id: "fizzbuzz",
+    name: "FizzBuzz",
     code: `
 define function fizzBuzz with arguments [ number n ] which returns nothing:
     loop for n times with i as counter:

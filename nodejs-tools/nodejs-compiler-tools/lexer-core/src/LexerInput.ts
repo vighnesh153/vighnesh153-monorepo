@@ -1,4 +1,4 @@
-import { EOF_CHARACTER } from './utils.ts';
+import { EOF_CHARACTER } from "./utils.ts";
 
 export interface LexerInput {
   getSize(): number;

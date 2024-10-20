@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-import { splitProps, type JSX } from 'solid-js';
+import { type JSX, splitProps } from "solid-js";
 
 export type GoogleIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
 
 export function GoogleIcon(incomingProps: GoogleIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ['viewBox', 'xmlns']);
+  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" {...props}>

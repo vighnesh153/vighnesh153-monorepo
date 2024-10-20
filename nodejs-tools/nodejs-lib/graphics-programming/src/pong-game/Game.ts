@@ -1,7 +1,7 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { ScoreTracker } from './score-tracker.ts';
-import { Arena } from './Arena.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { ScoreTracker } from "./score-tracker.ts";
+import { Arena } from "./Arena.ts";
 
 interface GameOptions {
   bgColor?: string;
@@ -22,9 +22,12 @@ export class PongGame {
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.#canvasWrapper = canvasWrapper;
     this.#bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
-    this.#contentColor = options.contentColor ?? 'black';
+    this.#contentColor = options.contentColor ?? "black";
 
-    this.#arena = new Arena(canvasWrapper, { scoreTracker: this.#scoreTracker, contentColor: this.#contentColor });
+    this.#arena = new Arena(canvasWrapper, {
+      scoreTracker: this.#scoreTracker,
+      contentColor: this.#contentColor,
+    });
   }
 
   *start() {
@@ -61,7 +64,13 @@ export class PongGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 
   handleMouseMove(e: MouseEvent, scrollTop: number) {
