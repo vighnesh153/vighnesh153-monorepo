@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 import { Scope } from "@/models/Scope";
 import { bugReporter } from "@/language-bug-handling";
-// prettier-ignore
 import {
   arithmeticOperationEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-operation-evaluator";

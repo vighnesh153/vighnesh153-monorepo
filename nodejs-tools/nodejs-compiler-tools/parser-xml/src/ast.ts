@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 import { Token } from "@vighnesh153/lexer-core";
 import { XmlTokenType } from "@vighnesh153/lexer-xml";
 

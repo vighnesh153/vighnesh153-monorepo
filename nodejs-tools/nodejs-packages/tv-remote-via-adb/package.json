@@ -13,7 +13,6 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:backend": "tsup --watch",
     "dev:frontend": "vite",
-    "lint": "eslint --max-warnings=0 .",
     "copy": "mkdir ./dist/client && mv ./src/client/dist/* ./dist/client",
     "build:frontend": "vite build",
     "build": "rimraf dist && tsup && vite build && npm run copy"
@@ -49,7 +48,6 @@
     "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0",
     "@vighnesh153/tsconfig": "*",
     "@vitejs/plugin-react": "^4.3.2",
-    "eslint-config-vighnesh153": "*",
     "npm-run-all": "^4.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

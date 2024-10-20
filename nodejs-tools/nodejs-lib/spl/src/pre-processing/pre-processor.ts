@@ -7,7 +7,6 @@ class PreProcessor {
   private _processedLOC: LineOfCode[] = [];
 
   public get processedLOC(): LineOfCode[] {
-    // eslint-disable-next-line no-underscore-dangle
     return [...this._processedLOC];
   }
 
@@ -19,12 +18,10 @@ class PreProcessor {
   }
 
   private setEffectiveLOC(code: string) {
-    // eslint-disable-next-line no-underscore-dangle
     this._processedLOC = extractEffectiveLoc(code);
   }
 
   private transformInitialWhitespace() {
-    // eslint-disable-next-line no-underscore-dangle
     this._processedLOC = initialWhitespaceConverter(this._processedLOC);
   }
 }

@@ -35,7 +35,6 @@ describe("check the tryEvaluate functionality of boolean-expression-evaluator.",
   });
 
   test("should return false for a string value input.", () => {
-    // eslint-disable-next-line quotes
     const input = " 'Hello World'   ";
     const result = booleanExpressionEvaluator.tryEvaluate(input);
 
@@ -99,7 +98,6 @@ describe("check the tryEvaluate functionality of boolean-expression-evaluator.",
     ["false or false", true],
     ["1 <= 10", true],
     ["2 >= 90", true],
-    // eslint-disable-next-line quotes
     [" 'hello' ", false],
     [" 100", false],
     [" (5 >= 1 and 3 < 1) and  true", true],

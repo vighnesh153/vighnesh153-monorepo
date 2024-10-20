@@ -2,7 +2,6 @@ import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluato
 import { Scope } from "@/models/Scope";
 import { bugReporter } from "@/language-bug-handling";
 import { BooleanExpressionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";

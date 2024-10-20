@@ -15,7 +15,6 @@ describe("check the tryEvaluate functionality of number evaluator.", () => {
 
   test("should return false if in-valid numbers are passed.", () => {
     expect(numberEvaluator.tryEvaluate("")).toStrictEqual(false);
-    // eslint-disable-next-line quotes
     expect(numberEvaluator.tryEvaluate(" 'Hello'  ")).toStrictEqual(false);
     expect(numberEvaluator.tryEvaluate("true   ")).toStrictEqual(false);
     expect(numberEvaluator.tryEvaluate("  ")).toStrictEqual(false);

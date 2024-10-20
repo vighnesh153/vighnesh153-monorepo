@@ -115,7 +115,6 @@ test(`focus should be within side nav when we press the Tab key`, async ({ page 
   expect(await verticalNav.locator("*:focus").textContent()).toBe(" About me ");
 });
 
-// prettier-ignore
 test(
   'should close sidebar menu when "Enter" key is pressed as Close button will be the first item to be focused',
   async ({ page }) => {
@@ -130,7 +129,6 @@ test(
   },
 );
 
-// prettier-ignore
 test(
   "should close sidebar menu when clicked on a link navigating to same page",
   async ({ page }) => {
@@ -148,7 +146,6 @@ test(
   },
 );
 
-// prettier-ignore
 test(
   'should close sidebar menu when hit "Enter" on a focused link navigating to same page',
   async ({ page }) => {

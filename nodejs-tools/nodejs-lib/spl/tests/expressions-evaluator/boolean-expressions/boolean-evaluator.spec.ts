@@ -15,7 +15,6 @@ describe("check the tryEvaluate functionality of boolean evaluator.", () => {
 
   test("should return false if in-valid booleans are passed.", () => {
     expect(booleanEvaluator.tryEvaluate("")).toStrictEqual(false);
-    // eslint-disable-next-line quotes
     expect(booleanEvaluator.tryEvaluate(" 'Hello'  ")).toStrictEqual(false);
     expect(booleanEvaluator.tryEvaluate(" 23424  ")).toStrictEqual(false);
     expect(booleanEvaluator.tryEvaluate("  ")).toStrictEqual(false);

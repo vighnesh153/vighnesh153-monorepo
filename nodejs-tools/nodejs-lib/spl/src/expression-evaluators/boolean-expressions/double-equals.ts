@@ -1,7 +1,6 @@
 import { Scope } from "@/models/Scope";
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 import { bugReporter } from "@/language-bug-handling";
-// prettier-ignore
 import {
   numericComparisionEvaluator,
 } from "@/expression-evaluators/boolean-expressions/numeric-comparision-evaluator";

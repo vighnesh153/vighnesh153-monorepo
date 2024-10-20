@@ -28,7 +28,6 @@ export class Scope {
   }
 
   hasFunction(functionName: string): boolean {
-    // eslint-disable-next-line no-prototype-builtins
     if (this.functions.hasOwnProperty(functionName)) {
       return true;
     }
@@ -38,7 +37,6 @@ export class Scope {
   }
 
   getFunction(functionName: string): FunctionBlock {
-    // eslint-disable-next-line no-prototype-builtins
     if (this.functions.hasOwnProperty(functionName)) {
       return this.functions[functionName];
     } else if (this.parentScope !== null) {
@@ -54,7 +52,6 @@ export class Scope {
   }
 
   hasVariable(variableName: string): boolean {
-    // eslint-disable-next-line no-prototype-builtins
     if (this.variables.hasOwnProperty(variableName)) {
       return true;
     }
@@ -64,7 +61,6 @@ export class Scope {
   }
 
   getVariable(variableName: string): Variable {
-    // eslint-disable-next-line no-prototype-builtins
     if (this.variables.hasOwnProperty(variableName)) {
       return this.variables[variableName];
     } else if (this.parentScope !== null) {

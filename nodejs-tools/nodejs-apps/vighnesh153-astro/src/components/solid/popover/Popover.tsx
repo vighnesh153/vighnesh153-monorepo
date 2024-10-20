@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   children,
   createEffect,
@@ -30,7 +29,6 @@ import {
 } from "./popover-placement.ts";
 
 declare module "solid-js" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface Directives {
       clickOutside: ReturnType<Parameters<typeof clickOutside>[1]>;

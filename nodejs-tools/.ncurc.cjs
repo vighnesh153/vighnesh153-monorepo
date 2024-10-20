@@ -9,13 +9,5 @@ module.exports = {
     "mongoose",
     "next-auth",
     "mongodb-memory-server",
-    "@typescript-eslint/eslint-plugin",
-    "@typescript-eslint/parser",
-    "eslint",
-    "eslint-config-prettier",
-    "eslint-import-resolver-typescript",
-    "eslint-plugin-astro",
-    "eslint-plugin-import",
-    "eslint-plugin-jsx-a11y",
   ],
 };

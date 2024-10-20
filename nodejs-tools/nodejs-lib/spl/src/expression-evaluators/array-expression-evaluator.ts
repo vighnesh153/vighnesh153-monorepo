@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { Scope } from "@/models/Scope";
 import { bugReporter } from "@/language-bug-handling";
 import { ArrayParser } from "@/parsers/data-type-parsers/non-primitive-parsers/array-parser";
 
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";

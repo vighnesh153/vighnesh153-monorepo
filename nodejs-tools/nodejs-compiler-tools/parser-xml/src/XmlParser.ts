@@ -139,7 +139,6 @@ export class XmlParser {
 
     const xmlPrologNode = new XmlPrologNode();
 
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (this.isCurrentToken(XmlTokenType.Eof)) {
         this.addError(
@@ -192,7 +191,6 @@ export class XmlParser {
       this.nextToken();
     }
 
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (this.isCurrentToken(XmlTokenType.Eof)) {
         this.addError(
@@ -236,7 +234,6 @@ export class XmlParser {
     this.nextToken();
 
     // parse children
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (this.isPeekToken(XmlTokenType.Eof)) {
         this.addError(
@@ -330,7 +327,6 @@ export class XmlParser {
 
     const namespaces: Readonly<Token<XmlTokenType>>[] = [this.#currentToken];
 
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (this.isPeekToken(XmlTokenType.Eof)) {
         this.addError(

@@ -19,7 +19,6 @@ describe("check the functionality of loop for x times parser.", () => {
 
   test("should print something for n number of times", () => {
     addLineOfCode("loop  for   4 times:");
-    // eslint-disable-next-line quotes
     addLineOfCode("    display 'Hello'");
     linesOfCode.reverse();
 

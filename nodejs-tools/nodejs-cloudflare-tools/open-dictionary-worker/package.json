@@ -12,7 +12,6 @@
   "scripts": {
     "start": "dotenv -e ../../.env.local -- wrangler dev",
     "deploy:prod": "dotenv -e ../../.env.local -- wrangler publish",
-    "lint": "eslint --max-warnings=0 .",
     "test-": "vitest run"
   },
   "devDependencies": {
@@ -20,7 +19,6 @@
     "@types/node": "*",
     "@types/node-fetch": "^2.6.11",
     "@vighnesh153/tsconfig": "*",
-    "eslint-config-vighnesh153": "*",
     "typescript": "^5.6.3",
     "vitest": "^2.1.2",
     "wrangler": "3.80.2"

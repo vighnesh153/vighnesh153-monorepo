@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { generateTwoMidPoints } from "./generateTwoMidpoints.ts";
 import { getDistantCorner } from "./getDistantCorner.ts";
 import { Line } from "./line.ts";

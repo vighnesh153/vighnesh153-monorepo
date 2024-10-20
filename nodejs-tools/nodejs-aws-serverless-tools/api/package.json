@@ -36,7 +36,6 @@
     "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.0",
     "@vighnesh153/tsconfig": "*",
     "cookie": "^1.0.0",
-    "eslint-config-vighnesh153": "*",
     "sst": "^3.1.72",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3",

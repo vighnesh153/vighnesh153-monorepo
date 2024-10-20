@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scope } from "@/models/Scope";
 import { LessThanOrEqual } from "@/expression-evaluators/boolean-expressions/less-than-or-equal";
 import {

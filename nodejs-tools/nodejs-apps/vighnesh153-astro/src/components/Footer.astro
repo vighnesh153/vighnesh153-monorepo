@@ -1,21 +1,25 @@
 ---
-import { classes, hashTags, externalLinks } from '@/utils/index.ts';
-import Link from './Link.svelte';
-import SocialLinks from './SocialLinks.astro';
+import { classes, hashTags, externalLinks } from "@/utils/index.ts";
+import Link from "./Link.svelte";
+import SocialLinks from "./SocialLinks.astro";
 
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'footer'> {}
+interface Props extends HTMLAttributes<"footer"> {}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { class: className, id, ...props } = Astro.props;
 ---
 
-<footer id={hashTags.footer} class={classes(className, `py-12 grid place-items-center scroll-mt-8`)} {...props}>
+<footer
+  id={hashTags.footer}
+  class={classes(className, `py-12 grid place-items-center scroll-mt-8`)}
+  {...props}
+>
   <SocialLinks direction="horizontal" class="mb-4 flex sm:hidden" />
   <p>
     <slot name="custom-source-code">
-      <Link href={externalLinks.githubRepo} color="secondary">Source code</Link> of this website
+      <Link href={externalLinks.githubRepo} color="secondary">Source code</Link>
+      of this website
     </slot>
   </p>
 </footer>

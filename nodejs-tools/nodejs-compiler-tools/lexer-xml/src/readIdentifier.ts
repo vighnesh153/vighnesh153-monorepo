@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 import { ALPHABET, DIGITS } from "@vighnesh153/tools";
 import { assert } from "@std/assert";
 import { Lexer } from "@vighnesh153/lexer-core";

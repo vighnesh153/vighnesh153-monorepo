@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createSignal, type JSX, onMount, Show } from "solid-js";
 
 import type { SnackbarProps } from "@/stores/snackbar.ts";

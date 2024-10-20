@@ -182,7 +182,6 @@ export class GithubGist {
     });
 
     this.gistFiles.forEach((gistFile) => {
-      // eslint-disable-next-line no-param-reassign
       gistFile.hasUnSyncedUpdates = false;
     });
   }

@@ -5,6 +5,8 @@
       "**/dist/**/*",
       "**/.sst/**/*",
       "**/.astro/**/*",
+      "**/lexer-xml/coverage/**/*",
+      "**/parser-xml/coverage/**/*",
       "**/.vscode-test-web/**/*",
       "**/.turbo/**/*"
     ]

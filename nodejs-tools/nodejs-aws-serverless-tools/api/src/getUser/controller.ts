@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as http2 from "node:http2";
 
 import { Resource } from "sst";
@@ -37,7 +36,6 @@ function mask(s?: string | null): string {
 export async function controller({
   // environment variables
   environmentStage = process.env.STAGE as "dev" | "prod" | undefined,
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   cookieSecret = inProduction(() => Resource.CookieSecret.value),
 

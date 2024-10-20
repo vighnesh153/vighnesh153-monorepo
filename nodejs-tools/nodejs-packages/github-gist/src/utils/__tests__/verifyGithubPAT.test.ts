@@ -5,7 +5,6 @@ import { verifyGithubPAT } from "../verifyGithubPAT.ts";
 vi.mock("axios");
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   axios.mockImplementation(impl);
 }

@@ -5,7 +5,6 @@ import { authScopes, inProduction } from "../common/utils.ts";
 
 export function constructAuthRedirectUrl({
   authRedirectUri = process.env.AUTH_REDIRECT_URL,
-  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
   // @ts-ignore: SSM Secret type auto-complete not working
   googleClientId = inProduction(() => Resource.GoogleClientId.value),
   logger = ConsoleLogger.getInstance(),

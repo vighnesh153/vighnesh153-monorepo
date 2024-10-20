@@ -55,7 +55,6 @@ export function UploadInputBox(props: UploadInputBoxProps) {
           "border-[transparent]": props.draggingOver,
           "border-accent": not(props.draggingOver),
 
-          // eslint-disable-next-line max-len
           "before:bg-[linear-gradient(transparent,transparent),linear-gradient(transparent,transparent),linear-gradient(transparent,transparent),linear-gradient(theme(colors.accent),theme(colors.background))]":
             props.draggingOver,
           "before:animate-spin-slow": props.draggingOver,

@@ -3,7 +3,6 @@ import {
   VariableBlock,
   VariableBlockType,
 } from "@/blocks/variable-blocks/variable-block";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "@/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -38,7 +37,6 @@ describe("check the tryEvaluate functionality of arithmetic-expression-evaluator
   });
 
   test("should return false for a string value input.", () => {
-    // eslint-disable-next-line quotes
     const input = " 'Hello World'   ";
     const result = arithmeticExpressionEvaluator.tryEvaluate(input);
 

@@ -105,7 +105,6 @@ export class DynamoDBTableImpl<T extends TableMetadata>
       );
     const conditionExpression = (keys as string[])
       .map((key) => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const { filterExpression = equalityFilterExpression } =
           params.filterBy[key as TFilterBy];
         return filterExpression(key);
@@ -135,7 +134,6 @@ export class DynamoDBTableImpl<T extends TableMetadata>
       const item = result.Items?.[0] ?? null;
       if (item != null) {
         return {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           data: item as any,
           error: null,
         };

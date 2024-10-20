@@ -70,7 +70,6 @@ describe("events manager tests", () => {
     // assert
     expect(eventsManager.undoEventsStack.size).toBe(0);
     expect(eventsManager.pendingQueue.size).toBe(1); // 1 is the clear slate event
-    // prettier-ignore
     expect(eventsManager.redoEventsStack.toArray()).toStrictEqual([
       events[3],
       events[2],
@@ -99,14 +98,12 @@ describe("events manager tests", () => {
 
     // assert
     expect(eventsManager.pendingQueue.size).toBe(4 + 1); // 1 is the clear slate event
-    // prettier-ignore
     expect(eventsManager.undoEventsStack.toArray()).toStrictEqual([
       events[0],
       events[1],
       events[2],
       events[3],
     ]);
-    // prettier-ignore
     expect(eventsManager.redoEventsStack.toArray()).toStrictEqual([
       events[7],
       events[6],
@@ -157,14 +154,12 @@ describe("events manager tests", () => {
     redo(eventsManager);
 
     // assert
-    // prettier-ignore
     expect(eventsManager.undoEventsStack.toArray()).toStrictEqual([
       events[0],
       events[1],
       events[2],
       events[3],
     ]);
-    // prettier-ignore
     expect(eventsManager.pendingQueue.toArray().slice(1)).toStrictEqual([
       events[0],
       events[1],
@@ -194,7 +189,6 @@ describe("events manager tests", () => {
     redo(eventsManager);
 
     // assert
-    // prettier-ignore
     expect(eventsManager.pendingQueue.toArray()).toStrictEqual([
       events[4],
       events[5],

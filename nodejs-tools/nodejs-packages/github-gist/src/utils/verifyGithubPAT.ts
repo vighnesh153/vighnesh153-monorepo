@@ -20,7 +20,6 @@ export async function verifyGithubPAT(token: string): Promise<void> {
   try {
     isValid = await isTokenValid(token);
   } catch (error: unknown) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (error as any).message = `Token is invalid.`;
     throw error;
   }

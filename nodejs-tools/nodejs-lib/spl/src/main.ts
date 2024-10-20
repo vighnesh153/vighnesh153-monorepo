@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { preProcess } from "./pre-processing/pre-processor";
 import { LineOfCode } from "./models/LineOfCode";
 import { Interpreter } from "./interpreter";

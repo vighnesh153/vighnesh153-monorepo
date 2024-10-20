@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { csvSplit } from "@/helpers/csv-split";
 
 describe("check the functionality of csv-split.", () => {
@@ -17,17 +16,14 @@ describe("check the functionality of csv-split.", () => {
   });
 
   test("should split comma separated strings.", () => {
-    // eslint-disable-next-line quotes
     const input =
       "   'Hello '   ,    ' LOL '      ,     ' This is so fun '      ";
 
     const result = csvSplit(input);
-    // eslint-disable-next-line quotes
     expect(result).toStrictEqual(["'Hello '", "' LOL '", "' This is so fun '"]);
   });
 
   test("should split comma separated strings that are more complex.", () => {
-    // eslint-disable-next-line quotes
     const input =
       "   'Hello, World! '   ,    ' LOL. ] OK OK '      ,     ' \" '      ";
 

@@ -11,7 +11,7 @@
 ## Setup
 
 - install the recommended extensions (amodio.tsl-problem-matcher,
-  ms-vscode.extension-test-runner, and dbaeumer.vscode-eslint)
+  ms-vscode.extension-test-runner)
 
 ## Get up and running the Web Extension
 

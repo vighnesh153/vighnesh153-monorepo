@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scope } from "@/models/Scope";
 import { LogicalOr } from "@/expression-evaluators/boolean-expressions/logical-or";
 import {

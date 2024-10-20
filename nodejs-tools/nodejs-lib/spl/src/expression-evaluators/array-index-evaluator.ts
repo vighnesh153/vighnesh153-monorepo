@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 import { Scope } from "@/models/Scope";
-// prettier-ignore
 import {
   ArithmeticExpressionEvaluator,
 } from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
@@ -44,7 +42,6 @@ export class ArrayIndexEvaluator extends ExpressionEvaluator {
 
     if (result) {
       const arrayName = result[1].trim();
-      // eslint-disable-next-line prefer-destructuring
       const indexString = result[2];
 
       const evaluator = new ArithmeticExpressionEvaluator(this.scope);

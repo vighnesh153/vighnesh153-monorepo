@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { afterEach, assert, beforeEach, expect, test, vi } from "vitest";
 import { cleanup, render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
@@ -658,6 +656,7 @@ async function popoverPlacementTest(props: {
       );
       // @ts-ignore
       button.getBoundingClientRect = vi.fn(() =>
+        // @ts-ignore
         constructBoundingClientRect(props.toggleButtonDimensions)
       );
       return button;
@@ -686,8 +685,8 @@ async function popoverPlacementTest(props: {
   assert(popoverContentRoot);
   assert(popoverToggleButton);
 
-  // @ts-ignore
   popoverContentRoot.getBoundingClientRect = vi.fn(() =>
+    // @ts-ignore
     constructBoundingClientRect(props.popoverDimensions)
   );
 
