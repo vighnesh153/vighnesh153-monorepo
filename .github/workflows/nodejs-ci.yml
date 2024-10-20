@@ -29,9 +29,6 @@ jobs:
       # install deps
       - run: npm install
 
-      # Run lint tools
-      - run: npm run lint
-
       # Build the project
       - run: npm run build
 

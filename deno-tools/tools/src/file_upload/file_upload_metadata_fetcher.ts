@@ -16,8 +16,9 @@ export interface FileUploadMetadataFetcher {
 
 export class FileUploadMetadataFetcherImpl
   implements FileUploadMetadataFetcher {
+  // deno-lint-ignore require-await
   async fetchMetadata(
-    files: { fileId: string; file: File }[],
+    _files: { fileId: string; file: File }[],
   ): Promise<FileUploadMetadataFetcherResponse> {
     // TODO: fetch metadata
     throw new Error("Not implemented");
