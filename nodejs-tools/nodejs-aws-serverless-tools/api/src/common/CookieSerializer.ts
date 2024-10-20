@@ -1,13 +1,21 @@
-import cookie, { type SerializeOptions } from 'cookie';
+import cookie, { type SerializeOptions } from "cookie";
 
 export interface CookieSerializer {
-  serialize(cookieName: string, cookieValue: string, options: SerializeOptions): string;
+  serialize(
+    cookieName: string,
+    cookieValue: string,
+    options: SerializeOptions,
+  ): string;
 
   parse(cookieValue: string): Record<string, string | undefined>;
 }
 
 export class CookieSerializerImpl implements CookieSerializer {
-  serialize(cookieName: string, cookieValue: string, options: SerializeOptions): string {
+  serialize(
+    cookieName: string,
+    cookieValue: string,
+    options: SerializeOptions,
+  ): string {
     return cookie.serialize(cookieName, cookieValue, options);
   }
 
@@ -17,7 +25,7 @@ export class CookieSerializerImpl implements CookieSerializer {
 }
 
 export class FakeCookieSerializer implements CookieSerializer {
-  serializedCookie = '';
+  serializedCookie = "";
   parsedValue: Record<string, string | undefined> = {};
 
   serialize(): string {

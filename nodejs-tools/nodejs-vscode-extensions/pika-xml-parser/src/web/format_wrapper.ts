@@ -1,90 +1,96 @@
-import { format } from '@vighnesh153/formatter-xml';
+import { format } from "@vighnesh153/formatter-xml";
 
 export type FormatResponse =
   | {
-      type: 'success';
-      result: string;
-    }
+    type: "success";
+    result: string;
+  }
   | {
-      type: 'error';
-      errMessage: string;
-    };
+    type: "error";
+    errMessage: string;
+  };
 
 export function formatWrapper(text: string): FormatResponse {
   const response = format(text, { sortAttributes: true, indentation: 4 });
 
-  if (response.type === 'success') {
+  if (response.type === "success") {
     return {
-      type: 'success',
+      type: "success",
       result: response.formattedXml,
     };
-  } else if (response.type === 'lexer-error') {
+  } else if (response.type === "lexer-error") {
     const [error] = response.lexerErrors;
-    let errorMessage = 'Unexpected lexer error...';
+    let errorMessage = "Unexpected lexer error...";
     if (error) {
       const { errorCategory, lineNumber, columnNumber } = error;
       switch (errorCategory.type) {
-        case 'ILLEGAL_CHARACTER':
-          errorMessage = `Illegal character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
+        case "ILLEGAL_CHARACTER":
+          errorMessage =
+            `Illegal character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
           break;
-        case 'INVALID_ESCAPE_CHARACTER_LITERAL':
-          errorMessage = `Invalid escape character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
+        case "INVALID_ESCAPE_CHARACTER_LITERAL":
+          errorMessage =
+            `Invalid escape character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
           break;
-        case 'INVALID_UNICODE_CHARACTER_LITERAL':
-          errorMessage = `Invalid unicode character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
+        case "INVALID_UNICODE_CHARACTER_LITERAL":
+          errorMessage =
+            `Invalid unicode character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
           break;
-        case 'UNCLOSED_COMMENT_LITERAL':
+        case "UNCLOSED_COMMENT_LITERAL":
           errorMessage = `Unclosed comment at ${lineNumber}:${columnNumber}`;
           break;
-        case 'UNCLOSED_ESCAPE_SEQUENCE':
-          errorMessage = `Unclosed escape sequence at ${lineNumber}:${columnNumber}`;
+        case "UNCLOSED_ESCAPE_SEQUENCE":
+          errorMessage =
+            `Unclosed escape sequence at ${lineNumber}:${columnNumber}`;
           break;
-        case 'UNCLOSED_STRING_LITERAL':
+        case "UNCLOSED_STRING_LITERAL":
           errorMessage = `Unclosed string at ${lineNumber}:${columnNumber}`;
           break;
-        case 'UNEXPECTED_COMMENT_CHARACTER':
-          errorMessage = `Unexpected comment character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
+        case "UNEXPECTED_COMMENT_CHARACTER":
+          errorMessage =
+            `Unexpected comment character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
           break;
       }
     }
     return {
-      type: 'error',
+      type: "error",
       errMessage: errorMessage,
     };
-  } else if (response.type === 'parser-error') {
+  } else if (response.type === "parser-error") {
     const [error] = response.parserErrors;
-    let errorMessage = 'Unexpected parser error...';
+    let errorMessage = "Unexpected parser error...";
     if (error) {
       const { errorType, culpritToken } = error;
       switch (errorType) {
-        case 'UNEXPECTED_CLOSING_TAG_LITERAL':
+        case "UNEXPECTED_CLOSING_TAG_LITERAL":
           errorMessage =
             `Unexpected closing tag '${culpritToken.tokenLiteral}'` +
             ` at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
           break;
-        case 'UNEXPECTED_EOF':
-          errorMessage = `Unexpected end of file at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
-          break;
-        case 'UNEXPECTED_PROLOG_TAG':
+        case "UNEXPECTED_EOF":
           errorMessage =
-            `Expected 'xml' found '${culpritToken.tokenLiteral}'` +
+            `Unexpected end of file at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
+          break;
+        case "UNEXPECTED_PROLOG_TAG":
+          errorMessage = `Expected 'xml' found '${culpritToken.tokenLiteral}'` +
             ` at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
           break;
-        case 'UNEXPECTED_TOKEN':
-          errorMessage =
-            `Unexpected token '${culpritToken.tokenLiteral}'` +
+        case "UNEXPECTED_TOKEN":
+          errorMessage = `Unexpected token '${culpritToken.tokenLiteral}'` +
             ` at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
           break;
       }
     }
     return {
-      type: 'error',
+      type: "error",
       errMessage: errorMessage,
     };
   }
 
   return {
-    type: 'error',
-    errMessage: `Unexpected error occurred: ${(response.err as { message: string })?.message ?? 'unknown error'}`,
+    type: "error",
+    errMessage: `Unexpected error occurred: ${
+      (response.err as { message: string })?.message ?? "unknown error"
+    }`,
   };
 }

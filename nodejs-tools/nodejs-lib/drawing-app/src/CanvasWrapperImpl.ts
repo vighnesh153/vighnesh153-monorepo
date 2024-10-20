@@ -1,4 +1,4 @@
-import { CanvasWrapper } from './CanvasWrapper.ts';
+import { CanvasWrapper } from "./CanvasWrapper.ts";
 
 export class CanvasWrapperImpl implements CanvasWrapper {
   private readonly canvas: HTMLCanvasElement;
@@ -14,7 +14,10 @@ export class CanvasWrapperImpl implements CanvasWrapper {
 
   constructor(
     canvas: HTMLCanvasElement,
-    { width = window.innerWidth, height = window.innerHeight }: { width?: number; height?: number } = {}
+    { width = window.innerWidth, height = window.innerHeight }: {
+      width?: number;
+      height?: number;
+    } = {},
   ) {
     // Set display size (css pixels)
     canvas.style.width = `${width}px`;
@@ -27,7 +30,7 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     canvas.width = width * scale;
     canvas.height = height * scale;
 
-    const canvasContext = canvas.getContext('2d', {
+    const canvasContext = canvas.getContext("2d", {
       willReadFrequently: true,
       desynchronized: true,
     });
@@ -51,7 +54,13 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     return this.canvas.getBoundingClientRect();
   }
 
-  getImageData(x: number, y: number, w: number, h: number, settings?: ImageDataSettings): ImageData {
+  getImageData(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    settings?: ImageDataSettings,
+  ): ImageData {
     return this.canvasContext.getImageData(x, y, w, h, settings);
   }
 
@@ -59,16 +68,29 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.canvasContext.putImageData(imageData, dx, dy);
   }
 
-  drawFilledRect(x: number, y: number, width: number, height: number, color: string): void {
+  drawFilledRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: string,
+  ): void {
     this.canvasContext.fillStyle = color;
     this.canvasContext.fillRect(x, y, width, height);
   }
 
-  drawLine(x1: number, y1: number, x2: number, y2: number, lineWidth: number, color: string): void {
+  drawLine(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    lineWidth: number,
+    color: string,
+  ): void {
     this.canvasContext.save();
     this.canvasContext.beginPath();
     this.canvasContext.lineWidth = lineWidth;
-    this.canvasContext.lineCap = 'round';
+    this.canvasContext.lineCap = "round";
     this.canvasContext.strokeStyle = color;
     this.canvasContext.moveTo(x1, y1);
     this.canvasContext.lineTo(x2, y2);
@@ -76,7 +98,12 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     this.canvasContext.restore();
   }
 
-  drawFilledCircle(centerX: number, centerY: number, radius: number, color: string): void {
+  drawFilledCircle(
+    centerX: number,
+    centerY: number,
+    radius: number,
+    color: string,
+  ): void {
     this.canvasContext.beginPath();
     this.canvasContext.fillStyle = color;
     this.canvasContext.arc(centerX, centerY, radius, 0, 2 * Math.PI, true);

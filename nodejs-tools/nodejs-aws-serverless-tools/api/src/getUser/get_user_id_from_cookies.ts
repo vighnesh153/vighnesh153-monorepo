@@ -1,7 +1,10 @@
-import { Logger } from '@vighnesh153/tools';
-import { LambdaRequestPayload, cookieKeys } from '@vighnesh153/tools/vighnesh153';
-import { CookieSerializer } from '../common/CookieSerializer.ts';
-import { AuthTokenGenerator } from '../common/AuthTokenGenerator.ts';
+import { Logger } from "@vighnesh153/tools";
+import {
+  cookieKeys,
+  LambdaRequestPayload,
+} from "@vighnesh153/tools/vighnesh153";
+import { CookieSerializer } from "../common/CookieSerializer.ts";
+import { AuthTokenGenerator } from "../common/AuthTokenGenerator.ts";
 
 export async function getUserIdFromCookies({
   cookieSecret,
@@ -12,23 +15,23 @@ export async function getUserIdFromCookies({
   authTokenGenerator,
 }: {
   cookieSecret: string;
-  environmentStage: 'dev' | 'prod';
+  environmentStage: "dev" | "prod";
 
-  headers: LambdaRequestPayload['headers'];
+  headers: LambdaRequestPayload["headers"];
 
   logger: Logger;
   cookieSerializer: CookieSerializer;
   authTokenGenerator: AuthTokenGenerator;
 }): Promise<string | null> {
-  const cookies = cookieSerializer.parse(headers['cookie'] || '');
+  const cookies = cookieSerializer.parse(headers["cookie"] || "");
 
-  const userInfo = cookies[cookieKeys.userInfo(environmentStage)] ?? '';
-  const authToken = cookies[cookieKeys.authToken(environmentStage)] ?? '';
+  const userInfo = cookies[cookieKeys.userInfo(environmentStage)] ?? "";
+  const authToken = cookies[cookieKeys.authToken(environmentStage)] ?? "";
 
   const userId = (() => {
     try {
       const maybeUserId = JSON.parse(decodeURIComponent(userInfo)).userId;
-      if (typeof maybeUserId != 'string' || maybeUserId?.trim()?.length == 0) {
+      if (typeof maybeUserId != "string" || maybeUserId?.trim()?.length == 0) {
         return null;
       }
       return maybeUserId;
@@ -40,7 +43,7 @@ export async function getUserIdFromCookies({
 
   const expectedAuthToken = authTokenGenerator.generate({
     cookieSecret,
-    userId: userId ?? '',
+    userId: userId ?? "",
   });
 
   if (authToken !== expectedAuthToken) {

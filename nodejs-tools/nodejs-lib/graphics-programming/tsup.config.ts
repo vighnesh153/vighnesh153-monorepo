@@ -1,17 +1,17 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig(({ watch }) => ({
   entry: {
-    main: './src/index.ts',
+    main: "./src/index.ts",
   },
   splitting: false,
   // clean: true,
   minify: !watch,
   treeshake: true,
-  format: ['esm'],
+  format: ["esm"],
   outExtension({ format }) {
     let js: string | undefined;
-    if (format === 'esm') js = `.js`;
+    if (format === "esm") js = `.js`;
     return { js };
   },
 }));

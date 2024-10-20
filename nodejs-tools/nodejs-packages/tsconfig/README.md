@@ -27,7 +27,8 @@ Add the following to your `tsconfig.json` file
 
 ## Variants
 
-You can use different variants of the configurations in different types of projects
+You can use different variants of the configurations in different types of
+projects
 
 - Pure typescript project
 

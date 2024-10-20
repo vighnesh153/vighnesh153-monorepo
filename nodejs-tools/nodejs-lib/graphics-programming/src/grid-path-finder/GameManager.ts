@@ -1,5 +1,5 @@
-import { not } from '@vighnesh153/tools';
-import { GridPathFinderGame } from './Game.ts';
+import { not } from "@vighnesh153/tools";
+import { GridPathFinderGame } from "./Game.ts";
 
 export class GridPathFinderGameManager {
   #game: GridPathFinderGame;

@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
-import axios from 'axios';
-import { randomEmail, randomUuid } from '@vighnesh153/tools';
-import { fetchLatestContentOfGistFile } from '../fetchLatestContentOfGistFile.ts';
+import { describe, expect, it, vi } from "vitest";
+import axios from "axios";
+import { randomEmail, randomUuid } from "@vighnesh153/tools";
+import { fetchLatestContentOfGistFile } from "../fetchLatestContentOfGistFile.ts";
 
-vi.mock('axios');
+vi.mock("axios");
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,7 +12,7 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
 }
 
 describe('Helpers > "fetchLatestContentOfGistFile" tests', () => {
-  it('should fetch the latest content', async () => {
+  it("should fetch the latest content", async () => {
     const content = randomUuid();
     mockAxiosImplementation(() => Promise.resolve({ data: content }));
 
@@ -20,7 +20,7 @@ describe('Helpers > "fetchLatestContentOfGistFile" tests', () => {
       latestCommitId: randomUuid(),
       gistId: randomUuid(),
       gistOwner: randomEmail(),
-      corsConfig: { type: 'default' },
+      corsConfig: { type: "default" },
       fileName: randomUuid(),
       personalAccessToken: randomUuid(),
     });

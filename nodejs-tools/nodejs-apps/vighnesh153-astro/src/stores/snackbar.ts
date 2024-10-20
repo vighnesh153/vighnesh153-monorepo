@@ -1,7 +1,7 @@
-import { atom, type ReadableAtom } from 'nanostores';
+import { atom, type ReadableAtom } from "nanostores";
 
 export type SnackbarPropsApi = {
-  type: 'success' | 'error' | 'info' | 'warn';
+  type: "success" | "error" | "info" | "warn";
   message: string;
 
   manualDismissible?: boolean;
@@ -18,7 +18,9 @@ export const mutableSnackbarList = atom<SnackbarProps[]>([]);
 export const snackbarList: ReadableAtom<SnackbarProps[]> = mutableSnackbarList;
 
 function removeSnackbar(id: string): void {
-  mutableSnackbarList.set(snackbarList.get().filter((snackbar) => snackbar.id !== id));
+  mutableSnackbarList.set(
+    snackbarList.get().filter((snackbar) => snackbar.id !== id),
+  );
 }
 
 export function createSnackbar({

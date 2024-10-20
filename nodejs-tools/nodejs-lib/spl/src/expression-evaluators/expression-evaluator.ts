@@ -1,4 +1,4 @@
-import { Scope } from '@/models/Scope';
+import { Scope } from "@/models/Scope";
 
 export abstract class ExpressionEvaluator {
   abstract scope: Scope;

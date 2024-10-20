@@ -1,11 +1,13 @@
-import { LineOfCode } from '@/models/LineOfCode';
+import { LineOfCode } from "@/models/LineOfCode";
 
 const whiteSpaceConvert: { [key: string]: string } = {
-  '\t': '    ',
-  ' ': ' ',
+  "\t": "    ",
+  " ": " ",
 };
 
-export const initialWhitespaceConverter = (effectiveLinesOfCode: LineOfCode[]): LineOfCode[] => {
+export const initialWhitespaceConverter = (
+  effectiveLinesOfCode: LineOfCode[],
+): LineOfCode[] => {
   const convertedLines: LineOfCode[] = [];
 
   effectiveLinesOfCode.forEach((line) => {
@@ -14,14 +16,14 @@ export const initialWhitespaceConverter = (effectiveLinesOfCode: LineOfCode[]): 
     for (let i = 0; i < line.value.length; i++) {
       // as soon as we encounter a non-whitespace character,
       // we break out with the remaining segment
-      if (['\t', ' '].includes(line.value[i]) === false) {
+      if (["\t", " "].includes(line.value[i]) === false) {
         convertedFragments.push(line.value.substring(i));
         break;
       }
       convertedFragments.push(whiteSpaceConvert[line.value[i]]);
     }
 
-    const convertedLineValue = convertedFragments.join('');
+    const convertedLineValue = convertedFragments.join("");
     const convertedLine = new LineOfCode(convertedLineValue, line.number);
     convertedLines.push(convertedLine);
   });

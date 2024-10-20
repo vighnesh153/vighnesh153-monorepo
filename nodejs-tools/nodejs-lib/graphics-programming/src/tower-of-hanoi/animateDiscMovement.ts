@@ -1,7 +1,7 @@
-import { not } from '@vighnesh153/tools';
-import { Disc } from './Disc.ts';
-import { Position } from './Position.ts';
-import { Stack } from './Stack.ts';
+import { not } from "@vighnesh153/tools";
+import { Disc } from "./Disc.ts";
+import { Position } from "./Position.ts";
+import { Stack } from "./Stack.ts";
 
 function withinThreshold(diff: number, threshold: number): boolean {
   return Math.abs(diff) <= threshold;
@@ -45,7 +45,8 @@ interface Props {
 }
 
 export function* animateDiscMovement(props: Props) {
-  const { disc, src, dest, ceilingGap, speed, beforeYield = () => null } = props;
+  const { disc, src, dest, ceilingGap, speed, beforeYield = () => null } =
+    props;
   const finalPos = dest.getPositionForNewDisc();
 
   const positions: Position[] = [

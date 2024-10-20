@@ -1,8 +1,8 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Particle } from './Particle.ts';
-import { Position, createPosition } from './Position.ts';
-import { Bond } from './Bond.ts';
-import { euclidianDistance } from './euclidian-distance.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Particle } from "./Particle.ts";
+import { createPosition, Position } from "./Position.ts";
+import { Bond } from "./Bond.ts";
+import { euclidianDistance } from "./euclidian-distance.ts";
 
 interface GameOptions {
   mouseDeflectionDistance?: number;
@@ -38,9 +38,12 @@ export class BondingParticlesGame {
       this.#particles.push(
         new Particle(canvasWrapper, {
           radius: options.particleRadius ?? 3,
-          color: options.particleColor ?? 'black',
-          position: createPosition(canvasWrapper.rectWidth, canvasWrapper.rectHeight),
-        })
+          color: options.particleColor ?? "black",
+          position: createPosition(
+            canvasWrapper.rectWidth,
+            canvasWrapper.rectHeight,
+          ),
+        }),
       );
     }
 
@@ -59,7 +62,7 @@ export class BondingParticlesGame {
               g: 0,
               b: 0,
             },
-          })
+          }),
         );
       }
     }

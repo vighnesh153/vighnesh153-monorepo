@@ -1,11 +1,13 @@
-import { not } from '@vighnesh153/tools';
+import { not } from "@vighnesh153/tools";
 
-import { CellPosition } from './CellPosition.ts';
-import { CellsGrid } from './CellsGrid.ts';
-import { BfsCell } from './Cell.ts';
+import { CellPosition } from "./CellPosition.ts";
+import { CellsGrid } from "./CellsGrid.ts";
+import { BfsCell } from "./Cell.ts";
 
 function getRandomEmptyCell(grid: CellsGrid): BfsCell | null {
-  const emptyCells = grid.mapEachCell((cell) => cell).filter((cell) => cell.isEmpty);
+  const emptyCells = grid.mapEachCell((cell) => cell).filter((cell) =>
+    cell.isEmpty
+  );
   if (emptyCells.length === 0) {
     return null;
   }
@@ -13,12 +15,15 @@ function getRandomEmptyCell(grid: CellsGrid): BfsCell | null {
   return emptyCells[randomIndex];
 }
 
-export function fillGridWithWalls(grid: CellsGrid, walls?: Array<CellPosition>): void {
+export function fillGridWithWalls(
+  grid: CellsGrid,
+  walls?: Array<CellPosition>,
+): void {
   if (walls) {
     walls.forEach((position) => {
       const cell = grid.getCell(position);
       if (cell !== null) {
-        cell.type = 'wall';
+        cell.type = "wall";
       }
     });
     return;
@@ -27,19 +32,23 @@ export function fillGridWithWalls(grid: CellsGrid, walls?: Array<CellPosition>):
   // random walls
   grid.forEachCell((cell) => {
     if (Math.random() < 0.3) {
-      cell.type = 'wall';
+      cell.type = "wall";
     }
   });
 }
 
-export function fillGridWithStartAndEnd(grid: CellsGrid, start?: CellPosition, end?: CellPosition): void {
+export function fillGridWithStartAndEnd(
+  grid: CellsGrid,
+  start?: CellPosition,
+  end?: CellPosition,
+): void {
   let startDone = false;
   let endDone = false;
 
   if (start) {
     const cell = grid.getCell(start);
     if (cell !== null) {
-      cell.type = 'start';
+      cell.type = "start";
     }
     startDone = true;
   }
@@ -47,7 +56,7 @@ export function fillGridWithStartAndEnd(grid: CellsGrid, start?: CellPosition, e
   if (end) {
     const cell = grid.getCell(end);
     if (cell !== null) {
-      cell.type = 'end';
+      cell.type = "end";
     }
     endDone = true;
   }
@@ -55,14 +64,14 @@ export function fillGridWithStartAndEnd(grid: CellsGrid, start?: CellPosition, e
   if (not(startDone)) {
     const randomCell = getRandomEmptyCell(grid);
     if (randomCell !== null) {
-      randomCell.type = 'start';
+      randomCell.type = "start";
     }
   }
 
   if (not(endDone)) {
     const randomCell = getRandomEmptyCell(grid);
     if (randomCell !== null) {
-      randomCell.type = 'end';
+      randomCell.type = "end";
     }
   }
 }

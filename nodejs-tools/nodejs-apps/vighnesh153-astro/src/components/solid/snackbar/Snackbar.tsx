@@ -1,18 +1,23 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { createSignal, onMount, type JSX, Show } from 'solid-js';
+import { createSignal, type JSX, onMount, Show } from "solid-js";
 
-import type { SnackbarProps } from '@/stores/snackbar.ts';
-import { classes } from '@/utils/index.ts';
-import { InfoIcon, CheckIcon, WarnIcon, CloseIcon } from '@/icons/solid/index.ts';
+import type { SnackbarProps } from "@/stores/snackbar.ts";
+import { classes } from "@/utils/index.ts";
+import {
+  CheckIcon,
+  CloseIcon,
+  InfoIcon,
+  WarnIcon,
+} from "@/icons/solid/index.ts";
 
 export function Snackbar(props: SnackbarProps): JSX.Element {
   const config = mapping[props.type];
-  const [width, setWidth] = createSignal('100%');
+  const [width, setWidth] = createSignal("100%");
 
   onMount(() => {
     // animating the progress bar
     setTimeout(() => {
-      setWidth('0%');
+      setWidth("0%");
     }, 1);
   });
 
@@ -51,7 +56,7 @@ export function Snackbar(props: SnackbarProps): JSX.Element {
         <div
           class="h-2"
           style={{
-            'background-color': config.timerProgressColor,
+            "background-color": config.timerProgressColor,
             width: width(),
             transition: `width ${props.autoDismissTimeMillis}ms linear`,
           }}
@@ -64,34 +69,34 @@ export function Snackbar(props: SnackbarProps): JSX.Element {
 const mapping = {
   success: {
     icon: () => <CheckIcon class="w-4 h-4" />,
-    bgColor: '#388e3c',
-    textColor: 'text-secondary',
-    iconColor: 'fill-secondary',
-    timerProgressColor: '#87d58a',
+    bgColor: "#388e3c",
+    textColor: "text-secondary",
+    iconColor: "fill-secondary",
+    timerProgressColor: "#87d58a",
   },
   info: {
     icon: () => <InfoIcon class="w-4 h-4" />,
-    bgColor: '#0288d1',
-    textColor: 'text-secondary',
-    iconColor: 'fill-secondary',
-    timerProgressColor: '#7fd7ff',
+    bgColor: "#0288d1",
+    textColor: "text-secondary",
+    iconColor: "fill-secondary",
+    timerProgressColor: "#7fd7ff",
   },
   warn: {
     icon: () => <WarnIcon class="w-4 h-4" />,
-    bgColor: '#f57c00',
-    textColor: 'text-secondary',
-    iconColor: 'fill-secondary',
-    timerProgressColor: '#ffd89f',
+    bgColor: "#f57c00",
+    textColor: "text-secondary",
+    iconColor: "fill-secondary",
+    timerProgressColor: "#ffd89f",
   },
   error: {
     icon: () => <InfoIcon class="w-4 h-4" />,
-    bgColor: '#d32f2f',
-    textColor: 'text-text',
-    iconColor: 'fill-text',
-    timerProgressColor: '#ffbbbb',
+    bgColor: "#d32f2f",
+    textColor: "text-text",
+    iconColor: "fill-text",
+    timerProgressColor: "#ffbbbb",
   },
 } satisfies Record<
-  SnackbarProps['type'],
+  SnackbarProps["type"],
   {
     icon: () => JSX.Element;
     bgColor: string;

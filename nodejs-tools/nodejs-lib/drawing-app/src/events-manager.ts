@@ -1,6 +1,6 @@
-import { Queue, Stack, not } from '@vighnesh153/tools';
-import { buildClearScreenEvent, type AppEvent } from './events.ts';
-import { Color } from './colors.ts';
+import { not, Queue, Stack } from "@vighnesh153/tools";
+import { type AppEvent, buildClearScreenEvent } from "./events.ts";
+import { Color } from "./colors.ts";
 
 export type EventsManager = {
   undoEventsStack: Stack<AppEvent>;
@@ -9,7 +9,7 @@ export type EventsManager = {
 };
 
 function isCommitEvent(event?: AppEvent): boolean {
-  return event?.type === 'commit';
+  return event?.type === "commit";
 }
 
 export function buildEventsManager(): EventsManager {
@@ -56,7 +56,7 @@ export function undo(eventsManager: EventsManager): boolean {
     buildClearScreenEvent({
       color: Color.White,
     }),
-    ...eventsManager.undoEventsStack.toArray()
+    ...eventsManager.undoEventsStack.toArray(),
   );
 
   return true;
@@ -80,7 +80,10 @@ export function redo(eventsManager: EventsManager): boolean {
   return true;
 }
 
-export function publishEvents(eventsManager: EventsManager, events: AppEvent[]): void {
+export function publishEvents(
+  eventsManager: EventsManager,
+  events: AppEvent[],
+): void {
   eventsManager.undoEventsStack.push(...events);
   eventsManager.redoEventsStack = new Stack();
 

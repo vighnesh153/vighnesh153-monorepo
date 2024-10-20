@@ -1,11 +1,14 @@
-import { useGlobalState } from '@vighnesh153/react-hooks';
+import { useGlobalState } from "@vighnesh153/react-hooks";
 
 export function useDevices() {
-  const [selectedDevice, setSelectedDevice] = useGlobalState<string | null>('selectedDevice', null);
-  const [devices, setDevices] = useGlobalState('devices', <string[]>[]);
+  const [selectedDevice, setSelectedDevice] = useGlobalState<string | null>(
+    "selectedDevice",
+    null,
+  );
+  const [devices, setDevices] = useGlobalState("devices", <string[]> []);
 
   const fetchDevices = () => {
-    fetch('/api/devices')
+    fetch("/api/devices")
       .then((res) => res.json())
       .then((res) => {
         setDevices(res.devices);
@@ -15,5 +18,10 @@ export function useDevices() {
       });
   };
 
-  return { devices: devices ?? [], selectedDevice, setSelectedDevice, fetchDevices };
+  return {
+    devices: devices ?? [],
+    selectedDevice,
+    setSelectedDevice,
+    fetchDevices,
+  };
 }

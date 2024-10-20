@@ -8,17 +8,20 @@ type ParseCodeOperatorsResult = Array<{
 }>;
 
 const mapping: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
   // '"': '&quot;',
   // [`'`]: '&#39;',
 };
 
-export function parseCodeOperators(code: string, options: ParseCodeOperatorsOptions): ParseCodeOperatorsResult {
+export function parseCodeOperators(
+  code: string,
+  options: ParseCodeOperatorsOptions,
+): ParseCodeOperatorsResult {
   const { operators } = options;
   return code
-    .split('')
+    .split("")
     .map((ch) => {
       const result = {
         isOperator: operators.includes(ch),

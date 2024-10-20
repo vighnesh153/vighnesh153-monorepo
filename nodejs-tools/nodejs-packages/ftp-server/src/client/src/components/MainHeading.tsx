@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { Typography } from '@mui/material';
+import { ReactElement } from "react";
+import { Typography } from "@mui/material";
 
 export function MainHeading(): ReactElement {
   return (
@@ -8,8 +8,8 @@ export function MainHeading(): ReactElement {
       variant="h3"
       sx={{
         typography: {
-          xs: 'h4',
-          md: 'h3',
+          xs: "h4",
+          md: "h3",
         },
       }}
     >

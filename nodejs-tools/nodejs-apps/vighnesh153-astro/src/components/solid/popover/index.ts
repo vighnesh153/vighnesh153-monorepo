@@ -1,2 +1,2 @@
-export * from './externalTypes.ts';
-export { Popover, PopoverPlayground } from './Popover.tsx';
+export * from "./externalTypes.ts";
+export { Popover, PopoverPlayground } from "./Popover.tsx";

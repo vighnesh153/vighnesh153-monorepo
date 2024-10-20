@@ -1,7 +1,8 @@
-import { not } from '@vighnesh153/tools';
-import { CommonTypes } from './commonTypes.ts';
+import { not } from "@vighnesh153/tools";
+import { CommonTypes } from "./commonTypes.ts";
 
-export interface ParseCodeCommentsOptions extends Pick<CommonTypes, 'escapeCharacters'> {
+export interface ParseCodeCommentsOptions
+  extends Pick<CommonTypes, "escapeCharacters"> {
   singleLineCommentIdentifiers: string[];
   multiLineCommentIdentifierPairs: Map<string, string>;
 }
@@ -18,7 +19,9 @@ function tryParseSingleLineCommentStart({
   code: string;
   singleLineCommentIdentifiers: string[];
 }): string | null {
-  return singleLineCommentIdentifiers.find((startId) => code.startsWith(startId)) ?? null;
+  return singleLineCommentIdentifiers.find((startId) =>
+    code.startsWith(startId)
+  ) ?? null;
 }
 
 function tryParseMultilineLineCommentStart({
@@ -28,11 +31,20 @@ function tryParseMultilineLineCommentStart({
   code: string;
   multiLineCommentStartIdentifiers: string[];
 }): string | null {
-  return multiLineCommentStartIdentifiers.find((startId) => code.startsWith(startId)) ?? null;
+  return multiLineCommentStartIdentifiers.find((startId) =>
+    code.startsWith(startId)
+  ) ?? null;
 }
 
-export function parseCodeComments(code: string, options: ParseCodeCommentsOptions): ParseCodeCommentsResult {
-  const { singleLineCommentIdentifiers, multiLineCommentIdentifierPairs, escapeCharacters } = options;
+export function parseCodeComments(
+  code: string,
+  options: ParseCodeCommentsOptions,
+): ParseCodeCommentsResult {
+  const {
+    singleLineCommentIdentifiers,
+    multiLineCommentIdentifierPairs,
+    escapeCharacters,
+  } = options;
 
   const commentIndices: { start: number; end: number }[] = [];
   let singleLineCommentStartIndex: number | null = null;
@@ -41,7 +53,7 @@ export function parseCodeComments(code: string, options: ParseCodeCommentsOption
 
   let currIndex = 0;
   while (currIndex < code.length) {
-    const prevCh = currIndex > 0 ? code[currIndex - 1] : '';
+    const prevCh = currIndex > 0 ? code[currIndex - 1] : "";
     const isEscaped = escapeCharacters.includes(prevCh);
 
     // check if inside single line comment
@@ -66,9 +78,11 @@ export function parseCodeComments(code: string, options: ParseCodeCommentsOption
     // check if inside multiline comment
     if (multiLineCommentStartIndex !== null) {
       if (multilineCommentStartString === null) {
-        throw new Error('This should not happen');
+        throw new Error("This should not happen");
       }
-      const expectedCommentEndString = multiLineCommentIdentifierPairs.get(multilineCommentStartString)!;
+      const expectedCommentEndString = multiLineCommentIdentifierPairs.get(
+        multilineCommentStartString,
+      )!;
 
       // multiline comment ending
       if (code.slice(currIndex).startsWith(expectedCommentEndString)) {
@@ -100,7 +114,9 @@ export function parseCodeComments(code: string, options: ParseCodeCommentsOption
     // detect if beginning of multiline line comment
     const multiLineCommentStart = tryParseMultilineLineCommentStart({
       code: code.slice(currIndex),
-      multiLineCommentStartIdentifiers: Array.from(multiLineCommentIdentifierPairs.keys()),
+      multiLineCommentStartIdentifiers: Array.from(
+        multiLineCommentIdentifierPairs.keys(),
+      ),
     });
     if (multiLineCommentStart !== null && not(isEscaped)) {
       multiLineCommentStartIndex = currIndex;

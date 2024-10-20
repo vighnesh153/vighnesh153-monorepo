@@ -1,10 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-import ip from 'ip';
-import chalk from 'chalk';
-import { fileURLToPath } from 'url';
-import { not } from '@vighnesh153/tools';
-import { Vighnesh153File } from '../types';
+import fs from "fs";
+import path from "path";
+import ip from "ip";
+import chalk from "chalk";
+import { fileURLToPath } from "url";
+import { not } from "@vighnesh153/tools";
+import { Vighnesh153File } from "../types";
 
 /**
  * __dirname
@@ -21,7 +21,9 @@ export function isDirectoryPath(pathString: string): boolean {
   return fs.existsSync(pathString) && fs.lstatSync(pathString).isDirectory();
 }
 
-export function getDirectoryInformation(requestedPath: string): Vighnesh153File[] {
+export function getDirectoryInformation(
+  requestedPath: string,
+): Vighnesh153File[] {
   if (not(isDirectoryPath(requestedPath))) {
     return [];
   }
@@ -30,12 +32,14 @@ export function getDirectoryInformation(requestedPath: string): Vighnesh153File[
     const filePath = path.resolve(requestedPath, fileName);
     return {
       name: fileName,
-      type: isDirectoryPath(filePath) ? 'directory' : 'file',
+      type: isDirectoryPath(filePath) ? "directory" : "file",
     };
   });
 }
 
-export function serverIsListeningHandler(options: { directoryPath: string; port: number }): () => void {
+export function serverIsListeningHandler(
+  options: { directoryPath: string; port: number },
+): () => void {
   const { directoryPath, port } = options;
   return () => {
     /* eslint-disable no-console */
@@ -47,16 +51,18 @@ export function serverIsListeningHandler(options: { directoryPath: string; port:
   };
 }
 
-export function serverFailedToStartHandler(options: { directoryPath: string; port: number }) {
+export function serverFailedToStartHandler(
+  options: { directoryPath: string; port: number },
+) {
   const { port } = options;
   return (e: unknown) => {
-    if ((e as { code: string }).code === 'EADDRINUSE') {
+    if ((e as { code: string }).code === "EADDRINUSE") {
       /* eslint-disable no-console */
       console.log();
       console.log(e);
       console.log();
       console.log(chalk.red(`Port ${port} already in use!`));
-      console.log('Please try with a different port. eg. --port=4200');
+      console.log("Please try with a different port. eg. --port=4200");
       /* eslint-enable no-console */
       process.exit(1);
       return;

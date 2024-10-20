@@ -1,20 +1,24 @@
-const { tsRules } = require('./tsRules.cjs');
+const { tsRules } = require("./tsRules.cjs");
 
 module.exports = {
-  extends: ['plugin:astro/recommended', 'plugin:astro/jsx-a11y-recommended', 'vighnesh153/ts-base.eslintrc.cjs'],
+  extends: [
+    "plugin:astro/recommended",
+    "plugin:astro/jsx-a11y-recommended",
+    "vighnesh153/ts-base.eslintrc.cjs",
+  ],
   parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 'latest',
-    extraFileExtensions: ['.astro', '.ts', '.tsx'],
+    sourceType: "module",
+    ecmaVersion: "latest",
+    extraFileExtensions: [".astro", ".ts", ".tsx"],
   },
   overrides: [
     {
-      files: ['*.astro'],
-      parser: 'astro-eslint-parser',
+      files: ["*.astro"],
+      parser: "astro-eslint-parser",
       parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
-        sourceType: 'module',
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".astro"],
+        sourceType: "module",
       },
       rules: {
         ...tsRules,

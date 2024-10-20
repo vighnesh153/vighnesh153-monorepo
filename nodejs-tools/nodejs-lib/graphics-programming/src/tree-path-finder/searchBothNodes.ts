@@ -1,4 +1,4 @@
-import { TreeNode } from './TreeNode.ts';
+import { TreeNode } from "./TreeNode.ts";
 
 interface SearchResult {
   foundStart: boolean;
@@ -13,10 +13,10 @@ export function* searchBothNodes(
   root: TreeNode,
   startNode: TreeNode,
   endNode: TreeNode,
-  searchResult: SearchResult = { foundStart: false, foundEnd: false }
+  searchResult: SearchResult = { foundStart: false, foundEnd: false },
 ): Iterable<unknown> {
   if (root !== startNode && root !== endNode) {
-    root.updateState('visited');
+    root.updateState("visited");
     yield;
   }
 

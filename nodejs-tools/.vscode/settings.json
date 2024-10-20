@@ -40,7 +40,15 @@
     "editor.tabSize": 2
   },
   "chat.editor.fontSize": 20,
-  "cSpell.userWords": ["astro", "Millis", "Pikachu", "Raut", "treeshake", "tsup", "Vighnesh"],
+  "cSpell.userWords": [
+    "astro",
+    "Millis",
+    "Pikachu",
+    "Raut",
+    "treeshake",
+    "tsup",
+    "Vighnesh"
+  ],
   "debug.console.fontSize": 20,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.bracketPairColorization.enabled": true,
@@ -52,7 +60,13 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "eslint.format.enable": true,
-  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
   "explorer.autoReveal": "focusNoScroll",
   "explorer.compactFolders": false,
   "git.autofetch": true,
@@ -73,5 +87,15 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
-  "cSpell.words": ["astro", "Millis", "Pikachu", "Raut", "tailwindcss", "treeshake", "tseslint", "tsup", "Vighnesh"]
+  "cSpell.words": [
+    "astro",
+    "Millis",
+    "Pikachu",
+    "Raut",
+    "tailwindcss",
+    "treeshake",
+    "tseslint",
+    "tsup",
+    "Vighnesh"
+  ]
 }

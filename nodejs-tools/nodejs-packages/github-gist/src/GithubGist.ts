@@ -5,16 +5,21 @@ import {
   isGistPublic,
   removeFileContentFromGistMetadata,
   verifyGithubPAT,
-} from './utils/index.ts';
-import { IGithubGistMetadata, IGithubGistProps } from './types/index.ts';
-import { GistFile } from './GithubGistFile.ts';
-import { saveGithubGist } from './saveGithubGist.ts';
+} from "./utils/index.ts";
+import { IGithubGistMetadata, IGithubGistProps } from "./types/index.ts";
+import { GistFile } from "./GithubGistFile.ts";
+import { saveGithubGist } from "./saveGithubGist.ts";
 
 function gistNotInitializedError() {
-  return new Error(`Gist is not initialized. Initialize the gist by invoking the "initialize()" method first`);
+  return new Error(
+    `Gist is not initialized. Initialize the gist by invoking the "initialize()" method first`,
+  );
 }
 
-function buildGistFilesFromGistMetadataFiles(gistMetadata: IGithubGistMetadata, options: IGithubGistProps): GistFile[] {
+function buildGistFilesFromGistMetadataFiles(
+  gistMetadata: IGithubGistMetadata,
+  options: IGithubGistProps,
+): GistFile[] {
   const cleanedGistMetadata = removeFileContentFromGistMetadata(gistMetadata);
 
   return Object.values(gistMetadata.files).map(
@@ -28,7 +33,7 @@ function buildGistFilesFromGistMetadataFiles(gistMetadata: IGithubGistMetadata, 
         fileContent: file.content,
         fileName: file.filename,
         hasUnSyncedUpdates: false,
-      })
+      }),
   );
 }
 
@@ -40,14 +45,13 @@ export class GithubGist {
   private gistFiles: GistFile[] = [];
 
   /**
-   *
    * @param options
    * @deprecated Use the `GithubGist.initializeUsingGistId` static method instead
    */
   private constructor(private options: IGithubGistProps) {
     if (GithubGist.avoidInstantiation) {
       throw new Error(
-        `Public instantiation is not supported. Do "await GithubGist.initializeUsingGistId(...)" instead`
+        `Public instantiation is not supported. Do "await GithubGist.initializeUsingGistId(...)" instead`,
       );
     }
   }
@@ -86,7 +90,9 @@ export class GithubGist {
    * Initializes the gist object with the metadata from server and all file content
    * @param options
    */
-  static async initializeUsingGistId(options: IGithubGistProps): Promise<GithubGist> {
+  static async initializeUsingGistId(
+    options: IGithubGistProps,
+  ): Promise<GithubGist> {
     const { personalAccessToken, gistId } = options;
 
     // Throws error if the token is not valid
@@ -98,7 +104,11 @@ export class GithubGist {
     GithubGist.avoidInstantiation = true;
 
     // Waits to fetch the gist metadata
-    const gistMetadata = await fetchGistMetadata({ personalAccessToken, gistId, corsConfig: getCorsConfig(options) });
+    const gistMetadata = await fetchGistMetadata({
+      personalAccessToken,
+      gistId,
+      corsConfig: getCorsConfig(options),
+    });
 
     // File content will be stored in `gistFiles`. Remove it from here to avoid bloat.
     gist.gistMetadata = removeFileContentFromGistMetadata(gistMetadata);
@@ -118,7 +128,10 @@ export class GithubGist {
       gistId,
       corsConfig: getCorsConfig(this.options),
     });
-    this.gistFiles = buildGistFilesFromGistMetadataFiles(gistMetadata, this.options);
+    this.gistFiles = buildGistFilesFromGistMetadataFiles(
+      gistMetadata,
+      this.options,
+    );
   }
 
   /**
@@ -144,7 +157,7 @@ export class GithubGist {
       enableRequestCaching: getEnableRequestCaching(this.options),
       isPublic: isGistPublic(this.options),
       fileName,
-      fileContent: '',
+      fileContent: "",
       personalAccessToken: this.options.personalAccessToken,
       gistMetadata: this.gistMetadata,
     });

@@ -1,15 +1,15 @@
-import { Queue, not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { TreeNode } from './TreeNode.ts';
-import { populateTreeNodePositions } from './populateTreeNodePositions.ts';
-import { createTreeStructure } from './createTreeStructure.ts';
-import { TreeNodeEdge } from './Edge.ts';
-import { createTreeNodeEdges } from './createTreeNodeEdges.ts';
-import { getRandomNodes } from './getRandomNodes.ts';
-import { searchBothNodes } from './searchBothNodes.ts';
-import { findPathFromRoot } from './findPathFromRoot.ts';
-import { findConnectingPath } from './findConnectingPath.ts';
+import { not, Queue } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { TreeNode } from "./TreeNode.ts";
+import { populateTreeNodePositions } from "./populateTreeNodePositions.ts";
+import { createTreeStructure } from "./createTreeStructure.ts";
+import { TreeNodeEdge } from "./Edge.ts";
+import { createTreeNodeEdges } from "./createTreeNodeEdges.ts";
+import { getRandomNodes } from "./getRandomNodes.ts";
+import { searchBothNodes } from "./searchBothNodes.ts";
+import { findPathFromRoot } from "./findPathFromRoot.ts";
+import { findConnectingPath } from "./findConnectingPath.ts";
 
 interface GameOptions {
   bgColor?: string;
@@ -33,7 +33,12 @@ export class TreePathFinderGame {
     this.#bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
     this.#depth = options.depth ?? 7;
 
-    const rootNode = createTreeStructure(this.#canvasWrapper, null, 1, this.#depth);
+    const rootNode = createTreeStructure(
+      this.#canvasWrapper,
+      null,
+      1,
+      this.#depth,
+    );
     if (rootNode == null) {
       throw new Error(`Depth should be an integer >= 1`);
     }
@@ -42,8 +47,8 @@ export class TreePathFinderGame {
     this.#treeNodeEdges = createTreeNodeEdges(this.#canvasWrapper, rootNode);
 
     [this.#startNode, this.#endNode] = getRandomNodes(rootNode, 2);
-    this.#startNode.updateState('destination');
-    this.#endNode.updateState('destination');
+    this.#startNode.updateState("destination");
+    this.#endNode.updateState("destination");
   }
 
   *start() {
@@ -73,7 +78,7 @@ export class TreePathFinderGame {
       if (node.isDestination) {
         continue;
       }
-      node.updateState('path');
+      node.updateState("path");
       yield;
     }
   }
@@ -87,7 +92,13 @@ export class TreePathFinderGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 
   private drawTreeNodes(): void {

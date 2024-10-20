@@ -1,10 +1,17 @@
-import { Queue } from '@vighnesh153/tools';
-import { Color } from './colors.ts';
-import { buildClearScreenEvent, buildCommitEvent } from './events.ts';
-import { buildEventsManager, isRedoAvailable, isUndoAvailable, publishEvents, redo, undo } from './events-manager.ts';
+import { Queue } from "@vighnesh153/tools";
+import { Color } from "./colors.ts";
+import { buildClearScreenEvent, buildCommitEvent } from "./events.ts";
+import {
+  buildEventsManager,
+  isRedoAvailable,
+  isUndoAvailable,
+  publishEvents,
+  redo,
+  undo,
+} from "./events-manager.ts";
 
-describe('events manager tests', () => {
-  it('should publish the events', () => {
+describe("events manager tests", () => {
+  it("should publish the events", () => {
     // arrange
     const eventsManager = buildEventsManager();
 
@@ -21,7 +28,7 @@ describe('events manager tests', () => {
     expect(eventsManager.redoEventsStack.size).toBe(0);
   });
 
-  it('should return false if undo is not possible', () => {
+  it("should return false if undo is not possible", () => {
     // arrange
     const eventsManager = buildEventsManager();
 
@@ -32,10 +39,12 @@ describe('events manager tests', () => {
     expect(result).toBe(false);
   });
 
-  it('should return true if undo is possible', () => {
+  it("should return true if undo is possible", () => {
     // arrange
     const eventsManager = buildEventsManager();
-    publishEvents(eventsManager, [buildClearScreenEvent({ color: Color.Black })]);
+    publishEvents(eventsManager, [
+      buildClearScreenEvent({ color: Color.Black }),
+    ]);
 
     // act
     const result = isUndoAvailable(eventsManager);
@@ -44,7 +53,7 @@ describe('events manager tests', () => {
     expect(result).toBe(true);
   });
 
-  it('should do the undo operation for 1 commit', () => {
+  it("should do the undo operation for 1 commit", () => {
     // arrange
     const eventsManager = buildEventsManager();
     const events = [
@@ -63,14 +72,14 @@ describe('events manager tests', () => {
     expect(eventsManager.pendingQueue.size).toBe(1); // 1 is the clear slate event
     // prettier-ignore
     expect(eventsManager.redoEventsStack.toArray()).toStrictEqual([
-      events[3], 
-      events[2], 
-      events[1], 
+      events[3],
+      events[2],
+      events[1],
       events[0],
     ]);
   });
 
-  it('should do the undo operation for multiple commits', () => {
+  it("should do the undo operation for multiple commits", () => {
     // arrange
     const eventsManager = buildEventsManager();
     const events = [
@@ -106,7 +115,7 @@ describe('events manager tests', () => {
     ]);
   });
 
-  it('should return false if redo is not possible', () => {
+  it("should return false if redo is not possible", () => {
     // arrange
     const eventsManager = buildEventsManager();
 
@@ -117,10 +126,12 @@ describe('events manager tests', () => {
     expect(result).toBe(false);
   });
 
-  it('should return true if redo is possible', () => {
+  it("should return true if redo is possible", () => {
     // arrange
     const eventsManager = buildEventsManager();
-    publishEvents(eventsManager, [buildClearScreenEvent({ color: Color.Black })]);
+    publishEvents(eventsManager, [
+      buildClearScreenEvent({ color: Color.Black }),
+    ]);
     undo(eventsManager);
 
     // act
@@ -130,7 +141,7 @@ describe('events manager tests', () => {
     expect(result).toBe(true);
   });
 
-  it('should do the redo operation for 1 commit', () => {
+  it("should do the redo operation for 1 commit", () => {
     // arrange
     const eventsManager = buildEventsManager();
     const events = [
@@ -162,7 +173,7 @@ describe('events manager tests', () => {
     expect(eventsManager.redoEventsStack.size).toBe(0);
   });
 
-  it('should do the redo operation for multiple commits', () => {
+  it("should do the redo operation for multiple commits", () => {
     // arrange
     const eventsManager = buildEventsManager();
     const events = [

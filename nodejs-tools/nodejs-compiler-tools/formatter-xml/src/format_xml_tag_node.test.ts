@@ -1,9 +1,9 @@
-import { test, expect } from 'vitest';
-import { XmlTagNode } from '@vighnesh153/parser-xml';
-import { formatXmlTagNode } from './format_xml_tag_node.ts';
-import { parseProgram } from './test_utils.ts';
+import { expect, test } from "vitest";
+import { XmlTagNode } from "@vighnesh153/parser-xml";
+import { formatXmlTagNode } from "./format_xml_tag_node.ts";
+import { parseProgram } from "./test_utils.ts";
 
-test('should format empty, self-closing xml tag node', () => {
+test("should format empty, self-closing xml tag node", () => {
   const [parser, program] = parseProgram(`<manifest />`);
 
   expect(parser.errors.length).toBe(0);
@@ -14,13 +14,13 @@ test('should format empty, self-closing xml tag node', () => {
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
-    })
+    }),
   ).toMatchInlineSnapshot(`"<manifest />"`);
 });
 
-test('should format self-closing xml tag node with attributes', () => {
+test("should format self-closing xml tag node with attributes", () => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" />`
+    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" />`,
   );
 
   expect(parser.errors.length).toBe(0);
@@ -31,7 +31,7 @@ test('should format self-closing xml tag node with attributes', () => {
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
-    })
+    }),
   ).toMatchInlineSnapshot(`
     "<manifest
         simpleAttribute="some random value"
@@ -39,11 +39,11 @@ test('should format self-closing xml tag node with attributes', () => {
   `);
 });
 
-test('should format non self-closing xml tag node with attributes but no children', () => {
+test("should format non self-closing xml tag node with attributes but no children", () => {
   const [parser, program] = parseProgram(
     `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" >
   </ manifest>
-    `
+    `,
   );
 
   expect(parser.errors.length).toBe(0);
@@ -54,7 +54,7 @@ test('should format non self-closing xml tag node with attributes but no childre
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
-    })
+    }),
   ).toMatchInlineSnapshot(`
     "<manifest
         simpleAttribute="some random value"
@@ -62,7 +62,7 @@ test('should format non self-closing xml tag node with attributes but no childre
   `);
 });
 
-test('should format xml tag node with children', () => {
+test("should format xml tag node with children", () => {
   const [parser, program] = parseProgram(
     `<manifest    >
      < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
@@ -70,7 +70,7 @@ test('should format xml tag node with children', () => {
           <  childTag3  Infernape = "lol" >  </ childTag3>
        </ childTag2>
   </ manifest>
-    `
+    `,
   );
 
   expect(parser.errors.length).toBe(0);
@@ -81,7 +81,7 @@ test('should format xml tag node with children', () => {
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
-    })
+    }),
   ).toMatchInlineSnapshot(`
     "<manifest>
         <childTag
@@ -94,7 +94,7 @@ test('should format xml tag node with children', () => {
   `);
 });
 
-test('should sort all attributes based on android rules', () => {
+test("should sort all attributes based on android rules", () => {
   const [parser, program] = parseProgram(
     `<manifest  
         qlaAttr="prop18"
@@ -125,7 +125,7 @@ test('should sort all attributes based on android rules', () => {
         android:poki1:id="prop7"
         android:temper="prop23"
      />
-    `
+    `,
   );
 
   expect(parser.errors.length).toBe(0);
@@ -136,7 +136,7 @@ test('should sort all attributes based on android rules', () => {
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
-    })
+    }),
   ).toMatchInlineSnapshot(`
     "<manifest
         xmlns:android="prop1"
@@ -169,7 +169,7 @@ test('should sort all attributes based on android rules', () => {
   `);
 });
 
-test('should format xml tag node without sorting if sortAttribute is false', () => {
+test("should format xml tag node without sorting if sortAttribute is false", () => {
   const [parser, program] = parseProgram(
     `<manifest    >
      < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
@@ -177,7 +177,7 @@ test('should format xml tag node without sorting if sortAttribute is false', () 
           <  childTag3  Infernape = "lol" >  </ childTag3>
        </ childTag2>
   </ manifest>
-    `
+    `,
   );
 
   expect(parser.errors.length).toBe(0);
@@ -188,7 +188,7 @@ test('should format xml tag node without sorting if sortAttribute is false', () 
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: false,
-    })
+    }),
   ).toMatchInlineSnapshot(`
     "<manifest>
         <childTag

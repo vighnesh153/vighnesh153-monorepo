@@ -1,8 +1,8 @@
 module.exports = {
   plugins: {
     tailwindcss: {},
-    'postcss-import': {},
-    'postcss-custom-media': {},
+    "postcss-import": {},
+    "postcss-custom-media": {},
     autoprefixer: {},
     cssnano: {},
   },

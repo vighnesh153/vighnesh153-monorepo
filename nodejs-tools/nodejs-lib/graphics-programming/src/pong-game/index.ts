@@ -1,1 +1,1 @@
-export { PongGame } from './Game.ts';
+export { PongGame } from "./Game.ts";

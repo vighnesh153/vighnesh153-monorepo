@@ -1,10 +1,16 @@
 /* eslint-disable max-len */
-import { splitProps, type JSX } from 'solid-js';
+import { type JSX, splitProps } from "solid-js";
 
 export type CloseIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
 
 export function CloseIcon(incomingProps: CloseIconProps) {
-  const [, props] = splitProps(incomingProps, ['xmlns', 'viewBox', 'stroke', 'stroke-linecap', 'stroke-linejoin']);
+  const [, props] = splitProps(incomingProps, [
+    "xmlns",
+    "viewBox",
+    "stroke",
+    "stroke-linecap",
+    "stroke-linejoin",
+  ]);
 
   return (
     <svg

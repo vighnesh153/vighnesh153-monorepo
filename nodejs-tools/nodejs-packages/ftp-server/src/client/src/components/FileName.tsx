@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { Typography } from '@mui/material';
+import { ReactElement } from "react";
+import { Typography } from "@mui/material";
 
 export interface FileNameProps {
   fileName: string;
@@ -10,10 +10,10 @@ export function FileName({ fileName }: FileNameProps): ReactElement {
     <Typography
       component="span"
       sx={{
-        display: 'block',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
+        display: "block",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
       }}
     >
       {fileName}

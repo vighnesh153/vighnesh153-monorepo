@@ -1,5 +1,5 @@
-import { randomIntegerBetween } from '@std/random'
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { randomIntegerBetween } from "@std/random";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
 interface TwoWayPipeOptions {
   verticalPadding: number;
@@ -33,15 +33,15 @@ export class TwoWayPipe {
     this.canvasWrapper = canvasWrapper;
 
     this.verticalPadding = options.verticalPadding;
-    this.color = options.color ?? 'blue';
+    this.color = options.color ?? "blue";
     this.width = options.width ?? 30;
     this.minimumPipeHeight = options.minimumPipeHeight ?? 30;
     this.spaceBetweenPipes = options.spaceBetweenPipes ?? 100;
     this.speed = options.speed ?? 2;
 
     this.topPipeHeight = this.getRandomTopPipeHeight();
-    this.bottomPipeHeight =
-      canvasWrapper.height - 2 * this.verticalPadding - this.topPipeHeight - this.spaceBetweenPipes;
+    this.bottomPipeHeight = canvasWrapper.height - 2 * this.verticalPadding -
+      this.topPipeHeight - this.spaceBetweenPipes;
 
     this.initialHorizontalOffset = options.initialHorizontalOffset ?? 100;
     this.x = canvasWrapper.width + this.initialHorizontalOffset;
@@ -53,13 +53,20 @@ export class TwoWayPipe {
 
   draw(): void {
     const cw = this.canvasWrapper;
-    const { color, width, verticalPadding, topPipeHeight, bottomPipeHeight } = this;
+    const { color, width, verticalPadding, topPipeHeight, bottomPipeHeight } =
+      this;
 
     // top pipe
     cw.drawFilledRect(this.x, verticalPadding, width, topPipeHeight, color);
 
     // bottom pipe
-    cw.drawFilledRect(this.x, cw.height - verticalPadding - bottomPipeHeight, width, bottomPipeHeight, color);
+    cw.drawFilledRect(
+      this.x,
+      cw.height - verticalPadding - bottomPipeHeight,
+      width,
+      bottomPipeHeight,
+      color,
+    );
   }
 
   update(): void {
@@ -75,7 +82,11 @@ export class TwoWayPipe {
   }
 
   private getRandomTopPipeHeight(): number {
-    const maxAvailableHeight = this.canvasWrapper.height - this.verticalPadding * 2;
-    return randomIntegerBetween(this.minimumPipeHeight, maxAvailableHeight - this.minimumPipeHeight - this.spaceBetweenPipes);
+    const maxAvailableHeight = this.canvasWrapper.height -
+      this.verticalPadding * 2;
+    return randomIntegerBetween(
+      this.minimumPipeHeight,
+      maxAvailableHeight - this.minimumPipeHeight - this.spaceBetweenPipes,
+    );
   }
 }

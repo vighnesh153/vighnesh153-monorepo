@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from 'src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
+} from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
 
 export class ArrayIndexEvaluator extends ExpressionEvaluator {
   private static regex = /^(.+)\[(.*)]$/;
 
   constructor(
     public scope: Scope,
-    public arrayType: string
+    public arrayType: string,
   ) {
     super();
   }
@@ -23,16 +23,16 @@ export class ArrayIndexEvaluator extends ExpressionEvaluator {
       const arrayName = result[1].trim();
 
       if (this.scope.hasVariable(arrayName) === false) {
-        return '';
+        return "";
       }
 
-      if (this.scope.getVariable(arrayName).type !== 'array') {
-        return '';
+      if (this.scope.getVariable(arrayName).type !== "array") {
+        return "";
       }
 
       return this.scope.getVariable(arrayName).arrayType as string;
     }
-    return '';
+    return "";
   }
 
   tryEvaluate(text: string): boolean {
@@ -49,7 +49,7 @@ export class ArrayIndexEvaluator extends ExpressionEvaluator {
 
       const evaluator = new ArithmeticExpressionEvaluator(this.scope);
       if (evaluator.tryEvaluate(indexString) === false) {
-        throw new Error('Invalid index.');
+        throw new Error("Invalid index.");
       }
 
       const index = evaluator.evaluate(indexString);
@@ -57,11 +57,11 @@ export class ArrayIndexEvaluator extends ExpressionEvaluator {
 
       // @ts-ignore
       if (index < 0 || index >= variable.value.length) {
-        throw new Error('Index out of bounds.');
+        throw new Error("Index out of bounds.");
       }
       // @ts-ignore
       return variable.value[index];
     }
-    throw new Error('Invalid statement.');
+    throw new Error("Invalid statement.");
   }
 }

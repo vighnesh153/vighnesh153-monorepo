@@ -1,14 +1,19 @@
-import { IGithubGistMetadata } from '../types/index.ts';
+import { IGithubGistMetadata } from "../types/index.ts";
 
-export function removeFileContentFromGistMetadata(gistMetadata: IGithubGistMetadata): IGithubGistMetadata {
+export function removeFileContentFromGistMetadata(
+  gistMetadata: IGithubGistMetadata,
+): IGithubGistMetadata {
   return {
     ...gistMetadata,
-    files: Object.keys(gistMetadata.files).reduce((accumulator, filename: string) => {
-      accumulator[filename] = {
-        filename,
-        content: '',
-      };
-      return accumulator;
-    }, {} as IGithubGistMetadata['files']),
+    files: Object.keys(gistMetadata.files).reduce(
+      (accumulator, filename: string) => {
+        accumulator[filename] = {
+          filename,
+          content: "",
+        };
+        return accumulator;
+      },
+      {} as IGithubGistMetadata["files"],
+    ),
   };
 }

@@ -1,21 +1,21 @@
-const { defineConfig } = require('eslint-define-config');
-const { tsRules } = require('./tsRules.cjs');
+const { defineConfig } = require("eslint-define-config");
+const { tsRules } = require("./tsRules.cjs");
 
 module.exports = defineConfig({
   overrides: [
     {
       extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:import/recommended',
-        'plugin:import/errors',
-        'plugin:import/warnings',
-        'plugin:import/typescript',
-        'prettier',
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "prettier",
       ],
-      plugins: ['import'],
-      files: ['*.ts', '*.tsx'],
-      parser: '@typescript-eslint/parser',
+      plugins: ["import"],
+      files: ["*.ts", "*.tsx"],
+      parser: "@typescript-eslint/parser",
       env: {
         browser: true,
         amd: true,
@@ -23,13 +23,13 @@ module.exports = defineConfig({
       },
       parserOptions: {
         ecmaVersion: 2015,
-        sourceType: 'module',
+        sourceType: "module",
       },
       settings: {
-        'import/parsers': {
-          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".tsx"],
         },
-        'import/resolver': {
+        "import/resolver": {
           typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
         },
       },

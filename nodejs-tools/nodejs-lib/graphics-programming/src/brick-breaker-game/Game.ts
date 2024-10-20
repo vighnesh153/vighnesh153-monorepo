@@ -1,11 +1,11 @@
-import { not } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { Paddle } from './Paddle.ts';
-import { Ball } from './Ball.ts';
-import { ScoreTracker } from './ScoreTracker.ts';
-import { Brick } from './Brick.ts';
-import { createBricksGrid } from './createBricksGrid.ts';
+import { not } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { Paddle } from "./Paddle.ts";
+import { Ball } from "./Ball.ts";
+import { ScoreTracker } from "./ScoreTracker.ts";
+import { Brick } from "./Brick.ts";
+import { createBricksGrid } from "./createBricksGrid.ts";
 
 interface BrickBreakerGameOptions {
   readonly bgColor?: string;
@@ -43,7 +43,7 @@ export class BrickBreakerGame {
     this.canvasWrapper = canvasWrapper;
 
     this.bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
-    this.scoreColor = options.scoreColor ?? 'black';
+    this.scoreColor = options.scoreColor ?? "black";
     this.scoreFontSize = options.scoreFontSize ?? 15;
     this.rows = options.rows ?? 15;
     this.placeholderBrickRows = options.placeholderBrickRows ?? 3;
@@ -81,8 +81,9 @@ export class BrickBreakerGame {
           row,
           column,
           width: canvasWrapper.width / 20,
-          visible: row >= this.placeholderBrickRows && row < this.rows - this.placeholderBrickRows,
-        })
+          visible: row >= this.placeholderBrickRows &&
+            row < this.rows - this.placeholderBrickRows,
+        }),
     );
   }
 
@@ -127,7 +128,13 @@ export class BrickBreakerGame {
     const rect = this.canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.bgColor);
+    this.canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.bgColor,
+    );
   }
 
   private writeScore(): void {
@@ -215,9 +222,14 @@ export class BrickBreakerGame {
   private handleBrickCollision(): void {
     const { previousBrickRow, previousBrickCol } = this;
     const [[randomBrick]] = this.bricksGrid;
-    const currentBrickRow = Math.floor(this.ball.coordinate.y / randomBrick.height);
-    const currentBrickCol = Math.floor(this.ball.coordinate.x / randomBrick.width);
-    const currentBrick = this.bricksGrid[currentBrickRow]?.[currentBrickCol] ?? null;
+    const currentBrickRow = Math.floor(
+      this.ball.coordinate.y / randomBrick.height,
+    );
+    const currentBrickCol = Math.floor(
+      this.ball.coordinate.x / randomBrick.width,
+    );
+    const currentBrick = this.bricksGrid[currentBrickRow]?.[currentBrickCol] ??
+      null;
 
     if (
       previousBrickCol === null ||
@@ -230,7 +242,10 @@ export class BrickBreakerGame {
       return;
     }
 
-    if (currentBrickRow !== previousBrickRow && currentBrickCol !== previousBrickCol) {
+    if (
+      currentBrickRow !== previousBrickRow &&
+      currentBrickCol !== previousBrickCol
+    ) {
       // ball is travelling diagonally
       this.ball.flipVelocityX();
       this.ball.flipVelocityY();

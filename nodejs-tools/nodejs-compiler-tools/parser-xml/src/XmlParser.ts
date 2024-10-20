@@ -1,7 +1,7 @@
-import { not } from '@vighnesh153/tools';
-import { assert } from '@std/assert';
-import { nextToken, XmlTokenType } from '@vighnesh153/lexer-xml';
-import { ParserError } from './ParserError.ts';
+import { not } from "@vighnesh153/tools";
+import { assert } from "@std/assert";
+import { nextToken, XmlTokenType } from "@vighnesh153/lexer-xml";
+import { ParserError } from "./ParserError.ts";
 import {
   XmlCommentNode,
   XmlElementAttribute,
@@ -10,8 +10,8 @@ import {
   XmlPrologNode,
   XmlTagNode,
   XmlTextNode,
-} from './ast.ts';
-import { Lexer, Token } from '@vighnesh153/lexer-core';
+} from "./ast.ts";
+import { Lexer, Token } from "@vighnesh153/lexer-core";
 
 export class XmlParser {
   readonly #errors: Array<ParserError> = [];
@@ -62,9 +62,9 @@ export class XmlParser {
     }
     this.addError(
       new ParserError({
-        errorType: 'UNEXPECTED_TOKEN',
+        errorType: "UNEXPECTED_TOKEN",
         culpritToken: this.#peekToken,
-      })
+      }),
     );
     return false;
   }
@@ -86,9 +86,9 @@ export class XmlParser {
       }
       this.addError(
         new ParserError({
-          errorType: 'UNEXPECTED_TOKEN',
+          errorType: "UNEXPECTED_TOKEN",
           culpritToken: this.#peekToken,
-        })
+        }),
       );
       return null;
     }
@@ -100,9 +100,9 @@ export class XmlParser {
     }
     this.addError(
       new ParserError({
-        errorType: 'UNEXPECTED_TOKEN',
+        errorType: "UNEXPECTED_TOKEN",
         culpritToken: this.#currentToken,
-      })
+      }),
     );
     return null;
   }
@@ -110,7 +110,7 @@ export class XmlParser {
   private parseXmlPrologNode(): XmlPrologNode | null {
     assert(
       this.isCurrentToken(XmlTokenType.LeftAngleBracket),
-      `Shouldn't call parseXmlPrologNode when current token is not '<'`
+      `Shouldn't call parseXmlPrologNode when current token is not '<'`,
     );
 
     // move past "<"
@@ -118,19 +118,19 @@ export class XmlParser {
 
     assert(
       this.isCurrentToken(XmlTokenType.QuestionMark),
-      `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`
+      `Shouldn't call parseXmlPrologNode when expression doesn't start with '<?'`,
     );
 
     if (not(this.expectPeek(XmlTokenType.Identifier))) {
       return null;
     }
 
-    if (this.#currentToken.tokenLiteral !== 'xml') {
+    if (this.#currentToken.tokenLiteral !== "xml") {
       this.addError(
         new ParserError({
-          errorType: 'UNEXPECTED_PROLOG_TAG',
+          errorType: "UNEXPECTED_PROLOG_TAG",
           culpritToken: this.#currentToken,
-        })
+        }),
       );
       return null;
     }
@@ -145,8 +145,8 @@ export class XmlParser {
         this.addError(
           new ParserError({
             culpritToken: this.#currentToken,
-            errorType: 'UNEXPECTED_EOF',
-          })
+            errorType: "UNEXPECTED_EOF",
+          }),
         );
         return null;
       }
@@ -170,14 +170,14 @@ export class XmlParser {
   private parseXmlTagNode(): XmlTagNode | null {
     assert(
       this.isCurrentToken(XmlTokenType.LeftAngleBracket),
-      `Shouldn't call parseXmlTagNode when current token is not '<'`
+      `Shouldn't call parseXmlTagNode when current token is not '<'`,
     );
 
     this.nextToken();
 
     assert(
       this.isCurrentToken(XmlTokenType.Identifier),
-      `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`
+      `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`,
     );
 
     const xmlTagNode = new XmlTagNode();
@@ -198,8 +198,8 @@ export class XmlParser {
         this.addError(
           new ParserError({
             culpritToken: this.#currentToken,
-            errorType: 'UNEXPECTED_EOF',
-          })
+            errorType: "UNEXPECTED_EOF",
+          }),
         );
         return null;
       }
@@ -229,7 +229,7 @@ export class XmlParser {
 
     assert(
       this.isCurrentToken(XmlTokenType.RightAngleBracket),
-      `Expected ">" found ${this.#currentToken.tokenLiteral}`
+      `Expected ">" found ${this.#currentToken.tokenLiteral}`,
     );
 
     // move past ">"
@@ -242,13 +242,16 @@ export class XmlParser {
         this.addError(
           new ParserError({
             culpritToken: this.#peekToken,
-            errorType: 'UNEXPECTED_EOF',
-          })
+            errorType: "UNEXPECTED_EOF",
+          }),
         );
         return null;
       }
 
-      if (this.isCurrentToken(XmlTokenType.LeftAngleBracket) && this.isPeekToken(XmlTokenType.ForwardSlash)) {
+      if (
+        this.isCurrentToken(XmlTokenType.LeftAngleBracket) &&
+        this.isPeekToken(XmlTokenType.ForwardSlash)
+      ) {
         break;
       }
 
@@ -260,7 +263,10 @@ export class XmlParser {
       this.nextToken();
     }
 
-    assert(this.isCurrentToken(XmlTokenType.LeftAngleBracket), `Expected "<" found ${this.#currentToken.tokenLiteral}`);
+    assert(
+      this.isCurrentToken(XmlTokenType.LeftAngleBracket),
+      `Expected "<" found ${this.#currentToken.tokenLiteral}`,
+    );
 
     // Move past "<"
     this.nextToken();
@@ -280,8 +286,11 @@ export class XmlParser {
       this.nextToken();
     }
 
-    const openingTagName = xmlTagNode.namespaces.map((part) => part.tokenLiteral).join(':');
-    const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral).join(':');
+    const openingTagName = xmlTagNode.namespaces.map((part) =>
+      part.tokenLiteral
+    ).join(":");
+    const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral)
+      .join(":");
     if (openingTagName !== closingTagName) {
       this.addError(
         new ParserError({
@@ -289,8 +298,8 @@ export class XmlParser {
             ...closingTagNamespaces[0],
             tokenLiteral: closingTagName,
           },
-          errorType: 'UNEXPECTED_CLOSING_TAG_LITERAL',
-        })
+          errorType: "UNEXPECTED_CLOSING_TAG_LITERAL",
+        }),
       );
       return null;
     }
@@ -299,8 +308,8 @@ export class XmlParser {
       this.addError(
         new ParserError({
           culpritToken: this.#currentToken,
-          errorType: 'UNEXPECTED_TOKEN',
-        })
+          errorType: "UNEXPECTED_TOKEN",
+        }),
       );
       return null;
     }
@@ -313,8 +322,8 @@ export class XmlParser {
       this.addError(
         new ParserError({
           culpritToken: this.#currentToken,
-          errorType: 'UNEXPECTED_TOKEN',
-        })
+          errorType: "UNEXPECTED_TOKEN",
+        }),
       );
       return null;
     }
@@ -327,8 +336,8 @@ export class XmlParser {
         this.addError(
           new ParserError({
             culpritToken: this.#peekToken,
-            errorType: 'UNEXPECTED_EOF',
-          })
+            errorType: "UNEXPECTED_EOF",
+          }),
         );
         return null;
       }
@@ -345,7 +354,10 @@ export class XmlParser {
       namespaces.push(this.#currentToken);
     }
 
-    assert(this.isPeekToken(XmlTokenType.Equals), `Expected "=" found ${this.#peekToken.tokenLiteral}`);
+    assert(
+      this.isPeekToken(XmlTokenType.Equals),
+      `Expected "=" found ${this.#peekToken.tokenLiteral}`,
+    );
 
     // we know next token is equals. move to that.
     this.nextToken();
@@ -360,7 +372,7 @@ export class XmlParser {
   private parseXmlCommentNode(): XmlCommentNode {
     assert(
       this.isCurrentToken(XmlTokenType.CommentLiteral),
-      `Shouldn't call parseXmlCommentNode when current token is not a comment token`
+      `Shouldn't call parseXmlCommentNode when current token is not a comment token`,
     );
 
     return new XmlCommentNode(this.#currentToken);
@@ -369,7 +381,7 @@ export class XmlParser {
   private parseXmlTextNode(): XmlTextNode {
     assert(
       this.isCurrentToken(XmlTokenType.TextNode),
-      `Shouldn't call parseXmlTextNode when current token is not a text token`
+      `Shouldn't call parseXmlTextNode when current token is not a text token`,
     );
 
     return new XmlTextNode(this.#currentToken);

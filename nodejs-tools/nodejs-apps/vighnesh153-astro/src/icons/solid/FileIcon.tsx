@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
-import { splitProps, type JSX } from 'solid-js';
+import { type JSX, splitProps } from "solid-js";
 
 export type FileIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
 
 export function FileIcon(incomingProps: FileIconProps) {
   const [, props] = splitProps(incomingProps, [
-    'viewBox',
-    'xmlns',
-    'stroke',
-    'fill',
-    'stroke-linecap',
-    'stroke-linejoin',
+    "viewBox",
+    "xmlns",
+    "stroke",
+    "fill",
+    "stroke-linecap",
+    "stroke-linejoin",
   ]);
 
   return (
@@ -24,7 +24,8 @@ export function FileIcon(incomingProps: FileIconProps) {
       stroke-linejoin="round"
       {...props}
     >
-      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z">
+      </path>
       <polyline points="14 2 14 8 20 8"></polyline>
     </svg>
   );

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
 // prettier-ignore
-import { 
+import {
   arithmeticOperationEvaluator,
-} from '@/expression-evaluators/arithmetic-expressions/arithmetic-operation-evaluator';
+} from "@/expression-evaluators/arithmetic-expressions/arithmetic-operation-evaluator";
 
 export class MultiplicationEvaluator extends ExpressionEvaluator {
-  private identifier: string = '*';
+  private identifier: string = "*";
 
   constructor(public scope: Scope) {
     super();
@@ -21,9 +21,14 @@ export class MultiplicationEvaluator extends ExpressionEvaluator {
   evaluate(text: string): unknown {
     if (this.tryEvaluate(text)) {
       // @ts-ignore
-      return arithmeticOperationEvaluator(text, this.identifier, this.scope, (lhs, rhs) => lhs * rhs);
+      return arithmeticOperationEvaluator(
+        text,
+        this.identifier,
+        this.scope,
+        (lhs, rhs) => lhs * rhs,
+      );
     } else {
-      bugReporter.report('INVALID_MULTIPLICATION_OPERATION');
+      bugReporter.report("INVALID_MULTIPLICATION_OPERATION");
     }
   }
 }

@@ -1,20 +1,20 @@
-import { Scope } from '@/models/Scope';
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
+import { Scope } from "@/models/Scope";
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
 
-import { bugReporter } from '@/language-bug-handling';
-import { BooleanParser } from '@/parsers/data-type-parsers/primitive-parsers/boolean-parser';
+import { bugReporter } from "@/language-bug-handling";
+import { BooleanParser } from "@/parsers/data-type-parsers/primitive-parsers/boolean-parser";
 
-import { ParenthesisEvaluator } from '@/expression-evaluators/parenthesis-evaluator';
-import { LogicalAnd } from '@/expression-evaluators/boolean-expressions/logical-and';
-import { LogicalOr } from '@/expression-evaluators/boolean-expressions/logical-or';
-import { DoubleEquals } from '@/expression-evaluators/boolean-expressions/double-equals';
-import { NotEquals } from '@/expression-evaluators/boolean-expressions/not-equals';
-import { GreaterThan } from '@/expression-evaluators/boolean-expressions/greater-than';
-import { GreaterThanOrEqual } from '@/expression-evaluators/boolean-expressions/greater-than-or-equal';
-import { LessThan } from '@/expression-evaluators/boolean-expressions/less-than';
-import { LessThanOrEqual } from '@/expression-evaluators/boolean-expressions/less-than-or-equal';
-import { BooleanEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-evaluator';
-import { FunctionExpressionEvaluator } from '@/expression-evaluators/function-expression-evaluator';
+import { ParenthesisEvaluator } from "@/expression-evaluators/parenthesis-evaluator";
+import { LogicalAnd } from "@/expression-evaluators/boolean-expressions/logical-and";
+import { LogicalOr } from "@/expression-evaluators/boolean-expressions/logical-or";
+import { DoubleEquals } from "@/expression-evaluators/boolean-expressions/double-equals";
+import { NotEquals } from "@/expression-evaluators/boolean-expressions/not-equals";
+import { GreaterThan } from "@/expression-evaluators/boolean-expressions/greater-than";
+import { GreaterThanOrEqual } from "@/expression-evaluators/boolean-expressions/greater-than-or-equal";
+import { LessThan } from "@/expression-evaluators/boolean-expressions/less-than";
+import { LessThanOrEqual } from "@/expression-evaluators/boolean-expressions/less-than-or-equal";
+import { BooleanEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-evaluator";
+import { FunctionExpressionEvaluator } from "@/expression-evaluators/function-expression-evaluator";
 
 export class BooleanExpressionEvaluator extends ExpressionEvaluator {
   readonly expressionEvaluators: ExpressionEvaluator[];
@@ -26,7 +26,9 @@ export class BooleanExpressionEvaluator extends ExpressionEvaluator {
     // Following order matters
     this.expressionEvaluators.push(new FunctionExpressionEvaluator(this.scope));
 
-    this.expressionEvaluators.push(new ParenthesisEvaluator(this.scope, 'boolean'));
+    this.expressionEvaluators.push(
+      new ParenthesisEvaluator(this.scope, "boolean"),
+    );
 
     this.expressionEvaluators.push(new DoubleEquals(this.scope));
     this.expressionEvaluators.push(new NotEquals(this.scope));
@@ -64,18 +66,18 @@ export class BooleanExpressionEvaluator extends ExpressionEvaluator {
         for (const evaluator of this.expressionEvaluators) {
           if (evaluator.tryEvaluate(text)) {
             parsedByAny = true;
-            text = '' + evaluator.evaluate(text);
+            text = "" + evaluator.evaluate(text);
             break;
           }
         }
         if (!parsedByAny) {
-          throw new Error('Invalid boolean expression');
+          throw new Error("Invalid boolean expression");
         }
       }
 
       return booleanParser.parse(text);
     } else {
-      bugReporter.report('INVALID_BOOLEAN_EXPRESSION_EVALUATION');
+      bugReporter.report("INVALID_BOOLEAN_EXPRESSION_EVALUATION");
     }
   }
 }

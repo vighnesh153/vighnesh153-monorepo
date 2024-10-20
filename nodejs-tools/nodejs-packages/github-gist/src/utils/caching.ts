@@ -5,7 +5,6 @@ export function getCache(key: string): unknown | null {
 }
 
 /**
- *
  * @param keys=ALL_KEYS
  */
 export function resetCache(keys?: string[]): void {

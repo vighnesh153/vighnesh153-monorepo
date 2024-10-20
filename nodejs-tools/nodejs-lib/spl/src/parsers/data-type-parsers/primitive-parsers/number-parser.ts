@@ -1,5 +1,5 @@
-import { DatatypeParser } from '../datatype-parser';
-import { bugReporter } from '@/language-bug-handling';
+import { DatatypeParser } from "../datatype-parser";
+import { bugReporter } from "@/language-bug-handling";
 
 export class NumberParser extends DatatypeParser {
   static instance = new NumberParser();
@@ -9,12 +9,12 @@ export class NumberParser extends DatatypeParser {
   }
 
   type(): string {
-    return 'number';
+    return "number";
   }
 
   tryParse(text: string): boolean {
     const trimmed = text.trim();
-    if (trimmed === '') {
+    if (trimmed === "") {
       return false;
     }
 
@@ -25,7 +25,7 @@ export class NumberParser extends DatatypeParser {
     if (this.tryParse(text)) {
       return Number(text);
     } else {
-      bugReporter.report('PARSE_CALLED_ON_NOT_VALID_NUMBER');
+      bugReporter.report("PARSE_CALLED_ON_NOT_VALID_NUMBER");
     }
   }
 }

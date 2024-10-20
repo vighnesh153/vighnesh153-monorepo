@@ -1,7 +1,7 @@
 module.exports = {
-  extends: ['vighnesh153/ts-base.eslintrc.cjs'],
+  extends: ["vighnesh153/ts-base.eslintrc.cjs"],
   parserOptions: {
-    project: './tsconfig.json',
+    project: "./tsconfig.json",
     tsconfigRootDir: __dirname,
   },
 };

@@ -1,39 +1,52 @@
-import { Resource } from 'sst';
+import { Resource } from "sst";
 
 import {
+  createDynamoDBDocumentClient,
   DynamoDBTable,
   DynamoDBTableImpl,
-  createDynamoDBDocumentClient,
   type IDynamoDBDocumentClient,
   type TableMetadata,
-} from '@vighnesh153/aws-dynamo-db';
+} from "@vighnesh153/aws-dynamo-db";
 import {
+  ConsoleLogger,
   createFactory,
   createSingletonFactory,
-  ConsoleLogger,
-  Logger,
   JsonHttpClient,
   JsonHttpClientImpl,
-} from '@vighnesh153/tools';
+  Logger,
+} from "@vighnesh153/tools";
 
-import { userInfoFields } from './dynamoDBTableMetadata.ts';
-import { RandomStringGenerator, RandomStringGeneratorImpl } from './randomStringGenerator.ts';
-import { AuthTokenGenerator, AuthTokenGeneratorImpl } from './AuthTokenGenerator.ts';
-import { CookieSerializer, CookieSerializerImpl } from './CookieSerializer.ts';
-import { inProduction } from './utils.ts';
-import { type UserInfoDecoder, UserInfoDecoderImpl } from './UserInfoDecoder.ts';
+import { userInfoFields } from "./dynamoDBTableMetadata.ts";
+import {
+  RandomStringGenerator,
+  RandomStringGeneratorImpl,
+} from "./randomStringGenerator.ts";
+import {
+  AuthTokenGenerator,
+  AuthTokenGeneratorImpl,
+} from "./AuthTokenGenerator.ts";
+import { CookieSerializer, CookieSerializerImpl } from "./CookieSerializer.ts";
+import { inProduction } from "./utils.ts";
+import {
+  type UserInfoDecoder,
+  UserInfoDecoderImpl,
+} from "./UserInfoDecoder.ts";
 
 export const loggerSingletonFactory = createSingletonFactory<Logger>(() => {
   return ConsoleLogger.getInstance();
 });
 
-export const httpClientSingletonFactory = createSingletonFactory<JsonHttpClient>(() => {
+export const httpClientSingletonFactory = createSingletonFactory<
+  JsonHttpClient
+>(() => {
   return new JsonHttpClientImpl({
-    baseUrl: '',
+    baseUrl: "",
   });
 });
 
-const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<IDynamoDBDocumentClient>(() => {
+const dynamoDBDocumentClientSingletonFactory = createSingletonFactory<
+  IDynamoDBDocumentClient
+>(() => {
   return createDynamoDBDocumentClient();
 });
 
@@ -42,20 +55,28 @@ export const userInfoTableMetadata = {
   tableName: inProduction(() => Resource.UserInfoTable.name),
 } satisfies TableMetadata;
 
-export const userInfoTableSingletonFactory = createSingletonFactory<DynamoDBTable<typeof userInfoTableMetadata>>(() => {
+export const userInfoTableSingletonFactory = createSingletonFactory<
+  DynamoDBTable<typeof userInfoTableMetadata>
+>(() => {
   const dynamoDBdocumentClient = dynamoDBDocumentClientSingletonFactory();
   return new DynamoDBTableImpl(dynamoDBdocumentClient, userInfoTableMetadata);
 });
 
-export const userInfoDecoderSingletonFactory = createSingletonFactory<UserInfoDecoder>(() => {
+export const userInfoDecoderSingletonFactory = createSingletonFactory<
+  UserInfoDecoder
+>(() => {
   return new UserInfoDecoderImpl(loggerSingletonFactory());
 });
 
-export const randomStringGeneratorSingletonFactory = createSingletonFactory<RandomStringGenerator>(() => {
+export const randomStringGeneratorSingletonFactory = createSingletonFactory<
+  RandomStringGenerator
+>(() => {
   return new RandomStringGeneratorImpl();
 });
 
-export const authTokenGeneratorSingletonFactory = createSingletonFactory<AuthTokenGenerator>(() => {
+export const authTokenGeneratorSingletonFactory = createSingletonFactory<
+  AuthTokenGenerator
+>(() => {
   return new AuthTokenGeneratorImpl();
 });
 

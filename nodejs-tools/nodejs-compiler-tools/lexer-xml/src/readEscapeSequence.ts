@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { HEXADECIMAL_DIGITS, repeat } from '@vighnesh153/tools';
-import { assert } from '@std/assert';
-import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
-import { XmlTokenType } from './tokens.ts';
+import { HEXADECIMAL_DIGITS, repeat } from "@vighnesh153/tools";
+import { assert } from "@std/assert";
+import { EOF_CHARACTER, Lexer, LexerError } from "@vighnesh153/lexer-core";
+import { XmlTokenType } from "./tokens.ts";
 
 export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
   assert(
-    lexer.inputReader.currentCharacter === '\\',
-    `You should not attempt to read an escaped sequence if it doesn't start with '\\'`
+    lexer.inputReader.currentCharacter === "\\",
+    `You should not attempt to read an escaped sequence if it doesn't start with '\\'`,
   );
 
   // move over the backslash
@@ -16,13 +16,13 @@ export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
 
   const currCh: string = lexer.inputReader.currentCharacter;
   switch (currCh) {
-    case 'u':
+    case "u":
       return parseUnicode(lexer);
-    case 't':
+    case "t":
       return `\t`;
-    case 'n':
+    case "n":
       return `\n`;
-    case '\\':
+    case "\\":
       return `\\`;
     case '"':
       return `"`;
@@ -30,11 +30,11 @@ export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'UNCLOSED_ESCAPE_SEQUENCE',
+            type: "UNCLOSED_ESCAPE_SEQUENCE",
           },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
-        })
+        }),
       );
       return `\n`;
     }
@@ -42,12 +42,12 @@ export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'INVALID_ESCAPE_CHARACTER_LITERAL',
+            type: "INVALID_ESCAPE_CHARACTER_LITERAL",
             ch: lexer.inputReader.currentCharacter,
           },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
-        })
+        }),
       );
       return `\n`;
     }
@@ -56,8 +56,8 @@ export function readEscapeSequence(lexer: Lexer<XmlTokenType>): string {
 
 function parseUnicode(lexer: Lexer<XmlTokenType>): string {
   assert(
-    lexer.inputReader.currentCharacter === 'u',
-    `You should not try to parse a unicode sequence that doesn't begin with 'u'`
+    lexer.inputReader.currentCharacter === "u",
+    `You should not try to parse a unicode sequence that doesn't begin with 'u'`,
   );
 
   const unicodeCharacters: string[] = [];
@@ -72,16 +72,16 @@ function parseUnicode(lexer: Lexer<XmlTokenType>): string {
       lexer.addError(
         new LexerError({
           errorCategory: {
-            type: 'INVALID_UNICODE_CHARACTER_LITERAL',
+            type: "INVALID_UNICODE_CHARACTER_LITERAL",
             ch: peek!,
           },
           lineNumber: lexer.inputReader.lineNumber,
           columnNumber: lexer.inputReader.columnNumber,
-        })
+        }),
       );
-      return ' ';
+      return " ";
     }
   });
 
-  return String.fromCharCode(parseInt(unicodeCharacters.join(''), 16));
+  return String.fromCharCode(parseInt(unicodeCharacters.join(""), 16));
 }

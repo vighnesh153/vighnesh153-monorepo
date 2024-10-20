@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { not } from '@vighnesh153/tools';
+import axios from "axios";
+import { not } from "@vighnesh153/tools";
 import {
   fetchLatestContentOfGistFile,
   fetchLatestGistCommitId,
@@ -7,9 +7,9 @@ import {
   getCorsConfig,
   setCache,
   withAuthConfig,
-} from './utils/index.ts';
-import { constants } from './constants.ts';
-import { CORSConfig, IGithubGistMetadata } from './types/index.ts';
+} from "./utils/index.ts";
+import { constants } from "./constants.ts";
+import { CORSConfig, IGithubGistMetadata } from "./types/index.ts";
 
 export interface GistFileProps {
   gistMetadata: IGithubGistMetadata;
@@ -76,9 +76,9 @@ export class GistFile {
         personalAccessToken: this.options.personalAccessToken,
         baseConfig: {
           url: `${constants.urls.github.gists}/${this.options.gistMetadata.id}`,
-          method: 'patch',
+          method: "patch",
           headers: {
-            'X-GitHub-Api-Version': '2022-11-28',
+            "X-GitHub-Api-Version": "2022-11-28",
           },
           data: {
             public: this.options.isPublic,
@@ -89,7 +89,7 @@ export class GistFile {
             },
           },
         },
-      })
+      }),
     );
     this.hasUnSyncedUpdates = false;
   }
@@ -115,7 +115,8 @@ export class GistFile {
       corsConfig: getCorsConfig({ corsConfig: this.options.corsConfig }),
     });
 
-    const cacheKey = `gistId=${gistId},commitId=${latestCommitId},fileName=${fileName}`;
+    const cacheKey =
+      `gistId=${gistId},commitId=${latestCommitId},fileName=${fileName}`;
 
     // cache hit and caching is enabled
     if (enableRequestCaching && getCache(cacheKey) !== null) {
@@ -139,7 +140,9 @@ export class GistFile {
       setCache(cacheKey, fileContent);
     }
 
-    this.fileContent = typeof fileContent === 'string' ? fileContent : JSON.stringify(fileContent);
+    this.fileContent = typeof fileContent === "string"
+      ? fileContent
+      : JSON.stringify(fileContent);
     this.hasUnSyncedUpdates = false;
   }
 }

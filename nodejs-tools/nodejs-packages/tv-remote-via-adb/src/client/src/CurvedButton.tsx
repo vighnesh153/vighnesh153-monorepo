@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Box, BoxProps } from '@mui/material';
-import { theme } from './theme';
+import { Box, BoxProps } from "@mui/material";
+import { theme } from "./theme";
 
 export function CurvedButton({ ...props }: BoxProps) {
   return (
@@ -13,27 +13,27 @@ export function CurvedButton({ ...props }: BoxProps) {
       viewBox="0 0 200 100"
       xmlns="http://www.w3.org/2000/svg"
       sx={{
-        '.shape': {
+        ".shape": {
           strokeWidth: 2,
-          stroke: 'transparent',
+          stroke: "transparent",
           fill: theme.palette.secondary.main,
-          transition: 'fill 200ms',
-          ':hover': {
+          transition: "fill 200ms",
+          ":hover": {
             stroke: theme.palette.secondary.main,
             fill: theme.palette.primary.light,
           },
         },
-        ':has(.caret:hover) .shape': {
+        ":has(.caret:hover) .shape": {
           stroke: theme.palette.secondary.main,
           fill: theme.palette.primary.light,
         },
-        '.caret': {
+        ".caret": {
           stroke: theme.palette.primary.main,
-          ':hover': {
+          ":hover": {
             stroke: theme.palette.secondary.main,
           },
         },
-        '.shape:hover + .caret': {
+        ".shape:hover + .caret": {
           stroke: theme.palette.secondary.main,
         },
       }}

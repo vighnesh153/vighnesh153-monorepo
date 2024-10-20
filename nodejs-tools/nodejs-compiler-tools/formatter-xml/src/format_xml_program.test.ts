@@ -1,8 +1,8 @@
-import { test, expect } from 'vitest';
-import { parseProgram } from './test_utils.ts';
-import { formatXmlProgram } from './format_xml_program.ts';
+import { expect, test } from "vitest";
+import { parseProgram } from "./test_utils.ts";
+import { formatXmlProgram } from "./format_xml_program.ts";
 
-test('should format xml program', () => {
+test("should format xml program", () => {
   const [parser, program] = parseProgram(`
     <?xml 
     
@@ -61,7 +61,8 @@ types    comma-separated   =  "true"    >
 
   expect(parser.errors.length).toBe(0);
   expect(program.statements.length).toBe(3);
-  expect(formatXmlProgram({ program, indentation: 4, sortAttributes: true })).toMatchInlineSnapshot(`
+  expect(formatXmlProgram({ program, indentation: 4, sortAttributes: true }))
+    .toMatchInlineSnapshot(`
     "<?xml version="1.0" encoding="utf-8"?>
     <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"

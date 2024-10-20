@@ -1,20 +1,20 @@
-import type { JSX } from 'solid-js';
+import type { JSX } from "solid-js";
 
 export type PopoverPlacement =
-  | 'top-start'
-  | 'top-center'
-  | 'top-end'
-  | 'right-start'
-  | 'right-center'
-  | 'right-end'
-  | 'bottom-start'
-  | 'bottom-center'
-  | 'bottom-end'
-  | 'left-start'
-  | 'left-center'
-  | 'left-end';
+  | "top-start"
+  | "top-center"
+  | "top-end"
+  | "right-start"
+  | "right-center"
+  | "right-end"
+  | "bottom-start"
+  | "bottom-center"
+  | "bottom-end"
+  | "left-start"
+  | "left-center"
+  | "left-end";
 
-export type PopoverLayoutDirection = 'ltr' | 'rtl';
+export type PopoverLayoutDirection = "ltr" | "rtl";
 
 export type PopoverToggle = (forceToggleTo?: boolean) => void;
 

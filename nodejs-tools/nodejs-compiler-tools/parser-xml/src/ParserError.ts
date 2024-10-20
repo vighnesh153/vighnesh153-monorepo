@@ -1,11 +1,11 @@
-import { cloneToken, Token } from '@vighnesh153/lexer-core';
-import { XmlTokenType } from '@vighnesh153/lexer-xml';
+import { cloneToken, Token } from "@vighnesh153/lexer-core";
+import { XmlTokenType } from "@vighnesh153/lexer-xml";
 
 export type ParserErrorType =
-  | 'UNEXPECTED_TOKEN'
-  | 'UNEXPECTED_PROLOG_TAG'
-  | 'UNEXPECTED_CLOSING_TAG_LITERAL'
-  | 'UNEXPECTED_EOF';
+  | "UNEXPECTED_TOKEN"
+  | "UNEXPECTED_PROLOG_TAG"
+  | "UNEXPECTED_CLOSING_TAG_LITERAL"
+  | "UNEXPECTED_EOF";
 
 export type ParserErrorProps = {
   readonly errorType: ParserErrorType;

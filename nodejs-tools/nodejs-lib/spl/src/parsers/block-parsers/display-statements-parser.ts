@@ -1,17 +1,17 @@
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
 
-import { Block } from '@/blocks/Block';
-import { DisplayBlock } from '@/blocks/display-block';
-import { csvSplit } from '@/helpers/csv-split';
+import { Block } from "@/blocks/Block";
+import { DisplayBlock } from "@/blocks/display-block";
+import { csvSplit } from "@/helpers/csv-split";
 
 export class DisplayStatementsParser extends BlockParser {
   private static regex = /^display\s* (.*)$/;
 
   constructor(
     public scope: Scope,
-    public lineOfCodes: LineOfCode[]
+    public lineOfCodes: LineOfCode[],
   ) {
     super();
   }
@@ -25,7 +25,9 @@ export class DisplayStatementsParser extends BlockParser {
     if (this.tryParse()) {
       const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
 
-      const result = lineUnderTest.value.trimRight().match(DisplayStatementsParser.regex);
+      const result = lineUnderTest.value.trimRight().match(
+        DisplayStatementsParser.regex,
+      );
       if (result) {
         // Remove the line as it is done parsing.
         this.lineOfCodes.pop();
@@ -35,11 +37,13 @@ export class DisplayStatementsParser extends BlockParser {
       }
 
       throw new Error(
-        `Display statement can't be empty. At line: ` + this.lineOfCodes[this.lineOfCodes.length - 1].number
+        `Display statement can't be empty. At line: ` +
+          this.lineOfCodes[this.lineOfCodes.length - 1].number,
       );
     }
     throw new Error(
-      'There is some error in display statement at line: ' + this.lineOfCodes[this.lineOfCodes.length - 1].number
+      "There is some error in display statement at line: " +
+        this.lineOfCodes[this.lineOfCodes.length - 1].number,
     );
   }
 }

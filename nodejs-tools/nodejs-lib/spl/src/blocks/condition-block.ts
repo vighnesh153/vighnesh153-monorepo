@@ -1,8 +1,8 @@
-import { Block } from '@/blocks/Block';
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { BooleanExpressionEvaluator } from '@/expression-evaluators/boolean-expressions/boolean-expression-evaluator';
-import { Interpreter } from '@/interpreter';
+import { Block } from "@/blocks/Block";
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { BooleanExpressionEvaluator } from "@/expression-evaluators/boolean-expressions/boolean-expression-evaluator";
+import { Interpreter } from "@/interpreter";
 
 export class ConditionBlock extends Block {
   private isAnyBlockEmpty() {
@@ -12,12 +12,12 @@ export class ConditionBlock extends Block {
   constructor(
     private conditions: string[],
     private blocks: LineOfCode[][],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
 
     if (this.isAnyBlockEmpty() || conditions.length !== blocks.length) {
-      throw new Error('Missing a block for a condition.');
+      throw new Error("Missing a block for a condition.");
     }
   }
 
@@ -28,7 +28,7 @@ export class ConditionBlock extends Block {
       const condition = this.conditions[i];
 
       if (evaluator.tryEvaluate(condition) === false) {
-        throw new Error('Invalid boolean expression.');
+        throw new Error("Invalid boolean expression.");
       }
 
       if (evaluator.evaluate(condition)) {

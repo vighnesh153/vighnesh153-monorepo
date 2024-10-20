@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Position, fixedPosition } from './Position.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { fixedPosition, Position } from "./Position.ts";
 
 export interface DiscConfig {
   center: Position;
@@ -29,7 +29,7 @@ export class Disc {
     };
   }
 
-  get borderConfig(): DiscConfig['border'] {
+  get borderConfig(): DiscConfig["border"] {
     return { ...this.#config.border };
   }
 
@@ -37,7 +37,10 @@ export class Disc {
     this.#config.center = { ...newValue };
   }
 
-  constructor(canvasWrapper: CanvasWrapper, config: Omit<DiscConfig, 'center'> & { center?: Position }) {
+  constructor(
+    canvasWrapper: CanvasWrapper,
+    config: Omit<DiscConfig, "center"> & { center?: Position },
+  ) {
     this.#canvasWrapper = canvasWrapper;
     this.#config = {
       ...config,
@@ -51,7 +54,20 @@ export class Disc {
     const topLeftX = center.x - width / 2;
     const topLeftY = center.y - thickness / 2;
 
-    this.#canvasWrapper.drawFilledRect(topLeftX, topLeftY, width, thickness, color);
-    this.#canvasWrapper.drawOutlinedRect(topLeftX, topLeftY, width, thickness, border.width, border.color);
+    this.#canvasWrapper.drawFilledRect(
+      topLeftX,
+      topLeftY,
+      width,
+      thickness,
+      color,
+    );
+    this.#canvasWrapper.drawOutlinedRect(
+      topLeftX,
+      topLeftY,
+      width,
+      thickness,
+      border.width,
+      border.color,
+    );
   }
 }

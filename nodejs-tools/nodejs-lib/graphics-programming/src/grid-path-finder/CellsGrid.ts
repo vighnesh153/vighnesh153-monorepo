@@ -1,5 +1,5 @@
-import { BfsCell } from './Cell.ts';
-import { CellPosition } from './CellPosition.ts';
+import { BfsCell } from "./Cell.ts";
+import { CellPosition } from "./CellPosition.ts";
 
 function createCellsBoard(rows: number, cols: number): BfsCell[][] {
   return Array.from({ length: rows }, () => Array.from({ length: cols }));
@@ -61,7 +61,9 @@ export class CellsGrid {
   }
 
   findCell(predicate: (cell: BfsCell) => boolean): BfsCell | null {
-    return this.mapEachCell((cell) => (predicate(cell) ? cell : null)).find((cell) => cell !== null) ?? null;
+    return this.mapEachCell((cell) => (predicate(cell) ? cell : null)).find((
+      cell,
+    ) => cell !== null) ?? null;
   }
 
   getNeighbourCells(cell: BfsCell): Array<BfsCell> {

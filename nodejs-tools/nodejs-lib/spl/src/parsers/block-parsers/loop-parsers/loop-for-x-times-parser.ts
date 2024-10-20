@@ -1,21 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { BlockParser } from 'src/parsers/block-parsers/block-parser';
-import { LineOfCode } from 'src/models/LineOfCode';
-import { Scope } from 'src/models/Scope';
-import { Block } from 'src/blocks/Block';
+import { BlockParser } from "src/parsers/block-parsers/block-parser";
+import { LineOfCode } from "src/models/LineOfCode";
+import { Scope } from "src/models/Scope";
+import { Block } from "src/blocks/Block";
 // prettier-ignore
-import { 
+import {
   ArithmeticExpressionEvaluator,
-} from 'src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator';
-import { LoopForXTimes } from 'src/blocks/loop-blocks/loop-for-x-times';
+} from "src/expression-evaluators/arithmetic-expressions/arithmetic-expression-evaluator";
+import { LoopForXTimes } from "src/blocks/loop-blocks/loop-for-x-times";
 
 export class LoopForXTimesParser extends BlockParser {
   private static withoutCounterRegex = /^loop\s* for (.*) times\s*:\s*$/;
-  private static withCounterRegex = /^loop\s* for (.*) times\s* with (.*) as\s* counter\s*:\s*$/;
+  private static withCounterRegex =
+    /^loop\s* for (.*) times\s* with (.*) as\s* counter\s*:\s*$/;
 
   constructor(
     public lineOfCodes: LineOfCode[],
-    public scope: Scope
+    public scope: Scope,
   ) {
     super();
   }
@@ -52,7 +53,9 @@ export class LoopForXTimesParser extends BlockParser {
 
   parseNoCounterLoop(): Block {
     const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
-    const result = lineUnderTest.value.match(LoopForXTimesParser.withoutCounterRegex);
+    const result = lineUnderTest.value.match(
+      LoopForXTimesParser.withoutCounterRegex,
+    );
 
     if (result) {
       // eslint-disable-next-line prefer-destructuring
@@ -68,12 +71,14 @@ export class LoopForXTimesParser extends BlockParser {
       }
     }
 
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 
   parseCounterLoop(): Block {
     const lineUnderTest = this.lineOfCodes[this.lineOfCodes.length - 1];
-    const result = lineUnderTest.value.match(LoopForXTimesParser.withCounterRegex);
+    const result = lineUnderTest.value.match(
+      LoopForXTimesParser.withCounterRegex,
+    );
 
     if (result) {
       // eslint-disable-next-line prefer-destructuring
@@ -87,11 +92,16 @@ export class LoopForXTimesParser extends BlockParser {
         this.lineOfCodes.pop();
 
         // @ts-ignore
-        return new LoopForXTimes(count, this.scope, this.getIndentedBlock(), variableName);
+        return new LoopForXTimes(
+          count,
+          this.scope,
+          this.getIndentedBlock(),
+          variableName,
+        );
       }
     }
 
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 
   parse(): Block {
@@ -101,6 +111,6 @@ export class LoopForXTimesParser extends BlockParser {
     if (this.isNoCounterLoop()) {
       return this.parseNoCounterLoop();
     }
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 }

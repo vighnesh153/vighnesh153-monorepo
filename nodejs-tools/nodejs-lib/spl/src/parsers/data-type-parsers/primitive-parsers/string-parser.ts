@@ -1,5 +1,5 @@
-import { DatatypeParser } from '../datatype-parser';
-import { bugReporter } from '@/language-bug-handling';
+import { DatatypeParser } from "../datatype-parser";
+import { bugReporter } from "@/language-bug-handling";
 
 export class StringParser extends DatatypeParser {
   static instance = new StringParser();
@@ -9,7 +9,7 @@ export class StringParser extends DatatypeParser {
   }
 
   type(): string {
-    return 'string';
+    return "string";
   }
 
   tryParse(text: string): boolean {
@@ -19,7 +19,8 @@ export class StringParser extends DatatypeParser {
       return false;
     }
 
-    const countOfSingleQuotes = Array.from(trimmed).filter((ch) => ch === `'`).length;
+    const countOfSingleQuotes =
+      Array.from(trimmed).filter((ch) => ch === `'`).length;
 
     return countOfSingleQuotes === 2;
   }
@@ -29,7 +30,7 @@ export class StringParser extends DatatypeParser {
       const trimmed = text.trim();
       return trimmed.slice(1, trimmed.length - 1);
     } else {
-      bugReporter.report('PARSE_INVOKED_ON_NON_STRING');
+      bugReporter.report("PARSE_INVOKED_ON_NON_STRING");
     }
   }
 }

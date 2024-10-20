@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { theme } from './theme';
-import { HomePage } from './HomePage';
+import { useEffect } from "react";
+import { theme } from "./theme";
+import { HomePage } from "./HomePage";
 
 export function App() {
   useEffect(() => {

@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
 
-type CellType = 'empty' | 'snake' | 'food';
+type CellType = "empty" | "snake" | "food";
 
 interface GameGridCellConfig {
   rowIndex: number;
@@ -36,17 +36,17 @@ export class GameGridCell {
     this.colIndex = config.colIndex;
 
     this.colors = {
-      snake: config.colors?.snake ?? 'blue',
-      food: config.colors?.snake ?? 'red',
-      empty: config.colors?.snake ?? 'white',
+      snake: config.colors?.snake ?? "blue",
+      food: config.colors?.snake ?? "red",
+      empty: config.colors?.snake ?? "white",
     };
 
-    this.#cellType = config.initialType ?? 'empty';
+    this.#cellType = config.initialType ?? "empty";
     this.endPadding = config.endPadding ?? 1;
   }
 
   draw() {
-    if (this.is('empty')) {
+    if (this.is("empty")) {
       return;
     }
     const cw = this.#canvasWrapper;
@@ -54,7 +54,13 @@ export class GameGridCell {
     const h = this.height;
     const { rowIndex, colIndex, endPadding } = this;
     const color = this.colors[this.#cellType];
-    cw.drawFilledRect(rowIndex * w, colIndex * h, w - endPadding, h - endPadding, color);
+    cw.drawFilledRect(
+      rowIndex * w,
+      colIndex * h,
+      w - endPadding,
+      h - endPadding,
+      color,
+    );
   }
 
   is(type: CellType): boolean {

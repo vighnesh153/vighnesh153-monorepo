@@ -1,13 +1,13 @@
-import { test, expect } from 'vitest';
+import { expect, test } from "vitest";
 
-import { cloneToken, Token } from './tokens.ts';
+import { cloneToken, Token } from "./tokens.ts";
 
-test('should clone token', () => {
-  const token: Token<'dummy_token_type'> = {
+test("should clone token", () => {
+  const token: Token<"dummy_token_type"> = {
     lineNumber: 43,
     columnNumber: 25,
-    tokenLiteral: 'dummy token literal',
-    tokenType: 'dummy_token_type',
+    tokenLiteral: "dummy token literal",
+    tokenType: "dummy_token_type",
   };
 
   const clonedToken = cloneToken(token);
@@ -18,7 +18,7 @@ test('should clone token', () => {
   expect(clonedToken).toStrictEqual({
     lineNumber: 43,
     columnNumber: 25,
-    tokenLiteral: 'dummy token literal',
-    tokenType: 'dummy_token_type',
+    tokenLiteral: "dummy token literal",
+    tokenType: "dummy_token_type",
   });
 });

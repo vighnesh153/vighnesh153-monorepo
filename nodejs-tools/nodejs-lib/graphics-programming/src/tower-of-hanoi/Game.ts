@@ -1,17 +1,17 @@
-import { not, range } from '@vighnesh153/tools';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { StackConfig } from './Stack.ts';
-import { Disc, DiscConfig } from './Disc.ts';
-import { StacksManager } from './StacksManager.ts';
-import { towerOfHanoi } from './algorithm.ts';
-import { animateDiscMovement } from './animateDiscMovement.ts';
+import { not, range } from "@vighnesh153/tools";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { StackConfig } from "./Stack.ts";
+import { Disc, DiscConfig } from "./Disc.ts";
+import { StacksManager } from "./StacksManager.ts";
+import { towerOfHanoi } from "./algorithm.ts";
+import { animateDiscMovement } from "./animateDiscMovement.ts";
 
 export interface TowerOfHanoiGameOptions {
   stackConfig?: StackConfig;
 
   discCount?: number;
-  discConfig?: Omit<DiscConfig, 'center' | 'width'>;
+  discConfig?: Omit<DiscConfig, "center" | "width">;
 
   ceilingGap?: number;
   animationSpeed?: number;
@@ -30,7 +30,7 @@ export class TowerOfHanoiGame {
   readonly #animationSpeed: number;
 
   readonly #discCount: number;
-  readonly #discConfig: Omit<DiscConfig, 'center' | 'width'>;
+  readonly #discConfig: Omit<DiscConfig, "center" | "width">;
 
   readonly #stacksManager: StacksManager;
 
@@ -40,7 +40,10 @@ export class TowerOfHanoiGame {
     return this.#isRunning;
   }
 
-  constructor(canvasWrapper: CanvasWrapper, options: TowerOfHanoiGameOptions = {}) {
+  constructor(
+    canvasWrapper: CanvasWrapper,
+    options: TowerOfHanoiGameOptions = {},
+  ) {
     this.#canvasWrapper = canvasWrapper;
 
     const rect = canvasWrapper.getBoundingClientRect();
@@ -51,19 +54,24 @@ export class TowerOfHanoiGame {
     this.#animationSpeed = options.animationSpeed ?? 5;
 
     this.#discCount = options.discCount ?? TowerOfHanoiGame.maxDiscCount;
-    const discThickness = options.discConfig?.thickness ?? (canvasHeight * 3) / 100;
+    const discThickness = options.discConfig?.thickness ??
+      (canvasHeight * 3) / 100;
     this.#discConfig = {
       thickness: discThickness,
-      color: 'red',
+      color: "red",
       ...options.discConfig,
       border: {
-        color: 'black',
+        color: "black",
         width: discThickness / 5,
         ...options.discConfig?.border,
       },
     };
 
-    this.#stacksManager = new StacksManager(canvasWrapper, TowerOfHanoiGame.stackCount, options.stackConfig ?? {});
+    this.#stacksManager = new StacksManager(
+      canvasWrapper,
+      TowerOfHanoiGame.stackCount,
+      options.stackConfig ?? {},
+    );
 
     this.initializeDiscs(0);
 
@@ -120,7 +128,13 @@ export class TowerOfHanoiGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 
   private initializeDiscs(stackIndex: number) {
@@ -130,8 +144,9 @@ export class TowerOfHanoiGame {
       stack.addDisc(
         new Disc(this.#canvasWrapper, {
           ...this.#discConfig,
-          width: this.#stacksManager.baseWidth * ((1 / (TowerOfHanoiGame.maxDiscCount + 1)) * i),
-        })
+          width: this.#stacksManager.baseWidth *
+            ((1 / (TowerOfHanoiGame.maxDiscCount + 1)) * i),
+        }),
       );
     }
   }

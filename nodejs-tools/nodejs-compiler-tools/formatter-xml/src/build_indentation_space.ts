@@ -3,8 +3,10 @@ type BuildIndentationSpaceConfig = {
   indentation: number;
 };
 
-export function buildIndentationSpace({ indentationLevel, indentation }: BuildIndentationSpaceConfig): string {
+export function buildIndentationSpace(
+  { indentationLevel, indentation }: BuildIndentationSpaceConfig,
+): string {
   return Array.from({ length: indentationLevel * indentation })
-    .map(() => ' ')
-    .join('');
+    .map(() => " ")
+    .join("");
 }

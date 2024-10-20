@@ -1,10 +1,10 @@
-import { Queue } from '@vighnesh153/tools';
-import { PositionDelta } from './PositionDelta.ts';
-import { GameGrid } from './GameGrid.ts';
-import { GameGridCell } from './GameGridCell.ts';
-import { generateRandomPosition } from './generateRandomPosition.ts';
-import { FoodController } from './FoodController.ts';
-import { Direction } from './Direction.ts';
+import { Queue } from "@vighnesh153/tools";
+import { PositionDelta } from "./PositionDelta.ts";
+import { GameGrid } from "./GameGrid.ts";
+import { GameGridCell } from "./GameGridCell.ts";
+import { generateRandomPosition } from "./generateRandomPosition.ts";
+import { FoodController } from "./FoodController.ts";
+import { Direction } from "./Direction.ts";
 
 const blockChange: Record<Direction, PositionDelta> = {
   right: { dx: 1, dy: 0 },
@@ -41,11 +41,14 @@ export class Snake {
     this.gameGrid = config.gameGrid;
     this.foodController = config.foodController;
 
-    const randomInitialSnakePosition = generateRandomPosition(this.gameGrid.rows, this.gameGrid.cols);
+    const randomInitialSnakePosition = generateRandomPosition(
+      this.gameGrid.rows,
+      this.gameGrid.cols,
+    );
     this.#headRow = config.blockRow ?? randomInitialSnakePosition.x;
     this.#headCol = config.blockCol ?? randomInitialSnakePosition.y;
 
-    this.#direction = config.initialDirection ?? 'right';
+    this.#direction = config.initialDirection ?? "right";
 
     this.addNewSnakeBlock();
     this.updateHeadBlockNumber();
@@ -71,14 +74,14 @@ export class Snake {
 
   private addNewSnakeBlock(): void {
     const cell = this.gameGrid.getCell(this.#headRow, this.#headCol);
-    if (cell.is('food')) {
+    if (cell.is("food")) {
       this.foodController.consumeFood();
       this.grow();
     }
-    if (cell.is('snake')) {
+    if (cell.is("snake")) {
       this.reset();
     }
-    cell.updateType('snake');
+    cell.updateType("snake");
     this.body.pushRight(cell);
   }
 
@@ -91,7 +94,7 @@ export class Snake {
   private pruneBody(): void {
     while (this.body.size > this.size) {
       const cell = this.body.popLeft();
-      cell.updateType('empty');
+      cell.updateType("empty");
     }
   }
 

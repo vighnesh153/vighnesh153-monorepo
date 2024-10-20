@@ -1,4 +1,4 @@
-import { TreeNode } from './TreeNode.ts';
+import { TreeNode } from "./TreeNode.ts";
 
 export function findPathFromRoot(treeNode: TreeNode): TreeNode[] {
   const path: TreeNode[] = [];

@@ -16,8 +16,8 @@ A simple proxy server for unlocking CORS disabled urls on localhost
 
 ## Usage
 
-To proxy the `api.github.com` on localhost, you can run the following command. It will start the server on
-`localhost:1234`
+To proxy the `api.github.com` on localhost, you can run the following command.
+It will start the server on `localhost:1234`
 
 ```shell
 npx @vighnesh153/localhost-cors-proxy \
@@ -25,7 +25,8 @@ npx @vighnesh153/localhost-cors-proxy \
   --port 1234
 ```
 
-Then, you can hit `localhost:1234/*` instead of `https://api.github.com/*` and you won't get CORS blocked.
+Then, you can hit `localhost:1234/*` instead of `https://api.github.com/*` and
+you won't get CORS blocked.
 
 ## Options
 

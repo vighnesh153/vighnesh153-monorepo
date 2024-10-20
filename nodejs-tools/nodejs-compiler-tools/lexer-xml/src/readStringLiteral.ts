@@ -1,14 +1,14 @@
-import { assert } from '@std/assert';
-import { EOF_CHARACTER, Lexer, LexerError } from '@vighnesh153/lexer-core';
-import { readEscapeSequence } from './readEscapeSequence.ts';
-import { XmlTokenType } from './tokens.ts';
+import { assert } from "@std/assert";
+import { EOF_CHARACTER, Lexer, LexerError } from "@vighnesh153/lexer-core";
+import { readEscapeSequence } from "./readEscapeSequence.ts";
+import { XmlTokenType } from "./tokens.ts";
 
 const DOUBLE_QUOTE = '"';
 
 export function readStringLiteral(lexer: Lexer<XmlTokenType>): string {
   assert(
     lexer.inputReader.currentCharacter === DOUBLE_QUOTE,
-    `You should not attempt to read a string literal if it doesn't start with '"'`
+    `You should not attempt to read a string literal if it doesn't start with '"'`,
   );
 
   // move over the first double quote
@@ -18,7 +18,7 @@ export function readStringLiteral(lexer: Lexer<XmlTokenType>): string {
 
   let currCh = lexer.inputReader.currentCharacter;
   while (currCh !== DOUBLE_QUOTE && currCh !== EOF_CHARACTER) {
-    if (currCh === '\\') {
+    if (currCh === "\\") {
       stringLiteralBuilder.push(readEscapeSequence(lexer));
     } else {
       stringLiteralBuilder.push(currCh);
@@ -31,13 +31,13 @@ export function readStringLiteral(lexer: Lexer<XmlTokenType>): string {
     lexer.addError(
       new LexerError({
         errorCategory: {
-          type: 'UNCLOSED_STRING_LITERAL',
+          type: "UNCLOSED_STRING_LITERAL",
         },
         lineNumber: lexer.inputReader.lineNumber,
         columnNumber: lexer.inputReader.columnNumber,
-      })
+      }),
     );
   }
 
-  return stringLiteralBuilder.join('');
+  return stringLiteralBuilder.join("");
 }

@@ -1,16 +1,16 @@
-import { bugReporter } from '@/language-bug-handling';
+import { bugReporter } from "@/language-bug-handling";
 
 export class LineOfCode {
   constructor(
     public value: string,
-    public number: number
+    public number: number,
   ) {
     // throw new Error('Not implemented: isIndentationValid');
   }
 
   // returns true if it has 4 space characters in the beginning
   isInBlock(): boolean {
-    return this.value.startsWith('    ');
+    return this.value.startsWith("    ");
   }
 
   // removes the first 4 space characters
@@ -18,7 +18,7 @@ export class LineOfCode {
     if (this.isInBlock()) {
       this.value = this.value.substring(4);
     } else {
-      bugReporter.report('BLOCK_LEVEL_CHOP_NON_BLOCK');
+      bugReporter.report("BLOCK_LEVEL_CHOP_NON_BLOCK");
     }
   }
 

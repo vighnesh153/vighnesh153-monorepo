@@ -1,14 +1,14 @@
-import { BlockParser } from '@/parsers/block-parsers/block-parser';
-import { Scope } from '@/models/Scope';
-import { LineOfCode } from '@/models/LineOfCode';
-import { Block } from '@/blocks/Block';
+import { BlockParser } from "@/parsers/block-parsers/block-parser";
+import { Scope } from "@/models/Scope";
+import { LineOfCode } from "@/models/LineOfCode";
+import { Block } from "@/blocks/Block";
 
 export class ContinueStatementParser extends BlockParser {
   private static regex = /^continue\s*$/;
 
   constructor(
     public scope: Scope,
-    public lineOfCodes: LineOfCode[]
+    public lineOfCodes: LineOfCode[],
   ) {
     super();
   }
@@ -28,11 +28,11 @@ export class ContinueStatementParser extends BlockParser {
 
         execute(): void {
           lineOfCodes.pop();
-          throw new Error('continue');
+          throw new Error("continue");
         }
       })(this.scope);
     }
 
-    throw new Error('Invalid statement');
+    throw new Error("Invalid statement");
   }
 }

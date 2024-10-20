@@ -1,1 +1,1 @@
-export { BondingParticlesGame } from './Game.ts';
+export { BondingParticlesGame } from "./Game.ts";

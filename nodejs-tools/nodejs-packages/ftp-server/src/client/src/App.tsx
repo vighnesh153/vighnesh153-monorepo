@@ -1,6 +1,11 @@
-import { Box, List } from '@mui/material';
-import { DirectoryListItem, MainHeading, PathBreadcrumbs, RegularFileListItem } from './components';
-import { isDirectory, sortedDirectoryInformation } from './utils';
+import { Box, List } from "@mui/material";
+import {
+  DirectoryListItem,
+  MainHeading,
+  PathBreadcrumbs,
+  RegularFileListItem,
+} from "./components";
+import { isDirectory, sortedDirectoryInformation } from "./utils";
 
 export function App() {
   return (
@@ -8,13 +13,11 @@ export function App() {
       <MainHeading />
       <Box sx={{ height: 20 }} />
       <PathBreadcrumbs />
-      <List sx={{ p: 2, mt: 3, border: '1px solid lightgray' }}>
+      <List sx={{ p: 2, mt: 3, border: "1px solid lightgray" }}>
         {sortedDirectoryInformation.map((file, index) =>
-          isDirectory(file.type) ? (
-            <DirectoryListItem key={index} file={file} />
-          ) : (
-            <RegularFileListItem key={index} file={file} />
-          )
+          isDirectory(file.type)
+            ? <DirectoryListItem key={index} file={file} />
+            : <RegularFileListItem key={index} file={file} />
         )}
       </List>
     </Box>

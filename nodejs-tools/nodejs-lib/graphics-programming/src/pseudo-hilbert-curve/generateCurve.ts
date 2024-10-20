@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { generateTwoMidPoints } from './generateTwoMidpoints.ts';
-import { getDistantCorner } from './getDistantCorner.ts';
-import { Line } from './line.ts';
-import { Point } from './point.ts';
+import { generateTwoMidPoints } from "./generateTwoMidpoints.ts";
+import { getDistantCorner } from "./getDistantCorner.ts";
+import { Line } from "./line.ts";
+import { Point } from "./point.ts";
 
 /**
- *
  *  c1---------a          b---------c4
  *             |          |
  *       p1    |          |    p4
@@ -19,13 +18,20 @@ import { Point } from './point.ts';
  *  |    p2----|----------|----p3   |
  *  |          |          |         |
  *  c2---------g          h---------c3
- *
  */
-export function generateCurve(p1: Point, p2: Point, p3: Point, p4: Point, level: number): Line[] {
+export function generateCurve(
+  p1: Point,
+  p2: Point,
+  p3: Point,
+  p4: Point,
+  level: number,
+): Line[] {
   if (level < 1) {
-    throw new Error('Level cannot be less than 1');
+    throw new Error("Level cannot be less than 1");
   }
-  if (level === 1) return [new Line(p1, p2), new Line(p2, p3), new Line(p3, p4)];
+  if (level === 1) {
+    return [new Line(p1, p2), new Line(p2, p3), new Line(p3, p4)];
+  }
 
   // corners
   const c1 = getDistantCorner(p1, p2, p4);

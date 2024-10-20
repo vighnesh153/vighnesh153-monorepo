@@ -1,29 +1,29 @@
 export type LexerErrorCategory =
   | {
-      type: 'ILLEGAL_CHARACTER';
-      ch: string;
-    }
+    type: "ILLEGAL_CHARACTER";
+    ch: string;
+  }
   | {
-      type: 'UNEXPECTED_COMMENT_CHARACTER';
-      ch: string;
-    }
+    type: "UNEXPECTED_COMMENT_CHARACTER";
+    ch: string;
+  }
   | {
-      type: 'INVALID_ESCAPE_CHARACTER_LITERAL';
-      ch: string;
-    }
+    type: "INVALID_ESCAPE_CHARACTER_LITERAL";
+    ch: string;
+  }
   | {
-      type: 'INVALID_UNICODE_CHARACTER_LITERAL';
-      ch: string;
-    }
+    type: "INVALID_UNICODE_CHARACTER_LITERAL";
+    ch: string;
+  }
   | {
-      type: 'UNCLOSED_COMMENT_LITERAL';
-    }
+    type: "UNCLOSED_COMMENT_LITERAL";
+  }
   | {
-      type: 'UNCLOSED_ESCAPE_SEQUENCE';
-    }
+    type: "UNCLOSED_ESCAPE_SEQUENCE";
+  }
   | {
-      type: 'UNCLOSED_STRING_LITERAL';
-    };
+    type: "UNCLOSED_STRING_LITERAL";
+  };
 
 export type LexerErrorProps = {
   readonly errorCategory: Readonly<LexerErrorCategory>;

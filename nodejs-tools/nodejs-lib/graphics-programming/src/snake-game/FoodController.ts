@@ -1,6 +1,6 @@
-import { shuffleIterable } from '@vighnesh153/tools';
-import { GameGrid } from './GameGrid.ts';
-import { GameGridCell } from './GameGridCell.ts';
+import { shuffleIterable } from "@vighnesh153/tools";
+import { GameGrid } from "./GameGrid.ts";
+import { GameGridCell } from "./GameGridCell.ts";
 
 interface FoodControllerConfig {
   readonly gameGrid: GameGrid;
@@ -16,20 +16,20 @@ export class FoodController {
   }
 
   consumeFood() {
-    this.#food.updateType('empty');
+    this.#food.updateType("empty");
     this.#food = this.newFood();
   }
 
   private newFood(): GameGridCell {
     const cells = this.gameGrid.grid.flatMap((row) => row);
-    const emptyCells = cells.filter((cell) => cell.is('empty'));
+    const emptyCells = cells.filter((cell) => cell.is("empty"));
 
     if (emptyCells.length === 0) {
-      alert('Game over....');
+      alert("Game over....");
     }
 
     const [food] = shuffleIterable(emptyCells);
-    food.updateType('food');
+    food.updateType("food");
     return food;
   }
 }

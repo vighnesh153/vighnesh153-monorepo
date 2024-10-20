@@ -1,1 +1,1 @@
-export { TreePathFinderGame } from './Game.ts';
+export { TreePathFinderGame } from "./Game.ts";

@@ -1,4 +1,4 @@
-import { internalLinks, externalLinks } from './links.ts';
+import { externalLinks, internalLinks } from "./links.ts";
 
 export interface NavItem {
   text: string;
@@ -6,12 +6,12 @@ export interface NavItem {
 }
 
 export const AllNavigationItems = {
-  home: { text: 'Home', link: internalLinks.homePage.root },
-  aboutMe: { text: 'About me', link: internalLinks.homePage.aboutMe },
-  blog: { text: 'Blog', link: externalLinks.blog },
-  projects: { text: 'Projects', link: internalLinks.homePage.projects },
-  experience: { text: 'Experience', link: internalLinks.homePage.experience },
-  resume: { text: 'Resume', link: externalLinks.resume },
+  home: { text: "Home", link: internalLinks.homePage.root },
+  aboutMe: { text: "About me", link: internalLinks.homePage.aboutMe },
+  blog: { text: "Blog", link: externalLinks.blog },
+  projects: { text: "Projects", link: internalLinks.homePage.projects },
+  experience: { text: "Experience", link: internalLinks.homePage.experience },
+  resume: { text: "Resume", link: externalLinks.resume },
 } satisfies Record<string, NavItem>;
 
 export const defaultNavItems: NavItem[] = [
@@ -38,4 +38,7 @@ export const projectNavItems: NavItem[] = [
 ];
 
 // For "/tutor"
-export const tutorNavItems: NavItem[] = [AllNavigationItems.home, AllNavigationItems.projects];
+export const tutorNavItems: NavItem[] = [
+  AllNavigationItems.home,
+  AllNavigationItems.projects,
+];

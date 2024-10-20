@@ -1,14 +1,14 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
     coverage: {
-      provider: 'v8',
+      provider: "v8",
       thresholds: {
-        '100': true,
+        "100": true,
       },
-      include: ['src/**'],
-      exclude: ['src/index.ts', 'src/**/*.test.ts'],
+      include: ["src/**"],
+      exclude: ["src/index.ts", "src/**/*.test.ts"],
       reportOnFailure: true,
     },
   },

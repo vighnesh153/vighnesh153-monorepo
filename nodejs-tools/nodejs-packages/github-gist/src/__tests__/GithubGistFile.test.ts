@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
-import axios from 'axios';
-import { randomEmail, randomUuid } from '@vighnesh153/tools';
-import { GistFile, GistFileProps } from '../GithubGistFile.ts';
+import { describe, expect, it, vi } from "vitest";
+import axios from "axios";
+import { randomEmail, randomUuid } from "@vighnesh153/tools";
+import { GistFile, GistFileProps } from "../GithubGistFile.ts";
 
-vi.mock('axios');
+vi.mock("axios");
 
 function mockAxiosImplementation<T>(impl: () => Promise<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -14,12 +14,12 @@ function mockAxiosImplementation<T>(impl: () => Promise<T>) {
 function createGistFile(options: Partial<GistFileProps> = {}): GistFile {
   return new GistFile({
     personalAccessToken: randomUuid(),
-    fileContent: '',
+    fileContent: "",
     fileName: randomUuid(),
     enableRequestCaching: true,
     isPublic: false,
     ...options,
-    corsConfig: { type: 'default', ...options.corsConfig },
+    corsConfig: { type: "default", ...options.corsConfig },
     gistMetadata: {
       id: randomUuid(),
       files: {},
@@ -29,22 +29,22 @@ function createGistFile(options: Partial<GistFileProps> = {}): GistFile {
   });
 }
 
-describe('GithubGistFile tests', () => {
-  it('should return the name of the file', () => {
+describe("GithubGistFile tests", () => {
+  it("should return the name of the file", () => {
     const fileName = randomUuid();
     const gistFile = createGistFile({ fileName });
 
     expect(gistFile.name).toBe(fileName);
   });
 
-  it('should return the content', () => {
+  it("should return the content", () => {
     const fileContent = randomUuid();
     const gistFile = createGistFile({ fileContent });
 
     expect(gistFile.content).toBe(fileContent);
   });
 
-  it('should set the content and mark the file as dirty', () => {
+  it("should set the content and mark the file as dirty", () => {
     const fileContent = randomUuid();
     const gistFile = createGistFile();
 
@@ -55,8 +55,10 @@ describe('GithubGistFile tests', () => {
     expect(gistFile.hasUnSyncedUpdates).toBe(true);
   });
 
-  it('should not initiate the POST request if there are no changes', async () => {
-    mockAxiosImplementation(() => Promise.reject(new Error('This should not have invoked')));
+  it("should not initiate the POST request if there are no changes", async () => {
+    mockAxiosImplementation(() =>
+      Promise.reject(new Error("This should not have invoked"))
+    );
 
     const gistFile = createGistFile();
     gistFile.hasUnSyncedUpdates = false;
@@ -65,7 +67,7 @@ describe('GithubGistFile tests', () => {
     await gistFile.save();
   });
 
-  it('should save the content and mark the file as not dirty', async () => {
+  it("should save the content and mark the file as not dirty", async () => {
     mockAxiosImplementation(() => Promise.resolve({}));
 
     const fileContent = randomUuid();

@@ -1,26 +1,35 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { type JSX, children, splitProps, onCleanup, Show, createEffect, createSignal, mergeProps } from 'solid-js';
-import { Portal } from 'solid-js/web';
+import {
+  children,
+  createEffect,
+  createSignal,
+  type JSX,
+  mergeProps,
+  onCleanup,
+  Show,
+  splitProps,
+} from "solid-js";
+import { Portal } from "solid-js/web";
 
-import { not } from '@vighnesh153/tools';
+import { not } from "@vighnesh153/tools";
 
-import { classes } from '@/utils/index.ts';
-import styles from './popover.module.scss';
+import { classes } from "@/utils/index.ts";
+import styles from "./popover.module.scss";
 
-import { clickOutside } from '../clickOutside.ts';
+import { clickOutside } from "../clickOutside.ts";
 import type {
+  ControlledPopoverProps,
   PopoverLayoutDirection,
   PopoverPlacement,
   PopoverProps,
-  ControlledPopoverProps,
   PopoverToggle,
-} from './externalTypes.ts';
+} from "./externalTypes.ts";
 import {
   computeFlexClassesForPopoverContentRootBasedOnPlacement,
   updatePopoverPlacementBasedOnPlacement,
-} from './popover-placement.ts';
+} from "./popover-placement.ts";
 
-declare module 'solid-js' {
+declare module "solid-js" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface Directives {
@@ -29,28 +38,37 @@ declare module 'solid-js' {
   }
 }
 
-export function ControlledPopover(incomingProps: ControlledPopoverProps): JSX.Element {
+export function ControlledPopover(
+  incomingProps: ControlledPopoverProps,
+): JSX.Element {
   const [, props] = splitProps(
     mergeProps<Partial<ControlledPopoverProps>[]>(
-      { placement: 'bottom-center' },
-      incomingProps
+      { placement: "bottom-center" },
+      incomingProps,
     ) as Required<ControlledPopoverProps>,
-    []
+    [],
   );
 
   let root!: HTMLDivElement;
   let popoverContentRoot!: HTMLDivElement;
 
-  const controlElement = children(() => props.controlElement(props.open, props.toggle));
-  const [popoverBgColor, setPopoverBgColor] = createSignal('transparent');
-  const [layoutDirectionSignal, setLayoutDirectionSignal] = createSignal<PopoverLayoutDirection>('ltr');
+  const controlElement = children(() =>
+    props.controlElement(props.open, props.toggle)
+  );
+  const [popoverBgColor, setPopoverBgColor] = createSignal("transparent");
+  const [layoutDirectionSignal, setLayoutDirectionSignal] = createSignal<
+    PopoverLayoutDirection
+  >("ltr");
 
-  const anchorPopoverToControlElement = (placement: PopoverPlacement, layoutDirection: PopoverLayoutDirection) => {
+  const anchorPopoverToControlElement = (
+    placement: PopoverPlacement,
+    layoutDirection: PopoverLayoutDirection,
+  ) => {
     updatePopoverPlacementBasedOnPlacement(
       placement,
       layoutDirection,
       popoverContentRoot,
-      controlElement() as HTMLElement
+      controlElement() as HTMLElement,
     );
   };
 
@@ -60,10 +78,14 @@ export function ControlledPopover(incomingProps: ControlledPopoverProps): JSX.El
       return;
     }
 
-    const { backgroundColor } = getComputedStyle(popoverContentRoot.children[0] as HTMLElement);
+    const { backgroundColor } = getComputedStyle(
+      popoverContentRoot.children[0] as HTMLElement,
+    );
     setPopoverBgColor(backgroundColor);
 
-    const layoutDirection = (document.documentElement.getAttribute('dir') as PopoverLayoutDirection) ?? 'ltr';
+    const layoutDirection = (document.documentElement.getAttribute(
+      "dir",
+    ) as PopoverLayoutDirection) ?? "ltr";
     setLayoutDirectionSignal(layoutDirection);
 
     // anchor the popover to the control element
@@ -74,14 +96,14 @@ export function ControlledPopover(incomingProps: ControlledPopoverProps): JSX.El
     }
 
     const scrollElement = (props.scrollElement ?? window) as HTMLElement;
-    scrollElement.addEventListener('scroll', scrollElementEventListener);
+    scrollElement.addEventListener("scroll", scrollElementEventListener);
     onCleanup(() => {
-      scrollElement.removeEventListener('scroll', scrollElementEventListener);
+      scrollElement.removeEventListener("scroll", scrollElementEventListener);
     });
 
-    scrollElement.addEventListener('resize', scrollElementEventListener);
+    scrollElement.addEventListener("resize", scrollElementEventListener);
     onCleanup(() => {
-      scrollElement.removeEventListener('resize', scrollElementEventListener);
+      scrollElement.removeEventListener("resize", scrollElementEventListener);
     });
   });
 
@@ -91,21 +113,26 @@ export function ControlledPopover(incomingProps: ControlledPopoverProps): JSX.El
       <Portal>
         <div
           ref={popoverContentRoot}
-          role={props.open ? 'tooltip' : 'none'}
+          role={props.open ? "tooltip" : "none"}
           data-testid="popover-content-root"
           class={classes(
-            `${styles['popover-content-root']}
-            ${styles[`popover-placement-${props.placement.split('-')[0]}`]}
+            `${styles["popover-content-root"]}
+            ${styles[`popover-placement-${props.placement.split("-")[0]}`]}
 
             fixed z-tooltip
             flex 
-            ${computeFlexClassesForPopoverContentRootBasedOnPlacement(props.placement, layoutDirectionSignal())}
-            ${props.open ? 'before:inline-block' : 'before:hidden'}
-            `
+            ${
+              computeFlexClassesForPopoverContentRootBasedOnPlacement(
+                props.placement,
+                layoutDirectionSignal(),
+              )
+            }
+            ${props.open ? "before:inline-block" : "before:hidden"}
+            `,
           )}
           style={{
-            '--triangle-size': '10px',
-            '--triangle-color': popoverBgColor(),
+            "--triangle-size": "10px",
+            "--triangle-color": popoverBgColor(),
           }}
           use:clickOutside={{
             ignoreElements: [controlElement() as HTMLElement],
@@ -133,7 +160,9 @@ export function Popover(props: PopoverProps) {
   return <ControlledPopover open={open()} toggle={toggle} {...props} />;
 }
 
-export function PopoverPlayground(props: { placement?: PopoverPlacement; text: string }) {
+export function PopoverPlayground(
+  props: { placement?: PopoverPlacement; text: string },
+) {
   return (
     <Popover
       {...props}
@@ -147,7 +176,11 @@ export function PopoverPlayground(props: { placement?: PopoverPlacement; text: s
         </div>
       }
       controlElement={(isOpen, toggle) => (
-        <button aria-expanded={`${isOpen}`} class="border-2 min-w-40" onClick={() => toggle()}>
+        <button
+          aria-expanded={`${isOpen}`}
+          class="border-2 min-w-40"
+          onClick={() => toggle()}
+        >
           {props.text}
         </button>
       )}

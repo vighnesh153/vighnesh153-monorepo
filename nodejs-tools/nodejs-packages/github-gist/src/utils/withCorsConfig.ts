@@ -1,26 +1,28 @@
-import { AxiosRequestConfig } from 'axios';
-import { CORSConfig } from '../types/index.ts';
-import { constants } from '../constants.ts';
+import { AxiosRequestConfig } from "axios";
+import { CORSConfig } from "../types/index.ts";
+import { constants } from "../constants.ts";
 
 export interface WithCorsConfigOptions {
   url: string;
   corsConfig: CORSConfig;
 }
 
-export function withCorsConfig(options: WithCorsConfigOptions): AxiosRequestConfig {
+export function withCorsConfig(
+  options: WithCorsConfigOptions,
+): AxiosRequestConfig {
   const { url, corsConfig } = options;
 
-  if (corsConfig.type === 'none') {
+  if (corsConfig.type === "none") {
     return { url };
   }
 
-  if (corsConfig.type === 'default') {
+  if (corsConfig.type === "default") {
     return { url: `${constants.urls.corsAnywherePrefix}${url}` };
   }
 
-  if (corsConfig.type === 'custom') {
+  if (corsConfig.type === "custom") {
     return corsConfig.customRequestConfig(url);
   }
 
-  throw new Error('Unrecognized CORS configuration type');
+  throw new Error("Unrecognized CORS configuration type");
 }

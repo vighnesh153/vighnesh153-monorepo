@@ -1,7 +1,7 @@
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
-import { BooleanParser } from '@/parsers/data-type-parsers/primitive-parsers/boolean-parser';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
+import { BooleanParser } from "@/parsers/data-type-parsers/primitive-parsers/boolean-parser";
 
 export class BooleanEvaluator extends ExpressionEvaluator {
   private static booleanParser = BooleanParser.instance;
@@ -15,7 +15,8 @@ export class BooleanEvaluator extends ExpressionEvaluator {
     if (BooleanEvaluator.booleanParser.tryParse(trimmed)) {
       return true;
     }
-    return this.scope.hasVariable(trimmed) && this.scope.getVariable(trimmed).type === 'boolean';
+    return this.scope.hasVariable(trimmed) &&
+      this.scope.getVariable(trimmed).type === "boolean";
   }
 
   evaluate(text: string): unknown {
@@ -26,7 +27,7 @@ export class BooleanEvaluator extends ExpressionEvaluator {
       }
       return this.scope.getVariable(trimmed).value;
     } else {
-      bugReporter.report('EVALUATING_INVALID_BOOLEAN');
+      bugReporter.report("EVALUATING_INVALID_BOOLEAN");
     }
   }
 }

@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { Position } from './Position.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { Position } from "./Position.ts";
 
 interface TreeNodeOptions {
   defaultColor?: string;
@@ -15,7 +15,7 @@ interface TreeNodeOptions {
   pathRadius?: number;
 }
 
-type TreeNodeState = 'default' | 'visited' | 'path' | 'destination';
+type TreeNodeState = "default" | "visited" | "path" | "destination";
 
 export class TreeNode {
   readonly #canvasWrapper: CanvasWrapper;
@@ -34,14 +34,14 @@ export class TreeNode {
 
   #position: Position | null = null;
 
-  #state: TreeNodeState = 'default';
+  #state: TreeNodeState = "default";
 
   get children(): TreeNode[] {
     return [...this.#children];
   }
 
   get isDestination(): boolean {
-    return this.#state === 'destination';
+    return this.#state === "destination";
   }
 
   get position(): Position | null {
@@ -51,14 +51,18 @@ export class TreeNode {
     return { ...this.#position };
   }
 
-  constructor(canvasWrapper: CanvasWrapper, parentNode: TreeNode | null, options: TreeNodeOptions = {}) {
+  constructor(
+    canvasWrapper: CanvasWrapper,
+    parentNode: TreeNode | null,
+    options: TreeNodeOptions = {},
+  ) {
     this.#canvasWrapper = canvasWrapper;
     this.parentNode = parentNode;
 
-    this.#defaultColor = options.defaultColor ?? 'green';
-    this.#visitedColor = options.visitedColor ?? 'deepskyblue';
-    this.#pathColor = options.pathColor ?? 'yellow';
-    this.#destinationColor = options.destinationColor ?? 'red';
+    this.#defaultColor = options.defaultColor ?? "green";
+    this.#visitedColor = options.visitedColor ?? "deepskyblue";
+    this.#pathColor = options.pathColor ?? "yellow";
+    this.#destinationColor = options.destinationColor ?? "red";
 
     this.#defaultRadius = options.defaultRadius ?? 4;
     this.#visitedRadius = options.visitedRadius ?? 6;
@@ -90,11 +94,11 @@ export class TreeNode {
 
   private getColor(): string {
     switch (this.#state) {
-      case 'destination':
+      case "destination":
         return this.#destinationColor;
-      case 'path':
+      case "path":
         return this.#pathColor;
-      case 'visited':
+      case "visited":
         return this.#visitedColor;
       default:
         return this.#defaultColor;
@@ -103,10 +107,10 @@ export class TreeNode {
 
   private getRadius(): number {
     switch (this.#state) {
-      case 'destination':
-      case 'path':
+      case "destination":
+      case "path":
         return this.#pathRadius;
-      case 'visited':
+      case "visited":
         return this.#visitedRadius;
       default:
         return this.#defaultRadius;

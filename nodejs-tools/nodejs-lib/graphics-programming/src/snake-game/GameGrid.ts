@@ -1,6 +1,6 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { GameGridCell } from './GameGridCell.ts';
-import { createNewGrid } from './createNewGrid.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { GameGridCell } from "./GameGridCell.ts";
+import { createNewGrid } from "./createNewGrid.ts";
 
 interface GameGridOptions {
   readonly rows: number;
@@ -35,7 +35,7 @@ export class GameGrid {
           colIndex: col,
           width: this.cellWidth,
           height: this.cellHeight,
-        })
+        }),
     );
   }
 

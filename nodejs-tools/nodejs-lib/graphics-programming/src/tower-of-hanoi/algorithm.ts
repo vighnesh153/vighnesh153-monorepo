@@ -3,7 +3,12 @@ interface Move {
   to: number;
 }
 
-export function towerOfHanoi(discs: number, source: number, intermediate: number, destination: number): Move[] {
+export function towerOfHanoi(
+  discs: number,
+  source: number,
+  intermediate: number,
+  destination: number,
+): Move[] {
   if (discs === 0) {
     return [];
   }

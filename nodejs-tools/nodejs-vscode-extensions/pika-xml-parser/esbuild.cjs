@@ -1,10 +1,10 @@
-const esbuild = require('esbuild');
-const glob = require('glob');
-const path = require('path');
-const polyfill = require('@esbuild-plugins/node-globals-polyfill');
+const esbuild = require("esbuild");
+const glob = require("glob");
+const path = require("path");
+const polyfill = require("@esbuild-plugins/node-globals-polyfill");
 
-const production = process.argv.includes('--production');
-const watch = process.argv.includes('--watch');
+const production = process.argv.includes("--production");
+const watch = process.argv.includes("--watch");
 
 /**
  * This plugin hooks into the build process to print errors in a format that the problem matcher in
@@ -12,18 +12,20 @@ const watch = process.argv.includes('--watch');
  * @type {import('esbuild').Plugin}
  */
 const esbuildProblemMatcherPlugin = {
-  name: 'esbuild-problem-matcher',
+  name: "esbuild-problem-matcher",
 
   setup(build) {
     build.onStart(() => {
-      console.log('[watch] build started');
+      console.log("[watch] build started");
     });
     build.onEnd((result) => {
       result.errors.forEach(({ text, location }) => {
         console.error(`✘ [ERROR] ${text}`);
-        console.error(`    ${location.file}:${location.line}:${location.column}:`);
+        console.error(
+          `    ${location.file}:${location.line}:${location.column}:`,
+        );
       });
-      console.log('[watch] build finished');
+      console.log("[watch] build finished");
     });
   },
 };
@@ -35,18 +37,22 @@ const esbuildProblemMatcherPlugin = {
  * @type {import('esbuild').Plugin}
  */
 const testBundlePlugin = {
-  name: 'testBundlePlugin',
+  name: "testBundlePlugin",
   setup(build) {
     build.onResolve({ filter: /[\/\\]extensionTests\.ts$/ }, (args) => {
-      if (args.kind === 'entry-point') {
+      if (args.kind === "entry-point") {
         return { path: path.resolve(args.path) };
       }
     });
     build.onLoad({ filter: /[\/\\]extensionTests\.ts$/ }, async (args) => {
-      const testsRoot = path.join(__dirname, 'src/web/test/suite');
-      const files = await glob.glob('*.test.{ts,tsx}', { cwd: testsRoot, posix: true });
+      const testsRoot = path.join(__dirname, "src/web/test/suite");
+      const files = await glob.glob("*.test.{ts,tsx}", {
+        cwd: testsRoot,
+        posix: true,
+      });
       return {
-        contents: `export { run } from './mochaTestRunner.ts';` + files.map((f) => `import('./${f}');`).join(''),
+        contents: `export { run } from './mochaTestRunner.ts';` +
+          files.map((f) => `import('./${f}');`).join(""),
         watchDirs: files.map((f) => path.dirname(path.resolve(testsRoot, f))),
         watchFiles: files.map((f) => path.resolve(testsRoot, f)),
       };
@@ -56,19 +62,22 @@ const testBundlePlugin = {
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ['src/web/extension.ts', 'src/web/test/suite/extensionTests.ts'],
+    entryPoints: [
+      "src/web/extension.ts",
+      "src/web/test/suite/extensionTests.ts",
+    ],
     bundle: true,
-    format: 'cjs',
+    format: "cjs",
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: 'browser',
-    outdir: 'dist/web',
-    external: ['vscode'],
-    logLevel: 'silent',
+    platform: "browser",
+    outdir: "dist/web",
+    external: ["vscode"],
+    logLevel: "silent",
     // Node.js global to browser globalThis
     define: {
-      global: 'globalThis',
+      global: "globalThis",
     },
 
     plugins: [
@@ -77,7 +86,7 @@ async function main() {
         buffer: true,
       }),
       testBundlePlugin,
-      esbuildProblemMatcherPlugin /* add to the end of plugins array */,
+      esbuildProblemMatcherPlugin, /* add to the end of plugins array */
     ],
   });
   if (watch) {

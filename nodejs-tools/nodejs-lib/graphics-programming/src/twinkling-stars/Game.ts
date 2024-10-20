@@ -1,7 +1,7 @@
-import { repeat } from '@vighnesh153/tools';
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { Star } from './star.ts';
+import { repeat } from "@vighnesh153/tools";
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { Star } from "./star.ts";
 
 interface GameOptions {
   bgColor?: string;
@@ -58,6 +58,12 @@ export class TwinklingStarsGame {
     const rect = this.#canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.#canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.#bgColor);
+    this.#canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.#bgColor,
+    );
   }
 }

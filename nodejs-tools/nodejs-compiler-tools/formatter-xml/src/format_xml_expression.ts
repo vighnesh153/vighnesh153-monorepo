@@ -1,8 +1,14 @@
-import { XmlCommentNode, XmlExpression, XmlPrologNode, XmlTagNode, XmlTextNode } from '@vighnesh153/parser-xml';
-import { formatXmlPrologNode } from './format_xml_prolog_node.ts';
-import { formatXmlTagNode } from './format_xml_tag_node.ts';
-import { formatCommentNode } from './format_comment_node.ts';
-import { formatTextNode } from './format_text_node.ts';
+import {
+  XmlCommentNode,
+  XmlExpression,
+  XmlPrologNode,
+  XmlTagNode,
+  XmlTextNode,
+} from "@vighnesh153/parser-xml";
+import { formatXmlPrologNode } from "./format_xml_prolog_node.ts";
+import { formatXmlTagNode } from "./format_xml_tag_node.ts";
+import { formatCommentNode } from "./format_comment_node.ts";
+import { formatTextNode } from "./format_text_node.ts";
 
 type FormatXmlExpressionProps = {
   readonly expression: Readonly<XmlExpression>;

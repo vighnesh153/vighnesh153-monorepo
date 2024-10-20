@@ -1,4 +1,4 @@
-import { TreeNode } from './TreeNode.ts';
+import { TreeNode } from "./TreeNode.ts";
 
 // least common ancestor
 function findLCA(path1: TreeNode[], path2: TreeNode[]): TreeNode {
@@ -18,7 +18,10 @@ function findLCA(path1: TreeNode[], path2: TreeNode[]): TreeNode {
   return path1[i - 1];
 }
 
-export function findConnectingPath(path1: TreeNode[], path2: TreeNode[]): TreeNode[] {
+export function findConnectingPath(
+  path1: TreeNode[],
+  path2: TreeNode[],
+): TreeNode[] {
   const pathFrom1: TreeNode[] = [];
   const pathFrom2: TreeNode[] = [];
 

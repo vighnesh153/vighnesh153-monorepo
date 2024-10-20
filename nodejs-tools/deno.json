@@ -1,0 +1,12 @@
+{
+  "fmt": {
+    "exclude": [
+      "**/node_modules/**/*",
+      "**/dist/**/*",
+      "**/.sst/**/*",
+      "**/.astro/**/*",
+      "**/.vscode-test-web/**/*",
+      "**/.turbo/**/*"
+    ]
+  }
+}

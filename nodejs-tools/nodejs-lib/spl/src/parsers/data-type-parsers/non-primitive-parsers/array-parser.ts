@@ -1,11 +1,11 @@
-import { DatatypeParser } from '../datatype-parser';
+import { DatatypeParser } from "../datatype-parser";
 
-import { NumberParser } from '../primitive-parsers/number-parser';
-import { BooleanParser } from '../primitive-parsers/boolean-parser';
-import { StringParser } from '../primitive-parsers/string-parser';
+import { NumberParser } from "../primitive-parsers/number-parser";
+import { BooleanParser } from "../primitive-parsers/boolean-parser";
+import { StringParser } from "../primitive-parsers/string-parser";
 
-import { bugReporter } from '@/language-bug-handling';
-import { csvSplit } from '@/helpers/csv-split';
+import { bugReporter } from "@/language-bug-handling";
+import { csvSplit } from "@/helpers/csv-split";
 
 export class ArrayParser extends DatatypeParser {
   static instance = new ArrayParser();
@@ -14,16 +14,20 @@ export class ArrayParser extends DatatypeParser {
     super();
   }
 
-  primitiveParsers: DatatypeParser[] = [NumberParser.instance, BooleanParser.instance, StringParser.instance];
+  primitiveParsers: DatatypeParser[] = [
+    NumberParser.instance,
+    BooleanParser.instance,
+    StringParser.instance,
+  ];
 
   type(): string {
-    return 'array';
+    return "array";
   }
 
   tryParse(text: string): boolean {
     const trimmed = text.trim();
 
-    if (trimmed.startsWith('[') === false || trimmed.endsWith(']') === false) {
+    if (trimmed.startsWith("[") === false || trimmed.endsWith("]") === false) {
       return false;
     }
 
@@ -33,7 +37,7 @@ export class ArrayParser extends DatatypeParser {
     }
 
     const arrayElements = csvSplit(innerContent);
-    let type: string = 'any';
+    let type: string = "any";
     let isArrayValid = true;
     arrayElements.forEach((element) => {
       if (isArrayValid === false) return;
@@ -43,7 +47,7 @@ export class ArrayParser extends DatatypeParser {
         if (isArrayValid === false) return;
 
         if (parser.tryParse(element)) {
-          if (type === 'any') {
+          if (type === "any") {
             type = parser.type();
           } else if (type !== parser.type()) {
             isArrayValid = false;
@@ -77,7 +81,7 @@ export class ArrayParser extends DatatypeParser {
 
       return resultantArray;
     } else {
-      bugReporter.report('PARSE_INVOKED_ON_INVALID_ARRAY');
+      bugReporter.report("PARSE_INVOKED_ON_INVALID_ARRAY");
     }
   }
 }

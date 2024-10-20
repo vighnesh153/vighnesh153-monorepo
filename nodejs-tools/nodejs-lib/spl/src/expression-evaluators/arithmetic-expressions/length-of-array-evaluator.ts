@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
 
 export class LengthOfArrayEvaluator extends ExpressionEvaluator {
   private static regex = /^length\s* of (.*)$/;
@@ -26,13 +26,13 @@ export class LengthOfArrayEvaluator extends ExpressionEvaluator {
       }
 
       const variable = this.scope.getVariable(arrayName);
-      if (variable.type !== 'array') {
+      if (variable.type !== "array") {
         throw new Error(`'${arrayName}' is not a array variable`);
       }
 
       return variable.value.length;
     }
 
-    throw new Error('Invalid statement.');
+    throw new Error("Invalid statement.");
   }
 }

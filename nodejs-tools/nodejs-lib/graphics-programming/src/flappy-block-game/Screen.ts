@@ -1,5 +1,5 @@
 export interface Screen {
-  readonly type: 'gameplay' | 'info';
+  readonly type: "gameplay" | "info";
 
   draw(): void;
   update(): void;

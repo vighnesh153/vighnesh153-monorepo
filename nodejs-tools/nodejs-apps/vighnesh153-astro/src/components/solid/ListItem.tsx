@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js';
-import { classes } from '@/utils/index.ts';
+import type { JSX } from "solid-js";
+import { classes } from "@/utils/index.ts";
 
 export type ListItemProps = {
   text: string;
@@ -18,7 +18,7 @@ export function ListItem(props: ListItemProps) {
       flex gap-1
 
       hover:bg-background hover:text-accent
-      `
+      `,
       )}
       role="button"
       onClick={props.onClick}

@@ -1,8 +1,8 @@
-import { ExpressionEvaluator } from '@/expression-evaluators/expression-evaluator';
-import { Scope } from '@/models/Scope';
-import { bugReporter } from '@/language-bug-handling';
-import { StringParser } from '@/parsers/data-type-parsers/primitive-parsers/string-parser';
-import { ArrayIndexEvaluator } from '@/expression-evaluators/array-index-evaluator';
+import { ExpressionEvaluator } from "@/expression-evaluators/expression-evaluator";
+import { Scope } from "@/models/Scope";
+import { bugReporter } from "@/language-bug-handling";
+import { StringParser } from "@/parsers/data-type-parsers/primitive-parsers/string-parser";
+import { ArrayIndexEvaluator } from "@/expression-evaluators/array-index-evaluator";
 
 export class StringExpressionEvaluator extends ExpressionEvaluator {
   private static stringParser = StringParser.instance;
@@ -10,7 +10,7 @@ export class StringExpressionEvaluator extends ExpressionEvaluator {
 
   constructor(public scope: Scope) {
     super();
-    this.arrayIndexEvaluator = new ArrayIndexEvaluator(scope, 'string');
+    this.arrayIndexEvaluator = new ArrayIndexEvaluator(scope, "string");
   }
 
   tryEvaluate(text: string): boolean {
@@ -18,7 +18,8 @@ export class StringExpressionEvaluator extends ExpressionEvaluator {
     if (StringExpressionEvaluator.stringParser.tryParse(trimmed)) {
       return true;
     }
-    return this.scope.hasVariable(trimmed) && this.scope.getVariable(trimmed).type === 'string';
+    return this.scope.hasVariable(trimmed) &&
+      this.scope.getVariable(trimmed).type === "string";
   }
 
   evaluate(text: string): unknown {
@@ -29,7 +30,7 @@ export class StringExpressionEvaluator extends ExpressionEvaluator {
       }
       return this.scope.getVariable(trimmed).value;
     } else {
-      bugReporter.report('EVALUATING_INVALID_STRING');
+      bugReporter.report("EVALUATING_INVALID_STRING");
     }
   }
 }

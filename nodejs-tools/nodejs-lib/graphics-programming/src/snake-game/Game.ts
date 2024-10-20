@@ -1,9 +1,9 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { getCanvasBgColor } from '@/getCanvasBgColor.ts';
-import { FoodController } from './FoodController.ts';
-import { Snake } from './Snake.ts';
-import { GameGrid } from './GameGrid.ts';
-import { Direction } from './Direction.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { getCanvasBgColor } from "@/getCanvasBgColor.ts";
+import { FoodController } from "./FoodController.ts";
+import { Snake } from "./Snake.ts";
+import { GameGrid } from "./GameGrid.ts";
+import { Direction } from "./Direction.ts";
 
 interface GameOptions {
   readonly cols?: number;
@@ -32,7 +32,7 @@ export class SnakeGame {
   constructor(canvasWrapper: CanvasWrapper, options: GameOptions = {}) {
     this.canvasWrapper = canvasWrapper;
     this.bgColor = options.bgColor ?? getCanvasBgColor(canvasWrapper);
-    this.textColor = options.textColor ?? 'black';
+    this.textColor = options.textColor ?? "black";
     this.fontSize = options.fontSize ?? 15;
 
     this.rows = options.rows ?? 90;
@@ -48,7 +48,10 @@ export class SnakeGame {
     });
 
     this.foodController = new FoodController({ gameGrid: this.gameGrid });
-    this.snake = new Snake({ gameGrid: this.gameGrid, foodController: this.foodController });
+    this.snake = new Snake({
+      gameGrid: this.gameGrid,
+      foodController: this.foodController,
+    });
   }
 
   *start() {
@@ -86,7 +89,13 @@ export class SnakeGame {
     const rect = this.canvasWrapper.getBoundingClientRect();
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    this.canvasWrapper.drawFilledRect(0, 0, canvasWidth, canvasHeight, this.bgColor);
+    this.canvasWrapper.drawFilledRect(
+      0,
+      0,
+      canvasWidth,
+      canvasHeight,
+      this.bgColor,
+    );
   }
 
   private drawText(): void {

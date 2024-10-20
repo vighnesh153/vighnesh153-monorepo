@@ -1,16 +1,16 @@
-import axios from 'axios';
-import { not } from '@vighnesh153/tools';
-import { constants } from '../constants.ts';
+import axios from "axios";
+import { not } from "@vighnesh153/tools";
+import { constants } from "../constants.ts";
 
 async function isTokenValid(token: string): Promise<boolean> {
   const rateLimitEndpoint = constants.urls.github.rateLimit;
   return axios({
     url: rateLimitEndpoint,
-    method: 'get',
+    method: "get",
     headers: { Authorization: `token ${token}` },
   }).then((result) => {
-    const OAuthScopes = result.headers['x-oauth-scopes'] ?? '';
-    return OAuthScopes.includes('gist');
+    const OAuthScopes = result.headers["x-oauth-scopes"] ?? "";
+    return OAuthScopes.includes("gist");
   });
 }
 

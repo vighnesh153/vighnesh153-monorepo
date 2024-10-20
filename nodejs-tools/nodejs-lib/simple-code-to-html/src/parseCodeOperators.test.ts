@@ -1,35 +1,35 @@
-import { parseCodeOperators } from './parseCodeOperators.ts';
+import { parseCodeOperators } from "./parseCodeOperators.ts";
 
 const javascriptOperators = {
-  operators: '~!@#$%^&*()-_=+{[}]|\\:;<,>.?/',
+  operators: "~!@#$%^&*()-_=+{[}]|\\:;<,>.?/",
 };
 
-test('no operators in code', () => {
-  expect(parseCodeOperators('pikachu', javascriptOperators)).toStrictEqual([
+test("no operators in code", () => {
+  expect(parseCodeOperators("pikachu", javascriptOperators)).toStrictEqual([
     {
       isOperator: false,
-      value: 'pikachu',
+      value: "pikachu",
     },
   ]);
 });
 
-test('operators', () => {
+test("operators", () => {
   expect(parseCodeOperators(` @!# 3s &<>`, javascriptOperators)).toStrictEqual([
     {
       isOperator: false,
-      value: ' ',
+      value: " ",
     },
     {
       isOperator: true,
-      value: '@!#',
+      value: "@!#",
     },
     {
       isOperator: false,
-      value: ' 3s ',
+      value: " 3s ",
     },
     {
       isOperator: true,
-      value: '&amp;&lt;&gt;',
+      value: "&amp;&lt;&gt;",
     },
   ]);
 });

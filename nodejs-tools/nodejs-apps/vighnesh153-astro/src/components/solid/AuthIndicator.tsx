@@ -1,12 +1,17 @@
-import { createEffect, createSignal, Show } from 'solid-js';
+import { createEffect, createSignal, Show } from "solid-js";
 
-import { type CompleteUserInfo } from '@vighnesh153/tools';
+import { type CompleteUserInfo } from "@vighnesh153/tools";
 
-import { browserCookieReaderFactory, classes, computeInitialsFromName, initiateLogout } from '@/utils/index.ts';
-import { GoogleSignInButton } from './buttons/index.ts';
-import { Avatar } from './Avatar.tsx';
-import { Menu } from './Menu.tsx';
-import type { ListItemProps } from './ListItem.tsx';
+import {
+  browserCookieReaderFactory,
+  classes,
+  computeInitialsFromName,
+  initiateLogout,
+} from "@/utils/index.ts";
+import { GoogleSignInButton } from "./buttons/index.ts";
+import { Avatar } from "./Avatar.tsx";
+import { Menu } from "./Menu.tsx";
+import type { ListItemProps } from "./ListItem.tsx";
 
 export type AuthIndicatorProps = {
   userInfo: CompleteUserInfo;
@@ -18,7 +23,7 @@ export function AuthIndicator() {
 
   const menuItems: ListItemProps[] = [
     {
-      text: 'Log out',
+      text: "Log out",
       onClick: () => initiateLogout(),
     },
   ];
@@ -38,7 +43,10 @@ export function AuthIndicator() {
             placement="bottom-end"
             items={menuItems}
             controlElement={(_, toggle) => (
-              <button class="flex gap-3 items-center" onClick={() => toggle()}>
+              <button
+                class="flex gap-3 items-center"
+                onClick={() => toggle()}
+              >
                 <div class="shrink-0">
                   <Avatar
                     userInitials={computeInitialsFromName(userInfo()!.name)}
@@ -51,10 +59,10 @@ export function AuthIndicator() {
               w-73 inline-block
               grow-0
               whitespace-nowrap overflow-hidden text-ellipsis
-              `
+              `,
                   )}
                 >
-                  {userInfo()!.name.split(' ')[0]}
+                  {userInfo()!.name.split(" ")[0]}
                 </div>
               </button>
             )}

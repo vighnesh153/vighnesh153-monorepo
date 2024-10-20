@@ -1,62 +1,66 @@
-import { reservedWords } from './constants.ts';
-import { parseCodeReservedWords } from './parseCodeReservedWords.ts';
+import { reservedWords } from "./constants.ts";
+import { parseCodeReservedWords } from "./parseCodeReservedWords.ts";
 
 const javascriptReservedWords = {
   reservedWords,
 };
 
-test('no reserved words', () => {
-  expect(parseCodeReservedWords('hello pikachu', javascriptReservedWords)).toStrictEqual([
-    {
-      isReservedWord: false,
-      value: 'hello pikachu',
-    },
-  ]);
+test("no reserved words", () => {
+  expect(parseCodeReservedWords("hello pikachu", javascriptReservedWords))
+    .toStrictEqual([
+      {
+        isReservedWord: false,
+        value: "hello pikachu",
+      },
+    ]);
 });
 
-test('reserved words', () => {
+test("reserved words", () => {
   expect(
-    parseCodeReservedWords(' public hello pikachu const hello let class as', javascriptReservedWords)
+    parseCodeReservedWords(
+      " public hello pikachu const hello let class as",
+      javascriptReservedWords,
+    ),
   ).toStrictEqual([
     {
       isReservedWord: false,
-      value: ' ',
+      value: " ",
     },
     {
       isReservedWord: true,
-      value: 'public',
+      value: "public",
     },
     {
       isReservedWord: false,
-      value: ' hello pikachu ',
+      value: " hello pikachu ",
     },
     {
       isReservedWord: true,
-      value: 'const',
+      value: "const",
     },
     {
       isReservedWord: false,
-      value: ' hello ',
+      value: " hello ",
     },
     {
       isReservedWord: true,
-      value: 'let',
+      value: "let",
     },
     {
       isReservedWord: false,
-      value: ' ',
+      value: " ",
     },
     {
       isReservedWord: true,
-      value: 'class',
+      value: "class",
     },
     {
       isReservedWord: false,
-      value: ' ',
+      value: " ",
     },
     {
       isReservedWord: true,
-      value: 'as',
+      value: "as",
     },
   ]);
 });

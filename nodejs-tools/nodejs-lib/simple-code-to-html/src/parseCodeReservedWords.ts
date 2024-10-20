@@ -9,9 +9,12 @@ type ParseCodeReservedWordsResult = Array<{
 
 export function parseCodeReservedWords(
   code: string,
-  options: ParseCodeReservedWordsOptions
+  options: ParseCodeReservedWordsOptions,
 ): ParseCodeReservedWordsResult {
-  const reservedWords = Array.from(new Set(options.reservedWords)).sort((a, b) => (a.length >= b.length ? -1 : 1));
+  const reservedWords = Array.from(new Set(options.reservedWords)).sort((
+    a,
+    b,
+  ) => (a.length >= b.length ? -1 : 1));
 
   const reservedWordIndices: { start: number; end: number }[] = [];
 

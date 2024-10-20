@@ -1,5 +1,5 @@
-import { CanvasWrapper } from '@/canvas-wrapper.ts';
-import { randomColor } from './randomColor.ts';
+import { CanvasWrapper } from "@/canvas-wrapper.ts";
+import { randomColor } from "./randomColor.ts";
 
 interface Options {
   /**
@@ -31,7 +31,7 @@ export class SymmetricBinaryTreeGame {
 
     this.#angle = ((options.angle ?? 40) * Math.PI) / 180;
     this.#thickness = options.thickness ?? 3;
-    this.#color = options.color ?? 'black';
+    this.#color = options.color ?? "black";
     this.#scaleDownFactor = options.scaleDownFactor ?? 0.7;
     this.#initialLength = options.initialLength ?? h * 0.3;
     this.#lengthThreshold = options.lengthThreshold ?? 3;

@@ -1,6 +1,13 @@
-import type { Command, MetadataBearer, HttpHandlerOptions } from '@smithy/types';
-import type { SmithyResolvedConfiguration } from '@smithy/smithy-client';
-import { type ServiceInputTypes, type ServiceOutputTypes } from '@aws-sdk/lib-dynamodb';
+import type {
+  Command,
+  HttpHandlerOptions,
+  MetadataBearer,
+} from "@smithy/types";
+import type { SmithyResolvedConfiguration } from "@smithy/smithy-client";
+import {
+  type ServiceInputTypes,
+  type ServiceOutputTypes,
+} from "@aws-sdk/lib-dynamodb";
 
 export interface IDynamoDBDocumentClient<
   HandlerOptions = HttpHandlerOptions,
@@ -8,7 +15,13 @@ export interface IDynamoDBDocumentClient<
   ClientOutput extends MetadataBearer = ServiceOutputTypes,
 > {
   send<InputType extends ClientInput, OutputType extends ClientOutput>(
-    command: Command<ClientInput, InputType, ClientOutput, OutputType, SmithyResolvedConfiguration<HandlerOptions>>,
-    options?: HandlerOptions
+    command: Command<
+      ClientInput,
+      InputType,
+      ClientOutput,
+      OutputType,
+      SmithyResolvedConfiguration<HandlerOptions>
+    >,
+    options?: HandlerOptions,
   ): Promise<OutputType>;
 }

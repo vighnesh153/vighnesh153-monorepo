@@ -1,1 +1,1 @@
-export { SymmetricBinaryTreeGame } from './Game.ts';
+export { SymmetricBinaryTreeGame } from "./Game.ts";

@@ -1,5 +1,9 @@
-import { randomIntegerBetween } from '@std/random';
+import { randomIntegerBetween } from "@std/random";
 
-export function buildInitialLineHeightPercentsArray(size: number, from = 10, to = 100): Array<number> {
+export function buildInitialLineHeightPercentsArray(
+  size: number,
+  from = 10,
+  to = 100,
+): Array<number> {
   return Array.from({ length: size }).map(() => randomIntegerBetween(from, to));
 }

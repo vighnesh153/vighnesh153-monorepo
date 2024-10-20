@@ -1,63 +1,88 @@
-import { PutCommand, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
-import { DynamoTypeMap, TableMetadata } from './TableMetadata.ts';
-import { DynamoDBTable, OptionalGetOne, OptionalCreateOne } from './DynamoDBTable.ts';
-import { IDynamoDBDocumentClient } from './IDynamoDBDocumentClient.ts';
+import { PutCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoTypeMap, TableMetadata } from "./TableMetadata.ts";
+import {
+  DynamoDBTable,
+  OptionalCreateOne,
+  OptionalGetOne,
+} from "./DynamoDBTable.ts";
+import { IDynamoDBDocumentClient } from "./IDynamoDBDocumentClient.ts";
 
-export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable<T> {
+export class DynamoDBTableImpl<T extends TableMetadata>
+  implements DynamoDBTable<T> {
   constructor(
     private client: IDynamoDBDocumentClient,
-    private tableMetadata: T
+    private tableMetadata: T,
   ) {}
 
-  async queryOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
+  async queryOne<
+    TKey extends keyof T["fields"],
+    TFilterBy extends keyof T["fields"],
+  >(params: {
     filterBy: {
       [key in TFilterBy]: {
-        value: DynamoTypeMap[T['fields'][key]];
+        value: DynamoTypeMap[T["fields"][key]];
         filterExpression?: (key: string) => string;
       };
     };
-  }): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
-    return this.fetchOne(params, 'query');
+  }): Promise<
+    OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
+  > {
+    return this.fetchOne(params, "query");
   }
 
-  async scanOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(params: {
+  async scanOne<
+    TKey extends keyof T["fields"],
+    TFilterBy extends keyof T["fields"],
+  >(params: {
     filterBy: {
       [key in TFilterBy]: {
-        value: DynamoTypeMap[T['fields'][key]];
+        value: DynamoTypeMap[T["fields"][key]];
         filterExpression?: (key: string) => string;
       };
     };
-  }): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
-    return this.fetchOne(params, 'scan');
+  }): Promise<
+    OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
+  > {
+    return this.fetchOne(params, "scan");
   }
 
-  async createOne<TField extends keyof T['fields']>(params: {
-    data: { [key in TField]: DynamoTypeMap[T['fields'][key]] };
+  async createOne<TField extends keyof T["fields"]>(params: {
+    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
   }): Promise<OptionalCreateOne> {
     try {
-      await this.client.send(new PutCommand({ TableName: this.tableMetadata.tableName, Item: params.data }));
+      await this.client.send(
+        new PutCommand({
+          TableName: this.tableMetadata.tableName,
+          Item: params.data,
+        }),
+      );
       return { error: null };
     } catch (e) {
       return {
         error: {
-          message: 'CREATION_FAILED',
+          message: "CREATION_FAILED",
           errorObject: e,
         },
       };
     }
   }
 
-  private async fetchOne<TKey extends keyof T['fields'], TFilterBy extends keyof T['fields']>(
+  private async fetchOne<
+    TKey extends keyof T["fields"],
+    TFilterBy extends keyof T["fields"],
+  >(
     params: {
       filterBy: {
         [key in TFilterBy]: {
-          value: DynamoTypeMap[T['fields'][key]];
+          value: DynamoTypeMap[T["fields"][key]];
           filterExpression?: (key: string) => string;
         };
       };
     },
-    type: 'scan' | 'query'
-  ): Promise<OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T['fields'][key]] }>> {
+    type: "scan" | "query",
+  ): Promise<
+    OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
+  > {
     const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
     const expressionAttributeValues = keys
       // Expected attribute values format:
@@ -67,8 +92,8 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
           const { value } = params.filterBy[key];
           const formattedKey = `:${String(key)}`;
           switch (typeof value) {
-            case 'number':
-            case 'string':
+            case "number":
+            case "string":
               exprAttrValues[formattedKey] = value;
               break;
             default:
@@ -76,31 +101,34 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
           }
           return exprAttrValues;
         },
-        {} as Record<string, unknown>
+        {} as Record<string, unknown>,
       );
     const conditionExpression = (keys as string[])
       .map((key) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const { filterExpression = equalityFilterExpression } = params.filterBy[key as TFilterBy];
+        const { filterExpression = equalityFilterExpression } =
+          params.filterBy[key as TFilterBy];
         return filterExpression(key);
       })
-      .join(' and ');
+      .join(" and ");
     const command = (() => {
-      if (type == 'query') {
+      if (type == "query") {
         return new QueryCommand({
           TableName: this.tableMetadata.tableName,
           KeyConditionExpression: conditionExpression,
           ExpressionAttributeValues: expressionAttributeValues,
         });
       }
-      if (type == 'scan') {
+      if (type == "scan") {
         return new ScanCommand({
           TableName: this.tableMetadata.tableName,
           FilterExpression: conditionExpression,
           ExpressionAttributeValues: expressionAttributeValues,
         });
       }
-      throw new Error(`Invalid fetch type. Should be either scan or query, found: '${type}'`);
+      throw new Error(
+        `Invalid fetch type. Should be either scan or query, found: '${type}'`,
+      );
     })();
     try {
       const result = await this.client.send(command);
@@ -115,7 +143,7 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
       return {
         data: null,
         error: {
-          message: 'OBJECT_NOT_FOUND',
+          message: "OBJECT_NOT_FOUND",
           errorObject: null,
         },
       };
@@ -123,7 +151,7 @@ export class DynamoDBTableImpl<T extends TableMetadata> implements DynamoDBTable
       return {
         data: null,
         error: {
-          message: 'ERROR_WHILE_FETCHING',
+          message: "ERROR_WHILE_FETCHING",
           errorObject: e,
         },
       };
