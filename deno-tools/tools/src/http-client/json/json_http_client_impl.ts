@@ -174,12 +174,12 @@ export class JsonHttpClientImpl implements JsonHttpClient {
           errorMessage: "Bad request",
           error: jsonResponse,
         });
-      } catch (e) {
+      } catch (_e) {
         return new JsonHttpResponse({
           type: "error",
           statusCode,
           errorMessage: textResponse,
-          error: e,
+          error: null,
         });
       }
     }

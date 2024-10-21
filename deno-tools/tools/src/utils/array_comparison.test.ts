@@ -1,7 +1,7 @@
 import { assertEquals, assertFalse } from "@std/assert";
 import {
   areArraysEqual,
-  type ArrayComparison,
+  type ArrayComparator,
   isArrayGreaterThan,
   isArrayGreaterThanOrEqualTo,
   isArrayLessThan,
@@ -22,8 +22,10 @@ Deno.test("Complex array equality", () => {
     areArraysEqual(
       [{ name: "Pikachu" }, { name: "Charizard" }],
       [{ name: "Pikachu" }, { name: "Charizard" }],
-      (pokemon1, pokemon2) =>
-        pokemon1.name.localeCompare(pokemon2.name) as ArrayComparison,
+      ((pokemon1, pokemon2) =>
+        pokemon1.name.localeCompare(pokemon2.name)) as ArrayComparator<
+          { name: string }
+        >,
     ),
     true,
   );
@@ -34,8 +36,10 @@ Deno.test("Complex array inequality", () => {
     areArraysEqual(
       [{ name: "Pikachu" }, { name: "Charizard" }],
       [{ name: "Pika Pika" }, { name: "Charizard" }],
-      (pokemon1, pokemon2) =>
-        pokemon1.name.localeCompare(pokemon2.name) as ArrayComparison,
+      ((pokemon1, pokemon2) =>
+        pokemon1.name.localeCompare(pokemon2.name)) as ArrayComparator<
+          { name: string }
+        >,
     ),
   );
 });

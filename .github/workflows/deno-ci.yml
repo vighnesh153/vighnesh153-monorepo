@@ -28,5 +28,6 @@ jobs:
       # Check if all deno projects are ok
       - run: export PIKA_PATH="$(pwd)"; for dir in */; do
           cd $PIKA_PATH/$dir;
+          echo "Checking - $(pwd)\n"
           deno lint && deno fmt --check && deno test -A --permit-no-files;
           done
