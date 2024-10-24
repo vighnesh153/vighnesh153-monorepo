@@ -1,7 +1,11 @@
 {
   "name": "@vighnesh153/tsx-bundler",
-  "private": true,
+  "private": false,
+  "version": "0.4.8",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "types": "./dist/src/index.d.ts",
     "import": "./dist/main.js"
@@ -19,22 +23,24 @@
     "test": "vitest run --passWithNoTests"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/*.config.d.ts",
+    "README.md"
   ],
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "1.7.7",
     "esbuild-wasm": "0.20.2",
-    "localforage": "^1.10.0"
+    "localforage": "1.10.0"
   },
   "devDependencies": {
-    "@types/jsdom": "^21.1.7",
+    "@types/jsdom": "21.1.7",
     "@types/node": "*",
-    "@vighnesh153/tsconfig": "*",
-    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.2",
-    "jsdom": "^25.0.1",
-    "npm-run-all": "^4.1.5",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.3",
+    "@vighnesh153/tsconfig": "0.4.8",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.2",
+    "jsdom": "25.0.1",
+    "npm-run-all": "4.1.5",
+    "tsup": "8.3.0",
+    "typescript": "5.6.3",
     "vitest": "2.1.2"
   }
 }

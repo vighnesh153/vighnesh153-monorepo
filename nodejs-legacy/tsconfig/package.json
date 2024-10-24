@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/tsconfig",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "My preferred `tsconfig` for different types of projects",
   "private": false,
   "publishConfig": {
@@ -9,7 +9,6 @@
   "files": [
     "astro.json",
     "base.json",
-    "nextjs.json",
     "react-library.json",
     "typescript-library.json"
   ],
