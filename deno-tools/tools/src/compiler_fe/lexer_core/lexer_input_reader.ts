@@ -1,5 +1,5 @@
 import { not } from "@vighnesh153/tools";
-import { LexerInput } from "./LexerInput.ts";
+import type { LexerInput } from "./lexer_input.ts";
 import { EOF_CHARACTER } from "./utils.ts";
 
 export class LexerInputReader {

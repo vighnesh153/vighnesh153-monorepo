@@ -1,21 +1,21 @@
-import { expect, test } from "vitest";
-import { LexerError } from "./LexerError.ts";
+import { assertEquals, assertNotStrictEquals } from "@std/assert";
+import { LexerError } from "./lexer_error.ts";
 
-test("should create the error object", () => {
+Deno.test("should create the error object", () => {
   const error = new LexerError({
     columnNumber: 999,
     lineNumber: 100,
     errorCategory: { type: "UNCLOSED_COMMENT_LITERAL" },
   });
 
-  expect(error.columnNumber).toBe(999);
-  expect(error.lineNumber).toBe(100);
-  expect(error.errorCategory).toStrictEqual({
+  assertEquals(error.columnNumber, 999);
+  assertEquals(error.lineNumber, 100);
+  assertEquals(error.errorCategory, {
     type: "UNCLOSED_COMMENT_LITERAL",
   });
 });
 
-test("should copy the error object", () => {
+Deno.test("should copy the error object", () => {
   const error = new LexerError({
     columnNumber: 999,
     lineNumber: 100,
@@ -23,16 +23,16 @@ test("should copy the error object", () => {
   });
   const copy = error.copy();
 
-  expect(copy).not.toBe(error);
-  expect(copy.columnNumber).toBe(999);
-  expect(copy.lineNumber).toBe(100);
-  expect(copy.errorCategory).toStrictEqual({
+  assertNotStrictEquals(copy, error);
+  assertEquals(copy.columnNumber, 999);
+  assertEquals(copy.lineNumber, 100);
+  assertEquals(copy.errorCategory, {
     type: "ILLEGAL_CHARACTER",
     ch: "{",
   });
 });
 
-test("copy should allow overriding errorMessage in error object", () => {
+Deno.test("copy should allow overriding errorMessage in error object", () => {
   const copy = new LexerError({
     columnNumber: 999,
     lineNumber: 100,
@@ -41,13 +41,13 @@ test("copy should allow overriding errorMessage in error object", () => {
     errorCategory: { type: "INVALID_ESCAPE_CHARACTER_LITERAL", ch: ";" },
   });
 
-  expect(copy.errorCategory).toStrictEqual({
+  assertEquals(copy.errorCategory, {
     type: "INVALID_ESCAPE_CHARACTER_LITERAL",
     ch: ";",
   });
 });
 
-test("copy should allow overriding lineNumber in error object", () => {
+Deno.test("copy should allow overriding lineNumber in error object", () => {
   const copy = new LexerError({
     columnNumber: 999,
     lineNumber: 100,
@@ -56,10 +56,10 @@ test("copy should allow overriding lineNumber in error object", () => {
     lineNumber: 101,
   });
 
-  expect(copy.lineNumber).toBe(101);
+  assertEquals(copy.lineNumber, 101);
 });
 
-test("copy should allow overriding columnNumber in error object", () => {
+Deno.test("copy should allow overriding columnNumber in error object", () => {
   const copy = new LexerError({
     columnNumber: 999,
     lineNumber: 100,
@@ -68,5 +68,5 @@ test("copy should allow overriding columnNumber in error object", () => {
     columnNumber: 1001,
   });
 
-  expect(copy.columnNumber).toBe(1001);
+  assertEquals(copy.columnNumber, 1001);
 });

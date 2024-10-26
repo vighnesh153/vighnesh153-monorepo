@@ -1,8 +1,8 @@
-import { expect, test } from "vitest";
+import { assertEquals, assertNotStrictEquals } from "@std/assert";
 
-import { cloneToken, Token } from "./tokens.ts";
+import { cloneToken, type Token } from "./tokens.ts";
 
-test("should clone token", () => {
+Deno.test("should clone token", () => {
   const token: Token<"dummy_token_type"> = {
     lineNumber: 43,
     columnNumber: 25,
@@ -13,9 +13,9 @@ test("should clone token", () => {
   const clonedToken = cloneToken(token);
 
   // reference equality
-  expect(clonedToken).not.toBe(token);
+  assertNotStrictEquals(clonedToken, token);
   // value equality
-  expect(clonedToken).toStrictEqual({
+  assertEquals(clonedToken, {
     lineNumber: 43,
     columnNumber: 25,
     tokenLiteral: "dummy token literal",

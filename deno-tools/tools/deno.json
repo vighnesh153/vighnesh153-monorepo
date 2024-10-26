@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "exports": {
     ".": "./src/mod.ts",
+    "./compiler_fe": "./src/compiler_fe/mod.ts",
     "./file_upload": "./src/file_upload/mod.ts",
     "./vighnesh153": "./src/vighnesh153/mod.ts"
   },
