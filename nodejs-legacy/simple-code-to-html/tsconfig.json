@@ -1,12 +1,16 @@
 {
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
-    "types": ["vitest/globals"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "dist",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "target": "ESNext",
+    "types": ["vitest/globals"]
   },
   "include": [".", "src", "tests"],
   "exclude": ["dist", "build", "node_modules"]
