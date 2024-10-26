@@ -1,5 +1,5 @@
-import { Token } from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "@vighnesh153/lexer-xml";
+import type { Token } from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
 
 export type AstNodeType =
   | "XML_PROGRAM"
