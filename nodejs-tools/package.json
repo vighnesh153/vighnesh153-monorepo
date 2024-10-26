@@ -10,8 +10,7 @@
     "nodejs-compiler-tools/*",
     "nodejs-cloudflare-tools/*",
     "nodejs-docker-tools/*",
-    "nodejs-lib/*",
-    "nodejs-packages/*"
+    "nodejs-lib/*"
   ],
   "scripts": {
     "build": "turbo run build",
