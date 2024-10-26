@@ -1,17 +1,17 @@
-import { skipWhitespace } from "./skipWhitespace.ts";
 import {
   EOF_CHARACTER,
-  Lexer,
+  type Lexer,
   LexerError,
-  Token,
-} from "@vighnesh153/lexer-core";
-import { readStringLiteral } from "./readStringLiteral.ts";
+  type Token,
+} from "@/compiler_fe/lexer_core/mod.ts";
+import { skipWhitespace } from "./skip_whitespace.ts";
+import { readStringLiteral } from "./read_string_literal.ts";
 import {
   isAcceptableIdentifierStart,
   readIdentifier,
-} from "./readIdentifier.ts";
-import { readComment } from "./readComment.ts";
-import { readTextNode } from "./readTextNode.ts";
+} from "./read_identifier.ts";
+import { readComment } from "./read_comment.ts";
+import { readTextNode } from "./read_text_node.ts";
 import { XmlTokenType } from "./tokens.ts";
 
 export function nextToken(lexer: Lexer<XmlTokenType>): Token<XmlTokenType> {

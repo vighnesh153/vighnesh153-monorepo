@@ -1,5 +1,5 @@
-import { EOF_CHARACTER, Lexer } from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "./tokens.ts";
+import { EOF_CHARACTER, type Lexer } from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "./tokens.ts";
 
 const LEFT_ANGLE_BRACKET = "<";
 

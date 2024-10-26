@@ -1,7 +1,11 @@
 import { assert } from "@std/assert";
-import { EOF_CHARACTER, Lexer, LexerError } from "@vighnesh153/lexer-core";
-import { readEscapeSequence } from "./readEscapeSequence.ts";
-import { XmlTokenType } from "./tokens.ts";
+import {
+  EOF_CHARACTER,
+  type Lexer,
+  LexerError,
+} from "@/compiler_fe/lexer_core/mod.ts";
+import { readEscapeSequence } from "./read_escape_sequence.ts";
+import type { XmlTokenType } from "./tokens.ts";
 
 const DOUBLE_QUOTE = '"';
 
