@@ -2,7 +2,7 @@ import { assertEquals, assertNotStrictEquals } from "@std/assert";
 
 import { cloneToken, type Token } from "./tokens.ts";
 
-Deno.test("should clone token", () => {
+Deno.test("cloneToken should clone token", () => {
   const token: Token<"dummy_token_type"> = {
     lineNumber: 43,
     columnNumber: 25,
