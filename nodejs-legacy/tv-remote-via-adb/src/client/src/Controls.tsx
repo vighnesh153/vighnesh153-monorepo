@@ -1,8 +1,8 @@
 import { Box, BoxProps, IconButton } from "@mui/material";
 import { FaArrowLeft, FaHome } from "react-icons/fa";
-import { theme } from "./theme";
-import { DPad } from "./DPad";
-import { useActionOnKeyPress } from "./useActionOnKeyPress";
+import { theme } from "./theme.tsx";
+import { DPad } from "./DPad.tsx";
+import { useActionOnKeyPress } from "./useActionOnKeyPress.ts";
 
 const iconButtonSx: BoxProps["sx"] = {
   color: theme.palette.primary.main,

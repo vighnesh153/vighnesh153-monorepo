@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect } from "react";
-import { useDevices } from "./useDevices";
+import { useDevices } from "./useDevices.ts";
 
 export function Devices(props: BoxProps) {
   const { selectedDevice, setSelectedDevice, devices, fetchDevices } =

@@ -1,7 +1,8 @@
+// @ts-ignore
 import { useKeyPress, UseKeyPressKey } from "@vighnesh153/react-hooks";
-import { webKeyToAndroidKey } from "./webKeyToAndroidKey";
-import { useDevices } from "./useDevices";
-import { useHistory } from "./useHistory";
+import { webKeyToAndroidKey } from "./webKeyToAndroidKey.ts";
+import { useDevices } from "./useDevices.ts";
+import { useHistory } from "./useHistory.ts";
 
 export function useActionOnKeyPress() {
   const { selectedDevice } = useDevices();

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, BoxProps } from "@mui/material";
-import { theme } from "./theme";
+import { theme } from "./theme.tsx";
 
 export function CurvedButton({ ...props }: BoxProps) {
   return (

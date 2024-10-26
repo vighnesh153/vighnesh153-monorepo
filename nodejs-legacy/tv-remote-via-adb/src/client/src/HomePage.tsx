@@ -1,9 +1,9 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { Controls } from "./Controls";
-import { History } from "./History";
-import { Devices } from "./Devices";
+import { Controls } from "./Controls.tsx";
+import { History } from "./History.tsx";
+import { Devices } from "./Devices.tsx";
 
 export function HomePage() {
   return (
