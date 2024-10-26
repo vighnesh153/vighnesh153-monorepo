@@ -2,8 +2,8 @@
 
 import { Box, BoxProps } from "@mui/material";
 
-import { CurvedButton } from "./CurvedButton";
-import { CenterButton } from "./CenterButton";
+import { CurvedButton } from "./CurvedButton.tsx";
+import { CenterButton } from "./CenterButton.tsx";
 
 export interface DPadProps extends BoxProps {
   onLeftClick: () => void;

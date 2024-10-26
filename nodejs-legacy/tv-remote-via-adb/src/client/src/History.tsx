@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Box, BoxProps, Typography } from "@mui/material";
-import { useHistory } from "./useHistory";
+import { useHistory } from "./useHistory.ts";
 
 export function History({ ...props }: BoxProps) {
   const { history, fetchHistory } = useHistory();

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { UseKeyPressKey } from "@vighnesh153/react-hooks";
 
 // Keycode mapping found on this link

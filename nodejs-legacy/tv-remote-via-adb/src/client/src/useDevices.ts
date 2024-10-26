@@ -1,4 +1,4 @@
-import { useGlobalState } from "@vighnesh153/react-hooks";
+import { useGlobalState } from "./common.ts";
 
 export function useDevices() {
   const [selectedDevice, setSelectedDevice] = useGlobalState<string | null>(
