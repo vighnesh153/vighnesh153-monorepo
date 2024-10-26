@@ -38,7 +38,7 @@ const getCommonReceivedHeaders = () => ({
   "accept-encoding": "gzip,br",
   "accept-language": "*",
   host: serverAddress.slice("http://".length),
-  "user-agent": "Deno/2.0.2",
+  "user-agent": `Deno/${Deno.version.deno}`,
 });
 
 const getPostRequestReceivedHeaders = (contentLength = 47) => ({
