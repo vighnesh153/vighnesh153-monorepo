@@ -4,11 +4,13 @@ import { factorial } from "./factorial.ts";
 Deno.test("factorial tests", () => {
   assertThrows(
     () => factorial(2213.3),
+    Error,
     "Factorial of fractional numbers is not defined",
   );
 
   assertThrows(
     () => factorial(-4),
+    Error,
     "Factorial of negative numbers is not defined",
   );
 

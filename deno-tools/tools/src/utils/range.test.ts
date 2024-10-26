@@ -4,6 +4,7 @@ import { range } from "./range.ts";
 Deno.test("range should throw error if step is 0", () => {
   assertThrows(
     () => Array.from(range(1, 10, 0)),
+    Error,
     'Expected "step" to be non-zero, found "0"',
   );
 });
@@ -11,6 +12,7 @@ Deno.test("range should throw error if step is 0", () => {
 Deno.test("range should throw error if start < end and step < 0", () => {
   assertThrows(
     () => Array.from(range(1, 10, -2)),
+    Error,
     'Expected "step" to be positive if "start" is less than "end"',
   );
 });
@@ -18,6 +20,7 @@ Deno.test("range should throw error if start < end and step < 0", () => {
 Deno.test("range should throw error if start > end and step > 0", () => {
   assertThrows(
     () => Array.from(range(100, 10, 2)),
+    Error,
     'Expected "step" to be negative if "start" is greater than "end"',
   );
 });

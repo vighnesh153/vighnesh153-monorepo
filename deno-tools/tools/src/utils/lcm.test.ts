@@ -4,11 +4,13 @@ import { lcm } from "./lcm.ts";
 Deno.test("lcm tests", () => {
   assertThrows(
     () => lcm(-1),
+    Error,
     'Expected "n" to be a positive integer, found "-1"',
   );
 
   assertThrows(
     () => lcm(0.5),
+    Error,
     'Expected "n" to be a positive integer, found "0.5"',
   );
 

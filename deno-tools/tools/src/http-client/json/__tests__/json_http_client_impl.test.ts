@@ -78,8 +78,16 @@ test("jsonHttpClient: for GET Request, send headers and query parameters through
   assertEquals(response.isSuccess(), true);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const successResponse = response.getSuccessResponse();
   assertEquals(successResponse.type, "success");
@@ -108,8 +116,16 @@ test("jsonHttpClient: for GET Request, abort the request if it takes longer than
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), true);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
 
   const abortResponse = response.getAbortResponse();
   assertEquals(abortResponse.type, "abort");
@@ -136,8 +152,16 @@ test("jsonHttpClient: for GET Request, send headers and query parameters through
   assertEquals(response.isSuccess(), true);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const successResponse = response.getSuccessResponse();
   assertEquals(successResponse.type, "success");
@@ -169,8 +193,16 @@ test("jsonHttpClient: for GET Request, should abort the request", async () => {
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), true);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
 
   const abortResponse = response.getAbortResponse();
   assertEquals(abortResponse.type, "abort");
@@ -193,8 +225,16 @@ test("jsonHttpClient: for GET Request, parse the 4xx response as text error", as
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");
@@ -211,8 +251,16 @@ test("jsonHttpClient: for GET Request, parse the 4xx response as json error", as
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");
@@ -236,8 +284,16 @@ test("jsonHttpClient: for GET Request, parse the 5xx response as error", async (
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");
@@ -262,8 +318,16 @@ test("jsonHttpClient: for POST Request, send headers, query parameters and json 
   assertEquals(response.isSuccess(), true);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const successResponse = response.getSuccessResponse();
   assertEquals(successResponse.type, "success");
@@ -295,8 +359,16 @@ test("jsonHttpClient: for POST Request, abort the request if it takes longer tha
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), true);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
 
   const abortResponse = response.getAbortResponse();
   assertEquals(abortResponse.type, "abort");
@@ -324,8 +396,16 @@ test("jsonHttpClient: for POST Request, send headers, query parameters and form 
   assertEquals(response.isSuccess(), true);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const successResponse = response.getSuccessResponse();
   assertEquals(successResponse.type, "success");
@@ -367,8 +447,16 @@ test("jsonHttpClient: for POST Request, send headers, query parameters and data 
   assertEquals(response.isSuccess(), true);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const successResponse = response.getSuccessResponse();
   assertEquals(successResponse.type, "success");
@@ -407,8 +495,16 @@ test("jsonHttpClient: for POST Request, should abort the request", async () => {
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), false);
   assertEquals(response.isAbort(), true);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getErrorResponse(), "Not an error response");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getErrorResponse(),
+    Error,
+    "Not an error response",
+  );
 
   const abortResponse = response.getAbortResponse();
   assertEquals(abortResponse.type, "abort");
@@ -436,8 +532,16 @@ test("jsonHttpClient: for POST Request, parse the 4xx response as text error", a
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");
@@ -459,8 +563,16 @@ test("jsonHttpClient: for POST Request, parse the 4xx response as json error", a
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");
@@ -491,8 +603,16 @@ test("jsonHttpClient: for POST Request, parse the 5xx response as error", async 
   assertEquals(response.isSuccess(), false);
   assertEquals(response.isError(), true);
   assertEquals(response.isAbort(), false);
-  assertThrows(() => response.getSuccessResponse(), "Not a success response");
-  assertThrows(() => response.getAbortResponse(), "Request is not aborted");
+  assertThrows(
+    () => response.getSuccessResponse(),
+    Error,
+    "Not a success response",
+  );
+  assertThrows(
+    () => response.getAbortResponse(),
+    Error,
+    "Request is not aborted",
+  );
 
   const errorResponse = response.getErrorResponse();
   assertEquals(errorResponse.type, "error");

@@ -87,6 +87,7 @@ Deno.test("should throw error if futureOffset is negative integer", () => {
 
   assertThrows(
     () => reader.peekCharacter(-1),
+    Error,
     "Expected future offset to be a non-negative integer, found '-1'",
   );
 });
