@@ -1,6 +1,6 @@
-import { format } from "@vighnesh153/formatter-xml";
+import { format } from "./format.ts";
 
-export type FormatResponse =
+export type FormatWrapperResponse =
   | {
     type: "success";
     result: string;
@@ -10,7 +10,7 @@ export type FormatResponse =
     errMessage: string;
   };
 
-export function formatWrapper(text: string): FormatResponse {
+export function formatWrapper(text: string): FormatWrapperResponse {
   const response = format(text, { sortAttributes: true, indentation: 4 });
 
   if (response.type === "success") {
@@ -50,6 +50,10 @@ export function formatWrapper(text: string): FormatResponse {
           errorMessage =
             `Unexpected comment character '${errorCategory.ch}' at ${lineNumber}:${columnNumber}`;
           break;
+        default:
+          errorMessage =
+            `Unexpected lexer error at ${lineNumber}:${columnNumber}`;
+          break;
       }
     }
     return {
@@ -78,6 +82,10 @@ export function formatWrapper(text: string): FormatResponse {
         case "UNEXPECTED_TOKEN":
           errorMessage = `Unexpected token '${culpritToken.tokenLiteral}'` +
             ` at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
+          break;
+        default:
+          errorMessage =
+            `Unexpected parser error at ${culpritToken.lineNumber}:${culpritToken.columnNumber}`;
           break;
       }
     }
