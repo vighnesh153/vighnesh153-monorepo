@@ -16,7 +16,7 @@ function createLexer(input: string): Lexer<XmlTokenType> {
   return new Lexer(reader);
 }
 
-Deno.test("should return EOF for empty string", () => {
+Deno.test("xml nextToken should return EOF for empty string", () => {
   const lexer = createLexer("");
 
   assertEquals(
@@ -30,7 +30,7 @@ Deno.test("should return EOF for empty string", () => {
   );
 });
 
-Deno.test("should parse naked xml tag", () => {
+Deno.test("xml nextToken should parse naked xml tag", () => {
   const lexer = createLexer("<?xml?>");
 
   assertEquals(
@@ -84,7 +84,7 @@ Deno.test("should parse naked xml tag", () => {
   );
 });
 
-Deno.test("should parse xml tag", () => {
+Deno.test("xml nextToken should parse xml tag", () => {
   const lexer = createLexer('<?xml version="1.0" encoding="utf-8"?>');
 
   assertEquals(
@@ -198,7 +198,7 @@ Deno.test("should parse xml tag", () => {
   );
 });
 
-Deno.test("parse empty manifest", () => {
+Deno.test("xml nextToken parse empty manifest", () => {
   const lexer = createLexer(`
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
@@ -363,7 +363,7 @@ Deno.test("parse empty manifest", () => {
   );
 });
 
-Deno.test("parse comment", () => {
+Deno.test("xml nextToken parse comment", () => {
   const lexer = createLexer(`
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
@@ -429,7 +429,7 @@ Deno.test("parse comment", () => {
   );
 });
 
-Deno.test("should report error if comment start is invalid", () => {
+Deno.test("xml nextToken should report error if comment start is invalid", () => {
   const lexer = createLexer(`<!<<`);
 
   assertEquals(nextToken(lexer), {
@@ -450,7 +450,7 @@ Deno.test("should report error if comment start is invalid", () => {
   ]);
 });
 
-Deno.test("should report error if comment is unclosed", () => {
+Deno.test("xml nextToken should report error if comment is unclosed", () => {
   const lexer = createLexer(`<!--`);
 
   // attempting to read next token (comment literal) should report an error
@@ -466,7 +466,7 @@ Deno.test("should report error if comment is unclosed", () => {
   ]);
 });
 
-Deno.test("should read escape sequences", () => {
+Deno.test("xml nextToken should read escape sequences", () => {
   const lexer = createLexer(`
 <my-tag prop="\\n \\" \\u1234 \\t \\\\">
 </my-tag>
@@ -495,7 +495,7 @@ Deno.test("should read escape sequences", () => {
   );
 });
 
-Deno.test("should report error if unicode sequence is invalid", () => {
+Deno.test("xml nextToken should report error if unicode sequence is invalid", () => {
   const lexer = createLexer(`
 <my-tag prop="\\n \\" \\u123x"`);
 
@@ -515,7 +515,7 @@ Deno.test("should report error if unicode sequence is invalid", () => {
   ]);
 });
 
-Deno.test("should report error if escape sequence is invalid", () => {
+Deno.test("xml nextToken should report error if escape sequence is invalid", () => {
   const lexer = createLexer(`
 <my-tag prop="\\x"`);
 
@@ -535,7 +535,7 @@ Deno.test("should report error if escape sequence is invalid", () => {
   ]);
 });
 
-Deno.test("should report error if escape sequence is unclosed", () => {
+Deno.test("xml nextToken should report error if escape sequence is unclosed", () => {
   const lexer = createLexer(`
 <my-tag prop="\\n \\`);
 
@@ -561,7 +561,7 @@ Deno.test("should report error if escape sequence is unclosed", () => {
   ]);
 });
 
-Deno.test("should read tag name", () => {
+Deno.test("xml nextToken should read tag name", () => {
   const lexer = createLexer(`<my-tag`);
 
   assertEquals(nextToken(lexer), {
@@ -578,7 +578,7 @@ Deno.test("should read tag name", () => {
   });
 });
 
-Deno.test("should read naked text node", () => {
+Deno.test("xml nextToken should read naked text node", () => {
   const lexer = createLexer(`my-tag`);
 
   assertEquals(nextToken(lexer), {
@@ -589,7 +589,7 @@ Deno.test("should read naked text node", () => {
   });
 });
 
-Deno.test("should read text nodes", () => {
+Deno.test("xml nextToken should read text nodes", () => {
   const lexer = createLexer(`
     <pokemon>
       <name>Pikachu</name>
@@ -799,7 +799,7 @@ Deno.test("should read text nodes", () => {
   });
 });
 
-Deno.test("should report error if illegal character found", () => {
+Deno.test("xml nextToken should report error if illegal character found", () => {
   const lexer = createLexer(`
 <?xml !?>
     `);

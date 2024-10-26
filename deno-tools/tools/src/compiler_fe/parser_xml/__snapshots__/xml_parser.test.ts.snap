@@ -1,32 +1,32 @@
 export const snapshot = {};
 
-snapshot[`should parse prolog tag without attributes 1`] = `"<?xml?>"`;
+snapshot[`XmlParser should parse prolog tag without attributes 1`] = `"<?xml?>"`;
 
-snapshot[`should parse prolog tag with attributes 1`] = `'<?xml version="1.0" encoding="UTF-8"?>'`;
+snapshot[`XmlParser should parse prolog tag with attributes 1`] = `'<?xml version="1.0" encoding="UTF-8"?>'`;
 
-snapshot[`should parse empty self-closing tag 1`] = `"<manifest />"`;
+snapshot[`XmlParser should parse empty self-closing tag 1`] = `"<manifest />"`;
 
-snapshot[`should parse empty tag 1`] = `"<manifest />"`;
+snapshot[`XmlParser should parse empty tag 1`] = `"<manifest />"`;
 
-snapshot[`should parse tag with single simple attribute 1`] = `'<manifest package="com.pokemon.pikachu" />'`;
+snapshot[`XmlParser should parse tag with single simple attribute 1`] = `'<manifest package="com.pokemon.pikachu" />'`;
 
-snapshot[`should parse tag with multiple simple attributes 1`] = `
+snapshot[`XmlParser should parse tag with multiple simple attributes 1`] = `
 '<manifest
     package="com.pokemon.pikachu"
     attr2="2.0" />'
 `;
 
-snapshot[`should parse tag with colon separated attributes 1`] = `
+snapshot[`XmlParser should parse tag with colon separated attributes 1`] = `
 '<uses-feature
     android:name="android.hardware.touchscreen"
     android:required="false" />'
 `;
 
-snapshot[`should be able to read tags with namespaces 1`] = `"<namespace1:namespace2:namespace3 />"`;
+snapshot[`XmlParser should be able to read tags with namespaces 1`] = `"<namespace1:namespace2:namespace3 />"`;
 
-snapshot[`should parse naked text node 1`] = `"pikachu"`;
+snapshot[`XmlParser should parse naked text node 1`] = `"pikachu"`;
 
-snapshot[`should parse tag with children 1`] = `
+snapshot[`XmlParser should parse tag with children 1`] = `
 '<?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -65,7 +65,7 @@ snapshot[`should parse tag with children 1`] = `
 </manifest>'
 `;
 
-snapshot[`should parse tag with text node children and attributes 1`] = `
+snapshot[`XmlParser should parse tag with text node children and attributes 1`] = `
 '<pokemon>
     <name>Pikachu</name>
     <types comma-separated="true">electric, god</types>

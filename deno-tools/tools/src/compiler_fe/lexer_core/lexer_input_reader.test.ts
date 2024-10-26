@@ -3,21 +3,21 @@ import { LexerInputReader } from "./lexer_input_reader.ts";
 import { StringLexerInput } from "./lexer_input.ts";
 import { EOF_CHARACTER } from "./utils.ts";
 
-Deno.test("should read empty string without errors", () => {
+Deno.test("LexerInputReader should read empty string without errors", () => {
   const input = new StringLexerInput("");
   const reader = new LexerInputReader(input);
 
   assertEquals(reader.currentCharacter, EOF_CHARACTER);
 });
 
-Deno.test("should read string, of single character, without errors", () => {
+Deno.test("LexerInputReader should read string, of single character, without errors", () => {
   const input = new StringLexerInput("p");
   const reader = new LexerInputReader(input);
 
   assertEquals(reader.currentCharacter, "p");
 });
 
-Deno.test("should update currentCharacter when readNextCharacter is called", () => {
+Deno.test("LexerInputReader should update currentCharacter when readNextCharacter is called", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -31,7 +31,7 @@ Deno.test("should update currentCharacter when readNextCharacter is called", () 
 });
 
 Deno.test(
-  "current character should be EOF when the entire input is done reading " +
+  "LexerInputReader current character should be EOF when the entire input is done reading " +
     "no matter how many times readNextCharacter is called",
   () => {
     const input = new StringLexerInput("abc");
@@ -49,7 +49,7 @@ Deno.test(
   },
 );
 
-Deno.test("should update currentIndex when readNextCharacter is called and should stick to size of input at end", () => {
+Deno.test("LexerInputReader should update currentIndex when readNextCharacter is called and should stick to size of input at end", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -66,7 +66,7 @@ Deno.test("should update currentIndex when readNextCharacter is called and shoul
   assertEquals(reader.currentIndex, 4);
 });
 
-Deno.test("should update peekCharacter when readNextCharacter is called", () => {
+Deno.test("LexerInputReader should update peekCharacter when readNextCharacter is called", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -81,7 +81,7 @@ Deno.test("should update peekCharacter when readNextCharacter is called", () => 
   assertEquals(reader.peekCharacter(), EOF_CHARACTER);
 });
 
-Deno.test("should throw error if futureOffset is negative integer", () => {
+Deno.test("LexerInputReader should throw error if futureOffset is negative integer", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -92,7 +92,7 @@ Deno.test("should throw error if futureOffset is negative integer", () => {
   );
 });
 
-Deno.test("should throw error if futureOffset is fraction", () => {
+Deno.test("LexerInputReader should throw error if futureOffset is fraction", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -103,7 +103,7 @@ Deno.test("should throw error if futureOffset is fraction", () => {
   );
 });
 
-Deno.test("should return correct peekCharacter when futureOffset is provided", () => {
+Deno.test("LexerInputReader.peekCharacter should return correct peekCharacter when futureOffset is provided", () => {
   const input = new StringLexerInput("pika");
   const reader = new LexerInputReader(input);
 
@@ -112,7 +112,7 @@ Deno.test("should return correct peekCharacter when futureOffset is provided", (
   assertEquals(reader.peekCharacter(3), EOF_CHARACTER);
 });
 
-Deno.test("should correctly calculate the line and column numbers", () => {
+Deno.test("LexerInputReader should correctly calculate the line and column numbers", () => {
   const input = new StringLexerInput(`
 pi
 pikachu

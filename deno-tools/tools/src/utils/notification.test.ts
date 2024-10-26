@@ -63,7 +63,7 @@ Deno.test("notification should only publish data to active subscribers", async (
   assertSpyCallArgs(mockFn3, 0, [123]);
 });
 
-Deno.test("should invoke the subscription function with the latest data", async () => {
+Deno.test("notification.publish should invoke the subscription function with the latest data", async () => {
   const notification = new Notification<number>({ notifyOnSubscribe: true });
   const mockFn1 = stub({ func() {} } as const, "func");
   const mockFn2 = stub({ func() {} } as const, "func");
