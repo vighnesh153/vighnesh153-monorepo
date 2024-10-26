@@ -1,11 +1,11 @@
 import { PutCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { DynamoTypeMap, TableMetadata } from "./TableMetadata.ts";
-import {
+import type { DynamoTypeMap, TableMetadata } from "./table_metadata.ts";
+import type {
   DynamoDBTable,
   OptionalCreateOne,
   OptionalGetOne,
-} from "./DynamoDBTable.ts";
-import { IDynamoDBDocumentClient } from "./IDynamoDBDocumentClient.ts";
+} from "./dynamodb_table.ts";
+import type { IDynamoDBDocumentClient } from "./dynamodb_document_client.ts";
 
 export class DynamoDBTableImpl<T extends TableMetadata>
   implements DynamoDBTable<T> {
@@ -14,6 +14,7 @@ export class DynamoDBTableImpl<T extends TableMetadata>
     private tableMetadata: T,
   ) {}
 
+  // deno-lint-ignore require-await
   async queryOne<
     TKey extends keyof T["fields"],
     TFilterBy extends keyof T["fields"],
@@ -30,6 +31,7 @@ export class DynamoDBTableImpl<T extends TableMetadata>
     return this.fetchOne(params, "query");
   }
 
+  // deno-lint-ignore require-await
   async scanOne<
     TKey extends keyof T["fields"],
     TFilterBy extends keyof T["fields"],
@@ -134,6 +136,7 @@ export class DynamoDBTableImpl<T extends TableMetadata>
       const item = result.Items?.[0] ?? null;
       if (item != null) {
         return {
+          // deno-lint-ignore no-explicit-any
           data: item as any,
           error: null,
         };

@@ -4,9 +4,9 @@ import type {
   MetadataBearer,
 } from "@smithy/types";
 import type { SmithyResolvedConfiguration } from "@smithy/smithy-client";
-import {
-  type ServiceInputTypes,
-  type ServiceOutputTypes,
+import type {
+  ServiceInputTypes,
+  ServiceOutputTypes,
 } from "@aws-sdk/lib-dynamodb";
 
 export interface IDynamoDBDocumentClient<

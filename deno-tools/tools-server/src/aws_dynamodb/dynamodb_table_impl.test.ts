@@ -1,12 +1,13 @@
-import { beforeEach, describe, expect, test } from "vitest";
+import { assertEquals } from "@std/assert";
+import { beforeEach, describe, it } from "@std/testing/bdd";
 import {
   PutCommand,
   QueryCommand,
   type ServiceOutputTypes,
 } from "@aws-sdk/lib-dynamodb";
-import { FakeDynamoDBDocumentClient } from "./FakeDynamoDBDocumentClient.ts";
-import { DynamoDBTableImpl } from "./DynamoDBTableImpl.ts";
-import { TableMetadata } from "./TableMetadata.ts";
+import { FakeDynamoDBDocumentClient } from "./fake_dynamodb_document_client.ts";
+import { DynamoDBTableImpl } from "./dynamodb_table_impl.ts";
+import type { TableMetadata } from "./table_metadata.ts";
 
 const tableName = "Pokemon" as const;
 const tableMetadata = {
@@ -26,7 +27,7 @@ beforeEach(() => {
 });
 
 describe("queryOne tests", () => {
-  test("should return item if no errors", async () => {
+  it("should return item if no errors", async () => {
     const result = { name: "pikachu", type: "electric", strength: 60 };
     fakeDocumentClient.sendReturnValues.pushRight({
       Items: [result],
@@ -36,7 +37,8 @@ describe("queryOne tests", () => {
       filterBy: { name: { value: "Pikachu" } },
     });
 
-    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+    assertEquals(
+      fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
       new QueryCommand({
         ExpressionAttributeValues: {
           ":name": "Pikachu",
@@ -45,14 +47,14 @@ describe("queryOne tests", () => {
         TableName: tableName,
       }).input,
     );
-    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
-    expect(actual).toStrictEqual({
+    assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
+    assertEquals(actual, {
       error: null,
       data: { ...result },
     });
   });
 
-  test("should return error if item not found", async () => {
+  it("should return error if item not found", async () => {
     fakeDocumentClient.sendReturnValues.pushRight({
       Items: [],
     } as unknown as ServiceOutputTypes);
@@ -61,7 +63,8 @@ describe("queryOne tests", () => {
       filterBy: { name: { value: "Pikachu" } },
     });
 
-    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+    assertEquals(
+      fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
       new QueryCommand({
         ExpressionAttributeValues: {
           ":name": "Pikachu",
@@ -70,8 +73,8 @@ describe("queryOne tests", () => {
         TableName: tableName,
       }).input,
     );
-    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
-    expect(actual).toStrictEqual({
+    assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
+    assertEquals(actual, {
       error: {
         message: "OBJECT_NOT_FOUND",
         errorObject: null,
@@ -80,7 +83,7 @@ describe("queryOne tests", () => {
     });
   });
 
-  test("should return error if error occurs while fetching", async () => {
+  it("should return error if error occurs while fetching", async () => {
     const error = new Error("Some random error");
     fakeDocumentClient.sendError = error;
 
@@ -88,7 +91,8 @@ describe("queryOne tests", () => {
       filterBy: { name: { value: "Pikachu" } },
     });
 
-    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+    assertEquals(
+      fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
       new QueryCommand({
         ExpressionAttributeValues: {
           ":name": "Pikachu",
@@ -97,8 +101,8 @@ describe("queryOne tests", () => {
         TableName: tableName,
       }).input,
     );
-    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
-    expect(actual).toStrictEqual({
+    assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
+    assertEquals(actual, {
       error: {
         message: "ERROR_WHILE_FETCHING",
         errorObject: error,
@@ -109,7 +113,7 @@ describe("queryOne tests", () => {
 });
 
 describe("createOne tests", () => {
-  test("should create item if no errors", async () => {
+  it("should create item if no errors", async () => {
     const item = {
       name: "Pikachu",
       type: "thunder",
@@ -123,17 +127,18 @@ describe("createOne tests", () => {
       data: item,
     });
 
-    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+    assertEquals(
+      fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
       new PutCommand({
         Item: item,
         TableName: tableName,
       }).input,
     );
-    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
-    expect(result).toStrictEqual({ error: null });
+    assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
+    assertEquals(result, { error: null });
   });
 
-  test("should return error if error occurs while creation", async () => {
+  it("should return error if error occurs while creation", async () => {
     const item = {
       name: "Pikachu",
       type: "thunder",
@@ -146,14 +151,15 @@ describe("createOne tests", () => {
       data: item,
     });
 
-    expect(fakeDocumentClient.sendCalledWithArgs?.[0]?.input).toStrictEqual(
+    assertEquals(
+      fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
       new PutCommand({
         Item: item,
         TableName: tableName,
       }).input,
     );
-    expect(fakeDocumentClient.sendCalledWithArgs?.[1]).toStrictEqual(undefined);
-    expect(result).toStrictEqual({
+    assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
+    assertEquals(result, {
       error: {
         message: "CREATION_FAILED",
         errorObject: error,

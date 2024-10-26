@@ -1,9 +1,9 @@
-import {
+import type {
   DynamoDBTable,
   OptionalCreateOne,
   OptionalGetOne,
-} from "./DynamoDBTable.ts";
-import { DynamoTypeMap, TableMetadata } from "./TableMetadata.ts";
+} from "./dynamodb_table.ts";
+import type { DynamoTypeMap, TableMetadata } from "./table_metadata.ts";
 
 export class FakeDynamoDBTable<T extends TableMetadata>
   implements DynamoDBTable<T> {
@@ -24,6 +24,7 @@ export class FakeDynamoDBTable<T extends TableMetadata>
   createOneResult: OptionalCreateOne = { error: null };
   createOneCalledTimes = 0;
 
+  // deno-lint-ignore require-await
   async queryOne<TKey extends keyof T["fields"]>(): Promise<
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   > {
@@ -31,6 +32,7 @@ export class FakeDynamoDBTable<T extends TableMetadata>
     return this.queryOneResult;
   }
 
+  // deno-lint-ignore require-await
   async scanOne<TKey extends keyof T["fields"]>(): Promise<
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   > {
@@ -38,6 +40,7 @@ export class FakeDynamoDBTable<T extends TableMetadata>
     return this.scanOneResult;
   }
 
+  // deno-lint-ignore require-await
   async createOne(): Promise<OptionalCreateOne> {
     this.createOneCalledTimes += 1;
     return this.createOneResult;

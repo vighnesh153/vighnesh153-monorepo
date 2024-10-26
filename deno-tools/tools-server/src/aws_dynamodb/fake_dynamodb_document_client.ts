@@ -3,7 +3,7 @@ import type {
   ServiceOutputTypes,
 } from "@aws-sdk/lib-dynamodb";
 import { Queue } from "@vighnesh153/tools";
-import { IDynamoDBDocumentClient } from "./IDynamoDBDocumentClient.ts";
+import type { IDynamoDBDocumentClient } from "./dynamodb_document_client.ts";
 
 import type {
   Command,
@@ -33,6 +33,7 @@ export class FakeDynamoDBDocumentClient<
     ]
     | null = null;
 
+  // deno-lint-ignore require-await
   async send<InputType extends ClientInput, OutputType extends ClientOutput>(
     command: Command<
       ClientInput,
@@ -42,7 +43,8 @@ export class FakeDynamoDBDocumentClient<
       SmithyResolvedConfiguration<HandlerOptions>
     >,
     options?: HandlerOptions,
-  ) {
+  ): Promise<OutputType> {
+    // deno-lint-ignore no-explicit-any
     this.sendCalledWithArgs = [command as any, options];
     if (this.sendError != null) {
       throw this.sendError;
