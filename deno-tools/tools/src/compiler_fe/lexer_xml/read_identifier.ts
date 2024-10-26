@@ -1,7 +1,7 @@
-import { ALPHABET, DIGITS } from "@vighnesh153/tools";
 import { assert } from "@std/assert";
-import { Lexer } from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "./tokens.ts";
+import { ALPHABET, DIGITS } from "@/utils/mod.ts";
+import type { Lexer } from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "./tokens.ts";
 
 export function readIdentifier(lexer: Lexer<XmlTokenType>): string {
   assert(

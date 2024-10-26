@@ -1,5 +1,5 @@
-import { Lexer } from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "./tokens.ts";
+import type { Lexer } from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "./tokens.ts";
 
 const WHITE_SPACE_CHARACTERS = [" ", "\t", "\n", "\r"];
 

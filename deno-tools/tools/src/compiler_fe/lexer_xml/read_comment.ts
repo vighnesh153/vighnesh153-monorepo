@@ -1,7 +1,11 @@
-import { not, repeat } from "@vighnesh153/tools";
 import { assert } from "@std/assert";
-import { EOF_CHARACTER, Lexer, LexerError } from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "./tokens.ts";
+import { not, repeat } from "@/utils/mod.ts";
+import {
+  EOF_CHARACTER,
+  type Lexer,
+  LexerError,
+} from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "./tokens.ts";
 
 export function readComment(lexer: Lexer<XmlTokenType>): string | null {
   assert(
