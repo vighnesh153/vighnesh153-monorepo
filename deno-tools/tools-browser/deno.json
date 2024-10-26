@@ -11,6 +11,7 @@
     "types": ["./src/globals.d.ts"]
   },
   "publish": {
+    "exclude": ["src/**/*.test.ts"],
     "include": ["src", "deno.json", "deno.lock", "README.md"]
   }
 }
