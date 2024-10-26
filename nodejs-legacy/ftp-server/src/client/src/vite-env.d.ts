@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import { Vighnesh153File } from "../../types";
+import { Vighnesh153File } from "../../types.ts";
 
 declare global {
   interface Window {

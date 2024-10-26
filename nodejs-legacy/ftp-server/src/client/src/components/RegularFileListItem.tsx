@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { InsertDriveFileOutlined as InsertDriveFileOutlinedIcon } from "@mui/icons-material";
-import { Vighnesh153File } from "../../../types";
-import { FileName } from "./FileName";
-import { DownloadItem } from "./DownloadItem";
-import { ListItemWrapper } from "./ListItemWrapper";
+import { Vighnesh153File } from "../../../types.ts";
+import { FileName } from "./FileName.tsx";
+import { DownloadItem } from "./DownloadItem.tsx";
+import { ListItemWrapper } from "./ListItemWrapper.tsx";
 
 export interface RegularFileListItemProps {
   file: Vighnesh153File;

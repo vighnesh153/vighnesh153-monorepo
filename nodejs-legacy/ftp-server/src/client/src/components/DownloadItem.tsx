@@ -1,12 +1,12 @@
 import { ReactElement, useMemo } from "react";
 import { Link, Tooltip } from "@mui/material";
 import { Download as DownloadIcon } from "@mui/icons-material";
-import { Vighnesh153File } from "../../../types";
+import { Vighnesh153File } from "../../../types.ts";
 import {
   directoryZipAndDownloadPath,
   isDirectory,
   windowPathname,
-} from "../utils";
+} from "../utils/index.ts";
 
 export interface DownloadItemByNameProps {
   type: "by-name";

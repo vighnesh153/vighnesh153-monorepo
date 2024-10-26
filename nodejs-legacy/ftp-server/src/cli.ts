@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { startServer } from "./server";
+import { startServer } from "./server/index.ts";
 import packageInfo from "../package.json";
-import { DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from "./constants";
+import { DEFAULT_PORT, DEFAULT_SERVE_DIRECTORY } from "./constants.ts";
 
 const program = new Command();
 

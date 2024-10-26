@@ -4,13 +4,13 @@ import express, { NextFunction, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import { not } from "@vighnesh153/tools";
-import { ROOT_HTML_FILE_PATH } from "../constants";
+import { ROOT_HTML_FILE_PATH } from "../constants.ts";
 import {
   getDirectoryInformation,
   getDirName,
   isDirectoryPath,
   isPathValid,
-} from "./utils";
+} from "./utils.ts";
 
 export function frontendCodeHandler() {
   return express.static(getDirName(), {

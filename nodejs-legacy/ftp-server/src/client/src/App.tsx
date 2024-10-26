@@ -4,8 +4,8 @@ import {
   MainHeading,
   PathBreadcrumbs,
   RegularFileListItem,
-} from "./components";
-import { isDirectory, sortedDirectoryInformation } from "./utils";
+} from "./components/index.ts";
+import { isDirectory, sortedDirectoryInformation } from "./utils/index.ts";
 
 export function App() {
   return (

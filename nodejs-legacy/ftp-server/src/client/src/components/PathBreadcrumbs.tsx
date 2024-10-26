@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { Box, Breadcrumbs, Link, Typography } from "@mui/material";
-import { DownloadItem } from "./DownloadItem";
-import { directoryZipAndDownloadPath } from "../utils";
+import { DownloadItem } from "./DownloadItem.tsx";
+import { directoryZipAndDownloadPath } from "../utils/index.ts";
 
 const segments = window.location.pathname.split("/");
 const isLastSegment = (index: number) => index === segments.length - 1;
