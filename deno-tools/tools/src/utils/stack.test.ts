@@ -26,7 +26,7 @@ Deno.test("stack.pop returns element", () => {
 
 Deno.test("stack.pop throws when empty", () => {
   const stack = new Stack();
-  assertThrows(() => stack.pop(), "Stack is empty");
+  assertThrows(() => stack.pop(), Error, "Stack is empty");
 });
 
 Deno.test("stack.peek returns element", () => {
@@ -43,7 +43,7 @@ Deno.test("stack.peek doesn't mutate stack", () => {
 
 Deno.test("stack.peek throws when empty", () => {
   const stack = new Stack();
-  assertThrows(() => stack.peek(), "Stack is empty");
+  assertThrows(() => stack.peek(), Error, "Stack is empty");
 });
 
 Deno.test("stack.size is 0 if stack is empty", () => {

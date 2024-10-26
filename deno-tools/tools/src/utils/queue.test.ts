@@ -60,7 +60,7 @@ Deno.test("queue.peekLeft should not modify the queue elements if peeked from le
 
 Deno.test("queue.peekLeft should throw if peekLeft is invoked on an empty Queue", () => {
   const queue = new Queue();
-  assertThrows(() => queue.peekLeft(), "Queue is empty");
+  assertThrows(() => queue.peekLeft(), Error, "Queue is empty");
 });
 
 Deno.test("queue.peekRight should allow to peek an element from the right", () => {
@@ -76,7 +76,7 @@ Deno.test("queue.peekRight should not modify the queue elements if peeked from r
 
 Deno.test("queue.peekRight should throw if peekRight is invoked on an empty Queue", () => {
   const queue = new Queue();
-  assertThrows(() => queue.peekRight(), "Queue is empty");
+  assertThrows(() => queue.peekRight(), Error, "Queue is empty");
 });
 
 Deno.test("queue.popLeft should return the popped element from the left", () => {
@@ -98,7 +98,7 @@ Deno.test("queue.popLeft should set the size of the queue to 0, if popLeft is in
 
 Deno.test("queue.popLeft should throw if popLeft is invoked on an empty queue", () => {
   const queue = new Queue();
-  assertThrows(() => queue.popLeft(), "Queue is empty");
+  assertThrows(() => queue.popLeft(), Error, "Queue is empty");
 });
 
 Deno.test("queue.popRight should return the popped element from the right", () => {
@@ -120,7 +120,7 @@ Deno.test("queue.popRight should set the size of the queue to 0, if popRight is 
 
 Deno.test("queue.popRight should throw if popRight is invoked on an empty queue", () => {
   const queue = new Queue();
-  assertThrows(() => queue.popRight(), "Queue is empty");
+  assertThrows(() => queue.popRight(), Error, "Queue is empty");
 });
 
 Deno.test("queue.reverse should reverse a queue", () => {

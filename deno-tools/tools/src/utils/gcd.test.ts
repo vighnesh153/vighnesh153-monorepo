@@ -4,12 +4,14 @@ import { gcd } from "./gcd.ts";
 Deno.test("gcd tests", () => {
   assertThrows(
     () => gcd(-1),
+    Error,
     'Expected "n" to be a positive integer, found "-1"',
   );
 
   assertThrows(
     () => gcd(0.5),
-    'Expected "n" to be a positive integer, found "0.5"]',
+    Error,
+    'Expected "n" to be a positive integer, found "0.5"',
   );
 
   assertEquals(gcd(), 1);

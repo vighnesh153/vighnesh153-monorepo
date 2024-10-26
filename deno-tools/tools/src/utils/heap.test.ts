@@ -18,7 +18,7 @@ Deno.test("heap.isEmpty should return false for isEmpty if heap has some element
 
 Deno.test("heap.pop should throw if pop is invoked on an empty heap", () => {
   const heap = new Heap([]);
-  assertThrows(() => heap.pop(), "Heap is empty");
+  assertThrows(() => heap.pop(), Error, "Heap is empty");
 });
 
 Deno.test("heap.pop should pop the smallest element from the heap", () => {
