@@ -1,17 +1,17 @@
 import { not } from "@vighnesh153/tools";
 import { assert } from "@std/assert";
-import { nextToken, XmlTokenType } from "@vighnesh153/lexer-xml";
-import { ParserError } from "./ParserError.ts";
+import { nextToken, XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
+import { ParserError } from "./parser_error.ts";
 import {
   XmlCommentNode,
   XmlElementAttribute,
-  XmlExpression,
+  type XmlExpression,
   XmlProgram,
   XmlPrologNode,
   XmlTagNode,
   XmlTextNode,
 } from "./ast.ts";
-import { Lexer, Token } from "@vighnesh153/lexer-core";
+import type { Lexer, Token } from "@/compiler_fe/lexer_core/mod.ts";
 
 export class XmlParser {
   readonly #errors: Array<ParserError> = [];

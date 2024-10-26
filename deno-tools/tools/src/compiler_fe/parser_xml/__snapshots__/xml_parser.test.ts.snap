@@ -1,0 +1,74 @@
+export const snapshot = {};
+
+snapshot[`should parse prolog tag without attributes 1`] = `"<?xml?>"`;
+
+snapshot[`should parse prolog tag with attributes 1`] = `'<?xml version="1.0" encoding="UTF-8"?>'`;
+
+snapshot[`should parse empty self-closing tag 1`] = `"<manifest />"`;
+
+snapshot[`should parse empty tag 1`] = `"<manifest />"`;
+
+snapshot[`should parse tag with single simple attribute 1`] = `'<manifest package="com.pokemon.pikachu" />'`;
+
+snapshot[`should parse tag with multiple simple attributes 1`] = `
+'<manifest
+    package="com.pokemon.pikachu"
+    attr2="2.0" />'
+`;
+
+snapshot[`should parse tag with colon separated attributes 1`] = `
+'<uses-feature
+    android:name="android.hardware.touchscreen"
+    android:required="false" />'
+`;
+
+snapshot[`should be able to read tags with namespaces 1`] = `"<namespace1:namespace2:namespace3 />"`;
+
+snapshot[`should parse naked text node 1`] = `"pikachu"`;
+
+snapshot[`should parse tag with children 1`] = `
+'<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pokemon.charizard">
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <!-- <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" /> -->
+    <application
+        android:allowBackup="true"
+        android:label="Pikachu"
+        android:supportsRtl="true">
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="SOME_INTENT_FILTER_1" />
+                <action android:name="SOME_INTENT_FILTER_2" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>'
+`;
+
+snapshot[`should parse tag with text node children and attributes 1`] = `
+'<pokemon>
+    <name>Pikachu</name>
+    <types comma-separated="true">electric, god</types>
+    <desc>Best pokemon ever!!!</desc>
+</pokemon>'
+`;
