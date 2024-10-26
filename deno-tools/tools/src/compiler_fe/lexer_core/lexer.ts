@@ -1,6 +1,6 @@
-import { LexerError } from "./LexerError.ts";
-import { LexerInputReader } from "./LexerInputReader.ts";
-import { Token } from "./tokens.ts";
+import type { LexerError } from "./lexer_error.ts";
+import type { LexerInputReader } from "./lexer_input_reader.ts";
+import type { Token } from "./tokens.ts";
 
 export class Lexer<TokenType> {
   readonly #errors: Array<LexerError> = [];
