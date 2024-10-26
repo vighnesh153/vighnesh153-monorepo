@@ -1,5 +1,5 @@
-import { ALPHABET, DIGITS, not } from "@vighnesh153/tools";
-import { KotlinTokenType, operatorTokens } from "./tokens";
+import { ALPHABET, DIGITS, not } from "@/utils/mod.ts";
+import { KotlinTokenType, operatorTokens } from "./tokens.ts";
 
 class StateMachineNode {
   fallbackNode: StateMachineNode | null = null;
