@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import { CLIENT_BASE_DIR } from "../constants";
+import { CLIENT_BASE_DIR } from "../constants.ts";
 import {
   frontendCodeHandler,
   handleDirectory,
@@ -8,8 +8,11 @@ import {
   handleZip,
   methodNotAllowed,
   validateRequestPathExists,
-} from "./middlewares";
-import { serverFailedToStartHandler, serverIsListeningHandler } from "./utils";
+} from "./middlewares.ts";
+import {
+  serverFailedToStartHandler,
+  serverIsListeningHandler,
+} from "./utils.ts";
 
 export interface StartServerOptions {
   port: number;

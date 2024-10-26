@@ -1,10 +1,10 @@
 import { Link, Tooltip } from "@mui/material";
 import { Folder as FolderIcon } from "@mui/icons-material";
-import { Vighnesh153File } from "../../../types";
-import { FileName } from "./FileName";
-import { DownloadItem } from "./DownloadItem";
-import { ListItemWrapper } from "./ListItemWrapper";
-import { windowPathname } from "../utils";
+import { Vighnesh153File } from "../../../types.ts";
+import { FileName } from "./FileName.tsx";
+import { DownloadItem } from "./DownloadItem.tsx";
+import { ListItemWrapper } from "./ListItemWrapper.tsx";
+import { windowPathname } from "../utils/index.ts";
 
 export interface DirectoryListItemProps {
   file: Vighnesh153File;

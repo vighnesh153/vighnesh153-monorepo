@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 
 // NOTE: any changes to this should also be updated in "packageJson.scripts.copy" command
 export const CLIENT_BASE_DIR = "__vighnesh153-ftp-client__";

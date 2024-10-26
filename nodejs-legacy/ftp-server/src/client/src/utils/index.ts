@@ -1,5 +1,5 @@
 import { not } from "@vighnesh153/tools";
-import { Vighnesh153File } from "../../../types";
+import { Vighnesh153File } from "../../../types.ts";
 
 export const isDirectory = (fileType: Vighnesh153File["type"]) =>
   fileType === "directory";
