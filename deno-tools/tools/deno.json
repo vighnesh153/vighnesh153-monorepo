@@ -15,6 +15,7 @@
     "@std/testing": "jsr:@std/testing@^1.0.3"
   },
   "publish": {
+    "exclude": ["src/**/*.test.ts"],
     "include": ["src", "README.md", "deno.json", "deno.lock"]
   }
 }
