@@ -26,19 +26,19 @@
     "build": "tsup"
   },
   "dependencies": {
-    "commander": "^12.1.0",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "http-proxy-middleware": "^3.0.3",
-    "morgan": "^1.10.0"
+    "commander": "12.1.0",
+    "cors": "2.8.5",
+    "express": "4.21.1",
+    "http-proxy-middleware": "3.0.3",
+    "morgan": "1.10.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/morgan": "^1.9.9",
+    "@types/cors": "2.8.17",
+    "@types/express": "5.0.0",
+    "@types/morgan": "1.9.9",
     "@types/node": "*",
-    "@vighnesh153/tsconfig": "*",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.3"
+    "@vighnesh153/tsconfig": "0.4.8",
+    "tsup": "8.3.0",
+    "typescript": "5.6.3"
   }
 }

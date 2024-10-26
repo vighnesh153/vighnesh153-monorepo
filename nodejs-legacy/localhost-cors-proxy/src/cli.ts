@@ -2,7 +2,7 @@
 
 import { Command } from "commander";
 import { startServer } from "./server.ts";
-import packageInfo from "../package.json";
+import packageInfo from "../package.json" with { type: "json" };
 
 const program = new Command();
 
