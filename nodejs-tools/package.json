@@ -11,8 +11,7 @@
     "nodejs-cloudflare-tools/*",
     "nodejs-docker-tools/*",
     "nodejs-lib/*",
-    "nodejs-packages/*",
-    "nodejs-vscode-extensions/*"
+    "nodejs-packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
