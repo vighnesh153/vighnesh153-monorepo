@@ -6,7 +6,6 @@
   "workspaces": [
     "nodejs-apps/*",
     "nodejs-aws-serverless-tools/*",
-    "nodejs-cloudflare-tools/*",
     "nodejs-lib/*"
   ],
   "scripts": {
