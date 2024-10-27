@@ -5,10 +5,10 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "deno-tools/**"
+      - "tools-deno/**"
   pull_request:
     paths:
-      - "deno-tools/**"
+      - "tools-deno/**"
 
 jobs:
   deno-ci:
@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./deno-tools
+        working-directory: ./tools-deno
 
     steps:
       - uses: actions/checkout@v3

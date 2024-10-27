@@ -142,4 +142,4 @@ export const gamesProjectsMap = {
 export const gamesProjects: CanvasProject[] = Object.values(gamesProjectsMap);
 
 export const canvasProjectSourceCodeLink =
-  "https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/deno-tools/tools-browser/src/graphics-programming";
+  "https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/tools-deno/tools-browser/src/graphics-programming";
