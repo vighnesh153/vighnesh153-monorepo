@@ -5,8 +5,7 @@
   "type": "module",
   "workspaces": [
     "nodejs-apps/*",
-    "nodejs-aws-serverless-tools/*",
-    "nodejs-lib/*"
+    "nodejs-aws-serverless-tools/*"
   ],
   "scripts": {
     "build": "turbo run build",
