@@ -29,12 +29,12 @@ export class Disc {
     };
   }
 
-  get borderConfig(): DiscConfig["border"] {
-    return { ...this.#config.border };
-  }
-
   set center(newValue: Position) {
     this.#config.center = { ...newValue };
+  }
+
+  get borderConfig(): DiscConfig["border"] {
+    return { ...this.#config.border };
   }
 
   constructor(

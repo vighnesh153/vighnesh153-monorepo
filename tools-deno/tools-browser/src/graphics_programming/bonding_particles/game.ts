@@ -1,7 +1,7 @@
 import type { CanvasWrapper } from "../canvas_wrapper.ts";
 import { Particle } from "./particle.ts";
 import { createPosition, type Position } from "./position.ts";
-import { Bond } from "./Bond.ts";
+import { Bond } from "./bond.ts";
 import { euclidianDistance } from "./euclidian_distance.ts";
 
 interface GameOptions {
