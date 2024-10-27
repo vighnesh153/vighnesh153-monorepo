@@ -1,68 +1,64 @@
-import { expect, test } from "vitest";
-import { XmlTagNode } from "@vighnesh153/parser-xml";
+import { assertEquals } from "@std/assert";
+import { assertSnapshot } from "@std/testing/snapshot";
+import type { XmlTagNode } from "@/compiler_fe/parser_xml/mod.ts";
 import { formatXmlTagNode } from "./format_xml_tag_node.ts";
 import { parseProgram } from "./test_utils.ts";
 
-test("should format empty, self-closing xml tag node", () => {
+Deno.test("should format empty, self-closing xml tag node", async (t) => {
   const [parser, program] = parseProgram(`<manifest />`);
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
     }),
-  ).toMatchInlineSnapshot(`"<manifest />"`);
+  );
 });
 
-test("should format self-closing xml tag node with attributes", () => {
+Deno.test("should format self-closing xml tag node with attributes", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" />`,
   );
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
     }),
-  ).toMatchInlineSnapshot(`
-    "<manifest
-        simpleAttribute="some random value"
-        deeply:nested:attribute="20" />"
-  `);
+  );
 });
 
-test("should format non self-closing xml tag node with attributes but no children", () => {
+Deno.test("should format non self-closing xml tag node with attributes but no children", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" >
   </ manifest>
     `,
   );
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
     }),
-  ).toMatchInlineSnapshot(`
-    "<manifest
-        simpleAttribute="some random value"
-        deeply:nested:attribute="20" />"
-  `);
+  );
 });
 
-test("should format xml tag node with children", () => {
+Deno.test("should format xml tag node with children", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest    >
      < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
@@ -73,28 +69,20 @@ test("should format xml tag node with children", () => {
     `,
   );
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
     }),
-  ).toMatchInlineSnapshot(`
-    "<manifest>
-        <childTag
-            pokemon="Hurray"
-            special:forces:commando="Pikachu" />
-        <childTag2 pokemon="Greninja">
-            <childTag3 Infernape="lol" />
-        </childTag2>
-    </manifest>"
-  `);
+  );
 });
 
-test("should sort all attributes based on android rules", () => {
+Deno.test("should sort all attributes based on android rules", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest  
         qlaAttr="prop18"
@@ -128,48 +116,20 @@ test("should sort all attributes based on android rules", () => {
     `,
   );
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: true,
     }),
-  ).toMatchInlineSnapshot(`
-    "<manifest
-        xmlns:android="prop1"
-        xmlns:app="prop2"
-        xmlns:tools="prop3"
-        android:id="prop4"
-        android:bla:id="prop5"
-        android:blb:id="prop6"
-        android:poki1:id="prop7"
-        android:poki2:id="prop8"
-        android:name="prop9"
-        android:plu:name="prop10"
-        android:plz:name="prop11"
-        android:zza:name="prop12"
-        android:zzb:name="prop13"
-        name="prop14"
-        style="prop15"
-        blaAttr="prop16"
-        plaAttr="prop17"
-        qlaAttr="prop18"
-        zlaAttr="prop19"
-        android:layout="prop20"
-        android:pae="prop21"
-        android:raster="prop22"
-        android:temper="prop23"
-        app:bla="prop24"
-        app:pla="prop25"
-        tools:hungry="prop26"
-        zools:duckie="prop27" />"
-  `);
+  );
 });
 
-test("should format xml tag node without sorting if sortAttribute is false", () => {
+Deno.test("should format xml tag node without sorting if sortAttribute is false", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest    >
      < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
@@ -180,23 +140,15 @@ test("should format xml tag node without sorting if sortAttribute is false", () 
     `,
   );
 
-  expect(parser.errors.length).toBe(0);
-  expect(program.statements.length).toBe(1);
-  expect(
+  assertEquals(parser.errors.length, 0);
+  assertEquals(program.statements.length, 1);
+  await assertSnapshot(
+    t,
     formatXmlTagNode({
       xmlTagNode: program.statements[0] as XmlTagNode,
       indentation: 4,
       indentationLevel: 0,
       sortAttributes: false,
     }),
-  ).toMatchInlineSnapshot(`
-    "<manifest>
-        <childTag
-            special:forces:commando="Pikachu"
-            pokemon="Hurray" />
-        <childTag2 pokemon="Greninja">
-            <childTag3 Infernape="lol" />
-        </childTag2>
-    </manifest>"
-  `);
+  );
 });

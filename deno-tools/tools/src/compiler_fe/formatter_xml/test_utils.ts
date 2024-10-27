@@ -2,9 +2,9 @@ import {
   Lexer,
   LexerInputReader,
   StringLexerInput,
-} from "@vighnesh153/lexer-core";
-import { XmlTokenType } from "@vighnesh153/lexer-xml";
-import { XmlParser, XmlProgram } from "@vighnesh153/parser-xml";
+} from "@/compiler_fe/lexer_core/mod.ts";
+import type { XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
+import { XmlParser, type XmlProgram } from "@/compiler_fe/parser_xml/mod.ts";
 
 export function parseProgram(input: string): [XmlParser, XmlProgram] {
   const stringInput = new StringLexerInput(input);

@@ -1,5 +1,5 @@
-import { not } from "@vighnesh153/tools";
-import { XmlElementAttribute } from "@vighnesh153/parser-xml";
+import { not } from "@/utils/mod.ts";
+import type { XmlElementAttribute } from "@/compiler_fe/parser_xml/mod.ts";
 
 export function sortAttributes(
   attributes: readonly XmlElementAttribute[],

@@ -1,0 +1,68 @@
+export const snapshot = {};
+
+snapshot[`should format empty, self-closing xml tag node 1`] = `"<manifest />"`;
+
+snapshot[`should format self-closing xml tag node with attributes 1`] = `
+'<manifest
+    simpleAttribute="some random value"
+    deeply:nested:attribute="20" />'
+`;
+
+snapshot[`should format non self-closing xml tag node with attributes but no children 1`] = `
+'<manifest
+    simpleAttribute="some random value"
+    deeply:nested:attribute="20" />'
+`;
+
+snapshot[`should format xml tag node with children 1`] = `
+'<manifest>
+    <childTag
+        pokemon="Hurray"
+        special:forces:commando="Pikachu" />
+    <childTag2 pokemon="Greninja">
+        <childTag3 Infernape="lol" />
+    </childTag2>
+</manifest>'
+`;
+
+snapshot[`should sort all attributes based on android rules 1`] = `
+'<manifest
+    xmlns:android="prop1"
+    xmlns:app="prop2"
+    xmlns:tools="prop3"
+    android:id="prop4"
+    android:bla:id="prop5"
+    android:blb:id="prop6"
+    android:poki1:id="prop7"
+    android:poki2:id="prop8"
+    android:name="prop9"
+    android:plu:name="prop10"
+    android:plz:name="prop11"
+    android:zza:name="prop12"
+    android:zzb:name="prop13"
+    name="prop14"
+    style="prop15"
+    blaAttr="prop16"
+    plaAttr="prop17"
+    qlaAttr="prop18"
+    zlaAttr="prop19"
+    android:layout="prop20"
+    android:pae="prop21"
+    android:raster="prop22"
+    android:temper="prop23"
+    app:bla="prop24"
+    app:pla="prop25"
+    tools:hungry="prop26"
+    zools:duckie="prop27" />'
+`;
+
+snapshot[`should format xml tag node without sorting if sortAttribute is false 1`] = `
+'<manifest>
+    <childTag
+        special:forces:commando="Pikachu"
+        pokemon="Hurray" />
+    <childTag2 pokemon="Greninja">
+        <childTag3 Infernape="lol" />
+    </childTag2>
+</manifest>'
+`;

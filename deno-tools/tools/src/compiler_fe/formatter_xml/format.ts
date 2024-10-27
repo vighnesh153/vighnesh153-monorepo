@@ -1,12 +1,12 @@
 import {
   Lexer,
-  LexerError,
+  type LexerError,
   LexerInputReader,
   StringLexerInput,
-} from "@vighnesh153/lexer-core";
-import { ParserError, XmlParser } from "@vighnesh153/parser-xml";
-import { XmlTokenType } from "@vighnesh153/lexer-xml";
-import { FormattingOptions } from "./formatting_options.ts";
+} from "@/compiler_fe/lexer_core/mod.ts";
+import { type ParserError, XmlParser } from "@/compiler_fe/parser_xml/mod.ts";
+import type { XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
+import type { FormattingOptions } from "./formatting_options.ts";
 import { formatXmlProgram } from "./format_xml_program.ts";
 
 export type FormatResponse =

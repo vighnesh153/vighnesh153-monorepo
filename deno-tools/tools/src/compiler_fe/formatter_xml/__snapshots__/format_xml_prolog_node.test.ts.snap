@@ -1,0 +1,7 @@
+export const snapshot = {};
+
+snapshot[`formatXmlPrologNode should format xml prolog node with 0 indentation level 1`] = `'<?xml encoding="utf-8" version="2.0"?>'`;
+
+snapshot[`formatXmlPrologNode should format xml prolog node with 2 indentation level 1`] = `'        <?xml encoding="utf-8" version="2.0"?>'`;
+
+snapshot[`formatXmlPrologNode should format xml prolog node with 2 indentation level and 3 indentation 1`] = `'      <?xml encoding="utf-8" version="2.0"?>'`;
