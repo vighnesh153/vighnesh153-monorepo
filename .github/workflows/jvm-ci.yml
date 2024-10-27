@@ -5,10 +5,10 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "jvm-tools/**"
+      - "tools-jvm/**"
   pull_request:
     paths:
-      - "jvm-tools/**"
+      - "tools-jvm/**"
 
 jobs:
   jvm-ci:
@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./jvm-tools
+        working-directory: ./tools-jvm
 
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +26,9 @@ jobs:
           distribution: "adopt-openj9"
           java-version: "21"
 
-      - run: export PIKA_PATH="$(pwd)"; for dir in */; do
-          cd $PIKA_PATH/$dir;
-          ./gradlew test;
+      - run: |
+          export PIKA_PATH="$(pwd)"; 
+          for dir in */; do
+            cd $PIKA_PATH/$dir;
+            ./gradlew test;
           done
