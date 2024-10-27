@@ -1,4 +1,4 @@
-import { XmlProgram } from "@vighnesh153/parser-xml";
+import type { XmlProgram } from "@/compiler_fe/parser_xml/mod.ts";
 import { formatXmlExpression } from "./format_xml_expression.ts";
 
 type FormatXmlProgramConfig = {

@@ -7,7 +7,6 @@
     "nodejs-apps/*",
     "nodejs-aws-serverless-tools/*",
     "nodejs-chrome-extensions/*",
-    "nodejs-compiler-tools/*",
     "nodejs-cloudflare-tools/*",
     "nodejs-docker-tools/*",
     "nodejs-lib/*"

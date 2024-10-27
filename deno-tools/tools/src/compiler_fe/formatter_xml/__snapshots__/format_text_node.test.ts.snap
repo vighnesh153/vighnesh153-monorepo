@@ -1,0 +1,7 @@
+export const snapshot = {};
+
+snapshot[`formatTextNode should format text node with 0 indentation level 1`] = `"Pikachu"`;
+
+snapshot[`formatTextNode should format text node with 2 indentation level 1`] = `"        Pikachu"`;
+
+snapshot[`formatTextNode should format text node with 2 indentation level and 3 indentation 1`] = `"      Pikachu"`;

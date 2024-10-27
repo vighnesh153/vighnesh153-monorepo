@@ -1,0 +1,33 @@
+export const snapshot = {};
+
+snapshot[`formatXmlProgram should format xml program 1`] = `
+'<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pokemon.charizard">
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <!-- Some stupid comment -->
+    <application
+        android:allowBackup="true"
+        android:label="Pikachu"
+        android:supportsRtl="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+<pokemon>
+    <name>Pikachu</name>
+    <types comma-separated="true">electric, god</types>
+    <desc>Best pokemon ever!!!</desc>
+</pokemon>
+'
+`;

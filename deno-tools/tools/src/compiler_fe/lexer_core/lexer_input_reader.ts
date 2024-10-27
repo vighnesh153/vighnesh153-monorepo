@@ -1,4 +1,4 @@
-import { not } from "@vighnesh153/tools";
+import { not } from "@/utils/mod.ts";
 import type { LexerInput } from "./lexer_input.ts";
 import { EOF_CHARACTER } from "./utils.ts";
 

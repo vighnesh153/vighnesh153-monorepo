@@ -1,4 +1,4 @@
-import { XmlElementAttribute } from "@vighnesh153/parser-xml";
+import type { XmlElementAttribute } from "@/compiler_fe/parser_xml/mod.ts";
 
 export function formatXmlElementAttribute(
   { namespaces, value }: XmlElementAttribute,

@@ -1,4 +1,4 @@
-import { not } from "@vighnesh153/tools";
+import { not } from "@/utils/mod.ts";
 import { assert } from "@std/assert";
 import { nextToken, XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
 import { ParserError } from "./parser_error.ts";
