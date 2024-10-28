@@ -26,7 +26,7 @@ export class PseudoHilbertCurveGame {
     this.#lineColor = config.lineColor ?? "black";
   }
 
-  *start(level: number) {
+  *start(level: number): Generator<undefined, void, unknown> {
     this.#isRunning = true;
 
     const { width, height } = this.#canvasWrapper;

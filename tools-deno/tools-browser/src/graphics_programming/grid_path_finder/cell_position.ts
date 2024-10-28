@@ -1,8 +1,8 @@
 export class CellPosition {
-  get row() {
+  get row(): number {
     return this.#row;
   }
-  get col() {
+  get col(): number {
     return this.#col;
   }
 

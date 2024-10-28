@@ -39,7 +39,9 @@ export class SortingVisualizerGame {
     this.#lineHeightPercents = buildInitialLineHeightPercentsArray(linesCount);
   }
 
-  *start(sortingAlgorithm: SortingAlgorithm) {
+  *start(
+    sortingAlgorithm: SortingAlgorithm,
+  ): Generator<undefined, void, unknown> {
     this.#isRunning = true;
     sortingAlgorithm.initializeArray(this.#lineHeightPercents);
 

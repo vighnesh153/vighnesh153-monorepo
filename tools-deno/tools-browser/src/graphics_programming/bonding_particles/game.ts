@@ -68,7 +68,7 @@ export class BondingParticlesGame {
     }
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     while (true) {
       this.clearScreen();
       this.update();

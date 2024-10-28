@@ -1,6 +1,6 @@
 import type { CanvasWrapper } from "../canvas_wrapper.ts";
 import type { ScoreTracker } from "./score_tracker.ts";
-import { Pad } from "./Pad.ts";
+import { Pad } from "./pad.ts";
 import { Ball } from "./ball.ts";
 import { ComputerPadController } from "./computer_pad_controller.ts";
 

@@ -54,7 +54,7 @@ export class SnakeGame {
     });
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     let updateThrottle = 0;
     this.#isRunning = true;
     while (this.#isRunning) {

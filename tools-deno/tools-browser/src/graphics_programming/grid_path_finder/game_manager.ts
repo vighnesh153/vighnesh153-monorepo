@@ -4,7 +4,7 @@ import type { GridPathFinderGame } from "./game.ts";
 export class GridPathFinderGameManager {
   #game: GridPathFinderGame;
 
-  get isRunning() {
+  get isRunning(): boolean {
     return this.#game.isRunning;
   }
 
@@ -17,7 +17,7 @@ export class GridPathFinderGameManager {
     this.#game = game;
   }
 
-  *solve() {
+  *solve(): Generator<undefined, void, unknown> {
     const frames = this.#game.solve();
     while (not(frames.next().done)) {
       yield;

@@ -87,7 +87,7 @@ export class BrickBreakerGame {
     );
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.isRunning = true;
     while (this.isRunning) {
       this.draw();

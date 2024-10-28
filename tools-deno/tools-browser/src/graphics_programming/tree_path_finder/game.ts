@@ -51,7 +51,7 @@ export class TreePathFinderGame {
     this.#endNode.updateState("destination");
   }
 
-  *start() {
+  *start(): Generator<unknown, void, unknown> {
     this.#isRunning = true;
     for (const frame of this.update()) {
       if (not(this.#isRunning)) {

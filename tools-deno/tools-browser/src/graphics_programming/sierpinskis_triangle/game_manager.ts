@@ -7,7 +7,7 @@ export class SierpinskisTriangleGameManager {
     this.#game = game;
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     const frames = this.#game.start();
 
     while (!frames.next().done) {

@@ -10,7 +10,9 @@ import {
 export { SortingVisualizerGame } from "./game.ts";
 export { SortingAlgorithm } from "./sorting_algorithm.ts";
 
-export const sortingAlgorithms = [
+export const sortingAlgorithms: Array<
+  { displayName: string; algorithmFactory: () => SortingAlgorithm }
+> = [
   {
     displayName: "Bubble sort",
     algorithmFactory: () => new BubbleSortSortingAlgorithm(),
@@ -27,6 +29,4 @@ export const sortingAlgorithms = [
     displayName: "Insertion sort",
     algorithmFactory: () => new InsertionSortSortingAlgorithm(),
   },
-] satisfies Array<
-  { displayName: string; algorithmFactory: () => SortingAlgorithm }
->;
+];
