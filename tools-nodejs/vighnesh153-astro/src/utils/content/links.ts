@@ -2,8 +2,12 @@ function monorepo(localPath: string): string {
   return `https://github.com/vighnesh153/vighnesh153-monorepo/tree/main${localPath}`;
 }
 
-function nodejsLib(localPath: string): string {
-  return monorepo(`/nodejs-tools/nodejs-lib${localPath}`);
+function nodejsLegacy(localPath: string): string {
+  return monorepo(`/tools-nodejs-legacy${localPath}`);
+}
+
+function denoBrowserTools(localPath: string): string {
+  return monorepo(`/tools-deno/tools-browser${localPath}`);
 }
 
 export const searchParams = {
@@ -26,25 +30,25 @@ export const hashTags = {
 };
 
 export const externalLinks = {
-  githubRepo: monorepo("/nodejs-tools/nodejs-apps/vighnesh153-astro-svelte"),
+  githubRepo: monorepo("/tools-nodejs/vighnesh153-astro"),
   blog: "/blog",
   resume: "https://bit.ly/vighnesh153-resume",
   projects: {
     spl: {
-      sourceCode: nodejsLib("/spl"),
-      learnSyntax: nodejsLib("/spl/README.md"),
+      sourceCode: nodejsLegacy("/spl"),
+      learnSyntax: nodejsLegacy("/spl/README.md"),
     },
     tsxBundler: {
-      sourceCode: nodejsLib("/tsx-bundler"),
+      sourceCode: nodejsLegacy("/tsx-bundler"),
     },
     drawingApp: {
-      sourceCode: nodejsLib("/drawing-app"),
+      sourceCode: nodejsLegacy("/drawing-app"),
     },
     graphicsProjects: {
-      sourceCode: nodejsLib("/graphics-programming"),
+      sourceCode: denoBrowserTools("/src/graphics_programming"),
     },
     games: {
-      sourceCode: nodejsLib("/graphics-programming"),
+      sourceCode: denoBrowserTools("/src/graphics_programming"),
     },
   },
 };

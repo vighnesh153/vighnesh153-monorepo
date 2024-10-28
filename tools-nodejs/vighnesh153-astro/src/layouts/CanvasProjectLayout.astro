@@ -1,11 +1,9 @@
 ---
-import {
-  type CanvasProject,
-  canvasProjectSourceCodeLink,
-} from "@vighnesh153/tools-browser/graphics_programming";
+import { type CanvasProject } from "@vighnesh153/tools-browser/graphics_programming";
 
 import {
   classes,
+  externalLinks,
   internalLinks,
   projectNavItems,
   verifyCanvasProjectPath,
@@ -52,7 +50,8 @@ const title = `Vighnesh Raut | ${project.title}`;
     <slot />
   </div>
   <p slot="custom-source-code">
-    See the <Link href={canvasProjectSourceCodeLink}>project's source code</Link
+    See the <Link href={externalLinks.projects.graphicsProjects.sourceCode}
+      >project's source code</Link
     >
   </p>
 </ContentLayout>

@@ -1,12 +1,14 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import SkipToMainContent from '@/components/SkipToMainContent.astro';
-import AppBar from '@/components/navigation/AppBar.astro';
-import SocialLinksAside from '@/components/SocialLinksAside.astro';
-import EmailAddressAside from '@/components/EmailAddressAside.astro';
-import Footer from '@/components/Footer.astro';
+import BaseLayout from "./BaseLayout.astro";
+import SkipToMainContent from "@/components/SkipToMainContent.astro";
+import AppBar from "@/components/navigation/AppBar.astro";
+import SocialLinksAside from "@/components/SocialLinksAside.astro";
+import EmailAddressAside from "@/components/EmailAddressAside.astro";
+import Footer from "@/components/Footer.astro";
 
-import { hashTags, type NavItem } from '@/utils/index.ts';
+import Link from "@/components/Link.svelte";
+
+import { hashTags, type NavItem, externalLinks } from "@/utils/index.ts";
 
 interface Props {
   title?: string;
@@ -15,13 +17,19 @@ interface Props {
   showFooter?: boolean;
 }
 
-const defaultTitle = 'Vighnesh Raut - the man, the myth, the living legend himself';
+const defaultTitle =
+  "Vighnesh Raut - the man, the myth, the living legend himself";
 const defaultDescription =
-  'Vighnesh is a Software Engineer who specializes in building exceptional software ' +
-  'tools. He is fascinated by Physics, Mathematics and Computer Science. When bored, ' +
-  'you can find him watching Pokémon on his bed';
+  "Vighnesh is a Software Engineer who specializes in building exceptional software " +
+  "tools. He is fascinated by Physics, Mathematics and Computer Science. When bored, " +
+  "you can find him watching Pokémon on his bed";
 
-const { title = defaultTitle, description = defaultDescription, navItems, showFooter = true } = Astro.props;
+const {
+  title = defaultTitle,
+  description = defaultDescription,
+  navItems,
+  showFooter = true,
+} = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -39,7 +47,12 @@ const { title = defaultTitle, description = defaultDescription, navItems, showFo
   {
     showFooter ? (
       <Footer>
-        <slot name="custom-source-code" slot="custom-source-code" />
+        <slot name="custom-source-code">
+          <Link href={externalLinks.githubRepo} color="secondary">
+            Source code
+          </Link>
+          of this website
+        </slot>
       </Footer>
     ) : null
   }
