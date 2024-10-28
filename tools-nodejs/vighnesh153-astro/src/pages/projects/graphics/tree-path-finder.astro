@@ -1,0 +1,11 @@
+---
+import { graphicsProjectsMap } from "@vighnesh153/tools-browser/graphics_programming";
+import CanvasProjectLayout from "@/layouts/CanvasProjectLayout.astro";
+import TreePathFinderRoot from "@/components/projects/graphics/tree-path-finder/TreePathFinderRoot.svelte";
+
+const project = graphicsProjectsMap.treePathFinder;
+---
+
+<CanvasProjectLayout project={project} type="illustration">
+  <TreePathFinderRoot client:load />
+</CanvasProjectLayout>

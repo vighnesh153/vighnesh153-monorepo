@@ -1,0 +1,11 @@
+---
+import { gamesProjectsMap } from "@vighnesh153/tools-browser/graphics_programming";
+import CanvasProjectLayout from "@/layouts/CanvasProjectLayout.astro";
+import SnakeGameRoot from "@/components/projects/games/snake-game/SnakeGameRoot.svelte";
+
+const project = gamesProjectsMap.snakeGame;
+---
+
+<CanvasProjectLayout project={project} type="game">
+  <SnakeGameRoot client:load />
+</CanvasProjectLayout>

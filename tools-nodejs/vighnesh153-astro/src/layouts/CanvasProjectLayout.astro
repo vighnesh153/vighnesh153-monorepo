@@ -1,0 +1,58 @@
+---
+import {
+  type CanvasProject,
+  canvasProjectSourceCodeLink,
+} from "@vighnesh153/tools-browser/graphics_programming";
+
+import {
+  classes,
+  internalLinks,
+  projectNavItems,
+  verifyCanvasProjectPath,
+} from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import Link from "@/components/Link.svelte";
+
+interface Props {
+  project: CanvasProject;
+  type: "game" | "illustration";
+}
+
+const { project, type } = Astro.props;
+
+if (type === "game") {
+  verifyCanvasProjectPath(
+    project,
+    Astro.request.url,
+    internalLinks.projects.games.buildProjectLinkFromId,
+  );
+} else if (type === "illustration") {
+  verifyCanvasProjectPath(
+    project,
+    Astro.request.url,
+    internalLinks.projects.graphicsProjects.buildProjectLinkFromId,
+  );
+} else {
+  throw new Error(`Unexpected canvas project type: "${type}"`);
+}
+
+const title = `Vighnesh Raut | ${project.title}`;
+---
+
+<ContentLayout
+  title={title}
+  description={project.description}
+  navItems={projectNavItems}
+  showFooter={true}
+>
+  <div
+    class={classes(`mt-28 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}
+  >
+    <h1 class="text-3xl mb-6 text-center">{project.title}</h1>
+    <slot />
+  </div>
+  <p slot="custom-source-code">
+    See the <Link href={canvasProjectSourceCodeLink}>project's source code</Link
+    >
+  </p>
+</ContentLayout>

@@ -1,0 +1,11 @@
+---
+import { gamesProjectsMap } from "@vighnesh153/tools-browser/graphics_programming";
+import CanvasProjectLayout from "@/layouts/CanvasProjectLayout.astro";
+import BrickBreakerGameRoot from "@/components/projects/games/brick-breaker-game/BrickBreakerGameRoot.svelte";
+
+const project = gamesProjectsMap.brickBreakerGame;
+---
+
+<CanvasProjectLayout project={project} type="game">
+  <BrickBreakerGameRoot client:load />
+</CanvasProjectLayout>

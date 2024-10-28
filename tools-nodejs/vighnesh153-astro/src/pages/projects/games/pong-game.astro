@@ -1,0 +1,11 @@
+---
+import { gamesProjectsMap } from "@vighnesh153/tools-browser/graphics_programming";
+import CanvasProjectLayout from "@/layouts/CanvasProjectLayout.astro";
+import PongGameRoot from "@/components/projects/games/pong-game/PongGameRoot.svelte";
+
+const project = gamesProjectsMap.pongGame;
+---
+
+<CanvasProjectLayout project={project} type="game">
+  <PongGameRoot client:load />
+</CanvasProjectLayout>
