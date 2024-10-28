@@ -1,19 +1,25 @@
 ---
-import { classes, externalLinks, projectNavItems } from '@/utils/index.ts';
-import ContentLayout from '@/layouts/ContentLayout.astro';
-import Link from '@/components/Link.svelte';
-import TsxPlaygroundRoot from '@/components/projects/tsx-playground/TsxPlaygroundRoot.svelte';
+import { classes, externalLinks, projectNavItems } from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import Link from "@/components/Link.svelte";
+import TsxPlaygroundRoot from "@/components/projects/tsx-playground/TsxPlaygroundRoot.svelte";
 
-const title = 'Vighnesh Raut | Project - TSX Playground';
+const title = "Vighnesh Raut | Project - TSX Playground";
 const description = `A in-browser transpiler and bundler for React.js and Typescript`;
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
+<ContentLayout
+  title={title}
+  description={description}
+  navItems={projectNavItems}
+>
   <div class={classes(`mt-32 mb-12 mx-auto scroll-mt-8`)}>
     <h1 class="text-3xl text-center">Typescript & React Playground</h1>
     <p class="mt-2 text-center">Made with ❤️ by Vighnesh Raut</p>
     <p class="mt-2 text-center">
-      Checkout the source code on <Link href={externalLinks.projects.tsxBundler.sourceCode}>Github</Link>
+      Checkout the source code on <Link
+        href={externalLinks.projects.tsxBundler.sourceCode}>Github</Link
+      >
     </p>
     <TsxPlaygroundRoot client:only="svelte" />
   </div>

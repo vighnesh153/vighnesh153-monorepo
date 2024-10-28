@@ -5,7 +5,7 @@
     SortingVisualizerGame,
     CanvasWrapperImpl,
     sortingAlgorithms,
-    SortingAlgorithm,
+    type SortingAlgorithm,
     type CanvasWrapper,
   } from "@vighnesh153/tools-browser/graphics_programming";
 
