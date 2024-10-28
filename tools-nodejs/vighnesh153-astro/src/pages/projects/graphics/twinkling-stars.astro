@@ -1,0 +1,11 @@
+---
+import { graphicsProjectsMap } from "@vighnesh153/tools-browser/graphics_programming";
+import CanvasProjectLayout from "@/layouts/CanvasProjectLayout.astro";
+import TwinklingStarsRoot from "@/components/projects/graphics/twinkling-stars/TwinklingStarsRoot.svelte";
+
+const project = graphicsProjectsMap.twinklingStars;
+---
+
+<CanvasProjectLayout project={project} type="illustration">
+  <TwinklingStarsRoot client:load />
+</CanvasProjectLayout>
