@@ -1,0 +1,37 @@
+name: nodejs-ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "tools-nodejs/**"
+  pull_request:
+    paths:
+      - "tools-nodejs/**"
+
+jobs:
+  nodejs-ci:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./tools-nodejs
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
+
+      # Check if all nodejs projects are ok
+      - run: |
+          export PIKA_PATH="$(pwd)"; 
+          for dir in */; do
+            cd $PIKA_PATH/$dir;
+            echo "Checking - $(pwd)\n";
+            npm t;
+          done
