@@ -13,7 +13,7 @@ export class GridPathFinderGame {
   #cellParents: Map<string, BfsCell> = new Map();
   #solutionPathCellIds: Set<string> = new Set();
 
-  get isRunning() {
+  get isRunning(): boolean {
     return this.#state === "running";
   }
 
@@ -48,7 +48,7 @@ export class GridPathFinderGame {
     return this.#grid.getCell(new CellPosition(row, col));
   }
 
-  *solve() {
+  *solve(): Generator<undefined, void, unknown> {
     this.#state = "running";
 
     const startCell = this.#grid.findCell((cell) => cell.isStart);

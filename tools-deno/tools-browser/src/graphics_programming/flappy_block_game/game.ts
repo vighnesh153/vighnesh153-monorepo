@@ -18,7 +18,7 @@ export class FlappyBlockGame {
   readonly bgColor: string;
   readonly defaultColor: string;
 
-  readonly scoreTracker = new ScoreTracker();
+  readonly scoreTracker: ScoreTracker = new ScoreTracker();
 
   private infoScreen: InfoScreen;
   private gameplayScreen: GameplayScreen;
@@ -43,7 +43,7 @@ export class FlappyBlockGame {
     this.activeScreen = this.gameplayScreen;
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.isRunning = true;
     while (this.isRunning) {
       this.draw();

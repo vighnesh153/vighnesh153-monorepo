@@ -78,7 +78,7 @@ export class SierpinskisTriangleGame {
     this.drawInitialPoints();
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.#isRunning = true;
 
     while (this.#isRunning) {

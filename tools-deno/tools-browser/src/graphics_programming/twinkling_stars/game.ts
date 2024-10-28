@@ -24,7 +24,7 @@ export class TwinklingStarsGame {
     });
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.#isRunning = true;
     while (this.#isRunning) {
       this.draw();

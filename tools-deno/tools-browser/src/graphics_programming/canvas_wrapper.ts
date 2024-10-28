@@ -75,7 +75,7 @@ export class CanvasWrapperImpl implements CanvasWrapper {
     return this.#canvas.height / dpr();
   }
 
-  get rect() {
+  get rect(): DOMRect {
     return this.getBoundingClientRect();
   }
 

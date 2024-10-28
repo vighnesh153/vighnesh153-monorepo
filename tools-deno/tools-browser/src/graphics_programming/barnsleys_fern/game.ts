@@ -27,7 +27,7 @@ export class BarnsleysFern {
     this.#barnsleysFernGenerator = new BarnsleysFernGenerator();
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.#isRunning = true;
     while (this.#isRunning) {
       for (let i = 0; i < this.#speed; i++) {

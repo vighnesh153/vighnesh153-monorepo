@@ -115,7 +115,20 @@ const twinklingStars: CanvasProject = {
   description: `A bunch of stars roaming freely in the space and twinkling`,
 };
 
-export const graphicsProjectsMap = {
+export type GraphicsProjectsMap = {
+  gridPathFinderGame: CanvasProject;
+  sierpinskisTriangle: CanvasProject;
+  towerOfHanoi: CanvasProject;
+  symmetricBinaryTree: CanvasProject;
+  bondingParticles: CanvasProject;
+  pseudoHilbertCurve: CanvasProject;
+  sortingVisualizer: CanvasProject;
+  twinklingStars: CanvasProject;
+  treePathFinder: CanvasProject;
+  barnsleysFern: CanvasProject;
+};
+
+export const graphicsProjectsMap: GraphicsProjectsMap = {
   gridPathFinderGame,
   sierpinskisTriangle,
   towerOfHanoi,
@@ -132,12 +145,19 @@ export const graphicsProjects: CanvasProject[] = Object.values(
   graphicsProjectsMap,
 );
 
-export const gamesProjectsMap = {
+export type GamesProjectMap = {
+  brickBreakerGame: CanvasProject;
+  flappyBlockGame: CanvasProject;
+  pongGame: CanvasProject;
+  snakeGame: CanvasProject;
+};
+
+export const gamesProjectsMap: GamesProjectMap = {
   brickBreakerGame,
   flappyBlockGame,
   pongGame,
   snakeGame,
-} satisfies Record<string, CanvasProject>;
+};
 
 export const gamesProjects: CanvasProject[] = Object.values(gamesProjectsMap);
 

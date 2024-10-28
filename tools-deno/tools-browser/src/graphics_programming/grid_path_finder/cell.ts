@@ -6,19 +6,19 @@ export class BfsCell {
   #id: string = Math.random().toString(16).slice(2);
   #type: CellType = "empty";
 
-  get id() {
+  get id(): string {
     return this.#id;
   }
-  get isEmpty() {
+  get isEmpty(): boolean {
     return this.#type === "empty";
   }
-  get isStart() {
+  get isStart(): boolean {
     return this.#type === "start";
   }
-  get isEnd() {
+  get isEnd(): boolean {
     return this.#type === "end";
   }
-  get isWall() {
+  get isWall(): boolean {
     return this.#type === "wall";
   }
   set type(cellType: CellType) {

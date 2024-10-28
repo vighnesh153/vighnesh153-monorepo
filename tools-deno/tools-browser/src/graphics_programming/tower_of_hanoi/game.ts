@@ -78,7 +78,7 @@ export class TowerOfHanoiGame {
     this.draw();
   }
 
-  *start() {
+  *start(): Generator<undefined, void, unknown> {
     this.#isRunning = true;
     for (const frame of this.solve()) {
       yield frame;

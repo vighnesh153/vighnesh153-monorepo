@@ -7,7 +7,7 @@ export class TowerOfHanoiGameManager {
     this.#game = game;
   }
 
-  *start() {
+  *start(): Generator<unknown, void, unknown> {
     yield* this.#game.start();
   }
 
