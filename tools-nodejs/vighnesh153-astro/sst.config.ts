@@ -5,7 +5,6 @@ const oneDay = "86400";
 const fiveMinutes = "300";
 
 // Hosted zone: vighnesh153.dev
-const hostedZoneId = "Z0751561MSQKJ4JAASC2";
 const domainNames = {
   staging: "staging.vighnesh153.dev",
   production: "vighnesh153.dev",
@@ -44,11 +43,7 @@ export default $config({
       // errorPage: '404.html',
       domain: {
         name: domainName,
-        dns: sst.aws.dns(
-          //   {
-          //   zone: hostedZoneId,
-          // }
-        ),
+        dns: sst.aws.dns(),
         redirects: ["www." + domainName],
       },
       assets: {

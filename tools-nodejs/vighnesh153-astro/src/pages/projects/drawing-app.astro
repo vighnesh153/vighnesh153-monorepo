@@ -1,22 +1,36 @@
 ---
-import { classes, externalLinks, internalLinks, projectNavItems } from '@/utils/index.ts';
-import ContentLayout from '@/layouts/ContentLayout.astro';
-import Link from '@/components/Link.svelte';
-import DrawingAppRoot from '@/components/projects/drawing-app/DrawingAppRoot.svelte';
+import {
+  classes,
+  externalLinks,
+  internalLinks,
+  projectNavItems,
+} from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import Link from "@/components/Link.svelte";
+import DrawingAppRoot from "@/components/projects/drawing-app/DrawingAppRoot.svelte";
 
-const title = 'Vighnesh Raut | Project - Drawing App';
+const title = "Vighnesh Raut | Project - Drawing App";
 const description = `A drawing app made with ❤️ by Vighnesh Raut`;
 ---
 
-<ContentLayout title={title} description={description} navItems={projectNavItems} showFooter={false}>
-  <div class={classes(`mt-28 mb-12 max-w-2xl mx-auto lg:max-w-[unset] scroll-mt-8 text-center`)}>
+<ContentLayout
+  title={title}
+  description={description}
+  navItems={projectNavItems}
+>
+  <div
+    class={classes(
+      `mt-28 mb-12 max-w-2xl mx-auto lg:max-w-[unset] scroll-mt-8 text-center`,
+    )}
+  >
     <h1 class="text-3xl">A Drawing App</h1>
     <div class="mt-6">
       <DrawingAppRoot client:load />
     </div>
     <p class="mt-6">
       Made with ❤️ by
-      <Link href={internalLinks.main}>Vighnesh Raut</Link>. Check out the source code on
+      <Link href={internalLinks.main}>Vighnesh Raut</Link>. Check out the source
+      code on
       <Link href={externalLinks.projects.drawingApp.sourceCode}>Github</Link>
     </p>
   </div>
