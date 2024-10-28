@@ -1,6 +1,5 @@
 ---
-import { classes, hashTags, externalLinks } from "@/utils/index.ts";
-import Link from "./Link.svelte";
+import { classes, hashTags } from "@/utils/index.ts";
 import SocialLinks from "./SocialLinks.astro";
 
 import type { HTMLAttributes } from "astro/types";
@@ -17,9 +16,6 @@ const { class: className, id, ...props } = Astro.props;
 >
   <SocialLinks direction="horizontal" class="mb-4 flex sm:hidden" />
   <p>
-    <slot name="custom-source-code">
-      <Link href={externalLinks.githubRepo} color="secondary">Source code</Link>
-      of this website
-    </slot>
+    <slot />
   </p>
 </footer>

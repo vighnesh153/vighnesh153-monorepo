@@ -1,6 +1,5 @@
 ---
-import { canvasProjectSourceCodeLink } from "@vighnesh153/tools-browser/graphics_programming";
-import { classes, projectNavItems } from "@/utils/index.ts";
+import { classes, externalLinks, projectNavItems } from "@/utils/index.ts";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import GamesCollection from "@/components/projects/games/GamesCollection.svelte";
 import Link from "@/components/Link.svelte";
@@ -22,7 +21,8 @@ const description = `Games built with HTML Canvas API`;
     <GamesCollection client:load />
   </div>
   <p slot="custom-source-code">
-    See the <Link href={canvasProjectSourceCodeLink}>project's source code</Link
+    See the <Link href={externalLinks.projects.games.sourceCode}
+      >project's source code</Link
     >
   </p>
 </ContentLayout>
