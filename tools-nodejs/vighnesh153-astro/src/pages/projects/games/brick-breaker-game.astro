@@ -9,3 +9,11 @@ const project = gamesProjectsMap.brickBreakerGame;
 <CanvasProjectLayout project={project} type="game">
   <BrickBreakerGameRoot client:load />
 </CanvasProjectLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project/game", {
+    gameTitle: "brick breaker",
+  });
+</script>

@@ -50,10 +50,25 @@ const {
     <SocialLinks direction="horizontal" class="mb-4 flex sm:hidden" />
     <p>
       <slot name="custom-source-code">
-        <Link href={externalLinks.githubRepo} color="secondary"
-          >Source code</Link
+        <Link
+          href={externalLinks.githubRepo}
+          color="secondary"
+          id="viewSourceCodeLink">Source code</Link
         > of this website</slot
       >
     </p>
   </footer>
 </BaseLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  const viewSrcCodeLink = document.getElementById("viewSourceCodeLink");
+  if (viewSrcCodeLink) {
+    viewSrcCodeLink.addEventListener("click", () => {
+      logAnalyticsEvent("visit/source_code", {
+        project: "astro website",
+      });
+    });
+  }
+</script>

@@ -1,7 +1,17 @@
 <script lang="ts">
   import { SplExamples } from "@vighnesh153/spl";
-  import { externalLinks, internalLinks } from "@/utils/index.ts";
+  import {
+    externalLinks,
+    internalLinks,
+    logAnalyticsEvent,
+  } from "@/utils/index.ts";
   import Link from "@/components/Link.svelte";
+
+  function onClickSrcCodeLink() {
+    logAnalyticsEvent("visit/source_code", {
+      project: "graphics projects",
+    });
+  }
 </script>
 
 <div class="mt-12 relative flex justify-center items-center gap-20">
@@ -17,7 +27,8 @@
     <Link
       linkType="secondary-btn"
       target="_blank"
-      href={externalLinks.projects.spl.sourceCode}>Source code</Link
+      href={externalLinks.projects.spl.sourceCode}
+      on:click={onClickSrcCodeLink}>Source code</Link
     >
   </div>
   <div class="w-[1px] h-80 bg-text4" />

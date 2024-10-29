@@ -1,9 +1,9 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import Link from '../Link.svelte';
-import { defaultNavItems, type NavItem } from '@/utils/index.ts';
+import type { HTMLAttributes } from "astro/types";
+import Link from "../Link.svelte";
+import { defaultNavItems, type NavItem } from "@/utils/index.ts";
 
-interface Props extends HTMLAttributes<'nav'> {
+interface Props extends HTMLAttributes<"nav"> {
   navItems?: NavItem[];
 }
 
@@ -14,10 +14,20 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
   <slot name="start" />
   {
     navItems.map((navItem) => (
-      <Link href={navItem.link} rel="prefetch">
+      <Link href={navItem.link} rel="prefetch" id={navItem.id}>
         <span class="text-lg">{navItem.text}</span>
       </Link>
     ))
   }
   <slot name="end" />
 </nav>
+
+<script>
+  import { AllNavigationItems, logAnalyticsEvent } from "@/utils/index.ts";
+
+  document
+    .getElementById(AllNavigationItems.resume.id)
+    ?.addEventListener("click", () => {
+      logAnalyticsEvent("visit/resume");
+    });
+</script>

@@ -9,3 +9,11 @@ const project = graphicsProjectsMap.treePathFinder;
 <CanvasProjectLayout project={project} type="illustration">
   <TreePathFinderRoot client:load />
 </CanvasProjectLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project/graphics", {
+    graphicsProjectTitle: "tree path finder",
+  });
+</script>

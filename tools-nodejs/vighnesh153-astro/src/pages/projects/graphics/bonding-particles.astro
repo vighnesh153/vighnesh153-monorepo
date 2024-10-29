@@ -9,3 +9,11 @@ const project = graphicsProjectsMap.bondingParticles;
 <CanvasProjectLayout project={project} type="illustration">
   <BondingParticlesRoot client:load />
 </CanvasProjectLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project/graphics", {
+    graphicsProjectTitle: "bonding particles",
+  });
+</script>

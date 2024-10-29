@@ -1,17 +1,29 @@
 ---
-import { classes, projectsRootNavItems } from '@/utils/index.ts';
-import ContentLayout from '@/layouts/ContentLayout.astro';
-import ProjectsMasonry from '@/components/projects/ProjectsMasonry.astro';
+import { classes, projectsRootNavItems } from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import ProjectsMasonry from "@/components/projects/ProjectsMasonry.astro";
 
-const title = 'Vighnesh Raut | Projects';
+const title = "Vighnesh Raut | Projects";
 const description =
-  'Vighnesh builds a lot of amazing projects in his free time. He loves to play ' +
-  'around with graphics programming and different frameworks';
+  "Vighnesh builds a lot of amazing projects in his free time. He loves to play " +
+  "around with graphics programming and different frameworks";
 ---
 
-<ContentLayout title={title} description={description} navItems={projectsRootNavItems}>
-  <div class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+<ContentLayout
+  title={title}
+  description={description}
+  navItems={projectsRootNavItems}
+>
+  <div
+    class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}
+  >
     <h1 class="text-3xl">Projects</h1>
     <ProjectsMasonry />
   </div>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/projects_homepage");
+</script>

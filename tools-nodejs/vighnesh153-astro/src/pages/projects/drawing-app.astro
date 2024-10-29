@@ -31,7 +31,23 @@ const description = `A drawing app made with ❤️ by Vighnesh Raut`;
       Made with ❤️ by
       <Link href={internalLinks.main}>Vighnesh Raut</Link>. Check out the source
       code on
-      <Link href={externalLinks.projects.drawingApp.sourceCode}>Github</Link>
+      <Link href={externalLinks.projects.drawingApp.sourceCode} id="githubLink"
+        >Github</Link
+      >
     </p>
   </div>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project", {
+    projectTitle: "drawing app",
+  });
+
+  document.getElementById("githubLink")?.addEventListener("click", () => {
+    logAnalyticsEvent("visit/source_code", {
+      project: "drawing app",
+    });
+  });
+</script>

@@ -9,3 +9,11 @@ const project = graphicsProjectsMap.twinklingStars;
 <CanvasProjectLayout project={project} type="illustration">
   <TwinklingStarsRoot client:load />
 </CanvasProjectLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project/graphics", {
+    graphicsProjectTitle: "twinkling stars",
+  });
+</script>

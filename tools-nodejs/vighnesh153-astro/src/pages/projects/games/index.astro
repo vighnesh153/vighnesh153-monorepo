@@ -25,3 +25,9 @@ const description = `Games built with HTML Canvas API`;
     >
   </p>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/projects/games_homepage");
+</script>

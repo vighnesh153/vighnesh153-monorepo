@@ -1,8 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Page not found" description="Lost? Head over to vighnesh153.dev">
+<BaseLayout
+  title="Page not found"
+  description="Lost? Head over to vighnesh153.dev"
+>
   <main class="loading">
     <h1>404: Not found</h1>
   </main>
@@ -26,7 +29,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  import { removeTrailingSlashFromUrlPathName } from '@/utils/index.ts';
+  import { removeTrailingSlashFromUrlPathName } from "@/utils/index.ts";
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/404");
 
   const rawUrl = window.location.toString();
   const filteredUrl = removeTrailingSlashFromUrlPathName(rawUrl);
@@ -34,6 +40,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   if (filteredUrl !== rawUrl) {
     window.location.replace(filteredUrl);
   } else {
-    document.querySelector('main')?.classList.remove('loading');
+    document.querySelector("main")?.classList.remove("loading");
   }
 </script>

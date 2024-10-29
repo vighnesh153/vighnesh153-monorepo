@@ -1,7 +1,7 @@
 ---
-import ContentLayout from './ContentLayout.astro';
+import ContentLayout from "./ContentLayout.astro";
 
-import { classes, type BlogFrontmatter } from '@/utils/index.ts';
+import { classes, type BlogFrontmatter } from "@/utils/index.ts";
 
 interface Props {
   frontmatter: BlogFrontmatter & {
@@ -12,10 +12,12 @@ interface Props {
 
 const { frontmatter } = Astro.props;
 
-const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString('en-us', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+const date = new Date(
+  frontmatter.creationDate ?? Date.now(),
+).toLocaleDateString("en-us", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 ---
 
@@ -30,7 +32,7 @@ const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString
   >
     {/* Heading */}
     <h1>
-      {frontmatter.title ?? 'Heading 1'}
+      {frontmatter.title ?? "Heading 1"}
     </h1>
 
     {/* Creation date */}
@@ -39,3 +41,11 @@ const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString
     <slot />
   </article>
 </ContentLayout>
+
+<script define:vars={{ frontmatter }}>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/blog", {
+    blogTitle: frontmatter.title,
+  });
+</script>

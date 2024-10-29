@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
-import { type FirebaseOptions, initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
+import {
+  type FirebaseApp,
+  type FirebaseOptions,
+  initializeApp,
+} from "firebase/app";
+import {
+  type Analytics,
+  getAnalytics as getFirebaseAnalytics,
+  logEvent,
+} from "firebase/analytics";
 
 import { stage } from "./stage.ts";
 import type { AnalyticsEventName } from "./analytics_event_name.ts";
@@ -38,16 +46,24 @@ if (stage === "prod") {
 }
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+let app: FirebaseApp;
+let analytics: Analytics;
+function getApp(): FirebaseApp {
+  if (!app) app = initializeApp(firebaseConfig);
+  return app;
+}
+function getAnalytics(): Analytics {
+  if (!analytics) analytics = getFirebaseAnalytics(getApp());
+  return analytics;
+}
 
 export function logAnalyticsEvent(
   eventName: AnalyticsEventName,
   extras: Record<string, unknown> | null = null,
 ): void {
   if (extras == null) {
-    logEvent(analytics, eventName);
+    logEvent(getAnalytics(), eventName);
   } else {
-    logEvent(analytics, eventName, extras);
+    logEvent(getAnalytics(), eventName, extras);
   }
 }

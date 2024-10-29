@@ -1,16 +1,24 @@
 ---
-import { type BlogFrontmatter } from '@/utils/index.ts';
+import { type BlogFrontmatter } from "@/utils/index.ts";
 
-import ContentLayout from '@/layouts/ContentLayout.astro';
+import ContentLayout from "@/layouts/ContentLayout.astro";
 
-const posts = await Astro.glob('./*/*.mdx');
+const posts = await Astro.glob("./*/*.mdx");
 const frontmatters = posts
   .map((it) => ({ ...(it.frontmatter as BlogFrontmatter), url: it.url }))
   .filter((it) => import.meta.env.DEV || it.live)
-  .sort((a, b) => (new Date(a.creationDate ?? Date.now()) > new Date(b.creationDate ?? Date.now()) ? -1 : 1));
+  .sort((a, b) =>
+    new Date(a.creationDate ?? Date.now()) >
+    new Date(b.creationDate ?? Date.now())
+      ? -1
+      : 1,
+  );
 ---
 
-<ContentLayout title="Vighnesh Raut - Blog" description="A personal blog by Vighnesh Raut">
+<ContentLayout
+  title="Vighnesh Raut - Blog"
+  description="A personal blog by Vighnesh Raut"
+>
   <ul class="max-w-prose mt-40 mx-auto">
     {
       frontmatters.length == 0 && (
@@ -21,17 +29,24 @@ const frontmatters = posts
     }
     {
       frontmatters.map((frontmatter) => {
-        const date = new Date(frontmatter.creationDate ?? Date.now()).toLocaleDateString('en-us', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
+        const date = new Date(
+          frontmatter.creationDate ?? Date.now(),
+        ).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
         });
         return (
-          <a href={frontmatter.url} class="block hover:scale-[1.005] transition-transform">
+          <a
+            href={frontmatter.url}
+            class="block hover:scale-[1.005] transition-transform"
+          >
             <li class="mb-16">
-              <h2 class="text-text font-bold text-3xl italic">{frontmatter.title ?? 'Blog Title'}</h2>
+              <h2 class="text-text font-bold text-3xl italic">
+                {frontmatter.title ?? "Blog Title"}
+              </h2>
               <p class="text-base text-text3 italic">{date}</p>
-              <p class="mt-1 text-text2">{frontmatter.description ?? ''}</p>
+              <p class="mt-1 text-text2">{frontmatter.description ?? ""}</p>
             </li>
           </a>
         );
@@ -39,3 +54,9 @@ const frontmatters = posts
     }
   </ul>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/blog_homepage");
+</script>
