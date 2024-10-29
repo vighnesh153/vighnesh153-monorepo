@@ -35,4 +35,5 @@ jobs:
             echo "Checking - $(pwd)\n";
             npm install;
             npm t;
+            npm run build;
           done
