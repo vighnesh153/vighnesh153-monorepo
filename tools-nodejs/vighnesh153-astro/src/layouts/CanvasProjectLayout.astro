@@ -59,12 +59,17 @@ const title = `Vighnesh Raut | ${project.title}`;
 <script>
   import { logAnalyticsEvent } from "@/utils/index.ts";
 
+  const heading = document.querySelector("h1")?.textContent;
+  logAnalyticsEvent("visit_project_canvas", {
+    canvasProjectTitle: heading,
+  });
+
   const canvasProjSrcCodeLink = document.getElementById(
     "canvasProjectSourceCodeLink",
   );
   if (canvasProjSrcCodeLink) {
     canvasProjSrcCodeLink.addEventListener("click", () => {
-      logAnalyticsEvent("visit/source_code", {
+      logAnalyticsEvent("visit_source_code", {
         project: "graphics projects",
       });
     });

@@ -8,7 +8,7 @@
   import Link from "@/components/Link.svelte";
 
   function onClickSrcCodeLink() {
-    logAnalyticsEvent("visit/source_code", {
+    logAnalyticsEvent("visit_source_code", {
       project: "graphics projects",
     });
   }

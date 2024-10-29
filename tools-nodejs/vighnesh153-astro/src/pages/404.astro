@@ -32,7 +32,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   import { removeTrailingSlashFromUrlPathName } from "@/utils/index.ts";
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
-  logAnalyticsEvent("visit/404");
+  logAnalyticsEvent("visit_404");
 
   const rawUrl = window.location.toString();
   const filteredUrl = removeTrailingSlashFromUrlPathName(rawUrl);

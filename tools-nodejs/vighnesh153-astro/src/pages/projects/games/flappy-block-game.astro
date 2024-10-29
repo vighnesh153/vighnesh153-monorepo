@@ -9,11 +9,3 @@ const project = gamesProjectsMap.flappyBlockGame;
 <CanvasProjectLayout project={project} type="game">
   <FlappyBlockGameRoot client:load />
 </CanvasProjectLayout>
-
-<script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
-
-  logAnalyticsEvent("visit/project/game", {
-    gameTitle: "flappy block",
-  });
-</script>

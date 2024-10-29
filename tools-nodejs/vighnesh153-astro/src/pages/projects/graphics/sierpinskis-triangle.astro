@@ -9,11 +9,3 @@ const project = graphicsProjectsMap.sierpinskisTriangle;
 <CanvasProjectLayout project={project} type="illustration">
   <SierpinskisTriangleRoot client:load />
 </CanvasProjectLayout>
-
-<script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
-
-  logAnalyticsEvent("visit/project/graphics", {
-    graphicsProjectTitle: "sierpinski's triangle",
-  });
-</script>
