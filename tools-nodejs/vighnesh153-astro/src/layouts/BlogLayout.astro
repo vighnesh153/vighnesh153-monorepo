@@ -42,10 +42,12 @@ const date = new Date(
   </article>
 </ContentLayout>
 
-<script define:vars={{ frontmatter }}>
+<script>
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
+  const heading = document.querySelector("h1")?.textContent;
+
   logAnalyticsEvent("visit/blog", {
-    blogTitle: frontmatter.title,
+    blogTitle: heading,
   });
 </script>
