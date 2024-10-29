@@ -8,12 +8,12 @@ import {
   JsonHttpResponse,
 } from "@vighnesh153/tools";
 import { type LambdaResponsePayload } from "@vighnesh153/tools/vighnesh153";
-import { FakeDynamoDBTable } from "@vighnesh153/aws-dynamo-db";
+import { FakeDynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 
 import { controller } from "./controller.ts";
-import { FakeUserInfoDecoder } from "../common/UserInfoDecoder.ts";
-import { UserInfoTableMetadata } from "../common/dynamoDBTableMetadata.ts";
-import { FakeCookieSerializer } from "../common/CookieSerializer.ts";
+import { FakeUserInfoDecoder } from "../common/user_info_decoder.ts";
+import { UserInfoTableMetadata } from "../common/dynamo_db_table_metadata.ts";
+import { FakeCookieSerializer } from "../common/cookie_serializer.ts";
 
 let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<{

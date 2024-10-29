@@ -3,8 +3,8 @@ import {
   cookieKeys,
   LambdaRequestPayload,
 } from "@vighnesh153/tools/vighnesh153";
-import { CookieSerializer } from "../common/CookieSerializer.ts";
-import { AuthTokenGenerator } from "../common/AuthTokenGenerator.ts";
+import { CookieSerializer } from "../common/cookie_serializer.ts";
+import { AuthTokenGenerator } from "../common/auth_token_generator.ts";
 
 export async function getUserIdFromCookies({
   cookieSecret,

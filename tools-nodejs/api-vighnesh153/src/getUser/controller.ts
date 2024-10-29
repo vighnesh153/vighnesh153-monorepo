@@ -14,9 +14,9 @@ import {
   LambdaRequestPayload,
   LambdaResponsePayload,
 } from "@vighnesh153/tools/vighnesh153";
-import { DynamoDBTable } from "@vighnesh153/aws-dynamo-db";
+import { type DynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 
-import { CookieSerializer } from "../common/CookieSerializer.ts";
+import { CookieSerializer } from "../common/cookie_serializer.ts";
 import { inProduction } from "../common/utils.ts";
 import {
   authTokenGeneratorSingletonFactory,
@@ -26,7 +26,7 @@ import {
   userInfoTableSingletonFactory,
 } from "../common/factories.ts";
 import { getCompleteUserInfo, getPublicUserInfo } from "./fetch_user_info.ts";
-import { AuthTokenGenerator } from "../common/AuthTokenGenerator.ts";
+import { AuthTokenGenerator } from "../common/auth_token_generator.ts";
 import { getUserIdFromCookies } from "./get_user_id_from_cookies.ts";
 
 function mask(s?: string | null): string {

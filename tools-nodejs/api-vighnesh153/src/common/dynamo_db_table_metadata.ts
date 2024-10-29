@@ -1,6 +1,9 @@
-import { DynamoTypeMap, TableMetadata } from "@vighnesh153/aws-dynamo-db";
+import type {
+  DynamoTypeMap,
+  TableMetadata,
+} from "@vighnesh153/tools-server/aws_dynamodb";
 
-export const userInfoFields = {
+export const userInfoFields = /* @__PURE__ */ {
   userId: "string",
   name: "string",
   email: "string",
@@ -8,6 +11,6 @@ export const userInfoFields = {
   createdAtMillis: "number",
 } satisfies Record<string, keyof DynamoTypeMap>;
 
-export const UserInfoTableMetadata = {
+export const UserInfoTableMetadata = /* @__PURE__ */ {
   fields: userInfoFields,
 } satisfies Partial<TableMetadata>;
