@@ -9,11 +9,3 @@ const project = gamesProjectsMap.pongGame;
 <CanvasProjectLayout project={project} type="game">
   <PongGameRoot client:load />
 </CanvasProjectLayout>
-
-<script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
-
-  logAnalyticsEvent("visit/project/game", {
-    gameTitle: "pong",
-  });
-</script>

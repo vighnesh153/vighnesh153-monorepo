@@ -9,11 +9,3 @@ const project = graphicsProjectsMap.symmetricBinaryTree;
 <CanvasProjectLayout project={project} type="illustration">
   <SymmetricBinaryTreeRoot client:load />
 </CanvasProjectLayout>
-
-<script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
-
-  logAnalyticsEvent("visit/project/graphics", {
-    graphicsProjectTitle: "symmetric binary tree",
-  });
-</script>

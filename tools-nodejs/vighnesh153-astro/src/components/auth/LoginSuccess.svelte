@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
 
   onMount(() => {
-    logAnalyticsEvent("login/success");
+    logAnalyticsEvent("login_success");
 
     const redirectPath =
       localStorage.getItem(onAuthSuccessRedirectPathKey) ?? "/";
