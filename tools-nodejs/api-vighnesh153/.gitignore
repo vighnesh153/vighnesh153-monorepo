@@ -2,3 +2,4 @@
 dist
 cdk.context.json
 sst-env.d.ts
+node_modules
