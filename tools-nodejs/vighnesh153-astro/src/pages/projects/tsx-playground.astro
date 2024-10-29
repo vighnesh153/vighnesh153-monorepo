@@ -18,9 +18,24 @@ const description = `A in-browser transpiler and bundler for React.js and Typesc
     <p class="mt-2 text-center">Made with ❤️ by Vighnesh Raut</p>
     <p class="mt-2 text-center">
       Checkout the source code on <Link
-        href={externalLinks.projects.tsxBundler.sourceCode}>Github</Link
+        href={externalLinks.projects.tsxBundler.sourceCode}
+        id="githubLink">Github</Link
       >
     </p>
     <TsxPlaygroundRoot client:only="svelte" />
   </div>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project", {
+    projectTitle: "tsx playground",
+  });
+
+  document.getElementById("githubLink")?.addEventListener("click", () => {
+    logAnalyticsEvent("visit/source_code", {
+      project: "tsx playground",
+    });
+  });
+</script>

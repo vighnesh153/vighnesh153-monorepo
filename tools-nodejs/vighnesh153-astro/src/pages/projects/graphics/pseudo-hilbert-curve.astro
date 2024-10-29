@@ -9,3 +9,11 @@ const project = graphicsProjectsMap.pseudoHilbertCurve;
 <CanvasProjectLayout project={project} type="illustration">
   <PseudoHilbertCurveRoot client:load />
 </CanvasProjectLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project/graphics", {
+    graphicsProjectTitle: "pseudo hilbert curve",
+  });
+</script>

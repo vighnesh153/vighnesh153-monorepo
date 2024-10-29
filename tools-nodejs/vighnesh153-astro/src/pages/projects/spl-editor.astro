@@ -19,3 +19,11 @@ const description = `A Simple Programming Language (SPL) with syntax closer to t
     <SplRoot client:load />
   </div>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit/project", {
+    projectTitle: "spl editor",
+  });
+</script>

@@ -3,15 +3,36 @@ import { externalLinks, internalLinks } from "./links.ts";
 export interface NavItem {
   text: string;
   link: string;
+  id: string;
 }
 
 export const AllNavigationItems = {
-  home: { text: "Home", link: internalLinks.homePage.root },
-  aboutMe: { text: "About me", link: internalLinks.homePage.aboutMe },
-  blog: { text: "Blog", link: externalLinks.blog },
-  projects: { text: "Projects", link: internalLinks.homePage.projects },
-  experience: { text: "Experience", link: internalLinks.homePage.experience },
-  resume: { text: "Resume", link: externalLinks.resume },
+  home: {
+    text: "Home",
+    link: internalLinks.homePage.root,
+    id: "primary-nav-link-home",
+  },
+  aboutMe: {
+    text: "About me",
+    link: internalLinks.homePage.aboutMe,
+    id: "primary-nav-link-about-me",
+  },
+  blog: { text: "Blog", link: externalLinks.blog, id: "primary-nav-link-blog" },
+  projects: {
+    text: "Projects",
+    link: internalLinks.homePage.projects,
+    id: "primary-nav-link-projects",
+  },
+  experience: {
+    text: "Experience",
+    link: internalLinks.homePage.experience,
+    id: "primary-nav-link-experience",
+  },
+  resume: {
+    text: "Resume",
+    link: externalLinks.resume,
+    id: "primary-nav-link-resume",
+  },
 } satisfies Record<string, NavItem>;
 
 export const defaultNavItems: NavItem[] = [

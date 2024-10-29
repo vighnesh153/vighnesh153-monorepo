@@ -49,8 +49,24 @@ const title = `Vighnesh Raut | ${project.title}`;
     <slot />
   </div>
   <p slot="custom-source-code">
-    See the <Link href={externalLinks.projects.graphicsProjects.sourceCode}
-      >project's source code</Link
+    See the <Link
+      href={externalLinks.projects.graphicsProjects.sourceCode}
+      id="canvasProjectSourceCodeLink">project's source code</Link
     >
   </p>
 </ContentLayout>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/index.ts";
+
+  const canvasProjSrcCodeLink = document.getElementById(
+    "canvasProjectSourceCodeLink",
+  );
+  if (canvasProjSrcCodeLink) {
+    canvasProjSrcCodeLink.addEventListener("click", () => {
+      logAnalyticsEvent("visit/source_code", {
+        project: "graphics projects",
+      });
+    });
+  }
+</script>
