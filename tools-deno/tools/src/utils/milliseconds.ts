@@ -1,10 +1,24 @@
-const secondInMs = 1000;
-const minuteInMs = secondInMs * 60;
-const hourInMs = minuteInMs * 60;
-const dayInMs = hourInMs * 24;
-const weekInMs = dayInMs * 7;
-const yearInMs = dayInMs * 365;
-const leapYearInMs = dayInMs * 366;
+const millis_in_one = /* @__PURE__ */ {
+  second: 1000,
+  get minute() {
+    return this.second * 60;
+  },
+  get hour() {
+    return this.minute * 60;
+  },
+  get day() {
+    return this.hour * 24;
+  },
+  get week() {
+    return this.day * 7;
+  },
+  get year() {
+    return this.day * 365;
+  },
+  get leap_year() {
+    return this.day * 366;
+  },
+};
 
 export interface MillisecondsFromProps {
   milliseconds?: number;
@@ -28,12 +42,12 @@ export function milliseconds(from: MillisecondsFromProps | number): number {
   }
   let millisecondsCount = 0;
   millisecondsCount += from.milliseconds ?? 0;
-  millisecondsCount += (from.seconds ?? 0) * secondInMs;
-  millisecondsCount += (from.minutes ?? 0) * minuteInMs;
-  millisecondsCount += (from.hours ?? 0) * hourInMs;
-  millisecondsCount += (from.days ?? 0) * dayInMs;
-  millisecondsCount += (from.weeks ?? 0) * weekInMs;
-  millisecondsCount += (from.years ?? 0) * yearInMs;
-  millisecondsCount += (from.leapYears ?? 0) * leapYearInMs;
+  millisecondsCount += (from.seconds ?? 0) * millis_in_one.second;
+  millisecondsCount += (from.minutes ?? 0) * millis_in_one.minute;
+  millisecondsCount += (from.hours ?? 0) * millis_in_one.hour;
+  millisecondsCount += (from.days ?? 0) * millis_in_one.day;
+  millisecondsCount += (from.weeks ?? 0) * millis_in_one.week;
+  millisecondsCount += (from.years ?? 0) * millis_in_one.year;
+  millisecondsCount += (from.leapYears ?? 0) * millis_in_one.leap_year;
   return millisecondsCount;
 }

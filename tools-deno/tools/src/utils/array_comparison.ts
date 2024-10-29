@@ -136,5 +136,3 @@ function defaultCompareFn<T>(el1: T, el2: T): ArrayComparisonResult {
   if (el1 > el2) return 1;
   return 0;
 }
-
-[].sort();
