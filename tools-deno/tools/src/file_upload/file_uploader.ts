@@ -1,5 +1,5 @@
 import type {} from "@kitsonk/xhr/globals";
-import "@kitsonk/xhr";
+// import "@kitsonk/xhr";
 
 export type FileUploaderResponse = { type: "success" } | {
   type: "error";

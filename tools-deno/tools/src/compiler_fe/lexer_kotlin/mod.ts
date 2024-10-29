@@ -1,1 +1,1 @@
-console.log("hello world");
+/* @__PURE__ */ console.log("hello world");

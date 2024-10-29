@@ -51,7 +51,7 @@ const LambdaFunctionNameList = [
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
 
 export const LambdaFunctionNames: { [key in LambdaFunctionName]: key } =
-  LambdaFunctionNameList.reduce(
+  /* @__PURE__ */ LambdaFunctionNameList.reduce(
     (acc, curr) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: some

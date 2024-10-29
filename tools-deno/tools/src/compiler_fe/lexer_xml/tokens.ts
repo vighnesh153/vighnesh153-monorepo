@@ -1,18 +1,26 @@
 export class XmlTokenType {
-  static Illegal: XmlTokenType = new XmlTokenType("Illegal");
-  static Eof: XmlTokenType = new XmlTokenType("Eof");
+  static Illegal: XmlTokenType = /* @__PURE__ */ new XmlTokenType("Illegal");
+  static Eof: XmlTokenType = /* @__PURE__ */ new XmlTokenType("Eof");
 
-  static Identifier: XmlTokenType = new XmlTokenType("Identifier");
-  static StringLiteral: XmlTokenType = new XmlTokenType("StringLiteral");
-  static CommentLiteral: XmlTokenType = new XmlTokenType("CommentLiteral");
-  static TextNode: XmlTokenType = new XmlTokenType("TextNode");
+  static Identifier: XmlTokenType = /* @__PURE__ */ new XmlTokenType(
+    "Identifier",
+  );
+  static StringLiteral: XmlTokenType = /* @__PURE__ */ new XmlTokenType(
+    "StringLiteral",
+  );
+  static CommentLiteral: XmlTokenType = /* @__PURE__ */ new XmlTokenType(
+    "CommentLiteral",
+  );
+  static TextNode: XmlTokenType = /* @__PURE__ */ new XmlTokenType("TextNode");
 
-  static Colon: XmlTokenType = new XmlTokenType(":");
-  static Equals: XmlTokenType = new XmlTokenType("=");
-  static LeftAngleBracket: XmlTokenType = new XmlTokenType("<");
-  static RightAngleBracket: XmlTokenType = new XmlTokenType(">");
-  static ForwardSlash: XmlTokenType = new XmlTokenType("/");
-  static QuestionMark: XmlTokenType = new XmlTokenType("?");
+  static Colon: XmlTokenType = /* @__PURE__ */ new XmlTokenType(":");
+  static Equals: XmlTokenType = /* @__PURE__ */ new XmlTokenType("=");
+  static LeftAngleBracket: XmlTokenType = /* @__PURE__ */ new XmlTokenType("<");
+  static RightAngleBracket: XmlTokenType = /* @__PURE__ */ new XmlTokenType(
+    ">",
+  );
+  static ForwardSlash: XmlTokenType = /* @__PURE__ */ new XmlTokenType("/");
+  static QuestionMark: XmlTokenType = /* @__PURE__ */ new XmlTokenType("?");
 
   private constructor(public readonly value: string) {}
 }

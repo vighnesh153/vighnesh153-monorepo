@@ -10,7 +10,9 @@ import type {
 import { JsonHttpResponse } from "./json_http_response.ts";
 import type { HttpQueryParameters } from "../common.ts";
 
-export const JSON_HTTP_CLIENT_TIMEOUT: number = milliseconds({ seconds: 10 });
+export const JSON_HTTP_CLIENT_TIMEOUT: number = /* @__PURE__ */ milliseconds({
+  seconds: 10,
+});
 
 export interface JsonHttpClientImplProps {
   baseUrl: string;
