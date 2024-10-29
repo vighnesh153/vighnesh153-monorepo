@@ -4,7 +4,7 @@ import {
   Logger,
   PublicUserInfo,
 } from "@vighnesh153/tools";
-import { DynamoDBTable } from "@vighnesh153/aws-dynamo-db";
+import type { DynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 import { userInfoTableMetadata } from "../common/factories.ts";
 
 export async function getPublicUserInfo({

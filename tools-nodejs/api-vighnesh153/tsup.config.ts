@@ -2,11 +2,11 @@ import { defineConfig } from "tsup";
 
 export default defineConfig(() => ({
   entry: {
-    googleAuthCallback: "./src/googleAuthCallback/index.ts",
-    initiateGoogleLogin: "./src/initiateGoogleLogin/index.ts",
-    initiateLogout: "./src/initiateLogout/index.ts",
-    getUser: "./src/getUser/index.ts",
-    playground: "./src/playground/index.ts",
+    googleAuthCallback: "./src/googleAuthCallback/mod.ts",
+    initiateGoogleLogin: "./src/initiateGoogleLogin/mod.ts",
+    initiateLogout: "./src/initiateLogout/mod.ts",
+    getUser: "./src/getUser/mod.ts",
+    playground: "./src/playground/mod.ts",
   },
   splitting: false,
   external: [

@@ -4,7 +4,7 @@ import { Resource } from "sst";
 
 import { type SerializeOptions } from "cookie";
 
-import { type DynamoDBTable } from "@vighnesh153/aws-dynamo-db";
+import { type DynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 import {
   type CompleteUserInfo,
   type JsonHttpClient,
@@ -21,7 +21,7 @@ import { slugify } from "@std/text/unstable-slugify";
 import {
   type TokenFetchRequestBuilder,
   TokenFetchRequestBuilderImpl,
-} from "./buildTokenFetchRequest.ts";
+} from "./build_token_fetch_request.ts";
 import {
   authTokenGeneratorSingletonFactory,
   cookieSerializerFactory,
@@ -32,11 +32,11 @@ import {
   userInfoTableMetadata,
   userInfoTableSingletonFactory,
 } from "../common/factories.ts";
-import { type UserInfoDecoder } from "../common/UserInfoDecoder.ts";
-import { type RandomStringGenerator } from "../common/randomStringGenerator.ts";
-import { type AuthTokenGenerator } from "../common/AuthTokenGenerator.ts";
+import { type UserInfoDecoder } from "../common/user_info_decoder.ts";
+import { type RandomStringGenerator } from "../common/random_string_generator.ts";
+import { type AuthTokenGenerator } from "../common/auth_token_generator.ts";
 import { inProduction } from "../common/utils.ts";
-import { CookieSerializer } from "../common/CookieSerializer.ts";
+import { CookieSerializer } from "../common/cookie_serializer.ts";
 
 function mask(s?: string | null): string {
   return (s || "").slice(0, 3) + "...";

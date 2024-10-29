@@ -7,10 +7,10 @@ import {
   DEFAULT_AWS_REGION,
   isValidStageType,
   type StageType,
-} from "@vighnesh153/tools";
+} from "@vighnesh153/tools/vighnesh153";
 
-import { userInfoFields } from "./src/common/dynamoDBTableMetadata";
-import { FunctionArgs } from "./.sst/platform/src/components/aws";
+import { userInfoFields } from "./src/common/dynamo_db_table_metadata.ts";
+import { FunctionArgs } from "./.sst/platform/src/components/aws/index.ts";
 
 function validateStage(stage: string): stage is StageType {
   if (!isValidStageType(stage)) {
@@ -36,7 +36,7 @@ export default $config({
       home: "aws",
       providers: {
         aws: {
-          region: DEFAULT_AWS_REGION,
+          region: DEFAULT_AWS_REGION as any,
         },
       },
     };

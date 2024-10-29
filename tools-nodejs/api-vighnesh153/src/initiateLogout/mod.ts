@@ -9,7 +9,7 @@ import {
   type LambdaResponsePayload,
 } from "@vighnesh153/tools/vighnesh153";
 
-import { CookieSerializer } from "../common/CookieSerializer.ts";
+import { CookieSerializer } from "../common/cookie_serializer.ts";
 import {
   cookieSerializerFactory,
   loggerSingletonFactory,

@@ -1,5 +1,5 @@
 import { type Handler } from "aws-lambda";
-import { constructAuthRedirectUrl } from "./constructAuthRedirectUrl.ts";
+import { constructAuthRedirectUrl } from "./construct_auth_redirect_url.ts";
 import { controller } from "./controller.ts";
 
 export const handler: Handler = () =>
