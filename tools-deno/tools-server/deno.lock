@@ -1,14 +1,19 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@kitsonk/xhr@0.5": "0.5.0",
+    "jsr:@luca/esbuild-deno-loader@*": "0.11.0",
     "jsr:@std/assert@1": "1.0.6",
     "jsr:@std/assert@^1.0.6": "1.0.6",
+    "jsr:@std/async@^1.0.5": "1.0.6",
+    "jsr:@std/bytes@^1.0.2": "1.0.2",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
+    "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/fs@^1.0.4": "1.0.4",
     "jsr:@std/internal@^1.0.4": "1.0.4",
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/testing@1": "1.0.3",
-    "jsr:@vighnesh153/tools@~0.1.2": "0.1.2",
+    "jsr:@vighnesh153/tools@~0.1.4": "0.1.4",
     "npm:@aws-sdk/client-dynamodb@^3.679.0": "3.679.0_@aws-sdk+client-sts@3.679.0__@aws-sdk+client-sso-oidc@3.679.0___@aws-sdk+client-sts@3.679.0_@aws-sdk+client-sso-oidc@3.679.0__@aws-sdk+client-sts@3.679.0___@aws-sdk+client-sso-oidc@3.679.0____@aws-sdk+client-sts@3.679.0__@aws-sdk+client-sts@3.679.0___@aws-sdk+client-sso-oidc@3.679.0____@aws-sdk+client-sts@3.679.0_____@aws-sdk+client-sso-oidc@3.679.0___@aws-sdk+client-sso-oidc@3.679.0",
     "npm:@aws-sdk/lib-dynamodb@^3.679.0": "3.679.0_@aws-sdk+client-dynamodb@3.679.0__@aws-sdk+client-sts@3.679.0___@aws-sdk+client-sso-oidc@3.679.0____@aws-sdk+client-sts@3.679.0__@aws-sdk+client-sso-oidc@3.679.0___@aws-sdk+client-sts@3.679.0____@aws-sdk+client-sso-oidc@3.679.0_____@aws-sdk+client-sts@3.679.0___@aws-sdk+client-sts@3.679.0____@aws-sdk+client-sso-oidc@3.679.0_____@aws-sdk+client-sts@3.679.0______@aws-sdk+client-sso-oidc@3.679.0____@aws-sdk+client-sso-oidc@3.679.0_@aws-sdk+client-dynamodb@3.679.0__@aws-sdk+client-sts@3.679.0___@aws-sdk+client-sso-oidc@3.679.0____@aws-sdk+client-sts@3.679.0__@aws-sdk+client-sso-oidc@3.679.0___@aws-sdk+client-sts@3.679.0____@aws-sdk+client-sso-oidc@3.679.0",
     "npm:@ngneat/falso@^7.2.0": "7.2.0",
@@ -16,14 +21,34 @@
     "npm:@smithy/types@^3.6.0": "3.6.0"
   },
   "jsr": {
+    "@kitsonk/xhr@0.5.0": {
+      "integrity": "1bc27fb039125e2ee046aa50209199e1746ae03a17bf910b7a182e2cee893a96"
+    },
+    "@luca/esbuild-deno-loader@0.11.0": {
+      "integrity": "c05a989aa7c4ee6992a27be5f15cfc5be12834cab7ff84cabb47313737c51a2c",
+      "dependencies": [
+        "jsr:@std/bytes",
+        "jsr:@std/encoding",
+        "jsr:@std/path"
+      ]
+    },
     "@std/assert@1.0.6": {
       "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
       "dependencies": [
         "jsr:@std/internal"
       ]
     },
+    "@std/async@1.0.6": {
+      "integrity": "6d262156dd35c4a72ee1a2f8679be40264f370cfb92e2e13d4eca2ae05e16f34"
+    },
+    "@std/bytes@1.0.2": {
+      "integrity": "fbdee322bbd8c599a6af186a1603b3355e59a5fb1baa139f8f4c3c9a1b3e3d57"
+    },
     "@std/data-structures@1.0.4": {
       "integrity": "fa0e20c11eb9ba673417450915c750a0001405a784e2a4e0c3725031681684a0"
+    },
+    "@std/encoding@1.0.5": {
+      "integrity": "ecf363d4fc25bd85bd915ff6733a7e79b67e0e7806334af15f4645c569fefc04"
     },
     "@std/fs@1.0.4": {
       "integrity": "2907d32d8d1d9e540588fd5fe0ec21ee638134bd51df327ad4e443aaef07123c",
@@ -41,15 +66,18 @@
       "integrity": "f98c2bee53860a5916727d7e7d3abe920dd6f9edace022e2d059f00d05c2cf42",
       "dependencies": [
         "jsr:@std/assert@^1.0.6",
+        "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
         "jsr:@std/path"
       ]
     },
-    "@vighnesh153/tools@0.1.2": {
-      "integrity": "8b955b7f044ad0675ce67546dd1910bec7c31d3db1e4b463561d1024d412fc38",
+    "@vighnesh153/tools@0.1.4": {
+      "integrity": "a49c5c43467428628f470111da0bb68a2077b4e5149280e21c3bb62951ed79c2",
       "dependencies": [
+        "jsr:@kitsonk/xhr",
+        "jsr:@std/assert@^1.0.6",
         "npm:@ngneat/falso"
       ]
     }
@@ -2403,7 +2431,7 @@
     "dependencies": [
       "jsr:@std/assert@1",
       "jsr:@std/testing@1",
-      "jsr:@vighnesh153/tools@~0.1.2",
+      "jsr:@vighnesh153/tools@~0.1.4",
       "npm:@aws-sdk/client-dynamodb@^3.679.0",
       "npm:@aws-sdk/lib-dynamodb@^3.679.0",
       "npm:@smithy/smithy-client@^3.4.2",
