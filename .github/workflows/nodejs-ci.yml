@@ -33,5 +33,6 @@ jobs:
           for dir in */; do
             cd $PIKA_PATH/$dir;
             echo "Checking - $(pwd)\n";
+            npm install;
             npm t;
           done
