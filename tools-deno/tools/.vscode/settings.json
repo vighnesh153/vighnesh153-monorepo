@@ -4,17 +4,6 @@
   "[json]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "cSpell.words": [
-    "charizard",
-    "chikorita",
-    "deployctl",
-    "dragonite",
-    "greninja",
-    "kitsonk",
-    "pigeot",
-    "randomizer",
-    "treeko"
-  ],
   "[markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
