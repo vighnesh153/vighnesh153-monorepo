@@ -15,7 +15,9 @@ export type UploadManagerProps = {
 };
 
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
-export function UploadManager(props: UploadManagerProps): JSX.Element {
+export function UploadInputBoxWithStats(
+  props: UploadManagerProps,
+): JSX.Element {
   const fileUploadManager = new FileUploadManager();
   const [dragCounter, setDragCounter] = createSignal<number>(0);
   const [fileStates, setFileStates] = createSignal<FileUploadState[]>([]);
