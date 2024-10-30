@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/tools",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "exports": {
     ".": "./src/mod.ts",
     "./compiler_fe": "./src/compiler_fe/mod.ts",

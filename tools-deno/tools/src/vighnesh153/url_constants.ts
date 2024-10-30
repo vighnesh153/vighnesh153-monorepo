@@ -14,6 +14,16 @@ const UI_HOSTS = {
   prod: "vighnesh153.dev",
 } satisfies Record<StageType, string>;
 
+const PUBLIC_ASSETS_HOSTS = {
+  dev: "dev.public-assets.vighnesh153.dev",
+  prod: "prod.public-assets.vighnesh153.dev",
+};
+
+export type Vighnesh153ApiRoute = {
+  path: string;
+  identifier: LambdaFunctionName;
+};
+
 export interface Vighnesh153Routes {
   ui: {
     baseHost: string;
@@ -27,34 +37,31 @@ export interface Vighnesh153Routes {
     baseOrigin: string;
 
     // auth
-    authCallback: {
-      path: string;
-      identifier: LambdaFunctionName;
-    };
-    getUser: {
-      path: string;
-      identifier: LambdaFunctionName;
-    };
-    initiateLogin: {
-      path: string;
-      identifier: LambdaFunctionName;
-    };
-    initiateLogout: {
-      path: string;
-      identifier: LambdaFunctionName;
-    };
-    playground: {
-      path: string;
-      identifier: LambdaFunctionName;
-    };
+    authCallback: Vighnesh153ApiRoute;
+    getUser: Vighnesh153ApiRoute;
+    initiateLogin: Vighnesh153ApiRoute;
+    initiateLogout: Vighnesh153ApiRoute;
+    playground: Vighnesh153ApiRoute;
+  };
+
+  publicAssets: {
+    baseHost: string;
+    baseOrigin: string;
   };
 }
 
-function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
+function constructRoutes(
+  apiHost: string,
+  uiHost: string,
+  publicAssetsHost: string,
+): Vighnesh153Routes {
   const apiOrigin = `https://${apiHost}`;
   const uiOrigin = `https://${uiHost}`;
+  const publicAssetsOrigin = `https://${publicAssetsHost}`;
 
-  const buildApiRouteConfig = (key: keyof typeof LambdaFunctionConfig) => ({
+  const buildApiRouteConfig = (
+    key: keyof typeof LambdaFunctionConfig,
+  ): Vighnesh153ApiRoute => ({
     path: `${apiOrigin}/${LambdaFunctionConfig[key].name}`,
     identifier: LambdaFunctionConfig[key].name,
   });
@@ -74,13 +81,21 @@ function constructRoutes(apiHost: string, uiHost: string): Vighnesh153Routes {
       initiateLogout: buildApiRouteConfig("initiateLogout"),
       playground: buildApiRouteConfig("playground"),
     },
+    publicAssets: {
+      baseHost: publicAssetsHost,
+      baseOrigin: publicAssetsOrigin,
+    },
   };
 }
 
 export function constructRoutesForDev(): Vighnesh153Routes {
-  return constructRoutes(API_HOSTS.dev, UI_HOSTS.dev);
+  return constructRoutes(API_HOSTS.dev, UI_HOSTS.dev, PUBLIC_ASSETS_HOSTS.dev);
 }
 
 export function constructRoutesForProd(): Vighnesh153Routes {
-  return constructRoutes(API_HOSTS.prod, UI_HOSTS.prod);
+  return constructRoutes(
+    API_HOSTS.prod,
+    UI_HOSTS.prod,
+    PUBLIC_ASSETS_HOSTS.prod,
+  );
 }
