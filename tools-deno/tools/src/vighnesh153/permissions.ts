@@ -1,4 +1,10 @@
-export type Permission = "admin" | "file_upload";
+export const permissions = [
+  "admin",
+  "file_upload",
+  "private_file_view",
+] as const;
+
+export type Permission = (typeof permissions)[number];
 
 export function hasPermission(userId: string, permission: Permission): boolean {
   if (isAdmin(userId)) {
@@ -20,5 +26,5 @@ function isAdmin(userId: string): boolean {
 }
 
 const userPermissions: Record<string, Permission[]> = {
-  vighnesh153: ["admin", "file_upload"],
+  vighnesh153: ["admin", "file_upload", "private_file_view"],
 };
