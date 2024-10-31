@@ -42,7 +42,10 @@ const prodFirebaseConfig = {
 
 let firebaseConfig: FirebaseOptions = devFirebaseConfig;
 if (stage === "prod") {
+  console.log("Switching to production firebase config");
   firebaseConfig = prodFirebaseConfig;
+} else {
+  console.log("Holding on to dev firebase config");
 }
 
 // Initialize Firebase
