@@ -1,7 +1,9 @@
+import type { CreateUploadPresignedUrlResponse } from "@/vighnesh153/contracts/mod.ts";
+
 export type FileUploadMetadataFetcherResponse =
   | {
     type: "success";
-    metadata: Array<{ fileId: string; uploadUrl: string }>;
+    metadata: CreateUploadPresignedUrlResponse;
   }
   | {
     type: "error";
@@ -10,21 +12,6 @@ export type FileUploadMetadataFetcherResponse =
 
 export interface FileUploadMetadataFetcher {
   fetchMetadata(
-    files: { fileId: string; file: File }[],
+    files: { clientSideFileId: string; file: File }[],
   ): Promise<FileUploadMetadataFetcherResponse>;
-}
-
-export class FileUploadMetadataFetcherImpl
-  implements FileUploadMetadataFetcher {
-  // deno-lint-ignore require-await
-  async fetchMetadata(
-    _files: { fileId: string; file: File }[],
-  ): Promise<FileUploadMetadataFetcherResponse> {
-    // TODO: fetch metadata
-    throw new Error("Not implemented");
-    // return {
-    //   type: "success",
-    //   metadata: [],
-    // };
-  }
 }
