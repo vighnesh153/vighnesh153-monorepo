@@ -41,6 +41,7 @@ export type LambdaResponsePayload = {
 };
 
 const LambdaFunctionNameList = [
+  "createUploadPresignedUrl",
   "initiateGoogleLogin",
   "initiateLogout",
   "googleAuthCallback",
@@ -68,6 +69,11 @@ export const LambdaFunctionConfig: {
     authRequired: boolean;
   };
 } = {
+  createUploadPresignedUrl: {
+    name: "createUploadPresignedUrl",
+    method: "post",
+    authRequired: true,
+  },
   getUser: {
     name: "getUser",
     method: "get",
