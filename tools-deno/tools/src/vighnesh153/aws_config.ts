@@ -10,14 +10,14 @@ export function isValidStageType(stage: string): stage is StageType {
   return (StageTypes as readonly string[]).includes(stage);
 }
 
-const LambdaMethodTypes = ["get", "post"] as const;
+const LambdaMethodTypeList = ["get", "post"] as const;
 
-export type LambdaMethodType = (typeof LambdaMethodTypes)[number];
+export type LambdaMethodType = (typeof LambdaMethodTypeList)[number];
 
 export function isValidLambdaMethod(
   method: string,
 ): method is LambdaMethodType {
-  return (LambdaMethodTypes as readonly string[]).includes(
+  return (LambdaMethodTypeList as readonly string[]).includes(
     method.toLowerCase(),
   );
 }
