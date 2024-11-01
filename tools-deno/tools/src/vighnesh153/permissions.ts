@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  isValidZodObject,
+  type IsValidZodObjectReturnValue,
+} from "@/vighnesh153/local_utils.ts";
 
 export const permissions = [
   "admin",
@@ -6,9 +10,13 @@ export const permissions = [
   "view_private_files",
 ] as const;
 
-export const Permission = z.enum(permissions);
+const ZodPermission = z.enum(permissions);
 
-export type Permission = z.infer<typeof Permission>;
+export type Permission = (typeof permissions)[number];
+
+export function isValidPermission(value: unknown): IsValidZodObjectReturnValue {
+  return isValidZodObject(value, ZodPermission);
+}
 
 export function hasPermission(userId: string, permission: Permission): boolean {
   if (isAdmin(userId)) {
