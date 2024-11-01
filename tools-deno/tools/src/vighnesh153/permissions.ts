@@ -1,10 +1,14 @@
+import { z } from "zod";
+
 export const permissions = [
   "admin",
   "upload_files",
   "view_private_files",
 ] as const;
 
-export type Permission = (typeof permissions)[number];
+export const Permission = z.enum(permissions);
+
+export type Permission = z.infer<typeof Permission>;
 
 export function hasPermission(userId: string, permission: Permission): boolean {
   if (isAdmin(userId)) {
