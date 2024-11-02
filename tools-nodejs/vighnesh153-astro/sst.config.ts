@@ -1,13 +1,18 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import {
+  constructRoutesForDev,
+  constructRoutesForProd,
+  DEFAULT_AWS_REGION,
+} from "@vighnesh153/tools/vighnesh153";
+
 const oneYear = "31536000";
 const oneDay = "86400";
 const fiveMinutes = "300";
 
-// Hosted zone: vighnesh153.dev
 const domainNames = {
-  staging: "staging.vighnesh153.dev",
-  production: "vighnesh153.dev",
+  dev: constructRoutesForDev().ui.baseHost,
+  prod: constructRoutesForProd().ui.baseHost,
 };
 
 export default $config({
@@ -20,8 +25,13 @@ export default $config({
     }
     return {
       name: `${stage}-Vighnesh153Astro`,
-      removal: stage === "prod" ? "retain" : "remove",
+      removal: "remove",
       home: "aws",
+      providers: {
+        aws: {
+          region: DEFAULT_AWS_REGION as any,
+        },
+      },
     };
   },
   async run() {
@@ -32,9 +42,7 @@ export default $config({
       );
     }
 
-    const domainName = stage === "prod"
-      ? domainNames.production
-      : domainNames.staging;
+    const domainName = domainNames[stage];
 
     new sst.aws.Astro(`${stage}-Vighnesh153Astro`, {
       // path: '.',
