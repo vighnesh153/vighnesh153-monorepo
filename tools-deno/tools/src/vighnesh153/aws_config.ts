@@ -42,10 +42,10 @@ export type LambdaResponsePayload = {
 
 const LambdaFunctionNameList = [
   "createUploadPresignedUrl",
+  "getUser",
+  "googleAuthCallback",
   "initiateGoogleLogin",
   "initiateLogout",
-  "googleAuthCallback",
-  "getUser",
   "playground",
 ] as const;
 
