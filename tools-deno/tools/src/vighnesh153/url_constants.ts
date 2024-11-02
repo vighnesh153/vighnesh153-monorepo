@@ -38,6 +38,7 @@ export interface Vighnesh153Routes {
 
     // auth
     authCallback: Vighnesh153ApiRoute;
+    createUploadPresignedUrl: Vighnesh153ApiRoute;
     getUser: Vighnesh153ApiRoute;
     initiateLogin: Vighnesh153ApiRoute;
     initiateLogout: Vighnesh153ApiRoute;
@@ -76,6 +77,7 @@ function constructRoutes(
       baseHost: apiHost,
       baseOrigin: apiOrigin,
       authCallback: buildApiRouteConfig("googleAuthCallback"),
+      createUploadPresignedUrl: buildApiRouteConfig("createUploadPresignedUrl"),
       getUser: buildApiRouteConfig("getUser"),
       initiateLogin: buildApiRouteConfig("initiateGoogleLogin"),
       initiateLogout: buildApiRouteConfig("initiateLogout"),
