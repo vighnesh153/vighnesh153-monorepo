@@ -20,7 +20,8 @@
     "test": "run-s install-test-deps test:only",
     "sst:deploy:dev": "dotenvx run --env-file=../../.env.local -- sst deploy --stage=dev",
     "sst:deploy:prod": "dotenvx run --env-file=../../.env.local -- sst deploy --stage=prod",
-    "sst:remove": "dotenv -e ../../.env.local -- sst remove --stage=dev"
+    "sst:remove:dev": "dotenvx run --env-file=../../.env.local -- sst remove --stage=dev",
+    "sst:remove:prod": "dotenvx run --env-file=../../.env.local -- sst remove --stage=prod"
   },
   "dependencies": {
     "@nanostores/solid": "^0.5.0",
@@ -28,8 +29,8 @@
     "@vighnesh153/drawing-app": "0.4.8",
     "@vighnesh153/simple-code-to-html": "0.4.8",
     "@vighnesh153/spl": "0.4.8",
-    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.2",
-    "@vighnesh153/tools-browser": "npm:@jsr/vighnesh153__tools-browser@^0.1.1",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.10",
+    "@vighnesh153/tools-browser": "npm:@jsr/vighnesh153__tools-browser@^0.1.2",
     "@vighnesh153/tsx-bundler": "0.4.8",
     "astro-sst": "2.43.5",
     "firebase": "^11.0.1",

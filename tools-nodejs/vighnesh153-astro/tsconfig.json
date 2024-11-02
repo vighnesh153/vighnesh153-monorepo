@@ -3,9 +3,9 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
-    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ES6",
     "jsxImportSource": "solid-js",
     "paths": {
       "@/*": ["src/*"]
