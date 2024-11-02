@@ -37,11 +37,11 @@ export interface Vighnesh153Routes {
     baseOrigin: string;
 
     // auth
-    authCallback: Vighnesh153ApiRoute;
     createUploadPresignedUrl: Vighnesh153ApiRoute;
-    getUser: Vighnesh153ApiRoute;
-    initiateLogin: Vighnesh153ApiRoute;
+    initiateGoogleLogin: Vighnesh153ApiRoute;
     initiateLogout: Vighnesh153ApiRoute;
+    getUser: Vighnesh153ApiRoute;
+    googleAuthCallback: Vighnesh153ApiRoute;
     playground: Vighnesh153ApiRoute;
   };
 
@@ -76,10 +76,10 @@ function constructRoutes(
     api: {
       baseHost: apiHost,
       baseOrigin: apiOrigin,
-      authCallback: buildApiRouteConfig("googleAuthCallback"),
       createUploadPresignedUrl: buildApiRouteConfig("createUploadPresignedUrl"),
       getUser: buildApiRouteConfig("getUser"),
-      initiateLogin: buildApiRouteConfig("initiateGoogleLogin"),
+      googleAuthCallback: buildApiRouteConfig("googleAuthCallback"),
+      initiateGoogleLogin: buildApiRouteConfig("initiateGoogleLogin"),
       initiateLogout: buildApiRouteConfig("initiateLogout"),
       playground: buildApiRouteConfig("playground"),
     },
