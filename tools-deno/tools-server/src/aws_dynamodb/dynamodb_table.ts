@@ -14,6 +14,10 @@ export type OptionalCreateOne = { error: null } | {
   error: { message: "CREATION_FAILED"; errorObject: unknown };
 };
 
+export type OptionalCreateMany = { error: null } | {
+  error: { message: "CREATION_FAILED"; errorObject: unknown };
+};
+
 export interface DynamoDBTable<T extends TableMetadata> {
   queryOne: <
     TKey extends keyof T["fields"],
@@ -31,6 +35,10 @@ export interface DynamoDBTable<T extends TableMetadata> {
 
   createOne<TField extends keyof T["fields"]>(params: {
     data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
+  }): Promise<OptionalCreateOne>;
+
+  createMany<TField extends keyof T["fields"]>(params: {
+    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] }[];
   }): Promise<OptionalCreateOne>;
 
   scanOne: <

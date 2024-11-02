@@ -1,4 +1,8 @@
-import { PutCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  BatchWriteCommand,
+  QueryCommand,
+  ScanCommand,
+} from "@aws-sdk/lib-dynamodb";
 import type { DynamoTypeMap, TableMetadata } from "./table_metadata.ts";
 import type {
   DynamoDBTable,
@@ -48,14 +52,28 @@ export class DynamoDBTableImpl<T extends TableMetadata>
     return this.fetchOne(params, "scan");
   }
 
+  // deno-lint-ignore require-await
   async createOne<TField extends keyof T["fields"]>(params: {
     data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
   }): Promise<OptionalCreateOne> {
+    return this.createMany({
+      data: [params.data],
+    });
+  }
+
+  async createMany<TField extends keyof T["fields"]>(params: {
+    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] }[];
+  }): Promise<OptionalCreateOne> {
     try {
       await this.client.send(
-        new PutCommand({
-          TableName: this.tableMetadata.tableName,
-          Item: params.data,
+        new BatchWriteCommand({
+          RequestItems: {
+            [this.tableMetadata.tableName]: params.data.map((item) => ({
+              PutRequest: {
+                Item: item,
+              },
+            })),
+          },
         }),
       );
       return { error: null };
