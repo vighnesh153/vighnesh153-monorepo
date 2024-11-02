@@ -1,6 +1,6 @@
 import type { CompleteUserInfo } from "../models/mod.ts";
 
-export const DEFAULT_AWS_REGION = "ap-south-1"; // Mumbai
+export const DEFAULT_AWS_REGION = "ap-south-1" as const; // Mumbai
 
 const StageTypes = ["dev", "prod"] as const;
 
