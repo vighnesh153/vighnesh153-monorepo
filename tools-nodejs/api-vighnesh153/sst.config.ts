@@ -74,19 +74,8 @@ export default $config({
     // s3 buckets
     const publicFilesBucket = new sst.aws.Bucket("PublicFilesBucket", {
       access: "cloudfront",
-      transform: {
-        bucket(args) {
-          args.bucketPrefix = `PublicFilesBucket-${stage}-`;
-        },
-      },
     });
-    const privateFilesBucket = new sst.aws.Bucket("PrivateFilesBucket", {
-      transform: {
-        bucket(args) {
-          args.bucketPrefix = `PrivateFilesBucket-${stage}-`;
-        },
-      },
-    });
+    const privateFilesBucket = new sst.aws.Bucket("PrivateFilesBucket", {});
 
     // cloudfront for public assets bucket
     const publicFilesCloudfront = new sst.aws.Cdn("PublicFilesCloudfront", {
@@ -179,7 +168,7 @@ export default $config({
       handler: `dist/${stageConfig.api.initiateGoogleLogin.identifier}.handler`,
       logging,
       environment: {
-        AUTH_REDIRECT_URL: stageConfig.api.initiateGoogleLogin.path,
+        AUTH_REDIRECT_URL: stageConfig.api.googleAuthCallback.path,
         STAGE: stage,
       },
     });
