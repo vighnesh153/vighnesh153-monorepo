@@ -13,7 +13,7 @@ import { CookieSerializer } from "../common/cookie_serializer.ts";
 import {
   cookieSerializerFactory,
   loggerSingletonFactory,
-} from "../common/factories.ts";
+} from "../common/factories/mod.ts";
 
 export async function controller({
   environmentStage = process.env.STAGE as "dev" | "prod" | undefined,

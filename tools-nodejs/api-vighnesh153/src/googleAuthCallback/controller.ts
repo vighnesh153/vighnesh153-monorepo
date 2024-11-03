@@ -7,6 +7,7 @@ import { type SerializeOptions } from "cookie";
 import { type DynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 import {
   type CompleteUserInfo,
+  isStringEmpty,
   type JsonHttpClient,
   type Logger,
   milliseconds,
@@ -31,7 +32,7 @@ import {
   userInfoDecoderSingletonFactory,
   userInfoTableMetadata,
   userInfoTableSingletonFactory,
-} from "../common/factories.ts";
+} from "../common/factories/mod.ts";
 import { type UserInfoDecoder } from "../common/user_info_decoder.ts";
 import { type RandomStringGenerator } from "../common/random_string_generator.ts";
 import { type AuthTokenGenerator } from "../common/auth_token_generator.ts";
@@ -92,13 +93,13 @@ export async function controller({
   cookieSerializer?: CookieSerializer;
 } = {}): Promise<LambdaResponsePayload> {
   if (
-    not(uiAuthCompleteUrl) ||
-    not(authRedirectUrl) ||
-    not(googleClientId) ||
-    not(googleClientSecret) ||
-    not(cookieSecret) ||
+    isStringEmpty(uiAuthCompleteUrl) ||
+    isStringEmpty(authRedirectUrl) ||
+    isStringEmpty(googleClientId) ||
+    isStringEmpty(googleClientSecret) ||
+    isStringEmpty(cookieSecret) ||
     not(["dev", "prod"].includes(environmentStage!)) ||
-    not(userInfoTableName)
+    isStringEmpty(userInfoTableName)
   ) {
     logger.log(
       `Some environment variables are missing or incorrect: ` +
@@ -122,7 +123,7 @@ export async function controller({
   }
 
   const authCallbackCode = searchParameters.code;
-  if (not(authCallbackCode)) {
+  if (isStringEmpty(authCallbackCode)) {
     logger.log("searchParams.code is empty");
     return {
       statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,

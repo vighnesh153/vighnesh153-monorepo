@@ -24,7 +24,7 @@ import {
   loggerSingletonFactory,
   userInfoTableMetadata,
   userInfoTableSingletonFactory,
-} from "../common/factories.ts";
+} from "../common/factories/mod.ts";
 import { getCompleteUserInfo, getPublicUserInfo } from "./fetch_user_info.ts";
 import { AuthTokenGenerator } from "../common/auth_token_generator.ts";
 import { getUserIdFromCookies } from "./get_user_id_from_cookies.ts";
