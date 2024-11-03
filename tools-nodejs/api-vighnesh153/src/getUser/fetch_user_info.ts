@@ -5,7 +5,7 @@ import {
   PublicUserInfo,
 } from "@vighnesh153/tools";
 import type { DynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
-import { userInfoTableMetadata } from "../common/factories.ts";
+import { userInfoTableMetadata } from "../common/factories/mod.ts";
 
 export async function getPublicUserInfo({
   userId,
