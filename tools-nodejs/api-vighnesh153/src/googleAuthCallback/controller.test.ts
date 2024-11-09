@@ -12,12 +12,12 @@ import { FakeDynamoDBTable } from "@vighnesh153/tools-server/aws_dynamodb";
 
 import { controller } from "./controller.ts";
 import { FakeUserInfoDecoder } from "../common/user_info_decoder.ts";
-import { UserInfoTableMetadata } from "../common/dynamo_db_table_metadata.ts";
+import { userInfoFields } from "../common/dynamo_db_table_metadata.ts";
 import { FakeCookieSerializer } from "../common/cookie_serializer.ts";
 
 let fakeUserInfoDecoder: FakeUserInfoDecoder;
 let fakeUserInfoTable: FakeDynamoDBTable<{
-  fields: (typeof UserInfoTableMetadata)["fields"];
+  fields: typeof userInfoFields;
   tableName: "fake-user-info";
 }>;
 let fakeCookieSerializer: FakeCookieSerializer;
