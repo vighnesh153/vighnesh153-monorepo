@@ -11,6 +11,7 @@
   },
   "imports": {
     "@aws-sdk/client-lambda": "npm:@aws-sdk/client-lambda@3.624.0",
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@vighnesh153/tools": "jsr:@vighnesh153/tools@^0.1.13"
   }
 }
