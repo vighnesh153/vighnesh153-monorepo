@@ -2,6 +2,7 @@
 export type DynamoTypeMap = {
   string: string;
   number: number;
+  boolean: boolean;
 };
 
 export interface TableMetadata {

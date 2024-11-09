@@ -114,6 +114,7 @@ export class DynamoDBTableImpl<T extends TableMetadata>
           switch (typeof value) {
             case "number":
             case "string":
+            case "boolean":
               exprAttrValues[formattedKey] = value;
               break;
             default:
