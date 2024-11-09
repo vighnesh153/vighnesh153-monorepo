@@ -158,7 +158,7 @@ export async function controller({
     const fileExtension = file.fileExtension.length > 0
       ? `.${file.fileExtension}`
       : "";
-    const filePath = `/${mediaType}/id${fileExtension}`;
+    const filePath = `/${mediaType}/${id}${fileExtension}`;
     return {
       clientSideId: file.clientSideId,
       fileId: id,
@@ -226,6 +226,7 @@ export async function controller({
       createdBy: metadata.createdBy,
       createdAtMillis: metadata.createdAtMillis,
       fileSizeInBytes: metadata.fileSizeInBytes,
+      isUploaded: false,
     })),
   });
 
