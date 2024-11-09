@@ -1,6 +1,6 @@
 {
   "name": "@vighnesh153/tools-server",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "exports": {
     "./aws_dynamodb": "./src/aws_dynamodb/mod.ts",
     "./aws_s3": "./src/aws_s3/mod.ts"

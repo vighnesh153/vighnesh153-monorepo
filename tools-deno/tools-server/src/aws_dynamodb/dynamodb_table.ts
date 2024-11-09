@@ -59,8 +59,10 @@ export interface DynamoDBTable<T extends TableMetadata> {
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   >;
 
-  updateOne<TField extends keyof T["fields"]>(params: {
-    key: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
-    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
-  }): Promise<OptionalUpdateOne>;
+  updateOne<TKey extends keyof T["fields"], TData extends keyof T["fields"]>(
+    params: {
+      key: { [key in TKey]: DynamoTypeMap[T["fields"][key]] };
+      data: { [key in TData]: DynamoTypeMap[T["fields"][key]] };
+    },
+  ): Promise<OptionalUpdateOne>;
 }
