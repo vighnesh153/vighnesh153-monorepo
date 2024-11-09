@@ -45,7 +45,7 @@ export const privateFilesMetadataTableMetadata = /* @__PURE__ */ {
   fields: filesMetadataFields,
   tableName: /* @__PURE__ */ inProduction(() =>
     // @ts-ignore: sst stuff
-    Resource.PrivateFilesBucket.name
+    Resource.PrivateFilesMetadataTable.name
   ),
 } satisfies TableMetadata;
 
@@ -67,7 +67,7 @@ export const publicFilesMetadataTableMetadata = /* @__PURE__ */ {
   fields: filesMetadataFields,
   tableName: /* @__PURE__ */ inProduction(() =>
     // @ts-ignore: sst stuff
-    Resource.PublicFilesBucket.name
+    Resource.PublicFilesMetadataTable.name
   ),
 } satisfies TableMetadata;
 

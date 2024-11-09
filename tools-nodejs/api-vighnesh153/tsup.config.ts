@@ -1,9 +1,7 @@
 import { defineConfig } from "tsup";
-import { constructRoutesForProd } from "@vighnesh153/tools/vighnesh153";
+import { LambdaFunctionName } from "@vighnesh153/tools/vighnesh153";
 
-const SST_CONFIG = constructRoutesForProd();
-
-function constructEntryPoint(identifier: string) {
+function constructEntryPoint(identifier: LambdaFunctionName) {
   return {
     [identifier]: `./src/${identifier}/mod.ts`,
   };
@@ -11,12 +9,14 @@ function constructEntryPoint(identifier: string) {
 
 export default defineConfig(() => ({
   entry: {
-    ...constructEntryPoint(SST_CONFIG.api.createUploadPresignedUrl.identifier),
-    ...constructEntryPoint(SST_CONFIG.api.getUser.identifier),
-    ...constructEntryPoint(SST_CONFIG.api.googleAuthCallback.identifier),
-    ...constructEntryPoint(SST_CONFIG.api.initiateGoogleLogin.identifier),
-    ...constructEntryPoint(SST_CONFIG.api.initiateLogout.identifier),
-    ...constructEntryPoint(SST_CONFIG.api.playground.identifier),
+    ...constructEntryPoint("createUploadPresignedUrl"),
+    ...constructEntryPoint("getUser"),
+    ...constructEntryPoint("googleAuthCallback"),
+    ...constructEntryPoint("initiateGoogleLogin"),
+    ...constructEntryPoint("initiateLogout"),
+    ...constructEntryPoint("playground"),
+    ...constructEntryPoint("privateS3BucketEventListener"),
+    ...constructEntryPoint("publicS3BucketEventListener"),
   },
   splitting: false,
   external: [
