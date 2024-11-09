@@ -1,7 +1,7 @@
 import { assertEquals } from "@std/assert";
 import { beforeEach, describe, it } from "@std/testing/bdd";
 import {
-  PutCommand,
+  BatchWriteCommand,
   QueryCommand,
   type ServiceOutputTypes,
 } from "@aws-sdk/lib-dynamodb";
@@ -129,9 +129,16 @@ describe("createOne tests", () => {
 
     assertEquals(
       fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
-      new PutCommand({
-        Item: item,
-        TableName: tableName,
+      new BatchWriteCommand({
+        RequestItems: {
+          [tableName]: [
+            {
+              PutRequest: {
+                Item: item,
+              },
+            },
+          ],
+        },
       }).input,
     );
     assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
@@ -153,9 +160,16 @@ describe("createOne tests", () => {
 
     assertEquals(
       fakeDocumentClient.sendCalledWithArgs?.[0]?.input,
-      new PutCommand({
-        Item: item,
-        TableName: tableName,
+      new BatchWriteCommand({
+        RequestItems: {
+          [tableName]: [
+            {
+              PutRequest: {
+                Item: item,
+              },
+            },
+          ],
+        },
       }).input,
     );
     assertEquals(fakeDocumentClient.sendCalledWithArgs?.[1], undefined);
