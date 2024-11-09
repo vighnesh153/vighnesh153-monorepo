@@ -36,7 +36,7 @@
     "@types/cookie": "^0.6.0",
     "@types/node": "*",
     "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.14",
-    "@vighnesh153/tools-server": "npm:@jsr/vighnesh153__tools-server@^0.1.5",
+    "@vighnesh153/tools-server": "npm:@jsr/vighnesh153__tools-server@^0.1.7",
     "@vighnesh153/tsconfig": "0.4.8",
     "cookie": "^1.0.1",
     "sst": "^3.2.70",
