@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-import { ACCEPTABLE_MIME_TYPES } from "@/vighnesh153/mime_types.ts";
 import {
   isValidZodObject,
   type IsValidZodObjectReturnValue,
@@ -11,7 +10,7 @@ const ZodCreateUploadPresignedUrlRequest = z.object({
   files: z.object({
     clientSideId: z.string().min(1),
     fileExtension: z.string().min(1),
-    mimeType: z.enum(ACCEPTABLE_MIME_TYPES),
+    mimeType: z.string().min(1),
     fileSizeInBytes: z.number(),
   }).array(),
   isPublic: z.boolean(),
@@ -29,7 +28,7 @@ export type CreateUploadPresignedUrlRequest = {
   files: {
     clientSideId: string;
     fileExtension: string;
-    mimeType: (typeof ACCEPTABLE_MIME_TYPES)[number];
+    mimeType: string;
     fileSizeInBytes: number;
   }[];
   isPublic: boolean;
