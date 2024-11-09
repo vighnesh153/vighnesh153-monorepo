@@ -47,7 +47,8 @@ const LambdaFunctionNameList = [
   "initiateGoogleLogin",
   "initiateLogout",
   "playground",
-  "s3ObjectsEventListener",
+  "privateS3BucketEventListener",
+  "publicS3BucketEventListener",
 ] as const;
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
@@ -110,8 +111,14 @@ export const LambdaFunctionConfig: {
     authRequired: false,
     callableByHttp: true,
   },
-  s3ObjectsEventListener: {
-    name: "s3ObjectsEventListener",
+  privateS3BucketEventListener: {
+    name: "privateS3BucketEventListener",
+    method: "post",
+    authRequired: false,
+    callableByHttp: false,
+  },
+  publicS3BucketEventListener: {
+    name: "publicS3BucketEventListener",
     method: "post",
     authRequired: false,
     callableByHttp: false,
