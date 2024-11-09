@@ -47,6 +47,7 @@ const LambdaFunctionNameList = [
   "initiateGoogleLogin",
   "initiateLogout",
   "playground",
+  "s3ObjectsEventListener",
 ] as const;
 
 export type LambdaFunctionName = (typeof LambdaFunctionNameList)[number];
@@ -67,37 +68,53 @@ export const LambdaFunctionConfig: {
     name: key;
     method: LambdaMethodType;
     authRequired: boolean;
+    /**
+     * whether this function can be called using HTTP
+     */
+    callableByHttp: boolean;
   };
 } = {
   createUploadPresignedUrl: {
     name: "createUploadPresignedUrl",
     method: "post",
     authRequired: true,
+    callableByHttp: true,
   },
   getUser: {
     name: "getUser",
     method: "get",
     authRequired: false,
+    callableByHttp: true,
   },
   googleAuthCallback: {
     name: "googleAuthCallback",
     method: "get",
     authRequired: false,
+    callableByHttp: true,
   },
   initiateGoogleLogin: {
     name: "initiateGoogleLogin",
     method: "get",
     authRequired: false,
+    callableByHttp: true,
   },
   initiateLogout: {
     name: "initiateLogout",
     method: "get",
     authRequired: false,
+    callableByHttp: true,
   },
   playground: {
     name: "playground",
     method: "get",
     authRequired: false,
+    callableByHttp: true,
+  },
+  s3ObjectsEventListener: {
+    name: "s3ObjectsEventListener",
+    method: "post",
+    authRequired: false,
+    callableByHttp: false,
   },
 };
 
