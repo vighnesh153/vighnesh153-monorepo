@@ -1,13 +1,17 @@
+import { mapEntries } from "@std/collections";
+
 import {
   BatchWriteCommand,
   QueryCommand,
   ScanCommand,
+  UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 import type { DynamoTypeMap, TableMetadata } from "./table_metadata.ts";
 import type {
   DynamoDBTable,
   OptionalCreateOne,
   OptionalGetOne,
+  OptionalUpdateOne,
 } from "./dynamodb_table.ts";
 import type { IDynamoDBDocumentClient } from "./dynamodb_document_client.ts";
 
@@ -87,6 +91,32 @@ export class DynamoDBTableImpl<T extends TableMetadata>
     }
   }
 
+  async updateOne<TField extends keyof T["fields"]>(params: {
+    key: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
+    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
+  }): Promise<OptionalUpdateOne> {
+    const command = new UpdateCommand({
+      TableName: this.tableMetadata.tableName,
+      Key: params.key,
+      ExpressionAttributeValues: constructExpressionAttributeValues(
+        params.data,
+      ),
+      UpdateExpression: constructUpdateExpression(Object.keys(params.data)),
+      ReturnValues: "NONE",
+    });
+    try {
+      await this.client.send(command);
+      return { error: null };
+    } catch (e) {
+      return {
+        error: {
+          message: "UPDATE_FAILED",
+          errorObject: e,
+        },
+      };
+    }
+  }
+
   private async fetchOne<
     TKey extends keyof T["fields"],
     TFilterBy extends keyof T["fields"],
@@ -104,26 +134,12 @@ export class DynamoDBTableImpl<T extends TableMetadata>
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   > {
     const keys = Object.keys(params.filterBy) as Array<TFilterBy>;
-    const expressionAttributeValues = keys
-      // Expected attribute values format:
-      // { ":email": "email@email.com", ":age": 25 }
-      .reduce(
-        (exprAttrValues, key) => {
-          const { value } = params.filterBy[key];
-          const formattedKey = `:${String(key)}`;
-          switch (typeof value) {
-            case "number":
-            case "string":
-            case "boolean":
-              exprAttrValues[formattedKey] = value;
-              break;
-            default:
-              throw new Error(`Unknown value type: "${typeof value}"`);
-          }
-          return exprAttrValues;
-        },
-        {} as Record<string, unknown>,
-      );
+    const expressionAttributeValues = constructExpressionAttributeValues(
+      mapEntries(params.filterBy, ([key, {
+        // @ts-ignore: i wonder why
+        value,
+      }]) => [key, value]),
+    );
     const conditionExpression = (keys as string[])
       .map((key) => {
         const { filterExpression = equalityFilterExpression } =
@@ -181,4 +197,20 @@ export class DynamoDBTableImpl<T extends TableMetadata>
 
 function equalityFilterExpression(key: string): string {
   return `${key} = :${key}`;
+}
+
+// Expected attribute values format:
+// { ":email": "email@email.com", ":age": 25 }
+function constructExpressionAttributeValues(
+  params: Record<string, unknown>,
+): Record<string, unknown> {
+  return Object.entries(params).reduce((acc, [key, value]) => {
+    const formattedKey = `:${String(key)}`;
+    acc[formattedKey] = value;
+    return acc;
+  }, {} as Record<string, unknown>);
+}
+
+function constructUpdateExpression(keys: string[]): string {
+  return "set " + keys.map((key) => `${key} = :${key}`).join(", ");
 }

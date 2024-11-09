@@ -18,8 +18,12 @@ export type OptionalCreateMany = { error: null } | {
   error: { message: "CREATION_FAILED"; errorObject: unknown };
 };
 
+export type OptionalUpdateOne = { error: null } | {
+  error: { message: "UPDATE_FAILED"; errorObject: unknown };
+};
+
 export interface DynamoDBTable<T extends TableMetadata> {
-  queryOne: <
+  queryOne<
     TKey extends keyof T["fields"],
     TFilterBy extends keyof T["fields"],
   >(params: {
@@ -29,7 +33,7 @@ export interface DynamoDBTable<T extends TableMetadata> {
         filterExpression?: (key: string) => string;
       };
     };
-  }) => Promise<
+  }): Promise<
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   >;
 
@@ -41,7 +45,7 @@ export interface DynamoDBTable<T extends TableMetadata> {
     data: { [key in TField]: DynamoTypeMap[T["fields"][key]] }[];
   }): Promise<OptionalCreateOne>;
 
-  scanOne: <
+  scanOne<
     TKey extends keyof T["fields"],
     TFilterBy extends keyof T["fields"],
   >(params: {
@@ -51,7 +55,12 @@ export interface DynamoDBTable<T extends TableMetadata> {
         filterExpression?: (key: string) => string;
       };
     };
-  }) => Promise<
+  }): Promise<
     OptionalGetOne<{ [key in TKey]: DynamoTypeMap[T["fields"][key]] }>
   >;
+
+  updateOne<TField extends keyof T["fields"]>(params: {
+    key: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
+    data: { [key in TField]: DynamoTypeMap[T["fields"][key]] };
+  }): Promise<OptionalUpdateOne>;
 }
