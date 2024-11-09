@@ -3,6 +3,7 @@ import type {
   OptionalCreateMany,
   OptionalCreateOne,
   OptionalGetOne,
+  OptionalUpdateOne,
 } from "./dynamodb_table.ts";
 import type { DynamoTypeMap, TableMetadata } from "./table_metadata.ts";
 
@@ -27,6 +28,9 @@ export class FakeDynamoDBTable<T extends TableMetadata>
 
   createManyResult: OptionalCreateMany = { error: null };
   createManyCalledTimes = 0;
+
+  updateOneResult: OptionalUpdateOne = { error: null };
+  updateOneCalledTimes = 0;
 
   // deno-lint-ignore require-await
   async queryOne<TKey extends keyof T["fields"]>(): Promise<
@@ -54,5 +58,11 @@ export class FakeDynamoDBTable<T extends TableMetadata>
   async createMany(): Promise<OptionalCreateMany> {
     this.createManyCalledTimes += 1;
     return this.createManyResult;
+  }
+
+  // deno-lint-ignore require-await
+  async updateOne(): Promise<OptionalUpdateOne> {
+    this.updateOneCalledTimes += 1;
+    return this.updateOneResult;
   }
 }
