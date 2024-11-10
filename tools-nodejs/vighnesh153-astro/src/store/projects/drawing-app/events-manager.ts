@@ -5,12 +5,13 @@ import {
   isRedoAvailable,
   isUndoAvailable,
 } from "@vighnesh153/drawing-app";
+import { Queue } from "@vighnesh153/tools";
 
 export const eventsManagerStore = writable<EventsManager>(buildEventsManager());
 
 export const pendingQueueStore = derived(
   eventsManagerStore,
-  (baseStore) => baseStore.pendingQueue,
+  (baseStore) => new Queue(...baseStore.pendingQueue.toArray()),
 );
 export const isUndoAvailableStore = derived(
   eventsManagerStore,
