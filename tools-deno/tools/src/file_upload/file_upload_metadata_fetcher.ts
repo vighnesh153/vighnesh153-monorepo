@@ -13,5 +13,6 @@ export type FileUploadMetadataFetcherResponse =
 export interface FileUploadMetadataFetcher {
   fetchMetadata(
     files: { clientSideFileId: string; file: File }[],
+    isPublic: boolean,
   ): Promise<FileUploadMetadataFetcherResponse>;
 }
