@@ -1,8 +1,6 @@
 go 1.21.5
 
 use (
-	./apps/identity/google-auth-callback
-	./apps/identity/initiate-google-login
 	./interpreters/monkey-lang
 	./packages/structs
 	./packages/utils
