@@ -9,7 +9,7 @@ export function initiateLoginWithGoogle() {
     onAuthSuccessRedirectPathKey,
     window.location.toString(),
   );
-  window.location.assign(routes.api.initiateLogin.path);
+  window.location.assign(routes.api.initiateGoogleLogin.path);
 }
 
 export async function initiateLogout() {
