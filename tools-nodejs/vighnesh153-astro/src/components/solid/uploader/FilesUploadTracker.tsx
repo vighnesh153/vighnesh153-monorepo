@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { For, type JSX, Show } from "solid-js";
 
 import { type FileUploadState } from "@vighnesh153/tools/file_upload";

@@ -1,34 +1,40 @@
-// @ts-nocheck
-
 import { createEffect, createSignal, type JSX, onCleanup } from "solid-js";
 
 import {
   FileUploadManager,
+  type FileUploadMetadataFetcher,
+  type FileUploadMetadataFetcherResponse,
   type FileUploadState,
 } from "@vighnesh153/tools/file_upload";
 
 import { UploadInputBox } from "./UploadInputBox.tsx";
 import { FilesUploadTracker } from "./FilesUploadTracker.tsx";
+import { testFilesData } from "./test_data.ts";
 
-export type UploadManagerProps = {
-  // TODO: add some props here
-};
+export type UploadManagerProps = {};
 
 // UI inspiration: https://dribbble.com/shots/20881427-Stratis-UI-Misc-Containers
 export function UploadInputBoxWithStats(
-  props: UploadManagerProps,
+  _props: UploadManagerProps,
 ): JSX.Element {
-  const fileUploadManager = new FileUploadManager();
+  const fileUploadManager = new FileUploadManager({
+    // TODO: add implementation here
+    fileUploadMetadataFetcher: {} as any,
+  });
   const [dragCounter, setDragCounter] = createSignal<number>(0);
-  const [fileStates, setFileStates] = createSignal<FileUploadState[]>([]);
+  const [isPublic, setIsPublic] = createSignal<boolean>(false);
+  const [fileStates, setFileStates] = createSignal<FileUploadState[]>(
+    testFilesData,
+  );
 
   // subscribe to file states
   createEffect(() => {
     const { unsubscribe } = fileUploadManager.subscribe((newFileStates) => {
-      setFileStates(newFileStates);
+      // TODO: uncomment the following line
+      // setFileStates(newFileStates);
     });
 
-    onCleanup(() => unsubscribe());
+    onCleanup(unsubscribe);
   });
 
   // Handle clipboard event
@@ -42,7 +48,7 @@ export function UploadInputBoxWithStats(
         file !== null
       );
       if (files.length > 0) {
-        fileUploadManager.upload(files);
+        fileUploadManager.upload(files, isPublic());
       }
     }
     document.addEventListener("paste", clipboardEventHandler);
@@ -74,7 +80,7 @@ export function UploadInputBoxWithStats(
       setDragCounter(0);
       const files = Array.from(e.dataTransfer?.files ?? []);
       if (files.length > 0) {
-        fileUploadManager.upload(files);
+        fileUploadManager.upload(files, isPublic());
       }
     }
 
@@ -95,9 +101,20 @@ export function UploadInputBoxWithStats(
       <div class="relative overflow-hidden">
         <UploadInputBox
           draggingOver={dragCounter() > 0}
-          onFilesChange={(newFiles) => fileUploadManager.upload(newFiles)}
+          onFilesChange={(newFiles) =>
+            fileUploadManager.upload(newFiles, isPublic())}
         />
       </div>
+      <label class="mt-4 flex gap-3">
+        <input
+          type="checkbox"
+          checked={isPublic()}
+          onChange={(e) => {
+            setIsPublic(e.target.checked);
+          }}
+        />
+        <span>Is Public</span>
+      </label>
       <FilesUploadTracker fileStates={fileStates()} class="mt-4" />
     </div>
   );

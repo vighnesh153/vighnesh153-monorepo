@@ -6,7 +6,7 @@ import {
   ChevronUpIcon,
   CopyIcon,
 } from "@/icons/solid/index.ts";
-import { classes } from "@/utils/index.ts";
+import { classes, copyToClipboard } from "@/utils/index.ts";
 
 export type HtmlCodeViewerProps = {
   code: string;
@@ -28,7 +28,7 @@ export function CodeViewer({
 
   const onCopyClick = async () => {
     try {
-      navigator.clipboard.writeText(code);
+      await copyToClipboard(code);
       createSnackbar({
         type: "success",
         message: "Copied to Clipboard!",
