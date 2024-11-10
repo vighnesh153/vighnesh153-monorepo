@@ -2,14 +2,13 @@ import { createEffect, createSignal, type JSX, onCleanup } from "solid-js";
 
 import {
   FileUploadManager,
-  type FileUploadMetadataFetcher,
-  type FileUploadMetadataFetcherResponse,
   type FileUploadState,
 } from "@vighnesh153/tools/file_upload";
 
 import { UploadInputBox } from "./UploadInputBox.tsx";
 import { FilesUploadTracker } from "./FilesUploadTracker.tsx";
-import { testFilesData } from "./test_data.ts";
+import { FileUploadMetadataFetcherImpl } from "./file_upload_metadata_fetcher.ts";
+import { JsonHttpClientImpl } from "@vighnesh153/tools";
 
 export type UploadManagerProps = {};
 
@@ -18,20 +17,18 @@ export function UploadInputBoxWithStats(
   _props: UploadManagerProps,
 ): JSX.Element {
   const fileUploadManager = new FileUploadManager({
-    // TODO: add implementation here
-    fileUploadMetadataFetcher: {} as any,
+    fileUploadMetadataFetcher: new FileUploadMetadataFetcherImpl(
+      new JsonHttpClientImpl({ baseUrl: "" }),
+    ),
   });
   const [dragCounter, setDragCounter] = createSignal<number>(0);
   const [isPublic, setIsPublic] = createSignal<boolean>(false);
-  const [fileStates, setFileStates] = createSignal<FileUploadState[]>(
-    testFilesData,
-  );
+  const [fileStates, setFileStates] = createSignal<FileUploadState[]>([]);
 
   // subscribe to file states
   createEffect(() => {
     const { unsubscribe } = fileUploadManager.subscribe((newFileStates) => {
-      // TODO: uncomment the following line
-      // setFileStates(newFileStates);
+      setFileStates(newFileStates);
     });
 
     onCleanup(unsubscribe);

@@ -29,7 +29,7 @@
     "@vighnesh153/drawing-app": "0.4.8",
     "@vighnesh153/simple-code-to-html": "0.4.8",
     "@vighnesh153/spl": "0.4.8",
-    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.15",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.16",
     "@vighnesh153/tools-browser": "npm:@jsr/vighnesh153__tools-browser@0.1.2",
     "@vighnesh153/tsx-bundler": "0.4.8",
     "astro-sst": "2.43.5",
