@@ -58,10 +58,12 @@ export class FileUploadManager {
       ...this.states,
     ]);
 
-    await this.performUpload();
+    console.log("Queued the files for upload:", files);
+
+    await this.performUpload(isPublic);
   }
 
-  private async performUpload(): Promise<void> {
+  private async performUpload(isPublic: boolean): Promise<void> {
     const queuedFiles: FileUploadState[] = this.states.filter((state) =>
       state.type === "queued"
     );
@@ -78,8 +80,11 @@ export class FileUploadManager {
       }),
     );
 
+    console.log("Fetching upload metadata for files:", queuedFiles);
+
     const response = await this.deps.fileUploadMetadataFetcher.fetchMetadata(
       queuedFiles,
+      isPublic,
     );
     if (response.type === "error") {
       console.log(
@@ -120,6 +125,8 @@ export class FileUploadManager {
         };
       },
     );
+
+    console.log("Upload to server in progress:", queuedFiles);
 
     await Promise.allSettled(
       this.states
@@ -178,6 +185,7 @@ export class FileUploadManager {
           };
         },
       );
+      console.log("Upload complete for file:", file);
     } else {
       console.log(
         `Error occurred while uploading file: ${fileId}, files:`,
