@@ -20,9 +20,6 @@ export class FileUploadManager {
     notifyOnSubscribe: true,
   });
 
-  // @ts-ignore: stupid deno complains that fileUploadStates is used before initialization
-  readonly subscribe = this.fileUploadStates.subscribe;
-
   private readonly deps: Required<FileUploaderDependencies>;
   private get states(): FileUploadState[] {
     return this.fileUploadStates.getData() ?? [];
@@ -35,6 +32,18 @@ export class FileUploadManager {
       ...deps,
     };
     this.fileUploadStates.publish([]);
+  }
+
+  /**
+   * Subscribe to state changes
+   *
+   * @param cb
+   * @returns unsubscribe function
+   */
+  subscribe(
+    cb: (data: FileUploadState[]) => void,
+  ): { unsubscribe: () => void } {
+    return this.fileUploadStates.subscribe(cb);
   }
 
   async upload(files: File[], isPublic: boolean) {
