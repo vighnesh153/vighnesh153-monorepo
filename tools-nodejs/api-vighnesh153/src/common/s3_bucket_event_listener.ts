@@ -16,7 +16,7 @@ export async function s3BucketEventListener({
   >;
 
   // tools
-  logger: Logger;
+  logger?: Logger;
 }) {
   logger.log(`Received file upload complete event for:`, uploadedObjectsKeys);
 
