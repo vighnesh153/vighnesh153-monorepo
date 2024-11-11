@@ -21,9 +21,12 @@ export async function s3BucketEventListener({
   logger.log(`Received file upload complete event for:`, uploadedObjectsKeys);
 
   const response = await Promise.allSettled(uploadedObjectsKeys.map((key) => {
-    const fileId = key.split("/").at(-1)?.split(".")?.[0] ?? "";
+    const segments = key.split("/");
 
-    logger.log("Extracted file id:", fileId);
+    const fileId = segments.pop()?.split(".")?.[0] ?? "";
+    const mimeType = segments.join("/");
+
+    logger.log("Extracted file id:", fileId, "and mimeType:", mimeType);
 
     if (isStringEmpty(fileId)) {
       logger.log("Failed to extract file id from file: ", key);
@@ -33,7 +36,7 @@ export async function s3BucketEventListener({
     }
 
     return filesMetadataDynamoTable.updateOne({
-      key: { fileId },
+      key: { fileId, mimeType },
       data: { isUploaded: true },
     });
   }));
