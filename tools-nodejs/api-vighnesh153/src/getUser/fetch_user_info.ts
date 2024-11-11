@@ -50,6 +50,6 @@ export async function getCompleteUserInfo({
     );
     return null;
   }
-  logger.log(`Successfully fetched user info: ${res.data}`);
+  logger.log(`Successfully fetched user info`, res.data);
   return res.data;
 }

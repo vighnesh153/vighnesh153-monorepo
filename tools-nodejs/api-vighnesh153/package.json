@@ -14,7 +14,9 @@
     "build": "tsup",
     "test:watch": "vitest",
     "test": "vitest run --passWithNoTests",
+    "presst:deploy:dev": "rm -rf .sst && sst refresh --verbose --print-logs --stage=dev",
     "sst:deploy:dev": "npm run build && dotenvx run --env-file=../../.env.local -- sst deploy --stage dev",
+    "presst:deploy:prod": "rm -rf .sst && sst refresh --verbose --print-logs --stage=prod",
     "sst:deploy:prod": "npm run build && dotenvx run --env-file=../../.env.local -- sst deploy --stage prod",
     "sst:remove:dev": "npm run build && dotenvx run --env-file=../../.env.local -- sst remove --stage dev",
     "sst:remove:prod": "npm run build && dotenvx run --env-file=../../.env.local -- sst remove --stage prod"
@@ -39,7 +41,7 @@
     "@vighnesh153/tools-server": "npm:@jsr/vighnesh153__tools-server@^0.1.7",
     "@vighnesh153/tsconfig": "0.4.8",
     "cookie": "^1.0.1",
-    "sst": "^3.2.70",
+    "sst": "^3.3.13",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4"
