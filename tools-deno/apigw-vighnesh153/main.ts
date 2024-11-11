@@ -21,6 +21,12 @@ import {
     type StageType,
 } from "@vighnesh153/tools/vighnesh153";
 
+const acceptableOriginsForOptions = [
+    "http://localhost:4321",
+    "https://staging.vighnesh153.dev",
+    "https://vighnesh153.dev",
+];
+
 const client = new LambdaClient({
     credentials: {
         accessKeyId: Deno.env.get("AWS_ACCESS_KEY_ID") ?? "",
@@ -65,9 +71,42 @@ function convertUrlSearchParams(
     return params;
 }
 
+function addCorsHeaders(
+    _headers: Headers | Record<string, string>,
+    req: Request,
+): Headers {
+    const headers = new Headers(_headers);
+    const origin = req.headers.get("origin") ?? "";
+
+    if (not(acceptableOriginsForOptions.includes(origin))) {
+        console.log("options request denied");
+        return headers;
+    }
+
+    headers.append("Access-Control-Allow-Origin", origin);
+    headers.append(
+        "Access-Control-Allow-Headers",
+        req.headers.get("Access-Control-Request-Headers") ?? "*",
+    );
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append("Access-Control-Allow-Methods", "GET,POST");
+
+    console.log("Cors headers added:", headers);
+
+    return headers;
+}
+
 Deno.serve(async (req, _connInfo) => {
     // TODO: add rate limiting using KV db
     // Use `connInfo.remoteAddr.hostname` to rate limit
+
+    if (req.method === "OPTIONS") {
+        console.log("Options request:", req);
+        return new Response("", {
+            status: 201,
+            headers: addCorsHeaders(new Headers(), req),
+        });
+    }
 
     if (!isValidStageType(STAGE)) {
         console.error(`Stage is not configured in the project.`);
@@ -75,10 +114,10 @@ Deno.serve(async (req, _connInfo) => {
             JSON.stringify({ error: "Stage is not configured." }),
             {
                 status: 500,
-                headers: {
+                headers: addCorsHeaders({
                     [HttpHeaderKeys.contentType]:
                         HttpHeaderValues.contentType.applicationJson,
-                },
+                }, req),
             },
         );
     }
@@ -112,10 +151,10 @@ Deno.serve(async (req, _connInfo) => {
             JSON.stringify({ error: "Unsupported http method", method }),
             {
                 status: 400,
-                headers: {
+                headers: addCorsHeaders({
                     [HttpHeaderKeys.contentType]:
                         HttpHeaderValues.contentType.applicationJson,
-                },
+                }, req),
             },
         );
     }
@@ -138,10 +177,10 @@ Deno.serve(async (req, _connInfo) => {
             }),
             {
                 status: 400,
-                headers: {
+                headers: addCorsHeaders({
                     [HttpHeaderKeys.contentType]:
                         HttpHeaderValues.contentType.applicationJson,
-                },
+                }, req),
             },
         );
     }
@@ -160,13 +199,15 @@ Deno.serve(async (req, _connInfo) => {
             }),
             {
                 status: 400,
-                headers: {
+                headers: addCorsHeaders({
                     [HttpHeaderKeys.contentType]:
                         HttpHeaderValues.contentType.applicationJson,
-                },
+                }, req),
             },
         );
     }
+
+    console.log("Request validation success...");
 
     let body: unknown | null = null;
     if (isJsonRequest(req)) {
@@ -182,21 +223,23 @@ Deno.serve(async (req, _connInfo) => {
     };
 
     if (not(LambdaFunctionConfig[functionName].callableByHttp)) {
+        console.log(functionName, "is not exposed to http");
         return new Response(
             JSON.stringify({
                 message: `"${functionName}" is not exposed to http`,
             }),
             {
-                headers: {
+                headers: addCorsHeaders({
                     [HttpHeaderKeys.contentType]:
                         HttpHeaderValues.contentType.applicationJson,
-                },
+                }, req),
                 status: 400,
             },
         );
     }
 
     if (LambdaFunctionConfig[functionName].authRequired) {
+        console.log("Auth required for", functionName);
         const userInfoResponse = await invokeLambdaFunction({
             functionName: "getUser",
             method: "get",
@@ -215,11 +258,14 @@ Deno.serve(async (req, _connInfo) => {
                         `Some error occurred while fetching authenticated user.`,
                 }),
                 {
-                    headers: userInfoResponse.headers,
+                    headers: addCorsHeaders(userInfoResponse.headers, req),
                     status: userInfoResponse.status,
                 },
             );
         }
+
+        console.log("Successfully fetched user info.");
+
         try {
             payload.user = JSON.parse(userInfoResponse.data);
             if (!payload.user?.userId?.trim()) {
@@ -229,6 +275,7 @@ Deno.serve(async (req, _connInfo) => {
                 );
                 throw new Error(`User id is blank`);
             }
+            console.log("Parsed user:", payload.user);
         } catch (e) {
             console.error(
                 "Error occurred while parsing logged in user info:",
@@ -239,17 +286,19 @@ Deno.serve(async (req, _connInfo) => {
                     message: "Failed to parse logged in user info",
                 }),
                 {
-                    headers: {
+                    headers: addCorsHeaders({
                         [HttpHeaderKeys.contentType]:
                             HttpHeaderValues.contentType.applicationJson,
-                    },
+                    }, req),
                     status: 500,
                 },
             );
         }
     }
 
-    // invoke the actual function
+    console.log("Invoking the actual requested function");
+
+    // invoke the actual requested function
     const lambdaResponse = await invokeLambdaFunction({
         functionName,
         method,
@@ -258,7 +307,7 @@ Deno.serve(async (req, _connInfo) => {
     });
 
     return new Response(lambdaResponse.data, {
-        headers: lambdaResponse.headers,
+        headers: addCorsHeaders(lambdaResponse.headers, req),
         status: lambdaResponse.status,
     });
 });
