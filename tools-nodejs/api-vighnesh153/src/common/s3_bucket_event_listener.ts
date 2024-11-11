@@ -23,7 +23,10 @@ export async function s3BucketEventListener({
   const response = await Promise.allSettled(uploadedObjectsKeys.map((key) => {
     const fileId = key.split("/").at(-1)?.split(".")?.[0] ?? "";
 
+    logger.log("Extracted file id:", fileId);
+
     if (isStringEmpty(fileId)) {
+      logger.log("Failed to extract file id from file: ", key);
       return Promise.reject(
         new Error(`Failed to extract fileId from "${key}"`),
       );
@@ -35,5 +38,5 @@ export async function s3BucketEventListener({
     });
   }));
 
-  console.log("Response:", response);
+  console.log("Response:", JSON.stringify(response, null, 2));
 }

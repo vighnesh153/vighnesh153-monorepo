@@ -74,6 +74,11 @@ export async function controller({
     isStringEmpty(publicFilesBucketName) ||
     isStringEmpty(privateFilesBucketName)
   ) {
+    logger.log(
+      "Missing configuration:",
+      `PublicFilesBucketName="${publicFilesBucketName}"`,
+      `PrivateFilesBucketName="${privateFilesBucketName}"`,
+    );
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       cookies: [],
@@ -88,6 +93,7 @@ export async function controller({
   }
 
   if (user === null) {
+    logger.log(`Auth user is null`);
     return {
       statusCode: http2.constants.HTTP_STATUS_UNAUTHORIZED,
       cookies: [],
@@ -102,6 +108,7 @@ export async function controller({
   }
 
   if (not(hasPermission(user.userId, "upload_files"))) {
+    logger.log(`User doesn't have permission to upload files.`);
     return {
       statusCode: http2.constants.HTTP_STATUS_FORBIDDEN,
       cookies: [],
@@ -115,7 +122,8 @@ export async function controller({
     };
   }
 
-  if (method !== "post") {
+  if (method.toLowerCase() !== "post") {
+    logger.log(`Expected post request method, found "${method}".`);
     return {
       statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,
       cookies: [],
@@ -130,6 +138,7 @@ export async function controller({
   }
 
   if (body == null || not(isValidCreateUploadPresignedUrlRequest(body))) {
+    logger.log(`Not valid request body:`, body);
     return {
       statusCode: http2.constants.HTTP_STATUS_BAD_REQUEST,
       cookies: [],
@@ -144,9 +153,11 @@ export async function controller({
     };
   }
 
+  logger.log("Received body:", body);
+
   const filesMetadataTableMetadata = body.isPublic
-    ? privateFilesMetadataDynamoTable
-    : publicFilesMetadataDynamoTable;
+    ? publicFilesMetadataDynamoTable
+    : privateFilesMetadataDynamoTable;
 
   const bucketName = body.isPublic
     ? publicFilesBucketName
@@ -158,7 +169,7 @@ export async function controller({
     const fileExtension = file.fileExtension.length > 0
       ? `.${file.fileExtension}`
       : "";
-    const filePath = `/${mediaType}/${id}${fileExtension}`;
+    const filePath = `${mediaType}/${id}${fileExtension}`;
     return {
       clientSideId: file.clientSideId,
       fileId: id,
@@ -169,6 +180,8 @@ export async function controller({
       createdAtMillis: Date.now(),
     };
   });
+
+  logger.log(`Generating presigned urls start...`);
 
   const uploadPresignedUrls = mapNotNullish(
     await Promise.all(
@@ -202,8 +215,10 @@ export async function controller({
     (x) => x,
   );
 
+  logger.log(`Generating presigned urls complete.`);
+
   if (uploadPresignedUrls.length !== filesMetadata.length) {
-    logger.log("Failed to fetch upload presigned url for some files.");
+    logger.log("Failed to generate upload presigned url for some files.");
     return {
       statusCode: http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
       cookies: [],
@@ -216,6 +231,8 @@ export async function controller({
       },
     };
   }
+
+  logger.log(`Presigned urls generate success. Writing metadata to dynamodb`);
 
   // write metadata to dynamodb
   const tableUpdateResponse = await filesMetadataTableMetadata.createMany({
@@ -244,6 +261,8 @@ export async function controller({
       },
     };
   }
+
+  logger.log(`Successfully wrote metadata to dynamodb. Sending response.`);
 
   return {
     statusCode: http2.constants.HTTP_STATUS_OK,
