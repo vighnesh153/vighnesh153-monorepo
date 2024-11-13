@@ -25,9 +25,9 @@ export default defineConfig({
     format: "file",
   },
   output: "static",
-  adapter: aws({
-    deploymentStrategy: "static",
-  }),
+  // adapter: aws({
+  //   deploymentStrategy: "static",
+  // }),
   vite: {
     build: {
       sourcemap: isDevCommandRunning,
