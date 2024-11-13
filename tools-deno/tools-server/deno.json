@@ -16,7 +16,7 @@
     "@std/assert": "jsr:@std/assert@1",
     "@std/collections": "jsr:@std/collections@^1.0.9",
     "@std/testing": "jsr:@std/testing@1",
-    "@vighnesh153/tools": "jsr:@vighnesh153/tools@^0.1.4"
+    "@vighnesh153/tools": "jsr:@vighnesh153/tools@^0.1.17"
   },
   "publish": {
     "exclude": ["src/**/*.test.ts"],
