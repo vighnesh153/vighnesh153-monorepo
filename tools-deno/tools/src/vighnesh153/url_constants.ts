@@ -1,22 +1,9 @@
-import {
-  LambdaFunctionConfig,
-  type LambdaFunctionName,
-  type StageType,
-} from "./aws_config.ts";
+import { LambdaFunctionConfig, type LambdaFunctionName } from "./aws_config.ts";
 
-const API_HOSTS = {
-  dev: "dev.api.vighnesh153.dev",
-  prod: "prod.api.vighnesh153.dev",
-} satisfies Record<StageType, string>;
-
-const UI_HOSTS = {
-  dev: "staging.vighnesh153.dev",
-  prod: "vighnesh153.dev",
-} satisfies Record<StageType, string>;
-
-const PUBLIC_ASSETS_HOSTS = {
-  dev: "dev.public-assets.vighnesh153.dev",
-  prod: "prod.public-assets.vighnesh153.dev",
+const hosts = {
+  api: "api.vighnesh153.dev",
+  ui: "vighnesh153.dev",
+  publicAssets: "public-assets.vighnesh153.dev",
 };
 
 export type Vighnesh153ApiRoute = {
@@ -90,14 +77,8 @@ function constructRoutes(
   };
 }
 
-export function constructRoutesForDev(): Vighnesh153Routes {
-  return constructRoutes(API_HOSTS.dev, UI_HOSTS.dev, PUBLIC_ASSETS_HOSTS.dev);
-}
-
-export function constructRoutesForProd(): Vighnesh153Routes {
-  return constructRoutes(
-    API_HOSTS.prod,
-    UI_HOSTS.prod,
-    PUBLIC_ASSETS_HOSTS.prod,
-  );
-}
+export const routes: Vighnesh153Routes = constructRoutes(
+  hosts.api,
+  hosts.ui,
+  hosts.publicAssets,
+);
