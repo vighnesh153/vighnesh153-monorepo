@@ -8,17 +8,12 @@ import {
 
 import { HttpHeaderKeys, HttpHeaderValues, not } from "@vighnesh153/tools";
 import {
-    constructHttpApiLambdaName,
     DEFAULT_AWS_REGION,
-    isValidLambdaMethod,
-    isValidStageType,
     LambdaFunctionConfig,
     type LambdaFunctionName,
     LambdaFunctionNames,
-    type LambdaMethodType,
     type LambdaRequestPayload,
     type LambdaResponsePayload,
-    type StageType,
 } from "@vighnesh153/tools/vighnesh153";
 
 const acceptableOriginsForOptions = [
@@ -34,8 +29,6 @@ const client = new LambdaClient({
     },
     region: DEFAULT_AWS_REGION,
 });
-
-const STAGE = Deno.env.get("STAGE") ?? "dev";
 
 const MAX_CONTENT_LENGTH = 10_000; // 20 KB
 
@@ -108,20 +101,6 @@ Deno.serve(async (req, _connInfo) => {
         });
     }
 
-    if (!isValidStageType(STAGE)) {
-        console.error(`Stage is not configured in the project.`);
-        return new Response(
-            JSON.stringify({ error: "Stage is not configured." }),
-            {
-                status: 500,
-                headers: addCorsHeaders({
-                    [HttpHeaderKeys.contentType]:
-                        HttpHeaderValues.contentType.applicationJson,
-                }, req),
-            },
-        );
-    }
-
     const method = req.method;
     const url = new URL(req.url);
     const headers = convertHeaders(req);
@@ -139,25 +118,6 @@ Deno.serve(async (req, _connInfo) => {
         (Object.keys(LambdaFunctionNames) as LambdaFunctionName[]).find((
             functionName,
         ) => url.pathname === `/${functionName}`) ?? null;
-
-    if (!isValidLambdaMethod(method)) {
-        console.log(
-            `Received request with unsupported http method:`,
-            method,
-            ` with headers:`,
-            headers,
-        );
-        return new Response(
-            JSON.stringify({ error: "Unsupported http method", method }),
-            {
-                status: 400,
-                headers: addCorsHeaders({
-                    [HttpHeaderKeys.contentType]:
-                        HttpHeaderValues.contentType.applicationJson,
-                }, req),
-            },
-        );
-    }
 
     if (functionName === null) {
         console.log(
@@ -215,7 +175,6 @@ Deno.serve(async (req, _connInfo) => {
     }
 
     const payload: LambdaRequestPayload = {
-        method,
         headers,
         body,
         filterParams: convertUrlSearchParams(url.searchParams),
@@ -242,8 +201,6 @@ Deno.serve(async (req, _connInfo) => {
         console.log("Auth required for", functionName);
         const userInfoResponse = await invokeLambdaFunction({
             functionName: "getUser",
-            method: "get",
-            stage: STAGE,
             payload: { headers },
         });
 
@@ -301,8 +258,6 @@ Deno.serve(async (req, _connInfo) => {
     // invoke the actual requested function
     const lambdaResponse = await invokeLambdaFunction({
         functionName,
-        method,
-        stage: STAGE,
         payload,
     });
 
@@ -313,21 +268,15 @@ Deno.serve(async (req, _connInfo) => {
 });
 
 async function invokeLambdaFunction<TReq>(
-    { functionName, stage, payload, method }: {
+    { functionName, payload }: {
         functionName: LambdaFunctionName;
-        stage: StageType;
         payload: TReq;
-        method: LambdaMethodType;
     },
 ): Promise<{ headers: Headers; status: number; data: string | null }> {
     const encodedBody = new TextEncoder().encode(JSON.stringify(payload));
 
     const input: InvocationRequest = {
-        FunctionName: constructHttpApiLambdaName({
-            functionIdentifier: functionName,
-            method,
-            stage,
-        }),
+        FunctionName: functionName,
         InvocationType: InvocationType.RequestResponse,
         LogType: LogType.Tail,
         Payload: encodedBody,
