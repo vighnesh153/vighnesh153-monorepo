@@ -134,8 +134,8 @@ test("jsonHttpClient: for GET Request, abort the request if it takes longer than
     "Request timed out after 500 milliseconds.",
   );
   assertEquals(
-    abortResponse.reason,
-    new Error("Request timed out after 500 milliseconds."),
+    abortResponse.reason.message,
+    new Error("Request timed out after 500 milliseconds.").message,
   );
 });
 
@@ -211,8 +211,8 @@ test("jsonHttpClient: for GET Request, should abort the request", async () => {
     `Aborting because user changed page.`,
   );
   assertEquals(
-    abortResponse.reason,
-    new Error(`Aborting because user changed page.`),
+    abortResponse.reason.message,
+    new Error(`Aborting because user changed page.`).message,
   );
 });
 
@@ -377,8 +377,8 @@ test("jsonHttpClient: for POST Request, abort the request if it takes longer tha
     "Request timed out after 500 milliseconds.",
   );
   assertEquals(
-    abortResponse.reason,
-    new Error("Request timed out after 500 milliseconds."),
+    abortResponse.reason.message,
+    new Error("Request timed out after 500 milliseconds.").message,
   );
 });
 
@@ -513,8 +513,8 @@ test("jsonHttpClient: for POST Request, should abort the request", async () => {
     "Aborting because user changed page.",
   );
   assertEquals(
-    abortResponse.reason,
-    new Error("Aborting because user changed page."),
+    abortResponse.reason.message,
+    new Error("Aborting because user changed page.").message,
   );
 });
 
