@@ -6,8 +6,6 @@ import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import svelte from "@astrojs/svelte";
 
-import aws from "astro-sst";
-
 const isDevCommandRunning = process.argv[2] === "dev";
 
 // https://astro.build/config
@@ -25,9 +23,6 @@ export default defineConfig({
     format: "file",
   },
   output: "static",
-  // adapter: aws({
-  //   deploymentStrategy: "static",
-  // }),
   vite: {
     build: {
       sourcemap: isDevCommandRunning,

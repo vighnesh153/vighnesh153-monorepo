@@ -17,11 +17,7 @@
     "test:vitest:watch": "vitest --passWithNoTests",
     "test:vitest": "vitest run --passWithNoTests",
     "test:only": "run-s test:vitest test:playwright",
-    "test": "run-s install-test-deps test:only",
-    "sst:deploy:dev": "dotenvx run --env-file=../../.env.local -- sst deploy --stage=dev",
-    "sst:deploy:prod": "dotenvx run --env-file=../../.env.local -- sst deploy --stage=prod",
-    "sst:remove:dev": "dotenvx run --env-file=../../.env.local -- sst remove --stage=dev",
-    "sst:remove:prod": "dotenvx run --env-file=../../.env.local -- sst remove --stage=prod"
+    "test": "run-s install-test-deps test:only"
   },
   "dependencies": {
     "@nanostores/solid": "^0.5.0",
@@ -32,7 +28,6 @@
     "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.16",
     "@vighnesh153/tools-browser": "npm:@jsr/vighnesh153__tools-browser@0.1.2",
     "@vighnesh153/tsx-bundler": "0.4.8",
-    "astro-sst": "2.43.5",
     "firebase": "^11.0.1",
     "nanostores": "^0.11.3",
     "solid-js": "^1.9.2",
@@ -66,7 +61,6 @@
     "postcss-import": "^16.1.0",
     "sass": "^1.79.4",
     "solid-devtools": "^0.30.1",
-    "sst": "^3.1.72",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.3",
     "vitest": "^2.1.2"
