@@ -5,7 +5,7 @@
     "jsr:@std/assert@1": "1.0.7",
     "jsr:@std/assert@^1.0.6": "1.0.7",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@vighnesh153/tools@~0.1.13": "0.1.13",
+    "jsr:@vighnesh153/tools@0.1.17": "0.1.17",
     "npm:@aws-sdk/client-lambda@3.624.0": "3.624.0_@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sts@3.624.0_@aws-sdk+client-sso-oidc@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0__@aws-sdk+client-sts@3.624.0___@aws-sdk+client-sso-oidc@3.624.0____@aws-sdk+client-sts@3.624.0_____@aws-sdk+client-sso-oidc@3.624.0___@aws-sdk+client-sso-oidc@3.624.0",
     "npm:@ngneat/falso@^7.2.0": "7.2.0",
     "npm:zod@^3.23.8": "3.23.8"
@@ -23,11 +23,11 @@
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
-    "@vighnesh153/tools@0.1.13": {
-      "integrity": "b7887de29deba62d716727e38eedf3077e0b1f9bf07b7d0f8afe12b210048b99",
+    "@vighnesh153/tools@0.1.17": {
+      "integrity": "be6b1e19d2f0ece7e079c61d1e79ec0561c6dc1f185400a43b17d4e16589345c",
       "dependencies": [
         "jsr:@kitsonk/xhr",
-        "jsr:@std/assert@^1.0.6",
+        "jsr:@std/assert@1",
         "npm:@ngneat/falso",
         "npm:zod"
       ]
@@ -2499,7 +2499,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
-      "jsr:@vighnesh153/tools@~0.1.13",
+      "jsr:@vighnesh153/tools@0.1.17",
       "npm:@aws-sdk/client-lambda@3.624.0"
     ]
   }
