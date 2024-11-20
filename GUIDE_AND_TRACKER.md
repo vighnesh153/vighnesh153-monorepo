@@ -5,22 +5,6 @@
 - Cloudflare workers:
   https://dash.cloudflare.com/6fe924c1bdad4bfa14e5f68916c32bb2/workers/overview
 
-### Check updates
-
-```shell
-cd apps/vighnesh153.com
-
-ncu -u
-```
-
-Checkout
-[more options here](https://github.com/raineorshine/npm-check-updates#options)
-
-### Publishing packages
-
-Visit
-[github actions: publish package to npm](https://github.com/vighnesh153/vighnesh153-monorepo/actions/workflows/publish-pkg-to-npm.yml)
-
 #### Tools
 
 - `*` to webp: https://cloudconvert.com/
@@ -28,25 +12,22 @@ Visit
 
 #### Tasks
 
+- api.vighnesh153.dev
 - Create Kotlin AST
 - Kotlin Syntax highlighting
 - Differ between 2 string content
 - Diff viewer
-- Popover testing triangle bump
 - Add a list of Chrome and Vscode extensions to projects on vighnesh153.dev
 - Look at removing Config usage from lambda
 - vighnesh153 media
 - vighnesh153 private.vighnesh153.dev
-- Move @vighnesh153/random-word to @vighnesh153/utils
 - adb fetch continue watching row from device
 - adb launch deeplink
 - compose-query (similar to react-query by tanstack)
 - migrate `tex.vighnesh153.com` to `vighnesh153.dev`
   - Build your own math jax equation parser using XML
-- migrate `blog.vighnesh153.com` to `vighnesh153.dev`
-  - https://docs.astro.build/en/tutorial/0-introduction/
 - https://go.dev/wiki/SQLDrivers
-- mp3 to mp4
+- mp4 to mp3
 - Check if trap focus mentioned in the below link could be useful for side bar
   on vighnesh153.dev: https://learn.svelte.dev/tutorial/actions
 - privacy policy in the repo
@@ -117,11 +98,6 @@ Visit
 </style>
 ```
 
-- Golang wasm
-  - html elements interaction
-  - api requests
-  - runtime type checking? assign incorrect interface to API response
-  - bundle size
 - Add tooltip component along with placement (left, top, right, bottom)
 - Add tooltip component to social links along with placement
 - Add tooltip component to aside email address
@@ -131,7 +107,6 @@ Visit
 - add code pen link as featured projects
 - https://github.com/astro-community/astro-compress
 - Add IP address of the command executor in the adb remote logs
-- Seed data in vighnesh153.com_next13
 - Brainf\*ck interpreter
   - https://github.com/vighnesh153/brainf.ck-interpreter
 - Groups/Permissions
@@ -148,10 +123,8 @@ Visit
   - Migrate all blogs from `blog.vighnesh153.com` to `vighnesh153/blog`
   - Javascript at scale
     - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
-- Sub-domain auth
-  - https://github.com/vercel/examples/blob/main/solutions/subdomain-auth/pages/api/auth/%5B...nextauth%5D.ts
-- Codepen clone for my personal HTML projects (no api just local code files)
-- https://stylelint.io/user-guide/get-started
+- Codepen like page for my personal HTML projects on vighnesh153.dev (no api
+  just local code files)
 - Javascript Intl:
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
 - email template builder
@@ -169,28 +142,19 @@ Visit
   - Remark: https://remark.js.org/
 - Docker tools
   - Image compression
-- NextJS replacement tool (AWS deployment)
 - Video editing tool
 - Audio and video libraries
 - SQS Queues
   - Pending events
     - USER_CREATED
       - Subscription 1: Send a welcome email
-- Notification system and processing
-  - Retry mechanism
-  - Email me with a retry link to retry the task and send debugging details
 - Email service
 - Embed GitHub commit snippet
-- Media CDN
-  - image optimization and standard multiple sources
-  - build a tool for compressing images
-- Hide emails of users on client side
 - Profile page for all users
   - `/users` -> Show list of users (hide emails)
   - `/users/:userId/username`
   - `/users/:userId` redirect to `/users/:userId/username`
   - Allow editing username
-- Clone: https://github.com/mysticatea/npm-run-all/
 - AWS sandbox
 - vighnesh153.com/memes
   - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when
@@ -200,8 +164,6 @@ Visit
     - other portals
   - Update welcome email template with link to vighnesh153.com/memes
 - CRON expression builder
-- CORS anywhere lambda
-  - `cors-anywhere.aws.vighnesh153.com`
 - Response cache for a url, headers, etc (lambda)
   - Useful for accessing GitHub APIs that have rate limits without API key
     (https://api.github.com/repos/vighnesh153/vighnesh153-monorepo)
@@ -223,22 +185,6 @@ fetch(
 - send email sqs worker
 - Trigger a user account created message in SNS
 - Imgur upload library
-
-- Video ideas
-  - How to use React context effectively
-  - How to build and publish a typescript and React JS component library
-- Audit logs viewer
-  - Filters based on
-    - action
-    - user
-    - date
-  - Search
-  - Pagination
-- Liked videos
-  - Features
-    - Tags
-  - List
-    - https://www.youtube.com/watch?v=JHregeIsjPQ
 - Miscellaneous: Holds links to all my projects
 - Blogs
   - Checkout material's documentation website configurations for creating blog
@@ -247,13 +193,6 @@ fetch(
   - Reactions (Likes & other emoji reactions, Comments)
 - Integrate [Algolia's DocSearch](https://docsearch.algolia.com/)
   - NPM package: https://www.npmjs.com/package/@docsearch/react
-- Fix `import-sorting` in eslint
-- Explore and integrate Cockroach DB (Serverless SQL):
-  https://www.cockroachlabs.com/
-- Checkout sentry for detailed error analysis
-  - https://sentry.io/welcome/
-  - https://github.com/getsentry/sentry-javascript
-- docker mongo-nextjs image
 - Free subtitles srt editor
 - Checkout libraries
   - Zustand
