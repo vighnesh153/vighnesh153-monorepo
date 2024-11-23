@@ -26,6 +26,7 @@ authRouter.all("/initiateGoogleLogin", (c) => {
 authRouter.all("/googleAuthCallback", (c) => {
   return c.json({});
 });
+
 authRouter.all("/initiateLogout", (c) => {
   const cookieOpts: CookieOptions = {
     maxAge: 0,

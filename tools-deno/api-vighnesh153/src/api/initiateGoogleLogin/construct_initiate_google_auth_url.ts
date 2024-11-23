@@ -1,6 +1,6 @@
 import { isStringEmpty } from "@vighnesh153/tools";
 
-import { envVars } from "@/env_vars.ts";
+import { config } from "@/config.ts";
 
 const authScopes = [
   "https://www.googleapis.com/auth/userinfo.profile",
@@ -9,7 +9,7 @@ const authScopes = [
 
 export function constructInitiateGoogleAuthUrl({
   authRedirectUri,
-  googleClientId = envVars.googleClientId,
+  googleClientId = config.googleClientId,
 }: {
   authRedirectUri: string;
   googleClientId?: string;
