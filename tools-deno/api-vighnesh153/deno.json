@@ -13,7 +13,10 @@
   },
   "imports": {
     "@/": "./src/",
+    "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@vighnesh153/tools": "jsr:@vighnesh153/tools@0.1.17",
+    "firebase-admin": "npm:firebase-admin@^13.0.1",
     "hono": "jsr:@hono/hono@4.6.10"
-  }
+  },
+  "nodeModulesDir": "auto"
 }
