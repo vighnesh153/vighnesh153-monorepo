@@ -5,15 +5,14 @@ import type { CookieOptions } from "hono/utils/cookie";
 import { cookieKeys } from "@vighnesh153/tools/vighnesh153";
 
 import { initiateGoogleLoginController } from "@/api/initiateGoogleLogin/controller.ts";
-import { isProduction } from "@/is_production.ts";
-import { apexDomains, apiDomains, uiDomains } from "@/constants.ts";
+import { apexDomain, apiDomain, uiDomain } from "@/constants.ts";
 
 const authRouter = new Hono();
 
 // login / logout
 authRouter.all("/initiateGoogleLogin", (c) => {
   const initiateGoogleLoginUrl = initiateGoogleLoginController({
-    domain: isProduction ? apiDomains.prod : apiDomains.local,
+    domain: apiDomain,
   });
   if (initiateGoogleLoginUrl == null) {
     return c.text(
@@ -32,7 +31,7 @@ authRouter.all("/initiateLogout", (c) => {
     maxAge: 0,
     path: "/",
     // prefix "." is only needed to support old browsers (https://stackoverflow.com/questions/9618217/what-does-the-dot-prefix-in-the-cookie-domain-mean)
-    domain: "." + (isProduction ? apexDomains.prod : apexDomains.local),
+    domain: "." + apexDomain,
   };
 
   setCookie(c, cookieKeys.userInfo, "", cookieOpts);
@@ -42,8 +41,7 @@ authRouter.all("/initiateLogout", (c) => {
     secure: true,
   });
 
-  const redirectUrl = isProduction ? uiDomains.prod : uiDomains.local;
-  return c.redirect(redirectUrl + "/auth/callback");
+  return c.redirect(uiDomain + "/auth/callback");
 });
 
 export { authRouter };

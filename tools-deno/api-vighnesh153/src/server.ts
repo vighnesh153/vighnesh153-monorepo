@@ -2,14 +2,13 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 
-import { isProduction } from "@/is_production.ts";
-import { uiDomains } from "@/constants.ts";
+import { uiDomain } from "@/constants.ts";
 import { router } from "@/router/mod.ts";
 
 const app = new Hono({ strict: false });
 
 app.use(cors({
-  origin: isProduction ? uiDomains.prod : uiDomains.local,
+  origin: uiDomain,
   allowHeaders: ["content-type", "x-vighnesh153-xsrf"],
   credentials: true,
   allowMethods: ["GET", "POST", "PUT", "DELETE"],
