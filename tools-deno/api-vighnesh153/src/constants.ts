@@ -1,24 +1,34 @@
-export const apexDomains = {
+import { isProduction } from "@/is_production.ts";
+
+const key = isProduction ? "prod" : "local";
+
+const apexDomains = {
   local: "localhost",
   prod: "vighnesh153.dev",
 };
 
-export const apiHosts = {
+const apiHosts = {
   local: "localhost:8000",
   prod: "api.vighnesh153.dev",
 };
 
-export const apiDomains = {
+const apiDomains = {
   local: `http://${apiHosts.local}`,
   prod: `https://${apiHosts.prod}`,
 };
 
-export const uiHosts = {
+const uiHosts = {
   local: "localhost:4321",
   prod: "vighnesh153.dev",
 };
 
-export const uiDomains = {
+const uiDomains = {
   local: `http://${uiHosts.local}`,
   prod: `https://${uiHosts.prod}`,
 };
+
+export const apexDomain = apexDomains[key];
+export const apiHost = apiHosts[key];
+export const apiDomain = apiDomains[key];
+export const uiHost = uiHosts[key];
+export const uiDomain = uiDomains[key];
