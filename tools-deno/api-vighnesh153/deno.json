@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run --allow-env --allow-net --watch --env-file=.env.local.conf main.ts",
+    "start": "deno run --allow-env --allow-net --watch ./src/server.ts",
     "deploy": "deployctl deploy --project=api-vighnesh153"
   },
   "deploy": {
@@ -9,9 +9,11 @@
       "**/node_modules"
     ],
     "include": [],
-    "entrypoint": "main.ts"
+    "entrypoint": "./src/server.ts"
   },
   "imports": {
-    "hono": "jsr:@hono/hono@^4.6.10"
+    "@/": "./src/",
+    "@vighnesh153/tools": "jsr:@vighnesh153/tools@0.1.17",
+    "hono": "jsr:@hono/hono@4.6.10"
   }
 }
