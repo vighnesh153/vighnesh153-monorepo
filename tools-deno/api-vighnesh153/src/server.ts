@@ -3,13 +3,14 @@ import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 
 import { isProduction } from "@/is_production.ts";
-import { router } from "@/routes.ts";
+import { uiDomains } from "@/constants.ts";
+import { router } from "@/router/mod.ts";
 
 const app = new Hono({ strict: false });
 
 app.use(cors({
-  origin: isProduction ? "https://vighnesh153.dev" : "http://localhost:4321",
-  allowHeaders: ["content-type"],
+  origin: isProduction ? uiDomains.prod : uiDomains.local,
+  allowHeaders: ["content-type", "x-vighnesh153-xsrf"],
   credentials: true,
   allowMethods: ["GET", "POST", "PUT", "DELETE"],
   maxAge: 24 * 3600,
