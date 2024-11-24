@@ -22,3 +22,8 @@ export const uiDomains = {
   local: `http://${uiHosts.local}`,
   prod: `https://${uiHosts.prod}`,
 };
+
+export const cookieKeys = {
+  userInfo: "user-info",
+  authToken: "auth-token",
+};
