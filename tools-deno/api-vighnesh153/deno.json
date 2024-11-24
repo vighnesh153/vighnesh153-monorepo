@@ -1,4 +1,10 @@
 {
+  "name": "@vighnesh153/api",
+  "version": "0.0.1",
+  "exports": {
+    "./client": "./src/client/mod.ts"
+  },
+  "license": "MIT",
   "tasks": {
     "start": "deno run --allow-env --allow-net --watch ./src/server.ts",
     "deploy": "deployctl deploy --project=api-vighnesh153"

@@ -12,12 +12,12 @@ const apiHosts = {
   prod: "api.vighnesh153.dev",
 };
 
-const apiDomains = {
+export const apiDomains = {
   local: `http://${apiHosts.local}`,
   prod: `https://${apiHosts.prod}`,
 };
 
-const uiHosts = {
+export const uiHosts = {
   local: "localhost:4321",
   prod: "vighnesh153.dev",
 };
