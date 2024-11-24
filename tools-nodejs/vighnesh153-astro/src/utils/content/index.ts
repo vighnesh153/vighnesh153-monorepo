@@ -6,4 +6,3 @@ export * from "./navItems.ts";
 export * from "./projects.ts";
 export * from "./socialProfiles.ts";
 export * from "./tutorPlans.ts";
-export * from "./urls.ts";
