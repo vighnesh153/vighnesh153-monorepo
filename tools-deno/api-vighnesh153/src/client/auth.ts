@@ -1,4 +1,4 @@
-import { clientApiDomain } from "@/client/client_stage.ts";
+import { clientApiDomain } from "./client_stage.ts";
 
 export function initiateGoogleLogin(): void {
   location.assign(clientApiDomain + "/initiateGoogleLogin");

@@ -1,6 +1,5 @@
-import { JsonHttpPostRequest } from "@vighnesh153/tools";
+import type { JsonHttpPostRequest } from "@vighnesh153/tools";
 import { config } from "@/config.ts";
-import { serverAuthRedirectUrl } from "@/constants.ts";
 
 export function buildTokenFetchRequest(
   { authCallbackCode }: { authCallbackCode: string },
@@ -11,7 +10,7 @@ export function buildTokenFetchRequest(
   formData.append("client_id", config.googleClientId);
   formData.append("client_secret", config.googleClientSecret);
   formData.append("grant_type", "authorization_code");
-  formData.append("redirect_uri", serverAuthRedirectUrl);
+  formData.append("redirect_uri", config.serverAuthRedirectUrl);
 
   return {
     path: "https://oauth2.googleapis.com/token",

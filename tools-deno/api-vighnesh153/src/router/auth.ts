@@ -6,7 +6,7 @@ import { assert } from "@std/assert";
 import { isStringEmpty, milliseconds, not } from "@vighnesh153/tools";
 import { cookieKeys } from "@vighnesh153/tools/vighnesh153";
 
-import { apexDomain, uiAuthCompleteUrl } from "@/constants.ts";
+import { config } from "@/config.ts";
 
 import { initiateGoogleLoginController } from "@/api/initiate_google_login/controller.ts";
 import { googleAuthCallbackController } from "@/api/google_auth_callback/controller.ts";
@@ -16,7 +16,7 @@ const authRouter = new Hono();
 const commonCookieOpts: CookieOptions = {
   path: "/",
   // prefix "." is only needed to support old browsers (https://stackoverflow.com/questions/9618217/what-does-the-dot-prefix-in-the-cookie-domain-mean)
-  domain: "." + apexDomain,
+  domain: "." + config.apexDomain,
 };
 const secureCookieOpts: CookieOptions = {
   secure: true,
@@ -81,7 +81,7 @@ authRouter.all("/initiateLogout", (c) => {
     ...secureCookieOpts,
   });
 
-  return c.redirect(uiAuthCompleteUrl);
+  return c.redirect(config.uiAuthCompleteUrl);
 });
 
 export { authRouter };

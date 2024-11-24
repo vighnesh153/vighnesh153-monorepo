@@ -1,6 +1,6 @@
 import { createSingletonFactory } from "@vighnesh153/tools";
 import {
-  AuthTokenGenerator,
+  type AuthTokenGenerator,
   AuthTokenGeneratorImpl,
 } from "@/utils/auth_token_generator.ts";
 
