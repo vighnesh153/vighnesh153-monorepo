@@ -1,8 +1,9 @@
-import { firestore as firestoreFactory, initializeApp } from "firebase-admin";
+import { cert, initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import { config } from "@/config.ts";
 
 const app = initializeApp({
-  credential: config.firebaseConfig,
+  credential: cert(config.firebaseConfig),
 });
 
-export const firestore = firestoreFactory(app);
+export const firestoreInstance = getFirestore(app);

@@ -66,7 +66,7 @@ authRouter.all("/googleAuthCallback", async (c) => {
     { ...cookieOpts, ...secureCookieOpts },
   );
 
-  return c.json({});
+  return c.redirect(config.uiAuthCompleteUrl);
 });
 
 authRouter.all("/initiateLogout", (c) => {
