@@ -1,8 +1,9 @@
 {
   "name": "@vighnesh153/api",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "exports": {
-    "./client": "./src/client/mod.ts"
+    "./client": "./src/client/mod.ts",
+    "./models": "./src/models/mod.ts"
   },
   "license": "MIT",
   "tasks": {
