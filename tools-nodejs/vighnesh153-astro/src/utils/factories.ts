@@ -12,7 +12,6 @@ import {
   type BrowserCookieReader,
   BrowserCookieReaderImpl,
 } from "./BrowserCookieReader.ts";
-import { stage } from "./stage.ts";
 
 export const cookieStoreWrapperFactory = createSingletonFactory<
   CookieStoreWrapper
@@ -23,7 +22,7 @@ export const cookieStoreWrapperFactory = createSingletonFactory<
 export const browserCookieReaderFactory = createSingletonFactory<
   BrowserCookieReader
 >(() => {
-  return new BrowserCookieReaderImpl(stage, cookieStoreWrapperFactory());
+  return new BrowserCookieReaderImpl(cookieStoreWrapperFactory());
 });
 
 export const httpClientFactory = createSingletonFactory<JsonHttpClient>(() => {

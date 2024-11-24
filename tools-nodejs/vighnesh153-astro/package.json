@@ -22,10 +22,11 @@
   "dependencies": {
     "@nanostores/solid": "^0.5.0",
     "@std/assert": "npm:@jsr/std__assert@^1.0.6",
+    "@vighnesh153/api": "npm:@jsr/vighnesh153__api@^0.1.2",
     "@vighnesh153/drawing-app": "0.4.8",
     "@vighnesh153/simple-code-to-html": "0.4.8",
     "@vighnesh153/spl": "0.4.8",
-    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.16",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@0.1.17",
     "@vighnesh153/tools-browser": "npm:@jsr/vighnesh153__tools-browser@0.1.2",
     "@vighnesh153/tsx-bundler": "0.4.8",
     "firebase": "^11.0.1",

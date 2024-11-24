@@ -1,4 +1,5 @@
-import { routes } from "@/utils";
+// TODO
+// import { routes } from "@/utils";
 import type { JsonHttpClient } from "@vighnesh153/tools";
 import type {
   FileUploadMetadataFetcher,
@@ -34,7 +35,9 @@ export class FileUploadMetadataFetcherImpl
       CreateUploadPresignedUrlRequest,
       CreateUploadPresignedUrlResponse
     >({
-      path: routes.api.createUploadPresignedUrl.path,
+      // TODO
+      // path: routes.api.createUploadPresignedUrl.path,
+      path: "",
       data: request,
       credentials: "include",
     });

@@ -1,4 +1,7 @@
-import { routes } from "./content/urls.ts";
+import {
+  initiateGoogleLogin,
+  initiateLogout as clientInitiateLogout,
+} from "@vighnesh153/api/client";
 import { logAnalyticsEvent } from "./firebase_config.ts";
 
 export const onAuthSuccessRedirectPathKey = "on_auth_success_redirect_path";
@@ -9,7 +12,7 @@ export function initiateLoginWithGoogle() {
     onAuthSuccessRedirectPathKey,
     window.location.toString(),
   );
-  window.location.assign(routes.api.initiateGoogleLogin.path);
+  initiateGoogleLogin();
 }
 
 export async function initiateLogout() {
@@ -18,5 +21,5 @@ export async function initiateLogout() {
     onAuthSuccessRedirectPathKey,
     window.location.toString(),
   );
-  window.location.assign(routes.api.initiateLogout.path);
+  clientInitiateLogout();
 }
