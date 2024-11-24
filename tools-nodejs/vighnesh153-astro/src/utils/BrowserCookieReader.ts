@@ -1,8 +1,8 @@
 import type { CookieStoreWrapper } from "@vighnesh153/tools-browser";
-import { type CompleteUserInfo } from "@vighnesh153/tools";
-import { cookieKeys } from "@vighnesh153/tools/vighnesh153";
 
 import { cookieStoreWrapperFactory } from "./factories.ts";
+import { cookieKeys } from "@vighnesh153/api/client";
+import { CompleteUserInfo } from "@vighnesh153/api/models";
 
 export interface BrowserCookieReader {
   readUserInfo: () => Promise<CompleteUserInfo | null>;
@@ -21,7 +21,18 @@ export class BrowserCookieReaderImpl implements BrowserCookieReader {
         cookieKey,
       );
       const jsonUserString = atob(cookieValueString);
-      return JSON.parse(jsonUserString) as CompleteUserInfo;
+      const maybeUser = JSON.parse(jsonUserString);
+
+      const result = CompleteUserInfo.safeParse(maybeUser);
+      if (result.success) {
+        return result.data;
+      }
+
+      console.log(
+        "Some error occurred while parsing user info cookie:",
+        result.error.errors,
+      );
+      return null;
     } catch (e) {
       console.warn(`Couldn't get or parse user info cookie:`, e);
       return null;
