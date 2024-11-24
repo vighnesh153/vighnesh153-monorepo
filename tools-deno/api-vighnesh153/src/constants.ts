@@ -32,3 +32,5 @@ export const apiHost = apiHosts[key];
 export const apiDomain = apiDomains[key];
 export const uiHost = uiHosts[key];
 export const uiDomain = uiDomains[key];
+export const serverAuthRedirectUrl = `${apiDomain}/googleAuthCallback`;
+export const uiAuthCompleteUrl = `${uiDomain}/auth/callback`;
