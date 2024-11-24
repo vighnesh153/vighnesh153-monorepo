@@ -1,12 +1,13 @@
-import { JsonHttpClient, JsonHttpClientImpl, not } from "@vighnesh153/tools";
+import { type JsonHttpClient, not } from "@vighnesh153/tools";
 import { decodeUserInfo } from "./decode_user_info.ts";
-import { UserRepository } from "@/repositories/mod.ts";
+import type { UserRepository } from "@/repositories/mod.ts";
 import {
   authTokenGeneratorFactory,
+  jsonHttpClientFactory,
   userRepositoryFactory,
 } from "@/factories/mod.ts";
-import { AuthTokenGenerator } from "@/utils/auth_token_generator.ts";
-import { CompleteUserInfo } from "@/models/user_info.ts";
+import type { AuthTokenGenerator } from "@/utils/auth_token_generator.ts";
+import type { CompleteUserInfo } from "@/models/user_info.ts";
 import { buildTokenFetchRequest } from "./build_token_fetch_request.ts";
 
 type ControllerResponse = { success: false } | {
@@ -18,7 +19,7 @@ type ControllerResponse = { success: false } | {
 export async function googleAuthCallbackController(
   {
     authCallbackCode = "",
-    httpClient = new JsonHttpClientImpl({ baseUrl: "" }),
+    httpClient = jsonHttpClientFactory(),
     userRepository = userRepositoryFactory(),
     authTokenGenerator = authTokenGeneratorFactory(),
   }: {

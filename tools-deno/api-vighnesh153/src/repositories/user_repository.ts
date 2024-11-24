@@ -1,8 +1,11 @@
 import { slugify } from "@std/text/unstable-slugify";
 
 import { firestore as firestoreInstance } from "@/firebase.ts";
-import { CompleteUserInfo, GoogleOAuthUserInfo } from "@/models/user_info.ts";
-import { SimpleRandomStringGenerator } from "@/utils/simple_random_string_generator.ts";
+import {
+  CompleteUserInfo,
+  type GoogleOAuthUserInfo,
+} from "@/models/user_info.ts";
+import type { SimpleRandomStringGenerator } from "@/utils/simple_random_string_generator.ts";
 import { SimpleRandomStringGeneratorImpl } from "@/utils/simple_random_string_generator.ts";
 
 export interface UserRepository {
