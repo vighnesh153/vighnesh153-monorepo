@@ -1,6 +1,6 @@
 import { slugify } from "@std/text/unstable-slugify";
 
-import { firestore as firestoreInstance } from "@/firebase.ts";
+import { firestoreInstance } from "@/firebase.ts";
 import {
   CompleteUserInfo,
   type GoogleOAuthUserInfo,
@@ -32,9 +32,6 @@ export class FirebaseUserRepository implements UserRepository {
   ): Promise<CompleteUserInfo | null> {
     const {
       firestore,
-      getUserByUserIdCollection,
-      getUserIdByEmailCollection,
-      getUserIdByUsernameCollection,
       simpleRandomStringGenerator,
     } = this;
 
@@ -42,7 +39,7 @@ export class FirebaseUserRepository implements UserRepository {
       console.log("Fetching user having email:", oauthUser.email);
 
       const maybeUser = await tx.get(
-        getUserIdByEmailCollection().doc(oauthUser.email),
+        this.getUserIdByEmailCollection().doc(oauthUser.email),
       );
 
       if (maybeUser.exists) {
@@ -65,15 +62,15 @@ export class FirebaseUserRepository implements UserRepository {
       console.log("Attempting to create user records...");
       await tx
         .create(
-          getUserByUserIdCollection().doc(user.userId),
+          this.getUserByUserIdCollection().doc(user.userId),
           user,
         )
         .create(
-          getUserIdByEmailCollection().doc(user.email),
+          this.getUserIdByEmailCollection().doc(user.email),
           { userId: user.userId },
         )
-        .create(getUserIdByUsernameCollection().doc(user.username), {
-          username: user.username,
+        .create(this.getUserIdByUsernameCollection().doc(user.username), {
+          userId: user.userId,
         });
 
       console.log("Created user records successfully.");
@@ -86,12 +83,14 @@ export class FirebaseUserRepository implements UserRepository {
 
     try {
       console.log("Fetching user id...");
-      const userId = await getUserIdByEmailCollection().doc(oauthUser.email)
-        .get();
+      const userId = (await this.getUserIdByEmailCollection().doc(
+        oauthUser.email,
+      )
+        .get()).data()?.userId;
 
-      console.log("Fetching user user for userId:", userId);
-      const user = await getUserByUserIdCollection().doc(
-        userId.data()?.userId ?? "",
+      console.log("Fetching user for userId:", userId);
+      const user = await this.getUserByUserIdCollection().doc(
+        userId ?? "",
       ).get();
 
       const parsedUser = CompleteUserInfo.safeParse(user.data());
