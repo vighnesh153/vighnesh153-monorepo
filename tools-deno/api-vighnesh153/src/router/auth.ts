@@ -4,7 +4,7 @@ import type { CookieOptions } from "hono/utils/cookie";
 import { assert } from "@std/assert";
 
 import { isStringEmpty, milliseconds, not } from "@vighnesh153/tools";
-import { cookieKeys } from "@vighnesh153/tools/vighnesh153";
+import { cookieKeys } from "@/constants.ts";
 
 import { config } from "@/config.ts";
 
