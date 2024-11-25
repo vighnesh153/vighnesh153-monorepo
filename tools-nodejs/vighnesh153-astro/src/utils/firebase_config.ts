@@ -5,6 +5,7 @@ import {
   getAnalytics as getFirebaseAnalytics,
   logEvent,
 } from "firebase/analytics";
+import { getClientStage } from "@vighnesh153/api/client";
 
 import type { AnalyticsEventName } from "./analytics_event_name.ts";
 
@@ -37,6 +38,10 @@ export function logAnalyticsEvent(
   eventName: AnalyticsEventName,
   extras: Record<string, unknown> | null = null,
 ): void {
+  if (getClientStage() === "local") {
+    // no-op for local development
+    return;
+  }
   if (extras == null) {
     logEvent(getAnalytics(), eventName);
   } else {
