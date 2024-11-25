@@ -8,7 +8,7 @@
   "license": "MIT",
   "tasks": {
     "start": "deno run --env-file --allow-env --allow-net --allow-read --watch ./src/server.ts",
-    "deploy": "deployctl deploy --project=api-vighnesh153"
+    "deploy": "deployctl deploy --prod --project=api-vighnesh153"
   },
   "deploy": {
     "project": "7e47e5fc-e5c8-4acd-a993-ad7cc471179d",

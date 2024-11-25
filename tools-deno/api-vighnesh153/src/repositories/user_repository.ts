@@ -7,6 +7,7 @@ import {
 } from "@/models/user_info.ts";
 import type { SimpleRandomStringGenerator } from "@/utils/simple_random_string_generator.ts";
 import { SimpleRandomStringGeneratorImpl } from "@/utils/simple_random_string_generator.ts";
+import { not } from "@vighnesh153/tools";
 
 export interface UserRepository {
   createOrGetUser(
@@ -35,17 +36,19 @@ export class FirebaseUserRepository implements UserRepository {
       simpleRandomStringGenerator,
     } = this;
 
+    console.log("Received createOrGetUser request...");
+
     const txRes = await firestore.runTransaction(async (tx) => {
-      console.log("Fetching user having email:", oauthUser.email);
+      // console.log("Fetching user having email:", oauthUser.email);
 
-      const maybeUser = await tx.get(
-        this.getUserIdByEmailCollection().doc(oauthUser.email),
-      );
+      // const maybeUser = await tx.get(
+      //   this.getUserIdByEmailCollection().doc(oauthUser.email),
+      // );
 
-      if (maybeUser.exists) {
-        console.log("User already exists. Logging them in..");
-        return;
-      }
+      // if (maybeUser.exists) {
+      //   console.log("User already exists. Logging them in..");
+      //   return;
+      // }
 
       const userId = `${
         slugify(oauthUser.name)
@@ -62,12 +65,12 @@ export class FirebaseUserRepository implements UserRepository {
       console.log("Attempting to create user records...");
       await tx
         .create(
-          this.getUserByUserIdCollection().doc(user.userId),
-          user,
-        )
-        .create(
           this.getUserIdByEmailCollection().doc(user.email),
           { userId: user.userId },
+        )
+        .create(
+          this.getUserByUserIdCollection().doc(user.userId),
+          user,
         )
         .create(this.getUserIdByUsernameCollection().doc(user.username), {
           userId: user.userId,
@@ -76,7 +79,9 @@ export class FirebaseUserRepository implements UserRepository {
       console.log("Created user records successfully.");
     }).catch((e) => e);
 
-    if (txRes instanceof Error) {
+    if (
+      txRes instanceof Error && not(txRes.message.includes("ALREADY_EXISTS"))
+    ) {
       console.log("Some error occurred while creating user:", txRes);
       return null;
     }
