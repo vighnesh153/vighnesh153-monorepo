@@ -1,13 +1,15 @@
+import { assert } from "@std/assert";
 import { slugify } from "@std/text/unstable-slugify";
 
-import { firestoreInstance } from "@/firebase.ts";
+import { not } from "@vighnesh153/tools";
+
+import { FirestoreInstance } from "@/firebase.ts";
 import {
   CompleteUserInfo,
   type GoogleOAuthUserInfo,
 } from "@/models/user_info.ts";
 import type { SimpleRandomStringGenerator } from "@/utils/simple_random_string_generator.ts";
 import { SimpleRandomStringGeneratorImpl } from "@/utils/simple_random_string_generator.ts";
-import { not } from "@vighnesh153/tools";
 
 export interface UserRepository {
   createOrGetUser(
@@ -23,7 +25,6 @@ export class FirebaseUserRepository implements UserRepository {
   };
 
   constructor(
-    private readonly firestore: FirebaseFirestore.Firestore = firestoreInstance,
     private readonly simpleRandomStringGenerator: SimpleRandomStringGenerator =
       new SimpleRandomStringGeneratorImpl(),
   ) {}
@@ -31,25 +32,12 @@ export class FirebaseUserRepository implements UserRepository {
   async createOrGetUser(
     oauthUser: GoogleOAuthUserInfo,
   ): Promise<CompleteUserInfo | null> {
-    const {
-      firestore,
-      simpleRandomStringGenerator,
-    } = this;
+    const firestore = FirestoreInstance.getFirestoreInstance();
+    const { simpleRandomStringGenerator } = this;
 
     console.log("Received createOrGetUser request...");
 
-    const txRes = await firestore.runTransaction(async (tx) => {
-      // console.log("Fetching user having email:", oauthUser.email);
-
-      // const maybeUser = await tx.get(
-      //   this.getUserIdByEmailCollection().doc(oauthUser.email),
-      // );
-
-      // if (maybeUser.exists) {
-      //   console.log("User already exists. Logging them in..");
-      //   return;
-      // }
-
+    try {
       const userId = `${
         slugify(oauthUser.name)
       }-${simpleRandomStringGenerator.generate()}`.toLowerCase();
@@ -63,27 +51,38 @@ export class FirebaseUserRepository implements UserRepository {
       };
 
       console.log("Attempting to create user records...");
-      await tx
-        .create(
+
+      // use transaction
+      await firestore.runTransaction(async (tx) => {
+        await tx.create(
           this.getUserIdByEmailCollection().doc(user.email),
           { userId: user.userId },
-        )
-        .create(
+        );
+        await tx.create(
           this.getUserByUserIdCollection().doc(user.userId),
           user,
-        )
-        .create(this.getUserIdByUsernameCollection().doc(user.username), {
-          userId: user.userId,
-        });
+        );
+        await tx.create(
+          this.getUserIdByUsernameCollection().doc(user.username),
+          { userId: user.userId },
+        );
+      });
 
-      console.log("Created user records successfully.");
-    }).catch((e) => e);
+      console.log("Successfully created user records...");
+    } catch (e) {
+      if (not(e instanceof Error)) {
+        console.log("Some unknown error occurred:", e);
+        return null;
+      }
 
-    if (
-      txRes instanceof Error && not(txRes.message.includes("ALREADY_EXISTS"))
-    ) {
-      console.log("Some error occurred while creating user:", txRes);
-      return null;
+      assert(e instanceof Error);
+
+      if (not(e.message.includes("ALREADY_EXISTS"))) {
+        console.log("Some error occurred while creating user:", e);
+        return null;
+      }
+
+      console.log("User already exists... Proceeding to next step.");
     }
 
     try {
@@ -116,14 +115,20 @@ export class FirebaseUserRepository implements UserRepository {
   }
 
   private getUserByUserIdCollection(): FirebaseFirestore.CollectionReference {
-    return this.firestore.collection(this.collections.userByUserId);
+    return FirestoreInstance.getFirestoreInstance().collection(
+      this.collections.userByUserId,
+    );
   }
 
   private getUserIdByEmailCollection(): FirebaseFirestore.CollectionReference {
-    return this.firestore.collection(this.collections.userIdByEmail);
+    return FirestoreInstance.getFirestoreInstance().collection(
+      this.collections.userIdByEmail,
+    );
   }
 
   private getUserIdByUsernameCollection(): FirebaseFirestore.CollectionReference {
-    return this.firestore.collection(this.collections.userIdByUsername);
+    return FirestoreInstance.getFirestoreInstance().collection(
+      this.collections.userIdByUsername,
+    );
   }
 }

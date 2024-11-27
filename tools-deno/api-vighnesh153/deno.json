@@ -8,15 +8,16 @@
   "license": "MIT",
   "tasks": {
     "start": "deno run --env-file --allow-env --allow-net --allow-read --watch ./src/server.ts",
-    "deploy": "deployctl deploy --prod --project=api-vighnesh153"
+    "deploy": "deployctl deploy --prod --project=api-vighnesh153 --save-config"
   },
   "deploy": {
     "project": "7e47e5fc-e5c8-4acd-a993-ad7cc471179d",
     "exclude": [
+      "**/node_modules",
       "**/node_modules"
     ],
     "include": [],
-    "entrypoint": "./src/server.ts"
+    "entrypoint": "src/server.ts"
   },
   "imports": {
     "@/": "./src/",
