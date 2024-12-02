@@ -21,8 +21,6 @@ pnpm-debug.log*
 .DS_Store
 *.pem
 
-.sst
-sst-env.d.ts
 cdk.context.json
 tsconfig.tsbuildinfo
 
@@ -40,3 +38,6 @@ playwright/.cache
 
 # deno
 deno.json
+
+# firebase
+.firebase

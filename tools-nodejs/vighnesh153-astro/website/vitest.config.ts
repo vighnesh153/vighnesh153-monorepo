@@ -12,7 +12,6 @@ export default getViteConfig({
     // globals: true,
     exclude: [
       "e2e",
-      ".sst",
       ".astro",
       ".turbo",
       "playwright-report",
