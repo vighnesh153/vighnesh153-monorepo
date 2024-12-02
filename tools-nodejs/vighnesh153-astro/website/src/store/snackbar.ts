@@ -14,7 +14,7 @@ export type SnackbarProps = SnackbarPropsApi & {
   dismiss: () => void;
 };
 
-export const mutableSnackbarList = atom<SnackbarProps[]>([]);
+const mutableSnackbarList = atom<SnackbarProps[]>([]);
 export const snackbarList: ReadableAtom<SnackbarProps[]> = mutableSnackbarList;
 
 function removeSnackbar(id: string): void {

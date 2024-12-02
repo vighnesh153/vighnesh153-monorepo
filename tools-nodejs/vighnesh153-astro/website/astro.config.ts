@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 
 import compress from "@playform/compress";
 
+import node from "@astrojs/node";
 import mdx from "@astrojs/mdx";
 import solid from "@astrojs/solid-js";
 import svelte from "@astrojs/svelte";
@@ -22,7 +23,10 @@ export default defineConfig({
     inlineStylesheets: "auto",
     format: "file",
   },
-  output: "static",
+  output: "server",
+  adapter: node({
+    mode: "middleware",
+  }),
   vite: {
     build: {
       sourcemap: isDevCommandRunning,
