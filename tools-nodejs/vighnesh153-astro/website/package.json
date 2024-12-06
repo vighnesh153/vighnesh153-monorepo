@@ -20,7 +20,6 @@
     "test": "run-s install-test-deps test:only"
   },
   "dependencies": {
-    "@astrojs/node": "^8.3.4",
     "@nanostores/solid": "^0.5.0",
     "@std/assert": "npm:@jsr/std__assert@^1.0.6",
     "@vighnesh153/api": "npm:@jsr/vighnesh153__api@^0.1.4",
