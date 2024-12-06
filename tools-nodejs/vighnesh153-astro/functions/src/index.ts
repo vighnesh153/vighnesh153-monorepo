@@ -8,6 +8,7 @@
  */
 
 import * as logger from "firebase-functions/logger";
+import { setGlobalOptions } from "firebase-functions/v2";
 import { HttpsError } from "firebase-functions/v2/https";
 import {
   beforeUserCreated,
@@ -18,6 +19,8 @@ import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 import { firebaseCollections } from "../../constants";
+
+setGlobalOptions({ maxInstances: 2 });
 
 initializeApp();
 
