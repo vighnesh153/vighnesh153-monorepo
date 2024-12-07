@@ -98,8 +98,8 @@ function processFloodFillEvent(
     color,
     startPoint: { x: startPointX, y: startPointY },
   } = event;
-  const rounededStartPointX = Math.round(startPointX);
-  const rounededStartPointY = Math.round(startPointY);
+  const roundedStartPointX = Math.round(startPointX);
+  const roundedStartPointY = Math.round(startPointY);
 
   // Initial pixel information for the entire canvas. Doing it this way because invoking
   // getImageData several times is expensive than just doing it once
@@ -113,8 +113,8 @@ function processFloodFillEvent(
   // Color of the starting pixel
   const initialColor = getColorForPixel(
     canvasPixelData,
-    rounededStartPointX,
-    rounededStartPointY,
+    roundedStartPointX,
+    roundedStartPointY,
   );
   const newColor = color.rgba;
 
@@ -124,7 +124,7 @@ function processFloodFillEvent(
   // set of all the nodes that are already visited
   const visitedNodes: Record<number, Record<number, boolean>> = {};
   const pixelQueue = new Queue(
-    packPoint(rounededStartPointX, rounededStartPointY),
+    packPoint(roundedStartPointX, roundedStartPointY),
   );
 
   // Implementation of BFS algorithm for filling colors in
