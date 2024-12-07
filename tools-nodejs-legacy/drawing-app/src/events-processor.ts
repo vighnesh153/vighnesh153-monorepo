@@ -178,21 +178,17 @@ function processFloodFillEvent(
 
 export function processAppEvent(
   canvasWrapper: CanvasWrapper,
-  eventsQueue: Queue<AppEvent>,
+  event: AppEvent,
 ): void {
-  while (not(eventsQueue.isEmpty)) {
-    const event = eventsQueue.popLeft();
-
-    if (event.type === "point") {
-      processDrawPointEvent(canvasWrapper, event);
-    } else if (event.type === "line") {
-      processDrawLineEvent(canvasWrapper, event);
-    } else if (event.type === "fill") {
-      processFloodFillEvent(canvasWrapper, event);
-    } else if (event.type === "clear") {
-      processClearScreenEvent(canvasWrapper, event);
-    } else if (event.type === "commit") {
-      // no op
-    }
+  if (event.type === "point") {
+    processDrawPointEvent(canvasWrapper, event);
+  } else if (event.type === "line") {
+    processDrawLineEvent(canvasWrapper, event);
+  } else if (event.type === "fill") {
+    processFloodFillEvent(canvasWrapper, event);
+  } else if (event.type === "clear") {
+    processClearScreenEvent(canvasWrapper, event);
+  } else if (event.type === "commit") {
+    // no op
   }
 }
