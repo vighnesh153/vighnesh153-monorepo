@@ -1,7 +1,7 @@
 import type { JSX } from "solid-js";
 
 import { classes } from "@/utils/index.ts";
-import { CheckIcon, InfoIcon, WarnIcon } from "@/icons/solid/index.ts";
+import { CheckIcon, InfoIcon, WarnIcon } from "@/icons";
 
 export type NoteType = "info" | "warn" | "success" | "error";
 

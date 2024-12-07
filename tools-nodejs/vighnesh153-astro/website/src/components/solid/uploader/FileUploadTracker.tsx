@@ -3,7 +3,7 @@ import { assert } from "@std/assert";
 import { type FileUploadState } from "@vighnesh153/tools/file_upload";
 
 import { Spinner } from "@/components/solid/Spinner.tsx";
-import { CheckIcon, FileIcon } from "@/icons/solid/index.ts";
+import { CheckIcon, FileIcon } from "@/icons";
 import { createSnackbar } from "@/store/snackbar.ts";
 import { classes, copyToClipboard } from "@/utils/index.ts";
 

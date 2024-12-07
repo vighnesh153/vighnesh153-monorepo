@@ -2,12 +2,7 @@ import { createSignal, type JSX, onMount, Show } from "solid-js";
 
 import type { SnackbarProps } from "@/store/snackbar.ts";
 import { classes } from "@/utils/index.ts";
-import {
-  CheckIcon,
-  CloseIcon,
-  InfoIcon,
-  WarnIcon,
-} from "@/icons/solid/index.ts";
+import { CheckIcon, CloseIcon, InfoIcon, WarnIcon } from "@/icons";
 
 export function Snackbar(props: SnackbarProps): JSX.Element {
   const config = mapping[props.type];

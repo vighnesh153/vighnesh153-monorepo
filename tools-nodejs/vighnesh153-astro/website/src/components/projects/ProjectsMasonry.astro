@@ -1,9 +1,9 @@
 ---
-import { allProjects, classes } from '@/utils/index.ts';
-import FolderIcon from '@/icons/FolderIcon.astro';
-import ProjectIconLink from './ProjectIconLink.astro';
-import ProjectTag from './ProjectTag.astro';
-import Link from '../Link.svelte';
+import { allProjects, classes } from "@/utils/index.ts";
+import FolderIcon from "@/icons/FolderIcon.astro";
+import ProjectIconLink from "./ProjectIconLink.astro";
+import ProjectTag from "./ProjectTag.astro";
+import { Link } from "../Link.tsx";
 ---
 
 <ul
@@ -26,7 +26,11 @@ import Link from '../Link.svelte';
           <ul class="fill-text flex gap-4">
             <li class="[&:is(:focus-within,:hover)]:fill-accent">
               <ProjectIconLink href={links.github.href} title="source code">
-                <links.github.Icon role="img" width="1.25rem" height="1.25rem" />
+                <links.github.Icon
+                  role="img"
+                  width="1.25rem"
+                  height="1.25rem"
+                />
               </ProjectIconLink>
             </li>
             <li class="[&:is(:focus-within,:hover)]:fill-accent">

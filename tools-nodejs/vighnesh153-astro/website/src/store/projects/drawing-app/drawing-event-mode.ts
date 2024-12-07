@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { atom } from "nanostores";
 import { type EventMode } from "@vighnesh153/drawing-app";
 
-export const drawingEventModeStore = writable<EventMode>("draw");
+export const drawingEventModeStore = atom<EventMode>("draw");

@@ -1,8 +1,8 @@
 ---
 import { classes, externalLinks, projectNavItems } from "@/utils/index.ts";
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import Link from "@/components/Link.svelte";
-import TsxPlaygroundRoot from "@/components/projects/tsx-playground/TsxPlaygroundRoot.svelte";
+import { Link } from "@/components/Link.tsx";
+import { TsxPlaygroundRoot } from "@/components/projects/tsx-playground/TsxPlaygroundRoot.tsx";
 
 const title = "Vighnesh Raut | Project - TSX Playground";
 const description = `A in-browser transpiler and bundler for React.js and Typescript`;
@@ -22,7 +22,7 @@ const description = `A in-browser transpiler and bundler for React.js and Typesc
         id="githubLink">Github</Link
       >
     </p>
-    <TsxPlaygroundRoot client:only="svelte" />
+    <TsxPlaygroundRoot client:only="solid" />
   </div>
 </ContentLayout>
 

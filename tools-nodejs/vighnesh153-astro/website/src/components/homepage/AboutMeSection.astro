@@ -1,8 +1,13 @@
 ---
-import { hashTags, companyUrls, currentTechnologies, classes } from '@/utils/index.ts';
-import SectionTitle from './SectionTitle.astro';
-import Link from '../Link.svelte';
-import SectionListItem from './SectionListItem.astro';
+import {
+  hashTags,
+  companyUrls,
+  currentTechnologies,
+  classes,
+} from "@/utils/index.ts";
+import SectionTitle from "./SectionTitle.astro";
+import Link from "../Link.tsx";
+import SectionListItem from "./SectionListItem.astro";
 ---
 
 <section
@@ -25,23 +30,29 @@ import SectionListItem from './SectionListItem.astro';
     `)}
   >
     <p>
-      Hello. My name is Vighnesh and I enjoy creating projects involving graphics manipulations, cli-tools, libraries
-      and also developer tools. My interest in software development started a few years back when I first learnt about
-      Javascript. Since then, I have been building teeny-tiny projects for fun. I am also fascinated by compilers and I
-      am on a journey to master the art of building a compiler
+      Hello. My name is Vighnesh and I enjoy creating projects involving
+      graphics manipulations, cli-tools, libraries and also developer tools. My
+      interest in software development started a few years back when I first
+      learnt about Javascript. Since then, I have been building teeny-tiny
+      projects for fun. I am also fascinated by compilers and I am on a journey
+      to master the art of building a compiler
       <br />
       <br />
-      Fast-forward to today, and I have had the privilege to work for{' '}
+      Fast-forward to today, and I have had the privilege to work for{" "}
       <Link href={companyUrls.google} target="_blank">Google</Link>
-      ,{' '}
+      ,{" "}
       <Link href={companyUrls.amazon} target="_blank">Amazon</Link>
-      ,{' '}
-      <Link href={companyUrls.smarterCodes} target="_blank">an AI startup</Link>{' '}
-      and{' '}
-      <Link href={companyUrls.tavisca} target="_blank">a loyalty rewards company</Link>
+      ,{" "}
+      <Link href={companyUrls.smarterCodes} target="_blank">an AI startup</Link
+      >{" "}
+      and{" "}
+      <Link href={companyUrls.tavisca} target="_blank"
+        >a loyalty rewards company</Link
+      >
       <br />
       <br />
-      My Main focus these days is building next-gen developer tools for GoogleTV at{' '}
+      My Main focus these days is building next-gen developer tools for GoogleTV
+      at{" "}
       <Link href={companyUrls.google} target="_blank">Google</Link>
       <br />
       <br />

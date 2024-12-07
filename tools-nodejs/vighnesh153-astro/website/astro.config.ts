@@ -34,5 +34,9 @@ export default defineConfig({
         },
       },
     },
+    // temporary fix: https://github.com/withastro/astro/issues/12608
+    resolve: {
+      conditions: ["browser"],
+    },
   },
 });

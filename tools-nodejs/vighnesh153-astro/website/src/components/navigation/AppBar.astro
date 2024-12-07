@@ -1,12 +1,12 @@
 ---
-import RvLogoIcon from '@/icons/RvLogoIcon.astro';
-import HamburgerIcon from '@/icons/HamburgerIcon.astro';
-import CloseIcon from '@/icons/CloseIcon.svelte';
+import { RvLogoIcon } from "@/icons";
+import HamburgerIcon from "@/icons/HamburgerIcon.astro";
+import { CloseIcon } from "@/icons/CloseIcon.tsx";
 
-import { AuthIndicator } from '@/components/solid/index.ts';
-import { classes, hashTags, type NavItem } from '@/utils/index.ts';
+import { AuthIndicator } from "@/components/solid/index.ts";
+import { classes, hashTags, type NavItem } from "@/utils/index.ts";
 
-import NavigationItems from './NavigationItems.astro';
+import NavigationItems from "./NavigationItems.astro";
 
 interface Props {
   navItems?: NavItem[];
@@ -45,11 +45,14 @@ const { navItems } = Astro.props;
   `)}
 >
   <a href="/" aria-label="Logo" class="text-accent inline-block">
-    <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
+    <RvLogoIcon width="2.5rem" height="2.5rem" style={{ "font-size": 0 }} />
   </a>
 
   {/* Horizontal navigation */}
-  <NavigationItems class="hidden gap-6 lg:flex lg:items-center" navItems={navItems}>
+  <NavigationItems
+    class="hidden gap-6 lg:flex lg:items-center"
+    navItems={navItems}
+  >
     <AuthIndicator slot="end" client:load />
   </NavigationItems>
   <button
@@ -97,31 +100,37 @@ const { navItems } = Astro.props;
 </header>
 
 <script>
-  import { debounce } from '@vighnesh153/tools';
+  import { debounce } from "@vighnesh153/tools";
 
-  const checkbox = document.querySelector('#side-navigation-open');
-  const header = document.querySelector('#header');
-  const hamburgerButton = document.querySelector('#hamburger-menu');
-  const closeMenuButton = document.querySelector('#close-menu');
-  const verticalNav = document.querySelector('#vertical-nav');
+  const checkbox = document.querySelector("#side-navigation-open");
+  const header = document.querySelector("#header");
+  const hamburgerButton = document.querySelector("#hamburger-menu");
+  const closeMenuButton = document.querySelector("#close-menu");
+  const verticalNav = document.querySelector("#vertical-nav");
 
   const boxShadowScrollYOffset = 70;
   const showHeaderOffset = 200;
   let previousScrollY = 0;
 
   window.addEventListener(
-    'scroll',
+    "scroll",
     debounce(() => {
       const currentScrollY = window.scrollY;
-      header?.classList.toggle('box-shadow', currentScrollY >= boxShadowScrollYOffset);
-      header?.classList.toggle('show-header', currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY);
+      header?.classList.toggle(
+        "box-shadow",
+        currentScrollY >= boxShadowScrollYOffset,
+      );
+      header?.classList.toggle(
+        "show-header",
+        currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY,
+      );
       previousScrollY = currentScrollY;
-    }, 16)
+    }, 16),
   );
 
   // this is needed for when header is hidden and one of its children gets focus
-  header?.addEventListener('focusin', () => {
-    header?.classList.toggle('show-header', true);
+  header?.addEventListener("focusin", () => {
+    header?.classList.toggle("show-header", true);
   });
 
   // @ts-ignore
@@ -140,44 +149,48 @@ const { navItems } = Astro.props;
     }
   };
 
-  hamburgerButton?.addEventListener('click', () => {
+  hamburgerButton?.addEventListener("click", () => {
     toggleCheckbox(true);
     // @ts-ignore
     closeMenuButton?.focus();
   });
 
-  closeMenuButton?.addEventListener('click', () => {
+  closeMenuButton?.addEventListener("click", () => {
     closeMenu();
   });
 
   // @ts-ignore
-  const getVerticalNavFocusableItems = () => Array.from(verticalNav.querySelectorAll('a, button'));
+  const getVerticalNavFocusableItems = () =>
+    Array.from(verticalNav?.querySelectorAll("a, button") ?? []);
 
-  verticalNav?.addEventListener('click', (e) => {
+  verticalNav?.addEventListener("click", (e) => {
     // @ts-ignore
-    const clickedElement = e.target.closest('a, button');
+    const clickedElement = e.target.closest("a, button");
     const currentPathName = window.location.pathname;
 
     // don't close menu if a.href is same as current path but only hash is different
-    if (clickedElement?.tagName === 'A' && currentPathName === new URL(clickedElement.href).pathname) {
+    if (
+      clickedElement?.tagName === "A" &&
+      currentPathName === new URL(clickedElement.href).pathname
+    ) {
       closeMenu(false);
     }
   });
 
   // a11y
-  verticalNav?.addEventListener('keydown', (e) => {
+  verticalNav?.addEventListener("keydown", (e) => {
     const focusableItems = getVerticalNavFocusableItems();
     const firstItem = focusableItems[0];
     const lastItem = focusableItems[focusableItems.length - 1];
 
     // @ts-ignore
-    const isShiftTabPressed = e.shiftKey && e.key === 'Tab';
+    const isShiftTabPressed = e.shiftKey && e.key === "Tab";
     // @ts-ignore
-    const isOnlyTabPressed = !e.shiftKey && e.key === 'Tab';
+    const isOnlyTabPressed = !e.shiftKey && e.key === "Tab";
     // @ts-ignore
-    const isEscapeKeyPressed = e.key === 'Escape';
+    const isEscapeKeyPressed = e.key === "Escape";
     // @ts-ignore
-    const isEnterKeyPressed = e.key === 'Enter';
+    const isEnterKeyPressed = e.key === "Enter";
 
     if (isEscapeKeyPressed) {
       e.preventDefault();
@@ -188,12 +201,12 @@ const { navItems } = Astro.props;
     if (e.target !== closeMenuButton && isEnterKeyPressed) {
       const currentPathName = window.location.pathname;
       // @ts-ignore
-      const navigationPathName = new URL(e.target?.href ?? '').pathname;
+      const navigationPathName = new URL(e.target?.href ?? "").pathname;
       // @ts-ignore
       const tagName = e.target?.tagName;
 
       // don't close menu if a.href is same as current path but only hash is different
-      if (tagName === 'A' && currentPathName === navigationPathName) {
+      if (tagName === "A" && currentPathName === navigationPathName) {
         closeMenu(false);
       }
 

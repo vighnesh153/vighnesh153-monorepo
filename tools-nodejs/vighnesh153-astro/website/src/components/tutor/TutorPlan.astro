@@ -1,6 +1,10 @@
 ---
-import CircleChevronRightIcon from '@/icons/CircleChevronRightIcon.astro';
-import { classes, type TutorPlanProps, type TutorPlanTag } from '@/utils/index.ts';
+import { CircleChevronRightIcon } from "@/icons/CircleChevronRightIcon.tsx";
+import {
+  classes,
+  type TutorPlanProps,
+  type TutorPlanTag,
+} from "@/utils/index.ts";
 
 interface Props {
   item: TutorPlanProps;
@@ -9,24 +13,24 @@ interface Props {
 const { item } = Astro.props;
 
 const tagToColorMap: Record<TutorPlanTag, string> = {
-  beginner: 'bg-[green] text-secondary',
-  intermediate: 'bg-[#b97d01] text-secondary',
-  advanced: 'bg-[#910000] text-text',
+  beginner: "bg-[green] text-secondary",
+  intermediate: "bg-[#b97d01] text-secondary",
+  advanced: "bg-[#910000] text-text",
 };
 
 const rootClasses = classes(
-  'sm:mt-0 relative',
-  'flex flex-1 items-stretch flex-col',
-  'bg-backgroundDark',
-  'border-2 rounded-xl'
+  "sm:mt-0 relative",
+  "flex flex-1 items-stretch flex-col",
+  "bg-backgroundDark",
+  "border-2 rounded-xl",
 );
 ---
 
 <div
   class:list={{
     [rootClasses]: true,
-    'mt-10 border-primary shadow-primary shadow-2xl': item.isPopular,
-    'mt-6 border-text4': !item.isPopular,
+    "mt-10 border-primary shadow-primary shadow-2xl": item.isPopular,
+    "mt-6 border-text4": !item.isPopular,
   }}
   class=""
 >
@@ -34,9 +38,9 @@ const rootClasses = classes(
     item.isPopular ? (
       <span
         class={classes(
-          'w-32 absolute -top-5 left-0 right-0 mx-auto px-3 py-2',
-          'rounded-full border border-text4',
-          'bg-primary text-backgroundDark text-center text-sm font-bold'
+          "w-32 absolute -top-5 left-0 right-0 mx-auto px-3 py-2",
+          "rounded-full border border-text4",
+          "bg-primary text-backgroundDark text-center text-sm font-bold",
         )}
       >
         Popular
@@ -46,7 +50,7 @@ const rootClasses = classes(
   <div class="p-8 space-y-4 border-b border-text4">
     <span class="font-bold text-xl">{item.name}</span>
     <div class="text-2xl text-accent font-semibold">
-      ₹{new Intl.NumberFormat('en-IN').format(item.price)}{' '}
+      ₹{new Intl.NumberFormat("en-IN").format(item.price)}{" "}
       <span class="text-xl text-text3 font-normal">/mo</span>
     </div>
     <p class="text-text2">{item.description}</p>
@@ -54,7 +58,7 @@ const rootClasses = classes(
       item.tags.length > 0 ? (
         <ul class="flex gap-4">
           {item.tags.map((tag) => (
-            <li class={classes(tagToColorMap[tag], 'px-1 py-[1px] rounded-md')}>
+            <li class={classes(tagToColorMap[tag], "px-1 py-[1px] rounded-md")}>
               <span class="uppercase text-xs font-bold">{tag}</span>
             </li>
           ))}

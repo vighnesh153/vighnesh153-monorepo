@@ -1,10 +1,15 @@
-import type { HTMLAttributes } from "astro/types";
-import GithubIcon from "@/icons/GithubIcon.astro";
-import EyeIcon from "@/icons/EyeIcon.astro";
+import { GithubIcon } from "@/icons/GithubIcon.tsx";
+import { EyeIcon } from "@/icons/EyeIcon.tsx";
 import { externalLinks, internalLinks } from "./links.ts";
+import type { JSX } from "solid-js";
 
 interface ProjectLink {
-  Icon: (props: HTMLAttributes<"svg">) => unknown;
+  Icon: (
+    props: Pick<
+      JSX.SvgSVGAttributes<SVGElement>,
+      "role" | "width" | "height" | "style"
+    >,
+  ) => JSX.Element;
   href: string;
 }
 

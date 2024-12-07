@@ -1,6 +1,6 @@
 ---
-import { classes, internalLinks } from '@/utils/index.ts';
-import Link from '../Link.svelte';
+import { classes, internalLinks } from "@/utils/index.ts";
+import Link from "../Link.tsx";
 ---
 
 <section
@@ -46,10 +46,15 @@ import Link from '../Link.svelte';
     text-base sm:text-lg md:text-xl
   `)}
   >
-    I am a Software Engineer specializing in building exceptional digital experiences and beloved developer tools.
-    Currently, I am focused on building accessible, developer-centered products for different causes.
+    I am a Software Engineer specializing in building exceptional digital
+    experiences and beloved developer tools. Currently, I am focused on building
+    accessible, developer-centered products for different causes.
   </p>
-  <Link linkType="primary-btn" href={internalLinks.homePage.contactMe} class="focus-visible:outline-primary mt-6">
+  <Link
+    linkType="primary-btn"
+    href={internalLinks.homePage.contactMe}
+    class="focus-visible:outline-primary mt-6"
+  >
     Get in Touch
   </Link>
   <br />
