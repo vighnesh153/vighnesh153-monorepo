@@ -12,6 +12,12 @@
     },
     "types": ["vite/client", "@testing-library/jest-dom"]
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.astro", "./**/*.svelte"],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.astro",
+    "./**/*.svelte",
+    "./.astro/types.d.ts"
+  ],
   "exclude": ["dist", "build", "node_modules"]
 }

@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "npx firebase serve",
     "deploy": "npx firebase deploy",
     "deploy:hosting": "npx firebase deploy --only hosting",
     "deploy:functions": "npx firebase deploy --only functions"

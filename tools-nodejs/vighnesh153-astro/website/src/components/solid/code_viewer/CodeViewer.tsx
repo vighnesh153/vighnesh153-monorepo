@@ -1,11 +1,7 @@
 import { createSignal, type JSX, Show } from "solid-js";
 import { not } from "@vighnesh153/tools";
 import { createSnackbar } from "@/store/snackbar.ts";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  CopyIcon,
-} from "@/icons/solid/index.ts";
+import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "@/icons";
 import { classes, copyToClipboard } from "@/utils/index.ts";
 
 export type HtmlCodeViewerProps = {

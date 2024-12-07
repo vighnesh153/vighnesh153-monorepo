@@ -1,5 +1,5 @@
 import { not } from "@vighnesh153/tools";
-import { UploadIcon } from "@/icons/solid/index.ts";
+import { UploadIcon } from "@/icons";
 import { classes } from "@/utils/index.ts";
 
 export type UploadInputBoxProps = {
