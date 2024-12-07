@@ -1,22 +1,26 @@
-import { not, Queue, Stack } from "@vighnesh153/tools";
+import { not, Stack } from "@vighnesh153/tools";
 import { type AppEvent, buildClearScreenEvent } from "./events.ts";
 import { Color } from "./colors.ts";
+import { processAppEvent } from "./events-processor.ts";
+import { CanvasWrapper } from "./CanvasWrapper.ts";
 
 export type EventsManager = {
   undoEventsStack: Stack<AppEvent>;
   redoEventsStack: Stack<AppEvent>;
-  pendingQueue: Queue<AppEvent>; // events pending to be processed
+  onAppEvent: (event: AppEvent) => void;
 };
 
 function isCommitEvent(event?: AppEvent): boolean {
   return event?.type === "commit";
 }
 
-export function buildEventsManager(): EventsManager {
+export function buildEventsManager(
+  canvasWrapper: CanvasWrapper,
+): EventsManager {
   return {
     undoEventsStack: new Stack(),
     redoEventsStack: new Stack(),
-    pendingQueue: new Queue(),
+    onAppEvent: (event) => processAppEvent(canvasWrapper, event),
   };
 }
 
@@ -51,13 +55,16 @@ export function undo(eventsManager: EventsManager): boolean {
     eventsManager.redoEventsStack.push(event);
   }
 
-  // add events to pending queue
-  eventsManager.pendingQueue = new Queue(
+  // Process events
+  const events = [
     buildClearScreenEvent({
       color: Color.White,
     }),
     ...eventsManager.undoEventsStack.toArray(),
-  );
+  ];
+  for (const event of events) {
+    eventsManager.onAppEvent(event);
+  }
 
   return true;
 }
@@ -74,7 +81,8 @@ export function redo(eventsManager: EventsManager): boolean {
       break;
     }
 
-    eventsManager.pendingQueue.pushRight(event);
+    // Process event
+    eventsManager.onAppEvent(event);
   }
 
   return true;
@@ -87,5 +95,8 @@ export function publishEvents(
   eventsManager.undoEventsStack.push(...events);
   eventsManager.redoEventsStack = new Stack();
 
-  eventsManager.pendingQueue.pushRight(...events);
+  // Process event
+  for (const event of events) {
+    eventsManager.onAppEvent(event);
+  }
 }
