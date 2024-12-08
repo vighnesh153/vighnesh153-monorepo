@@ -29,9 +29,6 @@
   "[scss]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
@@ -57,7 +54,6 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "markdown.preview.fontSize": 20,
   "scm.inputFontSize": 16,
-  "svelte.enable-ts-plugin": true,
   "terminal.integrated.fontSize": 20,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Atom One Dark",

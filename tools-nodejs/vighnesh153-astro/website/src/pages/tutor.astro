@@ -1,33 +1,53 @@
 ---
-import { classes, codingTutorPlans, mathTutorPlans, tutorNavItems } from '@/utils/index.ts';
-import ContentLayout from '@/layouts/ContentLayout.astro';
-import Link from '@/components/Link.svelte';
-import CourseSection from '@/components/tutor/CourseSection.astro';
+import {
+  classes,
+  codingTutorPlans,
+  mathTutorPlans,
+  tutorNavItems,
+} from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { Link } from "@/components/Link.tsx";
+import CourseSection from "@/components/tutor/CourseSection.astro";
 
-const title = 'Vighnesh Raut | Tutor';
+const title = "Vighnesh Raut | Tutor";
 const description =
-  'Are you interested in learning math or computer science? You have come to ' +
-  'the right place! Check out our courses and find the one that excites you the most.';
+  "Are you interested in learning math or computer science? You have come to " +
+  "the right place! Check out our courses and find the one that excites you the most.";
 
-const mathSectionId = 'math';
-const codingSectionId = 'coding';
+const mathSectionId = "math";
+const codingSectionId = "coding";
 ---
 
 <ContentLayout title={title} description={description} navItems={tutorNavItems}>
-  <div class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+  <div
+    class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}
+  >
     <h1 class="text-3xl">Learn Mathematics and Computer Science</h1>
     <div class="max-w-lg mt-10 text-text2">
-      I am Vighnesh, a Software Engineer at Google. Prior to joining Google, I worked as a Software Engineer at Amazon.
-      I am passionate about mathematics and programming, and I love to teach these subjects to people. If you or any of
-      your family members or friends are interested in learning about math and/or computer science, I would be happy to
-      assist.
+      I am Vighnesh, a Software Engineer at Google. Prior to joining Google, I
+      worked as a Software Engineer at Amazon. I am passionate about mathematics
+      and programming, and I love to teach these subjects to people. If you or
+      any of your family members or friends are interested in learning about
+      math and/or computer science, I would be happy to assist.
     </div>
     <div class="mt-6 flex gap-5">
-      <Link linkType="primary-btn" href={`#${codingSectionId}`}>Coding courses</Link>
-      <Link linkType="secondary-btn" href={`#${mathSectionId}`}>Math courses</Link>
+      <Link linkType="primary-btn" href={`#${codingSectionId}`}
+        >Coding courses</Link
+      >
+      <Link linkType="secondary-btn" href={`#${mathSectionId}`}
+        >Math courses</Link
+      >
     </div>
 
-    <CourseSection sectionId={mathSectionId} title="Mathematics courses" plans={mathTutorPlans} />
-    <CourseSection sectionId={codingSectionId} title="Coding courses" plans={codingTutorPlans} />
+    <CourseSection
+      sectionId={mathSectionId}
+      title="Mathematics courses"
+      plans={mathTutorPlans}
+    />
+    <CourseSection
+      sectionId={codingSectionId}
+      title="Coding courses"
+      plans={codingTutorPlans}
+    />
   </div>
 </ContentLayout>

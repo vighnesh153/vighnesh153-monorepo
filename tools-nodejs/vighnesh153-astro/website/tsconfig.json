@@ -16,7 +16,6 @@
     "./**/*.ts",
     "./**/*.tsx",
     "./**/*.astro",
-    "./**/*.svelte",
     "./.astro/types.d.ts"
   ],
   "exclude": ["dist", "build", "node_modules"]

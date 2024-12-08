@@ -9,9 +9,8 @@ import {
 
 import { Button } from "@/components/solid/buttons/Button.tsx";
 
-const cellSize = 15;
-
 export function GridPathFinderRoot() {
+  const cellSize = 15;
   let container!: HTMLDivElement;
 
   const [rows, setRows] = createSignal(0);
@@ -112,9 +111,9 @@ export function GridPathFinderRoot() {
                   {(col) => (
                     <div
                       class="border border-secondary shrink-0 box-border"
-                      style={`width: ${cellSize}px; height: ${cellSize}px; background: ${cellColors()
+                      style={`width: ${cellSize}px; height: ${cellSize}px; background: ${
+                        cellColors()
                           .get(row)?.get(col) ?? "white"
-                        // getCellColor(game()!, row, col)
                       }`}
                     />
                   )}
