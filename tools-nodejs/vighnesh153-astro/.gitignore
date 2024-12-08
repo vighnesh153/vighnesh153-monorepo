@@ -41,3 +41,4 @@ deno.json
 
 # firebase
 .firebase
+firestore-debug.log

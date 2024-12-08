@@ -4,12 +4,12 @@ import {
   signOutFromGoogle,
 } from "./firebase_config.ts";
 
-export function initiateLoginWithGoogle() {
+export async function initiateLoginWithGoogle() {
   logAnalyticsEvent("login_initiate");
-  signInToGoogle();
+  await signInToGoogle();
 }
 
 export async function initiateLogout() {
   logAnalyticsEvent("logout_initiate");
-  signOutFromGoogle();
+  await signOutFromGoogle();
 }

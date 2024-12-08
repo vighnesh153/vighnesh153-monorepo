@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npx firebase serve",
+    "start": "npx firebase emulators:start --project demo-vighnesh153-app",
     "deploy": "npx firebase deploy",
     "deploy:hosting": "npx firebase deploy --only hosting",
     "deploy:functions": "npx firebase deploy --only functions"
