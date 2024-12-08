@@ -21,9 +21,17 @@ export function GridPathFinderRoot() {
   const [gameManager, setGameManager] = createSignal<
     GridPathFinderGameManager
   >();
+  const [cellColors, setCellColors] = createSignal<
+    Map<number, Map<number, string>>
+  >(new Map());
 
   const createNewGame = () => {
-    return GridPathFinderGame.createNewWithDefaults(rows(), cols());
+    const gameInstance = GridPathFinderGame.createNewWithDefaults(
+      rows(),
+      cols(),
+    );
+    setGame(gameInstance);
+    syncCellColors();
   };
 
   onMount(() => {
@@ -32,10 +40,31 @@ export function GridPathFinderRoot() {
       Math.floor((window.innerWidth - rect.left - rect.right) / cellSize - 1),
     );
     setRows(Math.floor((window.innerHeight - rect.top) / cellSize - 10));
-    setGame(createNewGame());
+    createNewGame();
     setGameManager(new GridPathFinderGameManager(game()!));
     setMounted(true);
+    syncCellColors();
   });
+
+  const syncCellColors = () => {
+    const rowCount = rows();
+    const colCount = cols();
+    const gameState = game();
+
+    if (!gameState) {
+      return;
+    }
+
+    const newCellColors: Map<number, Map<number, string>> = new Map();
+    for (let row = 0; row < rowCount; row++) {
+      newCellColors.set(row, new Map());
+      for (let col = 0; col < colCount; col++) {
+        newCellColors.get(row)?.set(col, getCellColor(gameState, row, col));
+      }
+    }
+
+    setCellColors(newCellColors);
+  };
 
   const solve = () => {
     const frames = gameManager()?.solve();
@@ -45,7 +74,7 @@ export function GridPathFinderRoot() {
 
     const showNextFrame = () => {
       const nextFrame = frames.next();
-      setGame(game);
+      syncCellColors();
 
       if (!nextFrame.done) {
         requestAnimationFrame(async () => {
@@ -59,7 +88,7 @@ export function GridPathFinderRoot() {
   };
 
   const randomize = () => {
-    setGame(createNewGame());
+    createNewGame();
     gameManager()?.randomize(game()!);
   };
 
@@ -83,8 +112,9 @@ export function GridPathFinderRoot() {
                   {(col) => (
                     <div
                       class="border border-secondary shrink-0 box-border"
-                      style={`width: ${cellSize}px; height: ${cellSize}px; background: ${
-                        getCellColor(game()!, row, col)
+                      style={`width: ${cellSize}px; height: ${cellSize}px; background: ${cellColors()
+                          .get(row)?.get(col) ?? "white"
+                        // getCellColor(game()!, row, col)
                       }`}
                     />
                   )}

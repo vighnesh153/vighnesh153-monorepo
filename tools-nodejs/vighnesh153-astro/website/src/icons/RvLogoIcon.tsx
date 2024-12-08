@@ -34,7 +34,7 @@ export function RvLogoIcon(incomingProps: RvLogoIconProps): JSX.Element {
         fill="currentColor"
         style={{
           color: "currentColor",
-          fontSize: "88px",
+          "font-size": "80px",
           ...(local.textStyle as any),
         }}
       >
