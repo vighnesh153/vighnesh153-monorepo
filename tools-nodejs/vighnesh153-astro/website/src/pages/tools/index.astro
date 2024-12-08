@@ -1,19 +1,27 @@
 ---
-import { classes, internalLinks, projectsRootNavItems } from '@/utils/index.ts';
-import ContentLayout from '@/layouts/ContentLayout.astro';
-import Link from '@/components/Link.svelte';
+import { classes, internalLinks, projectsRootNavItems } from "@/utils/index.ts";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { Link } from "@/components/Link.tsx";
 
-const title = 'Vighnesh Raut | Tools';
-const description = 'Bunch of utility tools';
+const title = "Vighnesh Raut | Tools";
+const description = "Bunch of utility tools";
 ---
 
-<ContentLayout title={title} description={description} navItems={projectsRootNavItems}>
-  <div class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}>
+<ContentLayout
+  title={title}
+  description={description}
+  navItems={projectsRootNavItems}
+>
+  <div
+    class={classes(`mt-32 mb-12 max-w-lg mx-auto lg:max-w-[unset] scroll-mt-8`)}
+  >
     <h1 class="text-3xl">Tools</h1>
     <p class="mt-4 italic font-bold">
-      (Well, this page is not yet ready to be shared with public. If you are here, welcome. If things don't look neat,
-      it is because I am still not sure about how I want the layout of this page to be like. If you have some ideas, and
-      if you would like to share them with me, reach out to me using one of
+      (Well, this page is not yet ready to be shared with public. If you are
+      here, welcome. If things don't look neat, it is because I am still not
+      sure about how I want the layout of this page to be like. If you have some
+      ideas, and if you would like to share them with me, reach out to me using
+      one of
       <Link href={internalLinks.homePage.contactMe}>these links</Link>.)
     </p>
 
