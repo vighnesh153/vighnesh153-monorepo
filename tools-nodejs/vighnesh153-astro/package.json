@@ -1,9 +1,9 @@
 {
   "scripts": {
     "start": "npx firebase emulators:start --project demo-vighnesh153-app --import ./firebase-seed --export-on-exit ./firebase-seed",
-    "deploy": "npx firebase deploy",
-    "deploy:hosting": "npx firebase deploy --only hosting",
-    "deploy:functions": "npx firebase deploy --only functions"
+    "deploy": "npx firebase deploy --project vighnesh153-app",
+    "deploy:hosting": "npx firebase deploy --only hosting --project vighnesh153-app",
+    "deploy:functions": "npx firebase deploy --only functions --project vighnesh153-app"
   },
   "dependencies": {
     "firebase-functions": "^6.1.1",

@@ -42,6 +42,8 @@ const { title, description } = Astro.props;
 
 <script>
   import { initializeUserInStore } from "@/store/auth.ts";
+  import { setupLocalStorageCleaner } from "@/utils/local_storage";
 
   initializeUserInStore();
+  setupLocalStorageCleaner();
 </script>

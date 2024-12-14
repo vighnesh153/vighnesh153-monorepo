@@ -5,5 +5,10 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+
+    match /users_by_userId/{userId} {
+      allow write: if false;
+      allow read: if true;
+    }
   }
 }
