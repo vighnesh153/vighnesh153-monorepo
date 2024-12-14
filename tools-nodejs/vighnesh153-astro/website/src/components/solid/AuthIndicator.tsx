@@ -1,8 +1,7 @@
 import { Show } from "solid-js";
 import { useStore } from "@nanostores/solid";
 
-import { type CompleteUserInfo } from "@vighnesh153/tools";
-
+import type { UserInfo } from "@/models/user_info.ts";
 import { loggedInUser } from "@/store/auth.ts";
 import {
   classes,
@@ -15,7 +14,7 @@ import { Menu } from "./Menu.tsx";
 import type { ListItemProps } from "./ListItem.tsx";
 
 export type AuthIndicatorProps = {
-  userInfo: CompleteUserInfo;
+  userInfo: UserInfo;
 };
 
 export function AuthIndicator() {
