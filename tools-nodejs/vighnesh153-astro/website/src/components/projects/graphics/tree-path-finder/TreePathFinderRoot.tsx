@@ -7,7 +7,7 @@ import {
   TreePathFinderGame,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
-import { Button } from "@/components/solid/buttons/index.ts";
+import { Button } from "@/components/buttons/index.ts";
 
 export function TreePathFinderRoot() {
   let canvasElement!: HTMLCanvasElement;

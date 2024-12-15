@@ -1,6 +1,6 @@
 import { createSignal, type JSX } from "solid-js";
 
-import { Button } from "@/components/solid/buttons/index.ts";
+import { Button } from "@/components/buttons/index.ts";
 import { isPrime, not } from "@vighnesh153/tools";
 
 export function FindPreviousAndNextPrime(): JSX.Element {

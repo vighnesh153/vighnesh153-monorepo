@@ -1,6 +1,6 @@
 import { createSignal, For, type JSX, Show } from "solid-js";
 
-import { Button } from "@/components/solid/buttons/index.ts";
+import { Button } from "@/components/buttons/index.ts";
 import {
   isPrime,
   primeFactorize,

@@ -6,7 +6,7 @@ import {
   SierpinskisTriangleGameManager,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
-import { Button } from "@/components/solid/buttons/index.ts";
+import { Button } from "@/components/buttons/index.ts";
 import { createSnackbar } from "@/store/snackbar.ts";
 
 export function SierpinskisTriangleRoot() {
