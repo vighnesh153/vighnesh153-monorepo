@@ -8,10 +8,6 @@ import {
   type Auth,
   getAuth as getFirebaseAuth,
   GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  type User as FirebaseUser,
 } from "firebase/auth";
 import {
   type Firestore,
@@ -19,8 +15,8 @@ import {
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
+import { type FirebaseStorage, getStorage } from "firebase/storage";
 
-import { createSnackbar } from "@/store/snackbar.ts";
 import type { AnalyticsEventName } from "./analytics_event_name.ts";
 import { getClientStage } from "./stage.ts";
 import { memoize } from "@vighnesh153/tools";
@@ -37,7 +33,8 @@ const getFirebaseConfig = memoize(async function () {
       apiKey: "12345",
       authDomain: `http://127.0.0.1:${emulatorsConf.auth.port}`,
       projectId: "demo-vighnesh153-app",
-      storageBucket: `http://127.0.0.1:${emulatorsConf.storage.port}`,
+      // storageBucket: `http://127.0.0.1:${emulatorsConf.storage.port}`,
+      storageBucket: `demo-vighnesh153-app.appspot.com`,
       messagingSenderId: "",
       appId: "12345",
       measurementId: "",
@@ -59,6 +56,7 @@ const getFirebaseConfig = memoize(async function () {
 let app: FirebaseApp;
 let analytics: Analytics;
 let firestore: Firestore;
+let storage: FirebaseStorage;
 async function getApp(): Promise<FirebaseApp> {
   if (!app) app = initializeApp(await getFirebaseConfig());
   return app;
@@ -88,6 +86,23 @@ export async function getFirestore(): Promise<Firestore> {
   }
   return firestore;
 }
+export async function getFirebaseStorage(): Promise<FirebaseStorage> {
+  if (!storage) {
+    const localConfig = await getFirebaseConfig();
+    storage = getStorage(await getApp());
+    if (localConfig.projectId.startsWith("demo")) {
+      const emulatorsConf = await getEmulatorsConfig();
+      (await import("firebase/storage").then((mod) =>
+        mod.connectStorageEmulator
+      ))(
+        storage,
+        "127.0.0.1",
+        emulatorsConf.storage.port,
+      );
+    }
+  }
+  return storage;
+}
 
 // Analytics event logger
 export async function logAnalyticsEvent(
@@ -107,7 +122,7 @@ export async function logAnalyticsEvent(
 
 // Google auth provider
 let googleAuthProvider: GoogleAuthProvider = new GoogleAuthProvider();
-function getGoogleAuthProvider(): GoogleAuthProvider {
+export function getGoogleAuthProvider(): GoogleAuthProvider {
   if (!googleAuthProvider) {
     googleAuthProvider = new GoogleAuthProvider();
     googleAuthProvider.addScope(
@@ -121,46 +136,10 @@ function getGoogleAuthProvider(): GoogleAuthProvider {
 }
 
 let auth: Auth;
-async function getAuth(): Promise<Auth> {
+export async function getAuth(): Promise<Auth> {
   if (!auth) {
     auth = getFirebaseAuth(await getApp());
     auth.useDeviceLanguage();
   }
   return auth;
-}
-
-export async function signInToGoogle(): Promise<FirebaseUser | null> {
-  return signInWithPopup(await getAuth(), getGoogleAuthProvider()).then((res) =>
-    res.user
-  ).catch((e) => {
-    createSnackbar({
-      type: "error",
-      message: `Failed to sign in.`,
-    });
-    console.log(e);
-    console.dir(e);
-    return null;
-  });
-}
-
-export async function signOutFromGoogle(): Promise<void> {
-  return signOut(await getAuth()).then(() =>
-    createSnackbar({
-      type: "success",
-      message: "Successfully signed out!",
-    })
-  ).catch((e) => {
-    createSnackbar({
-      type: "error",
-      message: "Failed to sign out.",
-    });
-    console.log(e);
-    console.dir(e);
-  });
-}
-
-export async function initializeAuthChangeListener(
-  onUserChange: (user: FirebaseUser | null) => Promise<void>,
-) {
-  onAuthStateChanged(await getAuth(), (user) => onUserChange(user));
 }

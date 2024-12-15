@@ -1,0 +1,19 @@
+{
+  "name": "public/pokemon.jpeg",
+  "bucket": "demo-vighnesh153-app.appspot.com",
+  "metageneration": 1,
+  "generation": 1734275684676,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "3989165f-9608-474f-ad67-d0376c204bf6"
+  ],
+  "etag": "YGN9SlIPcaJxJaw/wdf5zsIDy3Q",
+  "customMetadata": {},
+  "timeCreated": "2024-12-15T15:14:44.676Z",
+  "updated": "2024-12-15T15:14:44.676Z",
+  "size": 41313,
+  "md5Hash": "JCWJlNLIet5t/SVVGrkXeg==",
+  "crc32c": "970344032"
+}
