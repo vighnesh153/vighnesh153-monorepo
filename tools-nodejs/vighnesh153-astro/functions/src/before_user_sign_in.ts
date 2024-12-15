@@ -21,11 +21,6 @@ export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
     throw new HttpsError("invalid-argument", "UID is not defined");
   }
 
-  if (!user.emailVerified) {
-    logger.info("email is not verified.", user);
-    throw new HttpsError("failed-precondition", "email is not verified");
-  }
-
   const userInfo = {
     name: user.displayName,
     email: user.email,

@@ -76,3 +76,26 @@ fun formatXml(
 <!-- <script>
   document.dir = 'rtl';
 </script> -->
+
+<!-- <script>
+  import { getDownloadURL, ref as storageRef } from "firebase/storage";
+  import { getFirebaseStorage } from "@/utils/firebase_config";
+
+  const storage = await getFirebaseStorage();
+
+  async function logUrl(type: string, p: string) {
+    try {
+      const url = await getDownloadURL(storageRef(storage, p));
+      console.log("[type =", type, "] url:", url);
+    } catch (e) {
+      console.error("Some error occurred for type =", type, e);
+    }
+    return;
+  }
+
+  await Promise.all([
+    logUrl("Generic", "pokemon.jpeg"),
+    logUrl("Adult", "adult/pokemon.jpeg"),
+    logUrl("Public", "public/pokemon.jpeg"),
+  ]);
+</script> -->
