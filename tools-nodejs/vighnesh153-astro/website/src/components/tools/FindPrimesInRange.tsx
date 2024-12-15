@@ -1,6 +1,6 @@
 import { createSignal, type JSX, Show } from "solid-js";
 
-import { Button } from "@/components/solid/buttons/index.ts";
+import { Button } from "@/components/buttons/index.ts";
 import { isPrime, Queue } from "@vighnesh153/tools";
 
 export function FindPrimesInRange(): JSX.Element {

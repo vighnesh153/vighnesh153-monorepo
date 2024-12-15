@@ -2,7 +2,7 @@ import { type JSX, Match, Switch } from "solid-js";
 import { assert } from "@std/assert";
 import { type FileUploadState } from "@vighnesh153/tools/file_upload";
 
-import { Spinner } from "@/components/solid/Spinner.tsx";
+import { Spinner } from "@/components/Spinner";
 import { CheckIcon, FileIcon } from "@/icons";
 import { createSnackbar } from "@/store/snackbar.ts";
 import { classes, copyToClipboard } from "@/utils/index.ts";

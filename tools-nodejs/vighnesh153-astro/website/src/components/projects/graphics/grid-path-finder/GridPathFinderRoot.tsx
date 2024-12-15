@@ -7,7 +7,7 @@ import {
   GridPathFinderGameManager,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
-import { Button } from "@/components/solid/buttons/Button.tsx";
+import { Button } from "@/components/buttons/Button.tsx";
 
 export function GridPathFinderRoot() {
   const cellSize = 15;
