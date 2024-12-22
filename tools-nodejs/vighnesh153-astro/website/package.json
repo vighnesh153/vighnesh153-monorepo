@@ -5,8 +5,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "astro dev --host",
-    "build": "astro check && astro build",
+    "dev": "NODE_ENV=dev astro dev --host",
+    "build": "NODE_ENV=production astro check && astro build",
     "lint": "astro check",
     "prefmt": "cp deno-bk.json deno.json",
     "fmt": "deno fmt",

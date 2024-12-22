@@ -10,8 +10,11 @@
 import { setGlobalOptions } from "firebase-functions/v2";
 import { initializeApp } from "firebase-admin/app";
 
-setGlobalOptions({ maxInstances: 2 });
+import { functionsRegion } from "../../constants";
+
+setGlobalOptions({ maxInstances: 1, region: functionsRegion });
 initializeApp();
 
 export * from "./before_user_sign_up";
 export * from "./before_user_sign_in";
+export * from "./get_private_content";
