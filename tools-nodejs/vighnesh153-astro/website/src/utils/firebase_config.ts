@@ -10,16 +10,28 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import {
+  connectFirestoreEmulator,
   type Firestore,
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
-import { type FirebaseStorage, getStorage } from "firebase/storage";
+import {
+  connectFunctionsEmulator,
+  type Functions as FirebaseFunctions,
+  getFunctions,
+  httpsCallable,
+} from "firebase/functions";
+import {
+  connectStorageEmulator,
+  type FirebaseStorage,
+  getStorage,
+} from "firebase/storage";
 
 import type { AnalyticsEventName } from "./analytics_event_name.ts";
 import { getClientStage } from "./stage.ts";
 import { memoize } from "@vighnesh153/tools";
+import { functionsRegion } from "../../../constants.ts";
 
 async function getEmulatorsConfig() {
   return await import("../../../firebase.json").then((mod) => mod.emulators);
@@ -57,6 +69,7 @@ let app: FirebaseApp;
 let analytics: Analytics;
 let firestore: Firestore;
 let storage: FirebaseStorage;
+let functions: FirebaseFunctions;
 async function getApp(): Promise<FirebaseApp> {
   if (!app) app = initializeApp(await getFirebaseConfig());
   return app;
@@ -73,11 +86,13 @@ export async function getFirestore(): Promise<Firestore> {
         tabManager: persistentMultipleTabManager(),
       }),
     });
-    if (localConfig.projectId.startsWith("demo")) {
+    if (
+      // localConfig.projectId.startsWith("demo")
+      import.meta.env.DEV
+    ) {
+      console.log("Picking emulated firestore");
       const emulatorsConf = await getEmulatorsConfig();
-      (await import("firebase/firestore").then((mod) =>
-        mod.connectFirestoreEmulator
-      ))(
+      connectFirestoreEmulator(
         firestore,
         "127.0.0.1",
         emulatorsConf.firestore.port,
@@ -90,18 +105,45 @@ export async function getFirebaseStorage(): Promise<FirebaseStorage> {
   if (!storage) {
     const localConfig = await getFirebaseConfig();
     storage = getStorage(await getApp());
-    if (localConfig.projectId.startsWith("demo")) {
+    if (
+      // localConfig.projectId.startsWith("demo")
+      import.meta.env.DEV
+    ) {
+      console.log("Picking emulated storage");
       const emulatorsConf = await getEmulatorsConfig();
-      (await import("firebase/storage").then((mod) =>
-        mod.connectStorageEmulator
-      ))(
-        storage,
-        "127.0.0.1",
-        emulatorsConf.storage.port,
-      );
+      connectStorageEmulator(storage, "127.0.0.1", emulatorsConf.storage.port);
     }
   }
   return storage;
+}
+export async function getFirebaseFunctions(): Promise<FirebaseFunctions> {
+  if (!functions) {
+    const localConfig = await getFirebaseConfig();
+    functions = getFunctions(await getApp());
+    if (
+      // localConfig.projectId.startsWith("demo")
+      import.meta.env.DEV
+    ) {
+      console.log("Picking emulated functions");
+      const emulatorsConf = await getEmulatorsConfig();
+      connectFunctionsEmulator(
+        functions,
+        "127.0.0.1",
+        emulatorsConf.functions.port,
+      );
+    }
+  }
+  functions.region = functionsRegion;
+  return functions;
+}
+export async function invokeFirebaseFunction(
+  functionName: string,
+  data: unknown = undefined,
+): Promise<unknown> {
+  if (data === undefined) {
+    return httpsCallable(await getFirebaseFunctions(), functionName)();
+  }
+  return httpsCallable(await getFirebaseFunctions(), functionName)(data);
 }
 
 // Analytics event logger
