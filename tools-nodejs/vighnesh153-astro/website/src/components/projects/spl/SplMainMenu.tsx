@@ -1,10 +1,7 @@
 import { For } from "solid-js";
 import { SplExamples } from "@vighnesh153/spl";
-import {
-  externalLinks,
-  internalLinks,
-  logAnalyticsEvent,
-} from "@/utils/index.ts";
+import { externalLinks, internalLinks } from "@/utils/index.ts";
+import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 import { Link } from "@/components/Link.tsx";
 
 export function SplMainMenu() {

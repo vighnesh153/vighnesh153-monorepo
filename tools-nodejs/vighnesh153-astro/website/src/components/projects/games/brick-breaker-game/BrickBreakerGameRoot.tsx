@@ -1,7 +1,6 @@
 import { createSignal, onMount } from "solid-js";
 import {
   BrickBreakerGame,
-  type CanvasWrapper,
   CanvasWrapperImpl,
 } from "@vighnesh153/tools-browser/graphics_programming";
 

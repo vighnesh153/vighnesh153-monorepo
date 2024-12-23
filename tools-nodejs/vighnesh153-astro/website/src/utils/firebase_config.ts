@@ -80,7 +80,7 @@ async function getAnalytics(): Promise<Analytics> {
 }
 export async function getFirestore(): Promise<Firestore> {
   if (!firestore) {
-    const localConfig = await getFirebaseConfig();
+    // const localConfig = await getFirebaseConfig();
     firestore = initializeFirestore(await getApp(), {
       localCache: persistentLocalCache({
         tabManager: persistentMultipleTabManager(),
@@ -103,7 +103,7 @@ export async function getFirestore(): Promise<Firestore> {
 }
 export async function getFirebaseStorage(): Promise<FirebaseStorage> {
   if (!storage) {
-    const localConfig = await getFirebaseConfig();
+    // const localConfig = await getFirebaseConfig();
     storage = getStorage(await getApp());
     if (
       // localConfig.projectId.startsWith("demo")
@@ -118,7 +118,7 @@ export async function getFirebaseStorage(): Promise<FirebaseStorage> {
 }
 export async function getFirebaseFunctions(): Promise<FirebaseFunctions> {
   if (!functions) {
-    const localConfig = await getFirebaseConfig();
+    // const localConfig = await getFirebaseConfig();
     functions = getFunctions(await getApp());
     if (
       // localConfig.projectId.startsWith("demo")
