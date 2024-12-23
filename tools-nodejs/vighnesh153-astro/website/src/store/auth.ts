@@ -13,7 +13,7 @@ export const loggedInUserId = computed(
 );
 
 export async function initializeUserInStore() {
-  await onAuthStateChanged(await getAuth(), async (user) => {
+  onAuthStateChanged(await getAuth(), async (user) => {
     if (user === null) {
       mutableLoggedInUser.set(null);
     } else {
