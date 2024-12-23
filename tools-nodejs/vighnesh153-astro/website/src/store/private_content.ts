@@ -10,6 +10,10 @@ const cacheKeys = {
   privateContent: "vighnesh153/private_content",
 };
 
+export async function clearPrivateContentFromCache() {
+  ls.remove(cacheKeys.privateContent);
+}
+
 export async function getPrivateContent(
   userId: string | null,
 ): Promise<PrivateContent | null> {
@@ -46,7 +50,7 @@ async function getPrivateContentFromFirebase(): Promise<PrivateContent | null> {
   console.log("Fetching private content from firebase");
   const privateContentFromFirebase = await (async () => {
     try {
-      await invokeFirebaseFunction(
+      return invokeFirebaseFunction(
         "getPrivateContent",
       );
     } catch (e) {
