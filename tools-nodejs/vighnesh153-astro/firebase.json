@@ -47,7 +47,8 @@
       "port": 5000
     },
     "storage": {
-      "port": 9199
+      "port": 9199,
+      "rules": "firebase-storage.emulator.rules"
     },
     "ui": {
       "enabled": true,

@@ -1,7 +1,7 @@
 ---
 import { classes, projectNavItems } from "@/utils/index.ts";
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import { PrivateCardsCollection } from "@/components/private/private_cards_collection.tsx";
+import { PrivateCardsCollectionWrapper } from "@/components/private/private_cards_collection.tsx";
 
 const title = "Vighnesh Raut | Private content";
 const description = `Graphics programming projects built with HTML Canvas API`;
@@ -15,13 +15,6 @@ const description = `Graphics programming projects built with HTML Canvas API`;
   <div
     class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}
   >
-    <PrivateCardsCollection client:load />
+    <PrivateCardsCollectionWrapper client:load />
   </div>
 </ContentLayout>
-
-<script>
-  // import { invokeFirebaseFunction } from "@/utils/firebase_config";
-
-  // const result = await invokeFirebaseFunction("getPrivateContent");
-  // console.log("Pikachu:", result);
-</script>
