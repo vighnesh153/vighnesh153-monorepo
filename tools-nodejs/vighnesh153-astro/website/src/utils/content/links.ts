@@ -92,4 +92,9 @@ export const internalLinks = {
       root: "/tools/calculators",
     },
   },
+  private: {
+    root: "/private",
+    buildPrivateContentLinkFromId: (contentId: string) =>
+      `/private?contentId=${contentId}`,
+  },
 };

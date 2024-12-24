@@ -49,11 +49,11 @@ async function createReadSignedUrl(
   internalPath: string,
 ): Promise<string | null> {
   const file = storage.bucket().file(internalPath);
-  const expirationDate = new Date(Date.now() + 2 * dayInMs);
+  const expirationDate = new Date(Date.now() + dayInMs * 2);
 
   // https://github.com/firebase/firebase-tools/issues/3400#issuecomment-847916638
   if (process.env.FUNCTIONS_EMULATOR) {
-    return file.publicUrl();
+    return internalPath.startsWith("http") ? internalPath : file.publicUrl();
   }
 
   try {
@@ -61,6 +61,9 @@ async function createReadSignedUrl(
       version: "v4",
       action: "read",
       expires: expirationDate,
+      extensionHeaders: {
+        "cache-control": `max-age=${dayInMs * 365 / 1000}`,
+      },
     });
     return urls[0];
   } catch (e) {
