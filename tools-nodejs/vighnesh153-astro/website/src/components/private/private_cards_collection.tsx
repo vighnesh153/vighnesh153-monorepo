@@ -1,37 +1,13 @@
-import {
-  createResource,
-  ErrorBoundary,
-  For,
-  type JSX,
-  Show,
-  Suspense,
-} from "solid-js";
-import { useStore } from "@nanostores/solid";
+import { For, type JSX, Show } from "solid-js";
 
-import { classes } from "@/utils";
-import { loggedInUserId } from "@/store/auth.ts";
-import {
-  clearPrivateContentFromCache,
-  getPrivateContent,
-} from "@/store/private_content";
-import { Button } from "../buttons";
+import { classes, internalLinks } from "@/utils";
+import { clearPrivateContentFromCache } from "@/store/private_content";
 
-const fetchPrivateContent = (userId: string | null) =>
-  getPrivateContent(userId);
+import { Button } from "@/components/buttons";
+import { usePrivateContent } from "./usePrivateContent";
 
-export function PrivateCardsCollectionWrapper(): JSX.Element {
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <ErrorBoundary fallback={<p>Some error occurred while fetching data.</p>}>
-        <PrivateCardsCollection />
-      </ErrorBoundary>
-    </Suspense>
-  );
-}
-
-function PrivateCardsCollection(): JSX.Element {
-  const $loggedInUserId = useStore(loggedInUserId);
-  const [privateContent] = createResource($loggedInUserId, fetchPrivateContent);
+export function PrivateCardsCollection(): JSX.Element {
+  const { privateContent } = usePrivateContent();
 
   const hasItems = () => {
     const content = privateContent()?.data ?? null;
@@ -47,14 +23,14 @@ function PrivateCardsCollection(): JSX.Element {
 
   return (
     <div>
-      <div class="mb-4 flex justify-end">
-        <Button variant="secondary" onClick={onClearCache}>
-          Clear cache
-        </Button>
-      </div>
-      <Show when={privateContent.error || privateContent() === null}>
-        <p>Failed to fetch content.</p>
-      </Show>
+      <Button
+        class="block ml-auto mb-4"
+        variant="secondary"
+        onClick={onClearCache}
+      >
+        Clear cache
+      </Button>
+
       <Show when={hasItems()} fallback={<p>Nothing to show...</p>}>
         <div
           class={classes(`
@@ -65,26 +41,32 @@ function PrivateCardsCollection(): JSX.Element {
         >
           <For each={privateContent()?.data ?? []}>
             {(card) => (
-              <button
+              <a
                 class={classes(`
                   min-w-5 
 
                   hover:scale-105
+                  focus-visible:scale-105
+                  cursor-pointer
+
                   transition-all
-                  
+
                   bg-primary
-                  
+
                   rounded-lg
                   aspect-video
                   overflow-hidden
                 `)}
+                href={internalLinks.private.buildPrivateContentLinkFromId(
+                  card.id,
+                )}
               >
                 <img
                   src={card.imageUrl}
                   alt="private content"
                   class="block w-full h-full"
                 />
-              </button>
+              </a>
             )}
           </For>
         </div>
