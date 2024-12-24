@@ -45,7 +45,6 @@ const getFirebaseConfig = memoize(async function () {
       apiKey: "12345",
       authDomain: `http://127.0.0.1:${emulatorsConf.auth.port}`,
       projectId: "demo-vighnesh153-app",
-      // storageBucket: `http://127.0.0.1:${emulatorsConf.storage.port}`,
       storageBucket: `demo-vighnesh153-app.appspot.com`,
       messagingSenderId: "",
       appId: "12345",
@@ -80,16 +79,12 @@ async function getAnalytics(): Promise<Analytics> {
 }
 export async function getFirestore(): Promise<Firestore> {
   if (!firestore) {
-    // const localConfig = await getFirebaseConfig();
     firestore = initializeFirestore(await getApp(), {
       localCache: persistentLocalCache({
         tabManager: persistentMultipleTabManager(),
       }),
     });
-    if (
-      // localConfig.projectId.startsWith("demo")
-      import.meta.env.DEV
-    ) {
+    if (import.meta.env.DEV) {
       console.log("Picking emulated firestore");
       const emulatorsConf = await getEmulatorsConfig();
       connectFirestoreEmulator(
@@ -103,12 +98,8 @@ export async function getFirestore(): Promise<Firestore> {
 }
 export async function getFirebaseStorage(): Promise<FirebaseStorage> {
   if (!storage) {
-    // const localConfig = await getFirebaseConfig();
     storage = getStorage(await getApp());
-    if (
-      // localConfig.projectId.startsWith("demo")
-      import.meta.env.DEV
-    ) {
+    if (import.meta.env.DEV) {
       console.log("Picking emulated storage");
       const emulatorsConf = await getEmulatorsConfig();
       connectStorageEmulator(storage, "127.0.0.1", emulatorsConf.storage.port);
@@ -118,12 +109,8 @@ export async function getFirebaseStorage(): Promise<FirebaseStorage> {
 }
 export async function getFirebaseFunctions(): Promise<FirebaseFunctions> {
   if (!functions) {
-    // const localConfig = await getFirebaseConfig();
     functions = getFunctions(await getApp());
-    if (
-      // localConfig.projectId.startsWith("demo")
-      import.meta.env.DEV
-    ) {
+    if (import.meta.env.DEV) {
       console.log("Picking emulated functions");
       const emulatorsConf = await getEmulatorsConfig();
       connectFunctionsEmulator(
