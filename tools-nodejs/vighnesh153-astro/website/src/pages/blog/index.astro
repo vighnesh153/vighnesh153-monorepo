@@ -1,15 +1,14 @@
 ---
-import { type BlogFrontmatter } from "@/utils/index.ts";
+import { getCollection } from "astro:content";
 
 import ContentLayout from "@/layouts/ContentLayout.astro";
 
-const posts = Object.values(import.meta.glob("./*/*.mdx", { eager: true }));
+const posts = await getCollection("blog");
 const frontmatterList = posts
-  .map((_blog) => {
-    const blog = _blog as { frontmatter: BlogFrontmatter; url: string };
+  .map((post) => {
     return {
-      ...blog.frontmatter,
-      url: blog.url,
+      ...post.data,
+      url: `/blog/${post.data.slug}`,
     };
   })
   .filter((it) => import.meta.env.DEV || it.live)
@@ -17,7 +16,7 @@ const frontmatterList = posts
     new Date(a.creationDate ?? Date.now()) >
     new Date(b.creationDate ?? Date.now())
       ? -1
-      : 1,
+      : 1
   );
 ---
 
@@ -36,7 +35,7 @@ const frontmatterList = posts
     {
       frontmatterList.map((frontmatter) => {
         const date = new Date(
-          frontmatter.creationDate ?? Date.now(),
+          frontmatter.creationDate ?? Date.now()
         ).toLocaleDateString("en-us", {
           year: "numeric",
           month: "long",

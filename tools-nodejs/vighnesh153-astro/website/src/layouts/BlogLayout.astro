@@ -1,24 +1,23 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import ContentLayout from "./ContentLayout.astro";
 
-import { classes, type BlogFrontmatter } from "@/utils/index.ts";
+import { classes } from "@/utils/index.ts";
 
 interface Props {
-  frontmatter: BlogFrontmatter & {
-    // path to blog post
-    url: string;
-  };
+  post?: CollectionEntry<"blog">;
 }
 
-const { frontmatter } = Astro.props;
+const { post } = Astro.props;
 
-const date = new Date(
-  frontmatter.creationDate ?? Date.now(),
-).toLocaleDateString("en-us", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+const date = new Date(post?.data.creationDate ?? Date.now()).toLocaleDateString(
+  "en-us",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }
+);
 ---
 
 <ContentLayout>
@@ -32,7 +31,7 @@ const date = new Date(
   >
     {/* Heading */}
     <h1>
-      {frontmatter.title ?? "Heading 1"}
+      {post?.data.title ?? "Heading 1"}
     </h1>
 
     {/* Creation date */}
