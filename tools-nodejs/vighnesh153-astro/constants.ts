@@ -5,3 +5,9 @@ export const firebaseCollections = {
   userIdByUsername: "userId_by_username",
   privateContent: "private_content",
 };
+
+const dayInMillis = 24 * 3600 * 1000;
+
+export const cacheTtlMillis = {
+  privateContent: 7 * dayInMillis,
+};

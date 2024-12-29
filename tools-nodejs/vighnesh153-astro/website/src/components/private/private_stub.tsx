@@ -20,7 +20,9 @@ const images = [
 ];
 
 export function PrivateStub(): JSX.Element {
-  const { pageAccessible, onKey } = useAccidentalPrivatePageOpenStubBreaker();
+  const { pageAccessible, onKey } = useAccidentalPrivatePageOpenStubBreaker({
+    pageKey: "/private",
+  });
 
   return (
     <Show when={not(pageAccessible())} fallback={<PrivateContentWrapper />}>

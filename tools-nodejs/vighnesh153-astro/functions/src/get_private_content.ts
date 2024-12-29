@@ -1,7 +1,7 @@
 import * as logger from "firebase-functions/logger";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
-import { firebaseCollections } from "../../constants";
+import { cacheTtlMillis, firebaseCollections } from "../../constants";
 import { hasPermission } from "../../permissions/mod";
 
 import { firestoreInstance, storageInstance } from "./init";
@@ -48,7 +48,9 @@ async function createReadSignedUrl(
   internalPath: string,
 ): Promise<string | null> {
   const file = storageInstance.bucket().file(internalPath);
-  const expirationDate = new Date(Date.now() + dayInMs * 2);
+  const expirationDate = new Date(
+    Date.now() + cacheTtlMillis.privateContent + dayInMs,
+  );
 
   // https://github.com/firebase/firebase-tools/issues/3400#issuecomment-847916638
   if (process.env.FUNCTIONS_EMULATOR) {

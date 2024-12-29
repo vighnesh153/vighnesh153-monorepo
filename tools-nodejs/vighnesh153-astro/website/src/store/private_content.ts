@@ -5,6 +5,7 @@ import { invokeFirebaseFunction } from "@/utils/firebase_config";
 
 import { PrivateContent } from "@/models/private_content";
 import { hasPermission } from "../../../permissions/mod.ts";
+import { cacheTtlMillis } from "../../../constants.ts";
 
 const cacheKeys = {
   privateContent: "vighnesh153/private_content",
@@ -41,7 +42,7 @@ export async function getPrivateContent(
 
   // Cache private content for 1 day
   ls.set(cacheKeys.privateContent, privateContentFromFirebase, {
-    ttl: milliseconds({ days: 1 }) / 1000,
+    ttl: cacheTtlMillis.privateContent / 1000,
   });
   return privateContentFromFirebase;
 }
