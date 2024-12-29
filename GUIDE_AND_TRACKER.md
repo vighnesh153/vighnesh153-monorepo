@@ -12,15 +12,12 @@
 
 #### Tasks
 
-- api.vighnesh153.dev
+- Blog: Why i moved away from react and next js
 - Create Kotlin AST
 - Kotlin Syntax highlighting
 - Differ between 2 string content
 - Diff viewer
 - Add a list of Chrome and Vscode extensions to projects on vighnesh153.dev
-- Look at removing Config usage from lambda
-- vighnesh153 media
-- vighnesh153 private.vighnesh153.dev
 - adb fetch continue watching row from device
 - adb launch deeplink
 - compose-query (similar to react-query by tanstack)
@@ -64,40 +61,6 @@
 - Remotion: https://www.remotion.dev/
 - Building Macro-Systems: https://interpreterbook.com/lost/
 - https://park-ui.com/
-- Resume (CV) as code
-
-```html
-<div id="vighnesh153-paint">
-  <div class="lol">Hi there</div>
-</div>
-
-<style>
-  .lol {
-    width: 794px;
-    height: 1123px;
-
-    display: grid;
-    place-items: center;
-
-    background: red;
-    color: white;
-    font-size: 2rem;
-  }
-
-  @media print {
-    body {
-      visibility: hidden;
-    }
-    #vighnesh153-paint {
-      visibility: visible;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-  }
-</style>
-```
-
 - Add tooltip component along with placement (left, top, right, bottom)
 - Add tooltip component to social links along with placement
 - Add tooltip component to aside email address

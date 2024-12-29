@@ -1,0 +1,56 @@
+---
+import ContentLayout from "@/layouts/ContentLayout.astro";
+
+import { ResumeContainer } from "@/components/resume/ResumeContainer";
+import { Button } from "@/components/buttons/Button.tsx";
+---
+
+<ContentLayout>
+  <div class="mt-32">
+    <div class="flex justify-end">
+      <Button variant="primary" id="btn-download-resume">Download</Button>
+    </div>
+    <div class="mt-6 flex justify-center">
+      <div id="resume-container">
+        <ResumeContainer />
+      </div>
+    </div>
+  </div>
+</ContentLayout>
+
+<style>
+  #resume-container {
+    /* A4 size */
+    width: 794px;
+    height: 1123px;
+  }
+
+  @media print {
+    body {
+      visibility: hidden;
+      position: relative;
+    }
+
+    #resume-container {
+      visibility: visible;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+</style>
+
+<script>
+  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+
+  logAnalyticsEvent("visit_resume");
+
+  document
+    .querySelector("#btn-download-resume")
+    ?.addEventListener("click", () => {
+      // Once download as pdf feature is implemented, update this code to download pdf directly
+      // instead of opening the print dialog and expecting the user to download
+      // https://github.com/whatwg/html/issues/7946
+      print();
+    });
+</script>
