@@ -2,13 +2,10 @@ import * as logger from "firebase-functions/logger";
 import { HttpsError } from "firebase-functions/v2/https";
 import { beforeUserSignedIn } from "firebase-functions/v2/identity";
 
-import { getFirestore } from "firebase-admin/firestore";
-
 import { firebaseCollections } from "../../constants";
+import { firestoreInstance } from "./init";
 
 export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
-  const firestore = getFirestore();
-
   const user = event.data;
   if (!user) {
     logger.info("User info is missing from request.", user);
@@ -29,9 +26,9 @@ export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
 
   logger.info("Attempting to sign in user with info=", userInfo);
 
-  await firestore.runTransaction(async (tx) => {
+  await firestoreInstance.runTransaction(async (tx) => {
     return tx.update(
-      firestore.collection(firebaseCollections.usersByUserId).doc(uid),
+      firestoreInstance.collection(firebaseCollections.usersByUserId).doc(uid),
       userInfo,
     );
   }).catch((e) => {

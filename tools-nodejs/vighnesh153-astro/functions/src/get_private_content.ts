@@ -1,13 +1,10 @@
-import { getFirestore } from "firebase-admin/firestore";
-import { getStorage } from "firebase-admin/storage";
 import * as logger from "firebase-functions/logger";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import { firebaseCollections } from "../../constants";
 import { hasPermission } from "../../permissions/mod";
 
-const db = getFirestore();
-const storage = getStorage();
+import { firestoreInstance, storageInstance } from "./init";
 
 export const getPrivateContent = onCall(async (req) => {
   const uid = req.auth?.uid;
@@ -25,7 +22,9 @@ export const getPrivateContent = onCall(async (req) => {
   }
 
   try {
-    const snapshot = await db.collection(firebaseCollections.privateContent)
+    const snapshot = await firestoreInstance.collection(
+      firebaseCollections.privateContent,
+    )
       .get();
     const docs = await snapshot.docs.map((doc) => doc.data());
 
@@ -48,7 +47,7 @@ const dayInMs = 24 * 3600 * 1000;
 async function createReadSignedUrl(
   internalPath: string,
 ): Promise<string | null> {
-  const file = storage.bucket().file(internalPath);
+  const file = storageInstance.bucket().file(internalPath);
   const expirationDate = new Date(Date.now() + dayInMs * 2);
 
   // https://github.com/firebase/firebase-tools/issues/3400#issuecomment-847916638
@@ -62,7 +61,8 @@ async function createReadSignedUrl(
       action: "read",
       expires: expirationDate,
       extensionHeaders: {
-        "cache-control": `max-age=${dayInMs * 365 / 1000}`,
+        // This doesn't work: https://stackoverflow.com/questions/56482759/why-does-cache-control-fail-for-signed-urls
+        // "cache-control": `max-age=${dayInMs * 365 / 1000}`,
       },
     });
     return urls[0];

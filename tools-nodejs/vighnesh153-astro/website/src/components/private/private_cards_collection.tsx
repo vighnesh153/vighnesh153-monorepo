@@ -65,6 +65,7 @@ export function PrivateCardsCollection(): JSX.Element {
                   src={card.imageUrl}
                   alt="private content"
                   class="block w-full h-full"
+                  loading="lazy"
                 />
               </a>
             )}

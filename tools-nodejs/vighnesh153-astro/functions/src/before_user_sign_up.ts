@@ -2,13 +2,10 @@ import * as logger from "firebase-functions/logger";
 import { HttpsError } from "firebase-functions/v2/https";
 import { beforeUserCreated } from "firebase-functions/v2/identity";
 
-import { getFirestore } from "firebase-admin/firestore";
-
 import { firebaseCollections } from "../../constants";
+import { firestoreInstance } from "./init";
 
 export const beforeUserSignUp = beforeUserCreated(async (event) => {
-  const firestore = getFirestore();
-
   const user = event.data;
   if (!user) {
     logger.info("User info is missing from request.", user);
@@ -38,12 +35,12 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
 
   logger.info("Attempting to create user with info=", userInfo);
 
-  await firestore.runTransaction(async (tx) => {
+  await firestoreInstance.runTransaction(async (tx) => {
     return tx.create(
-      firestore.collection(firebaseCollections.usersByUserId).doc(uid),
+      firestoreInstance.collection(firebaseCollections.usersByUserId).doc(uid),
       userInfo,
     ).create(
-      firestore.collection(firebaseCollections.userIdByUsername).doc(
+      firestoreInstance.collection(firebaseCollections.userIdByUsername).doc(
         userInfo.username,
       ),
       { userId: userInfo.userId, expiresOn: null },

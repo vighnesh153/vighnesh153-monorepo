@@ -1,7 +1,7 @@
 ---
 import { classes, projectNavItems } from "@/utils/index.ts";
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import { PrivateContentWrapper } from "@/components/private/private_content_wrapper.tsx";
+import { PrivateStub } from "@/components/private/private_stub.tsx";
 
 const title = "Vighnesh Raut | Private content";
 const description = `A collection of private content.`;
@@ -15,6 +15,6 @@ const description = `A collection of private content.`;
   <div
     class={classes(`mt-32 mb-12 max-w-xl mx-auto lg:max-w-[unset] scroll-mt-8`)}
   >
-    <PrivateContentWrapper client:load />
+    <PrivateStub client:load />
   </div>
 </ContentLayout>
