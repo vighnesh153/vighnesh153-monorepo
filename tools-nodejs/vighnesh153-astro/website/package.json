@@ -23,6 +23,7 @@
   "dependencies": {
     "@nanostores/solid": "^0.5.0",
     "@std/assert": "npm:@jsr/std__assert@^1.0.10",
+    "@std/random": "npm:@jsr/std__random@^0.1.0",
     "@vighnesh153/api": "npm:@jsr/vighnesh153__api@^0.1.4",
     "@vighnesh153/drawing-app": "0.4.9",
     "@vighnesh153/simple-code-to-html": "0.4.8",

@@ -1,5 +1,6 @@
+import { shuffle } from "@std/random";
 import ls from "localstorage-slim";
-import { milliseconds, not } from "@vighnesh153/tools";
+import { not } from "@vighnesh153/tools";
 
 import { invokeFirebaseFunction } from "@/utils/firebase_config";
 
@@ -85,7 +86,9 @@ function parsePrivateContent(
 
   const parsed = PrivateContent.safeParse(maybePrivateContent);
   if (parsed.success) {
-    return parsed.data;
+    return {
+      data: shuffle(parsed.data.data),
+    };
   }
   console.log("Failed to parse as private content:", maybePrivateContent);
   console.log("Parsing error:", parsed.error);

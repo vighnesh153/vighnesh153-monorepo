@@ -9,5 +9,7 @@ export const firebaseCollections = {
 const dayInMillis = 24 * 3600 * 1000;
 
 export const cacheTtlMillis = {
-  privateContent: 7 * dayInMillis,
+  // max allowed expiration is 7 days in firebase. So, keeping it 6 here so
+  // that we can have 1 day buffer
+  privateContent: 6 * dayInMillis,
 };
