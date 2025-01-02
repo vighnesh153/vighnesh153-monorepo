@@ -4,6 +4,7 @@ import { classes, internalLinks } from "@/utils";
 import { clearPrivateContentFromCache } from "@/store/private_content";
 
 import { Button } from "@/components/buttons";
+import { ImageWithCache } from "@/components/ImageWithCache.tsx";
 import { usePrivateContent } from "./usePrivateContent";
 
 export function PrivateCardsCollection(): JSX.Element {
@@ -40,35 +41,41 @@ export function PrivateCardsCollection(): JSX.Element {
           `)}
         >
           <For each={privateContent()?.data ?? []}>
-            {(card) => (
-              <a
-                class={classes(`
-                  min-w-5 
-
-                  hover:scale-105
-                  focus-visible:scale-105
-                  cursor-pointer
-
-                  transition-all
-
-                  bg-primary
-
-                  rounded-lg
-                  aspect-video
-                  overflow-hidden
-                `)}
-                href={internalLinks.private.buildPrivateContentLinkFromId(
-                  card.id,
-                )}
-              >
-                <img
-                  src={card.imageUrl}
-                  alt="private content"
-                  class="block w-full h-full"
-                  loading="lazy"
-                />
-              </a>
-            )}
+            {(card) => {
+              const imageUrl = new URL(card.imageUrl);
+              return (
+                <a
+                  class={classes(`
+                    min-w-5 
+  
+                    hover:scale-105
+                    focus-visible:scale-105
+                    cursor-pointer
+  
+                    transition-all
+  
+                    bg-primary
+  
+                    rounded-lg
+                    aspect-video
+                    overflow-hidden
+                  `)}
+                  href={internalLinks.private.buildPrivateContentLinkFromId(
+                    card.id,
+                  )}
+                >
+                  <ImageWithCache
+                    src={imageUrl.toString()}
+                    cacheKey={imageUrl.pathname}
+                    imageProps={{
+                      alt: "private content",
+                      class: "block w-full h-full",
+                      loading: "lazy",
+                    }}
+                  />
+                </a>
+              );
+            }}
           </For>
         </div>
       </Show>

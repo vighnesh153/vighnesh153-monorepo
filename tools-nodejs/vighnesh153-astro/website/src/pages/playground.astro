@@ -3,6 +3,7 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
 import { UploadInputBoxWithStats } from "@/components/uploader";
 // import { CodeViewer } from "@/components/code_viewer/index.ts";
 import { classes } from "@/utils/index.ts";
+import { Button } from "@/components/buttons";
 ---
 
 <ContentLayout
@@ -97,3 +98,21 @@ fun formatXml(
     logUrl("Public", "public/pokemon.jpeg"),
   ]);
 </script> -->
+
+<Button class="hello">Share test</Button>
+
+<script>
+  document
+    .querySelector("button.hello")
+    ?.addEventListener("click", async () => {
+      try {
+        await navigator.share({
+          title: "MDN",
+          text: "Learn web development on MDN!",
+          url: "https://developer.mozilla.org",
+        });
+      } catch (e) {
+        alert((e as any)?.message);
+      }
+    });
+</script>

@@ -12,7 +12,18 @@
 
 #### Tasks
 
+- caching images in indexed db
+- todo: uncomment other images from private_stub.tsx
+- resume as code
 - Blog: Why i moved away from react and next js
+- Users page
+- User profile page
+- Change username
+  - Old username should exist for 7 days (add a expiresAt field of the username
+    record)
+  - Run a cron job daily (or weekly) that deletes the expired usernames
+  - Old username would be available for reuse once it has been cleared from the
+    db by the cron job
 - Create Kotlin AST
 - Kotlin Syntax highlighting
 - Differ between 2 string content
