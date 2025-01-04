@@ -22,7 +22,6 @@ export function Avatar(props: AvatarProps): JSX.Element {
         {props.userInitials}
       </div>
       <img
-        {...props}
         src={props.imageLink}
         alt="logged in user"
         class={classes(`
