@@ -34,6 +34,7 @@ export function ResumeContainer(): JSX.Element {
 
   onMount(() => {
     setDate(new Date());
+    document.title = `Vighnesh_Raut_CV_${formattedDate().replace(/ /g, "_")}`;
   });
 
   return (

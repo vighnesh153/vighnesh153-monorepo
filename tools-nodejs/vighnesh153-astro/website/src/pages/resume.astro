@@ -11,14 +11,14 @@ import { ResumeContainer } from "@/components/resume/ResumeContainer";
 import { Button } from "@/components/buttons/Button.tsx";
 ---
 
-<ContentLayout>
+<ContentLayout title="Vighnesh's Resume">
   <div class="mt-32">
     <div class="w-full flex items-center flex-col gap-6">
       <div class="">
         <Button variant="primary" id="btn-download-resume">Download</Button>
       </div>
       <div id="resume-container">
-        <ResumeContainer />
+        <ResumeContainer client:load />
       </div>
     </div>
   </div>
