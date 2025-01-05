@@ -30,9 +30,14 @@ export const hashTags = {
 };
 
 export const externalLinks = {
+  social: {
+    github: "https://github.com/vighnesh153",
+    linkedin: "https://www.linkedin.com/in/vighnesh153",
+    stackoverflow: "https://stackoverflow.com/users/8822610/vighnesh153",
+    codepen: "https://codepen.io/vighnesh153",
+  },
   githubRepo: monorepo("/tools-nodejs/vighnesh153-astro"),
-  blog: "/blog",
-  resume: "https://bit.ly/vighnesh153-resume",
+  // resume: "https://bit.ly/vighnesh153-resume",
   projects: {
     spl: {
       sourceCode: nodejsLegacy("/spl"),
@@ -54,7 +59,11 @@ export const externalLinks = {
 };
 
 export const internalLinks = {
+  host: "vighnesh153.dev",
+  domain: "https://vighnesh153.dev",
   main: `#${hashTags.main}`,
+  blog: "/blog",
+  resume: "/resume",
   homePage: {
     root: "/",
     aboutMe: `/#${hashTags.homePage.aboutMe}`,

@@ -12,9 +12,8 @@
 
 #### Tasks
 
-- caching images in indexed db
-- todo: uncomment other images from private_stub.tsx
 - resume as code
+- scale resume on small devices
 - Blog: Why i moved away from react and next js
 - Users page
 - User profile page

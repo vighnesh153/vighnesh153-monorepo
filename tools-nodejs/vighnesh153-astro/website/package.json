@@ -21,6 +21,8 @@
     "test": "run-s install-test-deps test:only"
   },
   "dependencies": {
+    "@fontsource-variable/noto-serif-lao": "^5.1.1",
+    "@fontsource-variable/raleway": "^5.1.1",
     "@nanostores/solid": "^0.5.0",
     "@std/assert": "npm:@jsr/std__assert@^1.0.10",
     "@std/random": "npm:@jsr/std__random@^0.1.0",

@@ -17,7 +17,7 @@ export const AllNavigationItems = {
     link: internalLinks.homePage.aboutMe,
     id: "primary-nav-link-about-me",
   },
-  blog: { text: "Blog", link: externalLinks.blog, id: "primary-nav-link-blog" },
+  blog: { text: "Blog", link: internalLinks.blog, id: "primary-nav-link-blog" },
   projects: {
     text: "Projects",
     link: internalLinks.homePage.projects,
@@ -30,7 +30,7 @@ export const AllNavigationItems = {
   },
   resume: {
     text: "Resume",
-    link: externalLinks.resume,
+    link: internalLinks.resume,
     id: "primary-nav-link-resume",
   },
 } satisfies Record<string, NavItem>;

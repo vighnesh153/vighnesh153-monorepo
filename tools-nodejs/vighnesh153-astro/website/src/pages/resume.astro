@@ -1,4 +1,10 @@
 ---
+// Supports weights 100-900
+import "@fontsource-variable/noto-serif-lao";
+
+// Supports weights 100-900
+import "@fontsource-variable/raleway";
+
 import ContentLayout from "@/layouts/ContentLayout.astro";
 
 import { ResumeContainer } from "@/components/resume/ResumeContainer";
@@ -23,6 +29,8 @@ import { Button } from "@/components/buttons/Button.tsx";
     /* A4 size */
     width: 794px;
     height: 1123px;
+
+    font-family: "Noto Serif Lao Variable", serif;
   }
 
   @media print {

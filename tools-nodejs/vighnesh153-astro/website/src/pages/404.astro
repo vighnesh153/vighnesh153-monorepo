@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { internalLinks } from "@/utils/content/links";
 ---
 
 <BaseLayout
   title="Page not found"
-  description="Lost? Head over to vighnesh153.dev"
+  description={"Lost? Head over to " + internalLinks.host}
 >
   <main class="loading">
     <h1>404: Not found</h1>
