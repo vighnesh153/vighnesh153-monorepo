@@ -12,8 +12,10 @@
 
 #### Tasks
 
-- resume as code
 - scale resume on small devices
+- Something wrong with React rendering on
+  https://vighnesh153.dev/projects/tsx-playground
+- upload private content from phone to firebase
 - Blog: Why i moved away from react and next js
 - Users page
 - User profile page
@@ -129,13 +131,6 @@
   - `/users/:userId` redirect to `/users/:userId/username`
   - Allow editing username
 - AWS sandbox
-- vighnesh153.com/memes
-  - vighnesh153.com/memes/12345 -> Should render the meme as meta-data when
-    sharing url
-  - Meme credit to
-    - users
-    - other portals
-  - Update welcome email template with link to vighnesh153.com/memes
 - CRON expression builder
 - Response cache for a url, headers, etc (lambda)
   - Useful for accessing GitHub APIs that have rate limits without API key
