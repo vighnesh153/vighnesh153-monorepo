@@ -12,10 +12,8 @@
 
 #### Tasks
 
-- scale resume on small devices
 - Something wrong with React rendering on
   https://vighnesh153.dev/projects/tsx-playground
-- upload private content from phone to firebase
 - Blog: Why i moved away from react and next js
 - Users page
 - User profile page

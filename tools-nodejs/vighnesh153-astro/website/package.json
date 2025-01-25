@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "astro dev --host",
-    "prebuild": "astro check",
+    "build:generate-resume-pdf": "npx playwright test -c playwright-pdf-generation.config.ts ./scripts/resume-pdf.spec.ts",
+    "prebuild": "astro check && npm run build:generate-resume-pdf",
     "build": "astro build",
     "lint": "astro check",
     "prefmt": "cp deno-bk.json deno.json",

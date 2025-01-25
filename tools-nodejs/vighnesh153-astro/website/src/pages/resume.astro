@@ -9,28 +9,90 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
 
 import { ResumeContainer } from "@/components/resume/ResumeContainer";
 import { Button } from "@/components/buttons/Button.tsx";
+
+const monthFormatter = new Intl.DateTimeFormat("en-GB", {
+  month: "short",
+});
+const ordinalSuffixes = new Map([
+  ["one", "st"],
+  ["two", "nd"],
+  ["few", "rd"],
+  ["other", "th"],
+]);
+const ordinalFormatter = new Intl.PluralRules("en-US", { type: "ordinal" });
+
+const date = new Date();
+const day = date.getDate();
+const ordinal = ordinalSuffixes.get(ordinalFormatter.select(day));
+const month = monthFormatter.format(date);
+const year = date.getFullYear();
+
+const formattedDate = `${day}${ordinal} ${month} ${year}`;
+const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
 ---
 
-<ContentLayout title="Vighnesh's Resume">
+<ContentLayout title={pageTitle}>
   <div class="mt-32">
     <div class="w-full flex items-center flex-col gap-6">
       <div class="">
         <Button variant="primary" id="btn-download-resume">Download</Button>
       </div>
       <div id="resume-container">
-        <ResumeContainer client:load />
+        <div id="resume-holder">
+          <ResumeContainer client:load snapshotDate={formattedDate} />
+        </div>
       </div>
     </div>
   </div>
 </ContentLayout>
 
 <style>
-  #resume-container {
+  :root {
     /* A4 size */
-    width: 794px;
-    height: 1123px;
+    --a4w: 794px;
+    --a4h: 1123px;
+
+    --scale: 0.35;
+    --scale-sm: 0.5;
+    --scale-md: 0.75;
+    --scale-lg: 1;
+  }
+
+  #resume-holder {
+    /* A4 size */
+    width: var(--a4w);
+    height: var(--a4h);
 
     font-family: "Noto Serif Lao Variable", serif;
+  }
+
+  @media not print {
+    #resume-container {
+      position: relative;
+
+      @apply w-[calc(var(--a4w)*var(--scale))];
+      @apply h-[calc(var(--a4h)*var(--scale))];
+
+      @apply sm:w-[calc(var(--a4w)*var(--scale-sm))];
+      @apply sm:h-[calc(var(--a4h)*var(--scale-sm))];
+
+      @apply md:w-[calc(var(--a4w)*var(--scale-md))];
+      @apply md:h-[calc(var(--a4h)*var(--scale-md))];
+
+      @apply lg:w-[calc(var(--a4w)*var(--scale-lg))];
+      @apply lg:h-[calc(var(--a4h)*var(--scale-lg))];
+    }
+
+    #resume-holder {
+      position: absolute;
+
+      transform-origin: top left;
+
+      @apply scale-[var(--scale)];
+      @apply sm:scale-[var(--scale-sm)];
+      @apply md:scale-[var(--scale-md)];
+      @apply lg:scale-[var(--scale-lg)];
+    }
   }
 
   @media print {
@@ -39,7 +101,7 @@ import { Button } from "@/components/buttons/Button.tsx";
       position: relative;
     }
 
-    #resume-container {
+    #resume-holder {
       visibility: visible;
       position: absolute;
       top: 0;
@@ -59,6 +121,14 @@ import { Button } from "@/components/buttons/Button.tsx";
       // Once download as pdf feature is implemented, update this code to download pdf directly
       // instead of opening the print dialog and expecting the user to download
       // https://github.com/whatwg/html/issues/7946
-      print();
+      // print();
+
+      const link = document.createElement("a");
+      const fileName = `${document.title}.pdf`;
+      link.href = `/${fileName}`;
+      link.download = fileName;
+      link.target = "_blank";
+
+      link.click();
     });
 </script>
