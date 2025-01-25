@@ -1,13 +1,26 @@
 {
   "extends": "@vighnesh153/tsconfig/typescript-library.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals"
+    ],
     "outDir": "dist",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": [".", "src", "tests"],
-  "exclude": ["dist", "build", "node_modules"]
+  "include": [
+    ".",
+    "src",
+    "tests"
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
 }

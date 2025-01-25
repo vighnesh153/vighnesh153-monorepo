@@ -3,8 +3,13 @@ import { IFileCache } from "./IFileCache.ts";
 
 export class BrowserFileCache implements IFileCache {
   private fileCache = localForage.createInstance({
-    name: "fileCache",
+    name: "fileCache_v2",
   });
+
+  constructor() {
+    // delete old db
+    localForage.dropInstance({ name: "fileCache" });
+  }
 
   async getItem<T>(key: string) {
     return this.fileCache.getItem<T>(key);

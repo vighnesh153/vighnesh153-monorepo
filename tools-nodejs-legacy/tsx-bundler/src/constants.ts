@@ -32,17 +32,12 @@ export const baseIframeHtmlCode = `
 `;
 
 export const starterCode = `
-import React from "react";
-import ReactDOM from "react-dom";
+import React from "react@19";
+import { createRoot } from 'react-dom@19/client';
 
 import axios from "axios";
 
-// Learn more about my library here:
-// https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-packages/utils/src/utils
-import { isPrime } from "@vighnesh153/utils@0.4.4/dist/main.js";
-
-const is42Prime = isPrime(42).toString();
-const is43Prime = isPrime(43).toString();
+import sum from "lodash.sum";
 
 function App() {
   const [users, setUsers] = React.useState(null);
@@ -56,14 +51,18 @@ function App() {
   return (
     <div>
       <h1>Pikachu supremacy ✌️ ϞϞ(๑⚈ ․̫ ⚈๑)∩ ⚡️⚡️</h1>
-      <p>Is 42 Prime: <strong>{is42Prime}</strong></p>
-      <p>Is 43 Prime: <strong>{is43Prime}</strong></p>
+      <p>Sum(1, 3, 5, 7): <strong>{sum([1, 3, 5, 7])}</strong></p>
       <h2>Users</h2>
       <p>User count: {users?.length ?? 'Loading...'}</p>
+      <ul>
+        {users?.map((user) => (
+           <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-const appRoot = document.getElementById("root");
-ReactDOM.render(<App />, appRoot);
+const appRoot = createRoot(document.getElementById('root'));
+appRoot.render(<App />);
 `;
