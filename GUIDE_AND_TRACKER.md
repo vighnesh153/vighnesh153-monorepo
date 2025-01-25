@@ -12,8 +12,6 @@
 
 #### Tasks
 
-- Something wrong with React rendering on
-  https://vighnesh153.dev/projects/tsx-playground
 - Blog: Why i moved away from react and next js
 - Users page
 - User profile page
