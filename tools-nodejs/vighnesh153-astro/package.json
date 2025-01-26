@@ -3,7 +3,9 @@
     "start:functions-watch": "npm run --prefix functions build:watch",
     "start:emulators": "npx firebase emulators:start --project demo-vighnesh153-app --import ./firebase-seed --export-on-exit ./firebase-seed",
     "start": "npx conc --kill-others \"npm run start:functions-watch\" \"npm run start:emulators\"",
+    "predeploy": "npm run predeploy:hosting",
     "deploy": "NODE_ENV=production npx firebase deploy --project vighnesh153-app",
+    "predeploy:hosting": "npm run --prefix website prebuild",
     "deploy:hosting": "NODE_ENV=production npx firebase deploy --only hosting --project vighnesh153-app",
     "deploy:functions": "npx firebase deploy --only functions --project vighnesh153-app"
   },

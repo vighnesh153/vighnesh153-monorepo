@@ -117,7 +117,7 @@ export function ControlledPopover(
             `${styles["popover-content-root"]}
             ${styles[`popover-placement-${props.placement.split("-")[0]}`]}
 
-            fixed z-tooltip
+            fixed z-(--z-tooltip)
             flex 
             ${
               computeFlexClassesForPopoverContentRootBasedOnPlacement(

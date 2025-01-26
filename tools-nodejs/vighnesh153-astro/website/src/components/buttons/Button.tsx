@@ -1,12 +1,15 @@
 import {
   children,
   type JSX,
+  Match,
   mergeProps,
   type ParentProps,
   splitProps,
+  Switch,
 } from "solid-js";
 
-import { classes } from "@/utils/index.ts";
+import { PrimaryButtonStyles } from "./PrimaryButtonStyles";
+import { SecondaryButtonStyles } from "./SecondaryButtonStyles";
 
 export type ButtonProps =
   & ParentProps<{
@@ -25,11 +28,25 @@ export function Button(incomingProps: ButtonProps): JSX.Element {
   );
   const c = children(() => local.children);
   return (
-    <button
-      {...buttonProps}
-      class={classes(local.class, `${local.variant}-button`)}
-    >
-      {c()}
-    </button>
+    <Switch>
+      <Match when={local.variant === "primary"}>
+        <PrimaryButtonStyles
+          {...buttonProps}
+          component="button"
+          class={local.class}
+        >
+          {c()}
+        </PrimaryButtonStyles>
+      </Match>
+      <Match when={local.variant === "secondary"}>
+        <SecondaryButtonStyles
+          {...buttonProps}
+          component="button"
+          class={local.class}
+        >
+          {c()}
+        </SecondaryButtonStyles>
+      </Match>
+    </Switch>
   );
 }

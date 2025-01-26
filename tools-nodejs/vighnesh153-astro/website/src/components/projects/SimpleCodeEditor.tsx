@@ -41,7 +41,7 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
         "overflow-hidden",
         "flex",
         "flex-row",
-        "bg-backgroundDark",
+        "bg-bg-dark",
       )}
     >
       {/* Line number container */}
@@ -50,7 +50,7 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
         class={classes(
           "h-full",
           "overflow-hidden",
-          "bg-backgroundDark",
+          "bg-bg-dark",
           "px-2",
           "z-[2]",
         )}
@@ -82,7 +82,7 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
             "absolute",
             "text-[transparent]",
             "border-none",
-            "focus:outline-none",
+            "focus:outline-hidden",
             "resize-none",
             "whitespace-pre",
             "z-[2]",

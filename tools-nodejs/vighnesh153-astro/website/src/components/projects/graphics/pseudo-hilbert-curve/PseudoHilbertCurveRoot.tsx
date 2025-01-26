@@ -55,7 +55,7 @@ export function PseudoHilbertCurveRoot() {
         <select
           name="level"
           id="level"
-          class="min-w-[100px] text-secondary"
+          class="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
           value={level()}
           onChange={updateLevel}
         >

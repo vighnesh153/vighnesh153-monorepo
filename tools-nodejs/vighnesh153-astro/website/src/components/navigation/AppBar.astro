@@ -16,20 +16,19 @@ const { navItems } = Astro.props;
 ---
 
 <style lang="scss">
-  // prevent scrolling when side navigation is open
+  /* prevent scrolling when side navigation is open */
   :global(html:has(#side-navigation-open:checked) body) {
     overflow: hidden;
   }
 
-  header {
-    &.box-shadow {
-      @apply shadow-lg;
-      @apply shadow-backgroundDark;
-    }
+  :global(header.my-box-shadow) {
+    box-shadow:
+      0 10px 15px -3px var(--color-bg-dark),
+      0 4px 6px -4px var(--color-bg-dark);
+  }
 
-    &.show-header {
-      @apply translate-y-0;
-    }
+  :global(header.show-header) {
+    translate: var(--tw-translate-x) calc(var(--spacing) * 0);
   }
 </style>
 
@@ -39,8 +38,8 @@ const { navItems } = Astro.props;
     py-8 px-10 w-full fixed -translate-y-full
     flex items-center justify-between
     bg-background
-    transition-[transform,box-shadow] duration-300 ease-in-out
-    z-appBar
+    transition-[translate,box-shadow] duration-300 ease-in-out
+    z-(--z-app-bar)
     show-header
   `)}
 >
@@ -72,7 +71,7 @@ const { navItems } = Astro.props;
     class={classes(`
     fixed hidden w-[100dvw] h-[100dvh] left-0 top-0
     flex-col justify-center items-center gap-12
-    bg-background z-drawer
+    bg-background z-(--z-drawer)
     peer-checked:flex
     lg:peer-checked:hidden
   `)}
@@ -117,15 +116,15 @@ const { navItems } = Astro.props;
     debounce(() => {
       const currentScrollY = window.scrollY;
       header?.classList.toggle(
-        "box-shadow",
-        currentScrollY >= boxShadowScrollYOffset,
+        "my-box-shadow",
+        currentScrollY >= boxShadowScrollYOffset
       );
       header?.classList.toggle(
         "show-header",
-        currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY,
+        currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY
       );
       previousScrollY = currentScrollY;
-    }, 16),
+    }, 16)
   );
 
   // this is needed for when header is hidden and one of its children gets focus

@@ -52,7 +52,7 @@ export function SortingVisualizerRoot() {
           <select
             name="algorithm"
             id="algorithm"
-            class="min-w-[100px] text-secondary"
+            class="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
             value={algorithmTitle()}
             onChange={(e) => {
               setAlgorithmTitle(e.target.value);

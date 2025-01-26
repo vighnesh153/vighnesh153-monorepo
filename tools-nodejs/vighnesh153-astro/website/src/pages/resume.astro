@@ -46,7 +46,7 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
   </div>
 </ContentLayout>
 
-<style>
+<style lang="scss">
   :root {
     /* A4 size */
     --a4w: 794px;
@@ -70,17 +70,23 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
     #resume-container {
       position: relative;
 
-      @apply w-[calc(var(--a4w)*var(--scale))];
-      @apply h-[calc(var(--a4h)*var(--scale))];
+      width: calc(var(--a4w) * var(--scale));
+      height: calc(var(--a4h) * var(--scale));
 
-      @apply sm:w-[calc(var(--a4w)*var(--scale-sm))];
-      @apply sm:h-[calc(var(--a4h)*var(--scale-sm))];
+      @media (width >= 40rem) {
+        width: calc(var(--a4w) * var(--scale-sm));
+        height: calc(var(--a4h) * var(--scale-sm));
+      }
 
-      @apply md:w-[calc(var(--a4w)*var(--scale-md))];
-      @apply md:h-[calc(var(--a4h)*var(--scale-md))];
+      @media (width >= 48rem) {
+        width: calc(var(--a4w) * var(--scale-md));
+        height: calc(var(--a4h) * var(--scale-md));
+      }
 
-      @apply lg:w-[calc(var(--a4w)*var(--scale-lg))];
-      @apply lg:h-[calc(var(--a4h)*var(--scale-lg))];
+      @media (width >= 64rem) {
+        width: calc(var(--a4w) * var(--scale-lg));
+        height: calc(var(--a4h) * var(--scale-lg));
+      }
     }
 
     #resume-holder {
@@ -88,10 +94,16 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
 
       transform-origin: top left;
 
-      @apply scale-[var(--scale)];
-      @apply sm:scale-[var(--scale-sm)];
-      @apply md:scale-[var(--scale-md)];
-      @apply lg:scale-[var(--scale-lg)];
+      scale: var(--scale);
+      @media (width >= 40rem) {
+        scale: var(--scale-sm);
+      }
+      @media (width >= 48rem) {
+        scale: var(--scale-md);
+      }
+      @media (width >= 64rem) {
+        scale: var(--scale-lg);
+      }
     }
   }
 

@@ -181,6 +181,12 @@ const rtlPlacementMapping: Record<PopoverPlacement, AbsolutePlacement> = {
   "left-end": "left-bottom",
 };
 
+const itemsAlignment = {
+  "start": "items-start",
+  "center": "items-center",
+  "end": "items-end",
+};
+
 function calculateAbsolutePlacementBasedOnDirection(
   placement: PopoverPlacement,
   layoutDirection: PopoverLayoutDirection,
@@ -290,7 +296,10 @@ export function computeFlexClassesForPopoverContentRootBasedOnPlacement(
   );
   const outputClasses: string[] = [];
   const [topBottomLeftRight] = absolutePlacement.split("-");
-  const [, startCenterEnd] = placement.split("-");
+  const [, startCenterEnd] = placement.split("-") as [
+    unknown,
+    keyof typeof itemsAlignment,
+  ];
   switch (topBottomLeftRight) {
     case "top":
       outputClasses.push("flex-col-reverse");
@@ -313,6 +322,6 @@ export function computeFlexClassesForPopoverContentRootBasedOnPlacement(
       }
       break;
   }
-  outputClasses.push(`items-${startCenterEnd}`);
+  outputClasses.push(itemsAlignment[startCenterEnd]);
   return outputClasses.join(" ");
 }

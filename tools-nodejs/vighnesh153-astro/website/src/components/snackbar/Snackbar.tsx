@@ -39,7 +39,7 @@ export function Snackbar(props: SnackbarProps): JSX.Element {
         `)}
       >
         <div class="mt-1">{config.icon()}</div>
-        <p class="flex-grow">{props.message}</p>
+        <p class="grow">{props.message}</p>
         <Show when={props.manualDismissible}>
           <button onClick={() => props.dismiss()}>
             <CloseIcon class="mt-1 w-4 h-4" />

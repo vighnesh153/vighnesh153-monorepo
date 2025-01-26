@@ -78,7 +78,7 @@ export function CodeViewer({
             ps-6
             pe-4
             
-            flex-grow
+            grow
             items-stretch
           `)}
           innerText={code}

@@ -3,6 +3,8 @@
   --_triangle-color: var(--triangle-color, currentColor);
 
   content: "";
+  width: 0;
+  height: 0;
 
   border: var(--_triangle-size) solid transparent;
 }

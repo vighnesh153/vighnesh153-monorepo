@@ -37,7 +37,7 @@ export function ResumeContainer(props: { snapshotDate: string }): JSX.Element {
       </p>
       <hr class="mt-2 border-[#999]" />
 
-      <div class="flex-grow flex [&>div]:pt-6">
+      <div class="grow flex [&>div]:pt-6">
         <div class="pl-10 basis-4/12">
           <ResumeEducationSection />
           <ResumeLinksSection class="mt-8" />

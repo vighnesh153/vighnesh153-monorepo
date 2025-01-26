@@ -1,4 +1,5 @@
 import { classes } from "@/utils/index.ts";
+import { ImageWithCache } from "./ImageWithCache";
 
 export type CanvasProjectCardProps = {
   title: string;
@@ -14,21 +15,21 @@ export function CanvasProjectCard(props: CanvasProjectCardProps) {
         "min-h-[180px] w-full",
         "flex flex-col items-center",
         "cursor-pointer rounded-2xl overflow-hidden",
-        "bg-backgroundDark",
-        // 'hover:bg-backgroundLight focus-visible:bg-backgroundLight',
-
-        // 'shadow-md',
+        "bg-bg-dark",
         "hover:shadow-xl focus-visible:shadow-xl",
         "shadow-text4",
         "hover:shadow-text4 focus-visible:shadow-text4",
       )}
       href={props.link}
     >
-      <img
-        class={classes("block w-full aspect-video object-contain")}
-        alt={props.title}
+      <ImageWithCache
         src={props.imageLink}
-        loading="lazy"
+        cacheKey={props.imageLink}
+        imageProps={{
+          class: classes("block w-full aspect-video object-cover"),
+          alt: props.title,
+          loading: "lazy",
+        }}
       />
       <span
         class={classes(

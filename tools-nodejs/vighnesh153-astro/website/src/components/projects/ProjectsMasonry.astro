@@ -19,7 +19,7 @@ import { Link } from "../Link.tsx";
 >
   {
     allProjects.map(({ title, description, tags, links }) => (
-      <li class="shadow-backgroundDark bg-backgroundLight flex max-w-lg flex-col rounded-lg p-6 shadow-md">
+      <li class="shadow-bg-dark bg-bg-light flex max-w-lg flex-col rounded-lg p-6 shadow-md">
         <div class="flex items-center justify-between">
           <FolderIcon class="fill-accent" role="img" height="2rem" />
 
@@ -43,7 +43,7 @@ import { Link } from "../Link.tsx";
         <h3 class="mt-5 text-xl md:text-2xl">
           <Link href={links.demo.href}>{title}</Link>
         </h3>
-        <p class="text-text2 mt-4 flex-grow text-base">{description}</p>
+        <p class="text-text2 mt-4 grow text-base">{description}</p>
         <ul class="mt-6 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <ProjectTag>{tag}</ProjectTag>

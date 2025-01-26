@@ -63,7 +63,7 @@ export function SplRoot() {
         class={classes(
           "w-full",
           "lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:row-end-[-1]",
-          "bg-backgroundDark",
+          "bg-bg-dark",
           "focus-within:outline-[transparent]",
           "z-[1]",
           "rounded-none",
@@ -82,7 +82,7 @@ export function SplRoot() {
         className={classes(
           "w-full",
           "lg:row-start-2 lg:row-end-[-1]",
-          "bg-backgroundLight",
+          "bg-bg-light",
           "rounded-md",
         )}
       />

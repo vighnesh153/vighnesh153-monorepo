@@ -7,7 +7,7 @@ export function SnackbarHost(): JSX.Element {
   const $snackbarList = useStore(snackbarList);
 
   return (
-    <div class="fixed top-10 right-10 z-snackbar">
+    <div class="fixed top-10 right-10 z-(--z-snackbar)">
       <For each={$snackbarList()}>
         {(snackbar) => <Snackbar {...snackbar} />}
       </For>

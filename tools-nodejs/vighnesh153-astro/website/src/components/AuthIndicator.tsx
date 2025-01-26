@@ -47,10 +47,10 @@ export function AuthIndicator() {
               <div
                 class={classes(
                   `
-              w-73 inline-block
-              grow-0
-              whitespace-nowrap overflow-hidden text-ellipsis
-              `,
+                    w-20 inline-block
+                    grow-0
+                    whitespace-nowrap overflow-hidden text-ellipsis
+                  `,
                 )}
               >
                 {$loggedInUser()!.name.split(" ")[0]}

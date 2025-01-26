@@ -24,7 +24,7 @@ export function ListItem(props: ListItemProps) {
       onClick={props.onClick}
     >
       {props.leadingContent}
-      <div class="flex-grow">{props.text}</div>
+      <div class="grow">{props.text}</div>
       {props.leadingContent}
     </li>
   );

@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 
-test("Generate PDF of Resume", async ({ page, browser }) => {
+test("Generate PDF of Resume", async ({ page }) => {
   await page.goto("/resume");
 
   await page.pdf({

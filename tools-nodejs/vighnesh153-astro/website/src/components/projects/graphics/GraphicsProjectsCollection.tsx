@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 
-import { graphicsProjects } from "@vighnesh153/tools-browser/graphics_programming";
+import { graphicsProjects } from "@/utils/content/graphics_projects.ts";
 
 import { classes, internalLinks } from "@/utils/index.ts";
 import { CanvasProjectCard } from "@/components/CanvasProjectCard.tsx";

@@ -1,7 +1,7 @@
-import { GithubIcon } from "@/icons/GithubIcon.tsx";
-import { EyeIcon } from "@/icons/EyeIcon.tsx";
-import { externalLinks, internalLinks } from "./links.ts";
 import type { JSX } from "solid-js";
+import { EyeIcon } from "@/icons/EyeIcon.tsx";
+import { SourceCodeIcon } from "@/icons/SourceCodeIcon.tsx";
+import { externalLinks, internalLinks } from "./links.ts";
 
 interface ProjectLink {
   Icon: (
@@ -31,7 +31,7 @@ export const allProjects: Project[] = [
     tags: ["Compiler", "Interpreter", "Typescript"],
     links: {
       github: {
-        Icon: GithubIcon,
+        Icon: SourceCodeIcon,
         href: externalLinks.projects.spl.sourceCode,
       },
       demo: {
@@ -49,7 +49,7 @@ export const allProjects: Project[] = [
     tags: ["Canvas API", "Typescript", "Astro"],
     links: {
       github: {
-        Icon: GithubIcon,
+        Icon: SourceCodeIcon,
         href: externalLinks.projects.drawingApp.sourceCode,
       },
       demo: {
@@ -65,7 +65,7 @@ export const allProjects: Project[] = [
     tags: ["Canvas API", "Astro", "Typescript"],
     links: {
       github: {
-        Icon: GithubIcon,
+        Icon: SourceCodeIcon,
         href: externalLinks.projects.graphicsProjects.sourceCode,
       },
       demo: {
@@ -81,7 +81,7 @@ export const allProjects: Project[] = [
     tags: ["ESBuild", "Astro", "React.js", "Golang"],
     links: {
       github: {
-        Icon: GithubIcon,
+        Icon: SourceCodeIcon,
         href: externalLinks.projects.tsxBundler.sourceCode,
       },
       demo: {
@@ -97,7 +97,7 @@ export const allProjects: Project[] = [
     tags: ["Canvas API", "Astro", "Typescript"],
     links: {
       github: {
-        Icon: GithubIcon,
+        Icon: SourceCodeIcon,
         href: externalLinks.projects.games.sourceCode,
       },
       demo: {

@@ -40,7 +40,7 @@ export function TsxPlaygroundRoot(): JSX.Element {
       <div
         class={classes(
           "w-1/2",
-          "bg-backgroundDark",
+          "bg-bg-dark",
           "focus-within:outline-[transparent]",
           "z-[1]",
           "rounded-none",
