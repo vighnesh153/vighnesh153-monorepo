@@ -4,7 +4,7 @@ test("Generate PDF of Resume", async ({ page }) => {
   await page.goto("/resume");
 
   await page.pdf({
-    path: `./public/${await page.title()}.pdf`,
+    path: `./public/resume.pdf`,
     displayHeaderFooter: false,
     landscape: false,
     printBackground: true,

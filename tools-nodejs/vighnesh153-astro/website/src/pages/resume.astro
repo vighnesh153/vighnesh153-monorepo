@@ -8,7 +8,7 @@ import "@fontsource-variable/raleway";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 
 import { ResumeContainer } from "@/components/resume/ResumeContainer";
-import { Button } from "@/components/buttons/Button.tsx";
+import { Link } from "@/components/Link.tsx";
 
 const monthFormatter = new Intl.DateTimeFormat("en-GB", {
   month: "short",
@@ -35,7 +35,14 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
   <div class="mt-32">
     <div class="w-full flex items-center flex-col gap-6">
       <div class="">
-        <Button variant="primary" id="btn-download-resume">Download</Button>
+        <Link
+          linkType="primary-btn"
+          href="/resume.pdf"
+          download={`${pageTitle}.pdf`}
+          target="_blank"
+        >
+          Download
+        </Link>
       </div>
       <div id="resume-container">
         <div id="resume-holder">
@@ -126,21 +133,4 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
   logAnalyticsEvent("visit_resume");
-
-  document
-    .querySelector("#btn-download-resume")
-    ?.addEventListener("click", () => {
-      // Once download as pdf feature is implemented, update this code to download pdf directly
-      // instead of opening the print dialog and expecting the user to download
-      // https://github.com/whatwg/html/issues/7946
-      // print();
-
-      const link = document.createElement("a");
-      const fileName = `${document.title}.pdf`;
-      link.href = `/${fileName}`;
-      link.download = fileName;
-      link.target = "_blank";
-
-      link.click();
-    });
 </script>
