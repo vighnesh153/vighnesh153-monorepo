@@ -1,11 +1,4 @@
 {
-  "[python]": {
-    "editor.formatOnType": true
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno",
-    "editor.tabSize": 2
-  },
   "chat.editor.fontSize": 20,
   "debug.console.fontSize": 20,
   "diffEditor.ignoreTrimWhitespace": false,
@@ -33,28 +26,5 @@
   },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
-  "workbench.tree.renderIndentGuides": "always",
-  "cSpell.words": [
-    "astro",
-    "astrojs",
-    "Codepen",
-    "cssnano",
-    "csstype",
-    "dotenvx",
-    "Millis",
-    "Multinomial",
-    "nanostores",
-    "Pikachu",
-    "playform",
-    "postfmt",
-    "prefmt",
-    "Raut",
-    "Sierpinskis",
-    "solidjs",
-    "Stackoverflow",
-    "tailwindcss",
-    "treeshake",
-    "tsup",
-    "Vighnesh"
-  ]
+  "workbench.tree.renderIndentGuides": "always"
 }
