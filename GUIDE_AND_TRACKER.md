@@ -85,21 +85,16 @@
     log them out
 - Svelte Query: https://sveltequery.vercel.app/overview
 - https://github.com/vighnesh153/my-favourite
-- Interview stuff
-  - Project: /Users/rvighnesh/practice/interview-hilbert-curve
+
 - Cool js packages
   - https://unjs.io/packages
 - Blog:
-  - Create a blog page under `vighnesh153.com/blog`
-  - Migrate all blogs from `blog.vighnesh153.com` to `vighnesh153/blog`
   - Javascript at scale
     - https://cube.dev/blog/how-to-build-tree-shakeable-javascript-libraries
 - Codepen like page for my personal HTML projects on vighnesh153.dev (no api
   just local code files)
 - Javascript Intl:
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
-- email template builder
-  - Create welcome email template
 - Awesome mouse move effect: http://alexandercoggin.com/
 - Populate `cors-anywhere` and `dictionary-api` lambdas.
 - CSS patterns: https://projects.verou.me/css3patterns/
@@ -115,12 +110,6 @@
   - Image compression
 - Video editing tool
 - Audio and video libraries
-- SQS Queues
-  - Pending events
-    - USER_CREATED
-      - Subscription 1: Send a welcome email
-- Email service
-- Embed GitHub commit snippet
 - Profile page for all users
   - `/users` -> Show list of users (hide emails)
   - `/users/:userId/username`
