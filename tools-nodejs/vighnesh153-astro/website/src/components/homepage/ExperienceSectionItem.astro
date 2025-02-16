@@ -16,23 +16,23 @@ const { companyName, companyUrl, totalDuration, companyPositions } =
 <style></style>
 
 <li class="mb-10 flex flex-col items-start">
-  <h3 class="mb-2 text-xl font-light sm:text-2xl">
-    <Link href={companyUrl}>@{companyName}</Link>
-  </h3>
-  {
-    companyPositions.length > 1 ? (
-      <p class={classes(`text-text3 text-base font-light`)}>
-        Full time · {totalDuration}
-      </p>
-    ) : null
-  }
-  <ul>
+  <div class="w-full mb-2 flex justify-between items-center gap-2">
+    <h3 class="text-xl font-light sm:text-2xl">
+      <Link href={companyUrl}>@{companyName}</Link>
+    </h3>
+    {
+      companyPositions.length > 1 ? (
+        <p class={classes(`text-text3 text-sm font-light`)}>
+          Full time · {totalDuration}
+        </p>
+      ) : null
+    }
+  </div>
+  <ul class="mb-4 flex flex-col gap-2">
     {
       companyPositions.map((companyPosition) => (
-        <li class={classes(`mb-4 flex flex-col items-start`)}>
-          <p class={classes(`text-base md:text-2xl`)}>
-            {companyPosition.title}
-          </p>
+        <li class={classes(`flex flex-col items-start`)}>
+          <p class={classes(`text-base md:text-xl`)}>{companyPosition.title}</p>
           <p
             class={classes(`
               font-light

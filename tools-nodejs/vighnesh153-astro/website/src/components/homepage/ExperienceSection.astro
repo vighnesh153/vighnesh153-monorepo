@@ -37,20 +37,22 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       totalDuration={getTimeDifference(new Date("2022-07-14"))}
       companyPositions={[
         {
+          title: "Software Engineer 3",
+          duration: `Nov 2023 - Present · ${getTimeDifference(new Date("2023-11-01"))}`,
+        },
+        {
           title: "Software Engineer 2",
-          duration: `July 2022 - Present · ${getTimeDifference(new Date("2022-07-14"))}`,
+          duration: `July 2022 - Oct 2023 · ${getTimeDifference(new Date("2022-07-14"), new Date("2023-10-31"))}`,
         },
       ]}
     >
       <Fragment slot="responsibilities">
         <ExperienceSectionItemResponsibility>
-          Building next-gen developer tools for GoogleTV
+          Building next-gen developer tools for Google Tv app developers
         </ExperienceSectionItemResponsibility>
         <ExperienceSectionItemResponsibility>
-          Google App Verification System for validating integration flows like
-          <strong class="font-bold">Playnext</strong> and <strong
-            class="font-bold">Deeplink</strong
-          > validation between GoogleTV and {`developer's`} apps
+          Building the Google Tv mobile app used by over 100 million users every
+          month
         </ExperienceSectionItemResponsibility>
       </Fragment>
     </ExperienceSectionItem>
@@ -60,7 +62,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.amazon}
       totalDuration={getTimeDifference(
         new Date("2020-09-28"),
-        new Date("2022-07-14"),
+        new Date("2022-07-14")
       )}
       companyPositions={[
         {
@@ -129,7 +131,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.smarterCodes}
       totalDuration={getTimeDifference(
         new Date("2020-07-06"),
-        new Date("2020-09-25"),
+        new Date("2020-09-25")
       )}
       companyPositions={[
         {
@@ -163,7 +165,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.tavisca}
       totalDuration={getTimeDifference(
         new Date("2019-07-15"),
-        new Date("2020-01-25"),
+        new Date("2020-01-25")
       )}
       companyPositions={[
         {
