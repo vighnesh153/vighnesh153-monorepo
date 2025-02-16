@@ -25,7 +25,7 @@ export function ResumeExperiencesSection(): JSX.Element {
             summaries: [
               "Developed an Android SDK adopted by over 10 media partners, improving video content discovery and user engagement on Google TV.",
               "Led the development of the Jetpack Compose Material library for TV, providing pre-built UI components optimized for large screen devices and remote control navigation.",
-              "Modernizing the Google Tv mobile app used by over 100 million users every month"
+              "Modernizing the Google Tv mobile app used by over 100 million users every month",
             ],
           },
         ]}
