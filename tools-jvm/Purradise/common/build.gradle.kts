@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -44,10 +45,10 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.compose.foundation:foundation:1.6.8")
-    implementation("androidx.compose.foundation:foundation-layout:1.6.8")
+    implementation("androidx.compose.foundation:foundation:1.7.8")
+    implementation("androidx.compose.foundation:foundation-layout:1.7.8")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
