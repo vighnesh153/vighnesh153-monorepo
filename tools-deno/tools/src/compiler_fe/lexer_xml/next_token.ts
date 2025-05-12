@@ -4,7 +4,7 @@ import {
   LexerError,
   type Token,
 } from "@/compiler_fe/lexer_core/mod.ts";
-import { skipWhitespace } from "./skip_whitespace.ts";
+import { skipWhitespace } from "./whitespace_utils.ts";
 import { readStringLiteral } from "./read_string_literal.ts";
 import {
   isAcceptableIdentifierStart,
@@ -21,10 +21,6 @@ export function nextToken(lexer: Lexer<XmlTokenType>): Token<XmlTokenType> {
 
   const currCh = lexer.inputReader.currentCharacter;
   switch (currCh) {
-    case ":": {
-      t = createToken(lexer, XmlTokenType.Colon);
-      break;
-    }
     case "=": {
       t = createToken(lexer, XmlTokenType.Equals);
       break;
@@ -98,13 +94,33 @@ export function nextToken(lexer: Lexer<XmlTokenType>): Token<XmlTokenType> {
       } else if (isAcceptableIdentifierStart(currCh)) {
         const { lineNumber, columnNumber } = lexer.inputReader;
         const identifier = readIdentifier(lexer);
-        t = createToken(
-          lexer,
-          XmlTokenType.Identifier,
-          identifier,
-          lineNumber,
-          columnNumber,
-        );
+        if (identifier.endsWith(".") || identifier.endsWith(":")) {
+          lexer.addError(
+            new LexerError({
+              errorCategory: {
+                type: "ILLEGAL_CHARACTER",
+                ch: currCh,
+              },
+              lineNumber: lexer.inputReader.lineNumber,
+              columnNumber: lexer.inputReader.columnNumber,
+            }),
+          );
+          t = createToken(
+            lexer,
+            XmlTokenType.Illegal,
+            identifier.at(-1),
+            lineNumber,
+            columnNumber + identifier.length - 1,
+          );
+        } else {
+          t = createToken(
+            lexer,
+            XmlTokenType.Identifier,
+            identifier,
+            lineNumber,
+            columnNumber,
+          );
+        }
       } else {
         lexer.addError(
           new LexerError({

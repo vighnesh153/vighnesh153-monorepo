@@ -179,17 +179,8 @@ export class XmlParser {
       `Shouldn't call parseXmlTagNode when statement doesn't start with "<IDENTIFIER"`,
     );
 
-    const xmlTagNode = new XmlTagNode();
-    xmlTagNode.addNamespace(this.#currentToken);
+    const xmlTagNode = new XmlTagNode(this.#currentToken);
     this.nextToken();
-
-    while (this.isCurrentToken(XmlTokenType.Colon)) {
-      if (!this.expectPeek(XmlTokenType.Identifier)) {
-        return null;
-      }
-      xmlTagNode.addNamespace(this.#currentToken);
-      this.nextToken();
-    }
 
     while (true) {
       if (this.isCurrentToken(XmlTokenType.Eof)) {
@@ -272,28 +263,16 @@ export class XmlParser {
       return null;
     }
 
-    const closingTagNamespaces = [this.#currentToken];
+    const closingTag = this.#currentToken;
     this.nextToken();
 
-    while (this.isCurrentToken(XmlTokenType.Colon)) {
-      if (!this.expectPeek(XmlTokenType.Identifier)) {
-        return null;
-      }
-      closingTagNamespaces.push(this.#currentToken);
-      this.nextToken();
-    }
-
-    const openingTagName = xmlTagNode.namespaces.map((part) =>
-      part.tokenLiteral
-    ).join(":");
-    const closingTagName = closingTagNamespaces.map((ns) => ns.tokenLiteral)
-      .join(":");
-    if (openingTagName !== closingTagName) {
+    const openingTagName = xmlTagNode.tag.tokenLiteral;
+    if (openingTagName !== closingTag.tokenLiteral) {
       this.addError(
         new ParserError({
           culpritToken: {
-            ...closingTagNamespaces[0],
-            tokenLiteral: closingTagName,
+            ...closingTag,
+            tokenLiteral: closingTag.tokenLiteral,
           },
           errorType: "UNEXPECTED_CLOSING_TAG_LITERAL",
         }),
@@ -325,44 +304,17 @@ export class XmlParser {
       return null;
     }
 
-    const namespaces: Readonly<Token<XmlTokenType>>[] = [this.#currentToken];
+    const attributeName = this.#currentToken;
 
-    while (true) {
-      if (this.isPeekToken(XmlTokenType.Eof)) {
-        this.addError(
-          new ParserError({
-            culpritToken: this.#peekToken,
-            errorType: "UNEXPECTED_EOF",
-          }),
-        );
-        return null;
-      }
-      if (this.isPeekToken(XmlTokenType.Equals)) {
-        break;
-      }
-
-      if (not(this.expectPeek(XmlTokenType.Colon))) {
-        return null;
-      }
-      if (not(this.expectPeek(XmlTokenType.Identifier))) {
-        return null;
-      }
-      namespaces.push(this.#currentToken);
+    if (not(this.expectPeek(XmlTokenType.Equals))) {
+      return null;
     }
-
-    assert(
-      this.isPeekToken(XmlTokenType.Equals),
-      `Expected "=" found ${this.#peekToken.tokenLiteral}`,
-    );
-
-    // we know next token is equals. move to that.
-    this.nextToken();
 
     if (not(this.expectPeek(XmlTokenType.StringLiteral))) {
       return null;
     }
 
-    return new XmlElementAttribute(namespaces, this.#currentToken);
+    return new XmlElementAttribute(attributeName, this.#currentToken);
   }
 
   private parseXmlCommentNode(): XmlCommentNode {

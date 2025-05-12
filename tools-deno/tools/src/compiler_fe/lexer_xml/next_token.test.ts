@@ -84,6 +84,50 @@ Deno.test("xml nextToken should parse naked xml tag", () => {
   );
 });
 
+Deno.test("xml nextToken should parse tags with class names", () => {
+  const lexer = createLexer("<a.b.c />");
+
+  assertEquals(
+    nextToken(lexer),
+    {
+      lineNumber: 1,
+      columnNumber: 1,
+      tokenLiteral: "<",
+      tokenType: XmlTokenType.LeftAngleBracket,
+    } satisfies Token<XmlTokenType>,
+  );
+
+  assertEquals(
+    nextToken(lexer),
+    {
+      lineNumber: 1,
+      columnNumber: 2,
+      tokenLiteral: "a.b.c",
+      tokenType: XmlTokenType.Identifier,
+    } satisfies Token<XmlTokenType>,
+  );
+
+  assertEquals(
+    nextToken(lexer),
+    {
+      lineNumber: 1,
+      columnNumber: 8,
+      tokenLiteral: "/",
+      tokenType: XmlTokenType.ForwardSlash,
+    } satisfies Token<XmlTokenType>,
+  );
+
+  assertEquals(
+    nextToken(lexer),
+    {
+      lineNumber: 1,
+      columnNumber: 9,
+      tokenLiteral: ">",
+      tokenType: XmlTokenType.RightAngleBracket,
+    } satisfies Token<XmlTokenType>,
+  );
+});
+
 Deno.test("xml nextToken should parse xml tag", () => {
   const lexer = createLexer('<?xml version="1.0" encoding="utf-8"?>');
 
@@ -237,27 +281,7 @@ Deno.test("xml nextToken parse empty manifest", () => {
     {
       lineNumber: 4,
       columnNumber: 5,
-      tokenLiteral: "xmlns",
-      tokenType: XmlTokenType.Identifier,
-    } satisfies Token<XmlTokenType>,
-  );
-
-  assertEquals(
-    nextToken(lexer),
-    {
-      lineNumber: 4,
-      columnNumber: 10,
-      tokenLiteral: ":",
-      tokenType: XmlTokenType.Colon,
-    } satisfies Token<XmlTokenType>,
-  );
-
-  assertEquals(
-    nextToken(lexer),
-    {
-      lineNumber: 4,
-      columnNumber: 11,
-      tokenLiteral: "android",
+      tokenLiteral: "xmlns:android",
       tokenType: XmlTokenType.Identifier,
     } satisfies Token<XmlTokenType>,
   );
@@ -374,7 +398,7 @@ Deno.test("xml nextToken parse comment", () => {
     `);
 
   // skip past opening tag of manifest
-  repeat(22, () => {
+  repeat(20, () => {
     nextToken(lexer);
   });
 

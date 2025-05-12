@@ -28,7 +28,7 @@ Deno.test("formatXmlExpression should format xml prolog node", async (t) => {
 
 Deno.test("formatXmlExpression should format xml tag node", async (t) => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleProperty = "some random value" deeply :  nested:property = "20" >
+    `<manifest   simpleProperty = "some random value" deeply:nested:property = "20" >
   </ manifest>
     `,
   );

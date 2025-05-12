@@ -22,7 +22,7 @@ Deno.test("should format empty, self-closing xml tag node", async (t) => {
 
 Deno.test("should format self-closing xml tag node with attributes", async (t) => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" />`,
+    `<manifest   simpleAttribute = "some random value" deeply:nested:attribute = "20" />`,
   );
 
   assertEquals(parser.errors.length, 0);
@@ -40,7 +40,7 @@ Deno.test("should format self-closing xml tag node with attributes", async (t) =
 
 Deno.test("should format non self-closing xml tag node with attributes but no children", async (t) => {
   const [parser, program] = parseProgram(
-    `<manifest   simpleAttribute = "some random value" deeply :  nested:attribute = "20" >
+    `<manifest   simpleAttribute = "some random value" deeply:nested:attribute = "20" >
   </ manifest>
     `,
   );
@@ -61,7 +61,7 @@ Deno.test("should format non self-closing xml tag node with attributes but no ch
 Deno.test("should format xml tag node with children", async (t) => {
   const [parser, program] = parseProgram(
     `<manifest    >
-     < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
+     < childTag  special:forces:commando = "Pikachu"  pokemon= "Hurray" />
       < childTag2    pokemon= "Greninja">
           <  childTag3  Infernape = "lol" >  </ childTag3>
        </ childTag2>
@@ -129,26 +129,29 @@ Deno.test("should sort all attributes based on android rules", async (t) => {
   );
 });
 
-Deno.test("should format xml tag node without sorting if sortAttribute is false", async (t) => {
-  const [parser, program] = parseProgram(
-    `<manifest    >
-     < childTag  special: forces : commando = "Pikachu"  pokemon= "Hurray" />
+Deno.test(
+  "should format xml tag node without sorting if sortAttribute is false",
+  async (t) => {
+    const [parser, program] = parseProgram(
+      `<manifest    >
+     < childTag  special:forces:commando = "Pikachu"  pokemon= "Hurray" />
       < childTag2    pokemon= "Greninja">
           <  childTag3  Infernape = "lol" >  </ childTag3>
        </ childTag2>
   </ manifest>
     `,
-  );
+    );
 
-  assertEquals(parser.errors.length, 0);
-  assertEquals(program.statements.length, 1);
-  await assertSnapshot(
-    t,
-    formatXmlTagNode({
-      xmlTagNode: program.statements[0] as XmlTagNode,
-      indentation: 4,
-      indentationLevel: 0,
-      sortAttributes: false,
-    }),
-  );
-});
+    assertEquals(parser.errors.length, 0);
+    assertEquals(program.statements.length, 1);
+    await assertSnapshot(
+      t,
+      formatXmlTagNode({
+        xmlTagNode: program.statements[0] as XmlTagNode,
+        indentation: 4,
+        indentationLevel: 0,
+        sortAttributes: false,
+      }),
+    );
+  },
+);

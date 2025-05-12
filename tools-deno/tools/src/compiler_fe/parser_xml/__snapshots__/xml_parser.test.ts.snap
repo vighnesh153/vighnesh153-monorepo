@@ -22,7 +22,7 @@ snapshot[`XmlParser should parse tag with colon separated attributes 1`] = `
     android:required="false" />'
 `;
 
-snapshot[`XmlParser should be able to read tags with namespaces 1`] = `"<namespace1:namespace2:namespace3 />"`;
+snapshot[`XmlParser should be able to read tags with namespaces and classes 1`] = `"<namespace1:namespace2.class1.class2:namespace3.class3.class4 />"`;
 
 snapshot[`XmlParser should parse naked text node 1`] = `"pikachu"`;
 

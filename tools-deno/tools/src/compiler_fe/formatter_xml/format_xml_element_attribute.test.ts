@@ -1,6 +1,7 @@
 import { assertSnapshot } from "@std/testing/snapshot";
 import type { Token } from "@/compiler_fe/lexer_core/mod.ts";
 import { XmlTokenType } from "@/compiler_fe/lexer_xml/mod.ts";
+import { XmlElementAttribute } from "@/compiler_fe/parser_xml/ast.ts";
 import { formatXmlElementAttribute } from "./format_xml_element_attribute.ts";
 
 function createToken(
@@ -18,23 +19,23 @@ function createToken(
 Deno.test("formatXmlElementAttribute should format attribute with single namespace", async (t) => {
   await assertSnapshot(
     t,
-    formatXmlElementAttribute({
-      namespaces: [createToken("pokemon", XmlTokenType.Identifier)],
-      value: createToken("pikachu", XmlTokenType.StringLiteral),
-    }),
+    formatXmlElementAttribute(
+      new XmlElementAttribute(
+        createToken("pokemon", XmlTokenType.Identifier),
+        createToken("pikachu", XmlTokenType.StringLiteral),
+      ),
+    ),
   );
 });
 
 Deno.test("formatXmlElementAttribute should format attribute with multiple namespaces", async (t) => {
   await assertSnapshot(
     t,
-    formatXmlElementAttribute({
-      namespaces: [
-        createToken("pokemon", XmlTokenType.Identifier),
-        createToken("electric", XmlTokenType.Identifier),
-        createToken("yellow", XmlTokenType.Identifier),
-      ],
-      value: createToken("pikachu", XmlTokenType.StringLiteral),
-    }),
+    formatXmlElementAttribute(
+      new XmlElementAttribute(
+        createToken("pokemon.electric.yellow", XmlTokenType.Identifier),
+        createToken("pikachu", XmlTokenType.StringLiteral),
+      ),
+    ),
   );
 });

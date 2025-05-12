@@ -21,10 +21,12 @@ export function sortAttributes(
 
   // xmlns:android
   const xmlnsAndroidAttr = clonedAttributes.find(
-    (attr) =>
-      attr.namespaces.length === 2 &&
-      attr.namespaces[0].tokenLiteral === "xmlns" &&
-      attr.namespaces[1].tokenLiteral === "android",
+    (attr) => {
+      const namespaces = parseNamespaces(attr);
+      return namespaces.length === 2 &&
+        namespaces[0] === "xmlns" &&
+        namespaces[1] === "android";
+    },
   );
   if (xmlnsAndroidAttr) {
     moveAttributesToResult([xmlnsAndroidAttr]);
@@ -32,77 +34,89 @@ export function sortAttributes(
 
   // xmlns:*
   moveAttributesToResult(
-    clonedAttributes.filter((attr) =>
-      attr.namespaces.length > 0 && attr.namespaces[0].tokenLiteral === "xmlns"
-    ),
+    clonedAttributes.filter((attr) => {
+      const namespaces = parseNamespaces(attr);
+      return namespaces.length > 0 && namespaces[0] === "xmlns";
+    }),
   );
 
   // android:id
   moveAttributesToResult(
     clonedAttributes.filter(
-      (attr) =>
-        attr.namespaces.length === 2 &&
-        attr.namespaces[0].tokenLiteral === "android" &&
-        attr.namespaces[1].tokenLiteral === "id",
+      (attr) => {
+        const namespaces = parseNamespaces(attr);
+        return namespaces.length === 2 &&
+          namespaces[0] === "android" &&
+          namespaces[1] === "id";
+      },
     ),
   );
 
   // android.*:id
   moveAttributesToResult(
     clonedAttributes.filter(
-      (attr) =>
-        attr.namespaces.length > 0 &&
-        attr.namespaces[0].tokenLiteral === "android" &&
-        attr.namespaces.at(-1)?.tokenLiteral === "id",
+      (attr) => {
+        const namespaces = parseNamespaces(attr);
+        return namespaces.length > 0 &&
+          namespaces[0] === "android" &&
+          namespaces.at(-1) === "id";
+      },
     ),
   );
 
   // android:name
   moveAttributesToResult(
     clonedAttributes.filter(
-      (attr) =>
-        attr.namespaces.length === 2 &&
-        attr.namespaces[0].tokenLiteral === "android" &&
-        attr.namespaces[1].tokenLiteral === "name",
+      (attr) => {
+        const namespaces = parseNamespaces(attr);
+        return namespaces.length === 2 &&
+          namespaces[0] === "android" &&
+          namespaces[1] === "name";
+      },
     ),
   );
 
   // android.*:name
   moveAttributesToResult(
     clonedAttributes.filter(
-      (attr) =>
-        attr.namespaces.length > 0 &&
-        attr.namespaces[0].tokenLiteral === "android" &&
-        attr.namespaces.at(-1)?.tokenLiteral === "name",
+      (attr) => {
+        const namespaces = parseNamespaces(attr);
+        return namespaces.length > 0 &&
+          namespaces[0] === "android" &&
+          namespaces.at(-1) === "name";
+      },
     ),
   );
 
   // name
   moveAttributesToResult(
-    clonedAttributes.filter((attr) =>
-      attr.namespaces.length === 1 && attr.namespaces[0].tokenLiteral === "name"
-    ),
+    clonedAttributes.filter((attr) => {
+      const namespaces = parseNamespaces(attr);
+      return namespaces.length === 1 && namespaces[0] === "name";
+    }),
   );
 
   // style
   moveAttributesToResult(
-    clonedAttributes.filter((attr) =>
-      attr.namespaces.length === 1 &&
-      attr.namespaces[0].tokenLiteral === "style"
-    ),
+    clonedAttributes.filter((attr) => {
+      const namespaces = parseNamespaces(attr);
+      return namespaces.length === 1 &&
+        namespaces[0] === "style";
+    }),
   );
 
   // no-namespace attributes
   moveAttributesToResult(
-    clonedAttributes.filter((attr) => attr.namespaces.length === 1),
+    clonedAttributes.filter((attr) => parseNamespaces(attr).length === 1),
   );
 
   // android ns attributes
   moveAttributesToResult(
-    clonedAttributes.filter((attr) =>
-      attr.namespaces.length > 1 &&
-      attr.namespaces[0].tokenLiteral === "android"
-    ),
+    clonedAttributes.filter((attr) => {
+      const namespaces = parseNamespaces(attr);
+      return namespaces.length > 1 &&
+        namespaces[0] === "android";
+    }),
   );
 
   // remaining attributes
@@ -112,13 +126,13 @@ export function sortAttributes(
 }
 
 function naiveSort(attributes: XmlElementAttribute[]): XmlElementAttribute[] {
-  return attributes.toSorted((attr1, attr2) => {
-    const combinedKey1 = attr1.namespaces.map((ns) => ns.tokenLiteral).join(
-      ":",
-    );
-    const combinedKey2 = attr2.namespaces.map((ns) => ns.tokenLiteral).join(
-      ":",
-    );
-    return combinedKey1.localeCompare(combinedKey2);
-  });
+  return attributes.toSorted((attr1, attr2) =>
+    attr1.attributeName.tokenLiteral.localeCompare(
+      attr2.attributeName.tokenLiteral,
+    )
+  );
+}
+
+function parseNamespaces(attr: XmlElementAttribute): string[] {
+  return attr.attributeName.tokenLiteral.split(":");
 }

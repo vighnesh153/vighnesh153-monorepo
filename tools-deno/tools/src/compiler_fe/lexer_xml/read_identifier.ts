@@ -5,7 +5,7 @@ import type { XmlTokenType } from "./tokens.ts";
 
 export function readIdentifier(lexer: Lexer<XmlTokenType>): string {
   assert(
-    isAcceptableIdentifierCharacter(lexer.inputReader.currentCharacter),
+    isAcceptableIdentifierStart(lexer.inputReader.currentCharacter ?? ""),
     `You should not attempt to read an identifier which doesn't start with '_' or a letter`,
   );
 
@@ -29,5 +29,5 @@ export function isAcceptableIdentifierCharacter(char: string | null): boolean {
     return false;
   }
   return isAcceptableIdentifierStart(char) || DIGITS.includes(char) ||
-    char === "-";
+    char === "-" || char === "." || char === ":";
 }

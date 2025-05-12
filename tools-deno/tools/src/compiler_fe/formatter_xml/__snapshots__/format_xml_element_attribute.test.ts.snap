@@ -2,4 +2,4 @@ export const snapshot = {};
 
 snapshot[`formatXmlElementAttribute should format attribute with single namespace 1`] = `'pokemon="pikachu"'`;
 
-snapshot[`formatXmlElementAttribute should format attribute with multiple namespaces 1`] = `'pokemon:electric:yellow="pikachu"'`;
+snapshot[`formatXmlElementAttribute should format attribute with multiple namespaces 1`] = `'pokemon.electric.yellow="pikachu"'`;

@@ -81,15 +81,11 @@ Deno.test("XmlParser should parse tag with multiple simple attributes", async (t
 
 Deno.test("XmlParser should parse tag with colon separated attributes", async (t) => {
   const [parser, program] = parseProgram(
-    `<uses-feature      android :    name   =    
+    `<uses-feature      android:name   =    
     
     "android.hardware.touchscreen" 
     
-    android
-    
-    :
-    
-    required      =
+    android:required      =
     "false" />`,
   );
 
@@ -98,15 +94,18 @@ Deno.test("XmlParser should parse tag with colon separated attributes", async (t
   await assertSnapshot(t, program.toString(0));
 });
 
-Deno.test("XmlParser should be able to read tags with namespaces", async (t) => {
-  const [parser, program] = parseProgram(
-    "< namespace1 : namespace2 : namespace3 > </ namespace1 : namespace2 : namespace3>",
-  );
+Deno.test(
+  "XmlParser should be able to read tags with namespaces and classes",
+  async (t) => {
+    const [parser, program] = parseProgram(
+      "< namespace1:namespace2.class1.class2:namespace3.class3.class4 > </ namespace1:namespace2.class1.class2:namespace3.class3.class4>",
+    );
 
-  assertEquals(parser.errors.length, 0);
-  assertEquals(program.statements.length, 1);
-  await assertSnapshot(t, program.toString(0));
-});
+    assertEquals(parser.errors.length, 0);
+    assertEquals(program.statements.length, 1);
+    await assertSnapshot(t, program.toString(0));
+  },
+);
 
 Deno.test("XmlParser should parse naked text node", async (t) => {
   const [parser, program] = parseProgram("pikachu");
@@ -235,7 +234,7 @@ Deno.test("XmlParser should return error if EOF while reading attribute", () => 
       tokenLiteral: "Eof",
       tokenType: XmlTokenType.Eof,
     },
-    errorType: "UNEXPECTED_EOF",
+    errorType: "UNEXPECTED_TOKEN",
   });
   assertEquals(program.statements.length, 0);
 });
@@ -264,10 +263,10 @@ Deno.test("XmlParser should return error if equals token after colon token inste
   assertEquals(parser.errors.length, 1);
   assertEquals(parser.errors[0].serialized(), {
     culpritToken: {
-      columnNumber: 18,
+      columnNumber: 17,
       lineNumber: 1,
-      tokenLiteral: "=",
-      tokenType: XmlTokenType.Equals,
+      tokenLiteral: ":",
+      tokenType: XmlTokenType.Illegal,
     },
     errorType: "UNEXPECTED_TOKEN",
   });
@@ -519,15 +518,15 @@ Deno.test("XmlParser should return errors if nameless tag", () => {
 });
 
 Deno.test('XmlParser should return error when unexpected token after ":" in tag name', () => {
-  const [parser, program] = parseProgram("< ns1 : ns2 :  /> ");
+  const [parser, program] = parseProgram("< ns1:ns2:  /> ");
 
   assertEquals(parser.errors.length, 1);
   assertEquals(parser.errors[0].serialized(), {
     culpritToken: {
-      columnNumber: 16,
+      columnNumber: 10,
       lineNumber: 1,
-      tokenLiteral: "/",
-      tokenType: XmlTokenType.ForwardSlash,
+      tokenLiteral: ":",
+      tokenType: XmlTokenType.Illegal,
     },
     errorType: "UNEXPECTED_TOKEN",
   });
@@ -535,12 +534,12 @@ Deno.test('XmlParser should return error when unexpected token after ":" in tag 
 });
 
 Deno.test(`XmlParser should return error if start and end tag names don't match`, () => {
-  const [parser, program] = parseProgram("< ns1 : ns2  > </ ns3 :  ns4> ");
+  const [parser, program] = parseProgram("< ns1:ns2  > </ ns3:ns4> ");
 
   assertEquals(parser.errors.length, 1);
   assertEquals(parser.errors[0].serialized(), {
     culpritToken: {
-      columnNumber: 19,
+      columnNumber: 17,
       lineNumber: 1,
       tokenLiteral: "ns3:ns4",
       tokenType: XmlTokenType.Identifier,
@@ -551,15 +550,15 @@ Deno.test(`XmlParser should return error if start and end tag names don't match`
 });
 
 Deno.test('XmlParser should return error when unexpected token after ":" in in closing tag name', () => {
-  const [parser, program] = parseProgram("< ns1 : ns2  > </ ns1 : ns2: >");
+  const [parser, program] = parseProgram("< ns1:ns2  > </ ns1:ns2: >");
 
   assertEquals(parser.errors.length, 1);
   assertEquals(parser.errors[0].serialized(), {
     culpritToken: {
-      columnNumber: 30,
+      columnNumber: 24,
       lineNumber: 1,
-      tokenLiteral: ">",
-      tokenType: XmlTokenType.RightAngleBracket,
+      tokenLiteral: ":",
+      tokenType: XmlTokenType.Illegal,
     },
     errorType: "UNEXPECTED_TOKEN",
   });

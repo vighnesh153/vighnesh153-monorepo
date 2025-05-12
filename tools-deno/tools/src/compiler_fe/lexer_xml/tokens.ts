@@ -13,7 +13,6 @@ export class XmlTokenType {
   );
   static TextNode: XmlTokenType = /* @__PURE__ */ new XmlTokenType("TextNode");
 
-  static Colon: XmlTokenType = /* @__PURE__ */ new XmlTokenType(":");
   static Equals: XmlTokenType = /* @__PURE__ */ new XmlTokenType("=");
   static LeftAngleBracket: XmlTokenType = /* @__PURE__ */ new XmlTokenType("<");
   static RightAngleBracket: XmlTokenType = /* @__PURE__ */ new XmlTokenType(

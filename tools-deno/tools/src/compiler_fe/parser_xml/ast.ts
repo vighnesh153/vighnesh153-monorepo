@@ -16,14 +16,12 @@ export interface XmlExpression {
 
 export class XmlElementAttribute {
   constructor(
-    public readonly namespaces: readonly Token<XmlTokenType>[],
+    public readonly attributeName: Token<XmlTokenType>,
     public readonly value: Token<XmlTokenType>,
   ) {}
 
   toString(): string {
-    return `${
-      this.namespaces.map((namespace) => namespace.tokenLiteral).join(":")
-    }="${this.value.tokenLiteral}"`;
+    return `${this.attributeName.tokenLiteral}="${this.value.tokenLiteral}"`;
   }
 }
 
@@ -76,12 +74,12 @@ export class XmlPrologNode implements XmlExpression {
 export class XmlTagNode implements XmlExpression {
   readonly astNodeType: AstNodeType = "XML_TAG_NODE";
 
-  #namespaces: Token<XmlTokenType>[] = [];
+  #tag: Token<XmlTokenType>;
   #attributes: XmlElementAttribute[] = [];
   #children: XmlExpression[] = [];
 
-  get namespaces(): readonly Token<XmlTokenType>[] {
-    return [...this.#namespaces];
+  get tag(): Token<XmlTokenType> {
+    return this.#tag;
   }
 
   get attributes(): readonly XmlElementAttribute[] {
@@ -92,8 +90,8 @@ export class XmlTagNode implements XmlExpression {
     return [...this.#children];
   }
 
-  addNamespace(ns: Token<XmlTokenType>): void {
-    this.#namespaces.push(ns);
+  constructor(tag: Token<XmlTokenType>) {
+    this.#tag = tag;
   }
 
   addAttribute(attribute: XmlElementAttribute): void {
@@ -105,12 +103,13 @@ export class XmlTagNode implements XmlExpression {
   }
 
   toString(indentation: number = 0): string {
-    const { namespaces, attributes, children } = this;
-    const tag = namespaces.map((ns) => ns.tokenLiteral).join(":");
+    const { tag, attributes, children } = this;
 
     const stringBuilder: string[] = [];
 
-    stringBuilder.push(`${buildIndentationSpace(indentation)}<${tag}`);
+    stringBuilder.push(
+      `${buildIndentationSpace(indentation)}<${tag.tokenLiteral}`,
+    );
     if (attributes.length === 1) {
       const serializedAttrs = attributes.map((attribute) =>
         attribute.toString()
@@ -132,7 +131,8 @@ export class XmlTagNode implements XmlExpression {
 
     // if only a single text node child
     if (children.length === 1 && children[0].astNodeType === "XML_TEXT_NODE") {
-      return stringBuilder.join("\n") + children[0].toString(0) + `</${tag}>`;
+      return stringBuilder.join("\n") + children[0].toString(0) +
+        `</${tag.tokenLiteral}>`;
     }
 
     for (const child of children) {
@@ -140,7 +140,9 @@ export class XmlTagNode implements XmlExpression {
     }
 
     if (children.length > 0) {
-      stringBuilder.push(`${buildIndentationSpace(indentation)}</${tag}>`);
+      stringBuilder.push(
+        `${buildIndentationSpace(indentation)}</${tag.tokenLiteral}>`,
+      );
     }
 
     return stringBuilder.join("\n");

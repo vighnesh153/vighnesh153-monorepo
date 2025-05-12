@@ -18,9 +18,9 @@ export function formatXmlTagNode({
   indentation,
   sortAttributes: shouldSortAttributes,
 }: FormatXmlTagNodeConfig): string {
-  const { namespaces, attributes, children } = xmlTagNode;
+  const { tag, attributes, children } = xmlTagNode;
 
-  const tagName = namespaces.map((ns) => ns.tokenLiteral).join(":");
+  const tagName = tag.tokenLiteral;
 
   const stringBuilder: string[] = [];
 
