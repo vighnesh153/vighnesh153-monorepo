@@ -1293,13 +1293,10 @@ var pika_xml_formatter = (function (exports) {
     };
   }
 
-  // node_modules/@vighnesh153/tools/src/compiler_fe/lexer_kotlin/mod.js
-  var mod_exports4 = {};
+  // src/main.ts
+  var format3 = mod_exports3.format;
 
-  exports.formatterXml = mod_exports3;
-  exports.lexerCore = mod_exports;
-  exports.lexerKotlin = mod_exports4;
-  exports.lexerXml = mod_exports2;
+  exports.format = format3;
 
   return exports;
 
