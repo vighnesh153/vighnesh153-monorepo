@@ -1,0 +1,20 @@
+{
+  "name": "pika-xml-formatter-bundle",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsup --target es2015 --format iife --globalName pika_xml_formatter --outDir google3 --no-dts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.15.17",
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.18",
+    "@vighnesh153/tsconfig": "^0.4.8",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  }
+}
