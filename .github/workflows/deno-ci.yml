@@ -1,4 +1,6 @@
 name: deno-ci
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
