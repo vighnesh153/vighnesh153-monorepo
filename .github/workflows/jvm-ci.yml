@@ -10,6 +10,9 @@ on:
     paths:
       - "tools-jvm/**"
 
+permissions:
+  contents: read
+
 jobs:
   jvm-ci:
     runs-on: ubuntu-latest
