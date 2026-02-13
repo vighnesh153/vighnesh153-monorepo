@@ -14,13 +14,13 @@
   },
   "main": "./dist/main.js",
   "dependencies": {
-    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.17",
-    "firebase-admin": "^13.0.2",
-    "firebase-functions": "^6.2.0"
+    "@vighnesh153/tools": "npm:@jsr/vighnesh153__tools@^0.1.18",
+    "firebase-admin": "^13.6.1",
+    "firebase-functions": "^7.0.5"
   },
   "devDependencies": {
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
   "private": true
 }
