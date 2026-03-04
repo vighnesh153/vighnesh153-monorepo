@@ -46,7 +46,7 @@ export function ResumeContainer(props: { snapshotDate: string }): JSX.Element {
         </div>
         <div class="px-6 basis-8/12">
           <ResumeExperiencesSection />
-          <ResumeProjectsSection class="mt-8" />
+          <ResumeProjectsSection class="mt-6" />
         </div>
       </div>
     </div>

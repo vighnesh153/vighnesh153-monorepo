@@ -23,6 +23,8 @@ export function ResumeExperiencesSection(): JSX.Element {
               { role: "Software Engineer 2", duration: "July 2022 - Oct 2023" },
             ],
             summaries: [
+              // 'Spearheaded the client-side development of "Micro Dramas" for the Google TV Android app, integrating short-form content from multiple providers.',
+              "Engineered a fully Server-Driven UI pre-purchase flow for Google Tv Mobile app, enabling real-time backend control over component layout, styling, and logic without requiring client-side releases.",
               "Developed an Android SDK adopted by over 10 media partners, improving video content discovery and user engagement on Google TV.",
               "Led the development of the Jetpack Compose Material library for TV, providing pre-built UI components optimized for large screen devices and remote control navigation.",
               "Modernizing the Google Tv mobile app used by over 100 million users every month",
@@ -65,7 +67,7 @@ export function ResumeExperiencesSection(): JSX.Element {
               duration: "July 2020 - Sept 2020",
             }],
             summaries: [
-              "Built plugins for Mattermost chat service to bridge the gap between it and RocketChat",
+              // "Built plugins for Mattermost chat service to bridge the gap between it and RocketChat",
             ],
           },
         ]}
@@ -80,7 +82,7 @@ export function ResumeExperiencesSection(): JSX.Element {
               { role: "Software Trainee", duration: "July 2019 - Jan 2020" },
             ],
             summaries: [
-              "Completed a 4-month software engineering training program, culminating in a road-trip planner project and contributing to the resolution of production-impacting issues.",
+              // "Completed a 4-month software engineering training program, culminating in a road-trip planner project and contributing to the resolution of production-impacting issues.",
             ],
           },
         ]}
