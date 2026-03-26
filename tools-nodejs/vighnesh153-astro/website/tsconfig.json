@@ -6,11 +6,17 @@
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ES6",
-    "jsxImportSource": "solid-js",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "types": ["vite/client", "@testing-library/jest-dom"]
+    "types": [
+      "vite/client",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "./**/*.ts",
@@ -18,5 +24,9 @@
     "./**/*.astro",
     "./.astro/types.d.ts"
   ],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
 }

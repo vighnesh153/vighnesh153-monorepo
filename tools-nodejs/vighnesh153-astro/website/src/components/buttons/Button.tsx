@@ -1,52 +1,85 @@
-import {
-  children,
-  type JSX,
-  Match,
-  mergeProps,
-  type ParentProps,
-  splitProps,
-  Switch,
-} from "solid-js";
+import type { ButtonHTMLAttributes, JSX } from "react";
 
-import { PrimaryButtonStyles } from "./PrimaryButtonStyles";
-import { SecondaryButtonStyles } from "./SecondaryButtonStyles";
+import { classes } from "@/utils/classes";
 
 export type ButtonProps =
-  & ParentProps<{
+  & {
     variant?: "primary" | "secondary";
-  }>
-  & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
+  }
+  & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button(incomingProps: ButtonProps): JSX.Element {
-  const [local, buttonProps] = splitProps(
-    mergeProps<ButtonProps[]>({ variant: "secondary" }, incomingProps),
-    [
-      "variant",
-      "class",
-      "children",
-    ],
-  );
-  const c = children(() => local.children);
+export function Button({
+  variant = "secondary",
+  ...props
+}: ButtonProps): JSX.Element {
+  if (variant == "primary") {
+    return <PrimaryButton {...props} />;
+  }
+  if (variant == "secondary") {
+    return <SecondaryButton {...props} />;
+  }
+
+  return <BaseButton {...props} />;
+}
+
+function PrimaryButton(
+  props: ButtonHTMLAttributes<HTMLButtonElement>,
+): JSX.Element {
   return (
-    <Switch>
-      <Match when={local.variant === "primary"}>
-        <PrimaryButtonStyles
-          {...buttonProps}
-          component="button"
-          class={local.class}
-        >
-          {c()}
-        </PrimaryButtonStyles>
-      </Match>
-      <Match when={local.variant === "secondary"}>
-        <SecondaryButtonStyles
-          {...buttonProps}
-          component="button"
-          class={local.class}
-        >
-          {c()}
-        </SecondaryButtonStyles>
-      </Match>
-    </Switch>
+    <BaseButton
+      {...props}
+      className={classes(
+        props.className,
+        `bg-primary
+        text-secondary`,
+      )}
+    />
+  );
+}
+
+function SecondaryButton(
+  props: ButtonHTMLAttributes<HTMLButtonElement>,
+): JSX.Element {
+  return (
+    <BaseButton
+      {...props}
+      className={classes(
+        props.className,
+        `bg-secondary
+        text-text
+        shadow-primary`,
+      )}
+    />
+  );
+}
+
+function BaseButton(
+  props: ButtonHTMLAttributes<HTMLButtonElement>,
+): JSX.Element {
+  return (
+    <button
+      {...props}
+      className={classes(
+        props.className,
+        `
+          py-[0.75em] px-[2em]
+          inline-block
+
+          border-none
+
+          rounded-xl
+          transition-shadow
+          duration-200
+          ease-in-out
+          text-base
+          text-center
+          cursor-pointer
+          uppercase
+
+          hover:shadow-2xl hover:shadow-primary
+          focus-visible:shadow-2xl focus-visible:shadow-primary
+      `,
+      )}
+    />
   );
 }

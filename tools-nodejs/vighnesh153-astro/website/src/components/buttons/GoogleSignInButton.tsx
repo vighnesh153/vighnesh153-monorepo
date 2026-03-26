@@ -1,15 +1,14 @@
-import { type ParentProps } from "solid-js";
+import type { JSX } from "react";
 
-import { classes, initiateLoginWithGoogle } from "@/utils/index.ts";
+import { initiateLoginWithGoogle } from "@/utils/auth.ts";
+import { classes } from "@/utils/classes.ts";
 import { GoogleIcon } from "@/icons/GoogleIcon.tsx";
 
-export type GoogleSignInButtonProps = ParentProps;
-
-export function GoogleSignInButton() {
+export function GoogleSignInButton(): JSX.Element {
   return (
     <button
       onClick={initiateLoginWithGoogle}
-      class={classes(`
+      className={classes(`
       min-w-fit px-5 py-2 rounded-md
       flex gap-2 items-center
       bg-text

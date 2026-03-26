@@ -4,7 +4,8 @@ import compress from "@playform/compress";
 
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
-import solid from "@astrojs/solid-js";
+
+import react from "@astrojs/react";
 
 const isDevCommandRunning = process.argv[2] === "dev";
 
@@ -13,7 +14,7 @@ export default defineConfig({
   compressHTML: true,
   integrations: [
     compress({ Logger: 2 }),
-    solid({ devtools: true }),
+    react(),
     mdx(),
   ],
   prefetch: true,
