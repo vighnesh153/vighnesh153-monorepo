@@ -7,7 +7,9 @@ import type { PrivateContent } from "@/models/private_content";
 
 export function usePrivateContent() {
   const $loggedInUserId = useStore(loggedInUserId);
-  const [privateContent, setPrivateContent] = useState<PrivateContent | null>(null);
+  const [privateContent, setPrivateContent] = useState<PrivateContent | null>(
+    null,
+  );
 
   useEffect(() => {
     async function init() {

@@ -21,7 +21,7 @@ export function AuthIndicator() {
       {$loggedInUser !== null
         ? (
           <Menu>
-            <MenuButton className="flex gap-3 items-center">
+            <MenuButton className="flex gap-2 items-center">
               <div className="shrink-0">
                 <Avatar
                   userInitials={computeInitialsFromName($loggedInUser!.name)}
@@ -40,7 +40,13 @@ export function AuthIndicator() {
                 {$loggedInUser!.name.split(" ")[0]}
               </div>
             </MenuButton>
-            <MenuItems>
+            <MenuItems
+              anchor={{
+                to: "bottom start",
+                gap: 8,
+              }}
+              className="z-(--z-app-bar) py-2 bg-secondary"
+            >
               <MenuItem>
                 <span
                   className={classes(

@@ -139,8 +139,8 @@ export function DrawingAppRoot(): JSX.Element {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsRedoAvailable(eventsManager?.redoEventsStack.size !== null);
-      setIsUndoAvailable(eventsManager?.undoEventsStack.size !== null);
+      setIsRedoAvailable((eventsManager?.redoEventsStack.size ?? 0) > 0);
+      setIsUndoAvailable((eventsManager?.undoEventsStack.size ?? 0) > 0);
     }, 16);
     return () => {
       clearInterval(interval);

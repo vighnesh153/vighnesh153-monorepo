@@ -1,6 +1,5 @@
 ---
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import { UploadInputBoxWithStats } from "@/components/uploader";
 // import { CodeViewer } from "@/components/code_viewer/index.ts";
 import { classes } from "@/utils/classes.ts";
 import { Button } from "@/components/buttons";
@@ -18,9 +17,8 @@ import { Button } from "@/components/buttons";
     mt-[200px]
   `)}
   >
-    <UploadInputBoxWithStats client:load />
     <!-- <CodeViewer
-      client:only="solid-js"
+      client:only="react"
       lang="kotlin"
       fileName="App.kt"
       code={`package dev.vighnesh153.xml.formatter
