@@ -1,10 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type UploadIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type UploadIconProps = SVGAttributes<SVGSVGElement>;
 
-export function UploadIcon(incomingProps: UploadIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function UploadIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: UploadIconProps): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path fill="none" d="M0 0h24v24H0z"></path>

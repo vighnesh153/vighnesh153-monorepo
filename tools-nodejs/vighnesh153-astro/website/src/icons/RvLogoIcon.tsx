@@ -1,25 +1,23 @@
-import { type JSX, splitProps } from "solid-js";
-import type * as CSS from "csstype";
+import type { CSSProperties, JSX, SVGAttributes } from "react";
 
 export type RvLogoIconProps = {
-  textStyle?: CSS.Properties<string | number>;
-} & JSX.SvgSVGAttributes<SVGSVGElement>;
+  textStyle?: CSSProperties;
+} & SVGAttributes<SVGSVGElement>;
 
-export function RvLogoIcon(incomingProps: RvLogoIconProps): JSX.Element {
-  const [local, props] = splitProps(incomingProps, [
-    "viewBox",
-    "xmlns",
-    "textStyle",
-  ]);
-
+export function RvLogoIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  textStyle,
+  ...props
+}: RvLogoIconProps): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-5 -5 210 210"
       stroke="currentColor"
-      stroke-width="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <polygon
@@ -30,12 +28,12 @@ export function RvLogoIcon(incomingProps: RvLogoIconProps): JSX.Element {
       <text
         x="45"
         y="135"
-        stroke-width="2"
+        strokeWidth="2"
         fill="currentColor"
         style={{
           color: "currentColor",
-          "font-size": "80px",
-          ...(local.textStyle as any),
+          fontSize: "80px",
+          ...textStyle,
         }}
       >
         RV

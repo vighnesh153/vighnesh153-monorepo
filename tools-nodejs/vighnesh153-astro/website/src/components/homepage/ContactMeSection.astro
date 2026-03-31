@@ -1,5 +1,7 @@
 ---
-import { hashTags, myPersonalizedEmail, classes } from "@/utils/index.ts";
+import { hashTags } from "@/utils/content/links.ts";
+import { myPersonalizedEmail } from "@/utils/content/emails.ts";
+import { classes } from "@/utils/classes.ts";
 import { Link } from "../Link.tsx";
 ---
 
@@ -31,7 +33,7 @@ import { Link } from "../Link.tsx";
   <Link
     linkType="primary-btn"
     href={`mailto:${myPersonalizedEmail}`}
-    class={classes(`mt-4 focus-visible:outline-primary`)}
+    className={classes(`mt-4 focus-visible:outline-primary`)}
   >
     Say Hello
   </Link>

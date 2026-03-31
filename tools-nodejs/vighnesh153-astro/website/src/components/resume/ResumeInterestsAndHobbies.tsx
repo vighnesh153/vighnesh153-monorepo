@@ -1,12 +1,12 @@
-import { type JSX } from "solid-js";
+import type { JSX } from "react";
 import { ResumeSectionTitle } from "./ResumeSectionTitle";
 import { ResumeAsideList } from "./ResumeAsideList";
 
 export function ResumeInterestsAndHobbies(
-  props: { class?: string },
+  props: { className?: string },
 ): JSX.Element {
   return (
-    <div class={props.class}>
+    <div className={props.className}>
       <ResumeSectionTitle text="Interests & Hobbies" />
       <ResumeAsideList
         asColumns

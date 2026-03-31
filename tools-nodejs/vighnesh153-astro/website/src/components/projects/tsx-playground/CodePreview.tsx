@@ -1,5 +1,5 @@
 import { baseIframeHtmlCode } from "@vighnesh153/tsx-bundler";
-import { createEffect, Match, mergeProps, Switch } from "solid-js";
+import { useEffect, useRef, type JSX } from "react";
 
 export type CodePreviewResult_Bundling = {
   status: "bundling";
@@ -23,54 +23,44 @@ export type CodePreviewProps = {
   result?: CodePreviewResult;
 };
 
-export function CodePreview(incomingProps: CodePreviewProps) {
-  let previewIframe!: HTMLIFrameElement;
+export function CodePreview({
+  result = { status: "bundling" },
+}: CodePreviewProps): JSX.Element {
+  const previewIframe = useRef<HTMLIFrameElement>(null);
 
-  const props = mergeProps<CodePreviewProps[]>({
-    result: {
-      status: "bundling",
-    },
-  }, incomingProps);
-
-  const result = () => props.result!;
-
-  createEffect(() => {
-    if (result().status === "success" && previewIframe) {
-      const outputCode = (result() as CodePreviewResult_Success).outputCode;
-      previewIframe.srcdoc = baseIframeHtmlCode;
-      setTimeout(() => {
-        previewIframe.contentWindow?.postMessage(outputCode);
+  useEffect(() => {
+    if (result.status === "success" && previewIframe.current) {
+      const outputCode = result.outputCode;
+      previewIframe.current.srcdoc = baseIframeHtmlCode;
+      const timeout = setTimeout(() => {
+        previewIframe.current?.contentWindow?.postMessage(outputCode, "*");
       }, 50);
+      return () => clearTimeout(timeout);
     }
-  });
+  }, [result]);
 
   return (
-    <div class="w-full h-full p-4 bg-text">
-      <Switch
-        fallback={
-          <iframe
-            ref={previewIframe}
-            class="w-full h-full"
-            title="preview"
-            sandbox="allow-same-origin allow-scripts"
-            srcdoc={baseIframeHtmlCode}
-          />
-        }
-      >
-        <Match when={result().status === "bundling"}>
-          <div class="text-background">Bundling...</div>
-        </Match>
-        <Match when={result().status === "error"}>
-          <div class="text-[red] whitespace-pre overflow-x-auto">
-            <div class="font-bold text-xl">
-              Some error occurred while bundling
-            </div>
-            <div class="whitespace-break-spaces">
-              {(result() as CodePreviewResult_Error).bundleError}
-            </div>
+    <div className="w-full h-full p-4 bg-text">
+      {result.status === "bundling" ? (
+        <div className="text-background">Bundling...</div>
+      ) : result.status === "error" ? (
+        <div className="text-[red] whitespace-pre overflow-x-auto">
+          <div className="font-bold text-xl">
+            Some error occurred while bundling
           </div>
-        </Match>
-      </Switch>
+          <div className="whitespace-break-spaces">
+            {result.bundleError}
+          </div>
+        </div>
+      ) : (
+        <iframe
+          ref={previewIframe}
+          className="w-full h-full"
+          title="preview"
+          sandbox="allow-same-origin allow-scripts"
+          srcDoc={baseIframeHtmlCode}
+        />
+      )}
     </div>
   );
 }

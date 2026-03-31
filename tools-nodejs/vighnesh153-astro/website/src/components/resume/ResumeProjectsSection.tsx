@@ -1,14 +1,16 @@
-import type { JSX } from "solid-js";
+import type { JSX, ReactNode } from "react";
 import {
   ResumeSectionSubtitle,
   ResumeSectionTitle,
 } from "./ResumeSectionTitle";
 import { ResumeLink } from "./ResumeLink";
-import { internalLinks } from "@/utils";
+import { internalLinks } from "@/utils/content/links.ts";
 
-export function ResumeProjectsSection(props: { class?: string }): JSX.Element {
+export function ResumeProjectsSection(
+  props: { className?: string },
+): JSX.Element {
   return (
-    <div class={props.class}>
+    <div className={props.className}>
       <ResumeSectionTitle text="Projects" />
 
       <Project
@@ -45,12 +47,12 @@ export function ResumeProjectsSection(props: { class?: string }): JSX.Element {
 }
 
 function Project(
-  props: { title: string; link: string; description: JSX.Element },
+  props: { title: string; link: string; description: ReactNode },
 ): JSX.Element {
   return (
     <>
       <ResumeSectionSubtitle
-        class="mt-2 leading-5"
+        className="mt-2 leading-5"
         text={
           <ResumeLink
             text={props.title}
@@ -58,12 +60,12 @@ function Project(
           />
         }
       />
-      <p class="text-xs leading-4">
-        <span class="font-light">
+      <p className="text-xs leading-4">
+        <span className="font-light">
           {props.description}
         </span>{" "}
         <ResumeLink
-          class="font-medium italic underline"
+          className="font-medium italic underline"
           text="Click to visit."
           href={props.link}
         />

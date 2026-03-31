@@ -1,8 +1,10 @@
 ---
-import { classes } from '@/utils/index.ts';
-import SectionListItem from './SectionListItem.astro';
+import { classes } from "@/utils/classes.ts";
+import SectionListItem from "./SectionListItem.astro";
 ---
 
 <SectionListItem class="mb-3">
-  <span class={classes('text-text2 font-light text-base sm:text-lg')}><slot /></span>
+  <span class={classes("text-text2 font-light text-base sm:text-lg")}>
+    <slot />
+  </span>
 </SectionListItem>

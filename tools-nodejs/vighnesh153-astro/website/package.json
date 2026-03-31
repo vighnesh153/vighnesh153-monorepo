@@ -25,6 +25,7 @@
     "@astrojs/react": "^4.4.2",
     "@fontsource-variable/noto-serif-lao": "^5.1.1",
     "@fontsource-variable/raleway": "^5.1.1",
+    "@headlessui/react": "^2.2.9",
     "@nanostores/react": "^1.0.0",
     "@std/assert": "npm:@jsr/std__assert@^1.0.11",
     "@std/random": "npm:@jsr/std__random@^0.1.0",

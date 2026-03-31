@@ -1,39 +1,35 @@
-import { children, type JSX, type ParentProps } from "solid-js";
+import { type ButtonHTMLAttributes, type JSX } from "react";
 import { not } from "@vighnesh153/tools";
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 
-export type ActionButtonProps =
-  & ParentProps<{
-    title: string;
-  }>
-  & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
+export type ActionButtonProps = {
+  title: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function ActionButton(props: ActionButtonProps) {
-  const disabled = () => props.disabled;
-  const safeChildren = children(() => props.children);
+export function ActionButton({
+  title,
+  children,
+  ...props
+}: ActionButtonProps): JSX.Element {
+  const disabled = props.disabled;
 
   return (
-    <div class="flex flex-col">
+    <div className="flex flex-col">
       <button
         {...props}
-        class={classes(
+        className={classes(
           "w-[40px] aspect-square rounded-full grid place-items-center border-2",
           "focus-visible:outline-secondary",
+          disabled &&
+            "cursor-not-allowed stroke-[#aeaeae] fill-[#aeaeae] border-[#aeaeae]",
+          not(disabled) &&
+            "stroke-secondary fill-secondary border-secondary",
         )}
-        classList={{
-          "cursor-not-allowed": disabled(),
-          "stroke-[#aeaeae]": disabled(),
-          "fill-[#aeaeae]": disabled(),
-          "border-[#aeaeae]": disabled(),
-          "stroke-secondary": not(disabled()),
-          "fill-secondary": not(disabled()),
-          "border-secondary": not(disabled()),
-        }}
       >
-        {safeChildren()}
+        {children}
       </button>
-      <div class="mt-2 text-secondary">
-        {props.title ?? "Title"}
+      <div className="mt-2 text-secondary">
+        {title ?? "Title"}
       </div>
     </div>
   );

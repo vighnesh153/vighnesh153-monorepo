@@ -1,3 +1,4 @@
+import { type JSX } from "react";
 import { not } from "@vighnesh153/tools";
 import {
   BrushThickness,
@@ -15,10 +16,10 @@ import { ModeButton } from "./ModeButton.tsx";
 import { ColorButton } from "./ColorButton.tsx";
 import { BrushThicknessButton } from "./BrushThicknessButton.tsx";
 import { ActionButton } from "./ActionButton.tsx";
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 
 function ToolbarDivider() {
-  return <div class="h-8 w-px bg-primary" />;
+  return <div className="h-8 w-px bg-primary" />;
 }
 
 export type ToolbarProps = {
@@ -37,29 +38,29 @@ export type ToolbarProps = {
   onClearButtonClick: () => void;
 };
 
-export function Toolbar(props: ToolbarProps) {
+export function Toolbar(props: ToolbarProps): JSX.Element {
   return (
     <div
-      class={classes(
+      className={classes(
         "w-fit px-6 pt-5 pb-4 mx-auto bg-text rounded-lg",
         "flex items-center gap-6 flex-wrap",
       )}
     >
       {/* Mode */}
-      <div class="flex gap-6">
+      <div className="flex gap-6">
         <ModeButton
           title="Draw"
           isSelected={props.selectedEventMode === "draw"}
           onClick={() => props.onModeChange("draw")}
         >
-          <PenIcon class="w-6 h-6" />
+          <PenIcon className="w-6 h-6" />
         </ModeButton>
         <ModeButton
           title="Fill"
           isSelected={props.selectedEventMode === "fill"}
           onClick={() => props.onModeChange("fill")}
         >
-          <FillDripIcon class="w-6 h-6" />
+          <FillDripIcon className="w-6 h-6" />
         </ModeButton>
       </div>
 
@@ -95,7 +96,7 @@ export function Toolbar(props: ToolbarProps) {
         disabled={not(props.isUndoAvailable)}
         onClick={props.onUndoButtonClick}
       >
-        <RotateLeftIcon class="w-[25px]" />
+        <RotateLeftIcon className="w-[25px]" />
       </ActionButton>
 
       <ToolbarDivider />
@@ -106,14 +107,14 @@ export function Toolbar(props: ToolbarProps) {
         disabled={not(props.isRedoAvailable)}
         onClick={props.onRedoButtonClick}
       >
-        <RotateRightIcon class="w-[25px]" />
+        <RotateRightIcon className="w-[25px]" />
       </ActionButton>
 
       <ToolbarDivider />
 
       {/* Clear button */}
       <ActionButton title="Clear" onClick={props.onClearButtonClick}>
-        <CloseIcon class="w-[20px]" stroke="inherit" />
+        <CloseIcon className="w-[20px]" stroke="inherit" />
       </ActionButton>
     </div>
   );

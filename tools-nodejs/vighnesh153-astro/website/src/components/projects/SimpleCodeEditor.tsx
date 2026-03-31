@@ -1,9 +1,9 @@
-import { For } from "solid-js";
+import { useRef, type JSX } from "react";
 import {
   simpleCodeToHtml,
   type SimpleCodeToHtmlOptions,
 } from "@vighnesh153/simple-code-to-html";
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 
 import "./SimpleCodeEditor.css";
 
@@ -13,27 +13,32 @@ export type SimpleCodeEditorProps = {
   simpleCodeToHtmlOptions?: SimpleCodeToHtmlOptions;
 };
 
-export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
-  let textAreaRef!: HTMLTextAreaElement;
-  let lineNumberContainerRef!: HTMLDivElement;
-  let codeAsHtmlRef!: HTMLDivElement;
+export function SimpleCodeEditor(props: SimpleCodeEditorProps): JSX.Element {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const lineNumberContainerRef = useRef<HTMLDivElement>(null);
+  const codeAsHtmlRef = useRef<HTMLDivElement>(null);
 
-  const linesCount = () => props.inputCode.split(`\n`).length;
-  const codeAsHtml = () =>
-    simpleCodeToHtml(props.inputCode, props.simpleCodeToHtmlOptions);
+  const linesCount = props.inputCode.split(`\n`).length;
+  const codeAsHtml = simpleCodeToHtml(
+    props.inputCode,
+    props.simpleCodeToHtmlOptions,
+  );
 
   const handleTextareaScroll = () => {
+    if (!textAreaRef.current || !codeAsHtmlRef.current ||
+      !lineNumberContainerRef.current) return;
+
     // scroll top
-    codeAsHtmlRef.scrollTop = textAreaRef.scrollTop;
-    lineNumberContainerRef.scrollTop = textAreaRef.scrollTop;
+    codeAsHtmlRef.current.scrollTop = textAreaRef.current.scrollTop;
+    lineNumberContainerRef.current.scrollTop = textAreaRef.current.scrollTop;
 
     // scroll left
-    codeAsHtmlRef.scrollLeft = textAreaRef.scrollLeft;
+    codeAsHtmlRef.current.scrollLeft = textAreaRef.current.scrollLeft;
   };
 
   return (
     <div
-      class={classes(
+      className={classes(
         "py-1",
         "pr-2",
         "w-full",
@@ -47,7 +52,7 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
       {/* Line number container */}
       <div
         ref={lineNumberContainerRef}
-        class={classes(
+        className={classes(
           "h-full",
           "overflow-hidden",
           "bg-bg-dark",
@@ -55,28 +60,26 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
           "z-[2]",
         )}
         style={{
-          "font-family": "monospace",
+          fontFamily: "monospace",
         }}
       >
-        <For each={Array.from({ length: linesCount() })}>
-          {(_, index) => (
-            <span>
-              {index() + 1}
-              <br />
-            </span>
-          )}
-        </For>
+        {Array.from({ length: linesCount }).map((_, index) => (
+          <span key={index}>
+            {index + 1}
+            <br />
+          </span>
+        ))}
       </div>
 
-      <div class={classes("grow", "relative")}>
+      <div className={classes("grow", "relative")}>
         {/* Textarea */}
         <textarea
           ref={textAreaRef}
           onScroll={handleTextareaScroll}
-          autocomplete="off"
+          autoComplete="off"
           autoCapitalize="off"
-          spellcheck={false}
-          class={classes(
+          spellCheck={false}
+          className={classes(
             "w-full",
             "h-full",
             "absolute",
@@ -90,16 +93,16 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
             "caret-[red]",
           )}
           style={{
-            "font-family": "monospace",
+            fontFamily: "monospace",
           }}
           value={props.inputCode}
-          onInput={(e) => props.updateInputCode(e.target.value)}
+          onChange={(e) => props.updateInputCode(e.target.value)}
         />
 
         {/* Code as HTML */}
         <div
           ref={codeAsHtmlRef}
-          class={classes(
+          className={classes(
             "w-full",
             "h-full",
             "absolute",
@@ -108,9 +111,9 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps) {
             "whitespace-pre",
           )}
           style={{
-            "font-family": "monospace",
+            fontFamily: "monospace",
           }}
-          innerHTML={codeAsHtml() + "<br>"}
+          dangerouslySetInnerHTML={{ __html: codeAsHtml + "<br>" }}
         />
       </div>
     </div>

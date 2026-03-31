@@ -1,22 +1,21 @@
-import { For, type JSX } from "solid-js";
+import { type ReactNode } from "react";
+import { classes } from "@/utils/classes.ts";
 
 export function ResumeAsideList(
   props: { items: string[]; asColumns?: boolean },
-): JSX.Element {
+): ReactNode {
   return (
     <ul
-      class="flex flex-wrap"
-      classList={{
-        "flex-col": props.asColumns,
-      }}
+      className={classes("flex flex-wrap", props.asColumns && "flex-col")}
     >
-      <For each={props.items}>
-        {(item) => (
-          <li class="ml-3 pr-2 text-xs leading-4 list-disc text-secondary font-light">
-            {item}
-          </li>
-        )}
-      </For>
+      {props.items.map((item) => (
+        <li
+          key={item}
+          className="ml-3 pr-2 text-xs leading-4 list-disc text-secondary font-light"
+        >
+          {item}
+        </li>
+      ))}
     </ul>
   );
 }

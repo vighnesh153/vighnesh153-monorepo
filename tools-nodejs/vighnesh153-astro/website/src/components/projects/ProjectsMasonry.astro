@@ -1,5 +1,6 @@
 ---
-import { allProjects, classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
+import { allProjects } from "@/utils/content/projects.ts";
 import { FolderIcon } from "@/icons/FolderIcon.tsx";
 import ProjectIconLink from "./ProjectIconLink.astro";
 import ProjectTag from "./ProjectTag.astro";
@@ -21,7 +22,7 @@ import { Link } from "../Link.tsx";
     allProjects.map(({ title, description, tags, links }) => (
       <li class="shadow-bg-dark bg-bg-light flex max-w-lg flex-col rounded-lg p-6 shadow-md">
         <div class="flex items-center justify-between">
-          <FolderIcon class="fill-accent" role="img" height="2rem" />
+          <FolderIcon className="fill-accent" role="img" height="2rem" />
 
           <ul class="fill-text flex gap-4">
             <li class="[&:is(:focus-within,:hover)]:fill-accent">

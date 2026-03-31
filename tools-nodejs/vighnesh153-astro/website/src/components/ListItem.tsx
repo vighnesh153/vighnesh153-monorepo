@@ -1,5 +1,5 @@
-import type { JSX } from "solid-js";
-import { classes } from "@/utils/index.ts";
+import type { JSX } from "react";
+import { classes } from "@/utils/classes";
 
 export type ListItemProps = {
   text: string;
@@ -9,10 +9,10 @@ export type ListItemProps = {
   trailingContent?: JSX.Element;
 };
 
-export function ListItem(props: ListItemProps) {
+export function ListItem(props: ListItemProps): JSX.Element {
   return (
     <li
-      class={classes(
+      className={classes(
         `w-full px-6 py-2 
       bg-secondary text-text 
       flex gap-1
@@ -24,7 +24,7 @@ export function ListItem(props: ListItemProps) {
       onClick={props.onClick}
     >
       {props.leadingContent}
-      <div class="grow">{props.text}</div>
+      <div className="grow">{props.text}</div>
       {props.leadingContent}
     </li>
   );

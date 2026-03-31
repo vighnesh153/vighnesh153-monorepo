@@ -1,61 +1,50 @@
 import {
-  children,
-  type JSX,
-  Match,
-  mergeProps,
-  type ParentProps,
-  splitProps,
-  Switch,
-} from "solid-js";
-import { classes } from "@/utils";
+  type AnchorHTMLAttributes,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
+import { classes } from "@/utils/classes.ts";
 
-import { SecondaryButtonStyles } from "./buttons/SecondaryButtonStyles";
-import { PrimaryButtonStyles } from "./buttons/PrimaryButtonStyles";
+import {
+  getPrimaryButtonClasses,
+  getSecondaryButtonClasses,
+} from "./buttons/Button.tsx";
 
-export type LinkProps =
-  & ParentProps<{
-    linkType?: "regular" | "primary-btn" | "secondary-btn";
-  }>
-  & JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  linkType?: "regular" | "primary-btn" | "secondary-btn";
+}
 
-export function Link(incomingProps: LinkProps) {
-  const [localProps, other] = splitProps(
-    mergeProps<LinkProps[]>({ linkType: "regular" }, incomingProps),
-    ["href", "class", "linkType", "children"],
-  );
-  const c = children(() => localProps.children);
+export function Link(
+  { linkType = "regular", className, ...props }: PropsWithChildren<
+    LinkProps
+  >,
+): ReactNode {
+  if (linkType == "regular") {
+    return (
+      <a
+        {...props}
+        className={classes(className, "regular-link")}
+      />
+    );
+  }
 
-  return (
-    <Switch>
-      <Match when={localProps.linkType === "regular"}>
-        <a
-          {...other}
-          href={localProps.href}
-          class={classes(localProps.class, "regular-link")}
-        >
-          {c()}
-        </a>
-      </Match>
-      <Match when={localProps.linkType === "primary-btn"}>
-        <PrimaryButtonStyles
-          {...other}
-          href={localProps.href}
-          class={classes(localProps.class)}
-          component="a"
-        >
-          {c()}
-        </PrimaryButtonStyles>
-      </Match>
-      <Match when={localProps.linkType === "secondary-btn"}>
-        <SecondaryButtonStyles
-          {...other}
-          href={localProps.href}
-          class={classes(localProps.class)}
-          component="a"
-        >
-          {c()}
-        </SecondaryButtonStyles>
-      </Match>
-    </Switch>
-  );
+  if (linkType == "primary-btn") {
+    return (
+      <a
+        {...props}
+        className={classes(className, getPrimaryButtonClasses())}
+      />
+    );
+  }
+
+  if (linkType == "secondary-btn") {
+    return (
+      <a
+        {...props}
+        className={classes(className, getSecondaryButtonClasses())}
+      />
+    );
+  }
+
+  return null;
 }

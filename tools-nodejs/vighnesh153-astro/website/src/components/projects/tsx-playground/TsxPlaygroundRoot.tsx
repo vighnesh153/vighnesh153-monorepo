@@ -1,6 +1,6 @@
-import { createEffect, createSignal, type JSX } from "solid-js";
+import { useEffect, useState, type JSX, useCallback } from "react";
 
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 import { debounce } from "@vighnesh153/tools";
 import { bundle, starterCode } from "@vighnesh153/tsx-bundler";
 
@@ -8,37 +8,40 @@ import { CodePreview, type CodePreviewResult } from "./CodePreview";
 import { SimpleCodeEditor } from "../SimpleCodeEditor";
 
 export function TsxPlaygroundRoot(): JSX.Element {
-  const [code, setCode] = createSignal(starterCode.trimStart());
-  const [result, setResult] = createSignal<CodePreviewResult>({
+  const [code, setCode] = useState(starterCode.trimStart());
+  const [result, setResult] = useState<CodePreviewResult>({
     status: "bundling",
   });
 
-  const runCode = debounce(async (inputCode: string) => {
-    setResult({ status: "bundling" });
+  const runCode = useCallback(
+    debounce(async (inputCode: string) => {
+      setResult({ status: "bundling" });
 
-    const bundleResult = await bundle(inputCode);
+      const bundleResult = await bundle(inputCode);
 
-    if (bundleResult.status === "success") {
-      setResult({
-        status: "success",
-        outputCode: bundleResult.outputCode,
-      });
-    } else {
-      setResult({
-        status: "error",
-        bundleError: bundleResult.error,
-      });
-    }
-  }, 1000);
+      if (bundleResult.status === "success") {
+        setResult({
+          status: "success",
+          outputCode: bundleResult.outputCode,
+        });
+      } else {
+        setResult({
+          status: "error",
+          bundleError: bundleResult.error,
+        });
+      }
+    }, 1000),
+    [],
+  );
 
-  createEffect(() => {
-    runCode(code());
-  });
+  useEffect(() => {
+    runCode(code);
+  }, [code, runCode]);
 
   return (
-    <div class={classes("w-full mt-10", "h-[50vh]", "flex", "items-stretch")}>
+    <div className={classes("w-full mt-10", "h-[50vh]", "flex", "items-stretch")}>
       <div
-        class={classes(
+        className={classes(
           "w-1/2",
           "bg-bg-dark",
           "focus-within:outline-[transparent]",
@@ -47,13 +50,12 @@ export function TsxPlaygroundRoot(): JSX.Element {
         )}
       >
         <SimpleCodeEditor
-          inputCode={code()}
-          updateInputCode={(newCode) =>
-            setCode(newCode)}
+          inputCode={code}
+          updateInputCode={(newCode) => setCode(newCode)}
         />
       </div>
-      <div class="w-1/2">
-        <CodePreview result={result()} />
+      <div className="w-1/2">
+        <CodePreview result={result} />
       </div>
     </div>
   );

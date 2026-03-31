@@ -1,25 +1,24 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type CloseIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type CloseIconProps = SVGAttributes<SVGSVGElement>;
 
-export function CloseIcon(incomingProps: CloseIconProps) {
-  const [, props] = splitProps(incomingProps, [
-    "xmlns",
-    "viewBox",
-  ]);
-
+export function CloseIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: CloseIconProps): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       stroke="currentColor"
-      stroke-width="15"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="15"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
-      <path class="top" d="M10,10 L90,90"></path>
-      <path class="bottom" d="M10,90 L90,10"></path>
+      <path className="top" d="M10,10 L90,90"></path>
+      <path className="bottom" d="M10,90 L90,10"></path>
     </svg>
   );
 }

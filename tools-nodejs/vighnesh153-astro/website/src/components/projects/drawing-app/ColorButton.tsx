@@ -1,4 +1,3 @@
-import { For } from "solid-js";
 import type { IColor } from "@vighnesh153/drawing-app";
 import { PopupButton } from "./PopupButton.tsx";
 
@@ -14,24 +13,22 @@ export function ColorButton(props: ColorButtonProps) {
       title="Color"
       popupContent={(togglePopup) => (
         <div
-          slot="popup-content"
-          class="w-96 mx-auto flex gap-2 flex-wrap justify-center"
+          className="w-96 mx-auto flex gap-2 flex-wrap justify-center"
         >
-          <For each={props.colors}>
-            {(color) => (
-              <button
-                style={`background-color: ${color.rgbaString}`}
-                class="w-10 h-10 rounded-full border border-secondary focus-visible:outline-secondary"
-                on:click={() => {
-                  props.onColorChange(color);
-                  togglePopup("closed");
-                }}
-              />
-            )}
-          </For>
+          {props.colors.map((color) => (
+            <button
+              key={color.rgbaString}
+              style={{ backgroundColor: color.rgbaString }}
+              className="w-10 h-10 rounded-full border border-secondary focus-visible:outline-secondary"
+              onClick={() => {
+                props.onColorChange(color);
+                togglePopup("closed");
+              }}
+            />
+          ))}
         </div>
       )}
-      buttonStyles={`background-color: ${props.selectedColor}`}
+      buttonStyles={{ backgroundColor: props.selectedColor }}
     />
   );
 }

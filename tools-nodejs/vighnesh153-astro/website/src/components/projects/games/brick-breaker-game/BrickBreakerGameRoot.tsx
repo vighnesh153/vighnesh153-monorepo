@@ -1,19 +1,20 @@
-import { createSignal, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 import {
   BrickBreakerGame,
   CanvasWrapperImpl,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
 export function BrickBreakerGameRoot() {
-  let canvasElement!: HTMLCanvasElement;
-  const [game, setGame] = createSignal<BrickBreakerGame>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [game, setGame] = useState<BrickBreakerGame>();
 
-  const handleMouseMove = (e: MouseEvent) => {
-    game()?.handleMouseMove(e, document.documentElement.scrollLeft);
+  const handleMouseMove: React.MouseEventHandler<HTMLCanvasElement> = (e) => {
+    game?.handleMouseMove(e as unknown as MouseEvent, document.documentElement.scrollLeft);
   };
 
-  onMount(() => {
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current);
     const gameInstance = new BrickBreakerGame(canvasWrapper, {
       onGameOver() {
         gameInstance.stop();
@@ -30,12 +31,12 @@ export function BrickBreakerGameRoot() {
     showNextFrame();
 
     setGame(gameInstance);
-  });
+  }, []);
 
   return (
     <canvas
-      class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-      ref={canvasElement}
+      className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+      ref={canvasRef}
       onMouseMove={handleMouseMove}
     >
       Sorry your browser doesn't support the canvas element

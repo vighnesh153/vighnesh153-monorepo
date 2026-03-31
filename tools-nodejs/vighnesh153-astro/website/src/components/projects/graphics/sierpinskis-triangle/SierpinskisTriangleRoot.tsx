@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 
 import {
   CanvasWrapperImpl,
@@ -10,14 +10,13 @@ import { Button } from "@/components/buttons/index.ts";
 import { createSnackbar } from "@/store/snackbar.ts";
 
 export function SierpinskisTriangleRoot() {
-  let canvasElement!: HTMLCanvasElement;
-
-  const [gameManager, setGameManager] = createSignal<
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [gameManager, setGameManager] = useState<
     SierpinskisTriangleGameManager
   >();
 
-  const start = () => {
-    const frames = gameManager()?.start();
+  const start = (gm: SierpinskisTriangleGameManager) => {
+    const frames = gm.start();
     if (!frames) {
       return;
     }
@@ -30,7 +29,7 @@ export function SierpinskisTriangleRoot() {
   };
 
   const stop = () => {
-    gameManager()?.stop();
+    gameManager?.stop();
     createSnackbar({
       type: "warn",
       message: "Rendering stopped. Refresh page to restart...",
@@ -39,25 +38,28 @@ export function SierpinskisTriangleRoot() {
     });
   };
 
-  onMount(() => {
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current);
     const game = new SierpinskisTriangleGame(canvasWrapper, {
       pointRadius: 1,
       speed: 6,
     });
-    setGameManager(new SierpinskisTriangleGameManager(game));
-    start();
-  });
+    const gm = new SierpinskisTriangleGameManager(game);
+    setGameManager(gm);
+    start(gm);
+  }, []);
 
   return (
     <>
-      <div class="flex justify-center gap-2">
+      <div className="flex justify-center gap-2">
         <Button variant="primary" onClick={stop}>Stop rendering</Button>
       </div>
 
       <canvas
-        class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-        ref={canvasElement}
+        className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+        ref={canvasRef}
       >
         Sorry your browser doesn't support the canvas element
       </canvas>

@@ -1,6 +1,6 @@
-import { type JSX } from "solid-js";
+import type { JSX } from "react";
 
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes";
 
 export type AvatarProps = {
   imageLink: string;
@@ -9,9 +9,9 @@ export type AvatarProps = {
 
 export function Avatar(props: AvatarProps): JSX.Element {
   return (
-    <div class="relative w-8 aspect-square">
+    <div className="relative w-8 aspect-square">
       <div
-        class={classes(`
+        className={classes(`
           absolute
           w-full aspect-square 
           grid place-items-center
@@ -24,7 +24,7 @@ export function Avatar(props: AvatarProps): JSX.Element {
       <img
         src={props.imageLink}
         alt="logged in user"
-        class={classes(`
+        className={classes(`
           relative
           w-8 aspect-square rounded-full
           pointer-events-none

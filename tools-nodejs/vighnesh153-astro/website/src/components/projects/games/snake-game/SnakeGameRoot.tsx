@@ -1,30 +1,31 @@
-import { createSignal, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 import {
   CanvasWrapperImpl,
   SnakeGame,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
 export function SnakeGameRoot() {
-  let canvasElement!: HTMLCanvasElement;
-  const [game, setGame] = createSignal<SnakeGame>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [game, setGame] = useState<SnakeGame>();
 
-  const keyupEventListener = (e: KeyboardEvent) => {
+  const keyupEventListener: React.KeyboardEventHandler<HTMLCanvasElement> = (e) => {
     e.preventDefault();
     if (["ArrowDown", "s", "S"].includes(e.key)) {
-      game()?.changeDirection("bottom");
+      game?.changeDirection("bottom");
     } else if (["ArrowUp", "w", "W"].includes(e.key)) {
-      game()?.changeDirection("top");
+      game?.changeDirection("top");
     } else if (["ArrowLeft", "a", "A"].includes(e.key)) {
-      game()?.changeDirection("left");
+      game?.changeDirection("left");
     } else if (["ArrowRight", "d", "D"].includes(e.key)) {
-      game()?.changeDirection("right");
+      game?.changeDirection("right");
     }
   };
 
-  onMount(() => {
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current);
     const gameInstance = new SnakeGame(canvasWrapper);
-    canvasElement.focus();
+    canvasRef.current.focus();
     const frames = gameInstance.start();
     function showNextFrame() {
       if (!frames.next().done) {
@@ -34,14 +35,14 @@ export function SnakeGameRoot() {
     showNextFrame();
 
     setGame(gameInstance);
-  });
+  }, []);
 
   return (
     <canvas
-      class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-      ref={canvasElement}
+      className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+      ref={canvasRef}
       onKeyUp={keyupEventListener}
-      tabindex="0"
+      tabIndex={0}
     >
       Sorry your browser doesn't support the canvas element
     </canvas>

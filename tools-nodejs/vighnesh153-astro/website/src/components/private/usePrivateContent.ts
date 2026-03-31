@@ -1,15 +1,21 @@
-import { createResource } from "solid-js";
-import { useStore } from "@nanostores/solid";
+import { useEffect, useState } from "react";
+import { useStore } from "@nanostores/react";
 
 import { loggedInUserId } from "@/store/auth";
 import { getPrivateContent } from "@/store/private_content";
-
-const fetchPrivateContent = (userId: string | null) =>
-  getPrivateContent(userId);
+import type { PrivateContent } from "@/models/private_content";
 
 export function usePrivateContent() {
   const $loggedInUserId = useStore(loggedInUserId);
-  const [privateContent] = createResource($loggedInUserId, fetchPrivateContent);
+  const [privateContent, setPrivateContent] = useState<PrivateContent | null>(null);
 
-  return { privateContent };
+  useEffect(() => {
+    async function init() {
+      const content = await getPrivateContent($loggedInUserId);
+      setPrivateContent(content);
+    }
+    init();
+  }, [$loggedInUserId]);
+
+  return { privateContent: () => privateContent };
 }

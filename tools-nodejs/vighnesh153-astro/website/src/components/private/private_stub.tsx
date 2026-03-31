@@ -1,5 +1,4 @@
-import { For, type JSX, Show } from "solid-js";
-import { not } from "@vighnesh153/tools";
+import type { JSX } from "react";
 
 import { ImageWithCache } from "@/components/ImageWithCache.tsx";
 import { useAccidentalPrivatePageOpenStubBreaker } from "@/hooks/mod.ts";
@@ -25,25 +24,26 @@ export function PrivateStub(): JSX.Element {
     pageKey: "/private",
   });
 
+  if (pageAccessible) {
+    return <PrivateContentWrapper />;
+  }
+
   return (
-    <Show when={not(pageAccessible())} fallback={<PrivateContentWrapper />}>
-      <div class="grid columns-1 gap-6">
-        <For each={images}>
-          {(p, index) => {
-            const url = new URL(prefix + p);
-            return (
-              <ImageWithCache
-                src={url.toString()}
-                cacheKey={url.pathname}
-                imageProps={{
-                  class: "block w-full",
-                  onClick: () => onKey((index() + 1).toString()),
-                }}
-              />
-            );
-          }}
-        </For>
-      </div>
-    </Show>
+    <div className="grid columns-1 gap-6">
+      {images.map((p, index) => {
+        const url = new URL(prefix + p);
+        return (
+          <ImageWithCache
+            key={p}
+            src={url.toString()}
+            cacheKey={url.pathname}
+            imageProps={{
+              className: "block w-full",
+              onClick: () => onKey((index + 1).toString()),
+            }}
+          />
+        );
+      })}
+    </div>
   );
 }

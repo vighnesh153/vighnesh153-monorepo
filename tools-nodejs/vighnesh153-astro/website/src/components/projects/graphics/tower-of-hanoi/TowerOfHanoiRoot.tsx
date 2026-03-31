@@ -1,4 +1,4 @@
-import { createSignal, For, onMount, Show } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 
 import { not, range } from "@vighnesh153/tools";
 import {
@@ -10,18 +10,18 @@ import {
 import { Button } from "@/components/buttons/index.ts";
 
 export function TowerOfHanoiRoot() {
-  let canvasElement!: HTMLCanvasElement;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const initialDiscCount = 5;
 
-  const [game, setGame] = createSignal<TowerOfHanoiGame>();
-  const [gameManager, setGameManager] = createSignal<TowerOfHanoiGameManager>();
-  const [isRunning, setIsRunning] = createSignal(false);
+  const [game, setGame] = useState<TowerOfHanoiGame>();
+  const [gameManager, setGameManager] = useState<TowerOfHanoiGameManager>();
+  const [isRunning, setIsRunning] = useState(false);
 
-  const [discCount, setDiscCount] = createSignal<number>();
+  const [discCount, setDiscCount] = useState<number>(initialDiscCount);
 
   const start = () => {
-    const frames = gameManager()?.start();
+    const frames = gameManager?.start();
     if (!frames) {
       return;
     }
@@ -29,59 +29,58 @@ export function TowerOfHanoiRoot() {
       if (!frames.next().done) {
         requestAnimationFrame(showNextFrame);
       }
-      setIsRunning(!!game()?.isRunning);
+      setIsRunning(!!game?.isRunning);
     };
     showNextFrame();
   };
 
-  const initializeNewGame = () => {
-    if (not(canvasElement)) return;
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  const initializeNewGame = (currentDiscCount: number) => {
+    if (not(canvasRef.current)) return;
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current!!);
     const gameInstance = new TowerOfHanoiGame(canvasWrapper, {
-      discCount: discCount(),
+      discCount: currentDiscCount,
     });
     const gameManagerInstance = new TowerOfHanoiGameManager(gameInstance);
 
     setGame(gameInstance);
     setGameManager(gameManagerInstance);
-    setIsRunning(!!game()?.isRunning);
+    setIsRunning(!!gameInstance.isRunning);
   };
 
-  onMount(() => {
-    setDiscCount(initialDiscCount);
-    initializeNewGame();
-  });
+  useEffect(() => {
+    initializeNewGame(discCount);
+  }, []);
 
   return (
     <>
-      <div class="flex justify-center items-center gap-20">
-        <Show when={not(isRunning())}>
+      <div className="flex justify-center items-center gap-20">
+        {not(isRunning) && (
           <Button variant="primary" onClick={start}>Start</Button>
-        </Show>
-        <div class="flex flex-col items-center gap-1">
-          <label for="discCount">Discs</label>
+        )}
+        <div className="flex flex-col items-center gap-1">
+          <label htmlFor="discCount">Discs</label>
           <select
             name="discCount"
             id="discCount"
-            class="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
-            value={discCount()}
+            className="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
+            value={discCount}
             onChange={(e) => {
-              setDiscCount(+e.target.value);
-              gameManager()?.stop();
-              initializeNewGame();
-              console.log(`Disc count changed: ${discCount()}`);
+              const newDiscCount = +e.target.value;
+              setDiscCount(newDiscCount);
+              gameManager?.stop();
+              initializeNewGame(newDiscCount);
             }}
           >
-            <For each={Array.from(range(1, TowerOfHanoiGame.maxDiscCount))}>
-              {(count) => <option value={count}>{count}</option>}
-            </For>
+            {Array.from(range(1, TowerOfHanoiGame.maxDiscCount)).map((
+              count,
+            ) => <option key={count} value={count}>{count}</option>)}
           </select>
         </div>
       </div>
 
       <canvas
-        class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-        ref={canvasElement}
+        className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+        ref={canvasRef}
       >
         Sorry your browser doesn't support the canvas element
       </canvas>

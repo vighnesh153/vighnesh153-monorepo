@@ -18,6 +18,7 @@ export * from "./PenIcon.tsx";
 export * from "./RotateLeftIcon.tsx";
 export * from "./RotateRightIcon.tsx";
 export * from "./RvLogoIcon.tsx";
+export * from "./SourceCodeIcon.tsx";
 export * from "./StackoverflowIcon.tsx";
 export * from "./UploadIcon.tsx";
 export * from "./WarnIcon.tsx";

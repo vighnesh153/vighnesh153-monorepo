@@ -8,7 +8,8 @@ import EmailAddressAside from "@/components/EmailAddressAside.astro";
 import { Link } from "@/components/Link.tsx";
 import SocialLinks from "@/components/SocialLinks.astro";
 
-import { hashTags, type NavItem, externalLinks } from "@/utils/index.ts";
+import { hashTags, externalLinks } from "@/utils/content/links.ts";
+import { type NavItem } from "@/utils/content/navItems.ts";
 
 interface Props {
   title?: string;

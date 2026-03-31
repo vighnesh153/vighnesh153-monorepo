@@ -1,4 +1,4 @@
-import { createSignal, For, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 import {
   type CanvasWrapper,
   CanvasWrapperImpl,
@@ -8,71 +8,70 @@ import {
 } from "@vighnesh153/tools-browser/graphics_programming";
 
 export function SortingVisualizerRoot() {
-  let canvasElement!: HTMLCanvasElement;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [canvasWrapper, setCanvasWrapper] = createSignal<CanvasWrapper>();
-  const [game, setGame] = createSignal<SortingVisualizerGame>();
+  const [canvasWrapper, setCanvasWrapper] = useState<CanvasWrapper>();
+  const [game, setGame] = useState<SortingVisualizerGame>();
 
   const initialAlgorithmTitle = sortingAlgorithms[1].displayName;
-  const [algorithmTitle, setAlgorithmTitle] = createSignal<string>();
+  const [algorithmTitle, setAlgorithmTitle] = useState<string>(initialAlgorithmTitle);
 
-  const getAlgorithmImpl = (): SortingAlgorithm => {
+  const getAlgorithmImpl = (title: string): SortingAlgorithm => {
     return sortingAlgorithms
-      .find((algorithm) => algorithm.displayName === algorithmTitle())!!
+      .find((algorithm) => algorithm.displayName === title)!!
       .algorithmFactory();
   };
 
-  const newGame = () => {
-    game()?.stop();
+  const newGame = (cw: CanvasWrapper, title: string) => {
+    game?.stop();
 
-    if (canvasWrapper()) {
-      const gameInstance = new SortingVisualizerGame(canvasWrapper()!);
-      const frames = gameInstance.start(getAlgorithmImpl());
-      function showNextFrame() {
-        if (!frames.next().done) {
-          requestAnimationFrame(showNextFrame);
-        }
+    const gameInstance = new SortingVisualizerGame(cw);
+    const frames = gameInstance.start(getAlgorithmImpl(title));
+    function showNextFrame() {
+      if (!frames.next().done) {
+        requestAnimationFrame(showNextFrame);
       }
-      showNextFrame();
-      setGame(gameInstance);
     }
+    showNextFrame();
+    setGame(gameInstance);
   };
 
-  onMount(() => {
-    setAlgorithmTitle(initialAlgorithmTitle);
-    setCanvasWrapper(new CanvasWrapperImpl(canvasElement));
-    newGame();
-  });
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const cw = new CanvasWrapperImpl(canvasRef.current);
+    setCanvasWrapper(cw);
+    newGame(cw, algorithmTitle);
+  }, []);
 
   return (
     <>
-      <div class="flex justify-center items-center gap-10">
-        <div class="flex flex-col items-center gap-1">
-          <label for="algorithm">Algorithm</label>
+      <div className="flex justify-center items-center gap-10">
+        <div className="flex flex-col items-center gap-1">
+          <label htmlFor="algorithm">Algorithm</label>
           <select
             name="algorithm"
             id="algorithm"
-            class="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
-            value={algorithmTitle()}
+            className="min-w-[100px] bg-text2 text-secondary rounded px-2 py-1"
+            value={algorithmTitle}
             onChange={(e) => {
-              setAlgorithmTitle(e.target.value);
-              newGame();
-              console.log(`Algorithm changed: ${algorithmTitle()}`);
+              const newTitle = e.target.value;
+              setAlgorithmTitle(newTitle);
+              if (canvasWrapper) {
+                newGame(canvasWrapper, newTitle);
+              }
             }}
           >
-            <For each={sortingAlgorithms}>
-              {(algorithm) => (
-                <option value={algorithm.displayName}>
-                  {algorithm.displayName}
-                </option>
-              )}
-            </For>
+            {sortingAlgorithms.map((algorithm) => (
+              <option key={algorithm.displayName} value={algorithm.displayName}>
+                {algorithm.displayName}
+              </option>
+            ))}
           </select>
         </div>
       </div>
       <canvas
-        class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-        ref={canvasElement}
+        className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+        ref={canvasRef}
       >
         Sorry your browser doesn't support the canvas element
       </canvas>

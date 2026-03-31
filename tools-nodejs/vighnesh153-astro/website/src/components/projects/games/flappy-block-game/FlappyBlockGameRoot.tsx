@@ -1,26 +1,27 @@
-import { createSignal, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 import {
   CanvasWrapperImpl,
   FlappyBlockGame,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
 export function FlappyBlockGameRoot() {
-  let canvasElement!: HTMLCanvasElement;
-  const [game, setGame] = createSignal<FlappyBlockGame>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [game, setGame] = useState<FlappyBlockGame>();
 
-  const handleKeyPress = (e: KeyboardEvent) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLCanvasElement> = (e) => {
     if (e.key === " ") {
-      game()?.handleSpacebarPress();
+      game?.handleSpacebarPress();
     }
     if (e.key === "Enter") {
-      game()?.handleEnterPress();
+      game?.handleEnterPress();
     }
   };
 
-  onMount(() => {
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current);
     const gameInstance = new FlappyBlockGame(canvasWrapper);
-    canvasElement.focus();
+    canvasRef.current.focus();
     const frames = gameInstance.start();
     function showNextFrame() {
       if (!frames.next().done) {
@@ -30,14 +31,14 @@ export function FlappyBlockGameRoot() {
     showNextFrame();
 
     setGame(gameInstance);
-  });
+  }, []);
 
   return (
     <canvas
-      class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-      tabindex="0"
-      ref={canvasElement}
-      onKeyPress={handleKeyPress}
+      className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+      tabIndex={0}
+      ref={canvasRef}
+      onKeyDown={handleKeyDown}
     >
       Sorry your browser doesn't support the canvas element
     </canvas>

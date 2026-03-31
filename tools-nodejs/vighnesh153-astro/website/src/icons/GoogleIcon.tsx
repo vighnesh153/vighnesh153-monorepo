@@ -1,10 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type GoogleIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type GoogleIconProps = SVGAttributes<SVGSVGElement>;
 
-export function GoogleIcon(incomingProps: GoogleIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function GoogleIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: GoogleIconProps): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" {...props}>
       <path

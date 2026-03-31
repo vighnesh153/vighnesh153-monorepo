@@ -4,7 +4,9 @@ import HamburgerIcon from "@/icons/HamburgerIcon.astro";
 import { CloseIcon } from "@/icons/CloseIcon.tsx";
 
 import { AuthIndicator } from "@/components/AuthIndicator.tsx";
-import { classes, hashTags, type NavItem } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
+import { hashTags } from "@/utils/content/links.ts";
+import { type NavItem } from "@/utils/content/navItems.ts";
 
 import NavigationItems from "./NavigationItems.astro";
 
@@ -44,7 +46,7 @@ const { navItems } = Astro.props;
   `)}
 >
   <a href="/" aria-label="Logo" class="text-accent inline-block">
-    <RvLogoIcon width="2.5rem" height="2.5rem" style={{ "font-size": 0 }} />
+    <RvLogoIcon width="2.5rem" height="2.5rem" style={{ fontSize: 0 }} />
   </a>
 
   {/* Horizontal navigation */}
@@ -117,14 +119,14 @@ const { navItems } = Astro.props;
       const currentScrollY = window.scrollY;
       header?.classList.toggle(
         "my-box-shadow",
-        currentScrollY >= boxShadowScrollYOffset
+        currentScrollY >= boxShadowScrollYOffset,
       );
       header?.classList.toggle(
         "show-header",
-        currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY
+        currentScrollY <= showHeaderOffset || currentScrollY < previousScrollY,
       );
       previousScrollY = currentScrollY;
-    }, 16)
+    }, 16),
   );
 
   // this is needed for when header is hidden and one of its children gets focus

@@ -1,89 +1,86 @@
-import { createSignal, type JSX, onMount, Show } from "solid-js";
+import { useEffect, useState, type JSX } from "react";
 
 import type { SnackbarProps } from "@/store/snackbar.ts";
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 import { CheckIcon, CloseIcon, InfoIcon, WarnIcon } from "@/icons";
 
 export function Snackbar(props: SnackbarProps): JSX.Element {
   const config = mapping[props.type];
-  const [width, setWidth] = createSignal("100%");
+  const [width, setWidth] = useState("100%");
 
-  onMount(() => {
+  useEffect(() => {
     // animating the progress bar
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setWidth("0%");
     }, 1);
-  });
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div
       role="alert"
-      class={classes(`
-        w-80 mb-3
-
-        rounded-md overflow-hidden
-      `)}
-      classList={{
-        [config.textColor]: true,
-        [config.iconColor]: true,
-      }}
+      className={classes(
+        `w-80 mb-3 rounded-md overflow-hidden`,
+        config.textColor,
+        config.iconColor,
+      )}
       style={{
         background: config.bgColor,
       }}
     >
       <div
-        class={classes(`
+        className={classes(`
           px-4 py-3
 
           flex items-start gap-2
         `)}
       >
-        <div class="mt-1">{config.icon()}</div>
-        <p class="grow">{props.message}</p>
-        <Show when={props.manualDismissible}>
+        <div className="mt-1">{config.icon()}</div>
+        <p className="grow">{props.message}</p>
+        {props.manualDismissible && (
           <button onClick={() => props.dismiss()}>
-            <CloseIcon class="mt-1 w-4 h-4" />
+            <CloseIcon className="mt-1 w-4 h-4" />
           </button>
-        </Show>
+        )}
       </div>
-      <Show when={props.autoDismissible}>
+      {props.autoDismissible && (
         <div
-          class="h-2"
+          className="h-2"
           style={{
-            "background-color": config.timerProgressColor,
-            width: width(),
+            backgroundColor: config.timerProgressColor,
+            width: width,
             transition: `width ${props.autoDismissTimeMillis}ms linear`,
           }}
         />
-      </Show>
+      )}
     </div>
   );
 }
 
 const mapping = {
   success: {
-    icon: () => <CheckIcon class="w-4 h-4" />,
+    icon: () => <CheckIcon className="w-4 h-4" />,
     bgColor: "#388e3c",
     textColor: "text-secondary",
     iconColor: "fill-secondary",
     timerProgressColor: "#87d58a",
   },
   info: {
-    icon: () => <InfoIcon class="w-4 h-4" />,
+    icon: () => <InfoIcon className="w-4 h-4" />,
     bgColor: "#0288d1",
     textColor: "text-secondary",
     iconColor: "fill-secondary",
     timerProgressColor: "#7fd7ff",
   },
   warn: {
-    icon: () => <WarnIcon class="w-4 h-4" />,
+    icon: () => <WarnIcon className="w-4 h-4" />,
     bgColor: "#f57c00",
     textColor: "text-secondary",
     iconColor: "fill-secondary",
     timerProgressColor: "#ffd89f",
   },
   error: {
-    icon: () => <InfoIcon class="w-4 h-4" />,
+    icon: () => <InfoIcon className="w-4 h-4" />,
     bgColor: "#d32f2f",
     textColor: "text-text",
     iconColor: "fill-text",

@@ -1,10 +1,11 @@
 import {
-  createEffect,
-  createSignal,
+  useEffect,
+  useRef,
+  useState,
   type JSX,
-  type ParentProps,
-} from "solid-js";
-import { Portal } from "solid-js/web";
+  type PropsWithChildren,
+} from "react";
+import { createPortal } from "react-dom";
 
 export type ModalProps = {
   open: boolean;
@@ -16,10 +17,10 @@ export type UseModalDialogProps = {
 };
 
 export function useModalDialog(props: UseModalDialogProps = {}) {
-  const [open, setOpen] = createSignal(props.initialOpen ?? false);
+  const [open, setOpen] = useState(props.initialOpen ?? false);
 
   const toggleOpen = (value?: boolean) => {
-    if (value == undefined) {
+    if (value === undefined) {
       setOpen((old) => !old);
     } else {
       setOpen(value);
@@ -33,22 +34,21 @@ export function useModalDialog(props: UseModalDialogProps = {}) {
   };
 }
 
-export function ModalDialog(props: ParentProps<ModalProps>): JSX.Element {
-  let dialogRef!: HTMLDialogElement;
+export function ModalDialog(props: PropsWithChildren<ModalProps>): JSX.Element {
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  createEffect(() => {
+  useEffect(() => {
     if (props.open) {
-      dialogRef?.showModal();
+      dialogRef.current?.showModal();
     } else {
-      dialogRef?.close();
+      dialogRef.current?.close();
     }
-  });
+  }, [props.open]);
 
-  return (
-    <Portal mount={document.body}>
-      <dialog ref={dialogRef} onClose={() => props.close()}>
-        {props.children}
-      </dialog>
-    </Portal>
+  return createPortal(
+    <dialog ref={dialogRef} onClose={() => props.close()}>
+      {props.children}
+    </dialog>,
+    document.body,
   );
 }

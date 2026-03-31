@@ -1,10 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type EyeIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type EyeIconProps = SVGAttributes<SVGSVGElement>;
 
-export function EyeIcon(incomingProps: EyeIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function EyeIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: EyeIconProps): JSX.Element {
   return (
     <svg
       {...props}

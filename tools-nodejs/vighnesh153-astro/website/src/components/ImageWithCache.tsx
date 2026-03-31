@@ -1,4 +1,9 @@
-import { createEffect, createSignal, type JSX, Show } from "solid-js";
+import {
+  useEffect,
+  useState,
+  type JSX,
+  type ImgHTMLAttributes,
+} from "react";
 
 import { cacheImage } from "@/utils/image_caching.ts";
 
@@ -8,26 +13,33 @@ export type ImageWithCacheProps = {
   ttlMillis?: number;
   fallback?: JSX.Element;
 
-  imageProps?: JSX.ImgHTMLAttributes<HTMLImageElement>;
+  imageProps?: ImgHTMLAttributes<HTMLImageElement>;
 };
 
 export function ImageWithCache(props: ImageWithCacheProps): JSX.Element {
-  const [objUrl, setObjUrl] = createSignal<string | null>(null);
+  const [objUrl, setObjUrl] = useState<string | null>(null);
 
-  createEffect(async () => {
-    try {
-      const cachedUrl = await cacheImage(props.src, props.cacheKey, {
-        ttlMillis: props.ttlMillis,
-      });
-      setObjUrl(cachedUrl);
-    } catch (e) {
-      console.log(e);
+  useEffect(() => {
+    async function init() {
+      try {
+        const cachedUrl = await cacheImage(props.src, props.cacheKey, {
+          ttlMillis: props.ttlMillis,
+        });
+        setObjUrl(cachedUrl);
+      } catch (e) {
+        console.error(e);
+      }
     }
-  });
+    init();
+  }, [props.src, props.cacheKey, props.ttlMillis]);
 
   return (
-    <Show when={objUrl() !== null} fallback={props.fallback}>
-      <img {...props.imageProps} src={objUrl()!} />
-    </Show>
+    <>
+      {objUrl !== null ? (
+        <img {...props.imageProps} src={objUrl!} />
+      ) : (
+        props.fallback
+      )}
+    </>
   );
 }

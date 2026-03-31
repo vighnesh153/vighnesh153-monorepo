@@ -1,8 +1,9 @@
-import { createSignal, type JSX, Show } from "solid-js";
+import { useState, type JSX } from "react";
 import { not } from "@vighnesh153/tools";
 import { createSnackbar } from "@/store/snackbar.ts";
 import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "@/icons";
-import { classes, copyToClipboard } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
+import { copyToClipboard } from "@/utils/copy_to_clipboard.ts";
 
 export type HtmlCodeViewerProps = {
   code: string;
@@ -20,7 +21,7 @@ export function CodeViewer({
   maxCodeBodyHeight = 500,
 }: HtmlCodeViewerProps): JSX.Element {
   const lineCount = code.split("\n").length;
-  const [showFullCode, setShowFullCode] = createSignal(false);
+  const [showFullCode, setShowFullCode] = useState(false);
 
   const onCopyClick = async () => {
     try {
@@ -43,71 +44,69 @@ export function CodeViewer({
 
   return (
     <div
-      class="rounded-xl bg-secondary border border-text4"
+      className="rounded-xl bg-secondary border border-text4"
       style={{
-        "font-family": "Courier, Menlo, Consolas",
+        fontFamily: "Courier, Menlo, Consolas",
       }}
     >
       {/* Header */}
-      <div class="w-full px-4 py-2 flex justify-between items-center border-b border-b-text4">
+      <div className="w-full px-4 py-2 flex justify-between items-center border-b border-b-text4">
         <p>{fileName}</p>
         <button
-          class="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg"
+          className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
           onClick={onCopyClick}
         >
-          <CopyIcon class="fill-text w-4" /> Copy
+          <CopyIcon className="fill-text w-4" /> Copy
         </button>
       </div>
 
       {/* Code body */}
       <div
-        class="relative py-4 w-full whitespace-pre flex items-stretch bg-[#16181d] overflow-auto"
+        className="relative py-4 w-full whitespace-pre flex items-stretch bg-[#16181d] overflow-auto"
         style={{
-          "max-height": not(viewEntireCode) && not(showFullCode())
+          maxHeight: not(viewEntireCode) && not(showFullCode)
             ? `${maxCodeBodyHeight}px`
             : "unset",
         }}
       >
-        <div class="sticky h-full ps-4 pe-2 left-0 bg-[inherit]">
+        <div className="sticky h-full ps-4 pe-2 left-0 bg-[inherit]">
           {Array.from({ length: lineCount })
             .map((_, index) => `${index + 1}`.padStart(3, " "))
             .join("\n")}
         </div>
         <div
-          class={classes(`
+          className={classes(`
             ps-6
             pe-4
             
             grow
             items-stretch
           `)}
-          innerText={code}
-        />
+        >
+          {code}
+        </div>
       </div>
 
       {/* Footer */}
-      <Show when={not(viewEntireCode)}>
-        <div class="w-full px-4 py-2 border-t border-t-text4">
-          <Show
-            when={showFullCode()}
-            fallback={
-              <button
-                onClick={toggleShowFullCode}
-                class="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg"
-              >
-                <ChevronDownIcon class="fill-text w-4" /> Show more
-              </button>
-            }
-          >
+      {not(viewEntireCode) && (
+        <div className="w-full px-4 py-2 border-t border-t-text4">
+          {showFullCode ? (
             <button
               onClick={toggleShowFullCode}
-              class="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg"
+              className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
             >
-              <ChevronUpIcon class="fill-text w-4" /> Show less
+              <ChevronUpIcon className="fill-text w-4" /> Show less
             </button>
-          </Show>
+          ) : (
+            <button
+              onClick={toggleShowFullCode}
+              className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
+            >
+              <ChevronDownIcon className="fill-text w-4" /> Show more
+            </button>
+          )}
         </div>
-      </Show>
+      )}
     </div>
   );
 }

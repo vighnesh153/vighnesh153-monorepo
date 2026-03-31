@@ -1,14 +1,15 @@
-import { onMount } from "solid-js";
+import { useEffect, useRef } from "react";
 import {
   BarnsleysFern,
   CanvasWrapperImpl,
 } from "@vighnesh153/tools-browser/graphics_programming";
 
 export function BarnsleysFernRoot() {
-  let canvasElement!: HTMLCanvasElement;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  onMount(() => {
-    const canvasWrapper = new CanvasWrapperImpl(canvasElement);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvasWrapper = new CanvasWrapperImpl(canvasRef.current);
     const game = new BarnsleysFern(canvasWrapper);
     const frames = game.start();
     function showNextFrame() {
@@ -17,12 +18,12 @@ export function BarnsleysFernRoot() {
       }
     }
     showNextFrame();
-  });
+  }, []);
 
   return (
     <canvas
-      class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
-      ref={canvasElement}
+      className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-text"
+      ref={canvasRef}
     >
       Sorry your browser doesn't support the canvas element
     </canvas>

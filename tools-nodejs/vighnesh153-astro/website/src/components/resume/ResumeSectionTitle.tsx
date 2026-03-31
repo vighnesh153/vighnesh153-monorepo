@@ -1,17 +1,17 @@
-import type { JSX } from "solid-js";
+import type { JSX, ReactNode } from "react";
 
-import { classes } from "@/utils";
+import { classes } from "@/utils/classes.ts";
 
 export type ResumeSectionHeadingProps = {
-  text: JSX.Element;
-  class?: string;
+  text: ReactNode;
+  className?: string;
 };
 
 export function ResumeSectionTitle(
   props: ResumeSectionHeadingProps,
 ): JSX.Element {
   return (
-    <h2 class={classes(props.class, `uppercase text-xl`)}>
+    <h2 className={classes(props.className, `uppercase text-xl`)}>
       {props.text}
     </h2>
   );
@@ -22,8 +22,8 @@ export function ResumeSectionSubtitle(
 ): JSX.Element {
   return (
     <h3
-      class={classes(
-        props.class,
+      className={classes(
+        props.className,
         `uppercase text-base font-bold`,
       )}
     >

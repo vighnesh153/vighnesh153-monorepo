@@ -1,6 +1,7 @@
-import { For, type JSX, Show } from "solid-js";
+import type { JSX } from "react";
 
-import { classes, internalLinks } from "@/utils";
+import { classes } from "@/utils/classes";
+import { internalLinks } from "@/utils/content/links.ts";
 import { clearPrivateContentFromCache } from "@/store/private_content";
 
 import { Button } from "@/components/buttons";
@@ -12,9 +13,6 @@ export function PrivateCardsCollection(): JSX.Element {
 
   const hasItems = () => {
     const content = privateContent()?.data ?? null;
-    if (content === null) {
-      return false;
-    }
     return content !== null && content.length > 0;
   };
 
@@ -25,27 +23,28 @@ export function PrivateCardsCollection(): JSX.Element {
   return (
     <div>
       <Button
-        class="block ml-auto mb-4"
+        className="block ml-auto mb-4"
         variant="secondary"
         onClick={onClearCache}
       >
         Clear cache
       </Button>
 
-      <Show when={hasItems()} fallback={<p>Nothing to show...</p>}>
-        <div
-          class={classes(`
+      {hasItems()
+        ? (
+          <div
+            className={classes(`
             grid gap-4
             
             grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
           `)}
-        >
-          <For each={privateContent()?.data ?? []}>
-            {(card) => {
+          >
+            {(privateContent()?.data ?? []).map((card) => {
               const imageUrl = new URL(card.imageUrl);
               return (
                 <a
-                  class={classes(`
+                  key={card.id}
+                  className={classes(`
                     min-w-5 
   
                     hover:scale-105
@@ -69,16 +68,16 @@ export function PrivateCardsCollection(): JSX.Element {
                     cacheKey={imageUrl.pathname}
                     imageProps={{
                       alt: "private content",
-                      class: "block w-full h-full",
+                      className: "block w-full h-full",
                       loading: "lazy",
                     }}
                   />
                 </a>
               );
-            }}
-          </For>
-        </div>
-      </Show>
+            })}
+          </div>
+        )
+        : <p>Nothing to show...</p>}
     </div>
   );
 }

@@ -1,5 +1,7 @@
 ---
-import { classes, hashTags, companyUrls } from "@/utils/index.ts";
+import { hashTags } from "@/utils/content/links.ts";
+import { companyUrls } from "@/utils/content/companyUrls.ts";
+import { classes } from "@/utils/classes.ts";
 import SectionTitle from "./SectionTitle.astro";
 import ExperienceSectionItem from "./ExperienceSectionItem.astro";
 import ExperienceSectionItemResponsibility from "./ExperienceSectionItemResponsibility.astro";
@@ -62,7 +64,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.amazon}
       totalDuration={getTimeDifference(
         new Date("2020-09-28"),
-        new Date("2022-07-14")
+        new Date("2022-07-14"),
       )}
       companyPositions={[
         {
@@ -131,7 +133,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.smarterCodes}
       totalDuration={getTimeDifference(
         new Date("2020-07-06"),
-        new Date("2020-09-25")
+        new Date("2020-09-25"),
       )}
       companyPositions={[
         {
@@ -165,7 +167,7 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
       companyUrl={companyUrls.tavisca}
       totalDuration={getTimeDifference(
         new Date("2019-07-15"),
-        new Date("2020-01-25")
+        new Date("2020-01-25"),
       )}
       companyPositions={[
         {

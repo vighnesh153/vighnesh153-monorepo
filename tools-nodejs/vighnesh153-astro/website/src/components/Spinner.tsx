@@ -1,12 +1,14 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type SpinnerProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type SpinnerProps = SVGAttributes<SVGSVGElement>;
 
 // Credits: https://github.com/lenniezelk/solid-spinner
 
-export function Spinner(incomingProps: SpinnerProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function Spinner({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: SpinnerProps): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,22 +18,22 @@ export function Spinner(incomingProps: SpinnerProps): JSX.Element {
     >
       <defs>
         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-          <stop stop-color="currentColor" stop-opacity="0" offset="0%" />
+          <stop stopColor="currentColor" stopOpacity="0" offset="0%" />
           <stop
-            stop-color="currentColor"
-            stop-opacity=".631"
+            stopColor="currentColor"
+            stopOpacity=".631"
             offset="63.146%"
           />
-          <stop stop-color="currentColor" offset="100%" />
+          <stop stopColor="currentColor" offset="100%" />
         </linearGradient>
       </defs>
-      <g fill="none" fill-rule="evenodd">
+      <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)">
           <path
             d="M36 18c0-9.94-8.06-18-18-18"
             id="Oval-2"
             stroke="url(#a)"
-            stroke-width="2"
+            strokeWidth="2"
           >
             <animateTransform
               attributeName="transform"

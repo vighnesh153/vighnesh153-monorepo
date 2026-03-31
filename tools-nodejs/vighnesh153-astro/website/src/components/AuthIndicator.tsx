@@ -1,17 +1,13 @@
-import { Show } from "solid-js";
-import { useStore } from "@nanostores/solid";
+import { useStore } from "@nanostores/react";
 
 import type { UserInfo } from "@/models/user_info.ts";
 import { loggedInUser } from "@/store/auth.ts";
-import {
-  classes,
-  computeInitialsFromName,
-  initiateLogout,
-} from "@/utils/index.ts";
+import { initiateLogout } from "@/utils/auth.ts";
+import { computeInitialsFromName } from "@/utils/computeInitialsFromName.ts";
+import { classes } from "@/utils/classes.ts";
 import { GoogleSignInButton } from "./buttons/index.ts";
 import { Avatar } from "./Avatar.tsx";
-import { Menu } from "./Menu.tsx";
-import type { ListItemProps } from "./ListItem.tsx";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 export type AuthIndicatorProps = {
   userInfo: UserInfo;
@@ -20,32 +16,20 @@ export type AuthIndicatorProps = {
 export function AuthIndicator() {
   const $loggedInUser = useStore(loggedInUser);
 
-  const menuItems: ListItemProps[] = [
-    {
-      text: "Log out",
-      onClick: () => initiateLogout(),
-    },
-  ];
-
   return (
-    <div class="w-[117px]">
-      <Show when={$loggedInUser() !== null} fallback={<GoogleSignInButton />}>
-        <Menu
-          placement="bottom-end"
-          items={menuItems}
-          controlElement={(_, toggle) => (
-            <button
-              class="flex gap-3 items-center"
-              onClick={() => toggle()}
-            >
-              <div class="shrink-0">
+    <div className="w-[117px]">
+      {$loggedInUser !== null
+        ? (
+          <Menu>
+            <MenuButton className="flex gap-3 items-center">
+              <div className="shrink-0">
                 <Avatar
-                  userInitials={computeInitialsFromName($loggedInUser()!.name)}
-                  imageLink={$loggedInUser()!.profilePictureUrl}
+                  userInitials={computeInitialsFromName($loggedInUser!.name)}
+                  imageLink={$loggedInUser!.profilePictureUrl}
                 />
               </div>
               <div
-                class={classes(
+                className={classes(
                   `
                     w-20 inline-block
                     grow-0
@@ -53,12 +37,30 @@ export function AuthIndicator() {
                   `,
                 )}
               >
-                {$loggedInUser()!.name.split(" ")[0]}
+                {$loggedInUser!.name.split(" ")[0]}
               </div>
-            </button>
-          )}
-        />
-      </Show>
+            </MenuButton>
+            <MenuItems>
+              <MenuItem>
+                <span
+                  className={classes(
+                    `w-full px-6 py-2 
+                    bg-secondary text-text 
+                    flex gap-1
+
+                    hover:bg-background hover:text-accent
+                    `,
+                  )}
+                  role="button"
+                  onClick={() => initiateLogout()}
+                >
+                  Log out
+                </span>
+              </MenuItem>
+            </MenuItems>
+          </Menu>
+        )
+        : <GoogleSignInButton />}
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
-import { useStore } from "@nanostores/solid";
+import { type JSX, useEffect, useRef, useState } from "react";
+import { useStore } from "@nanostores/react";
 
 import {
   type AppConfig,
@@ -22,7 +22,7 @@ import {
   undo,
 } from "@vighnesh153/drawing-app";
 
-import { classes } from "@/utils/index.ts";
+import { classes } from "@/utils/classes.ts";
 import {
   brushThicknessStore,
   colorStore,
@@ -40,22 +40,22 @@ const brushThicknessValues = [
   BrushThickness.xl,
 ];
 
-export function DrawingAppRoot() {
-  let canvasElement!: HTMLCanvasElement;
-  const [mouseHandlerStore, setMouseHandlerStore] = createSignal(
+export function DrawingAppRoot(): JSX.Element {
+  const canvasElement = useRef<HTMLCanvasElement>(null);
+  const [mouseHandlerStore, setMouseHandlerStore] = useState(
     buildMouseHandlerStore(),
   );
   const brushThickness = useStore(brushThicknessStore);
   const color = useStore(colorStore);
   const drawingEventMode = useStore(drawingEventModeStore);
-  const [isRedoAvailable, setIsRedoAvailable] = createSignal(false);
-  const [isUndoAvailable, setIsUndoAvailable] = createSignal(false);
-  const [eventsManager, setEventsManager] = createSignal<EventsManager | null>(
+  const [isRedoAvailable, setIsRedoAvailable] = useState(false);
+  const [isUndoAvailable, setIsUndoAvailable] = useState(false);
+  const [eventsManager, setEventsManager] = useState<EventsManager | null>(
     null,
   );
 
   const updateMouseHandlerStore = (store: MouseHandlerStore) => {
-    setMouseHandlerStore(store);
+    setMouseHandlerStore({ ...store });
   };
 
   const onModeChange = (newMode: EventMode) => {
@@ -71,17 +71,17 @@ export function DrawingAppRoot() {
   };
 
   const onUndoButtonClick = (): void => {
-    const localEventsManager = eventsManager()!;
+    const localEventsManager = eventsManager!;
     undo(localEventsManager);
   };
 
   const onRedoButtonClick = (): void => {
-    const localEventsManager = eventsManager()!;
+    const localEventsManager = eventsManager!;
     redo(localEventsManager);
   };
 
   const onClearButtonClick = (): void => {
-    const localEventsManager = eventsManager()!;
+    const localEventsManager = eventsManager!;
     publishEvents(localEventsManager, [
       buildClearScreenEvent({
         color: Color.White,
@@ -91,71 +91,72 @@ export function DrawingAppRoot() {
   };
 
   const buildAppConfig = (): AppConfig => {
-    const c = color();
+    const c = color;
     const colorCloned = { ...c, rgba: { ...c.rgba } };
-    return drawingEventMode() === "draw"
-      ? { mode: "draw", brushThickness: brushThickness(), color: colorCloned }
+    return drawingEventMode === "draw"
+      ? { mode: "draw", brushThickness: brushThickness, color: colorCloned }
       : { mode: "fill", color: colorCloned };
   };
 
-  const onMouseDown = (e: MouseEvent): void => {
-    const store = mouseHandlerStore();
-    handleMouseDown(store, e, canvasElement);
+  const onMouseDown = (e: React.MouseEvent): void => {
+    const store = mouseHandlerStore;
+    handleMouseDown(store, e.nativeEvent, canvasElement.current!);
     updateMouseHandlerStore(store);
   };
 
-  const onMouseUp = (e: MouseEvent): void => {
-    const store = mouseHandlerStore();
+  const onMouseUp = (e: React.MouseEvent): void => {
+    const store = mouseHandlerStore;
     handleMouseUp(
       store,
-      eventsManager()!,
+      eventsManager!,
       buildAppConfig(),
-      e,
-      canvasElement,
+      e.nativeEvent,
+      canvasElement.current!,
     );
     updateMouseHandlerStore(store);
   };
 
-  const onMouseMove = (e: MouseEvent): void => {
-    const store = mouseHandlerStore();
+  const onMouseMove = (e: React.MouseEvent): void => {
+    const store = mouseHandlerStore;
     handleMouseMove(
       store,
-      eventsManager()!,
+      eventsManager!,
       buildAppConfig(),
-      e,
-      canvasElement,
+      e.nativeEvent,
+      canvasElement.current!,
     );
     updateMouseHandlerStore(store);
   };
 
-  onMount(() => {
-    const cw = new CanvasWrapperImpl(canvasElement, {
-      width: canvasElement.clientWidth,
-      height: canvasElement.clientHeight,
+  useEffect(() => {
+    if (!canvasElement.current) return;
+    const cw = new CanvasWrapperImpl(canvasElement.current, {
+      width: canvasElement.current.clientWidth,
+      height: canvasElement.current.clientHeight,
     });
     setEventsManager(buildEventsManager(cw));
-  });
+  }, []);
 
-  createEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
-      setIsRedoAvailable((eventsManager()?.redoEventsStack.size ?? 0) > 0);
-      setIsUndoAvailable((eventsManager()?.undoEventsStack.size ?? 0) > 0);
+      setIsRedoAvailable(eventsManager?.redoEventsStack.size !== null);
+      setIsUndoAvailable(eventsManager?.undoEventsStack.size !== null);
     }, 16);
-    onCleanup(() => {
+    return () => {
       clearInterval(interval);
-    });
-  });
+    };
+  }, [eventsManager]);
 
   return (
     <div>
       <Toolbar
         colors={colors}
         brushThicknessList={brushThicknessValues}
-        selectedColor={color()}
-        selectedEventMode={drawingEventMode()}
-        selectedBrushThickness={brushThickness()}
-        isRedoAvailable={isRedoAvailable()}
-        isUndoAvailable={isUndoAvailable()}
+        selectedColor={color}
+        selectedEventMode={drawingEventMode}
+        selectedBrushThickness={brushThickness}
+        isRedoAvailable={isRedoAvailable}
+        isUndoAvailable={isUndoAvailable}
         onModeChange={(newMode) => onModeChange(newMode)}
         onColorChange={(newColor) => onColorChange(newColor)}
         onBrushThicknessChange={(newBrushThickness) =>
@@ -167,13 +168,13 @@ export function DrawingAppRoot() {
 
       <canvas
         ref={canvasElement}
-        class={classes(
+        className={classes(
           "mt-4 mx-auto bg-[white]",
           "w-full max-w-3xl aspect-video",
         )}
-        on:mousedown={(e) => onMouseDown(e)}
-        on:mouseup={(e) => onMouseUp(e)}
-        on:mousemove={(e) => onMouseMove(e)}
+        onMouseDown={(e) => onMouseDown(e)}
+        onMouseUp={(e) => onMouseUp(e)}
+        onMouseMove={(e) => onMouseMove(e)}
       >
         <p>Sorry, canvas element is not supported in your browser</p>
       </canvas>

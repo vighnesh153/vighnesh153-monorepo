@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 import { EyeIcon } from "@/icons/EyeIcon.tsx";
 import { SourceCodeIcon } from "@/icons/SourceCodeIcon.tsx";
 import { externalLinks, internalLinks } from "./links.ts";
@@ -6,8 +6,8 @@ import { externalLinks, internalLinks } from "./links.ts";
 interface ProjectLink {
   Icon: (
     props: Pick<
-      JSX.SvgSVGAttributes<SVGElement>,
-      "role" | "width" | "height" | "style"
+      SVGAttributes<SVGElement>,
+      "role" | "width" | "height"
     >,
   ) => JSX.Element;
   href: string;

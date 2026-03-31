@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { Link } from "../Link.tsx";
-import { defaultNavItems, type NavItem } from "@/utils/index.ts";
+import { defaultNavItems, type NavItem } from "@/utils/content/navItems.ts";
 
 interface Props extends HTMLAttributes<"nav"> {
   navItems?: NavItem[];
@@ -23,7 +23,7 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
 </nav>
 
 <script>
-  import { AllNavigationItems } from "@/utils/index.ts";
+  import { AllNavigationItems } from "@/utils/content/navItems.ts";
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
   document

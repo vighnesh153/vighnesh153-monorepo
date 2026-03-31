@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 
 import { sleep } from "@vighnesh153/tools";
 import {
@@ -10,18 +10,19 @@ import {
 import { Button } from "@/components/buttons/index.ts";
 
 export function TreePathFinderRoot() {
-  let canvasElement!: HTMLCanvasElement;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [canvasWrapper, setCanvasWrapper] = createSignal<CanvasWrapper>();
-  const [game, setGame] = createSignal<TreePathFinderGame>();
+  const [canvasWrapper, setCanvasWrapper] = useState<CanvasWrapper>();
+  const [game, setGame] = useState<TreePathFinderGame>();
 
   const frameDelay = 100;
 
-  const newGame = () => {
-    game()?.stop();
+  const newGame = (cw?: CanvasWrapper) => {
+    game?.stop();
 
-    if (canvasWrapper()) {
-      const gameInstance = new TreePathFinderGame(canvasWrapper()!);
+    const wrapper = cw ?? canvasWrapper;
+    if (wrapper) {
+      const gameInstance = new TreePathFinderGame(wrapper);
       const frames = gameInstance.start();
       async function showNextFrame() {
         await sleep(frameDelay);
@@ -34,19 +35,21 @@ export function TreePathFinderRoot() {
     }
   };
 
-  onMount(() => {
-    setCanvasWrapper(new CanvasWrapperImpl(canvasElement));
-    newGame();
-  });
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const cw = new CanvasWrapperImpl(canvasRef.current);
+    setCanvasWrapper(cw);
+    newGame(cw);
+  }, []);
 
   return (
     <>
-      <div class="flex justify-center items-center gap-10">
-        <Button variant="primary" onClick={newGame}>New Game</Button>
+      <div className="flex justify-center items-center gap-10">
+        <Button variant="primary" onClick={() => newGame()}>New Game</Button>
       </div>
       <canvas
-        class="mt-6 mx-auto w-full max-w-3xl aspect-video bg-[#282727]"
-        ref={canvasElement}
+        className="mt-6 mx-auto w-full max-w-3xl aspect-video bg-[#282727]"
+        ref={canvasRef}
       >
         Sorry your browser doesn't support the canvas element
       </canvas>

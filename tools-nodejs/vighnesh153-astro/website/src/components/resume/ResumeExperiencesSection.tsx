@@ -1,6 +1,6 @@
-import { For, type JSX, Show } from "solid-js";
+import { type JSX } from "react";
 
-import { classes } from "@/utils";
+import { classes } from "@/utils/classes.ts";
 
 import {
   ResumeSectionSubtitle,
@@ -10,7 +10,7 @@ import { ResumeRalewayText } from "./ResumeRalewayText";
 
 export function ResumeExperiencesSection(): JSX.Element {
   return (
-    <div class="flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <ResumeSectionTitle text="Experience" />
 
       <Experience
@@ -101,56 +101,47 @@ function Experience(props: {
 }): JSX.Element {
   return (
     <div>
-      <div class="flex gap-2 items-center">
+      <div className="flex gap-2 items-center">
         <ResumeSectionSubtitle text={props.company} />
-        <span class="text-sm">
+        <span className="text-sm">
           |&nbsp;&nbsp;{props.location}
         </span>
       </div>
-      <For each={props.responsibilities}>
-        {(responsibility) => (
-          <div>
-            <For each={responsibility.positions}>
-              {(position) => (
-                <p class="leading-5 whitespace-pre">
-                  <span class="text-sm font-semibold">
-                    <ResumeRalewayText>{position.role}</ResumeRalewayText>
-                  </span>
-                  {" | "}
-                  <span class="text-xs">
-                    {position.duration}
-                  </span>
-                </p>
-              )}
-            </For>
-            <div class="font-light leading-4">
-              <Show
-                when={responsibility.summaries.length > 1}
-                fallback={
-                  <ExperienceSummary text={responsibility.summaries[0] ?? ""} />
-                }
-              >
-                <ul class="ml-4">
-                  <For each={responsibility.summaries}>
-                    {(summary) => (
-                      <li class="list-disc">
-                        <ExperienceSummary text={summary} />
-                      </li>
-                    )}
-                  </For>
-                </ul>
-              </Show>
-            </div>
+      {props.responsibilities.map((responsibility, index) => (
+        <div key={index}>
+          {responsibility.positions.map((position, pIndex) => (
+            <p key={pIndex} className="leading-5 whitespace-pre">
+              <span className="text-sm font-semibold">
+                <ResumeRalewayText>{position.role}</ResumeRalewayText>
+              </span>
+              {" | "}
+              <span className="text-xs">
+                {position.duration}
+              </span>
+            </p>
+          ))}
+          <div className="font-light leading-4">
+            {responsibility.summaries.length > 1 ? (
+              <ul className="ml-4">
+                {responsibility.summaries.map((summary, sIndex) => (
+                  <li key={sIndex} className="list-disc">
+                    <ExperienceSummary text={summary} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ExperienceSummary text={responsibility.summaries[0] ?? ""} />
+            )}
           </div>
-        )}
-      </For>
+        </div>
+      ))}
     </div>
   );
 }
 
-function ExperienceSummary(props: { text: string; class?: string }) {
+function ExperienceSummary(props: { text: string; className?: string }) {
   return (
-    <span class={classes(props.class, "text-xs leading-4 font-light")}>
+    <span className={classes(props.className, "text-xs leading-4 font-light")}>
       {props.text}
     </span>
   );

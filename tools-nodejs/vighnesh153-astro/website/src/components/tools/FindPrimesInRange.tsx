@@ -1,16 +1,16 @@
-import { createSignal, type JSX, Show } from "solid-js";
+import { useState, type JSX } from "react";
 
 import { Button } from "@/components/buttons/index.ts";
 import { isPrime, Queue } from "@vighnesh153/tools";
 
 export function FindPrimesInRange(): JSX.Element {
-  const [minN, setMinN] = createSignal(0);
-  const [maxN, setMaxN] = createSignal(0);
-  const [primesInRange, setPrimesInRange] = createSignal<number[]>([]);
+  const [minN, setMinN] = useState(0);
+  const [maxN, setMaxN] = useState(0);
+  const [primesInRange, setPrimesInRange] = useState<number[]>([]);
 
   const onFind = () => {
-    const start = Math.ceil(minN());
-    const end = Math.floor(maxN());
+    const start = Math.ceil(minN);
+    const end = Math.floor(maxN);
 
     const primes = new Queue<number>();
     for (let i = start; i <= end; i++) {
@@ -23,21 +23,21 @@ export function FindPrimesInRange(): JSX.Element {
 
   return (
     <>
-      <p class=" text-text">
+      <p className=" text-text">
         Find primes in between a range (start and end inclusive)
       </p>
 
-      <div class="mt-4 flex gap-6 items-center">
+      <div className="mt-4 flex gap-6 items-center">
         <input
-          class="p-2 text-secondary"
+          className="p-2 text-secondary"
           type="number"
-          value={minN()}
+          value={minN}
           onChange={(e) => setMinN(+e.target.value)}
         />
         <input
-          class="p-2 text-secondary"
+          className="p-2 text-secondary"
           type="number"
-          value={maxN()}
+          value={maxN}
           onChange={(e) => setMaxN(+e.target.value)}
         />
 
@@ -45,14 +45,16 @@ export function FindPrimesInRange(): JSX.Element {
       </div>
 
       <div>
-        <Show when={primesInRange().length > 0}>
-          <p class="text-text2">
-            Count: <span class="text-accent">{primesInRange().length}</span>
-          </p>
-          <p class="text-text2">
-            Values: <span class="text-text">{primesInRange().join(", ")}</span>
-          </p>
-        </Show>
+        {primesInRange.length > 0 && (
+          <>
+            <p className="text-text2">
+              Count: <span className="text-accent">{primesInRange.length}</span>
+            </p>
+            <p className="text-text2">
+              Values: <span className="text-text">{primesInRange.join(", ")}</span>
+            </p>
+          </>
+        )}
       </div>
     </>
   );

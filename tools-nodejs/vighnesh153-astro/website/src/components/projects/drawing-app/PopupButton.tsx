@@ -1,51 +1,49 @@
-import { children, createSignal, type JSX, Show } from "solid-js";
-import { classes } from "@/utils/index.ts";
+import { useState, type JSX, type ReactNode, type ButtonHTMLAttributes } from "react";
+import { classes } from "@/utils/classes.ts";
 
 type PopupState = "open" | "closed";
 
-export type PopupButton = {
+export type PopupButtonProps = {
   buttonClasses?: string;
-  buttonStyles?: string;
+  buttonStyles?: React.CSSProperties;
   title?: string;
-  popupContent: (togglePopup: (state?: PopupState) => void) => JSX.Element;
-  children?: (togglePopup: (state?: PopupState) => void) => JSX.Element;
-} & Pick<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
+  popupContent: (togglePopup: (state?: PopupState) => void) => ReactNode;
+  children?: (togglePopup: (state?: PopupState) => void) => ReactNode;
+} & Pick<ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
 
-export function PopupButton(props: PopupButton) {
-  const [popupState, setPopupState] = createSignal<PopupState>("closed");
+export function PopupButton(props: PopupButtonProps): JSX.Element {
+  const [popupState, setPopupState] = useState<PopupState>("closed");
 
   const togglePopup = (state?: PopupState) => {
-    setPopupState(
-      state !== undefined ? state : popupState() === "open" ? "closed" : "open",
+    setPopupState((old) =>
+      state !== undefined ? state : old === "open" ? "closed" : "open",
     );
   };
 
-  const safeChildren = children(() => props.children?.(togglePopup));
-
   return (
-    <div class="relative">
-      <div class="flex flex-col">
+    <div className="relative">
+      <div className="flex flex-col">
         <button
           style={props.buttonStyles}
-          class={classes(
+          className={classes(
             `w-11 h-11 grid place-items-center rounded-full border-2 border-secondary`,
             "focus-visible:outline-secondary",
             props.buttonClasses,
           )}
           onClick={() => togglePopup()}
         >
-          {safeChildren()}
+          {props.children?.(togglePopup)}
         </button>
 
-        <div class="mt-1 text-secondary">
+        <div className="mt-1 text-secondary">
           {props.title ?? "Title"}
         </div>
       </div>
-      <Show when={popupState() === "open"}>
-        <div class="absolute top-16 -translate-x-1/2 z-[1000000] w-fit p-6 bg-text shadow-2xl shadow-primary rounded-lg">
+      {popupState === "open" && (
+        <div className="absolute top-16 -translate-x-1/2 z-[1000000] w-fit p-6 bg-text shadow-2xl shadow-primary rounded-lg">
           {props.popupContent(togglePopup)}
         </div>
-      </Show>
+      )}
     </div>
   );
 }

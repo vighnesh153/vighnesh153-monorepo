@@ -1,55 +1,42 @@
 import {
-  children,
   type JSX,
-  mergeProps,
-  type ParentProps,
-  Show,
-} from "solid-js";
-import { classes } from "@/utils/index.ts";
+  type PropsWithChildren,
+} from "react";
+import { classes } from "@/utils/classes.ts";
 
-export type ModeButtonProps =
-  & ParentProps<{
-    isSelected?: boolean;
-    title?: string;
-  }>
-  & Pick<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
+export type ModeButtonProps = PropsWithChildren<{
+  isSelected?: boolean;
+  title?: string;
+  onClick?: () => void;
+}>;
 
-export function ModeButton(
-  incomingProps: ModeButtonProps,
-): JSX.Element {
-  const props = mergeProps<ModeButtonProps[]>(
-    { isSelected: false },
-    incomingProps,
-  );
-  const safeChildren = children(() => props.children);
-
+export function ModeButton({
+  isSelected = false,
+  title,
+  children,
+  onClick,
+}: ModeButtonProps): JSX.Element {
   return (
-    <div class="flex flex-col">
+    <div className="flex flex-col">
       <button
-        class={classes(`p-2 rounded-full focus-visible:outline-secondary`)}
-        classList={{
-          outline: props.isSelected,
-          "outline-offset-4": props.isSelected,
-          "outline-2": props.isSelected,
-          "outline-secondary": props.isSelected,
-          "fill-text": props.isSelected,
-          "bg-secondary": props.isSelected,
-        }}
-        onClick={props.onClick}
+        className={classes(
+          `p-2 rounded-full focus-visible:outline-secondary`,
+          isSelected && "outline outline-offset-4 outline-2 outline-secondary fill-text bg-secondary",
+        )}
+        onClick={onClick}
       >
-        {safeChildren()}
+        {children}
       </button>
-      <Show when={props.title}>
+      {title && (
         <div
-          class="mt-2 text-secondary"
-          classList={{
-            "font-bold": props.isSelected,
-            underline: props.isSelected,
-          }}
+          className={classes(
+            "mt-2 text-secondary",
+            isSelected && "font-bold underline",
+          )}
         >
-          {props.title ?? "Title"}
+          {title}
         </div>
-      </Show>
+      )}
     </div>
   );
 }

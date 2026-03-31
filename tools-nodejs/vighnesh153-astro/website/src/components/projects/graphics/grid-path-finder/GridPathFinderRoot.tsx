@@ -1,4 +1,4 @@
-import { createSignal, For, onMount, Show } from "solid-js";
+import { useEffect, useRef, useState } from "react";
 import { range, sleep } from "@vighnesh153/tools";
 
 import {
@@ -11,49 +11,20 @@ import { Button } from "@/components/buttons/Button.tsx";
 
 export function GridPathFinderRoot() {
   const cellSize = 15;
-  let container!: HTMLDivElement;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const [rows, setRows] = createSignal(0);
-  const [cols, setCols] = createSignal(0);
-  const [mounted, setMounted] = createSignal(false);
-  const [game, setGame] = createSignal<GridPathFinderGame>();
-  const [gameManager, setGameManager] = createSignal<
+  const [rows, setRows] = useState(0);
+  const [cols, setCols] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [game, setGame] = useState<GridPathFinderGame>();
+  const [gameManager, setGameManager] = useState<
     GridPathFinderGameManager
   >();
-  const [cellColors, setCellColors] = createSignal<
+  const [cellColors, setCellColors] = useState<
     Map<number, Map<number, string>>
   >(new Map());
 
-  const createNewGame = () => {
-    const gameInstance = GridPathFinderGame.createNewWithDefaults(
-      rows(),
-      cols(),
-    );
-    setGame(gameInstance);
-    syncCellColors();
-  };
-
-  onMount(() => {
-    const rect = container.getBoundingClientRect();
-    setCols(
-      Math.floor((window.innerWidth - rect.left - rect.right) / cellSize - 1),
-    );
-    setRows(Math.floor((window.innerHeight - rect.top) / cellSize - 10));
-    createNewGame();
-    setGameManager(new GridPathFinderGameManager(game()!));
-    setMounted(true);
-    syncCellColors();
-  });
-
-  const syncCellColors = () => {
-    const rowCount = rows();
-    const colCount = cols();
-    const gameState = game();
-
-    if (!gameState) {
-      return;
-    }
-
+  const syncCellColors = (gameState: GridPathFinderGame, rowCount: number, colCount: number) => {
     const newCellColors: Map<number, Map<number, string>> = new Map();
     for (let row = 0; row < rowCount; row++) {
       newCellColors.set(row, new Map());
@@ -61,19 +32,44 @@ export function GridPathFinderRoot() {
         newCellColors.get(row)?.set(col, getCellColor(gameState, row, col));
       }
     }
-
     setCellColors(newCellColors);
   };
 
+  const createNewGame = (rowCount: number, colCount: number) => {
+    const gameInstance = GridPathFinderGame.createNewWithDefaults(
+      rowCount,
+      colCount,
+    );
+    setGame(gameInstance);
+    syncCellColors(gameInstance, rowCount, colCount);
+    return gameInstance;
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const calculatedCols = Math.floor((window.innerWidth - rect.left - rect.right) / cellSize - 1);
+    const calculatedRows = Math.floor((window.innerHeight - rect.top) / cellSize - 10);
+    
+    setCols(calculatedCols);
+    setRows(calculatedRows);
+    
+    const gameInstance = createNewGame(calculatedRows, calculatedCols);
+    setGameManager(new GridPathFinderGameManager(gameInstance));
+    setMounted(true);
+  }, []);
+
   const solve = () => {
-    const frames = gameManager()?.solve();
+    const frames = gameManager?.solve();
     if (!frames) {
       return;
     }
 
     const showNextFrame = () => {
       const nextFrame = frames.next();
-      syncCellColors();
+      if (game) {
+        syncCellColors(game, rows, cols);
+      }
 
       if (!nextFrame.done) {
         requestAnimationFrame(async () => {
@@ -87,41 +83,37 @@ export function GridPathFinderRoot() {
   };
 
   const randomize = () => {
-    createNewGame();
-    gameManager()?.randomize(game()!);
+    const gameInstance = createNewGame(rows, cols);
+    gameManager?.randomize(gameInstance);
   };
 
   return (
     <>
-      <div class="flex justify-center gap-2">
+      <div className="flex justify-center gap-2">
         <Button variant="primary" onClick={solve}>Solve</Button>
         <Button onClick={randomize}>Randomize</Button>
       </div>
 
       <div
-        class="mt-6 border box-border border-text"
-        ref={container}
-        style={`width: ${cellSize * cols() + 2}px`}
+        className="mt-6 border box-border border-text"
+        ref={containerRef}
+        style={{ width: `${cellSize * cols + 2}px` }}
       >
-        <Show when={mounted() && cols() > 0}>
-          <For each={Array.from(range(0, rows() - 1))}>
-            {(row) => (
-              <div class="w-fit flex justify-center">
-                <For each={Array.from(range(0, cols() - 1))}>
-                  {(col) => (
-                    <div
-                      class="border border-secondary shrink-0 box-border"
-                      style={`width: ${cellSize}px; height: ${cellSize}px; background: ${
-                        cellColors()
-                          .get(row)?.get(col) ?? "white"
-                      }`}
-                    />
-                  )}
-                </For>
-              </div>
-            )}
-          </For>
-        </Show>
+        {mounted && cols > 0 && Array.from(range(0, rows - 1)).map((row) => (
+          <div key={row} className="w-fit flex justify-center">
+            {Array.from(range(0, cols - 1)).map((col) => (
+              <div
+                key={col}
+                className="border border-secondary shrink-0 box-border"
+                style={{
+                  width: `${cellSize}px`,
+                  height: `${cellSize}px`,
+                  background: cellColors.get(row)?.get(col) ?? "white",
+                }}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </>
   );

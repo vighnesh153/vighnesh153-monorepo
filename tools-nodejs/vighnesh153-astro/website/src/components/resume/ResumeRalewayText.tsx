@@ -1,15 +1,15 @@
-import type { JSX } from "solid-js";
+import type { JSX, PropsWithChildren } from "react";
 
-import { classes } from "@/utils";
+import { classes } from "@/utils/classes.ts";
 
 export function ResumeRalewayText(
-  props: { class?: string; children: JSX.Element },
-) {
+  props: PropsWithChildren<{ className?: string }>,
+): JSX.Element {
   return (
     <span
-      class={classes(props.class)}
+      className={classes(props.className)}
       style={{
-        "font-family": "'Raleway Variable', sans-serif",
+        fontFamily: "'Raleway Variable', sans-serif",
       }}
     >
       {props.children}

@@ -1,9 +1,10 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { classes, socialProfiles } from '@/utils/index.ts';
+import type { HTMLAttributes } from "astro/types";
+import { socialProfiles } from "@/utils/content/socialProfiles.ts";
+import { classes } from "@/utils/classes.ts";
 
-export interface Props extends HTMLAttributes<'ul'> {
-  direction: 'horizontal' | 'vertical';
+export interface Props extends HTMLAttributes<"ul"> {
+  direction: "horizontal" | "vertical";
 }
 
 const { direction, class: className, ...props } = Astro.props;
@@ -13,8 +14,8 @@ const { direction, class: className, ...props } = Astro.props;
   class={classes(
     className,
     `flex gap-6 items-center list-none 
-     ${direction == 'horizontal' ? 'flex-row' : 'flex-col'}
-    `
+     ${direction == "horizontal" ? "flex-row" : "flex-col"}
+    `,
   )}
   {...props}
 >

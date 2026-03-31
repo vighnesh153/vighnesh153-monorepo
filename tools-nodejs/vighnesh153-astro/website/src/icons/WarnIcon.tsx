@@ -1,10 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type WarnIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type WarnIconProps = SVGAttributes<SVGSVGElement>;
 
-export function WarnIcon(incomingProps: WarnIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function WarnIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: WarnIconProps): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path d="M12 5.511c.561 0 1.119.354 1.544 1.062l5.912 9.854c.851 1.415.194 2.573-1.456 2.573h-12c-1.65 0-2.307-1.159-1.456-2.573l5.912-9.854c.425-.708.983-1.062 1.544-1.062m0-2c-1.296 0-2.482.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83s1.879 1.772 3.406 1.772h12c1.527 0 2.77-.646 3.406-1.771s.551-2.521-.235-3.83l-5.912-9.854c-.777-1.294-1.963-2.034-3.259-2.034z">

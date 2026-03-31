@@ -1,10 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type InfoIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type InfoIconProps = SVGAttributes<SVGSVGElement>;
 
-export function InfoIcon(incomingProps: InfoIconProps): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function InfoIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: InfoIconProps): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...props}>
       <path d="M7 4.75c0-0.412 0.338-0.75 0.75-0.75h0.5c0.412 0 0.75 0.338 0.75 0.75v0.5c0 0.412-0.338 0.75-0.75 0.75h-0.5c-0.412 0-0.75-0.338-0.75-0.75v-0.5z">

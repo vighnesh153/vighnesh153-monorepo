@@ -15,7 +15,7 @@ export function GoogleSignInButton(): JSX.Element {
       text-secondary
       `)}
     >
-      <GoogleIcon class="inline-block w-5 aspect-square" />
+      <GoogleIcon className="inline-block w-5 aspect-square" />
       Sign in
     </button>
   );

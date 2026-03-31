@@ -1,12 +1,12 @@
-import { type JSX, splitProps } from "solid-js";
+import type { JSX, SVGAttributes } from "react";
 
-export type CircleChevronRightIconProps = JSX.SvgSVGAttributes<SVGSVGElement>;
+export type CircleChevronRightIconProps = SVGAttributes<SVGSVGElement>;
 
-export function CircleChevronRightIcon(
-  incomingProps: CircleChevronRightIconProps,
-): JSX.Element {
-  const [, props] = splitProps(incomingProps, ["viewBox", "xmlns"]);
-
+export function CircleChevronRightIcon({
+  viewBox: _viewBox,
+  xmlns: _xmlns,
+  ...props
+}: CircleChevronRightIconProps): JSX.Element {
   return (
     <svg
       {...props}

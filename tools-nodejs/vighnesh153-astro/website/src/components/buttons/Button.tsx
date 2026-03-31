@@ -19,19 +19,18 @@ export function Button({
     return <SecondaryButton {...props} />;
   }
 
-  return <BaseButton {...props} />;
+  return <button {...props} />;
 }
 
 function PrimaryButton(
   props: ButtonHTMLAttributes<HTMLButtonElement>,
 ): JSX.Element {
   return (
-    <BaseButton
+    <button
       {...props}
       className={classes(
+        getPrimaryButtonClasses(),
         props.className,
-        `bg-primary
-        text-secondary`,
       )}
     />
   );
@@ -41,27 +40,18 @@ function SecondaryButton(
   props: ButtonHTMLAttributes<HTMLButtonElement>,
 ): JSX.Element {
   return (
-    <BaseButton
+    <button
       {...props}
       className={classes(
+        getSecondaryButtonClasses(),
         props.className,
-        `bg-secondary
-        text-text
-        shadow-primary`,
       )}
     />
   );
 }
 
-function BaseButton(
-  props: ButtonHTMLAttributes<HTMLButtonElement>,
-): JSX.Element {
-  return (
-    <button
-      {...props}
-      className={classes(
-        props.className,
-        `
+function getBaseButtonClasses() {
+  return `
           py-[0.75em] px-[2em]
           inline-block
 
@@ -78,8 +68,24 @@ function BaseButton(
 
           hover:shadow-2xl hover:shadow-primary
           focus-visible:shadow-2xl focus-visible:shadow-primary
-      `,
-      )}
-    />
+      `;
+}
+
+export function getPrimaryButtonClasses(): string {
+  return classes(
+    getBaseButtonClasses(),
+    `
+    bg-primary
+    text-secondary`,
+  );
+}
+
+export function getSecondaryButtonClasses(): string {
+  return classes(
+    getBaseButtonClasses(),
+    `
+    bg-secondary
+    text-text
+    shadow-primary`,
   );
 }

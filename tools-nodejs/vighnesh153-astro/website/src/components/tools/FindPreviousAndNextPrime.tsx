@@ -1,16 +1,16 @@
-import { createSignal, type JSX } from "solid-js";
+import { useState, type JSX } from "react";
 
 import { Button } from "@/components/buttons/index.ts";
 import { isPrime, not } from "@vighnesh153/tools";
 
 export function FindPreviousAndNextPrime(): JSX.Element {
-  const [n, setN] = createSignal(0);
-  const [result, setResult] = createSignal("");
+  const [n, setN] = useState(0);
+  const [result, setResult] = useState("");
 
   const onFindPreviousClick = () => {
-    const floor = Math.floor(n());
+    const floor = Math.floor(n);
 
-    let previousN = floor === n() ? floor - 1 : floor;
+    let previousN = floor === n ? floor - 1 : floor;
 
     while (not(isPrime(previousN)) && previousN > 1) {
       previousN--;
@@ -24,9 +24,9 @@ export function FindPreviousAndNextPrime(): JSX.Element {
   };
 
   const onFindNextClick = () => {
-    const ceil = Math.ceil(n());
+    const ceil = Math.ceil(n);
 
-    let nextN = ceil === n() ? ceil + 1 : ceil;
+    let nextN = ceil === n ? ceil + 1 : ceil;
 
     while (not(isPrime(nextN))) {
       nextN++;
@@ -37,24 +37,24 @@ export function FindPreviousAndNextPrime(): JSX.Element {
 
   return (
     <>
-      <p class=" text-text">Find Previous or Next prime</p>
+      <p className=" text-text">Find Previous or Next prime</p>
 
-      <div class="mt-4 flex gap-6 items-center">
+      <div className="mt-4 flex gap-6 items-center">
         <input
-          class="p-2 text-secondary"
+          className="p-2 text-secondary"
           type="number"
-          value={n()}
+          value={n}
           onChange={(e) => setN(+e.target.value)}
         />
 
-        <Button variant="primary" on:click={onFindPreviousClick}>
+        <Button variant="primary" onClick={onFindPreviousClick}>
           Find Previous
         </Button>
-        <Button variant="primary" on:click={onFindNextClick}>Find Next</Button>
+        <Button variant="primary" onClick={onFindNextClick}>Find Next</Button>
       </div>
 
       <div>
-        <p class="text-text2">{result()}</p>
+        <p className="text-text2">{result}</p>
       </div>
     </>
   );

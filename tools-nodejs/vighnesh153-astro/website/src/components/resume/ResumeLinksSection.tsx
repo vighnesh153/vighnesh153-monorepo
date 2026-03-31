@@ -1,15 +1,16 @@
-import type { JSX } from "solid-js";
+import type { JSX } from "react";
 
-import { externalLinks, internalLinks, myPersonalizedEmail } from "@/utils";
+import { externalLinks, internalLinks } from "@/utils/content/links.ts";
+import { myPersonalizedEmail } from "@/utils/content/emails.ts";
 
 import { ResumeSectionTitle } from "./ResumeSectionTitle";
 import { ResumeLink } from "./ResumeLink";
 
-export function ResumeLinksSection(props: { class?: string }): JSX.Element {
+export function ResumeLinksSection(props: { className?: string }): JSX.Element {
   return (
-    <div class={props.class}>
+    <div className={props.className}>
       <ResumeSectionTitle text="Links" />
-      <ul class="mt-1">
+      <ul className="mt-1">
         <ListItem
           title="Email"
           link={`mailto:${myPersonalizedEmail}`}
@@ -44,12 +45,12 @@ function ListItem(
   props: { title: string; linkDisplayText: string; link: string },
 ): JSX.Element {
   return (
-    <li class="text-xs leading-tight">
-      <span class="font-light">
+    <li className="text-xs leading-tight">
+      <span className="font-light">
         {props.title}://
       </span>{" "}
       <ResumeLink
-        class="text-sm"
+        className="text-sm"
         href={props.link}
         text={props.linkDisplayText}
       />
