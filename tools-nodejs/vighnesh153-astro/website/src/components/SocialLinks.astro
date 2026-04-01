@@ -1,13 +1,13 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import { socialProfiles } from "@/utils/content/socialProfiles.ts";
 import { classes } from "@/utils/classes.ts";
 
-export interface Props extends HTMLAttributes<"ul"> {
+export interface Props {
+  className?: string;
   direction: "horizontal" | "vertical";
 }
 
-const { direction, class: className, ...props } = Astro.props;
+const { direction, className } = Astro.props;
 ---
 
 <ul
@@ -17,7 +17,6 @@ const { direction, class: className, ...props } = Astro.props;
      ${direction == "horizontal" ? "flex-row" : "flex-col"}
     `,
   )}
-  {...props}
 >
   {
     socialProfiles.map((socialProfile) => (

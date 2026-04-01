@@ -8,15 +8,22 @@
     "target": "ES6",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "noEmit": true,
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
     "types": [
       "vite/client",
       "@testing-library/jest-dom"
-    ]
+    ],
+    "verbatimModuleSyntax": true
   },
   "include": [
     "./**/*.ts",

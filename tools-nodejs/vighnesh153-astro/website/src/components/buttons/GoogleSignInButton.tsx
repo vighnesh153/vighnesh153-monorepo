@@ -13,6 +13,7 @@ export function GoogleSignInButton(): JSX.Element {
       flex gap-2 items-center
       bg-text
       text-secondary
+      cursor-pointer
       `)}
     >
       <GoogleIcon className="inline-block w-5 aspect-square" />
