@@ -28,12 +28,5 @@ export default defineConfig({
       sourcemap: isDevCommandRunning,
     },
     plugins: [tailwindcss()],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: "modern",
-        },
-      },
-    },
   },
 });

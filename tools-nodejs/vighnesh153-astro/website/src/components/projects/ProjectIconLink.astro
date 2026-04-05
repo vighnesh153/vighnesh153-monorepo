@@ -10,7 +10,7 @@ const { class: className, ...props } = Astro.props;
 <a
   class={classes(
     className,
-    `inline-block [font-size:0] fill-text [&:is(:hover,:focus)]:fill-accent`,
+    `inline-block [font-size:0] fill-text [:hover,:focus]:fill-accent`,
   )}
   {...props}
 >
