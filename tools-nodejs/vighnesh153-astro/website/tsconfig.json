@@ -3,11 +3,13 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "target": "ES6",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "paths": {
       "@/*": [
@@ -19,21 +21,24 @@
         "name": "@astrojs/ts-plugin"
       }
     ],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "esnext",
     "types": [
       "vite/client",
       "@testing-library/jest-dom"
     ],
     "verbatimModuleSyntax": true
   },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
     "./**/*.astro",
     "./.astro/types.d.ts"
   ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ]
 }

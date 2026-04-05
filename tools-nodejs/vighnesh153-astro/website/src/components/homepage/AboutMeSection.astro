@@ -61,7 +61,7 @@ import SectionListItem from "./SectionListItem.astro";
     <ul class="mt-4">
       {
         currentTechnologies.map((technology) => (
-          <SectionListItem class="li mb-2">
+          <SectionListItem className="li mb-2">
             <Link href={technology.link}>{technology.text}</Link>
           </SectionListItem>
         ))

@@ -1,17 +1,15 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import { CircleChevronRightIcon } from "@/icons/CircleChevronRightIcon.tsx";
 import { classes } from "@/utils/classes.ts";
 
-interface Props extends HTMLAttributes<"li"> {}
+interface Props {
+  className?: string;
+}
 
-const { class: className, ...props } = Astro.props;
+const { className } = Astro.props;
 ---
 
-<li
-  {...props}
-  class={classes(className, `relative flex items-start gap-4 md:gap-6`)}
->
+<li class={classes(className, `relative flex items-start gap-4 md:gap-6`)}>
   <span class="fill-accent mt-[0.25em]">
     <CircleChevronRightIcon aria-hidden="true" />
   </span>

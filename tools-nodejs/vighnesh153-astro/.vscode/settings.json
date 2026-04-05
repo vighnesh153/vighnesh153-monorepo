@@ -15,11 +15,10 @@
   "explorer.compactFolders": false,
   "git.autofetch": true,
   "git.openRepositoryInParentFolders": "never",
-  "javascript.updateImportsOnFileMove.enabled": "never",
+  "js/ts.updateImportsOnFileMove.enabled": "never",
   "markdown.preview.fontSize": 20,
   "scm.inputFontSize": 16,
   "terminal.integrated.fontSize": 20,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Atom One Dark",
   "workbench.editorAssociations": {
     "*.class": "default"
