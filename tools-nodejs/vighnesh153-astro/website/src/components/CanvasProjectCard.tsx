@@ -12,7 +12,7 @@ export function CanvasProjectCard(props: CanvasProjectCardProps) {
     <a
       className={classes(
         "group/card",
-        "min-h-[180px] w-full",
+        "min-h-45 w-full",
         "flex flex-col items-center",
         "cursor-pointer rounded-2xl overflow-hidden",
         "bg-bg-dark",

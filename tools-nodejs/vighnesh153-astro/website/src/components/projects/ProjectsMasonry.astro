@@ -13,8 +13,8 @@ import { Link } from "../Link.tsx";
 
     grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-items-center
     gap-12
-    [grid-template-rows:masonry]
-    supports-[grid-template-rows:masonry]:[grid-template-rows:masonry]
+    grid-rows-[masonry]
+    supports-[grid-template-rows:masonry]:grid-rows-[masonry]
     supports-[grid-template-rows:masonry]:items-start
   `)}
 >
@@ -25,7 +25,7 @@ import { Link } from "../Link.tsx";
           <FolderIcon className="fill-accent" role="img" height="2rem" />
 
           <ul class="fill-text flex gap-4">
-            <li class="[&:is(:focus-within,:hover)]:fill-accent">
+            <li class="[:focus-within,:hover]:fill-accent">
               <ProjectIconLink href={links.github.href} title="source code">
                 <links.github.Icon
                   role="img"
@@ -34,7 +34,7 @@ import { Link } from "../Link.tsx";
                 />
               </ProjectIconLink>
             </li>
-            <li class="[&:is(:focus-within,:hover)]:fill-accent">
+            <li class="[:focus-within,:hover]:fill-accent">
               <ProjectIconLink href={links.demo.href} title="demo">
                 <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
               </ProjectIconLink>

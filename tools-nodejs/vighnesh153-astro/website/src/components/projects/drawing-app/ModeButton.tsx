@@ -1,7 +1,4 @@
-import {
-  type JSX,
-  type PropsWithChildren,
-} from "react";
+import { type JSX, type PropsWithChildren } from "react";
 import { classes } from "@/utils/classes.ts";
 
 export type ModeButtonProps = PropsWithChildren<{
@@ -21,7 +18,8 @@ export function ModeButton({
       <button
         className={classes(
           `p-2 rounded-full focus-visible:outline-secondary`,
-          isSelected && "outline outline-offset-4 outline-2 outline-secondary fill-text bg-secondary",
+          isSelected &&
+            "outline-offset-4 outline-2 outline-secondary fill-text bg-secondary",
         )}
         onClick={onClick}
       >

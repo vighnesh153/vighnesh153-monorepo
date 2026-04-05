@@ -18,8 +18,8 @@ import { myPersonalizedEmail } from "@/utils/content/emails.ts";
       [writing-mode:vertical-lr]
       no-underline
       text-text
-      [&:is(:hover,:focus)]:underline
-      [&:is(:hover,:focus)]:text-accent
+      [:hover,:focus]:underline
+      [:hover,:focus]:text-accent
     `)}
   >
     {myPersonalizedEmail}

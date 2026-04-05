@@ -25,7 +25,7 @@ const { direction, className } = Astro.props;
           href={socialProfile.link}
           title={socialProfile.title}
           class={classes(`
-            text-text fill-text [&:is(:hover,:focus)]:fill-accent inline-block
+            text-text fill-text [:hover,:focus]:fill-accent inline-block
             [font-size:0]
           `)}
         >

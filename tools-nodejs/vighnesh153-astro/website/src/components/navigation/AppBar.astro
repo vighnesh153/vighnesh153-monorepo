@@ -71,7 +71,7 @@ const { navItems } = Astro.props;
   {/* Vertical navigation */}
   <NavigationItems
     class={classes(`
-    fixed hidden w-[100dvw] h-[100dvh] left-0 top-0
+    fixed hidden w-dvw h-dvh left-0 top-0
     flex-col justify-center items-center gap-12
     bg-background z-(--z-drawer)
     peer-checked:flex
@@ -86,9 +86,9 @@ const { navItems } = Astro.props;
       class={classes(`
         p-0
         flex
-        bg-[transparent] border-0 text-text
+        bg-transparent border-0 text-text
         cursor-pointer
-        [&:is(:focus-visible,:hover)]:text-accent
+        [:focus-visible,:hover]:text-accent
         lg:hidden
       `)}
       id="close-menu"
