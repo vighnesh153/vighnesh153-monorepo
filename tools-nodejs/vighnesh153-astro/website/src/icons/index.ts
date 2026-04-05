@@ -11,7 +11,7 @@ export * from "./FillDripIcon.tsx";
 export * from "./FolderIcon.tsx";
 export * from "./GithubIcon.tsx";
 export * from "./GoogleIcon.tsx";
-export * from "./HamburgerIcon.astro";
+export * from "./HamburgerIcon.tsx";
 export * from "./InfoIcon.tsx";
 export * from "./LinkedInIcon.tsx";
 export * from "./PenIcon.tsx";
