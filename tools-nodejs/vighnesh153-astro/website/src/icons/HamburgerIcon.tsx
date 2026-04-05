@@ -12,9 +12,9 @@ export function HamburgerIcon({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 140 100"
       stroke="currentColor"
-      stroke-width="15"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="15"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <path className="top" d="M20,20 L120,20"></path>

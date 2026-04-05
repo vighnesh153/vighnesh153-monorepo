@@ -103,10 +103,14 @@ const { navItems } = Astro.props;
 <script>
   import { debounce } from "@vighnesh153/tools";
 
-  const checkbox = document.querySelector("#side-navigation-open");
+  const checkbox = document.querySelector<HTMLInputElement>(
+    "#side-navigation-open",
+  );
   const header = document.querySelector("#header");
-  const hamburgerButton = document.querySelector("#hamburger-menu");
-  const closeMenuButton = document.querySelector("#close-menu");
+  const hamburgerButton =
+    document.querySelector<HTMLButtonElement>("#hamburger-menu");
+  const closeMenuButton =
+    document.querySelector<HTMLButtonElement>("#close-menu");
   const verticalNav = document.querySelector("#vertical-nav");
 
   const boxShadowScrollYOffset = 70;
@@ -134,10 +138,8 @@ const { navItems } = Astro.props;
     header?.classList.toggle("show-header", true);
   });
 
-  // @ts-ignore
-  const toggleCheckbox = (value) => {
+  const toggleCheckbox = (value?: boolean) => {
     if (checkbox) {
-      // @ts-ignore
       checkbox.checked = value === undefined ? !checkbox.checked : value;
     }
   };
@@ -145,14 +147,12 @@ const { navItems } = Astro.props;
   const closeMenu = (transferFocusToHamburger = true) => {
     toggleCheckbox(false);
     if (transferFocusToHamburger) {
-      // @ts-ignore
       hamburgerButton?.focus();
     }
   };
 
   hamburgerButton?.addEventListener("click", () => {
     toggleCheckbox(true);
-    // @ts-ignore
     closeMenuButton?.focus();
   });
 
