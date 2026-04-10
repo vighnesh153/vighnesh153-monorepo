@@ -58,7 +58,7 @@ const title = `Vighnesh Raut | ${project.title}`;
 
   const heading = document.querySelector("h1")?.textContent;
   logAnalyticsEvent("visit_project_canvas", {
-    canvasProjectTitle: heading,
+    title: heading,
   });
 
   const canvasProjSrcCodeLink = document.getElementById(
@@ -67,7 +67,7 @@ const title = `Vighnesh Raut | ${project.title}`;
   if (canvasProjSrcCodeLink) {
     canvasProjSrcCodeLink.addEventListener("click", () => {
       logAnalyticsEvent("visit_source_code", {
-        project: "graphics projects",
+        title: "graphics projects",
       });
     });
   }

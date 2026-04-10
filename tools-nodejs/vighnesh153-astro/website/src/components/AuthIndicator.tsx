@@ -17,7 +17,7 @@ export function AuthIndicator() {
   const $loggedInUser = useStore(loggedInUser);
 
   return (
-    <div className="w-[117px]">
+    <div className="w-29.25">
       {$loggedInUser !== null
         ? (
           <Menu>

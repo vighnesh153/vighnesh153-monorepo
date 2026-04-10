@@ -47,6 +47,6 @@ const date = new Date(post?.data.creationDate ?? Date.now()).toLocaleDateString(
   const heading = document.querySelector("h1")?.textContent;
 
   logAnalyticsEvent("visit_blog", {
-    blogTitle: heading,
+    title: heading,
   });
 </script>

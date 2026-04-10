@@ -32,12 +32,12 @@ const description = `A in-browser transpiler and bundler for React.js and Typesc
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
   logAnalyticsEvent("visit_project", {
-    projectTitle: "tsx playground",
+    title: "tsx playground",
   });
 
   document.getElementById("githubLink")?.addEventListener("click", () => {
     logAnalyticsEvent("visit_source_code", {
-      project: "tsx playground",
+      title: "tsx playground",
     });
   });
 </script>

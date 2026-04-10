@@ -33,10 +33,10 @@ import { internalLinks } from "@/utils/content/links";
   import { removeTrailingSlashFromUrlPathName } from "@/utils/removeTrailingSlashFromUrlPathName.ts";
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
-  logAnalyticsEvent("visit_404");
-
   const rawUrl = window.location.toString();
   const filteredUrl = removeTrailingSlashFromUrlPathName(rawUrl);
+
+  logAnalyticsEvent("visit_404", { url: rawUrl });
 
   if (filteredUrl !== rawUrl) {
     window.location.replace(filteredUrl);

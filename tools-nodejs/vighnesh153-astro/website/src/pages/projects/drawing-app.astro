@@ -39,12 +39,12 @@ const description = `A drawing app made with ❤️ by Vighnesh Raut`;
   import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
 
   logAnalyticsEvent("visit_project", {
-    projectTitle: "drawing app",
+    title: "drawing app",
   });
 
   document.getElementById("githubLink")?.addEventListener("click", () => {
     logAnalyticsEvent("visit_source_code", {
-      project: "drawing app",
+      title: "drawing app",
     });
   });
 </script>

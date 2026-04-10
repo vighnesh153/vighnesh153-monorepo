@@ -1,7 +1,7 @@
 import { type FirebaseApp, initializeApp } from "firebase/app";
 import {
   type Analytics,
-  initializeAnalytics,
+  getAnalytics as getFirebaseAnalytics,
   logEvent,
 } from "firebase/analytics";
 import {
@@ -74,7 +74,7 @@ async function getApp(): Promise<FirebaseApp> {
   return app;
 }
 async function getAnalytics(): Promise<Analytics> {
-  if (!analytics) analytics = initializeAnalytics(await getApp());
+  if (!analytics) analytics = getFirebaseAnalytics(await getApp());
   return analytics;
 }
 export async function getFirestore(): Promise<Firestore> {
@@ -136,7 +136,10 @@ export async function invokeFirebaseFunction(
 // Analytics event logger
 export async function logAnalyticsEvent(
   eventName: AnalyticsEventName,
-  extras: Record<string, unknown> | null = null,
+  extras: {
+    title?: string;
+    url?: string;
+  } | null = null,
 ): Promise<void> {
   if (import.meta.env.DEV) {
     // no-op for local development

@@ -7,7 +7,7 @@ import { Link } from "@/components/Link.tsx";
 export function SplMainMenu(): JSX.Element {
   const onClickSrcCodeLink = () => {
     logAnalyticsEvent("visit_source_code", {
-      project: "graphics projects",
+      title: "graphics projects",
     });
   };
 
@@ -36,7 +36,7 @@ export function SplMainMenu(): JSX.Element {
           Source code
         </Link>
       </div>
-      <div className="w-[1px] h-80 bg-text4" />
+      <div className="w-px h-80 bg-text4" />
       <div className="flex flex-col gap-4">
         <h2 className="text-lg text-center text-accent">Starter templates</h2>
         {SplExamples.map((example) => (
