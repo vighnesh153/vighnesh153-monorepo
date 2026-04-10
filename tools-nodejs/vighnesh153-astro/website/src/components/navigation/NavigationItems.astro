@@ -24,7 +24,7 @@ const { navItems = defaultNavItems, ...props } = Astro.props;
 
 <script>
   import { AllNavigationItems } from "@/utils/content/navItems.ts";
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   document
     .getElementById(AllNavigationItems.resume.id)

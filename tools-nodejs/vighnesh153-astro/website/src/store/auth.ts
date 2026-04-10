@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { atom, computed, type ReadableAtom } from "nanostores";
 
 import { UserInfo } from "@/models/user_info.ts";
-import { getAuth } from "@/utils/firebase_config.ts";
+import { getOrCreateAuth } from "@/utils/auth.ts";
 import { getUserById } from "./users.ts";
 
 const mutableLoggedInUser = atom<UserInfo | null>(null);
@@ -13,7 +13,7 @@ export const loggedInUserId = computed(
 );
 
 export async function initializeUserInStore() {
-  onAuthStateChanged(await getAuth(), async (user) => {
+  onAuthStateChanged(await getOrCreateAuth(), async (user) => {
     if (user === null) {
       mutableLoggedInUser.set(null);
     } else {

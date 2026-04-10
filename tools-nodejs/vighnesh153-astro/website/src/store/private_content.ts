@@ -2,7 +2,7 @@ import { shuffle } from "@std/random";
 import ls from "localstorage-slim";
 import { not } from "@vighnesh153/tools";
 
-import { invokeFirebaseFunction } from "@/utils/firebase_config";
+import { invokeFirebaseFunction } from "@/utils/functions.ts";
 
 import { PrivateContent } from "@/models/private_content";
 import { hasPermission } from "../../../permissions/mod.ts";

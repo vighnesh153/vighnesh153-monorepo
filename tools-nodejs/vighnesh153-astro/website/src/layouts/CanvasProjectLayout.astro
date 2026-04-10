@@ -54,7 +54,7 @@ const title = `Vighnesh Raut | ${project.title}`;
 </ContentLayout>
 
 <script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   const heading = document.querySelector("h1")?.textContent;
   logAnalyticsEvent("visit_project_canvas", {

@@ -76,9 +76,9 @@ fun formatXml(
 
 <!-- <script>
   import { getDownloadURL, ref as storageRef } from "firebase/storage";
-  import { getFirebaseStorage } from "@/utils/firebase_config";
+  import { getOrCreateFirebaseStorage } from "@/utils/firebase_config";
 
-  const storage = await getFirebaseStorage();
+  const storage = await getOrCreateFirebaseStorage();
 
   async function logUrl(type: string, p: string) {
     try {

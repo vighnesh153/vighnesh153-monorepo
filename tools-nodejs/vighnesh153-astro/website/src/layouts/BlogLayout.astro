@@ -42,7 +42,7 @@ const date = new Date(post?.data.creationDate ?? Date.now()).toLocaleDateString(
 </ContentLayout>
 
 <script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   const heading = document.querySelector("h1")?.textContent;
 

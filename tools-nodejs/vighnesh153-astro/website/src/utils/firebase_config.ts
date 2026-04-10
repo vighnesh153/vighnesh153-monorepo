@@ -2,13 +2,7 @@ import { type FirebaseApp, initializeApp } from "firebase/app";
 import {
   type Analytics,
   getAnalytics as getFirebaseAnalytics,
-  logEvent,
 } from "firebase/analytics";
-import {
-  type Auth,
-  getAuth as getFirebaseAuth,
-  GoogleAuthProvider,
-} from "firebase/auth";
 import {
   connectFirestoreEmulator,
   type Firestore,
@@ -28,7 +22,6 @@ import {
   getStorage,
 } from "firebase/storage";
 
-import type { AnalyticsEventName } from "./analytics_event_name.ts";
 import { getClientStage } from "./stage.ts";
 import { memoize } from "@vighnesh153/tools";
 import { functionsRegion } from "../../../constants.ts";
@@ -63,23 +56,25 @@ const getFirebaseConfig = memoize(async function () {
   };
 });
 
-// Initialize Firebase
+// Initialize Firebase App
 let app: FirebaseApp;
-let analytics: Analytics;
-let firestore: Firestore;
-let storage: FirebaseStorage;
-let functions: FirebaseFunctions;
-async function getApp(): Promise<FirebaseApp> {
+export async function getOrCreateApp(): Promise<FirebaseApp> {
   if (!app) app = initializeApp(await getFirebaseConfig());
   return app;
 }
-async function getAnalytics(): Promise<Analytics> {
-  if (!analytics) analytics = getFirebaseAnalytics(await getApp());
+
+// Initialize Firebase Analytics
+let analytics: Analytics;
+export async function getOrCreateAnalytics(): Promise<Analytics> {
+  if (!analytics) analytics = getFirebaseAnalytics(await getOrCreateApp());
   return analytics;
 }
+
+// Initialize Firebase Firestore
+let firestore: Firestore;
 export async function getFirestore(): Promise<Firestore> {
   if (!firestore) {
-    firestore = initializeFirestore(await getApp(), {
+    firestore = initializeFirestore(await getOrCreateApp(), {
       localCache: persistentLocalCache({
         tabManager: persistentMultipleTabManager(),
       }),
@@ -96,9 +91,12 @@ export async function getFirestore(): Promise<Firestore> {
   }
   return firestore;
 }
-export async function getFirebaseStorage(): Promise<FirebaseStorage> {
+
+// Initialize Firebase Storage
+let storage: FirebaseStorage;
+export async function getOrCreateFirebaseStorage(): Promise<FirebaseStorage> {
   if (!storage) {
-    storage = getStorage(await getApp());
+    storage = getStorage(await getOrCreateApp());
     if (import.meta.env.DEV) {
       console.log("Picking emulated storage");
       const emulatorsConf = await getEmulatorsConfig();
@@ -107,9 +105,14 @@ export async function getFirebaseStorage(): Promise<FirebaseStorage> {
   }
   return storage;
 }
-export async function getFirebaseFunctions(): Promise<FirebaseFunctions> {
+
+// Initialize Firebase Functions
+let functions: FirebaseFunctions;
+export async function getOrCreateFirebaseFunctions(): Promise<
+  FirebaseFunctions
+> {
   if (!functions) {
-    functions = getFunctions(await getApp());
+    functions = getFunctions(await getOrCreateApp());
     if (import.meta.env.DEV) {
       console.log("Picking emulated functions");
       const emulatorsConf = await getEmulatorsConfig();
@@ -122,56 +125,4 @@ export async function getFirebaseFunctions(): Promise<FirebaseFunctions> {
   }
   functions.region = functionsRegion;
   return functions;
-}
-export async function invokeFirebaseFunction(
-  functionName: string,
-  data: unknown = undefined,
-): Promise<unknown> {
-  if (data === undefined) {
-    return httpsCallable(await getFirebaseFunctions(), functionName)();
-  }
-  return httpsCallable(await getFirebaseFunctions(), functionName)(data);
-}
-
-// Analytics event logger
-export async function logAnalyticsEvent(
-  eventName: AnalyticsEventName,
-  extras: {
-    title?: string;
-    url?: string;
-  } | null = null,
-): Promise<void> {
-  if (import.meta.env.DEV) {
-    // no-op for local development
-    return;
-  }
-  if (extras == null) {
-    logEvent(await getAnalytics(), eventName);
-  } else {
-    logEvent(await getAnalytics(), eventName, extras);
-  }
-}
-
-// Google auth provider
-let googleAuthProvider: GoogleAuthProvider = new GoogleAuthProvider();
-export function getGoogleAuthProvider(): GoogleAuthProvider {
-  if (!googleAuthProvider) {
-    googleAuthProvider = new GoogleAuthProvider();
-    googleAuthProvider.addScope(
-      "https://www.googleapis.com/auth/userinfo.profile",
-    );
-    googleAuthProvider.addScope(
-      "https://www.googleapis.com/auth/userinfo.email",
-    );
-  }
-  return googleAuthProvider;
-}
-
-let auth: Auth;
-export async function getAuth(): Promise<Auth> {
-  if (!auth) {
-    auth = getFirebaseAuth(await getApp());
-    auth.useDeviceLanguage();
-  }
-  return auth;
 }

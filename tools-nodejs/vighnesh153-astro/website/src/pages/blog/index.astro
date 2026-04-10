@@ -16,7 +16,7 @@ const frontmatterList = posts
     new Date(a.creationDate ?? Date.now()) >
     new Date(b.creationDate ?? Date.now())
       ? -1
-      : 1
+      : 1,
   );
 ---
 
@@ -35,7 +35,7 @@ const frontmatterList = posts
     {
       frontmatterList.map((frontmatter) => {
         const date = new Date(
-          frontmatter.creationDate ?? Date.now()
+          frontmatter.creationDate ?? Date.now(),
         ).toLocaleDateString("en-us", {
           year: "numeric",
           month: "long",
@@ -61,7 +61,7 @@ const frontmatterList = posts
 </ContentLayout>
 
 <script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   logAnalyticsEvent("visit_blogHomepage");
 </script>

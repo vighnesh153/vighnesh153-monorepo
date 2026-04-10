@@ -16,7 +16,7 @@ import ContactMeSection from "@/components/homepage/ContactMeSection.astro";
 </ContentLayout>
 
 <script>
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   logAnalyticsEvent("visit_homepage");
 </script>

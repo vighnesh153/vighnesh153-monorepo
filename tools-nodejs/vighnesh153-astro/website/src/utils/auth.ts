@@ -1,17 +1,50 @@
-import { signInWithPopup, signOut } from "firebase/auth";
-
+import {
+  type Auth,
+  getAuth as getFirebaseAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { createSnackbar } from "@/store/snackbar.ts";
 
-import {
-  getAuth,
-  getGoogleAuthProvider,
-  logAnalyticsEvent,
-} from "./firebase_config.ts";
+import { getOrCreateApp } from "./firebase_config.ts";
+import { associateUserWithAnalytics, logAnalyticsEvent } from "./analytics.ts";
 
+let auth: Auth;
+export async function getOrCreateAuth(): Promise<Auth> {
+  if (!auth) {
+    auth = getFirebaseAuth(await getOrCreateApp());
+    auth.useDeviceLanguage();
+  }
+  return auth;
+}
+
+// Google auth provider
+let googleAuthProvider: GoogleAuthProvider = new GoogleAuthProvider();
+function getOrCreateGoogleAuthProvider(): GoogleAuthProvider {
+  if (!googleAuthProvider) {
+    googleAuthProvider = new GoogleAuthProvider();
+    googleAuthProvider.addScope(
+      "https://www.googleapis.com/auth/userinfo.profile",
+    );
+    googleAuthProvider.addScope(
+      "https://www.googleapis.com/auth/userinfo.email",
+    );
+  }
+  return googleAuthProvider;
+}
+
+// Login with Google
 export async function initiateLoginWithGoogle() {
   logAnalyticsEvent("login_initiate");
-  return signInWithPopup(await getAuth(), getGoogleAuthProvider()).then((res) =>
-    res.user
+  return signInWithPopup(
+    await getOrCreateAuth(),
+    getOrCreateGoogleAuthProvider(),
+  ).then(
+    (res) => {
+      associateUserWithAnalytics(res.user.email);
+      return res.user;
+    },
   ).catch((e) => {
     createSnackbar({
       type: "error",
@@ -23,14 +56,16 @@ export async function initiateLoginWithGoogle() {
   });
 }
 
+// Logout
 export async function initiateLogout() {
   logAnalyticsEvent("logout_initiate");
-  await signOut(await getAuth()).then(() =>
+  await signOut(await getOrCreateAuth()).then(() => {
+    associateUserWithAnalytics(null);
     createSnackbar({
       type: "success",
       message: "Successfully signed out!",
-    })
-  ).catch((e) => {
+    });
+  }).catch((e) => {
     createSnackbar({
       type: "error",
       message: "Failed to sign out.",

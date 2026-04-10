@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { SplExamples } from "@vighnesh153/spl";
 import { externalLinks, internalLinks } from "@/utils/content/links.ts";
-import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+import { logAnalyticsEvent } from "@/utils/analytics.ts";
 import { Link } from "@/components/Link.tsx";
 
 export function SplMainMenu(): JSX.Element {

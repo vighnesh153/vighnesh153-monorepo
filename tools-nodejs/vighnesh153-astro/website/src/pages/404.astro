@@ -31,7 +31,7 @@ import { internalLinks } from "@/utils/content/links";
 
 <script>
   import { removeTrailingSlashFromUrlPathName } from "@/utils/removeTrailingSlashFromUrlPathName.ts";
-  import { logAnalyticsEvent } from "@/utils/firebase_config.ts";
+  import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   const rawUrl = window.location.toString();
   const filteredUrl = removeTrailingSlashFromUrlPathName(rawUrl);
