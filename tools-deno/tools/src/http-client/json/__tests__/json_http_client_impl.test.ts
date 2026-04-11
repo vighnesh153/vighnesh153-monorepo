@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, test } from "@std/testing/bdd";
 import { assertEquals, assertThrows } from "@std/assert";
-import type { Server } from "npm:http";
+import type { Server } from "http";
 
 import { milliseconds } from "@/utils/mod.ts";
 

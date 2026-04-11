@@ -1,5 +1,5 @@
 // @deno-types="npm:@types/express@5.0.0"
-import express from "npm:express@5.0.1";
+import express from "express";
 
 import { milliseconds, sleep } from "@/utils/mod.ts";
 
