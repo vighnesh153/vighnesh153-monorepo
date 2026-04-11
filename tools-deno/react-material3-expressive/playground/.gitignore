@@ -1,0 +1,6 @@
+logs
+npm-debug.log*
+
+.vite
+node_modules
+dist

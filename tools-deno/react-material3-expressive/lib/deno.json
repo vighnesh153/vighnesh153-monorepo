@@ -1,0 +1,15 @@
+{
+  "name": "@vighnesh153/react-material3-expressive",
+  "version": "0.1.0",
+  "exports": "./src/mod.tsx",
+  "license": "MIT",
+  "imports": {
+    "react": "npm:react@19.2.5",
+    "@types/react": "npm:@types/react@19.2.14"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react"
+  }
+}
