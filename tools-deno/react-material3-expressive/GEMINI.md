@@ -4,15 +4,7 @@ This project is a modern Material 3 Expressive UI component library built for
 **React.js** and **TypeScript**, built using the **Deno** runtime with the
 **Vite** build tool.
 
-## Introductions
-
-- **Styling:** Use inline styles for all styling. Do not create custom CSS files
-  or rely on any CSS classes. Every component should be styled using theme. Only
-  use custom style objects for component specific styles that is not part of the
-  theme.
-- **Testing:** All new classes, components, etc. must include unit tests.
-- **Tone:** Be concise. Don't explain basic Javascript/Typescript/React.js
-  concepts.
+## Material 3 Expressive
 
 ## Project Overview
 
@@ -109,8 +101,12 @@ of the following technologies:
   - Avoid using `any`. Use `unknown` or generics if dynamic typing is absolutely
     necessary.
 
----
+## Rules
 
-**Note to Gemini:** Whenever I ask you to create a new component, please provide
-the component code for `/lib`, its corresponding TypeScript interface, and a
-sample usage file to be placed in `/playground` to test it.
+- **Styling:** Use inline styles for all styling. Do not create custom CSS files
+  or rely on any CSS classes. Every component should be styled using theme. Only
+  use custom style objects for component specific styles that is not part of the
+  theme.
+- **Testing:** All new classes, components, etc. must include unit tests.
+- **Tone:** Be concise. Don't explain basic Javascript/Typescript/React.js
+  concepts.
