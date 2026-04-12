@@ -6,6 +6,50 @@ This project is a modern Material 3 Expressive UI component library built for
 
 ## Material 3 Expressive
 
+Material Design 3 (M3) is the latest version of Google's open-source design
+system. It introduces a modernized, expressive, and personalizable visual
+language known as `Material You`. This library strictly adheres to the M3
+guidelines to provide a cohesive set of React components.
+
+### Core M3 Foundations
+
+- **[Color & Dynamic Color](https://m3.material.io/styles/color/overview):**
+  Uses tonal palettes to generate a cohesive set of color roles. Key roles
+  include `Primary`, `Secondary`, `Tertiary`, `Error`, `Background`, and
+  `Surface`. The system supports dynamic color extraction from user wallpapers
+  on supported devices.
+- **[Typography](https://m3.material.io/styles/typography/overview):** A
+  simplified, robust type scale consisting of five categories: `Display`,
+  `Headline`, `Title`, `Label`, and `Body`. Each category has `Large`, `Medium`,
+  and `Small` variations.
+- **[Elevation](https://m3.material.io/styles/elevation/overview):** Deprecates
+  relying purely on shadows. M3 introduces **tonal elevation** (adding a tint of
+  the primary color to the surface) combined with **shadow elevation** to
+  indicate depth and hierarchy (Levels 0 through 5).
+- **[Shape](https://m3.material.io/styles/shape/overview):** A standardized
+  shape scale focusing on rounded corners to direct attention and convey
+  hierarchy: `Extra Small`, `Small`, `Medium`, `Large`, `Extra Large`, and
+  `Full`.
+- **[Motion](https://m3.material.io/styles/motion/overview):** Expressive
+  transitions using predefined easing curves (Emphasized, Standard, Decelerated)
+  and durations (`Short`, `Medium`, `Long`, `Extra Long`) to make the UI feel
+  alive and responsive.
+- **[State Layers](https://m3.material.io/foundations/interaction/states):**
+  Visual indicators for interaction states (`Hover`, `Focus`, `Pressed`,
+  `Dragged`). They are implemented as semi-transparent overlays on top of the
+  base container color.
+- **[Components](https://m3.material.io/components):** Modernized structures for
+  `Buttons`, `Cards`, `Dialogs`, `Navigation`, and more, updated to consume M3
+  design tokens (`color`, `typography`, `shape`, etc.).
+
+### Implementation Strategy for this Project
+
+- **Inline Styles Only:** All M3 tokens (`colors`, `typography sizing`,
+  `elevation shadows/tints`) will be implemented as plain JavaScript objects and
+  consumed via inline `style` props. No CSS files will be used in components.
+- **Theme Object:** A centralized theme object will store all M3 tokens to
+  ensure consistency and allow for potential dynamic theming.
+
 ## Project Overview
 
 The repository is structured into three main sibling directories to separate the
@@ -100,13 +144,3 @@ of the following technologies:
   - Export reusable types from `/lib` so consumers of the library can use them.
   - Avoid using `any`. Use `unknown` or generics if dynamic typing is absolutely
     necessary.
-
-## Rules
-
-- **Styling:** Use inline styles for all styling. Do not create custom CSS files
-  or rely on any CSS classes. Every component should be styled using theme. Only
-  use custom style objects for component specific styles that is not part of the
-  theme.
-- **Testing:** All new classes, components, etc. must include unit tests.
-- **Tone:** Be concise. Don't explain basic Javascript/Typescript/React.js
-  concepts.
