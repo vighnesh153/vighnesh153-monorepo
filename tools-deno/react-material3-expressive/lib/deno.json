@@ -1,9 +1,13 @@
 {
   "name": "@vighnesh153/react-material3-expressive",
   "version": "0.1.0",
-  "exports": "./src/mod.tsx",
+  "exports": {
+    ".": "./src/mod.tsx",
+    "./colors": "./src/colors/mod.ts"
+  },
   "license": "MIT",
   "imports": {
+    "@material/material-color-utilities": "npm:@material/material-color-utilities@^0.4.0",
     "react": "npm:react@19.2.5",
     "@types/react": "npm:@types/react@19.2.14"
   },
