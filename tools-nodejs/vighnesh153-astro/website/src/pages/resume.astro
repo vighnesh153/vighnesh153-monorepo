@@ -73,44 +73,50 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
     font-family: "Noto Serif Lao Variable", serif;
   }
 
-  @media not print {
+  @media screen {
     #resume-container {
       position: relative;
-
       width: calc(var(--a4w) * var(--scale));
       height: calc(var(--a4h) * var(--scale));
-
-      @media (width >= 40rem) {
-        width: calc(var(--a4w) * var(--scale-sm));
-        height: calc(var(--a4h) * var(--scale-sm));
-      }
-
-      @media (width >= 48rem) {
-        width: calc(var(--a4w) * var(--scale-md));
-        height: calc(var(--a4h) * var(--scale-md));
-      }
-
-      @media (width >= 64rem) {
-        width: calc(var(--a4w) * var(--scale-lg));
-        height: calc(var(--a4h) * var(--scale-lg));
-      }
     }
 
     #resume-holder {
       position: absolute;
-
       transform-origin: top left;
-
       scale: var(--scale);
-      @media (width >= 40rem) {
-        scale: var(--scale-sm);
-      }
-      @media (width >= 48rem) {
-        scale: var(--scale-md);
-      }
-      @media (width >= 64rem) {
-        scale: var(--scale-lg);
-      }
+    }
+  }
+
+  @media screen and (width >= 40rem) {
+    #resume-container {
+      width: calc(var(--a4w) * var(--scale-sm));
+      height: calc(var(--a4h) * var(--scale-sm));
+    }
+
+    #resume-holder {
+      scale: var(--scale-sm);
+    }
+  }
+
+  @media screen and (width >= 48rem) {
+    #resume-container {
+      width: calc(var(--a4w) * var(--scale-md));
+      height: calc(var(--a4h) * var(--scale-md));
+    }
+
+    #resume-holder {
+      scale: var(--scale-md);
+    }
+  }
+
+  @media screen and (width >= 64rem) {
+    #resume-container {
+      width: calc(var(--a4w) * var(--scale-lg));
+      height: calc(var(--a4h) * var(--scale-lg));
+    }
+
+    #resume-holder {
+      scale: var(--scale-lg);
     }
   }
 
