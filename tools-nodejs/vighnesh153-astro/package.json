@@ -10,8 +10,8 @@
     "deploy:functions": "npx firebase deploy --only functions --project vighnesh153-app"
   },
   "dependencies": {
-    "firebase-functions": "^7.2.3",
-    "firebase-tools": "^15.13.0"
+    "firebase-functions": "^7.2.5",
+    "firebase-tools": "^15.16.0"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
