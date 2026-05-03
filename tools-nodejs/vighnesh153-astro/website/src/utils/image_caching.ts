@@ -3,6 +3,10 @@ import localforage from "localforage";
 
 const defaultCacheTtl = milliseconds({ years: 1 });
 
+// Delete old instances
+localforage.dropInstance({ name: "vighnesh153-images" });
+localforage.dropInstance({ name: "vighnesh153-images-ttl" });
+
 // Single store for both the data and the TTL metadata
 const imageStore = localforage.createInstance({
   name: "vighnesh153-images-cache",
