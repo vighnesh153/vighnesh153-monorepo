@@ -3,16 +3,20 @@ import localforage from "localforage";
 
 const defaultCacheTtl = milliseconds({ years: 1 });
 
+// Single store for both the data and the TTL metadata
 const imageStore = localforage.createInstance({
-  name: "vighnesh153-images",
-});
-
-const imageTtlStore = localforage.createInstance({
-  name: "vighnesh153-images-ttl",
+  name: "vighnesh153-images-cache",
 });
 
 export type CacheImageOptions = {
   ttlMillis?: number;
+};
+
+// Define the shape of our stored data
+type CachedRecord = {
+  cacheKey: string;
+  blob: Blob;
+  expiry: number;
 };
 
 export async function cacheImage(
@@ -20,67 +24,75 @@ export async function cacheImage(
   cacheKey: string,
   { ttlMillis = defaultCacheTtl }: CacheImageOptions = {},
 ): Promise<string> {
+  // Defensive check in case navigator.locks is unsupported in the environment
+  if (!navigator.locks) {
+    return fetchAndCache(networkUri, cacheKey, ttlMillis);
+  }
+
   return navigator.locks.request(`images-${cacheKey}`, async () => {
-    const existingImage = await getImageObjUrl(cacheKey);
-    if (existingImage !== null) {
-      return existingImage;
-    }
-
-    return new Promise(async (resolve, reject) => {
-      const blob = await fetch(networkUri).then((res) => res.blob());
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const objectUrl = reader.result as string;
-
-        imageStore.setItem(cacheKey, objectUrl).then(async () => {
-          resolve(objectUrl);
-          await imageTtlStore.setItem(cacheKey, Date.now() + ttlMillis);
-        });
-      };
-
-      try {
-        reader.readAsDataURL(blob);
-      } catch (e) {
-        reject(e);
-      }
-    });
+    return fetchAndCache(networkUri, cacheKey, ttlMillis);
   });
 }
 
-async function getImageObjUrl(cacheKey: string): Promise<string | null> {
-  const ttl = await imageTtlStore.getItem(cacheKey);
-  if (typeof ttl !== "number") {
-    // either ttl doesn't exist or is corrupted for this cache key
-    return null;
+// Extracted core logic for clarity
+async function fetchAndCache(
+  networkUri: string,
+  cacheKey: string,
+  ttlMillis: number,
+): Promise<string> {
+  const existingImage = await getImageObjUrl(cacheKey);
+  if (existingImage !== null) {
+    return existingImage;
   }
 
-  if (ttl < Date.now()) {
-    // Cache expired
-    return null;
+  // 1. Fetch data safely
+  const response = await fetch(networkUri);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch image: ${response.statusText}`);
   }
+  const blob = await response.blob();
 
-  const maybeImageObjUrl = await imageStore.getItem(cacheKey);
-  if (typeof maybeImageObjUrl === "string") {
-    return maybeImageObjUrl;
-  }
+  // 2. Store both Blob and Expiry atomically in a single operation
+  const record: CachedRecord = {
+    cacheKey,
+    blob,
+    expiry: Date.now() + ttlMillis,
+  };
+  await imageStore.setItem(cacheKey, record);
 
-  // imageObjUrl is corrupted
-  return null;
+  // 3. Return an Object URL (Fast, zero string-encoding overhead)
+  return URL.createObjectURL(blob);
 }
 
-export async function cleanupExpiredImages() {
-  const imageKeys = await imageStore.keys();
-  const ttlKeys = await imageTtlStore.keys();
+async function getImageObjUrl(cacheKey: string): Promise<string | null> {
+  const record = await imageStore.getItem<CachedRecord>(cacheKey);
 
-  for (const key of new Set([...imageKeys, ...ttlKeys])) {
-    const objUrl = await imageStore.getItem(key);
-    const ttl = await imageTtlStore.getItem(key);
-    if (
-      typeof objUrl !== "string" || typeof ttl !== "number" || ttl < Date.now()
-    ) {
-      await imageStore.removeItem(key);
-      await imageTtlStore.removeItem(key);
+  if (!record) {
+    return null;
+  }
+
+  if (record.expiry < Date.now()) {
+    // Cache expired: remove it lazily to free up space immediately
+    await imageStore.removeItem(cacheKey);
+    return null;
+  }
+
+  return URL.createObjectURL(record.blob);
+}
+
+export async function cleanupExpiredImages(): Promise<void> {
+  const now = Date.now();
+  const keysToDelete: string[] = [];
+
+  // Iterate is much faster for scanning the whole DB than sequentially getting by key
+  await imageStore.iterate((record: CachedRecord, key: string) => {
+    if (!record || typeof record.expiry !== "number" || record.expiry < now) {
+      keysToDelete.push(key);
     }
+  });
+
+  // Delete all expired keys concurrently
+  if (keysToDelete.length > 0) {
+    await Promise.all(keysToDelete.map((key) => imageStore.removeItem(key)));
   }
 }
