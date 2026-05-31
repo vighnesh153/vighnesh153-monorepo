@@ -125,8 +125,8 @@ of the following technologies:
 
 - **Context:** A declarative, component-based JavaScript library for building
   user interfaces.
-- **Guidelines:** \* Write functional components exclusively. Do not use class
-  components.
+- **Guidelines:**
+  - Write functional components exclusively. Do not use class components.
   - Utilize React Hooks (`useState`, `useEffect`, `useMemo`, `useCallback`,
     etc.) for state and lifecycle management.
   - Ensure components are pure, predictable, and optimized for rendering
