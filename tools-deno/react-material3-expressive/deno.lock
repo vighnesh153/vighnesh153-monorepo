@@ -1249,7 +1249,6 @@
       "playground": {
         "dependencies": [
           "npm:@deno/vite-plugin@^2.0.2",
-          "npm:@material/material-color-utilities@0.4",
           "npm:@types/react@^19.2.14",
           "npm:@vitejs/plugin-react@^6.0.1",
           "npm:react-dom@19.2.5",
