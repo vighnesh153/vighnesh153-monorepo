@@ -1,9 +1,11 @@
+import type { JSX } from "react";
+
 /**
  * Pikachu will attack you with Volt-tackle!
  *
  * @returns react element
  */
-export function PikaButton() {
+export function PikaButton(): JSX.Element {
   return (
     <button
       type="button"

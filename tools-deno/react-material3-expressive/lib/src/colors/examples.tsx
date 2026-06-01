@@ -162,7 +162,7 @@ function ThemeTable(
   );
 }
 
-function App() {
+function _App() {
   return (
     <div style={{ display: "flex" }}>
       <ThemeTable title="Light" scheme={createLightBaselineColorScheme()} />

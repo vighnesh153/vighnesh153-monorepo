@@ -6,7 +6,7 @@ export class Rgba {
     readonly a: number,
   ) {}
 
-  toString() {
+  toString(): string {
     const { r, g, b, a } = this;
     return `rgba(${r}, ${g}, ${b}, ${a})`;
   }
