@@ -121,17 +121,17 @@ function Experience(props: {
             </p>
           ))}
           <div className="font-light leading-4">
-            {responsibility.summaries.length > 1 ? (
-              <ul className="ml-4">
-                {responsibility.summaries.map((summary, sIndex) => (
-                  <li key={sIndex} className="list-disc">
-                    <ExperienceSummary text={summary} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <ExperienceSummary text={responsibility.summaries[0] ?? ""} />
-            )}
+            {responsibility.summaries.length > 1
+              ? (
+                <ul className="ml-4">
+                  {responsibility.summaries.map((summary, sIndex) => (
+                    <li key={sIndex} className="list-disc">
+                      <ExperienceSummary text={summary} />
+                    </li>
+                  ))}
+                </ul>
+              )
+              : <ExperienceSummary text={responsibility.summaries[0] ?? ""} />}
           </div>
         </div>
       ))}

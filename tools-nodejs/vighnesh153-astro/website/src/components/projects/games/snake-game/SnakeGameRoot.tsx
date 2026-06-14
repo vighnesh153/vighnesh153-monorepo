@@ -8,7 +8,9 @@ export function SnakeGameRoot() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [game, setGame] = useState<SnakeGame>();
 
-  const keyupEventListener: React.KeyboardEventHandler<HTMLCanvasElement> = (e) => {
+  const keyupEventListener: React.KeyboardEventHandler<HTMLCanvasElement> = (
+    e,
+  ) => {
     e.preventDefault();
     if (["ArrowDown", "s", "S"].includes(e.key)) {
       game?.changeDirection("bottom");

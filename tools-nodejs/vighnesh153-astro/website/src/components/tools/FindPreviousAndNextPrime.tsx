@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { type JSX, useState } from "react";
 
 import { Button } from "@/components/buttons/index.ts";
 import { isPrime, not } from "@vighnesh153/tools";

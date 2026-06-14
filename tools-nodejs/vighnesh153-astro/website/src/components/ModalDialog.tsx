@@ -1,9 +1,9 @@
 import {
+  type JSX,
+  type PropsWithChildren,
   useEffect,
   useRef,
   useState,
-  type JSX,
-  type PropsWithChildren,
 } from "react";
 import { createPortal } from "react-dom";
 

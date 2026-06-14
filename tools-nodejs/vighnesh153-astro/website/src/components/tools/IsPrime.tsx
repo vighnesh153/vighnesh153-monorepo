@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { type JSX, useState } from "react";
 
 import { Button } from "@/components/buttons/index.ts";
 import {
@@ -53,9 +53,7 @@ export function IsPrime(): JSX.Element {
       </div>
 
       <div>
-        {nIsPrime !== null && (
-          <p className="text-text2">{result}</p>
-        )}
+        {nIsPrime !== null && <p className="text-text2">{result}</p>}
 
         {Object.keys(primeFactors).length > 0 && (
           <p>
@@ -63,9 +61,7 @@ export function IsPrime(): JSX.Element {
             {Object.entries(primeFactors).map(([prime, factors], index) => (
               <span key={prime} className="text-accent">
                 {prime}
-                {factors > 1 && (
-                  <sup>{factors}</sup>
-                )}
+                {factors > 1 && <sup>{factors}</sup>}
                 {index !== Object.keys(primeFactors).length - 1 && (
                   " x "
                 )}

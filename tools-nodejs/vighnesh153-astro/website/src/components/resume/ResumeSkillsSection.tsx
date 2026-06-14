@@ -5,7 +5,9 @@ import {
 } from "./ResumeSectionTitle";
 import { ResumeAsideList } from "./ResumeAsideList";
 
-export function ResumeSkillsSection(props: { className?: string }): JSX.Element {
+export function ResumeSkillsSection(
+  props: { className?: string },
+): JSX.Element {
   return (
     <div className={props.className}>
       <ResumeSectionTitle text="Skills" />
@@ -13,7 +15,10 @@ export function ResumeSkillsSection(props: { className?: string }): JSX.Element 
       <ResumeAsideList
         items={["Typescript", "Kotlin", "Javascript", "Golang", "Java"]}
       />
-      <ResumeSectionSubtitle className="leading-5 mt-2" text="Frameworks | Tools" />
+      <ResumeSectionSubtitle
+        className="leading-5 mt-2"
+        text="Frameworks | Tools"
+      />
       <ResumeAsideList
         items={[
           "Astro.js",

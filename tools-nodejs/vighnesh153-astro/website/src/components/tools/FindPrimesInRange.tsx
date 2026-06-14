@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { type JSX, useState } from "react";
 
 import { Button } from "@/components/buttons/index.ts";
 import { isPrime, Queue } from "@vighnesh153/tools";
@@ -51,7 +51,8 @@ export function FindPrimesInRange(): JSX.Element {
               Count: <span className="text-accent">{primesInRange.length}</span>
             </p>
             <p className="text-text2">
-              Values: <span className="text-text">{primesInRange.join(", ")}</span>
+              Values:{" "}
+              <span className="text-text">{primesInRange.join(", ")}</span>
             </p>
           </>
         )}

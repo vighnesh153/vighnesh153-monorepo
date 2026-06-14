@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { type JSX, useState } from "react";
 import { not } from "@vighnesh153/tools";
 import { createSnackbar } from "@/store/snackbar.ts";
 import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "@/icons";
@@ -90,21 +90,23 @@ export function CodeViewer({
       {/* Footer */}
       {not(viewEntireCode) && (
         <div className="w-full px-4 py-2 border-t border-t-text4">
-          {showFullCode ? (
-            <button
-              onClick={toggleShowFullCode}
-              className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
-            >
-              <ChevronUpIcon className="fill-text w-4" /> Show less
-            </button>
-          ) : (
-            <button
-              onClick={toggleShowFullCode}
-              className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
-            >
-              <ChevronDownIcon className="fill-text w-4" /> Show more
-            </button>
-          )}
+          {showFullCode
+            ? (
+              <button
+                onClick={toggleShowFullCode}
+                className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
+              >
+                <ChevronUpIcon className="fill-text w-4" /> Show less
+              </button>
+            )
+            : (
+              <button
+                onClick={toggleShowFullCode}
+                className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
+              >
+                <ChevronDownIcon className="fill-text w-4" /> Show more
+              </button>
+            )}
         </div>
       )}
     </div>

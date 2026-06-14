@@ -14,7 +14,9 @@ export function SortingVisualizerRoot() {
   const [game, setGame] = useState<SortingVisualizerGame>();
 
   const initialAlgorithmTitle = sortingAlgorithms[1].displayName;
-  const [algorithmTitle, setAlgorithmTitle] = useState<string>(initialAlgorithmTitle);
+  const [algorithmTitle, setAlgorithmTitle] = useState<string>(
+    initialAlgorithmTitle,
+  );
 
   const getAlgorithmImpl = (title: string): SortingAlgorithm => {
     return sortingAlgorithms

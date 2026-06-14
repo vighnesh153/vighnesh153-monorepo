@@ -1,4 +1,4 @@
-import { useRef, type JSX } from "react";
+import { type JSX, useRef } from "react";
 import {
   simpleCodeToHtml,
   type SimpleCodeToHtmlOptions,
@@ -25,8 +25,10 @@ export function SimpleCodeEditor(props: SimpleCodeEditorProps): JSX.Element {
   );
 
   const handleTextareaScroll = () => {
-    if (!textAreaRef.current || !codeAsHtmlRef.current ||
-      !lineNumberContainerRef.current) return;
+    if (
+      !textAreaRef.current || !codeAsHtmlRef.current ||
+      !lineNumberContainerRef.current
+    ) return;
 
     // scroll top
     codeAsHtmlRef.current.scrollTop = textAreaRef.current.scrollTop;

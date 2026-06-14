@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX, useCallback } from "react";
+import { type JSX, useCallback, useEffect, useState } from "react";
 
 import { classes } from "@/utils/classes.ts";
 import { debounce } from "@vighnesh153/tools";
@@ -39,7 +39,9 @@ export function TsxPlaygroundRoot(): JSX.Element {
   }, [code, runCode]);
 
   return (
-    <div className={classes("w-full mt-10", "h-[50vh]", "flex", "items-stretch")}>
+    <div
+      className={classes("w-full mt-10", "h-[50vh]", "flex", "items-stretch")}
+    >
       <div
         className={classes(
           "w-1/2",

@@ -1,5 +1,5 @@
 import { baseIframeHtmlCode } from "@vighnesh153/tsx-bundler";
-import { useEffect, useRef, type JSX } from "react";
+import { type JSX, useEffect, useRef } from "react";
 
 export type CodePreviewResult_Bundling = {
   status: "bundling";
@@ -41,26 +41,28 @@ export function CodePreview({
 
   return (
     <div className="w-full h-full p-4 bg-text">
-      {result.status === "bundling" ? (
-        <div className="text-background">Bundling...</div>
-      ) : result.status === "error" ? (
-        <div className="text-[red] whitespace-pre overflow-x-auto">
-          <div className="font-bold text-xl">
-            Some error occurred while bundling
+      {result.status === "bundling"
+        ? <div className="text-background">Bundling...</div>
+        : result.status === "error"
+        ? (
+          <div className="text-[red] whitespace-pre overflow-x-auto">
+            <div className="font-bold text-xl">
+              Some error occurred while bundling
+            </div>
+            <div className="whitespace-break-spaces">
+              {result.bundleError}
+            </div>
           </div>
-          <div className="whitespace-break-spaces">
-            {result.bundleError}
-          </div>
-        </div>
-      ) : (
-        <iframe
-          ref={previewIframe}
-          className="w-full h-full"
-          title="preview"
-          sandbox="allow-same-origin allow-scripts"
-          srcDoc={baseIframeHtmlCode}
-        />
-      )}
+        )
+        : (
+          <iframe
+            ref={previewIframe}
+            className="w-full h-full"
+            title="preview"
+            sandbox="allow-same-origin allow-scripts"
+            srcDoc={baseIframeHtmlCode}
+          />
+        )}
     </div>
   );
 }

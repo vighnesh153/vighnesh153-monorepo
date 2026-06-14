@@ -15,7 +15,7 @@ test("Snackbar should render message", () => {
       dismiss={vi.fn()}
       autoDismissible={false}
       manualDismissible={false}
-    />
+    />,
   );
   expect(screen.getByText("Success Message")).toBeInTheDocument();
 });
@@ -30,7 +30,7 @@ test("Snackbar should render dismiss button if manualDismissible", () => {
       dismiss={dismiss}
       autoDismissible={false}
       manualDismissible={true}
-    />
+    />,
   );
   const button = screen.getByRole("button");
   button.click();

@@ -17,22 +17,22 @@ test("ImageWithCache should render fallback if url is null", () => {
       src="src"
       cacheKey="key"
       fallback={<div data-testid="fallback">Fallback</div>}
-    />
+    />,
   );
   expect(screen.getByTestId("fallback")).toBeInTheDocument();
 });
 
 test("ImageWithCache should render image once cachedUrl is available", async () => {
   vi.mocked(cachingUtils.cacheImage).mockResolvedValue("cached-url");
-  
+
   render(
     <ImageWithCache
       src="src"
       cacheKey="key"
       imageProps={{ "data-testid": "img" } as any}
-    />
+    />,
   );
-  
+
   await waitFor(() => {
     expect(screen.getByTestId("img")).toHaveAttribute("src", "cached-url");
   });

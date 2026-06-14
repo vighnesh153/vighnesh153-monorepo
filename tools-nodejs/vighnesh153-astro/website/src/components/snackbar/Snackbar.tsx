@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 import type { SnackbarProps } from "@/store/snackbar.ts";
 import { classes } from "@/utils/classes.ts";

@@ -12,9 +12,7 @@ export function ColorButton(props: ColorButtonProps) {
     <PopupButton
       title="Color"
       popupContent={(togglePopup) => (
-        <div
-          className="w-96 mx-auto flex gap-2 flex-wrap justify-center"
-        >
+        <div className="w-96 mx-auto flex gap-2 flex-wrap justify-center">
           {props.colors.map((color) => (
             <button
               key={color.rgbaString}

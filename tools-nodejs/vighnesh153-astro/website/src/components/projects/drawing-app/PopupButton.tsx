@@ -1,4 +1,9 @@
-import { useState, type JSX, type ReactNode, type ButtonHTMLAttributes } from "react";
+import {
+  type ButtonHTMLAttributes,
+  type JSX,
+  type ReactNode,
+  useState,
+} from "react";
 import { classes } from "@/utils/classes.ts";
 
 type PopupState = "open" | "closed";
@@ -16,7 +21,7 @@ export function PopupButton(props: PopupButtonProps): JSX.Element {
 
   const togglePopup = (state?: PopupState) => {
     setPopupState((old) =>
-      state !== undefined ? state : old === "open" ? "closed" : "open",
+      state !== undefined ? state : old === "open" ? "closed" : "open"
     );
   };
 

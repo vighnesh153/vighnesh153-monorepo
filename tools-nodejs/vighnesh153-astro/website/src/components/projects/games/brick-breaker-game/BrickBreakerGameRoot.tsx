@@ -9,7 +9,10 @@ export function BrickBreakerGameRoot() {
   const [game, setGame] = useState<BrickBreakerGame>();
 
   const handleMouseMove: React.MouseEventHandler<HTMLCanvasElement> = (e) => {
-    game?.handleMouseMove(e as unknown as MouseEvent, document.documentElement.scrollLeft);
+    game?.handleMouseMove(
+      e as unknown as MouseEvent,
+      document.documentElement.scrollLeft,
+    );
   };
 
   useEffect(() => {

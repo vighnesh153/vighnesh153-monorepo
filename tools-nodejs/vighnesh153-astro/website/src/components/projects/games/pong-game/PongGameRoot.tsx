@@ -9,7 +9,10 @@ export function PongGameRoot() {
   const [game, setGame] = useState<PongGame>();
 
   const handleMouseMove: React.MouseEventHandler<HTMLCanvasElement> = (e) => {
-    game?.handleMouseMove(e as unknown as MouseEvent, document.documentElement.scrollTop);
+    game?.handleMouseMove(
+      e as unknown as MouseEvent,
+      document.documentElement.scrollTop,
+    );
   };
 
   useEffect(() => {

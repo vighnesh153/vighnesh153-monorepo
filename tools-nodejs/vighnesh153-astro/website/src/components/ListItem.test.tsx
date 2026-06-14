@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { expect, test, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ListItem } from "./ListItem.tsx";
 
@@ -24,7 +24,7 @@ test("ListItem should render leading content", () => {
       text="Hello World"
       onClick={() => {}}
       leadingContent={<span data-testid="leading">Leading</span>}
-    />
+    />,
   );
   expect(screen.getAllByTestId("leading")).toHaveLength(2); // Since it's used twice in the original component
 });

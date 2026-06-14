@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useState,
-  type JSX,
-  type ImgHTMLAttributes,
-} from "react";
+import { type ImgHTMLAttributes, type JSX, useEffect, useState } from "react";
 
 import { cacheImage } from "@/utils/image_caching.ts";
 
@@ -35,9 +30,7 @@ export function ImageWithCache(props: ImageWithCacheProps): JSX.Element {
 
   return (
     <>
-      {objUrl !== null ? (
-        <img {...props.imageProps} src={objUrl!} />
-      ) : (
+      {objUrl !== null ? <img {...props.imageProps} src={objUrl!} /> : (
         props.fallback
       )}
     </>
