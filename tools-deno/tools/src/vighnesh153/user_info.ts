@@ -4,7 +4,7 @@ import { assertType, type Equals } from "@/utils/type_assertion.ts";
 import {
   isValidZodObject,
   type IsValidZodObjectReturnValue,
-} from "@/vighnesh153/local_utils.ts";
+} from "./local_utils.ts";
 
 const ZodGoogleOAuthUserInfo = z.object({
   name: z.string().min(1),

@@ -4,3 +4,4 @@ export * from "./aws_config.ts";
 export * from "./cookie_keys.ts";
 export * from "./permissions.ts";
 export * from "./url_constants.ts";
+export * from "./user_info.ts";

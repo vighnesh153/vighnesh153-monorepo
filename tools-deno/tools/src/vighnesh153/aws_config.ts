@@ -1,4 +1,4 @@
-import type { CompleteUserInfo } from "../models/mod.ts";
+import type { CompleteUserInfo } from "./user_info.ts";
 
 export const DEFAULT_AWS_REGION = "ap-south-1" as const; // Mumbai
 
