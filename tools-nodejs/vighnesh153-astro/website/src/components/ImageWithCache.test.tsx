@@ -12,6 +12,8 @@ vi.mock("@/utils/image_caching.ts", () => ({
 }));
 
 test("ImageWithCache should render fallback if url is null", () => {
+  vi.mocked(cachingUtils.cacheImage).mockReturnValue(new Promise(() => {}));
+
   render(
     <ImageWithCache
       src="src"
