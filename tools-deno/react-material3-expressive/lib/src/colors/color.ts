@@ -3,11 +3,11 @@ import {
   argbFromHex,
   blueFromArgb,
   greenFromArgb,
-  Hct,
   hexFromArgb,
   redFromArgb,
 } from "@material/material-color-utilities";
 
+import { Hct } from "./hct.ts";
 import { Rgba } from "./rgba.ts";
 
 export class Color {
