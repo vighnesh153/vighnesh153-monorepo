@@ -8,41 +8,19 @@ import "@fontsource-variable/raleway";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 
 import { ResumeContainer } from "@/components/resume/ResumeContainer";
-import { Link } from "@/components/Link.tsx";
+import { Button } from "@/components/buttons";
 
-const monthFormatter = new Intl.DateTimeFormat("en-GB", {
-  month: "short",
-});
-const ordinalSuffixes = new Map([
-  ["one", "st"],
-  ["two", "nd"],
-  ["few", "rd"],
-  ["other", "th"],
-]);
-const ordinalFormatter = new Intl.PluralRules("en-US", { type: "ordinal" });
-
-const date = new Date();
-const day = date.getDate();
-const ordinal = ordinalSuffixes.get(ordinalFormatter.select(day));
-const month = monthFormatter.format(date);
-const year = date.getFullYear();
-
-const formattedDate = `${day}${ordinal} ${month} ${year}`;
+const formattedDate = new Intl.DateTimeFormat("en-GB", {
+  dateStyle: "medium",
+}).format(new Date());
 const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
 ---
 
 <ContentLayout title={pageTitle}>
   <div class="mt-32">
     <div class="w-full flex items-center flex-col gap-6">
-      <div class="">
-        <Link
-          linkType="primary-btn"
-          href="/resume.pdf"
-          download={`${pageTitle}.pdf`}
-          target="_blank"
-        >
-          Download
-        </Link>
+      <div>
+        <Button variant="primary" id="download-resume-btn">Download</Button>
       </div>
       <div id="resume-container">
         <div id="resume-holder">
@@ -121,6 +99,11 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
   }
 
   @media print {
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
     body {
       visibility: hidden;
       position: relative;
@@ -131,6 +114,13 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
       position: absolute;
       top: 0;
       left: 0;
+
+      /* Force background colors and graphics to print */
+      -webkit-print-color-adjust: exact; /* Chrome/Safari/Edge */
+      color-adjust: exact; /* Firefox */
+
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
   }
 </style>
@@ -139,4 +129,10 @@ const pageTitle = `Vighnesh_Raut_CV_${formattedDate.replace(/ /g, "_")}`;
   import { logAnalyticsEvent } from "@/utils/analytics.ts";
 
   logAnalyticsEvent("visit_resume");
+
+  document
+    .querySelector("#download-resume-btn")
+    ?.addEventListener("click", () => {
+      window.print();
+    });
 </script>
