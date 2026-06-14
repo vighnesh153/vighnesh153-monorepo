@@ -1,5 +1,5 @@
-import { type Permissions } from "./permissions";
-import { vighnesh153Permissions } from "./vighnesh153";
+import { type Permissions } from "./permissions.ts";
+import { vighnesh153Permissions } from "./vighnesh153.ts";
 
 export function hasPermission(
   uid: string,
