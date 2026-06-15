@@ -6,21 +6,26 @@
 
   border: none;
   border-radius: var(--radius-xl);
-  /* 
 
-          rounded-xl
-          transition-shadow
-          duration-200
-          ease-in-out
-          text-base
-          text-center
-          cursor-pointer
-          uppercase
+  transition: box-shadow 200ms var(--ease-in-out);
 
-          hover:shadow-2xl hover:shadow-primary
-          focus-visible:shadow-2xl focus-visible:shadow-primary */
+  text-align: center;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: var(--shadow-2xl) var(--color-primary);
+  }
 }
 
-.btn-primary {}
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+}
 
-.btn-secondary {}
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-bright);
+}

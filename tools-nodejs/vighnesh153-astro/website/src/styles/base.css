@@ -1,25 +1,4 @@
-*,
-*::before,
-*::after,
-::backdrop,
-::file-selector-button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 0 solid;
-}
-
-html {
-  /* focus dashed outline */
-  :is(a, button, input, select, textarea):focus-visible {
-    outline-style: dashed;
-    outline-width: 4px;
-    outline-offset: 8px;
-    outline-color: var(--color-accent);
-  }
-}
-
-body {
+:root {
   --font-sans:
     ui-sans-serif,
     system-ui,
@@ -43,14 +22,14 @@ body {
   --color-secondary: rgb(0 0 0);
   --color-accent: rgb(102 255 219);
 
-  --color-background: rgb(10 24 46);
-  --color-bg-dark: rgb(3 12 28);
-  --color-bg-light: rgb(18 36 67);
-  --color-bg-blend: rgb(19 44 63);
+  --bg: rgb(10 24 46);
+  --bg-dark: rgb(3 12 28);
+  --bg-light: rgb(18 36 67);
+  --bg-blend: rgb(19 44 63);
 
-  --color-text: rgb(251, 226, 253);
-  --color-text2: rgb(251, 226, 253, 80%);
-  --color-text3: rgb(251, 226, 253, 60%);
+  --color-bright: rgb(251, 226, 253);
+  --color: rgb(251, 226, 253, 80%);
+  --color-dull: rgb(251, 226, 253, 60%);
   --color-text4: rgb(251, 226, 253, 30%);
 
   --color-black: #000;
@@ -124,8 +103,8 @@ body {
   --radius-4xl: 2rem;
   --radius-full: calc(infinity * 1px);
 
-  --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-2xs: 0 1px;
+  --shadow-xs: 0 1px 2px 0;
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg:
@@ -134,7 +113,7 @@ body {
   --shadow-xl:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-2xl: 0 25px 50px -12px;
 
   --inset-shadow-2xs: inset 0 1px rgb(0 0 0 / 0.05);
   --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0 / 0.05);
@@ -195,6 +174,37 @@ body {
   --z-modal: 1300;
   --z-snackbar: 1400;
   --z-tooltip: 1500;
+}
+
+*,
+*::before,
+*::after,
+::backdrop,
+::file-selector-button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0 solid;
+}
+
+html {
+  color: var(--color-bright);
+  background: var(--bg);
+  scroll-behavior: smooth;
+
+  /* focus dashed outline */
+  :is(
+    a,
+    button,
+    input,
+    select,
+    textarea
+  ):focus-visible {
+    outline-style: dashed;
+    outline-width: 4px;
+    outline-offset: 8px;
+    outline-color: var(--color-accent);
+  }
 }
 
 ::selection {

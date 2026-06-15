@@ -1,12 +1,10 @@
 import type { ButtonHTMLAttributes, JSX } from "react";
 
-import { classes } from "@/utils/classes";
+import styles from "./Button.module.css";
 
-export type ButtonProps =
-  & {
-    variant?: "primary" | "secondary";
-  }
-  & ButtonHTMLAttributes<HTMLButtonElement>;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary";
+}
 
 export function Button({
   variant = "secondary",
@@ -28,10 +26,7 @@ function PrimaryButton(
   return (
     <button
       {...props}
-      className={classes(
-        getPrimaryButtonClasses(),
-        props.className,
-      )}
+      className={`${styles.btn} ${styles.btnPrimary} ${props.className}`}
     />
   );
 }
@@ -42,50 +37,7 @@ function SecondaryButton(
   return (
     <button
       {...props}
-      className={classes(
-        getSecondaryButtonClasses(),
-        props.className,
-      )}
+      className={`${styles.btn} ${styles.btnSecondary} ${props.className}`}
     />
-  );
-}
-
-function getBaseButtonClasses() {
-  return `
-          py-[0.75em] px-[2em]
-          inline-block
-
-          border-none
-
-          rounded-xl
-          transition-shadow
-          duration-200
-          ease-in-out
-          text-base
-          text-center
-          cursor-pointer
-          uppercase
-
-          hover:shadow-2xl hover:shadow-primary
-          focus-visible:shadow-2xl focus-visible:shadow-primary
-      `;
-}
-
-export function getPrimaryButtonClasses(): string {
-  return classes(
-    getBaseButtonClasses(),
-    `
-    bg-primary
-    text-secondary`,
-  );
-}
-
-export function getSecondaryButtonClasses(): string {
-  return classes(
-    getBaseButtonClasses(),
-    `
-    bg-secondary
-    text-text
-    shadow-primary`,
   );
 }
