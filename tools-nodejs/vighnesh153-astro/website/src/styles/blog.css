@@ -1,0 +1,96 @@
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  margin-block: calc(var(--spacing) * 6);
+
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.blog-content h1 {
+  font-size: var(--text-5xl);
+  line-height: var(--tw-leading, var(--text-5xl--line-height));
+}
+
+.blog-content h2 {
+  font-size: var(--text-4xl);
+  line-height: var(--tw-leading, var(--text-4xl--line-height));
+}
+
+.blog-content h3 {
+  font-size: var(--text-3xl);
+  line-height: var(--tw-leading, var(--text-3xl--line-height));
+}
+
+.blog-content h4 {
+  font-size: var(--text-2xl);
+  line-height: var(--tw-leading, var(--text-2xl--line-height));
+}
+
+.blog-content h5 {
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+}
+
+.blog-content h6 {
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+}
+
+.blog-content p {
+  color: var(--color-text2);
+
+  &:not(:last-child) {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+}
+
+/* direct children only */
+.blog-content > ul,
+.blog-content > ol {
+  margin-inline-start: calc(var(--spacing) * 4);
+  margin-bottom: calc(var(--spacing) * 8);
+}
+
+/* indirect children only. First level lists should have no padding */
+.blog-content > * ul,
+.blog-content > * ol {
+  margin-inline-start: calc(var(--spacing) * 10);
+}
+
+.blog-content ul > li {
+  list-style-type: disc;
+}
+
+.blog-content ol > li {
+  list-style-type: decimal;
+  position: relative;
+  counter-increment: decimal-list;
+
+  &::before {
+    --tw-content: counter(decimal-list) ".";
+    content: var(--tw-content);
+    position: absolute;
+
+    padding-right: calc(var(--spacing) * 1.5);
+    width: calc(var(--spacing) * 10);
+    left: calc(var(--spacing) * -10);
+
+    color: var(--color-accent);
+    text-align: right;
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.blog-content li {
+  padding-block: calc(var(--spacing) * 0.5);
+  color: var(--color-text2);
+}
+
+.blog-content hr {
+  margin-block: calc(var(--spacing) * 4);
+  border-color: var(--color-text4);
+}

@@ -1,9 +1,12 @@
 *,
 *::before,
-*::after {
+*::after,
+::backdrop,
+::file-selector-button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 0 solid;
 }
 
 html {
@@ -199,6 +202,40 @@ body {
   color: var(--color-background);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -257,104 +294,5 @@ a {
 
   &:is(:hover, :focus-visible)::after {
     width: 100%;
-  }
-}
-
-.blog-content {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-block: calc(var(--spacing) * 6);
-
-    color: var(--color-text);
-    font-weight: var(--font-weight-bold);
-  }
-
-  h1 {
-    font-size: var(--text-5xl);
-    line-height: var(--tw-leading, var(--text-5xl--line-height));
-  }
-
-  h2 {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
-
-  h3 {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
-  }
-
-  h4 {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
-  }
-
-  h5 {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
-  }
-
-  h6 {
-    font-size: var(--text-base);
-    line-height: var(--tw-leading, var(--text-base--line-height));
-  }
-
-  p {
-    color: var(--color-text2);
-
-    &:not(:last-child) {
-      padding-bottom: calc(var(--spacing) * 4);
-    }
-  }
-
-  /* direct children only */
-  & > ul,
-  & > ol {
-    margin-inline-start: calc(var(--spacing) * 4);
-    margin-bottom: calc(var(--spacing) * 8);
-  }
-
-  /* indirect children only. First level lists should have no padding */
-  & > * ul,
-  & > * ol {
-    margin-inline-start: calc(var(--spacing) * 10);
-  }
-
-  ul > li {
-    list-style-type: disc;
-  }
-
-  ol > li {
-    list-style-type: decimal;
-    position: relative;
-    counter-increment: decimal-list;
-
-    &::before {
-      --tw-content: counter(decimal-list) ".";
-      content: var(--tw-content);
-      position: absolute;
-
-      padding-right: calc(var(--spacing) * 1.5);
-      width: calc(var(--spacing) * 10);
-      left: calc(var(--spacing) * -10);
-
-      color: var(--color-accent);
-      text-align: right;
-      font-weight: var(--font-weight-bold);
-    }
-  }
-
-  li {
-    padding-block: calc(var(--spacing) * 0.5);
-    color: var(--color-text2);
-  }
-
-  hr {
-    margin-block: calc(var(--spacing) * 4);
-    border-color: var(--color-text4);
   }
 }
