@@ -1,0 +1,15 @@
+.btn-google-sign-in {
+  min-width: fit-content;
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 2);
+
+  border-radius: var(--radius-md);
+
+  display: flex;
+  gap: calc(var(--spacing) * 2);
+  align-items: center;
+
+  background: var(--color-bright);
+  color: var(--color-secondary);
+  cursor: pointer;
+}

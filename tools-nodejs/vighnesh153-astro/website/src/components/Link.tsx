@@ -2,13 +2,10 @@ import {
   type AnchorHTMLAttributes,
   type PropsWithChildren,
   type ReactNode,
+  useMemo,
 } from "react";
-import { classes } from "@/utils/classes.ts";
 
-import {
-  getPrimaryButtonClasses,
-  getSecondaryButtonClasses,
-} from "./buttons/Button.tsx";
+import styles from "./buttons/Button.module.css";
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   linkType?: "regular" | "primary-btn" | "secondary-btn";
@@ -19,32 +16,21 @@ export function Link(
     LinkProps
   >,
 ): ReactNode {
-  if (linkType == "regular") {
-    return (
-      <a
-        {...props}
-        className={classes(className, "regular-link")}
-      />
-    );
-  }
+  const computedClassName = useMemo(() => {
+    const classes = [className];
+    if (linkType == "primary-btn") {
+      classes.push(styles.btn, styles["btn-primary"]);
+    }
+    if (linkType == "secondary-btn") {
+      classes.push(styles.btn, styles["btn-secondary"]);
+    }
+    return classes.join(" ");
+  }, [linkType]);
 
-  if (linkType == "primary-btn") {
-    return (
-      <a
-        {...props}
-        className={classes(className, getPrimaryButtonClasses())}
-      />
-    );
-  }
-
-  if (linkType == "secondary-btn") {
-    return (
-      <a
-        {...props}
-        className={classes(className, getSecondaryButtonClasses())}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <a
+      {...props}
+      className={computedClassName}
+    />
+  );
 }

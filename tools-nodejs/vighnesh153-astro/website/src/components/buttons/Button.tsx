@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, JSX } from "react";
+import { type ButtonHTMLAttributes, type JSX } from "react";
 
 import styles from "./Button.module.css";
 
@@ -26,7 +26,7 @@ function PrimaryButton(
   return (
     <button
       {...props}
-      className={`${styles.btn} ${styles.btnPrimary} ${props.className}`}
+      className={`${styles.btn} ${styles["btn-primary"]} ${props.className}`}
     />
   );
 }
@@ -37,7 +37,7 @@ function SecondaryButton(
   return (
     <button
       {...props}
-      className={`${styles.btn} ${styles.btnSecondary} ${props.className}`}
+      className={`${styles.btn} ${styles["btn-secondary"]} ${props.className}`}
     />
   );
 }
