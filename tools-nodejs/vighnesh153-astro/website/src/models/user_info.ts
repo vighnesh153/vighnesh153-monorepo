@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro/zod";
 
 export const UserInfo = z.object({
   userId: z.string().min(1),

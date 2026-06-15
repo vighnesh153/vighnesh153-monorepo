@@ -1,0 +1,26 @@
+.btn {
+  padding-block: 0.75em;
+  padding-inline: 2em;
+
+  display: inline-block;
+
+  border: none;
+  border-radius: var(--radius-xl);
+  /* 
+
+          rounded-xl
+          transition-shadow
+          duration-200
+          ease-in-out
+          text-base
+          text-center
+          cursor-pointer
+          uppercase
+
+          hover:shadow-2xl hover:shadow-primary
+          focus-visible:shadow-2xl focus-visible:shadow-primary */
+}
+
+.btn-primary {}
+
+.btn-secondary {}

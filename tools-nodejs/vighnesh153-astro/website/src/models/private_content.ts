@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro/zod";
 
 export const PrivateContentCard = z.object({
   id: z.string().min(1),
