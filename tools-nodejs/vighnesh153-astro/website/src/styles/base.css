@@ -29,8 +29,8 @@
 
   --color-bright: rgb(251, 226, 253);
   --color: rgb(251, 226, 253, 80%);
-  --color-dull: rgb(251, 226, 253, 60%);
-  --color-text4: rgb(251, 226, 253, 30%);
+  --color-light: rgb(251, 226, 253, 60%);
+  --color-dull: rgb(251, 226, 253, 30%);
 
   --color-black: #000;
   --color-white: #fff;

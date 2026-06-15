@@ -1,8 +1,10 @@
 import { type JSX, useState } from "react";
+
+import styles from "./CodeViewer.module.css";
+
 import { not } from "@vighnesh153/tools";
 import { createSnackbar } from "@/store/snackbar.ts";
 import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "@/icons";
-import { classes } from "@/utils/classes.ts";
 import { copyToClipboard } from "@/utils/copy_to_clipboard.ts";
 
 export type HtmlCodeViewerProps = {
@@ -44,67 +46,49 @@ export function CodeViewer({
 
   return (
     <div
-      className="rounded-xl bg-secondary border border-text4"
-      style={{
-        fontFamily: "Courier, Menlo, Consolas",
-      }}
+      className={styles["code-viewer-container"]}
     >
       {/* Header */}
-      <div className="w-full px-4 py-2 flex justify-between items-center border-b border-b-text4">
+      <div className={styles["code-viewer-header"]}>
         <p>{fileName}</p>
         <button
-          className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
           onClick={onCopyClick}
         >
-          <CopyIcon className="fill-text w-4" /> Copy
+          <CopyIcon className="copy-icon" /> Copy
         </button>
       </div>
 
       {/* Code body */}
       <div
-        className="relative py-4 w-full whitespace-pre flex items-stretch bg-[#16181d] overflow-auto"
+        className={styles["code-viewer-body"]}
         style={{
           maxHeight: not(viewEntireCode) && not(showFullCode)
             ? `${maxCodeBodyHeight}px`
             : "unset",
         }}
       >
-        <div className="sticky h-full ps-4 pe-2 left-0 bg-[inherit]">
+        <div className="line-numbers-container">
           {Array.from({ length: lineCount })
             .map((_, index) => `${index + 1}`.padStart(3, " "))
             .join("\n")}
         </div>
-        <div
-          className={classes(`
-            ps-6
-            pe-4
-            
-            grow
-            items-stretch
-          `)}
-        >
+        <div className="code-container">
           {code}
         </div>
       </div>
 
       {/* Footer */}
       {not(viewEntireCode) && (
-        <div className="w-full px-4 py-2 border-t border-t-text4">
+        <div className={styles["code-viewer-footer"]}>
           {showFullCode
             ? (
-              <button
-                onClick={toggleShowFullCode}
-                className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
-              >
-                <ChevronUpIcon className="fill-text w-4" /> Show less
+              <button onClick={toggleShowFullCode}>
+                <ChevronUpIcon /> Show less
               </button>
             )
             : (
-              <button
-                onClick={toggleShowFullCode}
-                className="py-1 px-4 flex items-center gap-2 border border-1 rounded-lg cursor-pointer"
-              >
-                <ChevronDownIcon className="fill-text w-4" /> Show more
+              <button onClick={toggleShowFullCode}>
+                <ChevronDownIcon /> Show more
               </button>
             )}
         </div>
