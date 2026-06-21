@@ -5,15 +5,22 @@ import ProjectsMasonry from "@/components/projects/ProjectsMasonry.astro";
 import SectionTitle from "./SectionTitle.astro";
 ---
 
-<section
-  id={hashTags.homePage.projects}
-  class={classes(`
-    mx-auto
-    my-40
-    scroll-mt-8
-  `)}
->
-  <div class="mx-auto max-w-prose">
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
+
+  section {
+    margin-inline: auto;
+    margin-block: $spacing * 40;
+
+    & > div {
+      margin-inline: auto;
+      max-width: $width-prose;
+    }
+  }
+</style>
+
+<section id={hashTags.homePage.projects}>
+  <div>
     <SectionTitle count="03" title="Projects" />
   </div>
   <ProjectsMasonry />

@@ -1,7 +1,4 @@
 ---
-import { classes } from "@/utils/classes.ts";
-import { Link } from "../Link.tsx";
-
 interface Props {
   companyName: string;
   companyUrl: string;
@@ -94,7 +91,7 @@ const { companyName, companyUrl, totalDuration, companyPositions } =
 <li class="experience-section-item">
   <div>
     <h3>
-      <Link href={companyUrl}>@{companyName}</Link>
+      <a href={companyUrl}>@{companyName}</a>
     </h3>
     {
       companyPositions.length > 1 ? (

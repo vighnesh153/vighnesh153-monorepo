@@ -7,25 +7,111 @@ import ProjectTag from "./ProjectTag.astro";
 import { Link } from "../Link.tsx";
 ---
 
-<ul
-  class={classes(`
-    scroll-mt-32 mt-8
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
 
-    grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-items-center
-    gap-12
-    grid-rows-[masonry]
-    supports-[grid-template-rows:masonry]:grid-rows-[masonry]
-    supports-[grid-template-rows:masonry]:items-start
-  `)}
->
+  ul.projects-masonry {
+    margin-block-start: $spacing * 8;
+
+    display: grid;
+    justify-items: center;
+    gap: $spacing * 12;
+
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    grid-template-rows: masonry;
+
+    @media (grid-template-rows: masonry) {
+      align-items: start;
+    }
+  }
+
+  li.project-item {
+    max-width: $container-lg;
+    padding: $spacing * 6;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: $radius-lg;
+    background: $bg-light;
+
+    --_shadow-color: #{$bg-dark};
+    box-shadow: $shadow-md;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .folder-icon {
+        fill: $color-accent;
+      }
+
+      ul {
+        display: flex;
+        gap: $spacing * 4;
+
+        fill: $color-bright;
+
+        li {
+          &:focus-within,
+          &:hover {
+            fill: $color-accent;
+          }
+        }
+      }
+    }
+
+    h3 {
+      margin-block-start: $spacing * 5;
+
+      font-size: $text-size-xl;
+      line-height: $line-height-xl;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: $text-size-2xl;
+        line-height: $line-height-2xl;
+      }
+    }
+
+    .project-desc {
+      margin-block-start: $spacing * 4;
+
+      flex-grow: 1;
+
+      color: $color;
+      font-size: $text-size-base;
+      line-height: $line-height-base;
+    }
+
+    .project-tags {
+      margin-block-start: $spacing * 6;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing * 2;
+    }
+  }
+</style>
+
+<ul class="projects-masonry">
   {
     allProjects.map(({ title, description, tags, links }) => (
-      <li class="shadow-bg-dark bg-bg-light flex max-w-lg flex-col rounded-lg p-6 shadow-md">
-        <div class="flex items-center justify-between">
-          <FolderIcon className="fill-accent" role="img" height="2rem" />
+      <li class="project-item">
+        <div class="header">
+          <FolderIcon className="folder-icon" role="img" height="2rem" />
 
-          <ul class="fill-text flex gap-4">
-            <li class="[:focus-within,:hover]:fill-accent">
+          <ul>
+            <li>
               <ProjectIconLink href={links.github.href} title="source code">
                 <links.github.Icon
                   role="img"
@@ -34,18 +120,18 @@ import { Link } from "../Link.tsx";
                 />
               </ProjectIconLink>
             </li>
-            <li class="[:focus-within,:hover]:fill-accent">
+            <li>
               <ProjectIconLink href={links.demo.href} title="demo">
                 <links.demo.Icon role="img" width="1.25rem" height="1.25rem" />
               </ProjectIconLink>
             </li>
           </ul>
         </div>
-        <h3 class="mt-5 text-xl md:text-2xl">
+        <h3>
           <Link href={links.demo.href}>{title}</Link>
         </h3>
-        <p class="text-text2 mt-4 grow text-base">{description}</p>
-        <ul class="mt-6 flex flex-wrap gap-2">
+        <p class="project-desc">{description}</p>
+        <ul class="project-tags">
           {tags.map((tag) => (
             <ProjectTag>{tag}</ProjectTag>
           ))}

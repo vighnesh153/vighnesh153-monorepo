@@ -261,7 +261,7 @@ video {
   }
 }
 
-a {
+a:not(.icon-link) {
   display: inline-block;
   position: relative;
 

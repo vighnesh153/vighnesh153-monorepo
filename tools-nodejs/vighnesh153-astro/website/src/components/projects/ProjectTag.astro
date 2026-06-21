@@ -2,6 +2,25 @@
 
 ---
 
-<li class="bg-secondary text-primary rounded-lg px-2 py-[0.15rem]">
-  <span class="text-sm"><slot /></span>
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
+
+  li {
+    padding-inline: $spacing * 2;
+    padding-block: 0.15rem;
+
+    background: $color-secondary;
+    color: $color-primary;
+
+    border-radius: $radius-lg;
+
+    span {
+      font-size: $text-size-sm;
+      line-height: $line-height-sm;
+    }
+  }
+</style>
+
+<li>
+  <span><slot /></span>
 </li>

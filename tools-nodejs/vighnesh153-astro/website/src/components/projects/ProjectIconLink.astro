@@ -7,12 +7,22 @@ interface Props extends HTMLAttributes<"a"> {}
 const { class: className, ...props } = Astro.props;
 ---
 
-<a
-  class={classes(
-    className,
-    `inline-block [font-size:0] fill-text [:hover,:focus]:fill-accent`,
-  )}
-  {...props}
->
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
+
+  a {
+    display: inline-block;
+
+    font-size: 0;
+    fill: $color-bright;
+
+    &:hover,
+    &:focus {
+      fill: $color-accent;
+    }
+  }
+</style>
+
+<a class="icon-link" {...props}>
   <slot />
 </a>
