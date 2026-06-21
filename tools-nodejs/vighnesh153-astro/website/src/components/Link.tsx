@@ -5,7 +5,7 @@ import {
   useMemo,
 } from "react";
 
-import styles from "./buttons/Button.module.css";
+import styles from "./buttons/Button.module.scss";
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   linkType?: "regular" | "primary-btn" | "secondary-btn";

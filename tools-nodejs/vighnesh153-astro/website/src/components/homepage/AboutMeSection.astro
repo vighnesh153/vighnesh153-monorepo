@@ -1,10 +1,8 @@
 ---
-import { classes } from "@/utils/classes.ts";
 import { hashTags } from "@/utils/content/links.ts";
 import { currentTechnologies } from "@/utils/content/currentTechnologies.ts";
 import { companyUrls } from "@/utils/content/companyUrls.ts";
 import SectionTitle from "./SectionTitle.astro";
-import { Link } from "../Link.tsx";
 import SectionListItem from "./SectionListItem.astro";
 ---
 
@@ -24,16 +22,16 @@ import SectionListItem from "./SectionListItem.astro";
     color: $color;
 
     font-size: $text-size-base;
-    line-height: $text-size-base--line-height;
+    line-height: $line-height-base;
 
     @media (min-width: $breakpoint-sm) {
       font-size: $text-size-lg;
-      line-height: $text-size-lg--line-height;
+      line-height: $line-height-lg;
     }
 
     @media (min-width: $breakpoint-xl) {
       font-size: $text-size-xl;
-      line-height: $text-size-xl--line-height;
+      line-height: $line-height-xl;
     }
   }
 
@@ -55,22 +53,18 @@ import SectionListItem from "./SectionListItem.astro";
       <br />
       <br />
       Fast-forward to today, and I have had the privilege to work for{" "}
-      <Link href={companyUrls.google} target="_blank">Google</Link>
-      ,{" "}
-      <Link href={companyUrls.amazon} target="_blank">Amazon</Link>
-      ,{" "}
-      <Link href={companyUrls.smarterCodes} target="_blank">an AI startup</Link
-      >{" "}
+      <a href={companyUrls.google} target="_blank">Google</a>,
+      <a href={companyUrls.amazon} target="_blank">Amazon</a>,
+      <a href={companyUrls.smarterCodes} target="_blank">an AI startup</a>{" "}
       and{" "}
-      <Link href={companyUrls.tavisca} target="_blank"
-        >a loyalty rewards company</Link
+      <a href={companyUrls.tavisca} target="_blank">a loyalty rewards company</a
       >
       <br />
       <br />
       My Main focus these days is building next-gen developer tools for GoogleTV at{
         " "
       }
-      <Link href={companyUrls.google} target="_blank">Google</Link>
+      <a href={companyUrls.google} target="_blank">Google</a>
       <br />
       <br />
       Here are a few technologies I have been working with recently:
@@ -80,7 +74,7 @@ import SectionListItem from "./SectionListItem.astro";
       {
         currentTechnologies.map((technology) => (
           <SectionListItem>
-            <Link href={technology.link}>{technology.text}</Link>
+            <a href={technology.link}>{technology.text}</a>
           </SectionListItem>
         ))
       }

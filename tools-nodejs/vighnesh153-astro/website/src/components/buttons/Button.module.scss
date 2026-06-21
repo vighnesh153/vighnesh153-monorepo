@@ -1,3 +1,5 @@
+@use "@/styles/variables.scss" as *;
+
 .btn {
   padding-block: 0.75em;
   padding-inline: 2em;
@@ -16,7 +18,8 @@
 
   &:hover,
   &:focus-visible {
-    box-shadow: var(--shadow-2xl) var(--color-primary);
+    --_shadow-color: var(--color-primary);
+    box-shadow: $shadow-2xl;
   }
 }
 

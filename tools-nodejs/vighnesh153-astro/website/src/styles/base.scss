@@ -60,19 +60,19 @@
   --text-size-8xl: #{$text-size-8xl};
   --text-size-9xl: #{$text-size-9xl};
 
-  --text-size-xs--line-height: #{$text-size-xs--line-height};
-  --text-size-sm--line-height: #{$text-size-sm--line-height};
-  --text-size-base--line-height: #{$text-size-base--line-height};
-  --text-size-lg--line-height: #{$text-size-lg--line-height};
-  --text-size-xl--line-height: #{$text-size-xl--line-height};
-  --text-size-2xl--line-height: #{$text-size-2xl--line-height};
-  --text-size-3xl--line-height: #{$text-size-3xl--line-height};
-  --text-size-4xl--line-height: #{$text-size-4xl--line-height};
-  --text-size-5xl--line-height: #{$text-size-5xl--line-height};
-  --text-size-6xl--line-height: #{$text-size-6xl--line-height};
-  --text-size-7xl--line-height: #{$text-size-7xl--line-height};
-  --text-size-8xl--line-height: #{$text-size-8xl--line-height};
-  --text-size-9xl--line-height: #{$text-size-9xl--line-height};
+  --line-height-xs: #{$line-height-xs};
+  --line-height-sm: #{$line-height-sm};
+  --line-height-base: #{$line-height-base};
+  --line-height-lg: #{$line-height-lg};
+  --line-height-xl: #{$line-height-xl};
+  --line-height-2xl: #{$line-height-2xl};
+  --line-height-3xl: #{$line-height-3xl};
+  --line-height-4xl: #{$line-height-4xl};
+  --line-height-5xl: #{$line-height-5xl};
+  --line-height-6xl: #{$line-height-6xl};
+  --line-height-7xl: #{$line-height-7xl};
+  --line-height-8xl: #{$line-height-8xl};
+  --line-height-9xl: #{$line-height-9xl};
 
   --font-weight-thin: #{$font-weight-thin};
   --font-weight-extralight: #{$font-weight-extralight};
@@ -182,7 +182,7 @@ html {
     outline-style: dashed;
     outline-width: 4px;
     outline-offset: 8px;
-    outline-color: $color-accent;
+    outline-color: var(--_outline-color, $color-accent);
   }
 }
 

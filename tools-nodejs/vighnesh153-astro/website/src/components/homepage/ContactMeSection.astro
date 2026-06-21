@@ -1,40 +1,77 @@
 ---
 import { hashTags } from "@/utils/content/links.ts";
 import { myPersonalizedEmail } from "@/utils/content/emails.ts";
-import { classes } from "@/utils/classes.ts";
 import { Link } from "../Link.tsx";
 ---
 
-<section
-  id={hashTags.homePage.contactMe}
-  class={classes(`
-    mx-auto
-    my-40
-    max-w-prose
-    scroll-mt-8
-    text-center
-  `)}
->
-  <p class="text-accent text-base">04. What's next?</p>
-  <h2 class="mt-2 text-2xl md:text-3xl lg:text-4xl">Get In Touch</h2>
-  <p
-    class={classes(`
-      mt-2 mx-auto max-w-xl 
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
 
-      text-text2
-      font-light
+  section {
+    margin-inline: auto;
+    margin-block: $spacing * 40;
+    max-width: $width-prose;
 
-      text-base sm:text-xl
-    `)}
-  >
+    text-align: center;
+  }
+
+  .section-header {
+    color: $color-accent;
+    font-size: $text-size-base;
+    line-height: $line-height-base;
+  }
+
+  h2 {
+    margin-block-start: $spacing * 2;
+
+    font-size: $text-size-2xl;
+    line-height: $line-height-2xl;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $text-size-3xl;
+      line-height: $line-height-3xl;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $text-size-4xl;
+      line-height: $line-height-4xl;
+    }
+  }
+
+  .section-body {
+    margin-block-start: $spacing * 2;
+    margin-inline: auto;
+    max-width: $container-xl;
+
+    color: $color;
+    font-weight: $font-weight-light;
+
+    font-size: $text-size-base;
+    line-height: $line-height-base;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: $text-size-xl;
+      line-height: $line-height-xl;
+    }
+  }
+
+  a {
+    margin-block-start: $spacing * 4;
+
+    &:focus-visible {
+      --_outline-color: #{$color-primary};
+    }
+  }
+</style>
+
+<section id={hashTags.homePage.contactMe}>
+  <p class="section-header">04. What's next?</p>
+  <h2>Get In Touch</h2>
+  <p class="section-body">
     My inbox is always open, whether you have a question or just to say hi. I
     will try my best to get back to you.
   </p>
-  <Link
-    linkType="primary-btn"
-    href={`mailto:${myPersonalizedEmail}`}
-    className={classes(`mt-4 focus-visible:outline-primary`)}
-  >
+  <Link linkType="primary-btn" href={`mailto:${myPersonalizedEmail}`}>
     Say Hello
   </Link>
 </section>
