@@ -1,6 +1,4 @@
 ---
-import { classes } from "@/utils/classes.ts";
-
 export interface Props {
   count: string;
   title: string;
@@ -9,23 +7,52 @@ export interface Props {
 const { count, title } = Astro.props;
 ---
 
-<h2
-  class={classes(`
-  flex
-  items-center
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
 
-  text-xl sm:text-2xl md:text-3xl lg:text-4xl
-  font-bold
-  whitespace-nowrap 
+  h2 {
+    display: flex;
+    align-items: center;
 
-  after:ml-4 
-  after:w-full 
-  after:max-w-xs 
-  after:h-px 
-  
-  after:inline-block 
-  after:bg-text4
-`)}
->
-  <span class="text-accent">{count}.</span>&nbsp;{title}
+    font-size: $text-size-xl;
+    line-height: $text-size-xl--line-height;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: $text-size-2xl;
+      line-height: $text-size-2xl--line-height;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $text-size-3xl;
+      line-height: $text-size-3xl--line-height;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $text-size-4xl;
+      line-height: $text-size-4xl--line-height;
+    }
+
+    font-weight: $font-weight-bold;
+    whitespace: nowrap;
+
+    &::after {
+      content: "";
+
+      margin-inline-start: $spacing * 4;
+      width: 100%;
+      max-width: $container-xs;
+      height: 1px;
+
+      display: inline-block;
+      background: $color-dull;
+    }
+
+    span {
+      color: $color-accent;
+    }
+  }
+</style>
+
+<h2>
+  <span>{count}.</span>&nbsp;{title}
 </h2>

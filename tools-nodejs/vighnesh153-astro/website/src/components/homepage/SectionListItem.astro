@@ -1,16 +1,35 @@
 ---
 import { CircleChevronRightIcon } from "@/icons/CircleChevronRightIcon.tsx";
-import { classes } from "@/utils/classes.ts";
 
 interface Props {
   className?: string;
 }
-
-const { className } = Astro.props;
 ---
 
-<li class={classes(className, `relative flex items-start gap-4 md:gap-6`)}>
-  <span class="fill-accent mt-[0.25em]">
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
+
+  li {
+    position: relative;
+    margin-block-end: $spacing * 2;
+
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing * 4;
+
+    @media (min-width: $breakpoint-md) {
+      gap: $spacing * 6;
+    }
+
+    span {
+      fill: $color-accent;
+      margin-block-start: 0.25em;
+    }
+  }
+</style>
+
+<li>
+  <span>
     <CircleChevronRightIcon aria-hidden="true" />
   </span>
   <slot />
