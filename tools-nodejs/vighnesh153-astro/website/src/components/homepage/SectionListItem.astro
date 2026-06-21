@@ -4,6 +4,8 @@ import { CircleChevronRightIcon } from "@/icons/CircleChevronRightIcon.tsx";
 interface Props {
   className?: string;
 }
+
+const { className } = Astro.props;
 ---
 
 <style lang="scss">
@@ -23,12 +25,12 @@ interface Props {
 
     span {
       fill: $color-accent;
-      margin-block-start: 0.25em;
+      margin-block-start: 0.3em;
     }
   }
 </style>
 
-<li>
+<li class={className}>
   <span>
     <CircleChevronRightIcon aria-hidden="true" />
   </span>

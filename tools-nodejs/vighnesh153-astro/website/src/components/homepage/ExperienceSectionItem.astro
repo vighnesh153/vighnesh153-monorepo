@@ -13,35 +13,101 @@ const { companyName, companyUrl, totalDuration, companyPositions } =
   Astro.props;
 ---
 
-<style></style>
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
 
-<li class="mb-10 flex flex-col items-start">
-  <div class="w-full mb-2 flex justify-between items-center gap-2">
-    <h3 class="text-xl font-light sm:text-2xl">
+  li.experience-section-item {
+    margin-block-end: $spacing * 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    & > div {
+      width: 100%;
+      margin-block-end: $spacing * 2;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $spacing * 2;
+    }
+  }
+
+  h3 {
+    font-weight: $font-weight-light;
+
+    font-size: $text-size-xl;
+    line-height: $line-height-xl;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: $text-size-2xl;
+      line-height: $line-height-2xl;
+    }
+  }
+
+  .total-duration {
+    color: $color-light;
+    font-size: $text-size-sm;
+    line-height: $line-height-sm;
+    font-weight: $font-weight-light;
+  }
+
+  ul.company-positions {
+    margin-block-end: $spacing * 4;
+
+    display: flex;
+    flex-direction: column;
+    gap: $spacing * 2;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .position-title {
+        font-size: $text-size-base;
+        line-height: $line-height-base;
+
+        @media (min-width: $breakpoint-md) {
+          font-size: $text-size-xl;
+          line-height: $line-height-xl;
+        }
+      }
+
+      .position-duration {
+        font-weight: $font-weight-light;
+        color: $color-light;
+
+        font-size: $text-size-sm;
+        line-height: $line-height-sm;
+
+        @media (min-width: $breakpoint-md) {
+          font-size: $text-size-base;
+          line-height: $line-height-base;
+        }
+      }
+    }
+  }
+</style>
+
+<li class="experience-section-item">
+  <div>
+    <h3>
       <Link href={companyUrl}>@{companyName}</Link>
     </h3>
     {
       companyPositions.length > 1 ? (
-        <p class={classes(`text-text3 text-sm font-light`)}>
-          Full time · {totalDuration}
-        </p>
+        <p class="total-duration">Full time · {totalDuration}</p>
       ) : null
     }
   </div>
-  <ul class="mb-4 flex flex-col gap-2">
+  <ul class="company-positions">
     {
       companyPositions.map((companyPosition) => (
-        <li class={classes(`flex flex-col items-start`)}>
-          <p class={classes(`text-base md:text-xl`)}>{companyPosition.title}</p>
-          <p
-            class={classes(`
-              font-light
-              text-text3
-              text-sm sm:text-sm md:text-base
-            `)}
-          >
-            {companyPosition.duration}
-          </p>
+        <li>
+          <p class="position-title">{companyPosition.title}</p>
+          <p class="position-duration">{companyPosition.duration}</p>
         </li>
       ))
     }

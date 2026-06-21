@@ -1,11 +1,9 @@
 ---
 import { hashTags } from "@/utils/content/links.ts";
 import { companyUrls } from "@/utils/content/companyUrls.ts";
-import { classes } from "@/utils/classes.ts";
 import SectionTitle from "./SectionTitle.astro";
 import ExperienceSectionItem from "./ExperienceSectionItem.astro";
 import ExperienceSectionItemResponsibility from "./ExperienceSectionItemResponsibility.astro";
-import { Link } from "../Link.tsx";
 
 import AppstoreDeveloperConsoleLink from "./AppstoreDeveloperConsoleLink.astro";
 
@@ -22,17 +20,23 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
 }
 ---
 
-<section
-  id={hashTags.homePage.experience}
-  class={classes(`
-    mx-auto
-    mt-60
-    max-w-prose
-    scroll-mt-40
-  `)}
->
+<style lang="scss">
+  @use "@/styles/variables.scss" as *;
+
+  section {
+    margin-inline: auto;
+    margin-block-start: $spacing * 60;
+    max-width: $width-prose;
+  }
+
+  ul {
+    margin-block-start: $spacing * 3;
+  }
+</style>
+
+<section id={hashTags.homePage.experience}>
   <SectionTitle count="02" title="Where I have worked" />
-  <ul class="mt-3">
+  <ul>
     <ExperienceSectionItem
       companyName="Google"
       companyUrl={companyUrls.google}
@@ -86,9 +90,9 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
         <ExperienceSectionItemResponsibility>
           Worked on an internal tool which is a one stop solution for everything
           related to the{" "}
-          <Link
+          <a
             href="https://www.amazon.jobs/en/landing_pages/about-amazon"
-            target="_blank">Day 1 culture</Link
+            target="_blank">Day 1 culture</a
           >{" "}
           of Amazon. The tool is accessible to all the Amazon employees
         </ExperienceSectionItemResponsibility>
@@ -109,16 +113,16 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
         <ExperienceSectionItemResponsibility>
           Working with a variety of different languages, platforms, frameworks,
           and content management systems such as
-          <Link
+          <a
             href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-            target="_blank">Javascript</Link
+            target="_blank">Javascript</a
+          >, <a href="https://www.typescriptlang.org" target="_blank"
+            >Typescript</a
+          >, <a href="https://reactjs.org" target="_blank">ReactJS</a>, <a
+            href="https://nextjs.org"
+            target="_blank">NextJS</a
           >
-          , <Link href="https://www.typescriptlang.org" target="_blank"
-            >Typescript</Link
-          >
-          , <Link href="https://reactjs.org" target="_blank">ReactJS</Link>
-          , <Link href="https://nextjs.org" target="_blank">NextJS</Link>
-          , <Link href="https://aws.amazon.com" target="_blank">AWS</Link>,
+          , <a href="https://aws.amazon.com" target="_blank">AWS</a>,
           internal-AWS, Java, Spring, JSP
         </ExperienceSectionItemResponsibility>
         <ExperienceSectionItemResponsibility>
@@ -144,17 +148,14 @@ function getTimeDifference(fromDate: Date, toDate: Date = new Date()): string {
     >
       <Fragment slot="responsibilities">
         <ExperienceSectionItemResponsibility>
-          Implemented many of the <Link
-            href="https://rocket.chat"
-            target="_blank">Rocket Chat</Link
+          Implemented many of the <a href="https://rocket.chat" target="_blank"
+            >Rocket Chat</a
           > features for the
-          <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat
-          platform
+          <a href="https://mattermost.com" target="_blank">Mattermost</a> chat platform
         </ExperienceSectionItemResponsibility>
         <ExperienceSectionItemResponsibility>
           Lot of other utility plugins for the
-          <Link href="https://mattermost.com" target="_blank">Mattermost</Link> chat
-          platform
+          <a href="https://mattermost.com" target="_blank">Mattermost</a> chat platform
         </ExperienceSectionItemResponsibility>
         <ExperienceSectionItemResponsibility>
           Worked on amazing tech stack: ReactJS, Golang and AWS
