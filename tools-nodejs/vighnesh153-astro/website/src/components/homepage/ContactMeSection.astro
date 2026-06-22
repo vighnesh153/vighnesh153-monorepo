@@ -71,7 +71,11 @@ import { Link } from "../Link.tsx";
     My inbox is always open, whether you have a question or just to say hi. I
     will try my best to get back to you.
   </p>
-  <Link linkType="primary-btn" href={`mailto:${myPersonalizedEmail}`}>
+  <Link
+    className="no-base-style"
+    linkType="primary-btn"
+    href={`mailto:${myPersonalizedEmail}`}
+  >
     Say Hello
   </Link>
 </section>

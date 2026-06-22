@@ -261,31 +261,34 @@ video {
   }
 }
 
-a:not(.icon-link) {
+a {
   display: inline-block;
   position: relative;
 
-  color: $color-accent;
   text-decoration-line: none;
   cursor: pointer;
 
-  &::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
+  &:not(.no-base-style) {
+    color: $color-accent;
 
-    left: 0;
-    bottom: -2px;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
 
-    background-color: currentColor;
+      left: 0;
+      bottom: -2px;
 
-    transition-property: width;
-    transition-duration: 150ms;
-    transition-timing-function: $ease-in;
-  }
+      background-color: currentColor;
 
-  &:is(:hover, :focus-visible)::after {
-    width: 100%;
+      transition-property: width;
+      transition-duration: 150ms;
+      transition-timing-function: $ease-in;
+    }
+
+    &:is(:hover, :focus-visible)::after {
+      width: 100%;
+    }
   }
 }
