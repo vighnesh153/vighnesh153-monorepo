@@ -1,5 +1,6 @@
 {
   "allowScripts": [
+    "npm:@parcel/watcher@2.5.6",
     "npm:esbuild@0.28.1",
     "npm:fsevents@2.3.3",
     "npm:sharp@0.34.5"
