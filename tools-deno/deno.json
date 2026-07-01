@@ -1,0 +1,14 @@
+{
+  "allowScripts": [
+    "npm:esbuild@0.28.1",
+    "npm:fsevents@2.3.3",
+    "npm:sharp@0.34.5"
+  ],
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "website:dev": "deno task --cwd=src/website dev"
+  },
+  "workspace": [
+    "./src/website"
+  ]
+}
