@@ -18,6 +18,7 @@ export default defineConfig({
     format: "file",
   },
   output: "static",
+  outDir: "./dist/ui",
   vite: {
     dev: {
       sourcemap: true,

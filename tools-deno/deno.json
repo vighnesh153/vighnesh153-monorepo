@@ -1,8 +1,11 @@
 {
   "allowScripts": [
+    "npm:@firebase/util@1.15.1",
     "npm:@parcel/watcher@2.5.6",
     "npm:esbuild@0.28.1",
     "npm:fsevents@2.3.3",
+    "npm:protobufjs@7.6.5",
+    "npm:re2@1.25.0",
     "npm:sharp@0.34.5"
   ],
   "nodeModulesDir": "auto",

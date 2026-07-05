@@ -1,0 +1,42 @@
+{
+  "hosting": {
+    "public": "dist/ui",
+    "cleanUrls": true,
+    "trailingSlash": false
+  },
+  "firestore": {
+    "rules": "src/firebase/rules/firestore.rules",
+    "indexes": "src/firebase/rules/firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "src/firebase/rules/storage.rules"
+  },
+  "functions": [
+    {
+      "codebase": "dist/functions"
+    }
+  ],
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "storage": {
+      "port": 9199,
+      "rules": "src/firebase/rules/storage.emulator.rules"
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "singleProjectMode": true
+  }
+}
