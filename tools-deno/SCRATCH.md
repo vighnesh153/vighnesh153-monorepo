@@ -1,0 +1,5 @@
+- Components
+  - typography
+  - button
+  - link
+    - attribute: data-astro-prefetch for prefetching

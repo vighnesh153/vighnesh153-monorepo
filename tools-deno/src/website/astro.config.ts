@@ -1,4 +1,26 @@
 import { defineConfig } from "astro/config";
 
+import svelte from "@astrojs/svelte";
+import { vitePreprocess } from "@astrojs/svelte";
+
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  compressHTML: true,
+  integrations: [
+    svelte({
+      extensions: [".svelte"],
+      preprocess: vitePreprocess(),
+    }),
+  ],
+  prefetch: true,
+  build: {
+    inlineStylesheets: "auto",
+    format: "file",
+  },
+  output: "static",
+  vite: {
+    dev: {
+      sourcemap: true,
+    },
+  },
+});
