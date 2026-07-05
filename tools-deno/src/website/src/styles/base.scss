@@ -1,0 +1,34 @@
+@use "./variables.scss" as *;
+
+*,
+*::before,
+*::after,
+::backdrop {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0 solid;
+}
+
+html {
+  color: $text-primary;
+  background: $surface-default;
+  scroll-behavior: smooth;
+
+  /* focus dashed outline */
+  :is(a, button, input, select, textarea):focus-visible {
+    outline-style: dashed;
+    outline-width: 4px;
+    outline-offset: 8px;
+    outline-color: var(--_outline-color, $color-accent);
+  }
+}
+
+::selection {
+  background-color: $color-accent;
+  color: $color-secondary;
+}
+
+body {
+  font-family: $font-sans;
+}

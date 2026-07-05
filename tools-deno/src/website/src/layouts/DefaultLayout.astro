@@ -1,0 +1,52 @@
+---
+import "@/styles/base.scss";
+// import { SnackbarHost } from "@/components/snackbar/index.ts";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const defaultTitle =
+  "Vighnesh Raut - the man, the myth, the living legend himself";
+const defaultDescription =
+  "Vighnesh is a Software Engineer who specializes in building exceptional software " +
+  "tools. He is fascinated by Physics, Mathematics and Computer Science. When bored, " +
+  "you can find him watching Pokémon on his bed";
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{title ?? defaultTitle}</title>
+    <meta charset="utf-8" />
+    <meta name="description" content={description ?? defaultDescription} />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- On mobile devices, telephone numbers in html should appear as hyperlinks 
+      to initiate phone calls -->
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="twitter:dnt" content="on" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <!-- <SnackbarHost client:load /> -->
+    <slot />
+  </body>
+</html>
+
+<script>
+  // import { initializeUserInStore } from "@/store/auth.ts";
+  // import { cleanupExpiredImages } from "@/utils/image_caching";
+  // import { setupLocalStorageCleaner } from "@/utils/local_storage";
+
+  // setupLocalStorageCleaner();
+  // await initializeUserInStore();
+  // await cleanupExpiredImages();
+</script>
