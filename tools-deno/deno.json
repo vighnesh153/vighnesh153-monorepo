@@ -7,6 +7,7 @@
   ],
   "nodeModulesDir": "auto",
   "tasks": {
+    "website:build": "deno task --cwd=src/website build",
     "website:dev": "deno task --cwd=src/website dev"
   },
   "workspace": [
