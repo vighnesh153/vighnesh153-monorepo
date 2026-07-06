@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "website:dev:emulators": "npx firebase emulators:start --project demo-vighnesh153-app",
+    "deploy:functions": "deno task build:functions && firebase deploy --only functions",
+    "deploy:ui": "deno task build:ui && firebase deploy --only hosting",
+    "deploy": "deno task build && firebase deploy"
+  },
+  "imports": {
+    "firebase": "npm:firebase@^12.15.0",
+    "firebase-tools": "npm:firebase-tools@^15.22.4"
+  }
+}

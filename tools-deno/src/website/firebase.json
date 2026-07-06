@@ -1,19 +1,20 @@
 {
   "hosting": {
-    "public": "dist/ui",
+    "source": "ui",
     "cleanUrls": true,
     "trailingSlash": false
   },
   "firestore": {
-    "rules": "src/firebase/rules/firestore.rules",
-    "indexes": "src/firebase/rules/firestore.indexes.json"
+    "rules": "firestore/firestore.rules",
+    "indexes": "firestore/firestore.indexes.json"
   },
   "storage": {
-    "rules": "src/firebase/rules/storage.rules"
+    "rules": "storage/storage.rules"
   },
   "functions": [
     {
-      "codebase": "dist/functions"
+      "source": "./functions",
+      "codebase": "default"
     }
   ],
   "emulators": {
@@ -31,7 +32,7 @@
     },
     "storage": {
       "port": 9199,
-      "rules": "src/firebase/rules/storage.emulator.rules"
+      "rules": "storage/storage.emulator.rules"
     },
     "ui": {
       "enabled": true,

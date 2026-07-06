@@ -1,0 +1,10 @@
+{
+  "publish": false,
+  "tasks": {
+    "website:dev:functions": "deno watch -A --unstable-bundle ./bundler.ts",
+    "build": "deno run -A --unstable-bundle ./bundler.ts"
+  },
+  "imports": {
+    "firebase-functions": "npm:firebase-functions@^7.2.5"
+  }
+}

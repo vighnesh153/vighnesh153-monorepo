@@ -1,9 +1,9 @@
 // Just for Dev:Watch command.
-import "./index.ts";
+import "./src/index.ts";
 
 const result = await Deno.bundle({
-  entrypoints: ["./src/firebase/functions/index.ts"],
-  outputDir: "dist/functions/dist",
+  entrypoints: ["./src/index.ts"],
+  outputDir: "dist",
   // Splitting currently only works with the "esm" format
   // codeSplitting: true,
   minify: false,

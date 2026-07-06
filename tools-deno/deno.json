@@ -10,10 +10,12 @@
   ],
   "nodeModulesDir": "auto",
   "tasks": {
-    "website:build": "deno task --cwd=src/website build",
-    "website:dev": "deno task --cwd=src/website dev"
+    "website:dev": "deno task -r website:dev:*",
+    "website:build": "deno task --cwd=src/website build"
   },
   "workspace": [
-    "./src/website"
+    "./src/website",
+    "./src/website/functions",
+    "./src/website/ui"
   ]
 }
