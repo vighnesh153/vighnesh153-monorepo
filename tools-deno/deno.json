@@ -11,7 +11,7 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "website:dev": "deno task -r website:dev:*",
-    "website:build": "deno task --cwd=src/website build"
+    "website:deploy": "deno task -r website:deploy:all"
   },
   "workspace": [
     "./src/website",

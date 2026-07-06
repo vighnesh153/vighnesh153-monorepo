@@ -1,9 +1,19 @@
 {
   "tasks": {
     "website:dev:emulators": "npx firebase emulators:start --project demo-vighnesh153-app",
-    "deploy:functions": "deno task build:functions && firebase deploy --only functions",
-    "deploy:ui": "deno task build:ui && firebase deploy --only hosting",
-    "deploy": "deno task build && firebase deploy"
+    "website:build:all": "deno task -r website:build:*",
+    "website:deploy:functions": {
+      "command": "firebase deploy --only functions --project vighnesh153-app",
+      "dependencies": ["website:build:all"]
+    },
+    "website:deploy:ui": {
+      "command": "firebase deploy --only hosting --project vighnesh153-app",
+      "dependencies": ["website:build:all"]
+    },
+    "website:deploy:all": {
+      "command": "firebase deploy --project vighnesh153-app",
+      "dependencies": ["website:build:all"]
+    }
   },
   "imports": {
     "firebase": "npm:firebase@^12.15.0",

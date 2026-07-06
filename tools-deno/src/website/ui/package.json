@@ -2,7 +2,7 @@
   "publish": false,
   "scripts": {
     "dev": "astro dev --host",
-    "build": "astro build"
+    "website:build:ui": "astro build"
   },
   "dependencies": {
     "@astrojs/svelte": "^9.0.1",
