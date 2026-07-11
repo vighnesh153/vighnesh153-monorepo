@@ -76,4 +76,8 @@ export class Color {
   }
 
   private constructor(private readonly argb: number) {}
+
+  asArgb(): number {
+    return this.argb;
+  }
 }

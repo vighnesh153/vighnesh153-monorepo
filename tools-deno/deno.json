@@ -8,6 +8,12 @@
     "npm:re2@1.25.0",
     "npm:sharp@0.34.5"
   ],
+  "fmt": {
+    "include": ["src/"]
+  },
+  "lint": {
+    "include": ["src/"]
+  },
   "nodeModulesDir": "auto",
   "tasks": {
     "website:dev": "deno task -r website:dev:*",
