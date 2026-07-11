@@ -1,0 +1,10 @@
+{
+  "name": "@openx/material3-foundation",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./src/mod.ts"
+  },
+  "imports": {
+    "@material/material-color-utilities": "npm:@material/material-color-utilities@^0.4.0"
+  }
+}
