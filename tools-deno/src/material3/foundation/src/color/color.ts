@@ -11,10 +11,11 @@ export class Color {
   // r - 0 to 255
   // g - 0 to 255
   // b - 0 to 255
-  // a - 0 to 255
+  // a - 0 to 1
   static fromRgba(r: number, g: number, b: number, a: number): Color {
-    const argb =
-      ((a & 255) << 24 | (r & 255) << 16 | (g & 255) << 8 | (b & 255)) >>> 0;
+    const normalizedA = Math.floor(a * 255);
+    const argb = ((normalizedA & 255) << 24 | (r & 255) << 16 | (g & 255) << 8 |
+      (b & 255)) >>> 0;
     return new Color(argb);
   }
 
@@ -28,7 +29,7 @@ export class Color {
   // h - 0 to 360
   // s - 0 to 100
   // l - 0 to 100
-  // a - 0 to 255
+  // a - 0 to 1
   static fromHsla(h: number, s: number, l: number, a: number): Color {
     // Ensure h is wrapped safely within [0, 360) even if negative or >= 360
     const normalizedH = ((h % 360) + 360) % 360;
@@ -51,7 +52,7 @@ export class Color {
     const green = f(8);
     const blue = f(4);
 
-    return this.fromRgba(red, green, blue, Math.round(a));
+    return this.fromRgba(red, green, blue, Math.floor(a * 255));
   }
 
   /**
@@ -65,6 +66,7 @@ export class Color {
     return new Color(Hct.from(h, c, t).toInt());
   }
 
+  // Accepted formats: #rgb, #rgba, #rrggbb, #rrggbbaa
   static fromHex(hexCode: string): Color {
     return new Color(argbFromHex(hexCode));
   }
