@@ -1,4 +1,11 @@
-import { argbFromHex, Hct } from "@material/material-color-utilities";
+import {
+  alphaFromArgb,
+  argbFromHex,
+  blueFromArgb,
+  greenFromArgb,
+  Hct,
+  redFromArgb,
+} from "@material/material-color-utilities";
 
 export class Color {
   // r - 0 to 255
@@ -79,5 +86,32 @@ export class Color {
 
   asArgb(): number {
     return this.argb;
+  }
+
+  asHex(): string {
+    // Convert each component to hex and pad with '0' if it's a single digit
+    const convertComponent = (c: number) => c.toString(16).padStart(2, "0");
+
+    const a = convertComponent(alphaFromArgb(this.argb));
+    const r = convertComponent(redFromArgb(this.argb));
+    const g = convertComponent(greenFromArgb(this.argb));
+    const b = convertComponent(blueFromArgb(this.argb));
+
+    // Return standard CSS format: #RRGGBBAA
+    return `#${r}${g}${b}${a}`;
+  }
+
+  asRgba(): string {
+    // Extract the RGB components as standard 0-255 integers
+    const r = redFromArgb(this.argb);
+    const g = greenFromArgb(this.argb);
+    const b = blueFromArgb(this.argb);
+
+    // Convert alpha from 0-255 to a 0.0-1.0 float.
+    // Using toFixed(3) and Number() keeps the string clean (e.g., 0.5 instead of 0.50196...)
+    const a = Number((alphaFromArgb(this.argb) / 255).toFixed(3));
+
+    // Return standard CSS format: rgba(R, G, B, A)
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
   }
 }
