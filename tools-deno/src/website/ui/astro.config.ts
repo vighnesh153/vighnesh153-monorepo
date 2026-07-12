@@ -8,7 +8,7 @@ export default defineConfig({
   compressHTML: true,
   integrations: [
     svelte({
-      extensions: [".svelte"],
+      extensions: [".svelte", ".svelte.ts"],
       preprocess: vitePreprocess(),
     }),
   ],
