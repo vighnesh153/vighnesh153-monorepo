@@ -20,7 +20,6 @@
     "website:deploy": "deno task -r website:deploy:all"
   },
   "workspace": [
-    "./src/material3/foundation",
     "./src/website",
     "./src/website/functions",
     "./src/website/ui"
